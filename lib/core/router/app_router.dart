@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/constants/file_types.dart';
 import '../../features/files/files_screen.dart';
+import '../../features/home/home_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/shell/main_shell.dart';
 import '../../features/tools/tools_screen.dart';
 
-final GlobalKey<NavigatorState> _rootNavigatorKey =
+/// Root navigator key shared across the application and router.
+final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
 
 /// Provider for application routing configured with GoRouter and StatefulShellRoute.
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    navigatorKey: _rootNavigatorKey,
-    initialLocation: '/files',
+    navigatorKey: rootNavigatorKey,
+    initialLocation: '/home',
     routes: [
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -24,9 +27,9 @@ final routerProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/files',
-                name: 'files',
-                builder: (context, state) => const FilesScreen(),
+                path: '/home',
+                name: 'home',
+                builder: (context, state) => const HomeScreen(),
               ),
             ],
           ),
@@ -50,7 +53,23 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
         ],
       ),
+      GoRoute(
+        path: '/files',
+        name: 'files',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+          final categoryParam = state.uri.queryParameters['category'];
+          FileCategory? category;
+          if (categoryParam != null &&
+              categoryParam.isNotEmpty &&
+              categoryParam.toLowerCase() != 'all') {
+            category = FileCategory.values
+                .where((c) => c.name == categoryParam.toLowerCase())
+                .firstOrNull;
+          }
+          return FilesScreen(category: category);
+        },
+      ),
     ],
   );
 });
-
