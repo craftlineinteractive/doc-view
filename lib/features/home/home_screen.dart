@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/file_types.dart';
+import '../files/open_document.dart';
+import '../files/widgets/file_tile.dart';
 import '../providers/providers.dart';
 
 /// Main documents hub displaying category metrics, scan progress, and recent/bookmarked tabs.
@@ -29,11 +31,7 @@ class HomeScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.search),
             tooltip: 'Search',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Coming in Phase 2')),
-              );
-            },
+            onPressed: () => context.push('/search'),
           ),
         ],
       ),
@@ -182,18 +180,11 @@ class HomeScreen extends ConsumerWidget {
           },
           body: const TabBarView(
             children: [
-              _EmptyStateIllustration(
-                icon: Icons.history_rounded,
-                label: 'Empty',
-                description: 'Recently opened files will appear here',
-              ),
-              _EmptyStateIllustration(
-                icon: Icons.bookmark_border_rounded,
-                label: 'Empty',
-                description: 'Bookmarked documents will appear here',
-              ),
+              _RecentsList(),
+              _BookmarksList(),
             ],
           ),
+
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -381,3 +372,86 @@ class _EmptyStateIllustration extends StatelessWidget {
     );
   }
 }
+
+class _RecentsList extends ConsumerWidget {
+  const _RecentsList();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final recentsAsync = ref.watch(recentsProvider);
+
+    return recentsAsync.when(
+      data: (files) {
+        if (files.isEmpty) {
+          return const _EmptyStateIllustration(
+            icon: Icons.history_rounded,
+            label: 'Empty',
+            description: 'Recently opened files will appear here',
+          );
+        }
+        return ListView.separated(
+          itemCount: files.length,
+          separatorBuilder: (context, index) => Divider(
+            height: 1,
+            indent: 72,
+            color: theme.dividerColor.withValues(alpha: 0.2),
+          ),
+          itemBuilder: (context, index) {
+            final file = files[index];
+            return FileTile(
+              file: file,
+              onTap: () => openDocument(context, ref, file),
+            );
+          },
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, _) => Center(
+        child: Text('Error loading recents: $error'),
+      ),
+    );
+  }
+}
+
+class _BookmarksList extends ConsumerWidget {
+  const _BookmarksList();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final bookmarksAsync = ref.watch(bookmarksProvider);
+
+    return bookmarksAsync.when(
+      data: (files) {
+        if (files.isEmpty) {
+          return const _EmptyStateIllustration(
+            icon: Icons.bookmark_border_rounded,
+            label: 'Empty',
+            description: 'Bookmarked documents will appear here',
+          );
+        }
+        return ListView.separated(
+          itemCount: files.length,
+          separatorBuilder: (context, index) => Divider(
+            height: 1,
+            indent: 72,
+            color: theme.dividerColor.withValues(alpha: 0.2),
+          ),
+          itemBuilder: (context, index) {
+            final file = files[index];
+            return FileTile(
+              file: file,
+              onTap: () => openDocument(context, ref, file),
+            );
+          },
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, _) => Center(
+        child: Text('Error loading bookmarks: $error'),
+      ),
+    );
+  }
+}
+

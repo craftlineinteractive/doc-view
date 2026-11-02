@@ -32,3 +32,12 @@ class FormatUtils {
     return '${formatDate(date)} · ${formatFileSize(bytes)}';
   }
 }
+
+/// Escapes SQLite LIKE wildcards (`%`, `_`, and `\`) for safe literal matching.
+String escapeLike(String input) {
+  return input
+      .replaceAll(r'\', r'\\')
+      .replaceAll('%', r'\%')
+      .replaceAll('_', r'\_');
+}
+

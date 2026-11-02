@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../data/models/doc_file.dart';
 import '../../features/files/files_screen.dart';
 import '../../features/home/home_screen.dart';
+import '../../features/search/search_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/shell/main_shell.dart';
 import '../../features/tools/tools_screen.dart';
@@ -70,6 +72,57 @@ final routerProvider = Provider<GoRouter>((ref) {
           return FilesScreen(category: category);
         },
       ),
+      GoRoute(
+        path: '/search',
+        name: 'search',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const SearchScreen(),
+      ),
+      GoRoute(
+        path: '/viewer',
+        name: 'viewer',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+          final file = state.extra as DocFile?;
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(file?.name ?? 'Document Viewer'),
+            ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    file?.category.icon ?? Icons.description_outlined,
+                    size: 64,
+                    color: file?.category.color,
+                  ),
+                  const SizedBox(height: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Text(
+                      file?.name ?? 'No file selected',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Viewer coming in Phase 2B',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withValues(alpha: 0.6),
+                        ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     ],
   );
 });
+

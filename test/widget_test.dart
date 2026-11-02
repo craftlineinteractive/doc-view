@@ -22,6 +22,9 @@ void main() {
               FileCategory.other: 0,
             },
           ),
+          recentsProvider.overrideWith((ref) async => []),
+          bookmarksProvider.overrideWith((ref) async => []),
+
         ],
         child: const DocReaderApp(),
       ),

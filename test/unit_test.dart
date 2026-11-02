@@ -1,6 +1,7 @@
 import 'package:docview/core/constants/file_types.dart';
 import 'package:docview/core/utils/format_utils.dart';
 import 'package:docview/data/models/doc_file.dart';
+import 'package:docview/data/models/sort_option.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -120,5 +121,67 @@ void main() {
         '05/15/2026 · 2.0 MB',
       );
     });
+
+    test('escapeLike escapes %, _, and backslash properly', () {
+      expect(escapeLike('document'), 'document');
+      expect(escapeLike('100%'), r'100\%');
+      expect(escapeLike('my_file'), r'my\_file');
+      expect(escapeLike(r'folder\path'), r'folder\\path');
+      expect(escapeLike(r'100%_done\doc'), r'100\%\_done\\doc');
+    });
+  });
+
+  group('SortOption Tests', () {
+    test('toOrderBy produces whitelisted SQL clauses', () {
+      const dateDesc = SortOption(
+        field: SortField.date,
+        direction: SortDirection.desc,
+      );
+      expect(dateDesc.toOrderBy(), 'modified DESC');
+
+      const dateAsc = SortOption(
+        field: SortField.date,
+        direction: SortDirection.asc,
+      );
+      expect(dateAsc.toOrderBy(), 'modified ASC');
+
+      const nameAsc = SortOption(
+        field: SortField.name,
+        direction: SortDirection.asc,
+      );
+      expect(nameAsc.toOrderBy(), 'name COLLATE NOCASE ASC');
+
+      const nameDesc = SortOption(
+        field: SortField.name,
+        direction: SortDirection.desc,
+      );
+      expect(nameDesc.toOrderBy(), 'name COLLATE NOCASE DESC');
+
+      const sizeAsc = SortOption(
+        field: SortField.size,
+        direction: SortDirection.asc,
+      );
+      expect(sizeAsc.toOrderBy(), 'size_bytes ASC');
+
+      const sizeDesc = SortOption(
+        field: SortField.size,
+        direction: SortDirection.desc,
+      );
+      expect(sizeDesc.toOrderBy(), 'size_bytes DESC');
+    });
+
+    test('SortOption equality and copyWith work as expected', () {
+      const opt1 = SortOption(
+        field: SortField.date,
+        direction: SortDirection.desc,
+      );
+      final opt2 = opt1.copyWith(direction: SortDirection.asc);
+
+      expect(opt1 == SortOption.defaultOption, isTrue);
+      expect(opt2.direction, SortDirection.asc);
+      expect(opt2.field, SortField.date);
+      expect(opt1 == opt2, isFalse);
+    });
   });
 }
+

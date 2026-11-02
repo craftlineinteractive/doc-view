@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../data/models/sort_option.dart';
 import '../providers/providers.dart';
+import 'open_document.dart';
 import 'widgets/file_tile.dart';
 
 /// Screen listing files belonging to a specific [FileCategory] (or all files if null).
@@ -13,6 +16,94 @@ class FilesScreen extends ConsumerWidget {
   });
 
   final FileCategory? category;
+
+  void _showSortSheet(BuildContext context, WidgetRef ref) {
+    showModalBottomSheet<void>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (sheetContext) {
+        return Consumer(
+          builder: (context, ref, _) {
+            final currentSort = ref.watch(sortOptionProvider);
+            final theme = Theme.of(context);
+
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        'Sort by',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    RadioGroup<SortField>(
+                      groupValue: currentSort.field,
+                      onChanged: (field) {
+                        if (field != null) {
+                          ref
+                              .read(sortOptionProvider.notifier)
+                              .setSortOption(currentSort.copyWith(field: field));
+                        }
+                      },
+                      child: const Column(
+                        children: [
+                          RadioListTile<SortField>(
+                            title: Text('Date'),
+                            value: SortField.date,
+                          ),
+                          RadioListTile<SortField>(
+                            title: Text('Name'),
+                            value: SortField.name,
+                          ),
+                          RadioListTile<SortField>(
+                            title: Text('Size'),
+                            value: SortField.size,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(),
+                    SwitchListTile(
+                      title: const Text('Ascending order'),
+                      subtitle: Text(
+                        currentSort.direction == SortDirection.asc
+                            ? 'Oldest first / A to Z / Smallest first'
+                            : 'Newest first / Z to A / Largest first',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.textTheme.bodySmall?.color
+                              ?.withValues(alpha: 0.6),
+                        ),
+                      ),
+                      value: currentSort.direction == SortDirection.asc,
+                      onChanged: (isAsc) {
+                        ref.read(sortOptionProvider.notifier).setSortOption(
+                              currentSort.copyWith(
+                                direction: isAsc
+                                    ? SortDirection.asc
+                                    : SortDirection.desc,
+                              ),
+                            );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,6 +116,21 @@ class FilesScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(title),
         centerTitle: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: 'Search',
+            onPressed: () {
+              ref.read(searchCategoryProvider.notifier).setCategory(category);
+              context.push('/search');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.sort_rounded),
+            tooltip: 'Sort',
+            onPressed: () => _showSortSheet(context, ref),
+          ),
+        ],
       ),
       body: filesAsync.when(
         data: (files) {
@@ -72,7 +178,11 @@ class FilesScreen extends ConsumerWidget {
                 color: theme.dividerColor.withValues(alpha: 0.2),
               ),
               itemBuilder: (context, index) {
-                return FileTile(file: files[index]);
+                final file = files[index];
+                return FileTile(
+                  file: file,
+                  onTap: () => openDocument(context, ref, file),
+                );
               },
             ),
           );

@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import '../../core/constants/file_types.dart';
+import '../../core/utils/format_utils.dart';
 import '../db/app_database.dart';
 import '../models/doc_file.dart';
+import '../models/sort_option.dart';
 
 /// Repository interface and SQLite implementation for managing [DocFile] records.
 class FileRepository {
@@ -135,11 +137,12 @@ class FileRepository {
     return 0;
   }
 
-  /// Queries indexed files with optional category filter, search query, and pagination.
-  /// Always sorted by [DocFile.modified] DESC.
+  /// Queries indexed files with optional category filter, search query, sorting, and pagination.
+  /// Defaults to sorting by [DocFile.modified] DESC if [sortOption] is null.
   Future<List<DocFile>> getFiles({
     FileCategory? category,
     String? query,
+    SortOption? sortOption,
     int limit = 100,
     int offset = 0,
   }) async {
@@ -154,23 +157,121 @@ class FileRepository {
     }
 
     if (query != null && query.trim().isNotEmpty) {
-      whereClauses.add('name LIKE ?');
-      whereArgs.add('%${query.trim()}%');
+      final escaped = escapeLike(query.trim());
+      whereClauses.add("name LIKE ? ESCAPE '\\'");
+      whereArgs.add('%$escaped%');
     }
 
     final whereString =
         whereClauses.isNotEmpty ? whereClauses.join(' AND ') : null;
 
+    final orderBy = sortOption?.toOrderBy() ?? 'modified DESC';
+
     final rows = await db.query(
       AppDatabase.tableFiles,
       where: whereString,
       whereArgs: whereArgs.isNotEmpty ? whereArgs : null,
-      orderBy: 'modified DESC',
+      orderBy: orderBy,
       limit: limit,
       offset: offset,
     );
 
     return rows.map(DocFile.fromMap).toList();
   }
+
+  /// Toggles the bookmark status of a file with [id].
+  Future<bool> toggleBookmark(int id) async {
+    final db = await _database.database;
+    final rows = await db.query(
+      AppDatabase.tableFiles,
+      columns: ['is_bookmarked'],
+      where: 'id = ?',
+      whereArgs: [id],
+      limit: 1,
+    );
+
+    if (rows.isEmpty) return false;
+
+    final isCurrentlyBookmarked =
+        (rows.first['is_bookmarked'] as int? ?? 0) == 1;
+    final newBookmarkedValue = isCurrentlyBookmarked ? 0 : 1;
+
+    await db.update(
+      AppDatabase.tableFiles,
+      {'is_bookmarked': newBookmarkedValue},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    return newBookmarkedValue == 1;
+  }
+
+  /// Sets the last opened timestamp of a file to current time in milliseconds.
+  Future<void> markOpened(int id) async {
+    final db = await _database.database;
+    final nowMs = DateTime.now().millisecondsSinceEpoch;
+
+    await db.update(
+      AppDatabase.tableFiles,
+      {'last_opened': nowMs},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  /// Returns all bookmarked files, newest modified first.
+  Future<List<DocFile>> getBookmarks() async {
+    final db = await _database.database;
+    final rows = await db.query(
+      AppDatabase.tableFiles,
+      where: 'is_bookmarked = 1',
+      orderBy: 'modified DESC',
+    );
+    return rows.map(DocFile.fromMap).toList();
+  }
+
+  /// Returns recently opened files up to [limit], ordered by last opened timestamp DESC.
+  Future<List<DocFile>> getRecents({int limit = 30}) async {
+    final db = await _database.database;
+    final rows = await db.query(
+      AppDatabase.tableFiles,
+      where: 'last_opened IS NOT NULL',
+      orderBy: 'last_opened DESC',
+      limit: limit,
+    );
+    return rows.map(DocFile.fromMap).toList();
+  }
+
+  /// Searches files matching [query] on file name with LIKE, optional category filter, and limit.
+  Future<List<DocFile>> searchFiles(
+    String query, {
+    FileCategory? category,
+    int limit = 100,
+  }) async {
+    final trimmed = query.trim();
+    if (trimmed.isEmpty) return const [];
+
+    final db = await _database.database;
+    final escaped = escapeLike(trimmed);
+
+    final whereClauses = <String>["name LIKE ? ESCAPE '\\'"];
+    final whereArgs = <dynamic>['%$escaped%'];
+
+    if (category != null) {
+      whereClauses.add('category = ?');
+      whereArgs.add(category.name);
+    }
+
+    final rows = await db.query(
+      AppDatabase.tableFiles,
+      where: whereClauses.join(' AND '),
+      whereArgs: whereArgs,
+      orderBy: 'modified DESC',
+      limit: limit,
+    );
+
+    return rows.map(DocFile.fromMap).toList();
+  }
 }
+
 

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
+import '../../providers/providers.dart';
+import '../open_document.dart';
 
 /// Reusable list tile displaying a document with category icon, title, metadata, and quick action icons.
-class FileTile extends StatelessWidget {
+class FileTile extends ConsumerWidget {
   const FileTile({
     required this.file,
     this.onTap,
@@ -15,12 +18,12 @@ class FileTile extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final categoryColor = file.category.color;
 
     return ListTile(
-      onTap: onTap,
+      onTap: onTap ?? () => openDocument(context, ref, file),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       leading: Container(
         width: 44,
@@ -57,19 +60,21 @@ class FileTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
+            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
             icon: Icon(
               file.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-              size: 20,
+              size: 22,
               color: file.isBookmarked
                   ? theme.colorScheme.primary
                   : theme.iconTheme.color?.withValues(alpha: 0.6),
             ),
-            tooltip: 'Bookmark',
+            tooltip: file.isBookmarked ? 'Remove bookmark' : 'Bookmark',
             onPressed: () {
-              // Non-functional in Phase 1B
+              ref.read(fileActionsControllerProvider).toggleBookmark(file);
             },
           ),
           IconButton(
+            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
             icon: Icon(
               Icons.more_vert,
               size: 20,
@@ -77,7 +82,7 @@ class FileTile extends StatelessWidget {
             ),
             tooltip: 'More actions',
             onPressed: () {
-              // Non-functional in Phase 1B
+              // Non-functional in Phase 1B / 2A (coming in Phase 4A)
             },
           ),
         ],
@@ -85,3 +90,4 @@ class FileTile extends StatelessWidget {
     );
   }
 }
+

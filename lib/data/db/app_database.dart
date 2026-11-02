@@ -8,7 +8,7 @@ class AppDatabase {
   static final AppDatabase instance = AppDatabase._internal();
 
   static const String databaseName = 'doc_reader.db';
-  static const int databaseVersion = 1;
+  static const int databaseVersion = 2;
 
   static const String tableFiles = 'files';
 
@@ -31,6 +31,7 @@ class AppDatabase {
       path,
       version: databaseVersion,
       onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
     );
   }
 
@@ -51,11 +52,28 @@ class AppDatabase {
     ''');
 
     await db.execute(
-      'CREATE INDEX idx_files_category ON $tableFiles (category)',
+      'CREATE INDEX IF NOT EXISTS idx_files_category ON $tableFiles (category)',
     );
     await db.execute(
-      'CREATE INDEX idx_files_name ON $tableFiles (name)',
+      'CREATE INDEX IF NOT EXISTS idx_files_name ON $tableFiles (name)',
     );
+    await db.execute(
+      'CREATE INDEX IF NOT EXISTS idx_files_bookmarked ON $tableFiles (is_bookmarked)',
+    );
+    await db.execute(
+      'CREATE INDEX IF NOT EXISTS idx_files_last_opened ON $tableFiles (last_opened)',
+    );
+  }
+
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute(
+        'CREATE INDEX IF NOT EXISTS idx_files_bookmarked ON $tableFiles (is_bookmarked)',
+      );
+      await db.execute(
+        'CREATE INDEX IF NOT EXISTS idx_files_last_opened ON $tableFiles (last_opened)',
+      );
+    }
   }
 
   /// Closes the database connection.
@@ -66,4 +84,3 @@ class AppDatabase {
     }
   }
 }
-
