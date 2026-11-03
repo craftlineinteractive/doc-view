@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:docview/core/constants/file_types.dart';
 import 'package:docview/core/utils/format_utils.dart';
 import 'package:docview/data/models/doc_file.dart';
@@ -183,5 +185,23 @@ void main() {
       expect(opt1 == opt2, isFalse);
     });
   });
+
+  group('Viewer & Encoding Tests', () {
+    test('utf8 decode handles malformed bytes without crashing', () {
+      final invalidBytes = [0xFF, 0xFE, 0xFD, 65, 66, 67]; // malformed + 'ABC'
+      final decoded = utf8.decode(invalidBytes, allowMalformed: true);
+      expect(decoded.contains('ABC'), isTrue);
+    });
+
+    test('LineSplitter splits multi-line text cleanly', () {
+      const multiline = 'Line 1\nLine 2\r\nLine 3\n';
+      final lines = const LineSplitter().convert(multiline);
+      expect(lines.length, 3);
+      expect(lines[0], 'Line 1');
+      expect(lines[1], 'Line 2');
+      expect(lines[2], 'Line 3');
+    });
+  });
 }
+
 

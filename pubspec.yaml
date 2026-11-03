@@ -45,6 +45,8 @@ dependencies:
   mime: ^2.1.0
   intl: ^0.20.3
   shared_preferences: ^2.5.6
+  pdfrx: ^2.4.8
+  open_filex: ^5.0.0
 
 dev_dependencies:
   flutter_test:

@@ -224,6 +224,13 @@ class FileActionsController {
     _invalidateAll();
   }
 
+  /// Deletes [file] from the database and refreshes all relevant providers.
+  Future<void> deleteFile(int id) async {
+    final repository = _ref.read(fileRepositoryProvider);
+    await repository.deleteFile(id);
+    _invalidateAll();
+  }
+
   void _invalidateAll() {
     _ref.invalidate(bookmarksProvider);
     _ref.invalidate(recentsProvider);

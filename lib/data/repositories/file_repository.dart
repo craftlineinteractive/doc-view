@@ -272,6 +272,17 @@ class FileRepository {
 
     return rows.map(DocFile.fromMap).toList();
   }
+
+  /// Deletes a file record from the database by its [id].
+  Future<void> deleteFile(int id) async {
+    final db = await _database.database;
+    await db.delete(
+      AppDatabase.tableFiles,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }
+
 
 

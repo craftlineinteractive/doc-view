@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/constants/file_types.dart';
 import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
 import '../../providers/providers.dart';
@@ -25,20 +28,49 @@ class FileTile extends ConsumerWidget {
     return ListTile(
       onTap: onTap ?? () => openDocument(context, ref, file),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      leading: Container(
-        width: 44,
-        height: 44,
-        decoration: BoxDecoration(
-          color: categoryColor.withValues(alpha: 0.15),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        alignment: Alignment.center,
-        child: Icon(
-          file.category.icon,
-          color: categoryColor,
-          size: 24,
-        ),
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: file.category == FileCategory.image
+            ? SizedBox(
+                width: 48,
+                height: 48,
+                child: Image.file(
+                  File(file.path),
+                  width: 48,
+                  height: 48,
+                  cacheWidth: 120,
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.low,
+                  gaplessPlayback: true,
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    width: 48,
+                    height: 48,
+                    color: categoryColor.withValues(alpha: 0.15),
+                    alignment: Alignment.center,
+                    child: Icon(
+                      file.category.icon,
+                      color: categoryColor,
+                      size: 24,
+                    ),
+                  ),
+                ),
+              )
+            : Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: categoryColor.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                alignment: Alignment.center,
+                child: Icon(
+                  file.category.icon,
+                  color: categoryColor,
+                  size: 24,
+                ),
+              ),
       ),
+
       title: Text(
         file.name,
         maxLines: 1,
