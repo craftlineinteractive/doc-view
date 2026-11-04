@@ -1,48 +1,38 @@
-# Task Plan: Doc Reader Phase 2B (Document Viewers)
+# Task Plan: Phase 3A (In-app Office Viewers)
 
 ## Goal
-Implement quiet, content-first in-app viewers for PDF, Image, and TXT files, external opening via OpenFilex for Office/other formats, thumbnail caching in FileTile, and file existence verification.
+Replace external app fallback for Word, Excel, and PowerPoint documents with high-fidelity, on-device in-app viewers using `offline_document_viewer`.
 
 ## Architecture & Constraints
 - Dark theme & colors from `app_theme.dart` (quiet, content-first, minimal chrome).
-- Use `FileActionsController` for bookmarking and opening events.
-- No heavy work on the UI thread (isolate decoding for TXT).
-- Cache image thumbnails (`cacheWidth: 120`, `gaplessPlayback: true`).
+- Isolate `offline_document_viewer` exclusively inside `lib/features/viewer/office_viewer_screen.dart`.
+- Put office extensions in ONE constant in `lib/core/constants/file_types.dart`.
+- Exhaustive handling of typed `DocumentFailure` with "Open in another app" fallback button.
 - All touch targets >= 48dp.
 - No logic inside `build()`, full async error & loading handling.
 
 ## Phases & Tasks
-- [x] **Step 0: Packages & Platform Configuration**
-  - [x] Add `pdfrx` and `open_filex` via `flutter pub add`.
-  - [x] Update iOS deployment target to 15.0 in `ios/Podfile` and `ios/Runner.xcodeproj/project.pbxproj`.
-  - [x] Inspect pdfrx documentation and API from pub cache.
-- [x] **Step 1: features/viewer/viewer_screen.dart (Dispatcher)**
-  - [x] Check `File(path).exists()`. If missing, remove DB row via repository, show SnackBar, pop.
-  - [x] Dispatch to `PdfViewerScreen`, `ImageViewerScreen`, `TxtViewerScreen`.
-  - [x] For `word`, `excel`, `ppt`, `other`: invoke `OpenFilex.open()`, then pop. If result != done, show SnackBar.
-- [x] **Step 2: PdfViewerScreen**
-  - [x] `PdfViewer.file` integration with documented API.
-  - [x] Minimal AppBar with file name and `FileActionsController.toggleBookmark`.
-  - [x] Page indicator overlay pill ("3 / 120") and validated "Go to page" dialog.
-  - [x] Password prompt dialog with retry and cancellation handling.
-  - [x] Corrupt/unreadable error state with "Open in another app" action.
+- [ ] **Step 0: Package & Platform Verification**
+  - [x] Added `offline_document_viewer: ^0.1.0`.
+  - [x] Read API and failure hierarchy from pub cache.
+- [x] **Step 1: Extension Constants in `core/constants/file_types.dart`**
+  - [x] Add `officeViewerExtensions` set and `isOfficeViewerSupported(path)`.
+- [x] **Step 2: Implement `features/viewer/office_viewer_screen.dart`**
+  - [x] `DocumentView(source: DocumentSource.file(file.path), controller: controller)`.
+  - [x] Search AppBar with query submit, clear, and match count badge.
+  - [x] Outline bottom sheet when `info.outline` is non-empty with `controller.goTo()`.
+  - [x] Bookmark toggle via `FileActionsController`.
+  - [x] Placeholder builder with "Opening document...".
+  - [x] Exhaustive error builder (`EncryptedDocumentFailure`, `TooLargeFailure`, `UnsupportedFormatFailure`, etc.) with "Open in another app".
+  - [x] Truncated banner for spreadsheets (>3000 rows) & legacy text-only banner for `.doc`/`.ppt`.
   - [x] Clean controller disposal.
-- [x] **Step 3: ImageViewerScreen**
-  - [x] Dark background, `InteractiveViewer` (scale 1 to 5).
-  - [x] Double-tap zoom toggle, single tap to toggle chrome (AppBar visibility).
-  - [x] `Image.file` with error state.
-- [x] **Step 4: TxtViewerScreen**
-  - [x] Read file via `Isolate.run`, decode `utf8.decode(..., allowMalformed: true)`.
-  - [x] Cap at 1 MB with banner indicator if capped.
-  - [x] `SelectionArea` with `ListView.builder` over lines.
-  - [x] Font size A- / A+ (12-28) and monospace toggle stored in `SharedPreferences`.
-  - [x] Loading & error states.
-- [x] **Step 5: Image Thumbnails in FileTile**
-  - [x] `cacheWidth: 120`, `fit: BoxFit.cover`, `filterQuality: FilterQuality.low`, `gaplessPlayback: true`.
-  - [x] Fallback to category icon on error or non-image types.
-- [x] **Step 6: Router Configuration**
-  - [x] Replace `/viewer` route in `app_router.dart` with `ViewerScreen` and null safety fallback.
-- [x] **Step 7: Verification & Testing**
-  - [x] Update unit and widget tests.
+- [x] **Step 3: Update `viewer_screen.dart` Dispatcher**
+  - [x] Route supported office extensions to `OfficeViewerScreen`.
+  - [x] Fall back to `open_filex` for unsupported office extensions (odt, ods, odp).
+- [x] **Step 4: Settings Screen Licenses**
+  - [x] Add "Open-source licenses" tile opening `showLicensePage`.
+  - [x] Load and display Liberation font license from bundled package assets.
+- [ ] **Step 5: Verification & Tests**
+  - [x] Update unit tests in `test/unit_test.dart`.
   - [x] Run `flutter analyze` and `flutter test`. Ensure 0 errors, 0 warnings.
-  - [x] Verify build and test on Android emulator.
+  - [ ] Verify build on emulator.

@@ -40,6 +40,31 @@ void main() {
         expect(cat.color, isNotNull);
       }
     });
+
+    test('isOfficeViewerSupported recognizes supported office formats and excludes others', () {
+      // Supported Office formats
+      expect(isOfficeViewerSupported('document.docx'), isTrue);
+      expect(isOfficeViewerSupported('macro.docm'), isTrue);
+      expect(isOfficeViewerSupported('sheet.xlsx'), isTrue);
+      expect(isOfficeViewerSupported('macro_sheet.xlsm'), isTrue);
+      expect(isOfficeViewerSupported('slides.pptx'), isTrue);
+      expect(isOfficeViewerSupported('macro_slides.pptm'), isTrue);
+      expect(isOfficeViewerSupported('legacy.xls'), isTrue);
+      expect(isOfficeViewerSupported('data.csv'), isTrue);
+      expect(isOfficeViewerSupported('data.tsv'), isTrue);
+      expect(isOfficeViewerSupported('document.rtf'), isTrue);
+      expect(isOfficeViewerSupported('old.doc'), isTrue);
+      expect(isOfficeViewerSupported('old.ppt'), isTrue);
+
+      // Excluded formats (open externally or other viewers)
+      expect(isOfficeViewerSupported('document.odt'), isFalse);
+      expect(isOfficeViewerSupported('sheet.ods'), isFalse);
+      expect(isOfficeViewerSupported('slides.odp'), isFalse);
+      expect(isOfficeViewerSupported('manual.pdf'), isFalse);
+      expect(isOfficeViewerSupported('photo.png'), isFalse);
+      expect(isOfficeViewerSupported('notes.txt'), isFalse);
+      expect(isOfficeViewerSupported('unknown.xyz'), isFalse);
+    });
   });
 
   group('DocFile Model Tests', () {

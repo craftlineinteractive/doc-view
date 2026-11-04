@@ -1,11 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/providers.dart';
 
-/// Screen managing application settings, manual scans, and manual file imports.
+/// Screen managing application settings, manual scans, manual file imports, and open-source licenses.
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
+
+  Future<void> _showDocumentEngineLicense(BuildContext context) async {
+    String licenseText = '';
+    try {
+      licenseText = await rootBundle.loadString(
+        'packages/offline_document_viewer/assets/licenses/LICENSE-liberation',
+      );
+    } catch (_) {
+      // If loading fails, catch the error and skip it silently as per requirements
+      return;
+    }
+
+    if (!context.mounted || licenseText.isEmpty) return;
+
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) {
+          final theme = Theme.of(context);
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Liberation Font License'),
+            ),
+            body: SelectionArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  licenseText,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    fontFamily: 'monospace',
+                    height: 1.4,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -166,7 +207,7 @@ class SettingsScreen extends ConsumerWidget {
 
           const SizedBox(height: 24),
           Text(
-            'About',
+            'About & Legal',
             style: theme.textTheme.titleSmall?.copyWith(
               color: theme.colorScheme.primary,
               fontWeight: FontWeight.w600,
@@ -181,10 +222,42 @@ class SettingsScreen extends ConsumerWidget {
                 color: theme.dividerColor.withValues(alpha: 0.1),
               ),
             ),
-            child: const ListTile(
-              leading: Icon(Icons.info_outline_rounded),
-              title: Text('Doc Reader'),
-              subtitle: Text('Version 1.0.0 (Phase 1)'),
+            child: Column(
+              children: [
+                const ListTile(
+                  leading: Icon(Icons.info_outline_rounded),
+                  title: Text('Doc Reader'),
+                  subtitle: Text('Version 1.0.0 (Phase 3A)'),
+                ),
+                Divider(
+                  height: 1,
+                  color: theme.dividerColor.withValues(alpha: 0.1),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.description_outlined),
+                  title: const Text('Open-source licenses'),
+                  subtitle: const Text('View licenses for bundled open-source software'),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  onTap: () {
+                    showLicensePage(
+                      context: context,
+                      applicationName: 'Doc Reader',
+                      applicationVersion: '1.0.0',
+                    );
+                  },
+                ),
+                Divider(
+                  height: 1,
+                  color: theme.dividerColor.withValues(alpha: 0.1),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.font_download_outlined),
+                  title: const Text('Document engine fonts license'),
+                  subtitle: const Text('Liberation Fonts and third-party notices'),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  onTap: () => _showDocumentEngineLicense(context),
+                ),
+              ],
             ),
           ),
         ],

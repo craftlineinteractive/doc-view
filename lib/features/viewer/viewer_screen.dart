@@ -8,14 +8,15 @@ import '../../core/constants/file_types.dart';
 import '../../data/models/doc_file.dart';
 import '../providers/providers.dart';
 import 'image_viewer_screen.dart';
+import 'office_viewer_screen.dart';
 import 'pdf_viewer_screen.dart';
 import 'txt_viewer_screen.dart';
 
 /// Central dispatcher for the `/viewer` route.
 ///
 /// Verifies file existence on disk, deletes missing files from the database with a notification,
-/// routes supported formats (PDF, Image, TXT) to dedicated viewers, and delegates Office/other
-/// documents to external system apps via [OpenFilex].
+/// routes supported formats (PDF, Image, TXT, and Office formats) to dedicated viewers, and
+/// delegates unsupported formats (ODT, ODS, ODP, Other) to external system apps via [OpenFilex].
 class ViewerScreen extends ConsumerStatefulWidget {
   const ViewerScreen({
     required this.file,
@@ -56,11 +57,13 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
       return;
     }
 
-    final category = widget.file.category;
-    if (category == FileCategory.word ||
-        category == FileCategory.excel ||
-        category == FileCategory.ppt ||
-        category == FileCategory.other) {
+    // Supported formats in-app: PDF, Image, TXT, and supported Office extensions
+    final isSupportedInApp = widget.file.category == FileCategory.pdf ||
+        widget.file.category == FileCategory.image ||
+        widget.file.category == FileCategory.txt ||
+        isOfficeViewerSupported(widget.file.path);
+
+    if (!isSupportedInApp) {
       final result = await OpenFilex.open(widget.file.path);
       if (mounted) {
         Navigator.of(context).pop();
@@ -89,6 +92,10 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           child: CircularProgressIndicator(),
         ),
       );
+    }
+
+    if (isOfficeViewerSupported(widget.file.path)) {
+      return OfficeViewerScreen(file: widget.file);
     }
 
     switch (widget.file.category) {

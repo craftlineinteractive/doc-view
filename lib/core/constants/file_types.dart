@@ -111,6 +111,32 @@ const Map<String, FileCategory> _extensionToCategoryMap = {
 final Set<String> supportedFileExtensions =
     Set<String>.unmodifiable(_extensionToCategoryMap.keys);
 
+/// File extensions supported by the in-app Office viewer.
+const Set<String> officeViewerExtensions = {
+  'docx',
+  'docm',
+  'xlsx',
+  'xlsm',
+  'pptx',
+  'pptm',
+  'xls',
+  'csv',
+  'tsv',
+  'rtf',
+  'doc',
+  'ppt',
+};
+
+/// Returns whether [path] has an extension supported by the in-app Office viewer.
+bool isOfficeViewerSupported(String path) {
+  final lastDot = path.lastIndexOf('.');
+  if (lastDot == -1 || lastDot == path.length - 1) {
+    return false;
+  }
+  final ext = path.substring(lastDot + 1).toLowerCase();
+  return officeViewerExtensions.contains(ext);
+}
+
 /// Resolves a [FileCategory] from a file path or file name.
 /// Returns `null` for unsupported file extensions so they are ignored.
 FileCategory? categoryFromPath(String path) {
