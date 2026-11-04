@@ -282,6 +282,21 @@ class FileRepository {
       whereArgs: [id],
     );
   }
+
+  /// Retrieves a single [DocFile] by its absolute [path], or null if not indexed.
+  Future<DocFile?> getFileByPath(String path) async {
+    final db = await _database.database;
+    final rows = await db.query(
+      AppDatabase.tableFiles,
+      where: 'path = ?',
+      whereArgs: [path],
+      limit: 1,
+    );
+    if (rows.isNotEmpty) {
+      return DocFile.fromMap(rows.first);
+    }
+    return null;
+  }
 }
 
 

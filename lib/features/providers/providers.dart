@@ -9,6 +9,10 @@ import '../../data/models/doc_file.dart';
 import '../../data/models/sort_option.dart';
 import '../../data/repositories/file_repository.dart';
 import '../../data/services/import_service.dart';
+import '../../data/services/pdf/image_to_pdf_service.dart';
+import '../../data/services/pdf/pdf_merge_service.dart';
+import '../../data/services/pdf/pdf_output_service.dart';
+import '../../data/services/pdf/pdf_split_service.dart';
 import '../../data/services/permission_service.dart';
 import '../../data/services/scanner_service.dart';
 
@@ -42,6 +46,34 @@ final scannerServiceProvider = Provider<ScannerService>((ref) {
 final importServiceProvider = Provider<ImportService>((ref) {
   final repository = ref.watch(fileRepositoryProvider);
   return ImportService(repository: repository);
+});
+
+/// PDF output service provider.
+final pdfOutputServiceProvider = Provider<PdfOutputService>((ref) {
+  final repository = ref.watch(fileRepositoryProvider);
+  final actionsController = ref.watch(fileActionsControllerProvider);
+  return PdfOutputService(
+    repository: repository,
+    actionsController: actionsController,
+  );
+});
+
+/// Image to PDF service provider.
+final imageToPdfServiceProvider = Provider<ImageToPdfService>((ref) {
+  final outputService = ref.watch(pdfOutputServiceProvider);
+  return ImageToPdfService(outputService: outputService);
+});
+
+/// PDF merge service provider.
+final pdfMergeServiceProvider = Provider<PdfMergeService>((ref) {
+  final outputService = ref.watch(pdfOutputServiceProvider);
+  return PdfMergeService(outputService: outputService);
+});
+
+/// PDF split service provider.
+final pdfSplitServiceProvider = Provider<PdfSplitService>((ref) {
+  final outputService = ref.watch(pdfOutputServiceProvider);
+  return PdfSplitService(outputService: outputService);
 });
 
 /// Notifier tracking background scan state, progress counts, and completion.
@@ -213,7 +245,7 @@ class FileActionsController {
     if (file.id == null) return;
     final repository = _ref.read(fileRepositoryProvider);
     await repository.toggleBookmark(file.id!);
-    _invalidateAll();
+    invalidateAll();
   }
 
   /// Marks [file] as opened and refreshes all relevant providers.
@@ -221,17 +253,18 @@ class FileActionsController {
     if (file.id == null) return;
     final repository = _ref.read(fileRepositoryProvider);
     await repository.markOpened(file.id!);
-    _invalidateAll();
+    invalidateAll();
   }
 
   /// Deletes [file] from the database and refreshes all relevant providers.
   Future<void> deleteFile(int id) async {
     final repository = _ref.read(fileRepositoryProvider);
     await repository.deleteFile(id);
-    _invalidateAll();
+    invalidateAll();
   }
 
-  void _invalidateAll() {
+  /// Invalidates all document-related providers across the app.
+  void invalidateAll() {
     _ref.invalidate(bookmarksProvider);
     _ref.invalidate(recentsProvider);
     _ref.invalidate(filesProvider);

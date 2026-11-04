@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:docview/core/constants/file_types.dart';
 import 'package:docview/core/utils/format_utils.dart';
+import 'package:docview/core/utils/page_range_parser.dart';
 import 'package:docview/data/models/doc_file.dart';
 import 'package:docview/data/models/sort_option.dart';
+import 'package:docview/data/services/pdf/pdf_output_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -225,6 +228,99 @@ void main() {
       expect(lines[0], 'Line 1');
       expect(lines[1], 'Line 2');
       expect(lines[2], 'Line 3');
+    });
+  });
+
+  group('PageRangeParser Tests', () {
+    test('parses valid single pages and ranges preserving user order', () {
+      final ranges = parsePageRanges('1-3, 5, 8-10', 10);
+      expect(ranges, [
+        const PageRange(1, 3),
+        const PageRange(5, 5),
+        const PageRange(8, 10),
+      ]);
+    });
+
+    test('handles whitespace around numbers and hyphens', () {
+      final ranges = parsePageRanges('  2 - 4 ,  7  , 9 - 10 ', 12);
+      expect(ranges, [
+        const PageRange(2, 4),
+        const PageRange(7, 7),
+        const PageRange(9, 10),
+      ]);
+    });
+
+    test('allows non-sequential and overlapping ranges without auto-merging', () {
+      final ranges = parsePageRanges('5, 1-3, 2-4', 10);
+      expect(ranges, [
+        const PageRange(5, 5),
+        const PageRange(1, 3),
+        const PageRange(2, 4),
+      ]);
+    });
+
+    test('rejects empty inputs or empty segments', () {
+      expect(() => parsePageRanges('', 5), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('   ', 5), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('1, , 3', 5), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('1, 2,', 5), throwsA(isA<PageRangeParseException>()));
+    });
+
+    test('rejects zero or negative page numbers', () {
+      expect(() => parsePageRanges('0', 5), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('0-3', 5), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('-1', 5), throwsA(isA<PageRangeParseException>()));
+    });
+
+    test('rejects reversed ranges (start > end)', () {
+      expect(() => parsePageRanges('5-2', 10), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('3-1', 5), throwsA(isA<PageRangeParseException>()));
+    });
+
+    test('rejects out of range pages exceeding total page count', () {
+      expect(() => parsePageRanges('11', 10), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('8-12', 10), throwsA(isA<PageRangeParseException>()));
+    });
+
+    test('rejects non-numeric tokens and malformed hyphens', () {
+      expect(() => parsePageRanges('abc', 5), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('1-two', 5), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('1--3', 5), throwsA(isA<PageRangeParseException>()));
+      expect(() => parsePageRanges('1-2-3', 5), throwsA(isA<PageRangeParseException>()));
+    });
+
+    test('validatePageRanges returns null for valid and error string for invalid', () {
+      expect(validatePageRanges('1-3, 5', 5), isNull);
+      expect(validatePageRanges('5-2', 5), isNotNull);
+      expect(validatePageRanges('6', 5), isNotNull);
+    });
+  });
+
+  group('PdfOutputService Naming & Sanitizing Tests', () {
+    test('sanitizeFileName removes illegal characters and trims', () {
+      expect(PdfOutputService.sanitizeFileName('report/2026:final*?.pdf'), 'report2026final');
+      expect(PdfOutputService.sanitizeFileName('my <file> | "quote"'), 'my file  quote');
+      expect(PdfOutputService.sanitizeFileName(''), 'Document');
+      expect(PdfOutputService.sanitizeFileName(':::'), 'Document');
+      expect(PdfOutputService.sanitizeFileName('MyInvoice.PDF'), 'MyInvoice');
+    });
+
+    test('uniqueFileInDir appends numbers sequentially when collision occurs', () {
+      final tempDir = Directory.systemTemp.createTempSync('pdf_output_test_');
+      try {
+        final f1 = PdfOutputService.uniqueFileInDir(tempDir, 'Invoice');
+        expect(f1.path.endsWith('Invoice.pdf'), isTrue);
+        f1.writeAsStringSync('dummy');
+
+        final f2 = PdfOutputService.uniqueFileInDir(tempDir, 'Invoice');
+        expect(f2.path.endsWith('Invoice (1).pdf'), isTrue);
+        f2.writeAsStringSync('dummy');
+
+        final f3 = PdfOutputService.uniqueFileInDir(tempDir, 'Invoice');
+        expect(f3.path.endsWith('Invoice (2).pdf'), isTrue);
+      } finally {
+        tempDir.deleteSync(recursive: true);
+      }
     });
   });
 }
