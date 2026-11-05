@@ -43,7 +43,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Doc Reader'), findsOneWidget);
+    expect(find.text('Doc View'), findsOneWidget);
     expect(find.text('All files'), findsWidgets);
     expect(find.text('Tools'), findsOneWidget);
     expect(find.text('Settings'), findsOneWidget);
@@ -77,7 +77,7 @@ void main() {
     expect(find.text('Directories'), findsOneWidget);
     expect(find.text('Storage Access Required'), findsOneWidget);
     expect(
-      find.text('Doc Reader needs All files access to browse your folders.'),
+      find.text('Doc View needs All files access to browse your folders.'),
       findsOneWidget,
     );
     expect(find.text('Grant access'), findsOneWidget);

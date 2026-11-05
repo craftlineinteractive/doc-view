@@ -33,7 +33,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // 1. Verify Home Screen loaded
-    expect(find.text('Doc Reader'), findsOneWidget);
+    expect(find.text('Doc View'), findsOneWidget);
 
     // 2. Navigate to Tools tab
     final toolsTab = find.byIcon(Icons.grid_view);

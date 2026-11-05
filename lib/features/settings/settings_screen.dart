@@ -226,8 +226,8 @@ class SettingsScreen extends ConsumerWidget {
               children: [
                 const ListTile(
                   leading: Icon(Icons.info_outline_rounded),
-                  title: Text('Doc Reader'),
-                  subtitle: Text('Version 1.0.0 (Phase 3A)'),
+                  title: Text('Doc View'),
+                  subtitle: Text('Version 1.0.0'),
                 ),
                 Divider(
                   height: 1,
@@ -241,7 +241,7 @@ class SettingsScreen extends ConsumerWidget {
                   onTap: () {
                     showLicensePage(
                       context: context,
-                      applicationName: 'Doc Reader',
+                      applicationName: 'Doc View',
                       applicationVersion: '1.0.0',
                     );
                   },

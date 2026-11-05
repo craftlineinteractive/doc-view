@@ -604,7 +604,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              'Doc Reader needs All files access to browse your folders.',
+              'Doc View needs All files access to browse your folders.',
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.7),

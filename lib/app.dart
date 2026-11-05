@@ -159,7 +159,7 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
           ),
           title: const Text('Storage Access Required'),
           content: const Text(
-            'Doc Reader needs storage access to scan and display documents '
+            'Doc View needs storage access to scan and display documents '
             '(PDF, Word, Excel, PPT, TXT, Images) stored on your device.\n\n'
             'Your files remain completely private and offline on your device.',
           ),

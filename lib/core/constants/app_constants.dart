@@ -2,6 +2,6 @@
 class AppConstants {
   const AppConstants._();
 
-  static const String appName = 'Doc Reader';
+  static const String appName = 'Doc View';
 }
 

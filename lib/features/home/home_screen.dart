@@ -25,7 +25,7 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Doc Reader'),
+        title: const Text('Doc View'),
         centerTitle: false,
         actions: [
           IconButton(
