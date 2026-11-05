@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/constants/file_types.dart';
 import '../../data/models/doc_file.dart';
+import '../../features/directories/directories_screen.dart';
 import '../../features/files/files_screen.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/search/search_screen.dart';
@@ -78,6 +79,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'search',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const SearchScreen(),
+      ),
+      GoRoute(
+        path: '/directories',
+        name: 'directories',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const DirectoriesScreen(),
       ),
       GoRoute(
         path: '/viewer',

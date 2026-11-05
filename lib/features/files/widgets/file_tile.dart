@@ -8,17 +8,27 @@ import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
 import '../../providers/providers.dart';
 import '../open_document.dart';
+import 'file_options_sheet.dart';
 
-/// Reusable list tile displaying a document with category icon, title, metadata, and quick action icons.
+/// Reusable list tile displaying a document with category icon, title, metadata,
+/// quick action icons, and multi-selection support.
 class FileTile extends ConsumerWidget {
   const FileTile({
     required this.file,
     this.onTap,
+    this.onLongPress,
+    this.selectionMode = false,
+    this.selected = false,
+    this.onSelectChanged,
     super.key,
   });
 
   final DocFile file;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
+  final bool selectionMode;
+  final bool selected;
+  final ValueChanged<bool?>? onSelectChanged;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,7 +36,22 @@ class FileTile extends ConsumerWidget {
     final categoryColor = file.category.color;
 
     return ListTile(
-      onTap: onTap ?? () => openDocument(context, ref, file),
+      onTap: () {
+        if (selectionMode) {
+          if (onTap != null) {
+            onTap!();
+          } else if (onSelectChanged != null) {
+            onSelectChanged!(!selected);
+          }
+        } else {
+          if (onTap != null) {
+            onTap!();
+          } else {
+            openDocument(context, ref, file);
+          }
+        }
+      },
+      onLongPress: onLongPress,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -70,7 +95,6 @@ class FileTile extends ConsumerWidget {
                 ),
               ),
       ),
-
       title: Text(
         file.name,
         maxLines: 1,
@@ -88,38 +112,45 @@ class FileTile extends ConsumerWidget {
           ),
         ),
       ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-            icon: Icon(
-              file.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-              size: 22,
-              color: file.isBookmarked
-                  ? theme.colorScheme.primary
-                  : theme.iconTheme.color?.withValues(alpha: 0.6),
+      trailing: selectionMode
+          ? ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+              child: Checkbox(
+                value: selected,
+                onChanged: onSelectChanged ?? (_) => onTap?.call(),
+              ),
+            )
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+                  icon: Icon(
+                    file.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                    size: 22,
+                    color: file.isBookmarked
+                        ? theme.colorScheme.primary
+                        : theme.iconTheme.color?.withValues(alpha: 0.6),
+                  ),
+                  tooltip: file.isBookmarked ? 'Remove bookmark' : 'Bookmark',
+                  onPressed: () {
+                    ref.read(fileActionsControllerProvider).toggleBookmark(file);
+                  },
+                ),
+                IconButton(
+                  constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+                  icon: Icon(
+                    Icons.more_vert,
+                    size: 20,
+                    color: theme.iconTheme.color?.withValues(alpha: 0.6),
+                  ),
+                  tooltip: 'More actions',
+                  onPressed: () {
+                    FileOptionsSheet.show(context, file);
+                  },
+                ),
+              ],
             ),
-            tooltip: file.isBookmarked ? 'Remove bookmark' : 'Bookmark',
-            onPressed: () {
-              ref.read(fileActionsControllerProvider).toggleBookmark(file);
-            },
-          ),
-          IconButton(
-            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-            icon: Icon(
-              Icons.more_vert,
-              size: 20,
-              color: theme.iconTheme.color?.withValues(alpha: 0.6),
-            ),
-            tooltip: 'More actions',
-            onPressed: () {
-              // Non-functional in Phase 1B / 2A (coming in Phase 4A)
-            },
-          ),
-        ],
-      ),
     );
   }
 }
-

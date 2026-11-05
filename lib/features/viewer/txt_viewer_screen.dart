@@ -10,8 +10,8 @@ import '../../data/models/doc_file.dart';
 import '../providers/providers.dart';
 
 /// Data class holding processed text lines and truncation status.
-class _TxtContent {
-  const _TxtContent({
+class TxtContent {
+  const TxtContent({
     required this.lines,
     required this.isTruncated,
   });
@@ -20,30 +20,38 @@ class _TxtContent {
   final bool isTruncated;
 }
 
-/// Reads a text file off the main isolate, capping reading to 1 MB with malformed UTF-8 tolerance.
-Future<_TxtContent> _readTxtFileIsolate(String filePath) async {
-  return await Isolate.run(() async {
-    final file = File(filePath);
-    final length = await file.length();
-    const maxBytes = 1024 * 1024; // 1 MB
-    final isTruncated = length > maxBytes;
+/// Top-level synchronous worker function running inside an isolate.
+/// Reads a text file safely capping reading to 1 MB with malformed UTF-8 tolerance.
+TxtContent readTxtFileWorker(String filePath) {
+  final file = File(filePath);
+  if (!file.existsSync()) {
+    return const TxtContent(lines: [], isTruncated: false);
+  }
 
-    List<int> bytes;
-    if (isTruncated) {
-      final raf = await file.open(mode: FileMode.read);
-      try {
-        bytes = await raf.read(maxBytes);
-      } finally {
-        await raf.close();
-      }
-    } else {
-      bytes = await file.readAsBytes();
+  final length = file.lengthSync();
+  const maxBytes = 1024 * 1024; // 1 MB
+  final isTruncated = length > maxBytes;
+
+  List<int> bytes;
+  if (isTruncated) {
+    final raf = file.openSync(mode: FileMode.read);
+    try {
+      bytes = raf.readSync(maxBytes);
+    } finally {
+      raf.closeSync();
     }
+  } else {
+    bytes = file.readAsBytesSync();
+  }
 
-    final decoded = utf8.decode(bytes, allowMalformed: true);
-    final lines = const LineSplitter().convert(decoded);
-    return _TxtContent(lines: lines, isTruncated: isTruncated);
-  });
+  final decoded = utf8.decode(bytes, allowMalformed: true);
+  final lines = const LineSplitter().convert(decoded);
+  return TxtContent(lines: lines, isTruncated: isTruncated);
+}
+
+/// Dispatches [readTxtFileWorker] in a background isolate via [Isolate.run].
+Future<TxtContent> readTxtFileContent(String filePath) {
+  return Isolate.run(() => readTxtFileWorker(filePath));
 }
 
 /// Content-first text document reader with isolate-backed decoding, selectable text, and dynamic typography controls.
@@ -63,14 +71,14 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
   static const String _keyFontSize = 'txt_font_size';
   static const String _keyMonospace = 'txt_is_monospace';
 
-  late Future<_TxtContent> _contentFuture;
+  late Future<TxtContent> _contentFuture;
   double _fontSize = 15.0;
   bool _isMonospace = false;
 
   @override
   void initState() {
     super.initState();
-    _contentFuture = _readTxtFileIsolate(widget.file.path);
+    _contentFuture = readTxtFileContent(widget.file.path);
     _loadPreferences();
   }
 
@@ -109,7 +117,7 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
 
   void _retry() {
     setState(() {
-      _contentFuture = _readTxtFileIsolate(widget.file.path);
+      _contentFuture = readTxtFileContent(widget.file.path);
     });
   }
 
@@ -190,7 +198,7 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
           ),
         ],
       ),
-      body: FutureBuilder<_TxtContent>(
+      body: FutureBuilder<TxtContent>(
         future: _contentFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

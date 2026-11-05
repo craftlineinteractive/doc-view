@@ -1,19 +1,17 @@
-# Phase 3B: Implementation Progress
+# Directories Hardening & Isolate Safety Progress
 
 | Date | Task | Status | Notes |
 | :--- | :--- | :--- | :--- |
-| 2026-11-04 | Added dependencies (`pdf`, `cunning_document_scanner`, `share_plus`, `flutter_image_compress`) | Completed | Resolved cleanly without constraints conflict |
-| 2026-11-04 | Android & iOS configurations (`NSCameraUsageDescription`, `CAMERA` permission, `minSdk 24`) | Completed | Updated `Info.plist`, `AndroidManifest.xml`, `build.gradle.kts` |
-| 2026-11-04 | Task 1.1: `PageRangeParser` and tests | Completed | Pure logic with comprehensive tests (order, gaps, syntax) |
-| 2026-11-04 | Task 1.2: `PdfOutputService` | Completed | Safe filename sanitizing, unique numbering, SQLite indexing |
-| 2026-11-04 | Task 1.3: `ImageToPdfService` | Completed | 1-by-1 compression, A4 & Fit modes, isolate execution |
-| 2026-11-04 | Task 1.4: `PdfMergeService` | Completed | Native pdfrx document stitching without rasterization |
-| 2026-11-04 | Task 1.5: `PdfSplitService` | Completed | Multi-range pdfrx page slicing without rasterization |
-| 2026-11-04 | Task 2.1: `ToolResultBottomSheet` | Completed | Open, Share, Done actions for single or multiple outputs |
-| 2026-11-04 | Task 2.2: `LibraryPdfPickerScreen` | Completed | Multi-select and single-select indexed PDF picker |
-| 2026-11-04 | Task 3.1: `ImageListEditorScreen` | Completed | Shared reorderable thumbnail editor for Images and Scans |
-| 2026-11-04 | Task 3.2: `MergeScreen` | Completed | Reorderable PDF merge screen with custom file naming |
-| 2026-11-04 | Task 3.3: `SplitScreen` | Completed | Live inline range validation and multi-file splitting |
-| 2026-11-04 | Task 3.4: `ToolsScreen` (Grid & Sections) | Completed | 4-column grid with Convert & Create and Edit & Manage |
-| 2026-11-04 | Task 4.1: Analyze & Test Run | Completed | 0 analyze issues, 26/26 unit tests passed |
-| 2026-11-04 | Task 4.2: Manual verification on device | Handed off to User | APK installed on device for manual QA |
+| 2026-11-05 | Diagnosis (Step 1) | Completed | Unsendable `_AsyncCompleter` in `_loadCurrentDirectory()` closure |
+| 2026-11-05 | Task 1.1: Isolate Audit | Completed | Audited all 4 isolate usages across `lib/` |
+| 2026-11-05 | Task 1.2: Refactor `image_to_pdf_service.dart` | Completed | Top-level worker `compilePdfInWorker` + `PdfCompilationPayload` |
+| 2026-11-05 | Task 1.3: Refactor `txt_viewer_screen.dart` | Completed | Top-level synchronous worker `readTxtFileWorker` |
+| 2026-11-05 | Task 2.1: Root Path Resolver | Completed | `deriveAndroidRoot` + `resolveRootDirectory` in `root_path_resolver.dart` |
+| 2026-11-05 | Task 3.1: Directory Lister Service | Completed | `directory_lister.dart` with `DirectoryEntryDto` and per-entry resilience |
+| 2026-11-05 | Task 4.1: Permission Provider | Completed | `allFilesAccessProvider` with resume and settings refresh |
+| 2026-11-05 | Task 4.2: Typed Directory States | Completed | `loading`, `permissionRequired`, `folderAccessDenied`, `notFound`, `empty`, `unknownError` |
+| 2026-11-05 | Task 5.1-5.4: Test Suite | Completed | 43/43 tests passing (unit + regression + widget) |
+| 2026-11-05 | Task 6.1: `flutter analyze` | Completed | 0 issues found |
+| 2026-11-05 | Task 6.2: `flutter test` | Completed | 43/43 tests passing |
+| 2026-11-05 | Fix Native ABI Mismatch Crash | Completed | Excluded mismatched ABIs in packaging; pure `arm64-v8a` APK built & installed |
+| 2026-11-05 | Live Verification | Completed | App launched and verified running with Root directory and all folders displayed |

@@ -1,53 +1,50 @@
-# Phase 3B: PDF Tools Implementation Plan
+# Step 2 Implementation Plan: Directories Hardening & Isolate Safety
 
-> **Goal:** Implement the Tools tab with 4 complete PDF creation and editing features: Image to PDF, Scan to PDF, Merge PDF, and Split PDF, adhering to dark/light theme consistency, UI performance isolates, touch accessibility, and comprehensive testing.
+> **Goal:** Fix the Directories browser feature (`/directories`) on Android emulator (API 36) where it gets stuck on breadcrumb "Root" with error `"Can't open this folder - Permission denied or folder inaccessible"`. Enforce Isolate Safety Rule everywhere across `lib/`, introduce typed directory states, resilient per-entry directory listing in an isolated service, single permission provider, dynamic root resolution, and full test suite.
 
-**Architecture:**
-- **Services Layer (`lib/data/services/pdf/`)**:
-  - `pdf_output_service.dart`: Creates and manages the `created/` output directory, sanitizes file names, generates collision-free file paths (`uniqueFile`), and registers created PDFs into SQLite (`DocFile`) with provider invalidation.
-  - `image_to_pdf_service.dart`: Memory-safe image-to-PDF conversion. Compresses each image individually with `flutter_image_compress` (JPEG, quality 80, max 1600px), builds PDF using `package:pdf`, handles progress callbacks, and builds in isolate.
-  - `pdf_merge_service.dart`: Merges multiple PDFs preserving original vectors using `pdfrx`'s `PdfDocument.createNew()`, `pages` assignment, and `encodePdf()`.
-  - `pdf_split_service.dart`: Splits a PDF into multiple documents using `pdfrx` page slicing and encoding according to parsed `PageRange`s.
-- **Pure Logic Utility (`lib/core/utils/page_range_parser.dart`)**:
-  - Validates and parses page range expressions (`"1-3, 5, 8-10"`) against total document page count without merging or reordering.
-- **UI Layer (`lib/features/tools/`)**:
-  - `tools_screen.dart`: Two sections ("Convert & Create", "Edit & Manage") displaying exactly the 4 implemented tools in 4-column grid tiles (>=48dp touch targets).
-  - `widgets/tool_result_bottom_sheet.dart`: Shared success sheet displaying generated PDF(s) with Open (`openDocument`), Share (`share_plus`), and Done actions.
-  - `widgets/library_pdf_picker_screen.dart`: Reusable indexed PDF picker (multi-select for Merge, single-select for Split) with search filtering and checkboxes.
-  - `image_list_editor_screen.dart`: Shared reorderable thumbnail editor for both Image to PDF and Scan to PDF, with page mode selector (A4 vs Fit), file naming, and progress dialog.
-  - `merge_screen.dart`: Reorderable PDF list with remove actions, file naming, and progress indicator.
-  - `split_screen.dart`: Document page count summary, live inline syntax validation for page ranges, and multi-file progress dialog.
-
-**Tech Stack:**
-- Flutter 3.x, Riverpod 3.x, GoRouter, SQLite (sqflite)
-- `pdfrx` (native PDFium document inspection, page slicing, and encoding)
-- `pdf` (creating PDFs from images)
-- `cunning_document_scanner` (system/ML Kit document camera scanner)
-- `flutter_image_compress` (memory-safe image resizing and compression)
-- `share_plus` (system sharing intent)
+**Hard Rule:**
+- The Tools tab must remain untouched (exactly the 4 tools created in Phase 3B; do not touch `lib/features/tools/`).
+- Do NOT rewrite unrelated files.
+- No new packages.
+- Touch targets $\ge 48\text{dp}$.
 
 ---
 
-## Phases & Tasks
+## Tasks
 
-### Phase 1: Core Logic & Services
-- [x] Task 1.1: Implement `PageRangeParser` (`lib/core/utils/page_range_parser.dart`) and unit tests (`test/unit_test.dart`)
-- [x] Task 1.2: Implement `PdfOutputService` (`lib/data/services/pdf/pdf_output_service.dart`) with file sanitization and registration
-- [x] Task 1.3: Implement `ImageToPdfService` (`lib/data/services/pdf/image_to_pdf_service.dart`) with isolated compilation and memory-safe compression
-- [x] Task 1.4: Implement `PdfMergeService` (`lib/data/services/pdf/pdf_merge_service.dart`) using `pdfrx`
-- [x] Task 1.5: Implement `PdfSplitService` (`lib/data/services/pdf/pdf_split_service.dart`) using `pdfrx`
+### Phase 1: Isolate Audit & Safety Enforcement
+- [x] Task 1.1: Audit all `Isolate.run`, `compute(`, and `Isolate.spawn` calls in `lib/`.
+- [x] Task 1.2: Refactor `lib/data/services/pdf/image_to_pdf_service.dart` to top-level worker with immutable DTO.
+- [x] Task 1.3: Refactor `lib/features/viewer/txt_viewer_screen.dart` to top-level worker with immutable DTO.
+- [x] Task 1.4: Compile audit report table for reply.
 
-### Phase 2: Shared UI Components
-- [x] Task 2.1: Implement `ToolResultBottomSheet` (`lib/features/tools/widgets/tool_result_bottom_sheet.dart`)
-- [x] Task 2.2: Implement `LibraryPdfPickerScreen` (`lib/features/tools/widgets/library_pdf_picker_screen.dart`) for single and multi-select modes
+### Phase 2: Root Path Resolution Utility
+- [x] Task 2.1: Implement `lib/core/utils/root_path_resolver.dart` with `deriveAndroidRoot` cutting at `/Android` and `resolveRootDirectory` with unit-testable fallbacks.
 
-### Phase 3: Tool Implementation & Screens
-- [x] Task 3.1: Implement `ImageListEditorScreen` (`lib/features/tools/image_list_editor_screen.dart`) shared by Image to PDF & Scan to PDF
-- [x] Task 3.2: Implement `MergeScreen` (`lib/features/tools/merge_screen.dart`)
-- [x] Task 3.3: Implement `SplitScreen` (`lib/features/tools/split_screen.dart`)
-- [x] Task 3.4: Rebuild `ToolsScreen` (`lib/features/tools/tools_screen.dart`) with the 4-column grid layout and 2 sections
+### Phase 3: Directory Lister Service & DTOs
+- [x] Task 3.1: Implement `lib/features/directories/services/directory_lister.dart` with `DirectoryEntryDto`, top-level `listDirectorySync`, and top-level `listDirectoryEntries` via `Isolate.run`.
+- [x] Task 3.2: Implement per-entry resilience (try/catch around stat, skipping broken symlinks/hidden files, filtering unsupported file types, alpha sorting).
 
-### Phase 4: Verification & Manual Testing
-- [x] Task 4.1: Run `flutter analyze` & fix any warnings/errors (0 issues found)
-- [x] Task 4.2: Run `flutter test` & verify all unit tests pass (26/26 passed)
-- [x] Task 4.3: Build & install APK on emulator for user manual QA
+### Phase 4: Single Permission Provider & Directories Screen Hardening
+- [x] Task 4.1: Add `allFilesAccessProvider` in `lib/features/providers/providers.dart` with auto-refresh on app resume and settings return.
+- [x] Task 4.2: Replace generic error in `lib/features/directories/directories_screen.dart` with typed states:
+  - `loading`
+  - `permissionRequired` ("Doc Reader needs All files access to browse your folders." + "Grant access" + "Import files instead")
+  - `folderAccessDenied` ("This folder is protected by Android." + "Go back")
+  - `notFound` ("This folder no longer exists." + "Go to Root")
+  - `empty` ("No supported files or folders here.")
+  - `unknownError` (short message + "Retry")
+- [x] Task 4.3: Implement tappable breadcrumb segments ($\ge 48\text{dp}$) and back navigation (PopScope + AppBar arrow).
+- [x] Task 4.4: Remove all `[DIRDBG]` temporary debug logs.
+
+### Phase 5: Regression & Unit Tests
+- [x] Task 5.1: Unit test for root path resolver in `test/unit_test.dart`.
+- [x] Task 5.2: Unit test for directory lister via real `Isolate.run` against `Directory.systemTemp.createTemp` directory with subfolder, `.pdf`, `.secret`, `.xyz`.
+- [x] Task 5.3: Unit test for `image_to_pdf_service` / TXT reader isolate workers.
+- [x] Task 5.4: Widget test for `DirectoryPermissionRequiredState` showing "Grant access" button.
+
+### Phase 6: Verification & QA
+- [x] Task 6.1: Run `flutter analyze` & ensure 0 issues (PASSED).
+- [x] Task 6.2: Run `flutter test` & verify all tests pass (43/43 PASSED).
+- [x] Task 6.3: Build split debug APK and install on emulator (`adb install -r -d` succeeded).
+- [x] Task 6.4: Provide manual QA test checklist.

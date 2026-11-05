@@ -146,12 +146,8 @@ class HomeScreen extends ConsumerWidget {
                         label: 'Directories',
                         icon: Icons.snippet_folder_rounded,
                         color: const Color(0xFF8E24AA),
-                        count: 'Folders',
-                        onTap: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Coming soon')),
-                          );
-                        },
+                        count: 'Browse',
+                        onTap: () => context.push('/directories'),
                       ),
                     ],
                   ),

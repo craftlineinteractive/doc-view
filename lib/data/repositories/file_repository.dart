@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
+
 import '../../core/constants/file_types.dart';
 import '../../core/utils/format_utils.dart';
 import '../db/app_database.dart';
@@ -12,6 +14,9 @@ class FileRepository {
       : _database = database ?? AppDatabase.instance;
 
   final AppDatabase _database;
+
+  /// Inserts or updates a single file in the database.
+  Future<void> upsert(DocFile file) => upsertBatch([file]);
 
   /// Inserts or updates a batch of files in a single database transaction.
   /// Preserves [DocFile.isBookmarked] and [DocFile.lastOpened] for existing records.
@@ -296,6 +301,54 @@ class FileRepository {
       return DocFile.fromMap(rows.first);
     }
     return null;
+  }
+
+  /// Updates the path and name of a file while preserving its bookmark and lastOpened state.
+  Future<void> updatePath(int id, String newPath, String newName) async {
+    final ext = p.extension(newPath).replaceAll('.', '').toLowerCase();
+    final db = await _database.database;
+    await db.update(
+      AppDatabase.tableFiles,
+      {
+        'path': newPath,
+        'name': newName,
+        'extension': ext,
+        'modified': DateTime.now().millisecondsSinceEpoch,
+      },
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  /// Deletes a single file record by its [id].
+  Future<void> deleteById(int id) => deleteFile(id);
+
+  /// Deletes multiple file records by their [ids].
+  Future<void> deleteByIds(List<int> ids) async {
+    if (ids.isEmpty) return;
+    final db = await _database.database;
+    final placeholders = List.filled(ids.length, '?').join(', ');
+    await db.delete(
+      AppDatabase.tableFiles,
+      where: 'id IN ($placeholders)',
+      whereArgs: ids,
+    );
+  }
+
+  /// Retrieves a single [DocFile] by its absolute [path], or null if not indexed.
+  Future<DocFile?> getByPath(String path) => getFileByPath(path);
+
+  /// Retrieves multiple [DocFile]s matching the given [paths].
+  Future<List<DocFile>> getByPaths(List<String> paths) async {
+    if (paths.isEmpty) return const [];
+    final db = await _database.database;
+    final placeholders = List.filled(paths.length, '?').join(', ');
+    final rows = await db.query(
+      AppDatabase.tableFiles,
+      where: 'path IN ($placeholders)',
+      whereArgs: paths,
+    );
+    return rows.map(DocFile.fromMap).toList();
   }
 }
 

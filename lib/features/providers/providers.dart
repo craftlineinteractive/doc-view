@@ -8,6 +8,7 @@ import '../../data/db/app_database.dart';
 import '../../data/models/doc_file.dart';
 import '../../data/models/sort_option.dart';
 import '../../data/repositories/file_repository.dart';
+import '../../data/services/file_operations_service.dart';
 import '../../data/services/import_service.dart';
 import '../../data/services/pdf/image_to_pdf_service.dart';
 import '../../data/services/pdf/pdf_merge_service.dart';
@@ -33,6 +34,38 @@ final fileRepositoryProvider = Provider<FileRepository>((ref) {
 final permissionServiceProvider = Provider<PermissionService>((ref) {
   return PermissionService();
 });
+
+/// AsyncNotifier tracking global storage / all-files access permission.
+/// Serves as the single source of truth for both scanner and directories.
+class AllFilesAccessNotifier extends AsyncNotifier<bool> {
+  @override
+  Future<bool> build() async {
+    final service = ref.watch(permissionServiceProvider);
+    return service.hasAllFilesAccess();
+  }
+
+  /// Re-checks permission status from the system.
+  Future<bool> refreshAccess() async {
+    final service = ref.read(permissionServiceProvider);
+    final hasAccess = await service.hasAllFilesAccess();
+    state = AsyncData(hasAccess);
+    return hasAccess;
+  }
+
+  /// Prompts the user to grant all-files access (or opens settings on API 30+).
+  Future<bool> requestAccess() async {
+    final service = ref.read(permissionServiceProvider);
+    final granted = await service.requestAllFilesAccess();
+    state = AsyncData(granted);
+    return granted;
+  }
+}
+
+/// Provider exposing reactive all files access permission status.
+final allFilesAccessProvider =
+    AsyncNotifierProvider<AllFilesAccessNotifier, bool>(
+  AllFilesAccessNotifier.new,
+);
 
 /// Scanner service provider.
 final scannerServiceProvider = Provider<ScannerService>((ref) {
@@ -234,6 +267,12 @@ final searchResultsProvider = FutureProvider<List<DocFile>>((ref) async {
   return repository.searchFiles(query, category: category);
 });
 
+/// File operations service provider.
+final fileOperationsServiceProvider = Provider<FileOperationsService>((ref) {
+  final repository = ref.watch(fileRepositoryProvider);
+  return FileOperationsService(repository: repository);
+});
+
 /// Centralized controller executing file actions and invalidating all dependent providers.
 class FileActionsController {
   FileActionsController(this._ref);
@@ -263,12 +302,39 @@ class FileActionsController {
     invalidateAll();
   }
 
+  /// Renames [file] with [newBaseName], updates disk and database, and invalidates providers.
+  Future<RenameResult> renameFile(DocFile file, String newBaseName) async {
+    final service = _ref.read(fileOperationsServiceProvider);
+    final result = await service.rename(file, newBaseName);
+    if (result is RenameSuccess) {
+      invalidateAll();
+    }
+    return result;
+  }
+
+  /// Deletes multiple [files] from disk and database, and invalidates providers if any were deleted.
+  Future<DeleteResult> deleteFiles(List<DocFile> files) async {
+    final service = _ref.read(fileOperationsServiceProvider);
+    final result = await service.delete(files);
+    if (result.hasDeletions) {
+      invalidateAll();
+    }
+    return result;
+  }
+
+  /// Shares one or multiple [files] via the system share sheet.
+  Future<void> shareFiles(List<DocFile> files) async {
+    final service = _ref.read(fileOperationsServiceProvider);
+    await service.share(files);
+  }
+
   /// Invalidates all document-related providers across the app.
   void invalidateAll() {
     _ref.invalidate(bookmarksProvider);
     _ref.invalidate(recentsProvider);
     _ref.invalidate(filesProvider);
     _ref.invalidate(categoryCountsProvider);
+    _ref.invalidate(searchResultsProvider);
   }
 }
 

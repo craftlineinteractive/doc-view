@@ -5,17 +5,26 @@ import 'package:permission_handler/permission_handler.dart';
 
 /// Service managing storage and document access permissions across Android and iOS.
 class PermissionService {
-  PermissionService({DeviceInfoPlugin? deviceInfo})
-      : _deviceInfo = deviceInfo ?? DeviceInfoPlugin();
+  PermissionService({
+    DeviceInfoPlugin? deviceInfo,
+    bool? isAndroidOverride,
+    bool? isIOSOverride,
+  })  : _deviceInfo = deviceInfo ?? DeviceInfoPlugin(),
+        _isAndroid = isAndroidOverride,
+        _isIOS = isIOSOverride;
 
   final DeviceInfoPlugin _deviceInfo;
+  final bool? _isAndroid;
+  final bool? _isIOS;
 
-  bool get isAndroid => Platform.isAndroid;
-  bool get isIOS => Platform.isIOS;
+  bool get isAndroid => _isAndroid ?? Platform.isAndroid;
+  bool get isIOS => _isIOS ?? Platform.isIOS;
 
   int? _androidSdkInt;
 
   /// Returns the Android SDK version, caching it after first fetch.
+  Future<int> getAndroidSdkInt() => _getAndroidSdkInt();
+
   Future<int> _getAndroidSdkInt() async {
     if (_androidSdkInt != null) return _androidSdkInt!;
     try {

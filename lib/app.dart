@@ -52,7 +52,8 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     }
 
     if (permissionService.isAndroid) {
-      final hasAccess = await permissionService.hasAllFilesAccess();
+      final hasAccess =
+          await ref.read(allFilesAccessProvider.notifier).refreshAccess();
       if (hasAccess) {
         ref.read(scanStateProvider.notifier).startScan();
       } else {
@@ -66,7 +67,8 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     final permissionService = ref.read(permissionServiceProvider);
     if (!permissionService.isAndroid) return;
 
-    final hasAccess = await permissionService.hasAllFilesAccess();
+    final hasAccess =
+        await ref.read(allFilesAccessProvider.notifier).refreshAccess();
     if (hasAccess) {
       final scanState = ref.read(scanStateProvider);
       if (!scanState.isScanning) {
@@ -113,9 +115,8 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
                 _dialogShowing = false;
                 Navigator.of(dialogContext).pop();
 
-                final permissionService = ref.read(permissionServiceProvider);
                 final granted =
-                    await permissionService.requestAllFilesAccess();
+                    await ref.read(allFilesAccessProvider.notifier).requestAccess();
                 if (granted) {
                   ref.read(scanStateProvider.notifier).startScan();
                 }

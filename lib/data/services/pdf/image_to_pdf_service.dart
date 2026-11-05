@@ -92,64 +92,80 @@ class ImageToPdfService {
       onProgress?.call(i + 1, total);
     }
 
-    // Heavy PDF generation in background isolate
-    final pdfBytes = await _compilePdfInIsolate(compressedImages, pageMode);
+    // Heavy PDF generation in background isolate using top-level isolate worker
+    final payload = PdfCompilationPayload(
+      images: compressedImages,
+      fitImage: pageMode == PageMode.fitImage,
+    );
+    final pdfBytes = await compilePdfInIsolate(payload);
 
     final outputFile = await outputService.uniqueFile(name);
     await outputFile.writeAsBytes(pdfBytes);
 
     return outputService.registerOutput(outputFile);
   }
+}
 
-  /// Pure worker function executed on a dedicated background isolate.
-  static Future<Uint8List> _compilePdfInIsolate(
-    List<Uint8List> images,
-    PageMode pageMode,
-  ) {
-    return Isolate.run(() {
-      final doc = pw.Document();
+/// Plain immutable payload sent to the background isolate for PDF generation.
+class PdfCompilationPayload {
+  const PdfCompilationPayload({
+    required this.images,
+    required this.fitImage,
+  });
 
-      for (final imageBytes in images) {
-        final image = pw.MemoryImage(imageBytes);
-        final pdflib.PdfPageFormat format;
+  final List<Uint8List> images;
+  final bool fitImage;
+}
 
-        if (pageMode == PageMode.fitImage &&
-            image.width != null &&
-            image.height != null &&
-            image.width! > 0 &&
-            image.height! > 0) {
-          format = pdflib.PdfPageFormat(
-            image.width!.toDouble(),
-            image.height!.toDouble(),
-            marginAll: 0,
+/// Top-level worker function executing inside [Isolate.run].
+/// Receives only plain immutable data and constructs the PDF document.
+Future<Uint8List> compilePdfInWorker(PdfCompilationPayload payload) async {
+  final doc = pw.Document();
+
+  for (final imageBytes in payload.images) {
+    final image = pw.MemoryImage(imageBytes);
+    final pdflib.PdfPageFormat format;
+
+    if (payload.fitImage &&
+        image.width != null &&
+        image.height != null &&
+        image.width! > 0 &&
+        image.height! > 0) {
+      format = pdflib.PdfPageFormat(
+        image.width!.toDouble(),
+        image.height!.toDouble(),
+        marginAll: 0,
+      );
+    } else {
+      format = pdflib.PdfPageFormat.a4;
+    }
+
+    doc.addPage(
+      pw.Page(
+        pageFormat: format,
+        margin: pw.EdgeInsets.zero,
+        build: (pw.Context context) {
+          return pw.FullPage(
+            ignoreMargins: true,
+            child: pw.Center(
+              child: pw.Image(
+                image,
+                fit: payload.fitImage
+                    ? pw.BoxFit.fill
+                    : pw.BoxFit.contain,
+              ),
+            ),
           );
-        } else {
-          format = pdflib.PdfPageFormat.a4;
-        }
-
-        doc.addPage(
-          pw.Page(
-            pageFormat: format,
-            margin: pw.EdgeInsets.zero,
-            build: (pw.Context context) {
-              return pw.FullPage(
-                ignoreMargins: true,
-                child: pw.Center(
-                  child: pw.Image(
-                    image,
-                    fit: pageMode == PageMode.fitImage
-                        ? pw.BoxFit.fill
-                        : pw.BoxFit.contain,
-                  ),
-                ),
-              );
-            },
-          ),
-        );
-      }
-
-      return doc.save();
-    });
+        },
+      ),
+    );
   }
+
+  return await doc.save();
+}
+
+/// Dispatches [compilePdfInWorker] in a dedicated background isolate via [Isolate.run].
+Future<Uint8List> compilePdfInIsolate(PdfCompilationPayload payload) {
+  return Isolate.run(() => compilePdfInWorker(payload));
 }
 

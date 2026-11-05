@@ -2,11 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:docview/core/constants/file_types.dart';
+import 'package:docview/core/utils/file_name_utils.dart';
 import 'package:docview/core/utils/format_utils.dart';
 import 'package:docview/core/utils/page_range_parser.dart';
+import 'package:docview/core/utils/root_path_resolver.dart';
 import 'package:docview/data/models/doc_file.dart';
 import 'package:docview/data/models/sort_option.dart';
+import 'package:docview/data/services/pdf/image_to_pdf_service.dart';
 import 'package:docview/data/services/pdf/pdf_output_service.dart';
+import 'package:docview/features/directories/services/directory_lister.dart';
+import 'package:docview/features/viewer/txt_viewer_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -321,6 +326,223 @@ void main() {
       } finally {
         tempDir.deleteSync(recursive: true);
       }
+    });
+  });
+
+  group('FileNameUtils Tests', () {
+    test('validateFileName accepts valid base names', () {
+      expect(validateFileName('valid_document'), isNull);
+      expect(validateFileName('My Report 2026'), isNull);
+      expect(validateFileName('Invoice.v2.draft'), isNull);
+      expect(validateFileName('12345'), isNull);
+    });
+
+    test('validateFileName rejects empty or whitespace-only names', () {
+      expect(validateFileName(''), isNotNull);
+      expect(validateFileName('   '), isNotNull);
+    });
+
+    test('validateFileName rejects names longer than 120 chars', () {
+      final longName = 'a' * 121;
+      expect(validateFileName(longName), isNotNull);
+      expect(validateFileName('a' * 120), isNull);
+    });
+
+    test('validateFileName rejects illegal characters and control chars', () {
+      expect(validateFileName('file/name'), isNotNull);
+      expect(validateFileName('file\\name'), isNotNull);
+      expect(validateFileName('file:name'), isNotNull);
+      expect(validateFileName('file*name'), isNotNull);
+      expect(validateFileName('file?name'), isNotNull);
+      expect(validateFileName('file"name'), isNotNull);
+      expect(validateFileName('file<name'), isNotNull);
+      expect(validateFileName('file>name'), isNotNull);
+      expect(validateFileName('file|name'), isNotNull);
+      expect(validateFileName('file\x00name'), isNotNull);
+      expect(validateFileName('file\x1Fname'), isNotNull);
+    });
+
+    test('validateFileName rejects leading dot, single dot, and double dot', () {
+      expect(validateFileName('.'), isNotNull);
+      expect(validateFileName('..'), isNotNull);
+      expect(validateFileName('.hidden'), isNotNull);
+      expect(validateFileName('.bashrc'), isNotNull);
+    });
+
+    test('buildRenamedPath preserves original extension, spaces, and multiple dots', () {
+      expect(
+        buildRenamedPath('/docs/report.pdf', 'financial_report'),
+        '/docs/financial_report.pdf',
+      );
+      expect(
+        buildRenamedPath('/folder/my file.docx', 'new file with spaces'),
+        '/folder/new file with spaces.docx',
+      );
+      expect(
+        buildRenamedPath('/folder/app.v1.0.txt', 'app.v2.0.beta'),
+        '/folder/app.v2.0.beta.txt',
+      );
+      expect(
+        buildRenamedPath('/docs/sheet.xlsx', 'sheet_renamed.xlsx'),
+        '/docs/sheet_renamed.xlsx',
+      );
+    });
+  });
+
+  group('Root Path Resolver Tests', () {
+    test('deriveAndroidRoot cuts at /Android correctly', () {
+      expect(
+        deriveAndroidRoot('/storage/emulated/0/Android/data/com.craftline/files'),
+        '/storage/emulated/0',
+      );
+      expect(
+        deriveAndroidRoot(r'C:\storage\emulated\0\Android\data'),
+        'C:/storage/emulated/0',
+      );
+      expect(
+        deriveAndroidRoot('/storage/emulated/0/Android/obb'),
+        '/storage/emulated/0',
+      );
+      expect(
+        deriveAndroidRoot('/custom/mount/point'),
+        '/custom/mount/point',
+      );
+      expect(
+        deriveAndroidRoot(null),
+        '/storage/emulated/0',
+      );
+      expect(
+        deriveAndroidRoot('   '),
+        '/storage/emulated/0',
+      );
+    });
+
+    test('resolveRootDirectory resolves mock Android external root', () async {
+      final root = await resolveRootDirectory(
+        isAndroid: true,
+        isIOS: false,
+        getExternalStorageDir: () async =>
+            Directory('/storage/emulated/0/Android/data/com.example/files'),
+      );
+      expect(root, '/storage/emulated/0');
+    });
+
+    test('resolveRootDirectory resolves mock iOS documents path', () async {
+      final root = await resolveRootDirectory(
+        isAndroid: false,
+        isIOS: true,
+        getAppDocumentsDir: () async =>
+            Directory('/var/mobile/Containers/Data/Application/app/Documents'),
+      );
+      expect(root, '/var/mobile/Containers/Data/Application/app/Documents');
+    });
+  });
+
+  group('Directory State Mapping Tests', () {
+    test('mapListingExceptionToState maps PathAccessException to folderAccessDenied', () {
+      final state = mapListingExceptionToState(
+        PathAccessException('/Android/data', const OSError('Permission denied', 13)),
+        '/Android/data',
+      );
+      expect(state, isA<DirectoryFolderAccessDeniedState>());
+      expect((state as DirectoryFolderAccessDeniedState).path, '/Android/data');
+    });
+
+    test('mapListingExceptionToState maps FileSystemException errno 13 to folderAccessDenied', () {
+      final state = mapListingExceptionToState(
+        FileSystemException('Access is denied', '/Android/obb', const OSError('Access denied', 13)),
+        '/Android/obb',
+      );
+      expect(state, isA<DirectoryFolderAccessDeniedState>());
+    });
+
+    test('mapListingExceptionToState maps FileSystemException errno 2 to notFound', () {
+      final state = mapListingExceptionToState(
+        FileSystemException('Cannot find path', '/deleted/folder', const OSError('No such file', 2)),
+        '/deleted/folder',
+      );
+      expect(state, isA<DirectoryNotFoundState>());
+      expect((state as DirectoryNotFoundState).path, '/deleted/folder');
+    });
+
+    test('mapListingExceptionToState maps general errors to unknownError', () {
+      final state = mapListingExceptionToState(
+        const FormatException('Malformed payload'),
+        '/some/folder',
+      );
+      expect(state, isA<DirectoryUnknownErrorState>());
+      expect((state as DirectoryUnknownErrorState).message, contains('Malformed payload'));
+    });
+  });
+
+  group('Isolate Safety & Regression Tests', () {
+    test('listDirectoryEntries runs via real Isolate.run and filters correctly', () async {
+      final tempDir = Directory.systemTemp.createTempSync('docview_isolate_test_');
+
+      try {
+        // Subfolder
+        final subDir = Directory('${tempDir.path}/subfolder');
+        subDir.createSync();
+        File('${subDir.path}/child.pdf').writeAsStringSync('dummy child pdf');
+
+        // Supported document
+        File('${tempDir.path}/sample.pdf').writeAsStringSync('%PDF-1.4 sample content');
+
+        // Hidden file & hidden folder (should be excluded)
+        File('${tempDir.path}/.secret').writeAsStringSync('hidden secret');
+        Directory('${tempDir.path}/.hidden_dir').createSync();
+
+        // Unsupported extension file (should be excluded)
+        File('${tempDir.path}/data.xyz').writeAsStringSync('unsupported extension');
+
+        final entries = await listDirectoryEntries(tempDir.path);
+
+        expect(entries.length, 2);
+
+        final folderEntry = entries.firstWhere((e) => e.isDirectory);
+        expect(folderEntry.name, 'subfolder');
+        expect(folderEntry.itemCount, 1);
+
+        final fileEntry = entries.firstWhere((e) => !e.isDirectory);
+        expect(fileEntry.name, 'sample.pdf');
+        expect(fileEntry.category, FileCategory.pdf);
+      } finally {
+        tempDir.deleteSync(recursive: true);
+      }
+    });
+
+    test('readTxtFileContent reads text lines via Isolate.run safely', () async {
+      final tempFile = File('${Directory.systemTemp.path}/sample_test.txt');
+      try {
+        tempFile.writeAsStringSync('First Line\nSecond Line\nThird Line');
+
+        final content = await readTxtFileContent(tempFile.path);
+
+        expect(content.lines, ['First Line', 'Second Line', 'Third Line']);
+        expect(content.isTruncated, isFalse);
+      } finally {
+        if (tempFile.existsSync()) {
+          tempFile.deleteSync();
+        }
+      }
+    });
+
+    test('compilePdfInIsolate produces valid PDF bytes via Isolate.run safely', () async {
+      // 1x1 base64 transparent PNG
+      final samplePng = base64Decode(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+      );
+
+      final payload = PdfCompilationPayload(
+        images: [samplePng],
+        fitImage: false,
+      );
+
+      final pdfBytes = await compilePdfInIsolate(payload);
+
+      expect(pdfBytes.isNotEmpty, isTrue);
+      final header = utf8.decode(pdfBytes.sublist(0, 5));
+      expect(header, '%PDF-');
     });
   });
 }
