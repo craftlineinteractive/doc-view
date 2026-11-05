@@ -95,6 +95,10 @@ class ToolsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textScale = MediaQuery.textScalerOf(context).scale(1.0);
+    final childAspectRatio =
+        textScale > 1.4 ? 0.60 : (textScale > 1.1 ? 0.72 : 0.88);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tools'),
@@ -117,15 +121,17 @@ class ToolsScreen extends ConsumerWidget {
               physics: const NeverScrollableScrollPhysics(),
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
-              childAspectRatio: 0.88,
+              childAspectRatio: childAspectRatio,
               children: [
                 _ToolTile(
+                  key: const Key('tool_image_to_pdf'),
                   label: 'Image to PDF',
                   icon: Icons.image_rounded,
                   color: const Color(0xFFF57C00),
                   onTap: () => _onImageToPdf(context),
                 ),
                 _ToolTile(
+                  key: const Key('tool_scan_to_pdf'),
                   label: 'Scan to PDF',
                   icon: Icons.document_scanner_rounded,
                   color: const Color(0xFF00897B),
@@ -147,15 +153,17 @@ class ToolsScreen extends ConsumerWidget {
               physics: const NeverScrollableScrollPhysics(),
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
-              childAspectRatio: 0.88,
+              childAspectRatio: childAspectRatio,
               children: [
                 _ToolTile(
+                  key: const Key('tool_merge_pdf'),
                   label: 'Merge PDF',
                   icon: Icons.call_merge_rounded,
                   color: const Color(0xFF1E88E5),
                   onTap: () => _onMergePdf(context),
                 ),
                 _ToolTile(
+                  key: const Key('tool_split_pdf'),
                   label: 'Split PDF',
                   icon: Icons.call_split_rounded,
                   color: const Color(0xFF8E24AA),
@@ -210,6 +218,7 @@ class _ToolTile extends StatelessWidget {
     required this.icon,
     required this.color,
     required this.onTap,
+    super.key,
   });
 
   final String label;
@@ -221,49 +230,53 @@ class _ToolTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Material(
-      color: theme.colorScheme.surface,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        onTap: onTap,
+    return Semantics(
+      button: true,
+      label: label,
+      child: Material(
+        color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: theme.dividerColor.withValues(alpha: 0.1),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: theme.dividerColor.withValues(alpha: 0.1),
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 38,
-                height: 38,
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.15),
-                  shape: BoxShape.circle,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: 0.15),
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    icon,
+                    color: color,
+                    size: 20,
+                  ),
                 ),
-                alignment: Alignment.center,
-                child: Icon(
-                  icon,
-                  color: color,
-                  size: 20,
+                const SizedBox(height: 6),
+                Text(
+                  label,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 11,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                label,
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 11,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

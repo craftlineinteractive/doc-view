@@ -35,10 +35,13 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: DefaultTabController(
-        length: 2,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
+      body: RefreshIndicator(
+        onRefresh: () => handlePullToRefreshScan(context, ref),
+        child: DefaultTabController(
+          length: 2,
+          child: NestedScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               // Scanning progress indicator banner
               if (scanState.isScanning)
@@ -82,74 +85,87 @@ class HomeScreen extends ConsumerWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
-                  child: GridView.count(
-                    crossAxisCount: 4,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    childAspectRatio: 0.88,
-                    children: [
-                      _CategoryTile(
-                        label: 'All',
-                        icon: Icons.folder_copy_rounded,
-                        color: const Color(0xFF1A73E8),
-                        count: '$totalFiles files',
-                        onTap: () => context.push('/files?category=all'),
-                      ),
-                      _CategoryTile(
-                        label: FileCategory.pdf.label,
-                        icon: FileCategory.pdf.icon,
-                        color: FileCategory.pdf.color,
-                        count: '${categoryCounts[FileCategory.pdf] ?? 0} files',
-                        onTap: () => context.push('/files?category=pdf'),
-                      ),
-                      _CategoryTile(
-                        label: FileCategory.word.label,
-                        icon: FileCategory.word.icon,
-                        color: FileCategory.word.color,
-                        count:
-                            '${categoryCounts[FileCategory.word] ?? 0} files',
-                        onTap: () => context.push('/files?category=word'),
-                      ),
-                      _CategoryTile(
-                        label: FileCategory.excel.label,
-                        icon: FileCategory.excel.icon,
-                        color: FileCategory.excel.color,
-                        count:
-                            '${categoryCounts[FileCategory.excel] ?? 0} files',
-                        onTap: () => context.push('/files?category=excel'),
-                      ),
-                      _CategoryTile(
-                        label: FileCategory.ppt.label,
-                        icon: FileCategory.ppt.icon,
-                        color: FileCategory.ppt.color,
-                        count: '${categoryCounts[FileCategory.ppt] ?? 0} files',
-                        onTap: () => context.push('/files?category=ppt'),
-                      ),
-                      _CategoryTile(
-                        label: FileCategory.txt.label,
-                        icon: FileCategory.txt.icon,
-                        color: FileCategory.txt.color,
-                        count: '${categoryCounts[FileCategory.txt] ?? 0} files',
-                        onTap: () => context.push('/files?category=txt'),
-                      ),
-                      _CategoryTile(
-                        label: FileCategory.image.label,
-                        icon: FileCategory.image.icon,
-                        color: FileCategory.image.color,
-                        count:
-                            '${categoryCounts[FileCategory.image] ?? 0} files',
-                        onTap: () => context.push('/files?category=image'),
-                      ),
-                      _CategoryTile(
-                        label: 'Directories',
-                        icon: Icons.snippet_folder_rounded,
-                        color: const Color(0xFF8E24AA),
-                        count: 'Browse',
-                        onTap: () => context.push('/directories'),
-                      ),
-                    ],
+                  child: Builder(
+                    builder: (context) {
+                      final textScale =
+                          MediaQuery.textScalerOf(context).scale(1.0);
+                      final categoryAspectRatio = textScale > 1.4
+                          ? 0.60
+                          : (textScale > 1.1 ? 0.72 : 0.88);
+
+                      return GridView.count(
+                        crossAxisCount: 4,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisSpacing: 8,
+                        crossAxisSpacing: 8,
+                        childAspectRatio: categoryAspectRatio,
+                        children: [
+                          _CategoryTile(
+                            label: 'All',
+                            icon: Icons.folder_copy_rounded,
+                            color: const Color(0xFF1A73E8),
+                            count: '$totalFiles files',
+                            onTap: () => context.push('/files?category=all'),
+                          ),
+                          _CategoryTile(
+                            label: FileCategory.pdf.label,
+                            icon: FileCategory.pdf.icon,
+                            color: FileCategory.pdf.color,
+                            count:
+                                '${categoryCounts[FileCategory.pdf] ?? 0} files',
+                            onTap: () => context.push('/files?category=pdf'),
+                          ),
+                          _CategoryTile(
+                            label: FileCategory.word.label,
+                            icon: FileCategory.word.icon,
+                            color: FileCategory.word.color,
+                            count:
+                                '${categoryCounts[FileCategory.word] ?? 0} files',
+                            onTap: () => context.push('/files?category=word'),
+                          ),
+                          _CategoryTile(
+                            label: FileCategory.excel.label,
+                            icon: FileCategory.excel.icon,
+                            color: FileCategory.excel.color,
+                            count:
+                                '${categoryCounts[FileCategory.excel] ?? 0} files',
+                            onTap: () => context.push('/files?category=excel'),
+                          ),
+                          _CategoryTile(
+                            label: FileCategory.ppt.label,
+                            icon: FileCategory.ppt.icon,
+                            color: FileCategory.ppt.color,
+                            count:
+                                '${categoryCounts[FileCategory.ppt] ?? 0} files',
+                            onTap: () => context.push('/files?category=ppt'),
+                          ),
+                          _CategoryTile(
+                            label: FileCategory.txt.label,
+                            icon: FileCategory.txt.icon,
+                            color: FileCategory.txt.color,
+                            count:
+                                '${categoryCounts[FileCategory.txt] ?? 0} files',
+                            onTap: () => context.push('/files?category=txt'),
+                          ),
+                          _CategoryTile(
+                            label: FileCategory.image.label,
+                            icon: FileCategory.image.icon,
+                            color: FileCategory.image.color,
+                            count:
+                                '${categoryCounts[FileCategory.image] ?? 0} files',
+                            onTap: () => context.push('/files?category=image'),
+                          ),
+                          _CategoryTile(
+                            label: 'Directories',
+                            icon: Icons.snippet_folder_rounded,
+                            color: const Color(0xFF8E24AA),
+                            count: 'Browse',
+                            onTap: () => context.push('/directories'),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
@@ -180,9 +196,9 @@ class HomeScreen extends ConsumerWidget {
               _BookmarksList(),
             ],
           ),
-
         ),
       ),
+    ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           try {
@@ -263,59 +279,63 @@ class _CategoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Material(
-      color: theme.colorScheme.surface,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        onTap: onTap,
+    return Semantics(
+      button: true,
+      label: '$label, $count',
+      child: Material(
+        color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: theme.dividerColor.withValues(alpha: 0.1),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: theme.dividerColor.withValues(alpha: 0.1),
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 38,
-                height: 38,
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.15),
-                  shape: BoxShape.circle,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: 0.15),
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    icon,
+                    color: color,
+                    size: 20,
+                  ),
                 ),
-                alignment: Alignment.center,
-                child: Icon(
-                  icon,
-                  color: color,
-                  size: 20,
+                const SizedBox(height: 6),
+                Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
+                const SizedBox(height: 2),
+                Text(
+                  count,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color:
+                        theme.textTheme.bodySmall?.color?.withValues(alpha: 0.6),
+                    fontSize: 10,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                count,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color:
-                      theme.textTheme.bodySmall?.color?.withValues(alpha: 0.6),
-                  fontSize: 10,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -380,13 +400,20 @@ class _RecentsList extends ConsumerWidget {
     return recentsAsync.when(
       data: (files) {
         if (files.isEmpty) {
-          return const _EmptyStateIllustration(
-            icon: Icons.history_rounded,
-            label: 'Empty',
-            description: 'Recently opened files will appear here',
+          return const SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: SizedBox(
+              height: 250,
+              child: _EmptyStateIllustration(
+                icon: Icons.history_rounded,
+                label: 'Empty',
+                description: 'Recently opened files will appear here',
+              ),
+            ),
           );
         }
         return ListView.separated(
+          physics: const AlwaysScrollableScrollPhysics(),
           itemCount: files.length,
           separatorBuilder: (context, index) => Divider(
             height: 1,
@@ -421,13 +448,20 @@ class _BookmarksList extends ConsumerWidget {
     return bookmarksAsync.when(
       data: (files) {
         if (files.isEmpty) {
-          return const _EmptyStateIllustration(
-            icon: Icons.bookmark_border_rounded,
-            label: 'Empty',
-            description: 'Bookmarked documents will appear here',
+          return const SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: SizedBox(
+              height: 250,
+              child: _EmptyStateIllustration(
+                icon: Icons.bookmark_border_rounded,
+                label: 'Empty',
+                description: 'Bookmarked documents will appear here',
+              ),
+            ),
           );
         }
         return ListView.separated(
+          physics: const AlwaysScrollableScrollPhysics(),
           itemCount: files.length,
           separatorBuilder: (context, index) => Divider(
             height: 1,

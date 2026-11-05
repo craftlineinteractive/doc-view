@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/constants/app_constants.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
+import 'features/files/open_document.dart';
 import 'features/providers/providers.dart';
 
 /// Root application widget configuring themes, routing, and lifecycle-driven startup scanning.
@@ -17,6 +21,7 @@ class DocReaderApp extends ConsumerStatefulWidget {
 class _DocReaderAppState extends ConsumerState<DocReaderApp>
     with WidgetsBindingObserver {
   bool _dialogShowing = false;
+  StreamSubscription<String>? _openWithSubscription;
 
   @override
   void initState() {
@@ -24,13 +29,54 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _runStartupLogic();
+      _initOpenWithListener();
     });
   }
 
   @override
   void dispose() {
+    _openWithSubscription?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  void _initOpenWithListener() {
+    final openWithService = ref.read(openWithServiceProvider);
+    openWithService.initialize();
+
+    // Cold start check
+    openWithService.getInitialFile().then((initialPath) {
+      if (initialPath != null && mounted) {
+        _handleOpenedFile(initialPath);
+      }
+    });
+
+    // Warm start stream listener
+    _openWithSubscription = openWithService.incomingFiles.listen((path) {
+      if (mounted) {
+        _handleOpenedFile(path);
+      }
+    });
+  }
+
+  Future<void> _handleOpenedFile(String filePath) async {
+    final context = rootNavigatorKey.currentContext;
+    try {
+      final docFile =
+          await ref.read(importServiceProvider).importFromPath(filePath);
+      ref.invalidate(categoryCountsProvider);
+      ref.invalidate(filesProvider);
+
+      if (context != null && context.mounted) {
+        openDocument(context, ref, docFile);
+      }
+    } catch (e) {
+      if (context != null && context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not open document: $e')),
+        );
+      }
+    }
   }
 
   @override
@@ -62,9 +108,19 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     }
   }
 
-  /// Re-checks permissions when user returns to the app from system settings.
+  static const Duration _rescanInterval = Duration(minutes: 5);
+
+  /// Re-checks permissions when user returns to the app and triggers periodic background rescan.
   Future<void> _checkAndStartScanOnResume() async {
     final permissionService = ref.read(permissionServiceProvider);
+
+    if (permissionService.isIOS) {
+      await ref.read(importServiceProvider).scanAppDocuments();
+      ref.invalidate(categoryCountsProvider);
+      ref.invalidate(filesProvider);
+      return;
+    }
+
     if (!permissionService.isAndroid) return;
 
     final hasAccess =
@@ -72,7 +128,12 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     if (hasAccess) {
       final scanState = ref.read(scanStateProvider);
       if (!scanState.isScanning) {
-        ref.read(scanStateProvider.notifier).startScan();
+        final prefs = await SharedPreferences.getInstance();
+        final lastScanMs = prefs.getInt(keyLastScanTime) ?? 0;
+        final lastScan = DateTime.fromMillisecondsSinceEpoch(lastScanMs);
+        if (DateTime.now().difference(lastScan) > _rescanInterval) {
+          ref.read(scanStateProvider.notifier).startScan();
+        }
       }
     }
   }

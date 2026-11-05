@@ -181,7 +181,10 @@ class FilesScreen extends ConsumerWidget {
                   tooltip: 'Cancel selection',
                   onPressed: selectionNotifier.clear,
                 ),
-                title: Text('${selection.count} selected'),
+                title: Semantics(
+                  liveRegion: true,
+                  child: Text('${selection.count} selected'),
+                ),
                 actions: [
                   IconButton(
                     icon: const Icon(Icons.select_all),
@@ -246,44 +249,56 @@ class FilesScreen extends ConsumerWidget {
         body: filesAsync.when(
           data: (files) {
             if (files.isEmpty) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      category?.icon ?? Icons.folder_open_rounded,
-                      size: 64,
-                      color: theme.colorScheme.onSurface.withValues(alpha: 0.3),
+              return RefreshIndicator(
+                onRefresh: () async {
+                  await handlePullToRefreshScan(context, ref);
+                  ref.invalidate(filesProvider(category));
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          category?.icon ?? Icons.folder_open_rounded,
+                          size: 64,
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.3),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'No ${category != null ? category!.label : ''} files found'
+                              .trim(),
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color:
+                                theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Import files or run a storage scan to see them here.',
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color:
+                                theme.colorScheme.onSurface.withValues(alpha: 0.4),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'No ${category != null ? category!.label : ''} files found'
-                          .trim(),
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        color:
-                            theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Import files or run a storage scan to see them here.',
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color:
-                            theme.colorScheme.onSurface.withValues(alpha: 0.4),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               );
             }
 
             return RefreshIndicator(
               onRefresh: () async {
+                await handlePullToRefreshScan(context, ref);
                 ref.invalidate(filesProvider(category));
-                ref.invalidate(categoryCountsProvider);
               },
               child: ListView.separated(
+                physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: files.length,
                 separatorBuilder: (context, index) => Divider(
                   height: 1,

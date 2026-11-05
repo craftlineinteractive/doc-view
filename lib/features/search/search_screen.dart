@@ -112,7 +112,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   tooltip: 'Cancel selection',
                   onPressed: selectionNotifier.clear,
                 ),
-                title: Text('${selection.count} selected'),
+                title: Semantics(
+                  liveRegion: true,
+                  child: Text('${selection.count} selected'),
+                ),
                 actions: [
                   IconButton(
                     icon: const Icon(Icons.select_all),

@@ -1,50 +1,58 @@
-# Step 2 Implementation Plan: Directories Hardening & Isolate Safety
+# Phase 4B Implementation Plan: Open-With, Auto-Rescan, Pull-to-Refresh, Accessibility, Tests & Release Prep
 
-> **Goal:** Fix the Directories browser feature (`/directories`) on Android emulator (API 36) where it gets stuck on breadcrumb "Root" with error `"Can't open this folder - Permission denied or folder inaccessible"`. Enforce Isolate Safety Rule everywhere across `lib/`, introduce typed directory states, resilient per-entry directory listing in an isolated service, single permission provider, dynamic root resolution, and full test suite.
+> **Goal:** Implement Phase 4B features in strict sequence:
+> 1. Auto rescan on resume (Android 5-minute debounce persisted in SharedPreferences, iOS scanAppDocuments).
+> 2. Pull-to-refresh on HomeScreen & FilesScreen with SnackBar scan report.
+> 3. Global error handling in `main.dart` with `FlutterError.onError` and `runZonedGuarded` (debugPrint only).
+> 4. Comprehensive accessibility audit: semantic labels, tooltips, contrast ratio check (>= 4.5:1), text scale 2.0 layout overflow immunity, and accessibility guideline widget tests.
+> 5. Widget test asserting exactly 4 Tools with stable Keys; SDK `integration_test` verifying core app navigation, tools count, and search input.
+> 6. Native "Open with Doc Reader" integration via `open_file_handler` with Android Intent Filters, iOS Document Types, lifecycle listeners, and isolated error recovery.
+> 7. Release build verification: `flutter analyze`, `flutter test`, `flutter build apk --release`.
 
-**Hard Rule:**
-- The Tools tab must remain untouched (exactly the 4 tools created in Phase 3B; do not touch `lib/features/tools/`).
-- Do NOT rewrite unrelated files.
-- No new packages.
+**Hard Rules:**
+- The Tools tab must remain EXACTLY 4 tools: Image to PDF, Scan to PDF, Merge PDF, Split PDF. Do NOT add or remove tools.
 - Touch targets $\ge 48\text{dp}$.
+- Follow strict order: Steps 1 -> 2 -> 3 -> 4 -> 5 -> 6.
 
 ---
 
 ## Tasks
 
-### Phase 1: Isolate Audit & Safety Enforcement
-- [x] Task 1.1: Audit all `Isolate.run`, `compute(`, and `Isolate.spawn` calls in `lib/`.
-- [x] Task 1.2: Refactor `lib/data/services/pdf/image_to_pdf_service.dart` to top-level worker with immutable DTO.
-- [x] Task 1.3: Refactor `lib/features/viewer/txt_viewer_screen.dart` to top-level worker with immutable DTO.
-- [x] Task 1.4: Compile audit report table for reply.
+### Phase 1: Auto Rescan on App Resume
+- [x] Task 1.1: Persist `last_scan_timestamp` in `SharedPreferences` in `ScannerService` / `app.dart`.
+- [x] Task 1.2: Update `_checkAndStartScanOnResume()` in `lib/app.dart`: on Android, if `allFilesAccess` is granted and `DateTime.now().difference(lastScan) > Duration(minutes: 5)`, trigger background scan. On iOS, call `scanAppDocuments()`.
 
-### Phase 2: Root Path Resolution Utility
-- [x] Task 2.1: Implement `lib/core/utils/root_path_resolver.dart` with `deriveAndroidRoot` cutting at `/Android` and `resolveRootDirectory` with unit-testable fallbacks.
+### Phase 2: Pull-to-Refresh
+- [x] Task 2.1: Wrap scrollable content in `HomeScreen` (`lib/features/home/home_screen.dart`) with `RefreshIndicator`. On refresh: Android checks permission and runs scan (or displays dialog); iOS runs `scanAppDocuments()`. Display SnackBar: "Scan complete: N files".
+- [x] Task 2.2: Wrap `FilesScreen` (`lib/features/files/files_screen.dart`) with `RefreshIndicator` reusing the same centralized scanning flow.
 
-### Phase 3: Directory Lister Service & DTOs
-- [x] Task 3.1: Implement `lib/features/directories/services/directory_lister.dart` with `DirectoryEntryDto`, top-level `listDirectorySync`, and top-level `listDirectoryEntries` via `Isolate.run`.
-- [x] Task 3.2: Implement per-entry resilience (try/catch around stat, skipping broken symlinks/hidden files, filtering unsupported file types, alpha sorting).
+### Phase 3: Global Error Handling & Clean Print Calls
+- [x] Task 3.1: Wrap `runApp` in `lib/main.dart` with `runZonedGuarded` and set `FlutterError.onError` logging via `debugPrint`.
+- [x] Task 3.2: Audit all `print()` calls in `lib/` and replace with `debugPrint` or remove.
 
-### Phase 4: Single Permission Provider & Directories Screen Hardening
-- [x] Task 4.1: Add `allFilesAccessProvider` in `lib/features/providers/providers.dart` with auto-refresh on app resume and settings return.
-- [x] Task 4.2: Replace generic error in `lib/features/directories/directories_screen.dart` with typed states:
-  - `loading`
-  - `permissionRequired` ("Doc Reader needs All files access to browse your folders." + "Grant access" + "Import files instead")
-  - `folderAccessDenied` ("This folder is protected by Android." + "Go back")
-  - `notFound` ("This folder no longer exists." + "Go to Root")
-  - `empty` ("No supported files or folders here.")
-  - `unknownError` (short message + "Retry")
-- [x] Task 4.3: Implement tappable breadcrumb segments ($\ge 48\text{dp}$) and back navigation (PopScope + AppBar arrow).
-- [x] Task 4.4: Remove all `[DIRDBG]` temporary debug logs.
+### Phase 4: Accessibility Pass
+- [x] Task 4.1: Ensure every `IconButton` across `lib/` has an informative `tooltip` and `semanticLabel`.
+- [x] Task 4.2: Update `FileTile` (`lib/features/files/widgets/file_tile.dart`) with comprehensive `Semantics` (e.g. "PDF, <name>, 2.5 MB, modified Oct 23, bookmarked", tap/long-press hints).
+- [x] Task 4.3: Update category tiles on Home (`_CategoryTile`) with Semantics ("<Category>, N files") and selection mode announcement ("N selected").
+- [x] Task 4.4: Check color contrast in `lib/core/theme/app_theme.dart` ($\ge 4.5:1$ body text contrast) and adjust colors if needed.
+- [x] Task 4.5: Verify layouts at text scale 2.0 (Home grid, file tiles, Tools grid, bottom sheets) using `Flexible`/`Wrap`/`ellipsis`.
+- [x] Task 4.6: Add accessibility guideline widget tests in `test/widget_test.dart` testing `androidTapTargetGuideline`, `labeledTapTargetGuideline`, and `textContrastGuideline`.
 
-### Phase 5: Regression & Unit Tests
-- [x] Task 5.1: Unit test for root path resolver in `test/unit_test.dart`.
-- [x] Task 5.2: Unit test for directory lister via real `Isolate.run` against `Directory.systemTemp.createTemp` directory with subfolder, `.pdf`, `.secret`, `.xyz`.
-- [x] Task 5.3: Unit test for `image_to_pdf_service` / TXT reader isolate workers.
-- [x] Task 5.4: Widget test for `DirectoryPermissionRequiredState` showing "Grant access" button.
+### Phase 5: Tests (Tools 4-Tile Assertion & Integration Test)
+- [x] Task 5.1: Add stable Keys to the 4 tool tiles in `lib/features/tools/tools_screen.dart` (`tool_image_to_pdf`, `tool_scan_to_pdf`, `tool_merge_pdf`, `tool_split_pdf`).
+- [x] Task 5.2: Write widget test in `test/widget_test.dart` asserting Tools screen shows exactly 4 tools with corresponding labels and keys.
+- [x] Task 5.3: Add `integration_test: sdk: flutter` to `pubspec.yaml` and create `integration_test/app_test.dart` testing tab navigation, tools count, and search input.
 
-### Phase 6: Verification & QA
-- [x] Task 6.1: Run `flutter analyze` & ensure 0 issues (PASSED).
-- [x] Task 6.2: Run `flutter test` & verify all tests pass (43/43 PASSED).
-- [x] Task 6.3: Build split debug APK and install on emulator (`adb install -r -d` succeeded).
-- [x] Task 6.4: Provide manual QA test checklist.
+### Phase 6: Native "Open with Doc Reader"
+- [x] Task 6.1: Native method channel service `OpenWithService` with cold/warm start handling.
+- [x] Task 6.2: Add Android intent filters in `android/app/src/main/AndroidManifest.xml` (ACTION_VIEW for pdf, docx, xlsx, pptx, doc, xls, ppt, txt, csv, images).
+- [x] Task 6.3: Implement intent handling in `android/app/src/main/kotlin/com/craftlineinteractive/docview/MainActivity.kt`.
+- [x] Task 6.4: Add CFBundleDocumentTypes in `ios/Runner/Info.plist` and update `ios/Runner/SceneDelegate.swift`.
+- [x] Task 6.5: Implement `importFromPath` in `lib/data/services/import_service.dart`.
+- [x] Task 6.6: Add cold/warm start listener in Flutter to copy to `imported/`, upsert, and call `openDocument()`.
+
+### Phase 7: Verification & Release Build
+- [x] Task 7.1: Run `flutter analyze` & ensure 0 issues.
+- [x] Task 7.2: Run `flutter test` & verify all tests pass.
+- [x] Task 7.3: Run `flutter build apk` & verify build compiles cleanly.
+- [x] Task 7.4: Report files changed and provide manual QA checklist.

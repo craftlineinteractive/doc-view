@@ -18,6 +18,8 @@ class AppTheme {
       brightness: Brightness.light,
       primary: primaryBlue,
       surface: lightSurface,
+      onSurface: const Color(0xFF0F172A), // Slate 900: > 15:1 contrast on white
+      onSurfaceVariant: const Color(0xFF334155), // Slate 700: > 7:1 contrast on white
     );
 
     return ThemeData(
@@ -27,9 +29,17 @@ class AppTheme {
       scaffoldBackgroundColor: lightScaffoldBackground,
       appBarTheme: const AppBarTheme(
         backgroundColor: lightSurface,
-        foregroundColor: Color(0xFF1E293B),
+        foregroundColor: Color(0xFF0F172A),
         elevation: 0,
         scrolledUnderElevation: 0,
+      ),
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: Color(0xFF0F172A)),
+        bodyMedium: TextStyle(color: Color(0xFF1E293B)),
+        bodySmall: TextStyle(color: Color(0xFF334155)),
+        titleLarge: TextStyle(color: Color(0xFF0F172A)),
+        titleMedium: TextStyle(color: Color(0xFF0F172A)),
+        titleSmall: TextStyle(color: Color(0xFF1E293B)),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: lightSurface,
@@ -38,7 +48,7 @@ class AppTheme {
           if (states.contains(WidgetState.selected)) {
             return const IconThemeData(color: primaryBlue);
           }
-          return const IconThemeData(color: Color(0xFF64748B));
+          return const IconThemeData(color: Color(0xFF475569));
         }),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
@@ -49,7 +59,7 @@ class AppTheme {
             );
           }
           return const TextStyle(
-            color: Color(0xFF64748B),
+            color: Color(0xFF475569),
             fontWeight: FontWeight.normal,
             fontSize: 12,
           );
@@ -58,7 +68,7 @@ class AppTheme {
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: lightSurface,
         selectedItemColor: primaryBlue,
-        unselectedItemColor: Color(0xFF64748B),
+        unselectedItemColor: Color(0xFF475569),
       ),
     );
   }
@@ -70,6 +80,8 @@ class AppTheme {
       brightness: Brightness.dark,
       primary: primaryBlue,
       surface: darkSurface,
+      onSurface: const Color(0xFFF8FAFC), // Slate 50: > 15:1 contrast on dark surface
+      onSurfaceVariant: const Color(0xFFCBD5E1), // Slate 300: > 9:1 contrast
     );
 
     return ThemeData(
@@ -82,6 +94,14 @@ class AppTheme {
         foregroundColor: Colors.white,
         elevation: 0,
         scrolledUnderElevation: 0,
+      ),
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: Color(0xFFF8FAFC)),
+        bodyMedium: TextStyle(color: Color(0xFFF1F5F9)),
+        bodySmall: TextStyle(color: Color(0xFFCBD5E1)),
+        titleLarge: TextStyle(color: Color(0xFFF8FAFC)),
+        titleMedium: TextStyle(color: Color(0xFFF8FAFC)),
+        titleSmall: TextStyle(color: Color(0xFFF1F5F9)),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: darkSurface,

@@ -75,6 +75,43 @@ class ImportService {
     return importedDocFiles.length;
   }
 
+  /// Copies a file at [sourcePath] into the app's `imported/` directory,
+  /// extracts its metadata, upserts it into the database, and returns the [DocFile].
+  Future<DocFile> importFromPath(String sourcePath) async {
+    final source = File(sourcePath);
+    if (!source.existsSync()) {
+      throw FileSystemException('Source file does not exist', sourcePath);
+    }
+
+    final docsDir = await getApplicationDocumentsDirectory();
+    final importedDir = Directory(p.join(docsDir.path, 'imported'));
+    if (!importedDir.existsSync()) {
+      await importedDir.create(recursive: true);
+    }
+
+    final originalName = p.basename(sourcePath);
+    final uniquePath = _generateUniqueFilePath(importedDir.path, originalName);
+    final destination = await source.copy(uniquePath);
+    final stat = await destination.stat();
+
+    final fileName = p.basename(uniquePath);
+    final ext = p.extension(uniquePath).replaceFirst('.', '').toLowerCase();
+    final category = categoryFromPath(uniquePath) ?? FileCategory.other;
+
+    final docFile = DocFile(
+      path: destination.path,
+      name: fileName,
+      extension: ext,
+      sizeBytes: stat.size,
+      modified: stat.modified,
+      category: category,
+      isImported: true,
+    );
+
+    await _repository.upsert(docFile);
+    return docFile;
+  }
+
   /// Scans the iOS Application Documents directory for documents placed via the iOS Files app or iTunes.
   Future<int> scanAppDocuments() async {
     try {

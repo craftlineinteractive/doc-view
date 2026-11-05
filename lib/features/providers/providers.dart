@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +11,7 @@ import '../../data/models/sort_option.dart';
 import '../../data/repositories/file_repository.dart';
 import '../../data/services/file_operations_service.dart';
 import '../../data/services/import_service.dart';
+import '../../data/services/open_with_service.dart';
 import '../../data/services/pdf/image_to_pdf_service.dart';
 import '../../data/services/pdf/pdf_merge_service.dart';
 import '../../data/services/pdf/pdf_output_service.dart';
@@ -81,6 +83,13 @@ final importServiceProvider = Provider<ImportService>((ref) {
   return ImportService(repository: repository);
 });
 
+/// Open With service provider for external document opening.
+final openWithServiceProvider = Provider<OpenWithService>((ref) {
+  final service = OpenWithService();
+  ref.onDispose(service.dispose);
+  return service;
+});
+
 /// PDF output service provider.
 final pdfOutputServiceProvider = Provider<PdfOutputService>((ref) {
   final repository = ref.watch(fileRepositoryProvider);
@@ -109,6 +118,9 @@ final pdfSplitServiceProvider = Provider<PdfSplitService>((ref) {
   return PdfSplitService(outputService: outputService);
 });
 
+/// Key for persisting last completed scan timestamp in SharedPreferences.
+const String keyLastScanTime = 'last_completed_scan_timestamp';
+
 /// Notifier tracking background scan state, progress counts, and completion.
 class ScanStateNotifier extends Notifier<ScanProgress> {
   StreamSubscription<ScanProgress>? _subscription;
@@ -120,6 +132,10 @@ class ScanStateNotifier extends Notifier<ScanProgress> {
     _subscription = scanner.progressStream.listen((progress) {
       state = progress;
       if (progress.isDone) {
+        SharedPreferences.getInstance().then((prefs) {
+          prefs.setInt(keyLastScanTime, DateTime.now().millisecondsSinceEpoch);
+        }).catchError((_) {});
+
         // Automatically refresh category counts and active file queries upon completion
         ref.invalidate(categoryCountsProvider);
         ref.invalidate(filesProvider);
@@ -140,12 +156,77 @@ class ScanStateNotifier extends Notifier<ScanProgress> {
       await scanner.startScan();
     }
   }
+
+  /// Refreshes files according to platform capability and returns the file count.
+  /// On iOS, scans app documents and returns count.
+  /// On Android, initiates scan and awaits completion, returning files found.
+  /// Returns -1 if permission is required on Android.
+  Future<int> refreshScan() async {
+    final permissionService = ref.read(permissionServiceProvider);
+    if (permissionService.isIOS) {
+      final count = await ref.read(importServiceProvider).scanAppDocuments();
+      ref.invalidate(categoryCountsProvider);
+      ref.invalidate(filesProvider);
+      return count;
+    }
+
+    if (permissionService.isAndroid) {
+      final hasAccess =
+          await ref.read(allFilesAccessProvider.notifier).refreshAccess();
+      if (!hasAccess) {
+        return -1;
+      }
+
+      final scanner = ref.read(scannerServiceProvider);
+      if (state.isScanning) {
+        return state.filesFound;
+      }
+
+      final completer = Completer<int>();
+      late StreamSubscription<ScanProgress> sub;
+      sub = scanner.progressStream.listen((progress) {
+        if (progress.isDone) {
+          sub.cancel();
+          if (!completer.isCompleted) {
+            completer.complete(progress.filesFound);
+          }
+        }
+      });
+
+      await scanner.startScan();
+      return completer.future;
+    }
+
+    return 0;
+  }
 }
 
 /// Provider for active filesystem scan state.
 final scanStateProvider = NotifierProvider<ScanStateNotifier, ScanProgress>(
   ScanStateNotifier.new,
 );
+
+/// Centralized pull-to-refresh execution showing feedback SnackBar or permission prompt.
+Future<void> handlePullToRefreshScan(BuildContext context, WidgetRef ref) async {
+  final count = await ref.read(scanStateProvider.notifier).refreshScan();
+  if (count == -1) {
+    final granted =
+        await ref.read(allFilesAccessProvider.notifier).requestAccess();
+    if (granted) {
+      final newCount =
+          await ref.read(scanStateProvider.notifier).refreshScan();
+      if (context.mounted && newCount >= 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Scan complete: $newCount files')),
+        );
+      }
+    }
+  } else if (context.mounted && count >= 0) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Scan complete: $count files')),
+    );
+  }
+}
 
 /// Provider fetching file counts grouped by category.
 final categoryCountsProvider =
