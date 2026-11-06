@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-error": "#ffffff", "on-tertiary-fixed-variant": "#3f4752", "on-tertiary-fixed": "#141c26", "error-container": "#ffdad6", "secondary-fixed-dim": "#b1c5ff", "secondary": "#0054cb", "surface-container": "#ecedf9", "on-surface": "#181b24", "surface-container-low": "#f2f3ff", "tertiary-fixed-dim": "#bfc7d4", "inverse-on-surface": "#eff0fc", "on-primary-fixed-variant": "#004492", "on-error-container": "#93000a", "tertiary-fixed": "#dbe3f1", "surface-container-highest": "#e0e2ee", "on-primary-container": "#fefcff", "secondary-fixed": "#dae2ff", "on-secondary-fixed": "#001847", "secondary-container": "#276def", "error": "#ba1a1a", "on-background": "#181b24", "primary-container": "#1f71e0", "surface-container-lowest": "#ffffff", "on-secondary-container": "#fefcff", "surface-dim": "#d8d9e5", "primary": "#0059ba", "on-tertiary-container": "#fdfcff", "on-secondary-fixed-variant": "#00409f", "tertiary-container": "#6d7581", "surface-bright": "#faf8ff", "on-primary": "#ffffff", "inverse-primary": "#acc7ff", "surface": "#faf8ff", "on-surface-variant": "#424753", "outline-variant": "#c2c6d5", "inverse-surface": "#2d3039", "outline": "#727785", "background": "#faf8ff", "surface-tint": "#005bbf", "on-tertiary": "#ffffff", "on-primary-fixed": "#001a40", "primary-fixed": "#d7e2ff", "primary-fixed-dim": "#acc7ff", "surface-container-high": "#e6e7f3", "surface-variant": "#e0e2ee", "tertiary": "#545d68", "on-secondary": "#ffffff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "0.75rem", "gutter": "0.75rem", "space-xl": "1.5rem", "margin": "1.25rem", "space-lg": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem" }, "fontFamily": { "label-lg": [ "Inter" ], "label-xs": [ "Inter" ], "headline-xl": [ "Space Grotesk" ], "label-md": [ "Inter" ], "body-sm": [ "Inter" ], "body-lg": [ "Inter" ], "headline-lg": [ "Space Grotesk" ], "title-md": [ "Inter" ], "headline-sm": [ "Space Grotesk" ], "body-md": [ "Inter" ] }, "fontSize": { "label-lg": [ "15px", { "lineHeight": "20px", "fontWeight": "600" } ], "label-xs": [ "11px", { "lineHeight": "14px", "fontWeight": "600" } ], "headline-xl": [ "32px", { "lineHeight": "38px", "fontWeight": "700" } ], "label-md": [ "13px", { "lineHeight": "18px", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "body-lg": [ "15px", { "lineHeight": "22px", "fontWeight": "500" } ], "headline-lg": [ "24px", { "lineHeight": "30px", "fontWeight": "700" } ], "title-md": [ "16px", { "lineHeight": "22px", "fontWeight": "700" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "fontWeight": "600" } ], "body-md": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-margin flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate">Doc View Single File Actions Suite</span><span class="px-space-xs py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs tracking-wider uppercase">v2.4 SPEC</span></div><div class="hidden md:flex items-center gap-space-xs pl-space-sm"><span class="w-2 h-2 rounded-full bg-primary"></span><span class="font-body-sm text-body-sm text-on-surface-variant">Light &amp; Dark Matrix</span></div></div><nav class="hidden lg:flex items-center gap-space-xs bg-surface-container-low p-space-xs rounded-DEFAULT" data-active-classes="bg-primary-container text-on-primary-container font-label-md"><a class="px-space-md py-space-xs rounded-DEFAULT text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="overview-board" href="#">Overview Board</a><a class="px-space-md py-space-xs rounded-DEFAULT text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="frame-a-preview" href="#">Frame A: Reader</a><a class="px-space-md py-space-xs rounded-DEFAULT text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="frame-b-actions" href="#">Frame B: Action Sheet</a><a class="px-space-md py-space-xs rounded-DEFAULT text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="frame-c-annotations" href="#">Frame C: Annotations</a><a class="px-space-md py-space-xs rounded-DEFAULT text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="frame-d-export-ops" href="#">Frame D: Export Ops</a></nav><div class="flex items-center gap-space-md flex-shrink-0"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container"><span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Grid: 393pt Canvas</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<div class="w-full bg-surface-container-low py-space-xl px-margin">
+<div class="max-w-[1720px] mx-auto flex flex-col gap-space-lg">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md bg-surface-container-lowest p-space-xl rounded-DEFAULT shadow-sm">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-xs text-label-xs uppercase tracking-wider">Production Spec Sheet</span>
+<span class="font-label-md text-label-md text-primary">Core UX Surface 01</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Baseline: 393 × 852 pt (iPhone 15 Standard)</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Doc View Mobile Reader Suite</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+            Clean-room presentation board displaying the 4 canonical reader operational modes: Light Mode Canvas, Dark Mode Chassis (with non-inverting white document fidelity), Sub-200ms Shimmer Skeleton State, and contextual Bottom Action Sheet.
+          </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm bg-surface-container p-space-xs rounded-DEFAULT">
+<div class="flex items-center gap-1.5 px-space-md py-space-xs rounded-DEFAULT bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>4 Artboard Matrix</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-md py-space-xs rounded-DEFAULT text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Zero-Distraction / Ad-Free</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-md py-space-xs rounded-DEFAULT text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">speed</span>
+<span>Continuous Scroll</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-space-xl items-start">
+<div class="flex flex-col gap-space-md items-center">
+<div class="w-full flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-xs text-label-xs flex items-center justify-center">01</span>
+<span class="font-title-md text-title-md text-on-surface">Light Mode Reader</span>
+</div>
+<span class="font-label-xs text-label-xs px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant">Default UI</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[48px] bg-[#11141C] p-[10px] shadow-[0_24px_50px_rgba(17,20,28,0.18)] relative flex-shrink-0 select-none overflow-hidden">
+<div class="w-full h-full rounded-[38px] bg-[#EEF0F5] relative flex flex-col overflow-hidden">
+<div class="w-full h-11 pt-2 px-7 flex items-center justify-between text-on-surface z-30">
+<span class="font-label-md text-label-md font-bold tracking-tight">9:41</span>
+<div class="w-[124px] h-[26px] bg-[#11141C] rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<div class="w-full h-12 px-space-sm flex items-center justify-between bg-[#EEF0F5]/90 backdrop-blur-md z-20">
+<button aria-label="Back" class="w-12 h-12 flex items-center justify-center text-on-surface rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</button>
+<div class="flex-1 min-w-0 px-space-xs text-center">
+<div class="font-label-lg text-label-lg text-on-surface truncate">Practical_1_to_13.pdf</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant flex items-center justify-center gap-1">
+<span>120 Pages</span>
+<span>•</span>
+<span>4.2 MB</span>
+</div>
+</div>
+<div class="flex items-center">
+<button aria-label="Add Bookmark" class="w-12 h-12 flex items-center justify-center text-on-surface rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="More Options" class="w-12 h-12 flex items-center justify-center text-on-surface rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-hidden relative px-4 py-2 flex flex-col gap-4">
+<div class="w-full bg-[#FFFFFF] rounded-[4px] p-5 shadow-[0_2px_12px_rgba(17,20,28,0.06)] flex flex-col text-[#181B24]">
+<div class="flex items-center justify-between pb-3 text-[9px] font-medium text-[#727785] tracking-wider uppercase">
+<span>CS201 · Advanced Programming Lab Manual</span>
+<span>Page 4</span>
+</div>
+<h2 class="font-title-md text-title-md text-[#181B24] pt-1 pb-2">Practical 4: Python Functions &amp; Variable Scopes</h2>
+<p class="font-body-sm text-body-sm text-[#424753] leading-relaxed mb-3">
+                    Functions in Python are first-class citizens initialized using the <span class="bg-[#F2F3FF] px-1 py-0.5 rounded text-[#0059BA] font-mono text-[11px]">def</span> keyword. They accept arbitrary arguments, return tuples by default when comma-delimited, and retain lexical execution closures.
+                  </p>
+<div class="bg-[#F2F3FF] rounded-DEFAULT p-3 font-mono text-[11px] text-[#181B24] leading-relaxed mb-3">
+<div class="text-[#727785] mb-1 font-label-xs">// Computational helper</div>
+<div class="flex gap-2">
+<span class="text-[#727785] select-none">1</span>
+<span><span class="text-[#0059BA] font-bold">def</span> calculate_variance(data):</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#727785] select-none">2</span>
+<span class="pl-2">mean = sum(data) / len(data)</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#727785] select-none">3</span>
+<span class="pl-2">sq_diff = [(x - mean) ** 2 <span class="text-[#0059BA]">for</span> x <span class="text-[#0059BA]">in</span> data]</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#727785] select-none">4</span>
+<span class="pl-2"><span class="text-[#0059BA] font-bold">return</span> sum(sq_diff) / len(data)</span>
+</div>
+</div>
+<div class="w-full bg-[#FAFAFA] rounded p-2 text-[10px]">
+<div class="grid grid-cols-3 font-bold text-[#181B24] pb-1">
+<span>Param</span>
+<span>Type</span>
+<span>Description</span>
+</div>
+<div class="grid grid-cols-3 text-[#424753] pt-1">
+<span class="font-mono text-[9px]">data</span>
+<span>List[float]</span>
+<span>Sample vectors</span>
+</div>
+<div class="grid grid-cols-3 text-[#424753] pt-1">
+<span class="font-mono text-[9px]">variance</span>
+<span>float</span>
+<span>Population var</span>
+</div>
+</div>
+</div>
+<div class="w-full h-24 bg-[#FFFFFF] rounded-[4px] p-5 shadow-[0_2px_12px_rgba(17,20,28,0.06)] opacity-70">
+<div class="flex items-center justify-between pb-1 text-[9px] text-[#727785] tracking-wider uppercase">
+<span>CS201 · Advanced Programming Lab Manual</span>
+<span>Page 5</span>
+</div>
+<h3 class="font-title-md text-title-md text-[#181B24]">Practical 5: Object Oriented Design</h3>
+</div>
+</div>
+<div class="absolute bottom-28 left-0 right-0 px-6 flex flex-col items-center pointer-events-none z-30">
+<div class="relative w-full max-w-[280px] flex flex-col items-center mb-3">
+<div class="mb-1.5 px-3 py-1 bg-[#11141C] text-white rounded-lg shadow-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed">auto_stories</span>
+<span class="font-label-xs text-label-xs font-semibold">Page 3 of 120</span>
+</div>
+<div class="w-full h-1.5 bg-[#C2C6D5]/40 rounded-full relative flex items-center">
+<div class="h-1.5 bg-primary rounded-full w-[24%]"></div>
+<div class="w-4 h-4 rounded-full bg-primary shadow-md absolute left-[24%] -translate-x-1/2"></div>
+</div>
+</div>
+<div class="px-3 py-1 rounded-full bg-[#11141C]/80 backdrop-blur-md text-white font-label-xs text-label-xs tracking-wide">
+                  3 / 120
+                </div>
+</div>
+<div class="absolute bottom-7 left-4 right-4 z-30">
+<div class="w-full h-[64px] rounded-[24px] bg-[#FFFFFF]/95 backdrop-blur-md shadow-[0_8px_24px_rgba(17,20,28,0.12)] px-2 flex items-center justify-around">
+<button class="flex flex-col items-center justify-center w-14 h-12 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="font-label-xs text-[10px] tracking-tight mt-0.5">Pages</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-12 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">format_list_numbered</span>
+<span class="font-label-xs text-[10px] tracking-tight mt-0.5">Go to</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-12 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+<span class="font-label-xs text-[10px] tracking-tight mt-0.5">Share</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-12 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span class="font-label-xs text-[10px] tracking-tight mt-0.5">More</span>
+</button>
+</div>
+</div>
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#181B24] rounded-full z-40"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-md items-center">
+<div class="w-full flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-label-xs text-label-xs flex items-center justify-center">02</span>
+<span class="font-title-md text-title-md text-on-surface">Dark Chassis Canvas</span>
+</div>
+<span class="font-label-xs text-label-xs px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant">White Page Guard</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[48px] bg-[#11141C] p-[10px] shadow-[0_24px_50px_rgba(17,20,28,0.22)] relative flex-shrink-0 select-none overflow-hidden">
+<div class="w-full h-full rounded-[38px] bg-[#11131B] relative flex flex-col overflow-hidden">
+<div class="w-full h-11 pt-2 px-7 flex items-center justify-between text-[#EFF0FC] z-30">
+<span class="font-label-md text-label-md font-bold tracking-tight">9:41</span>
+<div class="w-[124px] h-[26px] bg-[#000000] rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5 text-[#EFF0FC]">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<div class="w-full h-12 px-space-sm flex items-center justify-between bg-[#1A1D29]/95 backdrop-blur-md z-20">
+<button aria-label="Back" class="w-12 h-12 flex items-center justify-center text-[#EFF0FC] rounded-full hover:bg-[#232838] transition-colors">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</button>
+<div class="flex-1 min-w-0 px-space-xs text-center">
+<div class="font-label-lg text-label-lg text-[#EFF0FC] truncate">Practical_1_to_13.pdf</div>
+<div class="font-label-xs text-label-xs text-[#8A8F9C] flex items-center justify-center gap-1">
+<span>120 Pages</span>
+<span>•</span>
+<span class="text-primary-fixed">Night UI Active</span>
+</div>
+</div>
+<div class="flex items-center">
+<button aria-label="Bookmark Saved" class="w-12 h-12 flex items-center justify-center text-primary-fixed rounded-full hover:bg-[#232838] transition-colors">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+<button aria-label="More Options" class="w-12 h-12 flex items-center justify-center text-[#EFF0FC] rounded-full hover:bg-[#232838] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-hidden relative px-4 py-2 flex flex-col gap-4">
+<div class="w-full bg-[#FFFFFF] rounded-[4px] p-5 shadow-[0_4px_24px_rgba(0,0,0,0.45)] flex flex-col text-[#181B24]">
+<div class="flex items-center justify-between pb-3 text-[9px] font-medium text-[#727785] tracking-wider uppercase">
+<span>CS201 · Advanced Programming Lab Manual</span>
+<span>Page 4</span>
+</div>
+<h2 class="font-title-md text-title-md text-[#181B24] pt-1 pb-2">Practical 4: Python Functions &amp; Variable Scopes</h2>
+<p class="font-body-sm text-body-sm text-[#424753] leading-relaxed mb-3">
+                    Functions in Python are first-class citizens initialized using the <span class="bg-[#F2F3FF] px-1 py-0.5 rounded text-[#0059BA] font-mono text-[11px]">def</span> keyword. They accept arbitrary arguments, return tuples by default when comma-delimited, and retain lexical execution closures.
+                  </p>
+<div class="bg-[#F2F3FF] rounded-DEFAULT p-3 font-mono text-[11px] text-[#181B24] leading-relaxed mb-3">
+<div class="text-[#727785] mb-1 font-label-xs">// Computational helper</div>
+<div class="flex gap-2">
+<span class="text-[#727785] select-none">1</span>
+<span><span class="text-[#0059BA] font-bold">def</span> calculate_variance(data):</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#727785] select-none">2</span>
+<span class="pl-2">mean = sum(data) / len(data)</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#727785] select-none">3</span>
+<span class="pl-2">sq_diff = [(x - mean) ** 2 <span class="text-[#0059BA]">for</span> x <span class="text-[#0059BA]">in</span> data]</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#727785] select-none">4</span>
+<span class="pl-2"><span class="text-[#0059BA] font-bold">return</span> sum(sq_diff) / len(data)</span>
+</div>
+</div>
+<div class="w-full bg-[#FAFAFA] rounded p-2 text-[10px]">
+<div class="grid grid-cols-3 font-bold text-[#181B24] pb-1">
+<span>Param</span>
+<span>Type</span>
+<span>Description</span>
+</div>
+<div class="grid grid-cols-3 text-[#424753] pt-1">
+<span class="font-mono text-[9px]">data</span>
+<span>List[float]</span>
+<span>Sample vectors</span>
+</div>
+<div class="grid grid-cols-3 text-[#424753] pt-1">
+<span class="font-mono text-[9px]">variance</span>
+<span>float</span>
+<span>Population var</span>
+</div>
+</div>
+</div>
+<div class="w-full h-24 bg-[#FFFFFF] rounded-[4px] p-5 shadow-[0_4px_24px_rgba(0,0,0,0.45)] opacity-80">
+<div class="flex items-center justify-between pb-1 text-[9px] text-[#727785] tracking-wider uppercase">
+<span>CS201 · Advanced Programming Lab Manual</span>
+<span>Page 5</span>
+</div>
+<h3 class="font-title-md text-title-md text-[#181B24]">Practical 5: Object Oriented Design</h3>
+</div>
+</div>
+<div class="absolute bottom-28 left-0 right-0 px-6 flex flex-col items-center pointer-events-none z-30">
+<div class="px-3 py-1 rounded-full bg-[#1A1D29]/90 backdrop-blur-md text-[#EFF0FC] font-label-xs text-label-xs tracking-wide shadow-md">
+                  4 / 120
+                </div>
+</div>
+<div class="absolute bottom-7 left-4 right-4 z-30">
+<div class="w-full h-[64px] rounded-[24px] bg-[#232838]/95 backdrop-blur-md shadow-[0_12px_32px_rgba(0,0,0,0.55)] px-2 flex items-center justify-around">
+<button class="flex flex-col items-center justify-center w-14 h-12 text-[#EFF0FC] hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="font-label-xs text-[10px] tracking-tight mt-0.5">Pages</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-12 text-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[20px]">format_list_numbered</span>
+<span class="font-label-xs text-[10px] tracking-tight mt-0.5">Go to</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-12 text-[#EFF0FC] hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+<span class="font-label-xs text-[10px] tracking-tight mt-0.5">Share</span>
+</button>
+<button class="flex flex-col items-center justify-center w-14 h-12 text-[#EFF0FC] hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span class="font-label-xs text-[10px] tracking-tight mt-0.5">More</span>
+</button>
+</div>
+</div>
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#EFF0FC]/40 rounded-full z-40"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-md items-center">
+<div class="w-full flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-label-xs text-label-xs flex items-center justify-center">03</span>
+<span class="font-title-md text-title-md text-on-surface">Shimmer Skeleton</span>
+</div>
+<span class="font-label-xs text-label-xs px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant">&lt;200ms Instant Cache</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[48px] bg-[#11141C] p-[10px] shadow-[0_24px_50px_rgba(17,20,28,0.18)] relative flex-shrink-0 select-none overflow-hidden">
+<div class="w-full h-full rounded-[38px] bg-[#EEF0F5] relative flex flex-col overflow-hidden">
+<div class="w-full h-11 pt-2 px-7 flex items-center justify-between text-on-surface z-30">
+<span class="font-label-md text-label-md font-bold tracking-tight">9:41</span>
+<div class="w-[124px] h-[26px] bg-[#11141C] rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<div class="w-full h-12 px-space-sm flex items-center justify-between bg-[#EEF0F5]/80 backdrop-blur-md z-20">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest animate-pulse"></div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-32 h-3.5 bg-surface-container-highest rounded-full animate-pulse"></div>
+<div class="w-16 h-2 bg-surface-container rounded-full animate-pulse"></div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-container-highest animate-pulse"></div>
+<div class="w-7 h-7 rounded-full bg-surface-container-highest animate-pulse"></div>
+</div>
+</div>
+<div class="flex-1 overflow-hidden relative px-4 py-2 flex flex-col gap-4">
+<div class="w-full bg-[#FFFFFF] rounded-[4px] p-5 shadow-[0_2px_12px_rgba(17,20,28,0.04)] flex flex-col gap-3">
+<div class="flex items-center justify-between pb-1">
+<div class="w-28 h-2.5 bg-surface-container-highest rounded-full animate-pulse"></div>
+<div class="w-10 h-2.5 bg-surface-container-highest rounded-full animate-pulse"></div>
+</div>
+<div class="w-3/4 h-5 bg-surface-container-highest rounded animate-pulse mt-1"></div>
+<div class="flex flex-col gap-2 mt-2">
+<div class="w-full h-3 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-full h-3 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-4/5 h-3 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+<div class="w-full h-32 bg-surface-container-low rounded-DEFAULT p-3 flex flex-col justify-around">
+<div class="w-1/3 h-2.5 bg-surface-container-highest rounded animate-pulse"></div>
+<div class="w-2/3 h-2.5 bg-surface-container-highest rounded animate-pulse"></div>
+<div class="w-1/2 h-2.5 bg-surface-container-highest rounded animate-pulse"></div>
+<div class="w-3/5 h-2.5 bg-surface-container-highest rounded animate-pulse"></div>
+</div>
+<div class="w-full h-16 bg-surface-container-lowest rounded p-2 flex flex-col justify-around">
+<div class="w-full h-2.5 bg-surface-container-high rounded animate-pulse"></div>
+<div class="w-full h-2.5 bg-surface-container-high rounded animate-pulse"></div>
+</div>
+</div>
+<div class="w-full h-24 bg-[#FFFFFF] rounded-[4px] p-5 shadow-[0_2px_12px_rgba(17,20,28,0.04)] opacity-60 flex flex-col gap-2">
+<div class="w-28 h-2.5 bg-surface-container-highest rounded-full animate-pulse"></div>
+<div class="w-1/2 h-4 bg-surface-container-highest rounded animate-pulse"></div>
+</div>
+</div>
+<div class="absolute bottom-28 left-0 right-0 px-6 flex justify-center z-30">
+<div class="w-20 h-6 rounded-full bg-surface-container-highest animate-pulse shadow-xs"></div>
+</div>
+<div class="absolute bottom-7 left-4 right-4 z-30">
+<div class="w-full h-[64px] rounded-[24px] bg-[#FFFFFF]/90 backdrop-blur-md shadow-[0_8px_24px_rgba(17,20,28,0.08)] px-4 flex items-center justify-around">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest animate-pulse"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest animate-pulse"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest animate-pulse"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest animate-pulse"></div>
+</div>
+</div>
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#181B24] rounded-full z-40"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-md items-center">
+<div class="w-full flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-full bg-primary font-label-xs text-label-xs text-on-primary flex items-center justify-center">04</span>
+<span class="font-title-md text-title-md text-on-surface">Action Bottom Sheet</span>
+</div>
+<span class="font-label-xs text-label-xs px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant">Modal Sheet</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[48px] bg-[#11141C] p-[10px] shadow-[0_24px_50px_rgba(17,20,28,0.18)] relative flex-shrink-0 select-none overflow-hidden">
+<div class="w-full h-full rounded-[38px] bg-[#EEF0F5] relative flex flex-col overflow-hidden">
+<div class="w-full h-11 pt-2 px-7 flex items-center justify-between text-on-surface z-10">
+<span class="font-label-md text-label-md font-bold tracking-tight">9:41</span>
+<div class="w-[124px] h-[26px] bg-[#11141C] rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<div class="flex-1 px-4 py-2 flex flex-col gap-4 opacity-40">
+<div class="w-full bg-[#FFFFFF] rounded-[4px] p-5 shadow-xs flex flex-col text-[#181B24]">
+<div class="flex items-between pb-3 text-[9px] text-[#727785] uppercase">
+<span>CS201 · Practical Manual</span>
+<span>Page 4</span>
+</div>
+<h2 class="font-title-md text-title-md text-[#181B24] pb-2">Practical 4: Python Functions</h2>
+<div class="h-20 bg-[#F2F3FF] rounded p-2"></div>
+</div>
+</div>
+<div class="absolute inset-0 bg-[#11141C]/50 backdrop-blur-[2px] z-20"></div>
+<div class="absolute bottom-0 left-0 right-0 bg-[#FFFFFF] rounded-t-[28px] shadow-[0_-8px_32px_rgba(17,20,28,0.22)] z-30 pt-3 pb-8 px-6 flex flex-col">
+<div class="w-9 h-1 bg-[#C2C6D5] rounded-full mx-auto mb-4"></div>
+<div class="flex items-center justify-between pb-3">
+<div class="flex flex-col min-w-0 pr-2">
+<span class="font-headline-sm text-headline-sm text-[#181B24]">Reader Options</span>
+<span class="font-body-sm text-body-sm text-[#727785] truncate">Practical_1_to_13.pdf</span>
+</div>
+<button aria-label="Close Options" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="flex flex-col divide-y-0">
+<button class="w-full h-14 flex items-center justify-between text-left hover:bg-[#F2F3FF] -mx-2 px-2 rounded-DEFAULT transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-[#181B24]">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</div>
+<span class="font-label-lg text-label-lg text-[#181B24]">Share Document</span>
+</div>
+<span class="material-symbols-outlined text-[#727785] text-[18px]">chevron_right</span>
+</button>
+<button class="w-full h-14 flex items-center justify-between text-left hover:bg-[#F2F3FF] -mx-2 px-2 rounded-DEFAULT transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-[#181B24]">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</div>
+<span class="font-label-lg text-label-lg text-[#181B24]">Open in another app</span>
+</div>
+<span class="material-symbols-outlined text-[#727785] text-[18px]">chevron_right</span>
+</button>
+<button class="w-full h-14 flex items-center justify-between text-left hover:bg-[#F2F3FF] -mx-2 px-2 rounded-DEFAULT transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-[#181B24]">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</div>
+<span class="font-label-lg text-label-lg text-[#181B24]">Document Details</span>
+</div>
+<span class="font-label-xs text-label-xs px-2 py-0.5 rounded bg-surface-container text-[#424753]">4.2 MB</span>
+</button>
+<button class="w-full h-14 flex items-center justify-between text-left hover:bg-[#F2F3FF] -mx-2 px-2 rounded-DEFAULT transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-[#181B24]">
+<span class="material-symbols-outlined text-[20px]">bookmark_add</span>
+</div>
+<span class="font-label-lg text-label-lg text-[#181B24]">Add Bookmark</span>
+</div>
+<span class="font-label-xs text-label-xs text-primary font-semibold">Page 4</span>
+</button>
+<div class="w-full h-14 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">dark_mode</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-[#181B24]">Night reading mode</span>
+<span class="font-body-sm text-[11px] text-[#727785]">Dark chassis background</span>
+</div>
+</div>
+<button aria-checked="true" aria-label="Toggle Night Reading Mode" class="w-12 h-7 bg-primary rounded-full relative p-0.5 transition-colors" role="switch">
+<div class="w-6 h-6 rounded-full bg-white shadow-sm translate-x-5 transition-transform"></div>
+</button>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-label-xs text-label-xs">
+<span>Renderer: Native CorePDF</span>
+<span class="text-primary font-semibold">Ready</span>
+</div>
+</div>
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#181B24] rounded-full z-40"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest p-space-xl rounded-DEFAULT shadow-sm flex flex-col gap-space-lg">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Reader Architecture &amp; Production Directives</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Validated parameters for Android &amp; iOS Native Handheld Implementations</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-[#1A66E8]"></span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Doc View Engineering Sign-off</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<div class="p-space-md rounded-DEFAULT bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+<span class="font-title-md text-title-md">Canvas Tokens</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Light Canvas strictly pinned to <span class="font-mono text-primary font-semibold">#EEF0F5</span>. Dark Canvas pinned to <span class="font-mono text-primary font-semibold">#11131B</span> with header chrome <span class="font-mono text-primary font-semibold">#1A1D29</span>.
+            </p>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span class="font-title-md text-title-md">Document Fidelity</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              PDF content is never inverted or recolored. Pages retain pure white <span class="font-mono text-primary font-semibold">#FFFFFF</span> backgrounds with crisp typography and original chart colors intact.
+            </p>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">block</span>
+<span class="font-title-md text-title-md">Zero-Ad Policy</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              AdMob 60pt containers are explicitly disabled within reader viewing contexts to guarantee unimpeded vertical scroll flow and eliminate touch conflicts.
+            </p>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">touch_app</span>
+<span class="font-title-md text-title-md">Floating Island</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              64pt docked height island with 24px corner radius, 12px blur, and 48pt minimum touch hitbox targets across all icons and quick action triggers.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_8px_rgba(0,0,0,0.03)] mt-space-xl"><div class="w-full px-margin py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex flex-col sm:flex-row items-center gap-space-md"><span class="font-headline-sm text-headline-sm text-on-surface">Doc View Architecture</span><div class="flex items-center gap-space-sm font-body-sm text-body-sm text-on-surface-variant"><span>4pt Spatial Canvas</span><span>•</span><span>Docked 64pt Action Bar</span><span>•</span><span>60pt AdMob Guard</span></div></div><div class="flex items-center gap-space-xl font-label-md text-label-md text-on-surface-variant"><span>Viewport: 393 × 852 pt Native Mobile</span><span class="text-tertiary">© 2025 Mobile Document Platform</span></div></div></footer></body></html>

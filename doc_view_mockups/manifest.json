@@ -1,0 +1,490 @@
+{
+  "app": "Doc View",
+  "baseline_viewport": "393x852 (design units; treat as dp on Android)",
+  "primary_platform": "Android",
+  "secondary_platform": "iOS",
+  "source_of_truth_order": [
+    "screen.png and the 393x852 device frames inside code.html",
+    "00_design_system/DESIGN.md",
+    "README.md"
+  ],
+  "tool_contract": [
+    "Image to PDF",
+    "Scan to PDF",
+    "Merge PDF",
+    "Split PDF"
+  ],
+  "screens": [
+    {
+      "path": "01_launch/01_splash",
+      "title": "Splash screen",
+      "route": "/splash",
+      "code": "features/splash/splash_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "Light (#FFFFFF with pale-blue glow)",
+        "Dark (#1A1D29 deep navy with blue glow)"
+      ],
+      "ads": "None",
+      "has_png": true,
+      "defects": [
+        "The screenshot shows the wordmark wrapping onto two lines (\"Doc\" / \"View\") and overlapping the tagline. Implement it on ONE line with proper spacing."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "01_launch/02_onboarding_1",
+      "title": "Onboarding 1 of 3: All your documents, one place",
+      "route": "/onboarding (page 1)",
+      "code": "features/onboarding/onboarding_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "Light",
+        "Dark"
+      ],
+      "ads": "None",
+      "has_png": true,
+      "defects": [],
+      "gaps": []
+    },
+    {
+      "path": "01_launch/03_onboarding_2",
+      "title": "Onboarding 2 of 3: Read anything, beautifully",
+      "route": "/onboarding (page 2)",
+      "code": "features/onboarding/onboarding_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "Light",
+        "Dark"
+      ],
+      "ads": "None",
+      "has_png": true,
+      "defects": [],
+      "gaps": []
+    },
+    {
+      "path": "01_launch/04_onboarding_3",
+      "title": "Onboarding 3 of 3: Powerful PDF tools, offline",
+      "route": "/onboarding (page 3)",
+      "code": "features/onboarding/onboarding_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "Light",
+        "Dark"
+      ],
+      "ads": "None",
+      "has_png": false,
+      "defects": [
+        "No screen.png was included in the original zip; use code.html only.",
+        "The HTML <title> says \"Splash Screen\" (copy-paste error); the content is Onboarding 3.",
+        "Header pattern differs from pages 1-2 (Step 3 of 3 + back arrow vs Skip). Keep as designed or unify; report the choice."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "01_launch/05_permissions_privacy",
+      "title": "Permissions and privacy flow",
+      "route": "/permission (Android), /import-guide (iOS), /ads-consent",
+      "code": "features/permissions/*",
+      "modes": "Light, Dark",
+      "frames": [
+        "A: Android \"All files access\" (MANAGE_EXTERNAL_STORAGE)",
+        "B: iOS \"Bring your documents to Doc View\"",
+        "C: \"Free with ads\" explainer shown before the Google consent (UMP) and iOS ATT prompts"
+      ],
+      "ads": "None",
+      "has_png": true,
+      "defects": [],
+      "gaps": [
+        "Frame B is iOS-only; Android build must never show it, and iOS must never show Frame A."
+      ]
+    },
+    {
+      "path": "02_home/01_home_all_files",
+      "title": "Home, \"All files\" tab",
+      "route": "/home (tab 1)",
+      "code": "features/home/home_screen.dart",
+      "modes": "Light, Dark, Skeleton",
+      "frames": [
+        "Light",
+        "Dark",
+        "Skeleton shimmer"
+      ],
+      "ads": "Native row inside Recent list + docked 60pt adaptive banner above nav",
+      "has_png": true,
+      "defects": [
+        "The FAB overlaps the native ad row and its Install button; this breaks the design system own 16pt-clearance rule. Place the FAB so it never overlaps an ad or a tappable row action (>= 16pt gap).",
+        "Tile label here is \"Folders / Browse\"; the destination screen is titled \"Directories\". Keep as designed and be consistent."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "02_home/02_home_state_variants",
+      "title": "Home state variants",
+      "route": "/home (states)",
+      "code": "features/home/home_screen.dart",
+      "modes": "Light, Dark (each of 5 states)",
+      "frames": [
+        "1 Bookmarks tab populated (3 pinned PDFs, filled bookmarks)",
+        "2 Bookmarks empty",
+        "3 Recent empty",
+        "4 Indexing & scan in progress",
+        "5 Permission gate (no access yet)"
+      ],
+      "ads": "Docked banner in all states",
+      "has_png": true,
+      "defects": [
+        "Header here reads \"DocView\" and shows a more_vert icon; Home (01) uses \"Doc View\" with search only. Use \"Doc View\" everywhere."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "03_search/01_search_states",
+      "title": "Search screen, 5 states",
+      "route": "/search",
+      "code": "features/search/search_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "1 Typing \"prac\" with highlighted matches",
+        "2 Empty query: Recent searches",
+        "3 No results for \"xyz\"",
+        "4 Skeleton",
+        "5 Keyboard open (query \"fin\")"
+      ],
+      "ads": "One in-feed native ad at position 6; NO docked banner",
+      "has_png": true,
+      "defects": [],
+      "gaps": [
+        "Recent-searches storage is new behavior (not built yet)."
+      ]
+    },
+    {
+      "path": "04_file_management/01_file_actions",
+      "title": "Single-file actions: options sheet, rename, delete, details",
+      "route": "sheets/dialogs over file lists",
+      "code": "features/files/widgets/file_options_sheet.dart (+ rename/delete/details dialogs)",
+      "modes": "Light, Dark",
+      "frames": [
+        "A Options bottom sheet (520pt, 28pt top radius)",
+        "B Rename dialog with validation",
+        "C Delete confirmation dialog",
+        "D File details sheet"
+      ],
+      "ads": "None on sheets; the list behind shows one native ad row",
+      "has_png": true,
+      "defects": [
+        "The board nav mentions \"Frame C: Annotations\" and \"Frame D: Export Ops\"; these are stale links, no annotation or export UI exists. Ignore."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "04_file_management/02_multi_select_delete",
+      "title": "Multi-select and batch delete",
+      "route": "selection mode on file lists",
+      "code": "features/files/* (SelectionController)",
+      "modes": "Light, Dark",
+      "frames": [
+        "1 Selection mode active",
+        "2 Delete confirmation \"Delete 3 files?\"",
+        "3 List after delete with snackbar \"3 files deleted\""
+      ],
+      "ads": "Banner suppressed in selection mode",
+      "has_png": true,
+      "defects": [
+        "Rows show drag_indicator handles in selection mode; there is no reordering on these lists. Do not implement the handles."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "04_file_management/03_directories",
+      "title": "Directories (folder browser)",
+      "route": "/directories",
+      "code": "features/directories/directories_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "A Normal browser",
+        "B Permission required",
+        "C Protected folder (Android/data)",
+        "D Empty folder",
+        "E Folder not found",
+        "F Skeleton list"
+      ],
+      "ads": "Docked 60pt banner above nav",
+      "has_png": true,
+      "defects": [],
+      "gaps": [
+        "Item counts (\"8 items\"), page counts (\"120 pages\") and sort chips are NOT in the current Directories code; counting items per folder may be slow, so compute lazily or omit counts and report it."
+      ]
+    },
+    {
+      "path": "05_viewers/01_pdf_reader",
+      "title": "PDF reader",
+      "route": "/viewer (pdf)",
+      "code": "features/viewer/pdf_viewer_screen.dart",
+      "modes": "Light, Dark (white page kept un-inverted), Skeleton, More menu",
+      "frames": [
+        "01 Light reader",
+        "02 Dark chassis (page stays white)",
+        "03 Skeleton",
+        "04 More bottom sheet"
+      ],
+      "ads": "NONE (ad-free reading surface)",
+      "has_png": true,
+      "defects": [],
+      "gaps": [
+        "\"Pages\" (thumbnail grid) has no dedicated frame; build a simple thumbnail sheet or hide the button and report. No page-scrubber slider is present in this HTML."
+      ]
+    },
+    {
+      "path": "05_viewers/02_pdf_reader_states",
+      "title": "PDF reader exception states and dialogs",
+      "route": "/viewer (pdf) dialogs and error screens",
+      "code": "features/viewer/pdf_viewer_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "1 Password-protected dialog",
+        "2 \"Go to page\" dialog",
+        "3 Corrupt file screen",
+        "4 File missing screen"
+      ],
+      "ads": "NONE",
+      "has_png": true,
+      "defects": [],
+      "gaps": []
+    },
+    {
+      "path": "05_viewers/03_office_viewer",
+      "title": "Office viewer: DOCX, XLSX, PPTX",
+      "route": "/viewer (office)",
+      "code": "features/viewer/office_viewer_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "01 DOCX",
+        "02 XLSX",
+        "03 PPTX",
+        "04 Search active",
+        "05 Outline sheet",
+        "06 Error (password) and shimmer"
+      ],
+      "ads": "NONE",
+      "has_png": false,
+      "defects": [
+        "No screen.png was included in the original zip; use code.html only.",
+        "The board text claims a \"Rust OpenXML parser\"; that is marketing fiction. The app uses the offline_document_viewer package.",
+        "The XLSX frame shows a \"Filter\" chip and a sheet-tab \"+\" (add) button. The viewer is read-only: omit \"+\", and omit \"Filter\" unless you implement it."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "05_viewers/04_image_txt_viewer",
+      "title": "Image viewer and TXT viewer",
+      "route": "/viewer (image, txt)",
+      "code": "features/viewer/image_viewer_screen.dart, txt_viewer_screen.dart",
+      "modes": "Light, Dark, Zoomed, Skeleton",
+      "frames": [
+        "Image 01 standard (1.0x)",
+        "Image 02 zoomed (2.5x)",
+        "Image 03 shimmer decode",
+        "TXT light, dark and typography controls"
+      ],
+      "ads": "NONE",
+      "has_png": true,
+      "defects": [
+        "This PNG is large (2046x2853) and readable; the board text about \"Bicubic Hardware Sampling\" and \"NV21 buffers\" is decoration."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "06_tools/01_tools_tab",
+      "title": "Tools tab (exactly 4 tools)",
+      "route": "/tools (tab 2)",
+      "code": "features/tools/tools_screen.dart",
+      "modes": "Light, Dark, Skeleton, Empty",
+      "frames": [
+        "01 Light",
+        "02 Dark",
+        "03 Shimmer",
+        "04 Empty \"Created by you\""
+      ],
+      "ads": "Docked 60pt banner above nav",
+      "has_png": true,
+      "defects": [
+        "The labels \"Engine 4.18\" and \"2 Utilities\" are board decoration; do not ship them.",
+        "Nav label here is \"All Files\"; Home uses \"All files\". Use \"All files\"."
+      ],
+      "gaps": [
+        "\"See All\" opens a list of created PDFs; no frame exists for it. Reuse the PDF file-list design."
+      ]
+    },
+    {
+      "path": "06_tools/02_image_to_pdf_scan",
+      "title": "Image to PDF editor and scan review",
+      "route": "/tools/image-to-pdf",
+      "code": "features/tools/image_list_editor_screen.dart",
+      "modes": "Light, Dark, Scan review, Empty, Skeleton",
+      "frames": [
+        "01 Light editor",
+        "02 Dark editor",
+        "03 Scan review (perspective quad)",
+        "04 Empty \"Add images to start\"",
+        "05 Shimmer"
+      ],
+      "ads": "NONE",
+      "has_png": true,
+      "defects": [
+        "Decorative claims such as \"Homography 8-DOF\" and \"Native Skia/PDF 2.0\" are board text, not UI."
+      ],
+      "gaps": [
+        "\"A4 High Res\" chip implies a quality option; the current service has only A4/Fit; show it as a static info chip or add a quality option and report."
+      ]
+    },
+    {
+      "path": "06_tools/03_merge_pdf",
+      "title": "Merge PDF: select, arrange, error",
+      "route": "/tools/merge",
+      "code": "features/tools/library_pdf_picker_screen.dart, merge_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "01 Select PDFs",
+        "02 Arrange & merge (drag state)",
+        "03 Error variant (encrypted)",
+        "04 Skeleton"
+      ],
+      "ads": "In-feed native ad in step 1 only; no banner",
+      "has_png": true,
+      "defects": [
+        "The \"iCloud Drive\" tab is iOS-only; hide it on Android. Page counts per PDF require opening each document; compute lazily and show a placeholder until known."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "06_tools/04_split_pdf",
+      "title": "Split PDF: pick, configure, error",
+      "route": "/tools/split",
+      "code": "features/tools/library_pdf_picker_screen.dart, split_screen.dart",
+      "modes": "Light, Dark",
+      "frames": [
+        "01 Picker (single select)",
+        "02 Split config",
+        "03 Error (dark)",
+        "04 Skeleton"
+      ],
+      "ads": "NONE",
+      "has_png": true,
+      "defects": [],
+      "gaps": [
+        "NEW behavior vs current code: quick-select macros and the \"EST\" size estimate. Macros are easy (they fill the range field); the estimate can be approximate (pages/total x size) and labelled \"~\"."
+      ]
+    },
+    {
+      "path": "06_tools/05_progress_results",
+      "title": "Operation progress and results",
+      "route": "dialogs/sheets after a tool runs",
+      "code": "features/tools/widgets/* (progress dialog, result sheet)",
+      "modes": "Light, Dark",
+      "frames": [
+        "1 Progress dialog (Creating PDF 65%; Merging variant 45%)",
+        "2 Success sheet (single PDF)",
+        "3 Split success sheet (3 PDFs)",
+        "4 Error fallback sheet",
+        "5 Interstitial ad frame"
+      ],
+      "ads": "Interstitial only after a successful result, never on launch",
+      "has_png": true,
+      "defects": [
+        "The dimmed Tools backdrop in these frames shows 5 tiles (Create PDF, Split PDF, Merge Docs, Compress, tune). That VIOLATES the 4-tool rule. Use the real Tools tab (Image to PDF, Scan to PDF, Merge PDF, Split PDF) as the backdrop. NO Compress tool.",
+        "The sample error code \"Error 0x82A4\" and \"142 MB < 350 MB\" are invented. Show the real error message; show free-space numbers only if you actually measure them.",
+        "The \"WASM PDF-Core 3.1ms\" text is decoration."
+      ],
+      "gaps": [
+        "\"Approx. seconds remaining\" needs a time estimate; show it only if measurable, otherwise omit."
+      ]
+    },
+    {
+      "path": "07_settings/01_settings_tab",
+      "title": "Settings tab",
+      "route": "/settings (tab 3)",
+      "code": "features/settings/settings_screen.dart",
+      "modes": "Light, Dark, Skeleton",
+      "frames": [
+        "01 Light",
+        "02 Dark",
+        "03 Skeleton"
+      ],
+      "ads": "Docked 60pt banner above nav",
+      "has_png": true,
+      "defects": [
+        "Uses JetBrains Mono for tiny technical labels. Do not bundle a third font; use Inter with tabular figures."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "07_settings/02_settings_sub_screens",
+      "title": "Settings sub-screens: theme sheet, scan settings, snackbar",
+      "route": "sheet + /settings/scan",
+      "code": "features/settings/*",
+      "modes": "Light, Dark",
+      "frames": [
+        "01 App theme bottom sheet",
+        "02 Scan settings screen",
+        "03 Snackbar \"Image list updated\""
+      ],
+      "ads": "Docked banner on Scan settings",
+      "has_png": true,
+      "defects": [
+        "The diagnostics card is Android-only; on iOS hide it."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "07_settings/03_faq",
+      "title": "FAQ",
+      "route": "/settings/faq",
+      "code": "features/settings/faq_screen.dart",
+      "modes": "Light, Dark, Skeleton",
+      "frames": [
+        "01 Light",
+        "02 Dark",
+        "03 Skeleton"
+      ],
+      "ads": "Docked 60pt banner",
+      "has_png": true,
+      "defects": [
+        "Only one answer is written in the mockup; use the answers from Phase 5A for the others."
+      ],
+      "gaps": []
+    },
+    {
+      "path": "08_ads/01_admob_placements",
+      "title": "AdMob placements and policy board",
+      "route": "n/a (design reference for ad widgets)",
+      "code": "core/ads/* (later AdMob phase)",
+      "modes": "Light, Dark",
+      "frames": [
+        "01 Adaptive banner 60pt (loaded + skeleton)",
+        "02 Native ad row 68pt",
+        "03 Native ad card",
+        "04 Interstitial 393x852 with close",
+        "05 Placement map and compliance matrix",
+        "06 Ad failed / NO_FILL collapse"
+      ],
+      "ads": "This IS the ad reference",
+      "has_png": true,
+      "defects": [
+        "Advertiser names (CloudDrive Pro, Google Workspace, Clean Master...) are placeholders. Real creatives come from AdMob; layouts must tolerate any headline/icon.",
+        "Mentions \"OCR\"; there is no OCR in the app."
+      ],
+      "gaps": [
+        "This phase builds ad PLACEHOLDER widgets only. Real AdMob SDK integration, consent (UMP/ATT) and ad IDs are a separate phase."
+      ]
+    }
+  ],
+  "not_yet_designed": [
+    "Component library board",
+    "Category file list (PDF list and Image grid)",
+    "Sort bottom sheet",
+    "PDF pages thumbnail sheet",
+    "Clear recent history confirm dialog",
+    "Created-by-you \"See All\" list"
+  ]
+}

@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doc View Permission & Privacy Screens</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+        },
+        colors: {
+          'dv-light-bg': '#FFFFFF',
+          'dv-light-tile': '#F3F5FA',
+          'dv-light-hairline': '#E6E9F0',
+          'dv-light-text': '#11141C',
+          'dv-light-secondary': '#8A8F9C',
+          'dv-light-blue-tint': '#E8F0FE',
+          'dv-dark-bg': '#1A1D29',
+          'dv-dark-tile': '#232838',
+          'dv-dark-hairline': '#2A3042',
+          'dv-dark-text': '#FFFFFF',
+          'dv-dark-secondary': '#858B9C',
+          'dv-dark-tint': '#1E2A45',
+          'dv-primary-blue': '#1A66E8',
+          'dv-active-blue': '#4D8FF7',
+          'dv-pdf': '#E02B2B',
+          'dv-word': '#1E5FD8',
+          'dv-excel': '#1E9E4F',
+          'dv-ppt': '#F26B1D',
+          'dv-dirs': '#2F7BEA',
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+</head>
+<body class="bg-[#0B0E14] text-slate-100 min-h-screen py-10 px-6 font-sans antialiased">
+
+  <!-- Header & Specification Bar -->
+  <header class="max-w-[1400px] mx-auto mb-10 text-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wide uppercase mb-3">
+      DOC VIEW DESIGN SYSTEM • 393 × 852 PT PERMISSIONS & PRIVACY SUITE
+    </div>
+    <h1 class="text-3xl font-extrabold text-white tracking-tight">System Permissions & Privacy Flow</h1>
+    <p class="text-slate-400 text-sm mt-1">
+      Frame A (Android "All files access") • Frame B (iOS Document Import) • Frame C (Ads & Privacy Explainer)
+    </p>
+    <div class="flex items-center justify-center gap-6 mt-4 text-xs font-medium text-slate-400">
+      <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-white border border-slate-300"></span> Light Mode (#FFFFFF)</span>
+      <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#1A1D29] border border-[#2A3042]"></span> Dark Mode Deep Navy (#1A1D29)</span>
+      <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#1A66E8]"></span> Primary Blue (#1A66E8)</span>
+      <span class="text-slate-500">• 0 Ads • 0 Bottom Nav • 56pt Primary CTAs (r:16)</span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-[1400px] mx-auto space-y-16">
+
+    <!-- ========================================== -->
+    <!-- SECTION 1: FRAME A (Android All Files Access) -->
+    <!-- ========================================== -->
+    <section>
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
+        <div>
+          <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">FRAME A</span>
+          <h2 class="text-xl font-bold text-white">Android "All files access" (MANAGE_EXTERNAL_STORAGE)</h2>
+        </div>
+        <div class="text-xs text-slate-400 hidden sm:block">
+          Offline guarantee • Reassurance rows • Scoped / in-place fallback
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-items-center">
+
+        <!-- FRAME A - LIGHT MODE -->
+        <div class="w-[393px] h-[852px] bg-white rounded-[44px] shadow-2xl border-[6px] border-[#202534] flex flex-col justify-between p-5 relative overflow-hidden select-none text-[#11141C]">
+          <!-- Top Android Status / App Header -->
+          <div>
+            <!-- Status Bar -->
+            <div class="flex items-center justify-between pt-1 pb-3 text-xs font-semibold text-[#11141C]">
+              <span>9:41</span>
+              <div class="flex items-center gap-2">
+                <!-- Wifi -->
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.55 0 6.78 1.41 9.17 3.7L12 18.5 2.83 11.2C5.22 8.91 8.45 7.5 12 7.5z"/></svg>
+                <!-- Signal -->
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
+                <!-- Battery -->
+                <div class="w-5 h-2.5 border border-[#11141C] rounded-sm p-0.5 flex items-center">
+                  <div class="w-full h-full bg-[#11141C] rounded-xs"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Header Badge & Close/Back Icon -->
+            <div class="flex items-center justify-between mt-1 mb-2">
+              <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#F3F5FA] text-[#11141C] transition-colors" aria-label="Back">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F0FE] text-[#1A66E8] text-xs font-semibold">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                <span>Device Storage Access</span>
+              </div>
+              <div class="w-10"></div>
+            </div>
+
+            <!-- Top Illustration: Phone with folders and documents flowing into organized list -->
+            <div class="mt-2 bg-[#F3F5FA] rounded-[24px] p-4 border border-[#E6E9F0] relative overflow-hidden flex flex-col items-center">
+              <!-- Glow backdrop -->
+              <div class="absolute inset-0 bg-gradient-to-b from-[#E9F2FF] to-transparent opacity-60 pointer-events-none"></div>
+
+              <div class="relative w-full max-w-[280px] h-[165px] flex items-center justify-between">
+                <!-- Left Source Phone Mockup with Files -->
+                <div class="w-24 h-36 bg-white rounded-[16px] border-2 border-[#1A66E8]/40 shadow-md p-2 flex flex-col justify-between relative">
+                  <div class="w-8 h-1 bg-[#E6E9F0] rounded-full mx-auto mb-1"></div>
+                  <!-- Dispersed docs -->
+                  <div class="space-y-1.5">
+                    <div class="flex items-center gap-1 bg-[#F3F5FA] p-1 rounded-md border border-[#E6E9F0]">
+                      <span class="w-2.5 h-2.5 rounded bg-[#E02B2B] flex items-center justify-center text-[6px] text-white font-bold">P</span>
+                      <div class="w-10 h-1.5 bg-[#8A8F9C]/30 rounded"></div>
+                    </div>
+                    <div class="flex items-center gap-1 bg-[#F3F5FA] p-1 rounded-md border border-[#E6E9F0]">
+                      <span class="w-2.5 h-2.5 rounded bg-[#1E5FD8] flex items-center justify-center text-[6px] text-white font-bold">W</span>
+                      <div class="w-8 h-1.5 bg-[#8A8F9C]/30 rounded"></div>
+                    </div>
+                    <div class="flex items-center gap-1 bg-[#F3F5FA] p-1 rounded-md border border-[#E6E9F0]">
+                      <span class="w-2.5 h-2.5 rounded bg-[#1E9E4F] flex items-center justify-center text-[6px] text-white font-bold">X</span>
+                      <div class="w-11 h-1.5 bg-[#8A8F9C]/30 rounded"></div>
+                    </div>
+                  </div>
+                  <!-- Folder indicator -->
+                  <div class="flex items-center gap-1 text-[8px] font-semibold text-[#8A8F9C] pt-1 border-t border-[#E6E9F0]">
+                    <svg class="w-3 h-3 text-[#2F7BEA]" fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                    <span>Storage</span>
+                  </div>
+                </div>
+
+                <!-- Animated flowing beam / curved arrow connector -->
+                <div class="flex flex-col items-center justify-center px-1">
+                  <div class="relative flex items-center">
+                    <svg class="w-14 h-8 text-[#1A66E8]" viewBox="0 0 60 30" fill="none">
+                      <path d="M2 15 C 20 5, 40 25, 56 15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3"/>
+                      <path d="M52 10 L58 15 L52 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <span class="text-[9px] font-bold text-[#1A66E8] bg-[#E8F0FE] px-2 py-0.5 rounded-full mt-1">Automatic</span>
+                </div>
+
+                <!-- Right Doc View Structured Catalog Mockup -->
+                <div class="w-28 h-36 bg-white rounded-[16px] border-2 border-[#1A66E8] shadow-lg p-2.5 flex flex-col justify-between relative">
+                  <div class="flex items-center justify-between pb-1 border-b border-[#E6E9F0]">
+                    <span class="text-[9px] font-extrabold text-[#11141C]">Doc View</span>
+                    <span class="w-2 h-2 rounded-full bg-[#1FA971]"></span>
+                  </div>
+                  <!-- Clean List items -->
+                  <div class="space-y-1.5 py-1">
+                    <div class="flex items-center justify-between bg-[#F3F5FA] p-1 rounded-md">
+                      <div class="flex items-center gap-1.5">
+                        <div class="w-3 h-3 bg-[#E02B2B] text-white rounded text-[7px] font-bold flex items-center justify-center">PDF</div>
+                        <div class="w-9 h-1.5 bg-[#11141C] rounded-sm"></div>
+                      </div>
+                      <span class="text-[7px] text-[#8A8F9C]">2 MB</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-[#F3F5FA] p-1 rounded-md">
+                      <div class="flex items-center gap-1.5">
+                        <div class="w-3 h-3 bg-[#1E5FD8] text-white rounded text-[7px] font-bold flex items-center justify-center">DOC</div>
+                        <div class="w-8 h-1.5 bg-[#11141C] rounded-sm"></div>
+                      </div>
+                      <span class="text-[7px] text-[#8A8F9C]">84 KB</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-[#F3F5FA] p-1 rounded-md">
+                      <div class="flex items-center gap-1.5">
+                        <div class="w-3 h-3 bg-[#1E9E4F] text-white rounded text-[7px] font-bold flex items-center justify-center">XLS</div>
+                        <div class="w-10 h-1.5 bg-[#11141C] rounded-sm"></div>
+                      </div>
+                      <span class="text-[7px] text-[#8A8F9C]">1.4 MB</span>
+                    </div>
+                  </div>
+                  <div class="text-[8px] font-semibold text-[#1A66E8] text-center pt-0.5 border-t border-[#E6E9F0]">
+                    Indexed Offline
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Headline & Body -->
+            <div class="mt-4 text-center px-1">
+              <h3 class="text-[24px] leading-tight font-extrabold text-[#11141C]">
+                Let Doc View find your documents
+              </h3>
+              <p class="text-[14px] leading-relaxed font-normal text-[#8A8F9C] mt-2">
+                To list PDFs, Word, Excel and other files saved by any app, Android needs your permission to access all files. Your files never leave your phone.
+              </p>
+            </div>
+
+            <!-- Three Reassurance Rows with 2px outlined icons -->
+            <div class="mt-4 space-y-2.5">
+              <div class="flex items-center gap-3 bg-[#F3F5FA] p-3 rounded-[16px] border border-[#E6E9F0]">
+                <div class="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-[#1A66E8] shadow-sm border border-[#E6E9F0] shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m-3.536-3.536a4 4 0 010-5.656m-7.072 0a4 4 0 010 5.656m-3.536 3.536a9 9 0 010-12.728M12 9v4m0 4h.01"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-[#11141C]">Works offline</h4>
+                  <p class="text-xs text-[#8A8F9C]">No internet connection required. Operates 100% locally.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 bg-[#F3F5FA] p-3 rounded-[16px] border border-[#E6E9F0]">
+                <div class="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-[#1FA971] shadow-sm border border-[#E6E9F0] shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-[#11141C]">No uploads</h4>
+                  <p class="text-xs text-[#8A8F9C]">Zero cloud servers. Your files stay strictly in phone memory.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 bg-[#F3F5FA] p-3 rounded-[16px] border border-[#E6E9F0]">
+                <div class="w-9 h-9 rounded-xl bg-white flex items-center justify-center text-[#1A66E8] shadow-sm border border-[#E6E9F0] shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-[#11141C]">You can change this any time</h4>
+                  <p class="text-xs text-[#8A8F9C]">Easily toggle in your Android System App Settings.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom CTAs: 56 tall primary + secondary text -->
+          <div class="space-y-2 pt-2 pb-2">
+            <button class="w-full h-14 bg-[#1A66E8] hover:bg-blue-700 text-white font-bold text-base rounded-[16px] shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 active:scale-[0.99] transition-all">
+              <span>Grant access</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+            <button class="w-full h-11 text-[#8A8F9C] hover:text-[#11141C] font-semibold text-sm rounded-[14px] flex items-center justify-center transition-colors">
+              Import files instead
+            </button>
+          </div>
+        </div>
+
+
+        <!-- FRAME A - DARK MODE (DEEP NAVY #1A1D29) -->
+        <div class="w-[393px] h-[852px] bg-[#1A1D29] rounded-[44px] shadow-2xl border-[6px] border-[#202534] flex flex-col justify-between p-5 relative overflow-hidden select-none text-white">
+          <!-- Top Android Status / App Header -->
+          <div>
+            <!-- Status Bar -->
+            <div class="flex items-center justify-between pt-1 pb-3 text-xs font-semibold text-white">
+              <span>9:41</span>
+              <div class="flex items-center gap-2 text-white">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.55 0 6.78 1.41 9.17 3.7L12 18.5 2.83 11.2C5.22 8.91 8.45 7.5 12 7.5z"/></svg>
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
+                <div class="w-5 h-2.5 border border-white rounded-sm p-0.5 flex items-center">
+                  <div class="w-full h-full bg-white rounded-xs"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Header Badge & Close/Back Icon -->
+            <div class="flex items-center justify-between mt-1 mb-2">
+              <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#232838] text-white transition-colors" aria-label="Back">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1E2A45] border border-[#2A3042] text-[#4D8FF7] text-xs font-semibold">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                <span>Device Storage Access</span>
+              </div>
+              <div class="w-10"></div>
+            </div>
+
+            <!-- Top Illustration: Phone with folders and documents flowing into organized list -->
+            <div class="mt-2 bg-[#232838] rounded-[24px] p-4 border border-[#2A3042] relative overflow-hidden flex flex-col items-center">
+              <!-- Glow backdrop -->
+              <div class="absolute inset-0 bg-gradient-to-b from-[#1E2A45]/50 to-transparent pointer-events-none"></div>
+
+              <div class="relative w-full max-w-[280px] h-[165px] flex items-center justify-between">
+                <!-- Left Source Phone Mockup with Files -->
+                <div class="w-24 h-36 bg-[#1A1D29] rounded-[16px] border-2 border-[#4D8FF7]/40 shadow-md p-2 flex flex-col justify-between relative">
+                  <div class="w-8 h-1 bg-[#2A3042] rounded-full mx-auto mb-1"></div>
+                  <!-- Dispersed docs -->
+                  <div class="space-y-1.5">
+                    <div class="flex items-center gap-1 bg-[#232838] p-1 rounded-md border border-[#2A3042]">
+                      <span class="w-2.5 h-2.5 rounded bg-[#E02B2B] flex items-center justify-center text-[6px] text-white font-bold">P</span>
+                      <div class="w-10 h-1.5 bg-[#858B9C]/40 rounded"></div>
+                    </div>
+                    <div class="flex items-center gap-1 bg-[#232838] p-1 rounded-md border border-[#2A3042]">
+                      <span class="w-2.5 h-2.5 rounded bg-[#1E5FD8] flex items-center justify-center text-[6px] text-white font-bold">W</span>
+                      <div class="w-8 h-1.5 bg-[#858B9C]/40 rounded"></div>
+                    </div>
+                    <div class="flex items-center gap-1 bg-[#232838] p-1 rounded-md border border-[#2A3042]">
+                      <span class="w-2.5 h-2.5 rounded bg-[#1E9E4F] flex items-center justify-center text-[6px] text-white font-bold">X</span>
+                      <div class="w-11 h-1.5 bg-[#858B9C]/40 rounded"></div>
+                    </div>
+                  </div>
+                  <!-- Folder indicator -->
+                  <div class="flex items-center gap-1 text-[8px] font-semibold text-[#858B9C] pt-1 border-t border-[#2A3042]">
+                    <svg class="w-3 h-3 text-[#2F7BEA]" fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                    <span>Storage</span>
+                  </div>
+                </div>
+
+                <!-- Animated flowing beam connector -->
+                <div class="flex flex-col items-center justify-center px-1">
+                  <div class="relative flex items-center">
+                    <svg class="w-14 h-8 text-[#4D8FF7]" viewBox="0 0 60 30" fill="none">
+                      <path d="M2 15 C 20 5, 40 25, 56 15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3"/>
+                      <path d="M52 10 L58 15 L52 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <span class="text-[9px] font-bold text-[#4D8FF7] bg-[#1E2A45] border border-[#2A3042] px-2 py-0.5 rounded-full mt-1">Automatic</span>
+                </div>
+
+                <!-- Right Doc View Structured Catalog Mockup -->
+                <div class="w-28 h-36 bg-[#1A1D29] rounded-[16px] border-2 border-[#4D8FF7] shadow-lg p-2.5 flex flex-col justify-between relative">
+                  <div class="flex items-center justify-between pb-1 border-b border-[#2A3042]">
+                    <span class="text-[9px] font-extrabold text-white">Doc View</span>
+                    <span class="w-2 h-2 rounded-full bg-[#1FA971]"></span>
+                  </div>
+                  <!-- Clean List items -->
+                  <div class="space-y-1.5 py-1">
+                    <div class="flex items-center justify-between bg-[#232838] p-1 rounded-md border border-[#2A3042]">
+                      <div class="flex items-center gap-1.5">
+                        <div class="w-3 h-3 bg-[#E02B2B] text-white rounded text-[7px] font-bold flex items-center justify-center">PDF</div>
+                        <div class="w-9 h-1.5 bg-white/80 rounded-sm"></div>
+                      </div>
+                      <span class="text-[7px] text-[#858B9C]">2 MB</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-[#232838] p-1 rounded-md border border-[#2A3042]">
+                      <div class="flex items-center gap-1.5">
+                        <div class="w-3 h-3 bg-[#1E5FD8] text-white rounded text-[7px] font-bold flex items-center justify-center">DOC</div>
+                        <div class="w-8 h-1.5 bg-white/80 rounded-sm"></div>
+                      </div>
+                      <span class="text-[7px] text-[#858B9C]">84 KB</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-[#232838] p-1 rounded-md border border-[#2A3042]">
+                      <div class="flex items-center gap-1.5">
+                        <div class="w-3 h-3 bg-[#1E9E4F] text-white rounded text-[7px] font-bold flex items-center justify-center">XLS</div>
+                        <div class="w-10 h-1.5 bg-white/80 rounded-sm"></div>
+                      </div>
+                      <span class="text-[7px] text-[#858B9C]">1.4 MB</span>
+                    </div>
+                  </div>
+                  <div class="text-[8px] font-semibold text-[#4D8FF7] text-center pt-0.5 border-t border-[#2A3042]">
+                    Indexed Offline
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Headline & Body -->
+            <div class="mt-4 text-center px-1">
+              <h3 class="text-[24px] leading-tight font-extrabold text-white">
+                Let Doc View find your documents
+              </h3>
+              <p class="text-[14px] leading-relaxed font-normal text-[#858B9C] mt-2">
+                To list PDFs, Word, Excel and other files saved by any app, Android needs your permission to access all files. Your files never leave your phone.
+              </p>
+            </div>
+
+            <!-- Three Reassurance Rows with 2px outlined icons -->
+            <div class="mt-4 space-y-2.5">
+              <div class="flex items-center gap-3 bg-[#232838] p-3 rounded-[16px] border border-[#2A3042]">
+                <div class="w-9 h-9 rounded-xl bg-[#1A1D29] flex items-center justify-center text-[#4D8FF7] border border-[#2A3042] shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m-3.536-3.536a4 4 0 010-5.656m-7.072 0a4 4 0 010 5.656m-3.536 3.536a9 9 0 010-12.728M12 9v4m0 4h.01"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-white">Works offline</h4>
+                  <p class="text-xs text-[#858B9C]">No internet connection required. Operates 100% locally.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 bg-[#232838] p-3 rounded-[16px] border border-[#2A3042]">
+                <div class="w-9 h-9 rounded-xl bg-[#1A1D29] flex items-center justify-center text-[#1FA971] border border-[#2A3042] shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-white">No uploads</h4>
+                  <p class="text-xs text-[#858B9C]">Zero cloud servers. Your files stay strictly in phone memory.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 bg-[#232838] p-3 rounded-[16px] border border-[#2A3042]">
+                <div class="w-9 h-9 rounded-xl bg-[#1A1D29] flex items-center justify-center text-[#4D8FF7] border border-[#2A3042] shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-white">You can change this any time</h4>
+                  <p class="text-xs text-[#858B9C]">Easily toggle in your Android System App Settings.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom CTAs -->
+          <div class="space-y-2 pt-2 pb-2">
+            <button class="w-full h-14 bg-[#1A66E8] hover:bg-blue-600 text-white font-bold text-base rounded-[16px] shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 active:scale-[0.99] transition-all">
+              <span>Grant access</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+            <button class="w-full h-11 text-[#858B9C] hover:text-white font-semibold text-sm rounded-[14px] flex items-center justify-center transition-colors">
+              Import files instead
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- SECTION 2: FRAME B (iOS Document Import) -->
+    <!-- ========================================== -->
+    <section>
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
+        <div>
+          <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">FRAME B</span>
+          <h2 class="text-xl font-bold text-white">iOS Version: "Bring your documents to Doc View"</h2>
+        </div>
+        <div class="text-xs text-slate-400 hidden sm:block">
+          iOS Sandbox architecture • Two option cards (Import / Files App folder) • Dynamic Island
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-items-center">
+
+        <!-- FRAME B - LIGHT MODE -->
+        <div class="w-[393px] h-[852px] bg-white rounded-[44px] shadow-2xl border-[6px] border-[#202534] flex flex-col justify-between p-5 relative overflow-hidden select-none text-[#11141C]">
+          <div>
+            <!-- iOS Status Bar with Dynamic Island -->
+            <div class="flex items-center justify-between pt-1 pb-2">
+              <span class="text-xs font-semibold text-[#11141C]">9:41</span>
+              <div class="w-28 h-6 bg-black rounded-full mx-auto flex items-center justify-between px-2.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-[#111] border border-neutral-800"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-[#0a1b38]"></div>
+              </div>
+              <div class="flex items-center gap-1.5 text-xs text-[#11141C]">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+                <div class="w-5 h-2.5 border border-[#11141C] rounded-sm p-0.5 flex items-center">
+                  <div class="w-3/4 h-full bg-[#11141C] rounded-xs"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Header Navigation -->
+            <div class="flex items-center justify-between mt-2 mb-3">
+              <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#F3F5FA] text-[#11141C] transition-colors" aria-label="Back">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3F5FA] border border-[#E6E9F0] text-[#11141C] text-xs font-semibold">
+                <svg class="w-3.5 h-3.5 text-[#1A66E8]" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 1.01-2.87-.96.04-2.08.65-2.73 1.4-.56.64-.99 1.69-.94 2.76 1.05.08 2.05-.54 2.66-1.29z"/></svg>
+                <span>iOS Storage Guide</span>
+              </div>
+              <div class="w-10"></div>
+            </div>
+
+            <!-- Graphic Hero Tile: Apple Files & Sandbox Explainer -->
+            <div class="bg-[#F3F5FA] rounded-[24px] p-5 border border-[#E6E9F0] flex flex-col items-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-b from-[#E9F2FF] to-transparent opacity-50 pointer-events-none"></div>
+
+              <div class="relative w-full max-w-[280px] h-[150px] flex items-center justify-center">
+                <!-- iOS Files App Graphic with Blue Folder -->
+                <div class="relative">
+                  <!-- Back glow -->
+                  <div class="absolute -inset-4 bg-blue-400/20 blur-xl rounded-full"></div>
+
+                  <!-- Central Folder Card -->
+                  <div class="relative w-44 bg-white rounded-[20px] p-3 shadow-xl border border-[#E6E9F0] flex flex-col items-center">
+                    <div class="w-14 h-11 bg-gradient-to-br from-[#2F7BEA] to-[#1A66E8] rounded-xl shadow-md flex items-center justify-center text-white relative">
+                      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                      <!-- Sub badge -->
+                      <span class="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow">
+                        <span class="w-3.5 h-3.5 rounded-full bg-[#1FA971] flex items-center justify-center text-[8px] text-white font-bold">✓</span>
+                      </span>
+                    </div>
+
+                    <div class="text-center mt-2">
+                      <div class="text-xs font-bold text-[#11141C]">On My iPhone</div>
+                      <div class="text-[10px] text-[#1A66E8] font-semibold flex items-center justify-center gap-1 mt-0.5">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                        <span>Doc View Folder</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Floating mini preview tags -->
+                  <div class="absolute -left-6 top-3 bg-white px-2 py-1 rounded-lg border border-[#E6E9F0] shadow-md flex items-center gap-1 rotate-[-8deg]">
+                    <span class="w-2.5 h-2.5 bg-[#E02B2B] text-white text-[7px] font-bold rounded flex items-center justify-center">P</span>
+                    <span class="text-[9px] font-semibold text-[#11141C]">PDF Reader</span>
+                  </div>
+
+                  <div class="absolute -right-6 bottom-2 bg-white px-2 py-1 rounded-lg border border-[#E6E9F0] shadow-md flex items-center gap-1 rotate-[6deg]">
+                    <span class="w-2.5 h-2.5 bg-[#1E5FD8] text-white text-[7px] font-bold rounded flex items-center justify-center">W</span>
+                    <span class="text-[9px] font-semibold text-[#11141C]">Office Docs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Headline & iOS Clarification Body -->
+            <div class="mt-4 text-center px-1">
+              <h3 class="text-[24px] leading-tight font-extrabold text-[#11141C]">
+                Bring your documents to Doc View
+              </h3>
+              <p class="text-[14px] leading-relaxed font-normal text-[#8A8F9C] mt-2">
+                Due to Apple's privacy architecture, iOS doesn't allow any app to scan your entire phone automatically. Choose how you'd like to read your files:
+              </p>
+            </div>
+
+            <!-- Two Option Cards: Card 1 (Primary) and Card 2 (Files App Folder) -->
+            <div class="mt-4 space-y-3">
+              <!-- Option Card 1: Import Files (Selected / Primary) -->
+              <div class="p-3.5 rounded-[20px] bg-[#F3F5FA] border-2 border-[#1A66E8] relative flex items-start gap-3.5 shadow-sm">
+                <div class="w-10 h-10 rounded-[14px] bg-[#1A66E8] text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-500/20">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </div>
+                <div class="flex-1 pr-6">
+                  <div class="flex items-center gap-2">
+                    <h4 class="text-sm font-bold text-[#11141C]">Import files</h4>
+                    <span class="text-[10px] font-extrabold bg-[#1A66E8] text-white px-2 py-0.5 rounded-full uppercase tracking-wider">Fastest</span>
+                  </div>
+                  <p class="text-xs text-[#8A8F9C] mt-0.5 leading-snug">
+                    Pick documents directly from your iCloud Drive, Downloads, or any folder in seconds.
+                  </p>
+                </div>
+                <div class="absolute right-3.5 top-4 w-5 h-5 rounded-full bg-[#1A66E8] text-white flex items-center justify-center">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </div>
+              </div>
+
+              <!-- Option Card 2: Open the Doc View folder in the Files app -->
+              <div class="p-3.5 rounded-[20px] bg-[#F3F5FA] border border-[#E6E9F0] hover:border-[#1A66E8]/40 transition-colors flex items-start gap-3.5">
+                <div class="w-10 h-10 rounded-[14px] bg-white border border-[#E6E9F0] text-[#2F7BEA] flex items-center justify-center shrink-0 shadow-sm">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                </div>
+                <div class="flex-1">
+                  <h4 class="text-sm font-bold text-[#11141C]">Open Doc View folder in Files app</h4>
+                  <p class="text-xs text-[#8A8F9C] mt-0.5 leading-snug">
+                    Save or AirDrop documents directly into the "Doc View" folder in the iOS Files app for instant sync.
+                  </p>
+                </div>
+                <div class="w-5 h-5 rounded-full border-2 border-[#E6E9F0] mt-1 shrink-0"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom CTA -->
+          <div class="space-y-2 pt-2 pb-2">
+            <button class="w-full h-14 bg-[#1A66E8] hover:bg-blue-700 text-white font-bold text-base rounded-[16px] shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 active:scale-[0.99] transition-all">
+              <span>Import files</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            </button>
+            <div class="text-center text-xs text-[#8A8F9C] pt-1">
+              Supports PDF, DOCX, XLSX, PPTX, TXT & Images
+            </div>
+          </div>
+        </div>
+
+
+        <!-- FRAME B - DARK MODE (DEEP NAVY #1A1D29) -->
+        <div class="w-[393px] h-[852px] bg-[#1A1D29] rounded-[44px] shadow-2xl border-[6px] border-[#202534] flex flex-col justify-between p-5 relative overflow-hidden select-none text-white">
+          <div>
+            <!-- iOS Status Bar with Dynamic Island -->
+            <div class="flex items-center justify-between pt-1 pb-2">
+              <span class="text-xs font-semibold text-white">9:41</span>
+              <div class="w-28 h-6 bg-black rounded-full mx-auto flex items-center justify-between px-2.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-[#111] border border-neutral-800"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-[#0a1b38]"></div>
+              </div>
+              <div class="flex items-center gap-1.5 text-xs text-white">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+                <div class="w-5 h-2.5 border border-white rounded-sm p-0.5 flex items-center">
+                  <div class="w-3/4 h-full bg-white rounded-xs"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Header Navigation -->
+            <div class="flex items-center justify-between mt-2 mb-3">
+              <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#232838] text-white transition-colors" aria-label="Back">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#232838] border border-[#2A3042] text-white text-xs font-semibold">
+                <svg class="w-3.5 h-3.5 text-[#4D8FF7]" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 1.01-2.87-.96.04-2.08.65-2.73 1.4-.56.64-.99 1.69-.94 2.76 1.05.08 2.05-.54 2.66-1.29z"/></svg>
+                <span>iOS Storage Guide</span>
+              </div>
+              <div class="w-10"></div>
+            </div>
+
+            <!-- Graphic Hero Tile: Apple Files & Sandbox Explainer -->
+            <div class="bg-[#232838] rounded-[24px] p-5 border border-[#2A3042] flex flex-col items-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-b from-[#1E2A45]/60 to-transparent pointer-events-none"></div>
+
+              <div class="relative w-full max-w-[280px] h-[150px] flex items-center justify-center">
+                <!-- iOS Files App Graphic with Blue Folder -->
+                <div class="relative">
+                  <!-- Back glow -->
+                  <div class="absolute -inset-4 bg-blue-500/20 blur-xl rounded-full"></div>
+
+                  <!-- Central Folder Card -->
+                  <div class="relative w-44 bg-[#1A1D29] rounded-[20px] p-3 shadow-xl border border-[#2A3042] flex flex-col items-center">
+                    <div class="w-14 h-11 bg-gradient-to-br from-[#2F7BEA] to-[#1A66E8] rounded-xl shadow-md flex items-center justify-center text-white relative">
+                      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                      <!-- Sub badge -->
+                      <span class="absolute -bottom-1 -right-1 w-5 h-5 bg-[#232838] rounded-full flex items-center justify-center shadow border border-[#2A3042]">
+                        <span class="w-3.5 h-3.5 rounded-full bg-[#1FA971] flex items-center justify-center text-[8px] text-white font-bold">✓</span>
+                      </span>
+                    </div>
+
+                    <div class="text-center mt-2">
+                      <div class="text-xs font-bold text-white">On My iPhone</div>
+                      <div class="text-[10px] text-[#4D8FF7] font-semibold flex items-center justify-center gap-1 mt-0.5">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                        <span>Doc View Folder</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Floating mini preview tags -->
+                  <div class="absolute -left-6 top-3 bg-[#232838] px-2 py-1 rounded-lg border border-[#2A3042] shadow-md flex items-center gap-1 rotate-[-8deg]">
+                    <span class="w-2.5 h-2.5 bg-[#E02B2B] text-white text-[7px] font-bold rounded flex items-center justify-center">P</span>
+                    <span class="text-[9px] font-semibold text-white">PDF Reader</span>
+                  </div>
+
+                  <div class="absolute -right-6 bottom-2 bg-[#232838] px-2 py-1 rounded-lg border border-[#2A3042] shadow-md flex items-center gap-1 rotate-[6deg]">
+                    <span class="w-2.5 h-2.5 bg-[#1E5FD8] text-white text-[7px] font-bold rounded flex items-center justify-center">W</span>
+                    <span class="text-[9px] font-semibold text-white">Office Docs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Headline & iOS Clarification Body -->
+            <div class="mt-4 text-center px-1">
+              <h3 class="text-[24px] leading-tight font-extrabold text-white">
+                Bring your documents to Doc View
+              </h3>
+              <p class="text-[14px] leading-relaxed font-normal text-[#858B9C] mt-2">
+                Due to Apple's privacy architecture, iOS doesn't allow any app to scan your entire phone automatically. Choose how you'd like to read your files:
+              </p>
+            </div>
+
+            <!-- Two Option Cards -->
+            <div class="mt-4 space-y-3">
+              <!-- Option Card 1: Import Files (Selected / Primary) -->
+              <div class="p-3.5 rounded-[20px] bg-[#232838] border-2 border-[#4D8FF7] relative flex items-start gap-3.5 shadow-sm">
+                <div class="w-10 h-10 rounded-[14px] bg-[#1A66E8] text-white flex items-center justify-center shrink-0 shadow-md">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                </div>
+                <div class="flex-1 pr-6">
+                  <div class="flex items-center gap-2">
+                    <h4 class="text-sm font-bold text-white">Import files</h4>
+                    <span class="text-[10px] font-extrabold bg-[#1A66E8] text-white px-2 py-0.5 rounded-full uppercase tracking-wider">Fastest</span>
+                  </div>
+                  <p class="text-xs text-[#858B9C] mt-0.5 leading-snug">
+                    Pick documents directly from your iCloud Drive, Downloads, or any folder in seconds.
+                  </p>
+                </div>
+                <div class="absolute right-3.5 top-4 w-5 h-5 rounded-full bg-[#4D8FF7] text-[#1A1D29] flex items-center justify-center font-bold">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </div>
+              </div>
+
+              <!-- Option Card 2: Open Doc View folder in Files app -->
+              <div class="p-3.5 rounded-[20px] bg-[#232838] border border-[#2A3042] hover:border-[#4D8FF7]/40 transition-colors flex items-start gap-3.5">
+                <div class="w-10 h-10 rounded-[14px] bg-[#1A1D29] border border-[#2A3042] text-[#4D8FF7] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                </div>
+                <div class="flex-1">
+                  <h4 class="text-sm font-bold text-white">Open Doc View folder in Files app</h4>
+                  <p class="text-xs text-[#858B9C] mt-0.5 leading-snug">
+                    Save or AirDrop documents directly into the "Doc View" folder in the iOS Files app for instant sync.
+                  </p>
+                </div>
+                <div class="w-5 h-5 rounded-full border-2 border-[#2A3042] mt-1 shrink-0"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom CTA -->
+          <div class="space-y-2 pt-2 pb-2">
+            <button class="w-full h-14 bg-[#1A66E8] hover:bg-blue-600 text-white font-bold text-base rounded-[16px] shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 active:scale-[0.99] transition-all">
+              <span>Import files</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            </button>
+            <div class="text-center text-xs text-[#858B9C] pt-1">
+              Supports PDF, DOCX, XLSX, PPTX, TXT & Images
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- SECTION 3: FRAME C (Ads & Privacy Explainer) -->
+    <!-- ========================================== -->
+    <section>
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
+        <div>
+          <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">FRAME C</span>
+          <h2 class="text-xl font-bold text-white">"Ads & Privacy" Consent Explainer (Pre-Google AdMob / ATT prompt)</h2>
+        </div>
+        <div class="text-xs text-slate-400 hidden sm:block">
+          Pre-consent warm-up • Transparency badges • "Continue" primary + "Privacy policy" link
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-items-center">
+
+        <!-- FRAME C - LIGHT MODE -->
+        <div class="w-[393px] h-[852px] bg-white rounded-[44px] shadow-2xl border-[6px] border-[#202534] flex flex-col justify-between p-5 relative overflow-hidden select-none text-[#11141C]">
+          <div>
+            <!-- Status Bar -->
+            <div class="flex items-center justify-between pt-1 pb-3 text-xs font-semibold text-[#11141C]">
+              <span>9:41</span>
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.55 0 6.78 1.41 9.17 3.7L12 18.5 2.83 11.2C5.22 8.91 8.45 7.5 12 7.5z"/></svg>
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
+                <div class="w-5 h-2.5 border border-[#11141C] rounded-sm p-0.5 flex items-center">
+                  <div class="w-full h-full bg-[#11141C] rounded-xs"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Tag Pill -->
+            <div class="flex items-center justify-center mt-1 mb-2">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F0FE] text-[#1A66E8] text-xs font-semibold">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Transparency & Consent</span>
+              </div>
+            </div>
+
+            <!-- Hero Illustration: Shield + Gift/Ad Icon Badge -->
+            <div class="bg-[#F3F5FA] rounded-[24px] p-5 border border-[#E6E9F0] flex flex-col items-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-b from-[#E9F2FF] to-transparent opacity-60 pointer-events-none"></div>
+
+              <div class="relative w-full max-w-[280px] h-[155px] flex items-center justify-center">
+                <!-- Central Graphic -->
+                <div class="relative flex items-center justify-center">
+                  <div class="w-24 h-24 rounded-full bg-white shadow-lg border border-[#E6E9F0] flex items-center justify-center relative">
+                    <!-- Blue circular pulse ring -->
+                    <div class="absolute -inset-2 rounded-full border-2 border-dashed border-[#1A66E8]/30 animate-spin-slow"></div>
+
+                    <!-- Shield & Heart / Tag Icon -->
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1A66E8] to-[#2F7BEA] text-white flex items-center justify-center shadow-md">
+                      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+
+                    <!-- Floating Badge 1: 100% Free -->
+                    <div class="absolute -top-3 -right-6 bg-white px-2.5 py-1 rounded-full border border-[#E6E9F0] shadow-md flex items-center gap-1">
+                      <span class="w-2 h-2 rounded-full bg-[#1FA971]"></span>
+                      <span class="text-[10px] font-extrabold text-[#11141C]">100% Free App</span>
+                    </div>
+
+                    <!-- Floating Badge 2: AdMob AD icon -->
+                    <div class="absolute -bottom-2 -left-6 bg-white px-2.5 py-1 rounded-full border border-[#E6E9F0] shadow-md flex items-center gap-1.5">
+                      <span class="w-4 h-3.5 bg-[#E8F0FE] text-[#1A66E8] text-[8px] font-black rounded flex items-center justify-center">AD</span>
+                      <span class="text-[10px] font-bold text-[#11141C]">Minimal Ads</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Headline & Body -->
+            <div class="mt-4 text-center px-1">
+              <h3 class="text-[26px] leading-tight font-extrabold text-[#11141C]">
+                Free with ads
+              </h3>
+              <p class="text-[14px] leading-relaxed font-normal text-[#8A8F9C] mt-2">
+                Doc View is free thanks to ads. We'll ask for your choice about personalised ads next.
+              </p>
+            </div>
+
+            <!-- Bullet Information List -->
+            <div class="mt-4 space-y-2.5">
+              <div class="flex items-start gap-3 bg-[#F3F5FA] p-3 rounded-[16px] border border-[#E6E9F0]">
+                <div class="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-[#1A66E8] shadow-sm border border-[#E6E9F0] shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-[#11141C]">What ads you may see</h4>
+                  <p class="text-xs text-[#8A8F9C] leading-snug mt-0.5">
+                    Small banner ads and non-intrusive sponsor cards. No popups or video interruptions while reading.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 bg-[#F3F5FA] p-3 rounded-[16px] border border-[#E6E9F0]">
+                <div class="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-[#1FA971] shadow-sm border border-[#E6E9F0] shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-[#11141C]">Documents stay completely private</h4>
+                  <p class="text-xs text-[#8A8F9C] leading-snug mt-0.5">
+                    Ad partners never have access to your document names, text contents, or file locations.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 bg-[#F3F5FA] p-3 rounded-[16px] border border-[#E6E9F0]">
+                <div class="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-[#1A66E8] shadow-sm border border-[#E6E9F0] shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-[#11141C]">You can change your choice in Settings</h4>
+                  <p class="text-xs text-[#8A8F9C] leading-snug mt-0.5">
+                    Update personalized ad consent or privacy preferences anytime in Doc View Settings.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom CTAs: 56 tall primary + Privacy Policy text link -->
+          <div class="space-y-3 pt-2 pb-2 text-center">
+            <button class="w-full h-14 bg-[#1A66E8] hover:bg-blue-700 text-white font-bold text-base rounded-[16px] shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 active:scale-[0.99] transition-all">
+              <span>Continue</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+            <a href="#privacy" class="inline-block text-xs font-semibold text-[#1A66E8] hover:underline cursor-pointer py-1">
+              Privacy policy
+            </a>
+          </div>
+        </div>
+
+
+        <!-- FRAME C - DARK MODE (DEEP NAVY #1A1D29) -->
+        <div class="w-[393px] h-[852px] bg-[#1A1D29] rounded-[44px] shadow-2xl border-[6px] border-[#202534] flex flex-col justify-between p-5 relative overflow-hidden select-none text-white">
+          <div>
+            <!-- Status Bar -->
+            <div class="flex items-center justify-between pt-1 pb-3 text-xs font-semibold text-white">
+              <span>9:41</span>
+              <div class="flex items-center gap-2 text-white">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.55 0 6.78 1.41 9.17 3.7L12 18.5 2.83 11.2C5.22 8.91 8.45 7.5 12 7.5z"/></svg>
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
+                <div class="w-5 h-2.5 border border-white rounded-sm p-0.5 flex items-center">
+                  <div class="w-full h-full bg-white rounded-xs"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Tag Pill -->
+            <div class="flex items-center justify-center mt-1 mb-2">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1E2A45] border border-[#2A3042] text-[#4D8FF7] text-xs font-semibold">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Transparency & Consent</span>
+              </div>
+            </div>
+
+            <!-- Hero Illustration: Shield + Gift/Ad Icon Badge -->
+            <div class="bg-[#232838] rounded-[24px] p-5 border border-[#2A3042] flex flex-col items-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-b from-[#1E2A45]/60 to-transparent pointer-events-none"></div>
+
+              <div class="relative w-full max-w-[280px] h-[155px] flex items-center justify-center">
+                <!-- Central Graphic -->
+                <div class="relative flex items-center justify-center">
+                  <div class="w-24 h-24 rounded-full bg-[#1A1D29] shadow-lg border border-[#2A3042] flex items-center justify-center relative">
+                    <!-- Blue circular pulse ring -->
+                    <div class="absolute -inset-2 rounded-full border-2 border-dashed border-[#4D8FF7]/40"></div>
+
+                    <!-- Shield & Heart / Tag Icon -->
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1A66E8] to-[#4D8FF7] text-white flex items-center justify-center shadow-md">
+                      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+
+                    <!-- Floating Badge 1: 100% Free -->
+                    <div class="absolute -top-3 -right-6 bg-[#232838] px-2.5 py-1 rounded-full border border-[#2A3042] shadow-md flex items-center gap-1">
+                      <span class="w-2 h-2 rounded-full bg-[#1FA971]"></span>
+                      <span class="text-[10px] font-extrabold text-white">100% Free App</span>
+                    </div>
+
+                    <!-- Floating Badge 2: AdMob AD icon -->
+                    <div class="absolute -bottom-2 -left-6 bg-[#232838] px-2.5 py-1 rounded-full border border-[#2A3042] shadow-md flex items-center gap-1.5">
+                      <span class="w-4 h-3.5 bg-[#1E2A45] text-[#4D8FF7] text-[8px] font-black rounded flex items-center justify-center">AD</span>
+                      <span class="text-[10px] font-bold text-white">Minimal Ads</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Headline & Body -->
+            <div class="mt-4 text-center px-1">
+              <h3 class="text-[26px] leading-tight font-extrabold text-white">
+                Free with ads
+              </h3>
+              <p class="text-[14px] leading-relaxed font-normal text-[#858B9C] mt-2">
+                Doc View is free thanks to ads. We'll ask for your choice about personalised ads next.
+              </p>
+            </div>
+
+            <!-- Bullet Information List -->
+            <div class="mt-4 space-y-2.5">
+              <div class="flex items-start gap-3 bg-[#232838] p-3 rounded-[16px] border border-[#2A3042]">
+                <div class="w-7 h-7 rounded-lg bg-[#1A1D29] flex items-center justify-center text-[#4D8FF7] border border-[#2A3042] shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-white">What ads you may see</h4>
+                  <p class="text-xs text-[#858B9C] leading-snug mt-0.5">
+                    Small banner ads and non-intrusive sponsor cards. No popups or video interruptions while reading.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 bg-[#232838] p-3 rounded-[16px] border border-[#2A3042]">
+                <div class="w-7 h-7 rounded-lg bg-[#1A1D29] flex items-center justify-center text-[#1FA971] border border-[#2A3042] shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-white">Documents stay completely private</h4>
+                  <p class="text-xs text-[#858B9C] leading-snug mt-0.5">
+                    Ad partners never have access to your document names, text contents, or file locations.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 bg-[#232838] p-3 rounded-[16px] border border-[#2A3042]">
+                <div class="w-7 h-7 rounded-lg bg-[#1A1D29] flex items-center justify-center text-[#4D8FF7] border border-[#2A3042] shrink-0 mt-0.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-semibold text-white">You can change your choice in Settings</h4>
+                  <p class="text-xs text-[#858B9C] leading-snug mt-0.5">
+                    Update personalized ad consent or privacy preferences anytime in Doc View Settings.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom CTAs -->
+          <div class="space-y-3 pt-2 pb-2 text-center">
+            <button class="w-full h-14 bg-[#1A66E8] hover:bg-blue-600 text-white font-bold text-base rounded-[16px] shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 active:scale-[0.99] transition-all">
+              <span>Continue</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+            <a href="#privacy" class="inline-block text-xs font-semibold text-[#4D8FF7] hover:underline cursor-pointer py-1">
+              Privacy policy
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

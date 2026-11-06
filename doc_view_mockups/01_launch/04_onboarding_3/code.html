@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Doc View Splash Screen (Light &amp; Dark)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0c0e14;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    @keyframes shimmerMove {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+    
+    .animate-shimmer {
+      animation: shimmerMove 1.8s infinite ease-in-out;
+    }
+
+    @keyframes floatSlow1 {
+      0%, 100% { transform: translate(0, 0) rotate(-6deg); }
+      50% { transform: translate(6px, -12px) rotate(-3deg); }
+    }
+
+    @keyframes floatSlow2 {
+      0%, 100% { transform: translate(0, 0) rotate(8deg); }
+      50% { transform: translate(-8px, -10px) rotate(12deg); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.08); }
+    }
+
+    .float-card-1 {
+      animation: floatSlow1 7s ease-in-out infinite;
+    }
+    .float-card-2 {
+      animation: floatSlow2 8.5s ease-in-out infinite;
+    }
+    .pulse-glow {
+      animation: pulseGlow 4.5s ease-in-out infinite;
+    }
+  </style>
+<meta content="mobile_stack" name="shell-type"></head>
+<body class="min-h-screen bg-[#0C0E14] text-slate-100 flex flex-col items-center py-8 px-4 sm:px-6">
+<!-- Header Banner -->
+<header class="w-full max-w-[840px] mb-8 text-center flex flex-col items-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-2">
+      Doc View Design System · 393 × 852 pt
+    </div>
+<h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Splash Screen Variants</h1>
+<p class="text-sm text-slate-400 mt-1">Light (#FFFFFF + Pale Blue Glow) &amp; Dark (#1A1D29 Deep Navy) side-by-side</p>
+</header>
+<!-- Screens Container (Side-by-side or stacked on small screens) -->
+<main class="w-full max-w-[840px] flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-10 pb-12"><div class="flex flex-col w-full items-center">
+<!-- Legend Dots -->
+<div class="flex items-center gap-6 mb-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-surface-container-lowest"></span>
+<span class="font-label-xs text-body-sm text-outline-variant uppercase tracking-wider">Light Mode #FFFFFF</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-inverse-surface"></span>
+<span class="font-label-xs text-body-sm text-outline-variant uppercase tracking-wider">Dark Mode (Deep Navy) #1A1D29</span>
+</div>
+</div>
+<!-- Mobile Dual Showcase Container -->
+<div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-[860px]">
+<!-- ==================== 1. LIGHT MODE DEVICE FRAME ==================== -->
+<div class="relative w-[393px] h-[852px] bg-white rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between shrink-0 select-none border border-slate-200/50">
+<!-- Ambient Pale Blue Glow Behind Illustrations -->
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Top Phone Header & Status Bar -->
+<div class="relative z-10 w-full pt-3 px-7 flex flex-col gap-2">
+<div class="flex items-center justify-between text-[13px] font-semibold text-[#11141C]">
+<span class="">9:41</span>
+<!-- Dynamic Island -->
+<div class="w-28 h-7 bg-[#11141C] rounded-full flex items-center justify-end pr-2.5 gap-1.5 shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#1A66E8]"></span>
+</div>
+<!-- Status Icons -->
+<div class="flex items-center gap-1.5 text-[#11141C]">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<!-- Top Nav Area -->
+<div class="flex items-center justify-between mt-3 px-1">
+<button aria-label="Go Back" class="w-10 h-10 rounded-full flex items-center justify-center bg-[#F3F5FA] border border-[#E6E9F0] text-[#11141C] hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
+</button>
+<div class="text-[11px] font-semibold text-[#8A8F9C] uppercase tracking-widest px-3 py-1 bg-[#F3F5FA] border border-[#E6E9F0] rounded-full">Step 3 of 3</div>
+<div class="w-10"></div>
+</div>
+</div>
+<!-- Illustration Area: 2x2 Floating Tool Tiles -->
+<div class="relative z-10 px-5 pt-3 flex flex-col items-center">
+<!-- 2x2 Grid -->
+<div class="grid grid-cols-2 gap-3.5 w-full max-w-[345px]">
+<!-- Tile 1: Image to PDF -->
+<div class="group relative bg-[#F3F5FA] border border-[#E6E9F0] p-3.5 rounded-DEFAULT shadow-sm flex flex-col justify-between h-[134px] overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#11141C]">Image to PDF</span>
+<span class="material-symbols-outlined text-[#1A66E8] text-[19px]">photo_library</span>
+</div>
+<!-- Graphic Micro-Preview -->
+<div class="relative flex items-center justify-center py-1">
+<!-- Photo Cards Stack -->
+<div class="relative w-12 h-14 bg-gradient-to-br from-amber-400 to-rose-400 rounded-sm shadow-sm flex flex-col items-center justify-center overflow-hidden -rotate-6">
+<span class="material-symbols-outlined text-white text-[18px]">image</span>
+</div>
+<div class="relative -ml-4 z-10 w-12 h-14 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-sm shadow-md flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[20px]">landscape</span>
+</div>
+<!-- Transform Indicator -->
+<span class="material-symbols-outlined text-[#1A66E8] text-[14px] mx-1">arrow_forward</span>
+<!-- Target PDF Document -->
+<div class="relative w-12 h-14 bg-white border border-[#E6E9F0] rounded-sm shadow-sm flex flex-col justify-between p-1">
+<div class="flex items-center justify-between">
+<span class="text-[8px] font-bold text-white bg-error px-1 rounded-[2px] leading-tight">PDF</span>
+</div>
+<div class="space-y-1">
+<div class="w-full h-1 bg-slate-200 rounded-full"></div>
+<div class="w-3/4 h-1 bg-slate-200 rounded-full"></div>
+</div>
+</div>
+</div>
+<span class="text-[12px] text-[#8A8F9C] text-left">Convert JPG &amp; PNG</span>
+</div>
+<!-- Tile 2: Scan to PDF -->
+<div class="group relative bg-[#F3F5FA] border border-[#E6E9F0] p-3.5 rounded-DEFAULT shadow-sm flex flex-col justify-between h-[134px] overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#11141C]">Scan to PDF</span>
+<span class="material-symbols-outlined text-[#1A66E8] text-[19px]">document_scanner</span>
+</div>
+<!-- Graphic Micro-Preview -->
+<div class="relative flex items-center justify-center py-1">
+<div class="relative w-20 h-14 bg-white border border-[#E6E9F0] rounded-sm shadow-sm p-1.5 flex flex-col justify-between overflow-hidden">
+<!-- Laser Scan Line -->
+<div class="absolute inset-x-0 h-0.5 bg-[#1A66E8] shadow-[0_0_8px_rgba(26,102,232,0.8)] animate-pulse top-4"></div>
+<div class="flex items-center justify-between">
+<div class="w-4 h-1 bg-slate-300 rounded"></div>
+<span class="text-[8px] font-bold text-white bg-error px-1 rounded-[2px] leading-tight">PDF</span>
+</div>
+<div class="space-y-1">
+<div class="w-full h-1 bg-slate-200 rounded-full"></div>
+<div class="w-2/3 h-1 bg-slate-200 rounded-full"></div>
+<div class="w-4/5 h-1 bg-slate-200 rounded-full"></div>
+</div>
+</div>
+</div>
+<span class="text-[12px] text-[#8A8F9C] text-left">Camera edge detect</span>
+</div>
+<!-- Tile 3: Merge PDF -->
+<div class="group relative bg-[#F3F5FA] border border-[#E6E9F0] p-3.5 rounded-DEFAULT shadow-sm flex flex-col justify-between h-[134px] overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#11141C]">Merge PDF</span>
+<span class="material-symbols-outlined text-[#1A66E8] text-[19px]">call_merge</span>
+</div>
+<!-- Graphic Micro-Preview -->
+<div class="relative flex items-center justify-center gap-1.5 py-1">
+<!-- Mini Doc A -->
+<div class="w-7 h-10 bg-white border border-[#E6E9F0] rounded-[3px] shadow-sm p-0.5 flex flex-col justify-between">
+<span class="text-[6px] font-bold text-white bg-error px-0.5 rounded-[1px] leading-none w-max">A</span>
+<div class="w-full h-0.5 bg-slate-300 rounded-full"></div>
+</div>
+<span class="material-symbols-outlined text-[#1A66E8] text-[13px]">add</span>
+<!-- Mini Doc B -->
+<div class="w-7 h-10 bg-white border border-[#E6E9F0] rounded-[3px] shadow-sm p-0.5 flex flex-col justify-between">
+<span class="text-[6px] font-bold text-white bg-error px-0.5 rounded-[1px] leading-none w-max">B</span>
+<div class="w-full h-0.5 bg-slate-300 rounded-full"></div>
+</div>
+<span class="material-symbols-outlined text-[#1A66E8] text-[13px]">arrow_forward</span>
+<!-- Merged Binder -->
+<div class="relative w-8 h-11 bg-[#1A66E8] text-white rounded-[3px] shadow-md p-1 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-[6px] font-bold bg-white text-[#1A66E8] px-0.5 rounded-[1px]">PDF</span>
+</div>
+<div class="w-full h-0.5 bg-white/70 rounded-full"></div>
+<div class="w-3/4 h-0.5 bg-white/70 rounded-full"></div>
+</div>
+</div>
+<span class="text-[12px] text-[#8A8F9C] text-left">Combine into one</span>
+</div>
+<!-- Tile 4: Split PDF -->
+<div class="group relative bg-[#F3F5FA] border border-[#E6E9F0] p-3.5 rounded-DEFAULT shadow-sm flex flex-col justify-between h-[134px] overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#11141C]">Split PDF</span>
+<span class="material-symbols-outlined text-[#1A66E8] text-[19px]">call_split</span>
+</div>
+<!-- Graphic Micro-Preview -->
+<div class="relative flex items-center justify-center gap-1.5 py-1">
+<!-- Thick Master Doc -->
+<div class="relative w-8 h-11 bg-white border border-[#E6E9F0] rounded-[3px] shadow-sm p-1 flex flex-col justify-between overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="text-[6px] font-bold text-white bg-error px-0.5 rounded-[1px]">1-5</span>
+</div>
+<div class="w-full border-t border-dashed border-slate-300 my-0.5"></div>
+<div class="space-y-0.5">
+<div class="w-full h-0.5 bg-slate-300 rounded-full"></div>
+<div class="w-2/3 h-0.5 bg-slate-300 rounded-full"></div>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#8A8F9C] text-[13px]">content_cut</span>
+<!-- Divided Docs -->
+<div class="flex flex-col gap-1">
+<div class="w-6 h-5 bg-white border border-[#E6E9F0] rounded-[2px] shadow-sm p-0.5 flex items-center justify-center">
+<span class="text-[6px] font-bold text-[#1A66E8]">#1</span>
+</div>
+<div class="w-6 h-5 bg-white border border-[#E6E9F0] rounded-[2px] shadow-sm p-0.5 flex items-center justify-center">
+<span class="text-[6px] font-bold text-[#1A66E8]">#2-5</span>
+</div>
+</div>
+</div>
+<span class="text-[12px] text-[#8A8F9C] text-left">Extract any range</span>
+</div>
+</div>
+<!-- Floating Badge: Works Offline -->
+<div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#E8F0FE] border border-blue-100 rounded-full shadow-sm text-[#1A66E8]">
+<span class="material-symbols-outlined text-[#1A66E8] text-[18px]">verified_user</span>
+<span class="text-[13px] font-semibold text-[#11141C]">100% Offline • Private &amp; Secure</span>
+</div>
+</div>
+<!-- Typography Section -->
+<div class="px-7 text-center flex flex-col items-center">
+<h2 class="font-headline-lg text-[#11141C] tracking-tight">Powerful PDF tools, offline</h2>
+<p class="font-body-lg text-[#8A8F9C] mt-2 max-w-[280px]">
+Turn photos into PDFs, scan documents, merge and split files. Everything stays on your device.
+</p>
+</div>
+<!-- Pagination & Bottom Action Row -->
+<div class="px-6 pb-8 flex flex-col gap-5">
+<!-- Pagination Controls Row with Back button -->
+<div class="flex items-center justify-between px-2">
+<button class="font-label-lg text-[#8A8F9C] hover:text-[#11141C] transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+Back
+</button>
+<!-- 3-Dot Indicator with Dot 3 Active -->
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#E6E9F0]"></span>
+<span class="w-2 h-2 rounded-full bg-[#E6E9F0]"></span>
+<span class="w-8 h-2 rounded-full bg-[#1A66E8] shadow-sm transition-all duration-300"></span>
+</div>
+<div class="w-12"></div>
+</div>
+<!-- Full-Width Primary CTA -->
+<button class="w-full h-14 bg-[#1A66E8] hover:bg-blue-700 text-white font-semibold text-[15px] rounded-[16px] shadow-lg flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98]"><span class="">Get started</span><span class="material-symbols-outlined text-[20px]">arrow_forward</span></button>
+<!-- Home Bar Indicator -->
+<div class="w-36 h-1 bg-slate-300 rounded-full mx-auto -mb-3"></div>
+</div>
+</div>
+<!-- ==================== 2. DARK MODE DEVICE FRAME ==================== -->
+<div class="relative w-[393px] h-[852px] bg-[#1A1D29] border border-[#2A3042] rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between shrink-0 select-none">
+<!-- Ambient Deep Glow Behind Illustrations -->
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-primary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Top Phone Header & Status Bar -->
+<div class="relative z-10 w-full pt-3 px-7 flex flex-col gap-2">
+<div class="flex items-center justify-between text-[13px] font-semibold text-white">
+<span class="">9:41</span>
+<!-- Dynamic Island -->
+<div class="w-28 h-7 bg-[#11141C] rounded-full flex items-center justify-end pr-2.5 gap-1.5 shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#1A66E8]"></span>
+</div>
+<!-- Status Icons -->
+<div class="flex items-center gap-1.5 text-white">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<!-- Top Nav Area -->
+<div class="flex items-center justify-between mt-3 px-1">
+<button aria-label="Go Back" class="w-10 h-10 rounded-full flex items-center justify-center bg-[#232838] border border-[#2A3042] text-[#A0A6B8] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
+</button>
+<div class="text-[11px] font-semibold text-[#8A8F9C] uppercase tracking-widest px-3 py-1 bg-[#232838] border border-[#2A3042] rounded-full">Step 3 of 3</div>
+<div class="w-10"></div>
+</div>
+</div>
+<!-- Illustration Area: 2x2 Floating Tool Tiles -->
+<div class="relative z-10 px-5 pt-3 flex flex-col items-center">
+<div class="grid grid-cols-2 gap-3.5 w-full max-w-[345px]">
+<div class="group relative bg-[#232838] border border-[#2A3042] p-3.5 rounded-DEFAULT shadow-sm flex flex-col justify-between h-[134px] overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex items-center justify-between"><span class="text-[13px] font-semibold text-white">Image to PDF</span><span class="material-symbols-outlined text-[#4D8FF7] text-[19px]">photo_library</span></div>
+<div class="relative flex items-center justify-center py-1">
+<div class="relative w-12 h-14 bg-gradient-to-br from-amber-500 to-rose-600 rounded-sm shadow-sm flex flex-col items-center justify-center overflow-hidden -rotate-6"><span class="material-symbols-outlined text-white text-[18px]">image</span></div>
+<div class="relative -ml-4 z-10 w-12 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-sm shadow-md flex items-center justify-center"><span class="material-symbols-outlined text-white text-[20px]">landscape</span></div>
+<span class="material-symbols-outlined text-[#4D8FF7] text-[14px] mx-1">arrow_forward</span>
+<div class="relative w-12 h-14 bg-[#1A1D29] border border-[#2A3042] rounded-sm shadow-md flex flex-col justify-between p-1">
+<div class="flex items-center justify-between"><span class="text-[8px] font-bold text-white bg-error px-1 rounded-[2px] leading-tight">PDF</span></div>
+<div class="space-y-1"><div class="w-full h-1 bg-slate-600 rounded-full"></div><div class="w-3/4 h-1 bg-slate-600 rounded-full"></div></div>
+</div>
+</div>
+<span class="text-[12px] text-[#A0A6B8] text-left">Convert JPG &amp; PNG</span>
+</div>
+<div class="group relative bg-[#232838] border border-[#2A3042] p-3.5 rounded-DEFAULT shadow-sm flex flex-col justify-between h-[134px] overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex items-center justify-between"><span class="text-[13px] font-semibold text-white">Scan to PDF</span><span class="material-symbols-outlined text-[#4D8FF7] text-[19px]">document_scanner</span></div>
+<div class="relative flex items-center justify-center py-1">
+<div class="relative w-20 h-14 bg-[#1A1D29] border border-[#2A3042] rounded-sm shadow-md p-1.5 flex flex-col justify-between overflow-hidden">
+<div class="absolute inset-x-0 h-0.5 bg-[#4D8FF7] shadow-[0_0_10px_rgba(77,143,247,0.9)] animate-pulse top-4"></div>
+<div class="flex items-center justify-between"><div class="w-4 h-1 bg-slate-500 rounded"></div><span class="text-[8px] font-bold text-white bg-error px-1 rounded-[2px] leading-tight">PDF</span></div>
+<div class="space-y-1"><div class="w-full h-1 bg-slate-600 rounded-full"></div><div class="w-2/3 h-1 bg-slate-600 rounded-full"></div><div class="w-4/5 h-1 bg-slate-600 rounded-full"></div></div>
+</div>
+</div>
+<span class="text-[12px] text-[#A0A6B8] text-left">Camera edge detect</span>
+</div>
+<div class="group relative bg-[#232838] border border-[#2A3042] p-3.5 rounded-DEFAULT shadow-sm flex flex-col justify-between h-[134px] overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex items-center justify-between"><span class="text-[13px] font-semibold text-white">Merge PDF</span><span class="material-symbols-outlined text-[#4D8FF7] text-[19px]">call_merge</span></div>
+<div class="relative flex items-center justify-center gap-1.5 py-1">
+<div class="w-7 h-10 bg-[#1A1D29] border border-[#2A3042] rounded-[3px] shadow-sm p-0.5 flex flex-col justify-between"><span class="text-[6px] font-bold text-white bg-error px-0.5 rounded-[1px] leading-none w-max">A</span><div class="w-full h-0.5 bg-slate-600 rounded-full"></div></div>
+<span class="material-symbols-outlined text-[#4D8FF7] text-[13px]">add</span>
+<div class="w-7 h-10 bg-[#1A1D29] border border-[#2A3042] rounded-[3px] shadow-sm p-0.5 flex flex-col justify-between"><span class="text-[6px] font-bold text-white bg-error px-0.5 rounded-[1px] leading-none w-max">B</span><div class="w-full h-0.5 bg-slate-600 rounded-full"></div></div>
+<span class="material-symbols-outlined text-[#4D8FF7] text-[13px]">arrow_forward</span>
+<div class="relative w-8 h-11 bg-[#1A66E8] text-white rounded-[3px] shadow-md p-1 flex flex-col justify-between"><div class="flex items-center justify-between"><span class="text-[6px] font-bold bg-[#1A1D29] text-[#4D8FF7] px-0.5 rounded-[1px]">PDF</span></div><div class="w-full h-0.5 bg-white/70 rounded-full"></div><div class="w-3/4 h-0.5 bg-white/70 rounded-full"></div></div>
+</div>
+<span class="text-[12px] text-[#A0A6B8] text-left">Combine into one</span>
+</div>
+<div class="group relative bg-[#232838] border border-[#2A3042] p-3.5 rounded-DEFAULT shadow-sm flex flex-col justify-between h-[134px] overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex items-center justify-between"><span class="text-[13px] font-semibold text-white">Split PDF</span><span class="material-symbols-outlined text-[#4D8FF7] text-[19px]">call_split</span></div>
+<div class="relative flex items-center justify-center gap-1.5 py-1">
+<div class="relative w-8 h-11 bg-[#1A1D29] border border-[#2A3042] rounded-[3px] shadow-sm p-1 flex flex-col justify-between overflow-hidden"><div class="flex items-center justify-between"><span class="text-[6px] font-bold text-white bg-error px-0.5 rounded-[1px]">1-5</span></div><div class="w-full border-t border-dashed border-slate-600 my-0.5"></div><div class="space-y-0.5"><div class="w-full h-0.5 bg-slate-600 rounded-full"></div><div class="w-2/3 h-0.5 bg-slate-600 rounded-full"></div></div></div>
+<span class="material-symbols-outlined text-[#A0A6B8] text-[13px]">content_cut</span>
+<div class="flex flex-col gap-1"><div class="w-6 h-5 bg-[#1A1D29] border border-[#2A3042] rounded-[2px] shadow-sm p-0.5 flex items-center justify-center"><span class="text-[6px] font-bold text-[#4D8FF7]">#1</span></div><div class="w-6 h-5 bg-[#1A1D29] border border-[#2A3042] rounded-[2px] shadow-sm p-0.5 flex items-center justify-center"><span class="text-[6px] font-bold text-[#4D8FF7]">#2-5</span></div></div>
+</div>
+<span class="text-[12px] text-[#A0A6B8] text-left">Extract any range</span>
+</div>
+</div>
+<div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#1E2A45] border border-[#2A3042] rounded-full shadow-sm text-white">
+<span class="material-symbols-outlined text-[#4D8FF7] text-[18px]">verified_user</span>
+<span class="text-[13px] font-semibold text-white">100% Offline • Private &amp; Secure</span>
+</div>
+</div>
+<!-- Typography Section -->
+<div class="px-7 text-center flex flex-col items-center">
+<h2 class="font-headline-lg text-white tracking-tight">Powerful PDF tools, offline</h2>
+<p class="font-body-lg text-[#8A8F9C] mt-2 max-w-[280px]">
+Turn photos into PDFs, scan documents, merge and split files. Everything stays on your device.
+</p>
+</div>
+<!-- Pagination & Bottom Action Row -->
+<div class="px-6 pb-8 flex flex-col gap-5">
+<!-- Pagination Controls Row with Back button & 3-step indicator -->
+<div class="flex items-center justify-between px-2">
+<button class="font-label-lg text-[#8A8F9C] hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+Back
+</button>
+<!-- 3-Dot Indicator with Dot 3 Active -->
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#2A3042]"></span>
+<span class="w-2 h-2 rounded-full bg-[#2A3042]"></span>
+<span class="w-8 h-2 rounded-full bg-[#1A66E8] shadow-sm transition-all duration-300"></span>
+</div>
+<div class="w-12"></div>
+</div>
+<!-- Full-Width Primary CTA -->
+<button class="w-full h-14 bg-[#1A66E8] hover:bg-blue-700 text-white font-semibold text-[15px] rounded-[16px] shadow-lg flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98]">
+<span class="">Get started</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<!-- Home Bar Indicator -->
+<div class="w-36 h-1 bg-slate-600 rounded-full mx-auto -mb-3"></div>
+</div>
+</div>
+</div>
+</div></main>
+
+
+</body></html>

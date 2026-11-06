@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary":"#ffffff","on-tertiary-container":"#fdfcff","error":"#ba1a1a","surface":"#faf8ff","inverse-on-surface":"#eff0fc","surface-dim":"#d8d9e5","primary-fixed-dim":"#acc7ff","secondary-container":"#276def","on-error":"#ffffff","secondary-fixed-dim":"#b1c5ff","on-error-container":"#93000a","surface-bright":"#faf8ff","on-secondary-fixed":"#001847","on-primary-container":"#fefcff","on-primary-fixed-variant":"#004492","on-tertiary":"#ffffff","inverse-surface":"#2d3039","primary-container":"#1f71e0","on-background":"#181b24","error-container":"#ffdad6","surface-container-lowest":"#ffffff","on-primary-fixed":"#001a40","on-secondary-container":"#fefcff","tertiary-fixed-dim":"#bfc7d4","inverse-primary":"#acc7ff","surface-container-high":"#e6e7f3","background":"#faf8ff","on-secondary":"#ffffff","primary":"#0059ba","primary-fixed":"#d7e2ff","on-surface":"#181b24","tertiary-fixed":"#dbe3f1","surface-tint":"#005bbf","on-tertiary-fixed":"#141c26","surface-container-highest":"#e0e2ee","surface-variant":"#e0e2ee","outline-variant":"#c2c6d5","surface-container-low":"#f2f3ff","tertiary-container":"#6d7581","on-surface-variant":"#424753","tertiary":"#545d68","on-tertiary-fixed-variant":"#3f4752","secondary":"#0054cb","secondary-fixed":"#dae2ff","on-secondary-fixed-variant":"#00409f","outline":"#727785","surface-container":"#ecedf9"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"space-lg":"1rem","space-xs":"0.25rem","space-sm":"0.5rem","space-md":"0.75rem","space-xl":"1.5rem","gutter":"0.75rem","margin":"1.25rem"},"fontFamily":{"label-md":["Inter"],"label-lg":["Inter"],"body-sm":["Inter"],"body-lg":["Inter"],"headline-lg":["Space Grotesk"],"headline-sm":["Space Grotesk"],"headline-xl":["Space Grotesk"],"label-xs":["Inter"],"title-md":["Inter"],"body-md":["Inter"]},"fontSize":{"label-md":["13px",{"lineHeight":"18px","fontWeight":"600"}],"label-lg":["15px",{"lineHeight":"20px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"500"}],"headline-lg":["24px",{"lineHeight":"30px","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"headline-xl":["32px",{"lineHeight":"38px","fontWeight":"700"}],"label-xs":["11px",{"lineHeight":"14px","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"22px","fontWeight":"700"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen"><header class="fixed top-0 w-full z-50 bg-inverse-surface text-inverse-on-surface shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="h-16 w-full px-margin flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-primary-fixed text-[24px]">description</span><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight font-bold">Doc View</span></div><div class="h-4 w-[1px] bg-outline/40 mx-space-xs"></div><span class="px-space-xs py-[2px] rounded-full bg-primary/20 text-primary-fixed font-label-xs text-label-xs uppercase tracking-wider">Design System v2.4</span></div><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="bg-surface/10 text-on-primary font-bold rounded"><a aria-current="page" class="transition-colors py-space-xs px-space-sm bg-surface/10 text-on-primary font-bold rounded" data-path="canvas-presentation" href="#">Canvas Presentation</a><a class="font-label-md text-label-md text-outline-variant hover:text-inverse-on-surface transition-colors py-space-xs px-space-sm" data-path="tokens-specs" href="#">Specs &amp; Metrics</a><a class="font-label-md text-label-md text-outline-variant hover:text-inverse-on-surface transition-colors py-space-xs px-space-sm" data-path="component-inventory" href="#">Component Matrix</a></nav><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-space-xs text-outline-variant font-label-xs text-label-xs"><span class="material-symbols-outlined text-[16px]">smartphone</span><span>393 × 852 pt (iPhone Baseline)</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<!-- PRESENTATION CANVAS HEADER -->
+<section class="w-full bg-[#0B0D14] text-white px-6 py-12 lg:py-16">
+<div class="max-w-[1360px] mx-auto flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 text-primary-fixed font-label-xs text-label-xs uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-primary-fixed"></span> Production Showcase
+        </span>
+<span class="text-tertiary-fixed-dim font-label-xs text-label-xs">Spatial Engine v2.4 • Strict 4pt Grid</span>
+</div>
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-white tracking-tight">
+            Doc View Home Screen — All Files Tab (Light, Dark &amp; Skeleton)
+          </h1>
+<p class="font-body-lg text-body-lg text-outline-variant mt-2 max-w-3xl">
+            393 × 852 Mobile Frames • Inter Font • 4-Column Category Grid • Document Rows with Native AdMob • FAB &amp; Docked Banner Ad
+          </p>
+</div>
+<!-- Metric highlights -->
+<div class="flex items-center gap-6 bg-[#161A26] px-5 py-3 rounded-2xl">
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-outline-variant uppercase">Viewport</span>
+<span class="font-headline-sm text-headline-sm text-white">393 × 852 pt</span>
+</div>
+<div class="w-[1px] h-8 bg-outline/20"></div>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-outline-variant uppercase">AdMob Banner</span>
+<span class="font-headline-sm text-headline-sm text-primary-fixed">60 pt Docked</span>
+</div>
+<div class="w-[1px] h-8 bg-outline/20"></div>
+<div class="flex flex-col">
+<span class="font-label-xs text-label-xs text-outline-variant uppercase">Primary CTA</span>
+<span class="font-headline-sm text-headline-sm text-white">56 pt Hitbox</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- THREE-UP MOBILE FRAMES SHOWCASE -->
+<section class="w-full bg-[#10131D] py-12 px-4 md:px-8">
+<div class="max-w-[1360px] mx-auto overflow-x-auto pb-8">
+<div class="flex flex-col xl:flex-row items-center xl:items-start justify-center gap-10 min-w-max xl:min-w-0">
+<!-- ============================================================ -->
+<!-- FRAME 1: LIGHT MODE (#FFFFFF / #FAF8FF)                       -->
+<!-- ============================================================ -->
+<div class="flex flex-col items-center gap-3">
+<div class="flex items-center justify-between w-[393px] px-2 text-outline-variant font-label-md text-label-md">
+<span class="flex items-center gap-2 text-white">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+              LIGHT MODE (#FFFFFF)
+            </span>
+<span class="text-outline">iOS 17 Baseline</span>
+</div>
+<!-- Phone Chassis: 393 x 852 pt -->
+<div class="w-[393px] h-[852px] bg-white text-[#11141C] rounded-[48px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col select-none">
+<!-- A. STATUS BAR -->
+<div class="h-11 w-full px-7 flex items-center justify-between z-30 pt-2 shrink-0 bg-[#E9F2FF]">
+<span class="font-label-md text-label-md text-[#11141C] tracking-tight">9:41</span>
+<!-- Dynamic Island Notch -->
+<div class="w-28 h-7 bg-black rounded-full flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-[#11141C]/80"></div>
+</div>
+<div class="flex items-center gap-1.5 text-[#11141C]">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- B. APP BAR -->
+<div class="h-14 w-full px-5 flex items-center justify-between shrink-0 bg-gradient-to-b from-[#E9F2FF] to-white z-20">
+<span class="font-headline-sm text-[22px] leading-7 font-bold text-[#11141C] tracking-tight">Doc View</span>
+<button aria-label="Search files" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-black/5 active:bg-black/10 transition-colors">
+<span class="material-symbols-outlined text-[#11141C] text-[24px]">search</span>
+</button>
+</div>
+<!-- SCROLLABLE BODY AREA -->
+<div class="flex-1 overflow-y-auto no-scrollbar relative flex flex-col pb-32">
+<!-- C. CATEGORY GRID (4 columns, 2 rows, page margin 20px) -->
+<div class="px-5 pt-2 pb-4">
+<div class="grid grid-cols-4 gap-2.5">
+<!-- Tile 1: All -->
+<div class="bg-[#F3F5FA] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#E9EDF6] transition-colors">
+<div class="w-8 h-[38px] bg-[#2F7BEA] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+</div>
+<span class="font-label-md text-label-md text-[#11141C] mt-1.5">All</span>
+<span class="font-body-sm text-[11px] text-[#8A8F9C] truncate max-w-full">5,363 files</span>
+</div>
+<!-- Tile 2: PDF -->
+<div class="bg-[#F3F5FA] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#E9EDF6] transition-colors">
+<div class="w-8 h-[38px] bg-[#E02B2B] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[11px] font-bold text-white tracking-tighter">PDF</span>
+</div>
+<span class="font-label-md text-label-md text-[#11141C] mt-1.5">PDF</span>
+<span class="font-body-sm text-[11px] text-[#8A8F9C] truncate max-w-full">92 files</span>
+</div>
+<!-- Tile 3: Word -->
+<div class="bg-[#F3F5FA] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#E9EDF6] transition-colors">
+<div class="w-8 h-[38px] bg-[#1E5FD8] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[13px] font-bold text-white">W</span>
+</div>
+<span class="font-label-md text-label-md text-[#11141C] mt-1.5">Word</span>
+<span class="font-body-sm text-[11px] text-[#8A8F9C] truncate max-w-full">20 files</span>
+</div>
+<!-- Tile 4: Excel -->
+<div class="bg-[#F3F5FA] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#E9EDF6] transition-colors">
+<div class="w-8 h-[38px] bg-[#1E9E4F] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[13px] font-bold text-white">X</span>
+</div>
+<span class="font-label-md text-label-md text-[#11141C] mt-1.5">Excel</span>
+<span class="font-body-sm text-[11px] text-[#8A8F9C] truncate max-w-full">7 files</span>
+</div>
+<!-- Tile 5: PPT -->
+<div class="bg-[#F3F5FA] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#E9EDF6] transition-colors">
+<div class="w-8 h-[38px] bg-[#F26B1D] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[13px] font-bold text-white">P</span>
+</div>
+<span class="font-label-md text-label-md text-[#11141C] mt-1.5">PPT</span>
+<span class="font-body-sm text-[11px] text-[#8A8F9C] truncate max-w-full">4 files</span>
+</div>
+<!-- Tile 6: TXT -->
+<div class="bg-[#F3F5FA] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#E9EDF6] transition-colors">
+<div class="w-8 h-[38px] bg-[#5B6B9A] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[10px] font-bold text-white tracking-tight">TXT</span>
+</div>
+<span class="font-label-md text-label-md text-[#11141C] mt-1.5">TXT</span>
+<span class="font-body-sm text-[11px] text-[#8A8F9C] truncate max-w-full">7 files</span>
+</div>
+<!-- Tile 7: Image -->
+<div class="bg-[#F3F5FA] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#E9EDF6] transition-colors">
+<div class="w-8 h-[38px] bg-[#FFB300] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[19px]">photo_camera</span>
+</div>
+<span class="font-label-md text-label-md text-[#11141C] mt-1.5">Image</span>
+<span class="font-body-sm text-[11px] text-[#8A8F9C] truncate max-w-full">5,233 files</span>
+</div>
+<!-- Tile 8: Directories -->
+<div class="bg-[#F3F5FA] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#E9EDF6] transition-colors">
+<div class="w-8 h-[38px] bg-[#2F7BEA] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[19px]">manage_search</span>
+</div>
+<span class="font-label-md text-label-md text-[#11141C] mt-1.5 truncate max-w-full">Folders</span>
+<span class="font-body-sm text-[11px] text-[#8A8F9C]">Browse</span>
+</div>
+</div>
+</div>
+<!-- D. DIVIDER BAND (6pt) & UNDERLINE TABS -->
+<div class="h-1.5 w-full bg-[#F1F3F8]"></div>
+<div class="px-5 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<!-- Active Tab: Recent -->
+<div class="relative py-3 cursor-pointer">
+<span class="font-title-md text-title-md text-[#1A66E8]">Recent</span>
+<span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#1A66E8] rounded-full"></span>
+</div>
+<!-- Inactive Tab: Bookmarks -->
+<div class="py-3 cursor-pointer">
+<span class="font-body-lg text-body-lg text-[#8A8F9C] hover:text-[#11141C] transition-colors">Bookmarks</span>
+</div>
+</div>
+<!-- Selection Tool Button -->
+<button aria-label="Select files" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-black/5 active:bg-black/10 text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">checklist</span>
+</button>
+</div>
+<!-- E. RECENT ROWS (68pt tall each) -->
+<div class="flex flex-col">
+<!-- Row 1: PDF -->
+<div class="h-[68px] px-5 flex items-center justify-between hover:bg-[#F8FAFD] cursor-pointer transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Real first-page preview (48x56) -->
+<div class="w-12 h-14 bg-white rounded-[10px] shadow-sm relative overflow-hidden flex flex-col justify-between p-1.5 shrink-0 bg-surface-container-low">
+<div class="w-full flex flex-col gap-1">
+<div class="w-3/4 h-1 bg-[#D8DCE6] rounded-full"></div>
+<div class="w-full h-1 bg-[#E8EBF2] rounded-full"></div>
+<div class="w-5/6 h-1 bg-[#E8EBF2] rounded-full"></div>
+</div>
+<span class="self-start text-[9px] font-bold leading-none px-1 py-0.5 rounded bg-[#E02B2B] text-white">PDF</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-sm text-[#11141C] truncate">M.sc ( CA&amp;IT) 1.pdf</span>
+<span class="font-body-sm text-[12px] text-[#8A8F9C] mt-0.5">1 day ago • 681.1 KB</span>
+</div>
+</div>
+<div class="flex items-center shrink-0">
+<button aria-label="Bookmark" class="w-10 h-10 flex items-center justify-center rounded-full text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="More options" class="w-10 h-10 flex items-center justify-center rounded-full text-outline hover:text-[#11141C] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 2: Image -->
+<div class="h-[68px] px-5 flex items-center justify-between hover:bg-[#F8FAFD] cursor-pointer transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Real photo thumbnail preview (48x56) -->
+<div class="w-12 h-14 bg-[#FFF8E6] rounded-[10px] relative overflow-hidden flex flex-col justify-between p-1.5 shrink-0">
+<div class="w-full h-6 rounded bg-[#FFE299] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#B27D00] text-[16px]">insert_chart</span>
+</div>
+<span class="self-start text-[9px] font-bold leading-none px-1 py-0.5 rounded bg-[#FFB300] text-white">IMG</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-sm text-[#11141C] truncate">Screenshot_2026-11-02-08…</span>
+<span class="font-body-sm text-[12px] text-[#8A8F9C] mt-0.5">3 days ago • 191.9 KB</span>
+</div>
+</div>
+<div class="flex items-center shrink-0">
+<button aria-label="Bookmark" class="w-10 h-10 flex items-center justify-center rounded-full text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="More options" class="w-10 h-10 flex items-center justify-center rounded-full text-outline hover:text-[#11141C] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 3: Word -->
+<div class="h-[68px] px-5 flex items-center justify-between hover:bg-[#F8FAFD] cursor-pointer transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 bg-[#EDF3FD] rounded-[10px] relative overflow-hidden flex flex-col justify-between p-1.5 shrink-0">
+<div class="w-full flex flex-col gap-1">
+<div class="w-full h-1 bg-[#C5D7F8] rounded-full"></div>
+<div class="w-2/3 h-1 bg-[#Dbe5fa] rounded-full"></div>
+</div>
+<span class="self-start text-[9px] font-bold leading-none px-1 py-0.5 rounded bg-[#1E5FD8] text-white">DOCX</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-sm text-[#11141C] truncate">Digital_Marketing_Assignment.docx</span>
+<span class="font-body-sm text-[12px] text-[#8A8F9C] mt-0.5">5 days ago • 41.1 KB</span>
+</div>
+</div>
+<div class="flex items-center shrink-0">
+<button aria-label="Bookmark" class="w-10 h-10 flex items-center justify-center rounded-full text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="More options" class="w-10 h-10 flex items-center justify-center rounded-full text-outline hover:text-[#11141C] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 4: Excel -->
+<div class="h-[68px] px-5 flex items-center justify-between hover:bg-[#F8FAFD] cursor-pointer transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 bg-[#EEF9F2] rounded-[10px] relative overflow-hidden flex flex-col justify-between p-1.5 shrink-0">
+<div class="w-full grid grid-cols-2 gap-0.5">
+<div class="h-2 bg-[#BAE5CB] rounded-[2px]"></div>
+<div class="h-2 bg-[#BAE5CB] rounded-[2px]"></div>
+<div class="h-2 bg-[#D1F0DE] rounded-[2px]"></div>
+<div class="h-2 bg-[#D1F0DE] rounded-[2px]"></div>
+</div>
+<span class="self-start text-[9px] font-bold leading-none px-1 py-0.5 rounded bg-[#1E9E4F] text-white">XLSX</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-sm text-[#11141C] truncate">Q3_Revenue_Forecast_2026.xlsx</span>
+<span class="font-body-sm text-[12px] text-[#8A8F9C] mt-0.5">1 week ago • 84.5 KB</span>
+</div>
+</div>
+<div class="flex items-center shrink-0">
+<button aria-label="Bookmark" class="w-10 h-10 flex items-center justify-center rounded-full text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="More options" class="w-10 h-10 flex items-center justify-center rounded-full text-outline hover:text-[#11141C] transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 5: NATIVE AD ROW (68pt tall) -->
+<div class="h-[68px] mx-5 my-1 px-3 bg-[#F8FAFD] rounded-2xl flex items-center justify-between cursor-pointer hover:bg-[#F0F4FA] transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#1A66E8] to-[#60A5FA] flex items-center justify-center text-white shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">cloud_sync</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 leading-none">Ad</span>
+<span class="font-title-md text-sm text-[#11141C] truncate">Clean Master Pro • 4.8★</span>
+</div>
+<span class="font-body-sm text-[12px] text-[#8A8F9C] mt-0.5 truncate">Speed up &amp; protect storage</span>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0 ml-2">
+<button class="px-3 py-1.5 rounded-full bg-[#1A66E8]/10 text-[#1A66E8] font-label-md text-label-md hover:bg-[#1A66E8]/20 transition-colors">
+                      Install
+                    </button>
+<button aria-label="Ad options" class="w-8 h-8 flex items-center justify-center rounded-full text-outline hover:text-[#11141C]">
+<span class="material-symbols-outlined text-[16px]">info</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- F. FLOATING ACTION BUTTON (FAB) -->
+<button aria-label="Add file" class="absolute right-5 bottom-[136px] w-14 h-14 rounded-2xl bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-blue-600/35 hover:scale-105 active:scale-95 transition-all z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- G. DOCKED ADAPTIVE BANNER AD (60pt tall) -->
+<div class="h-[60px] w-full bg-[#F8FAFC] px-4 flex items-center justify-between shrink-0 relative z-20">
+<!-- AD pill tag -->
+<span class="absolute top-1 left-2 text-[9px] font-bold px-1.5 py-[1px] rounded bg-white text-[#8A8F9C] shadow-sm">AD</span>
+<div class="flex items-center gap-2.5 pl-7 min-w-0">
+<div class="w-7 h-7 rounded-lg bg-[#E0E7FF] flex items-center justify-center text-[#1A66E8] shrink-0">
+<span class="material-symbols-outlined text-[18px]">cloud</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-[12px] text-[#11141C] truncate">Google AdMob • 100GB Free Cloud Backup</span>
+<span class="font-body-sm text-[11px] text-[#8A8F9C] truncate">Secure all your PDF docs seamlessly</span>
+</div>
+</div>
+<button class="px-3 py-1 bg-[#1A66E8] text-white text-[12px] font-semibold rounded-full shrink-0 shadow-sm">
+                Open
+              </button>
+</div>
+<!-- H. BOTTOM NAVIGATION BAR (64pt tall) -->
+<div class="h-16 w-full bg-white px-6 flex items-center justify-between shrink-0 z-20 shadow-[0_-2px_10px_rgba(0,0,0,0.03)]">
+<!-- Tab 1: All files (ACTIVE) -->
+<div class="flex flex-col items-center gap-0.5 cursor-pointer">
+<span class="material-symbols-outlined text-[#1A66E8] text-[24px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="font-label-xs text-[11px] font-bold text-[#1A66E8]">All files</span>
+</div>
+<!-- Tab 2: Tools -->
+<div class="flex flex-col items-center gap-0.5 cursor-pointer text-[#8A8F9C] hover:text-[#11141C] transition-colors">
+<span class="material-symbols-outlined text-[24px]">construction</span>
+<span class="font-label-xs text-[11px] font-medium text-[#8A8F9C]">Tools</span>
+</div>
+<!-- Tab 3: Settings -->
+<div class="flex flex-col items-center gap-0.5 cursor-pointer text-[#8A8F9C] hover:text-[#11141C] transition-colors">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="font-label-xs text-[11px] font-medium text-[#8A8F9C]">Settings</span>
+</div>
+</div>
+<!-- Home indicator bar -->
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/20 rounded-full z-30"></div>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- FRAME 2: DARK MODE DEEP NAVY (#1A1D29)                       -->
+<!-- ============================================================ -->
+<div class="flex flex-col items-center gap-3">
+<div class="flex items-center justify-between w-[393px] px-2 text-outline-variant font-label-md text-label-md">
+<span class="flex items-center gap-2 text-white">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed-dim"></span>
+              DARK MODE (#1A1D29)
+            </span>
+<span class="text-outline">Deep Navy Matrix</span>
+</div>
+<!-- Phone Chassis: 393 x 852 pt -->
+<div class="w-[393px] h-[852px] bg-[#1A1D29] text-white rounded-[48px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] relative overflow-hidden flex flex-col select-none">
+<!-- A. STATUS BAR -->
+<div class="h-11 w-full px-7 flex items-center justify-between z-30 pt-2 shrink-0 bg-[#1A1D29]">
+<span class="font-label-md text-label-md text-white tracking-tight">9:41</span>
+<!-- Dynamic Island Notch -->
+<div class="w-28 h-7 bg-black rounded-full flex items-center justify-end pr-2.5 shadow-inner">
+<div class="w-2.5 h-2.5 rounded-full bg-[#2A3042]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-white">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- B. APP BAR -->
+<div class="h-14 w-full px-5 flex items-center justify-between shrink-0 bg-[#1A1D29] z-20">
+<span class="font-headline-sm text-[22px] leading-7 font-bold text-white tracking-tight">Doc View</span>
+<button aria-label="Search files" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 active:bg-white/15 transition-colors">
+<span class="material-symbols-outlined text-white text-[24px]">search</span>
+</button>
+</div>
+<!-- SCROLLABLE BODY AREA -->
+<div class="flex-1 overflow-y-auto no-scrollbar relative flex flex-col pb-32">
+<!-- C. CATEGORY GRID (4 columns, 2 rows, page margin 20px) -->
+<div class="px-5 pt-2 pb-4">
+<div class="grid grid-cols-4 gap-2.5">
+<!-- Tile 1: All -->
+<div class="bg-[#232838] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#2B3144] transition-colors">
+<div class="w-8 h-[38px] bg-[#2F7BEA] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+</div>
+<span class="font-label-md text-label-md text-white mt-1.5">All</span>
+<span class="font-body-sm text-[11px] text-[#858B9C] truncate max-w-full">5,363 files</span>
+</div>
+<!-- Tile 2: PDF -->
+<div class="bg-[#232838] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#2B3144] transition-colors">
+<div class="w-8 h-[38px] bg-[#E02B2B] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[11px] font-bold text-white tracking-tighter">PDF</span>
+</div>
+<span class="font-label-md text-label-md text-white mt-1.5">PDF</span>
+<span class="font-body-sm text-[11px] text-[#858B9C] truncate max-w-full">92 files</span>
+</div>
+<!-- Tile 3: Word -->
+<div class="bg-[#232838] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#2B3144] transition-colors">
+<div class="w-8 h-[38px] bg-[#1E5FD8] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[13px] font-bold text-white">W</span>
+</div>
+<span class="font-label-md text-label-md text-white mt-1.5">Word</span>
+<span class="font-body-sm text-[11px] text-[#858B9C] truncate max-w-full">20 files</span>
+</div>
+<!-- Tile 4: Excel -->
+<div class="bg-[#232838] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#2B3144] transition-colors">
+<div class="w-8 h-[38px] bg-[#1E9E4F] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[13px] font-bold text-white">X</span>
+</div>
+<span class="font-label-md text-label-md text-white mt-1.5">Excel</span>
+<span class="font-body-sm text-[11px] text-[#858B9C] truncate max-w-full">7 files</span>
+</div>
+<!-- Tile 5: PPT -->
+<div class="bg-[#232838] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#2B3144] transition-colors">
+<div class="w-8 h-[38px] bg-[#F26B1D] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[13px] font-bold text-white">P</span>
+</div>
+<span class="font-label-md text-label-md text-white mt-1.5">PPT</span>
+<span class="font-body-sm text-[11px] text-[#858B9C] truncate max-w-full">4 files</span>
+</div>
+<!-- Tile 6: TXT -->
+<div class="bg-[#232838] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#2B3144] transition-colors">
+<div class="w-8 h-[38px] bg-[#5B6B9A] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="font-headline-sm text-[10px] font-bold text-white tracking-tight">TXT</span>
+</div>
+<span class="font-label-md text-label-md text-white mt-1.5">TXT</span>
+<span class="font-body-sm text-[11px] text-[#858B9C] truncate max-w-full">7 files</span>
+</div>
+<!-- Tile 7: Image -->
+<div class="bg-[#232838] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#2B3144] transition-colors">
+<div class="w-8 h-[38px] bg-[#FFB300] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[19px]">photo_camera</span>
+</div>
+<span class="font-label-md text-label-md text-white mt-1.5">Image</span>
+<span class="font-body-sm text-[11px] text-[#858B9C] truncate max-w-full">5,233 files</span>
+</div>
+<!-- Tile 8: Directories -->
+<div class="bg-[#232838] rounded-[20px] p-2 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#2B3144] transition-colors">
+<div class="w-8 h-[38px] bg-[#2F7BEA] rounded-md relative flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[19px]">manage_search</span>
+</div>
+<span class="font-label-md text-label-md text-white mt-1.5 truncate max-w-full">Folders</span>
+<span class="font-body-sm text-[11px] text-[#858B9C]">Browse</span>
+</div>
+</div>
+</div>
+<!-- D. DIVIDER BAND (6pt) & UNDERLINE TABS -->
+<div class="h-1.5 w-full bg-[#141722]"></div>
+<div class="px-5 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<!-- Active Tab: Recent -->
+<div class="relative py-3 cursor-pointer">
+<span class="font-title-md text-title-md text-[#4D8FF7]">Recent</span>
+<span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#4D8FF7] rounded-full"></span>
+</div>
+<!-- Inactive Tab: Bookmarks -->
+<div class="py-3 cursor-pointer">
+<span class="font-body-lg text-body-lg text-[#858B9C] hover:text-white transition-colors">Bookmarks</span>
+</div>
+</div>
+<!-- Selection Tool Button -->
+<button aria-label="Select files" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 active:bg-white/15 text-[#858B9C] transition-colors">
+<span class="material-symbols-outlined text-[20px]">checklist</span>
+</button>
+</div>
+<!-- E. RECENT ROWS (68pt tall each) -->
+<div class="flex flex-col">
+<!-- Row 1: PDF -->
+<div class="h-[68px] px-5 flex items-center justify-between hover:bg-[#202534] cursor-pointer transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 bg-[#232838] rounded-[10px] relative overflow-hidden flex flex-col justify-between p-1.5 shrink-0">
+<div class="w-full flex flex-col gap-1">
+<div class="w-3/4 h-1 bg-[#3A4259] rounded-full"></div>
+<div class="w-full h-1 bg-[#2C3347] rounded-full"></div>
+<div class="w-5/6 h-1 bg-[#2C3347] rounded-full"></div>
+</div>
+<span class="self-start text-[9px] font-bold leading-none px-1 py-0.5 rounded bg-[#E02B2B] text-white">PDF</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-sm text-white truncate">M.sc ( CA&amp;IT) 1.pdf</span>
+<span class="font-body-sm text-[12px] text-[#858B9C] mt-0.5">1 day ago • 681.1 KB</span>
+</div>
+</div>
+<div class="flex items-center shrink-0">
+<button aria-label="Bookmark" class="w-10 h-10 flex items-center justify-center rounded-full text-[#858B9C] hover:text-[#4D8FF7] transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="More options" class="w-10 h-10 flex items-center justify-center rounded-full text-[#858B9C] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 2: Image -->
+<div class="h-[68px] px-5 flex items-center justify-between hover:bg-[#202534] cursor-pointer transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 bg-[#232838] rounded-[10px] relative overflow-hidden flex flex-col justify-between p-1.5 shrink-0">
+<div class="w-full h-6 rounded bg-[#3D3320] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#FFB300] text-[16px]">insert_chart</span>
+</div>
+<span class="self-start text-[9px] font-bold leading-none px-1 py-0.5 rounded bg-[#FFB300] text-white">IMG</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-sm text-white truncate">Screenshot_2026-11-02-08…</span>
+<span class="font-body-sm text-[12px] text-[#858B9C] mt-0.5">3 days ago • 191.9 KB</span>
+</div>
+</div>
+<div class="flex items-center shrink-0">
+<button aria-label="Bookmark" class="w-10 h-10 flex items-center justify-center rounded-full text-[#858B9C] hover:text-[#4D8FF7] transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="More options" class="w-10 h-10 flex items-center justify-center rounded-full text-[#858B9C] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 3: Word -->
+<div class="h-[68px] px-5 flex items-center justify-between hover:bg-[#202534] cursor-pointer transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 bg-[#232838] rounded-[10px] relative overflow-hidden flex flex-col justify-between p-1.5 shrink-0">
+<div class="w-full flex flex-col gap-1">
+<div class="w-full h-1 bg-[#1E3B70] rounded-full"></div>
+<div class="w-2/3 h-1 bg-[#1E3B70] rounded-full"></div>
+</div>
+<span class="self-start text-[9px] font-bold leading-none px-1 py-0.5 rounded bg-[#1E5FD8] text-white">DOCX</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-sm text-white truncate">Digital_Marketing_Assignment.docx</span>
+<span class="font-body-sm text-[12px] text-[#858B9C] mt-0.5">5 days ago • 41.1 KB</span>
+</div>
+</div>
+<div class="flex items-center shrink-0">
+<button aria-label="Bookmark" class="w-10 h-10 flex items-center justify-center rounded-full text-[#858B9C] hover:text-[#4D8FF7] transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="More options" class="w-10 h-10 flex items-center justify-center rounded-full text-[#858B9C] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 4: Excel -->
+<div class="h-[68px] px-5 flex items-center justify-between hover:bg-[#202534] cursor-pointer transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 bg-[#232838] rounded-[10px] relative overflow-hidden flex flex-col justify-between p-1.5 shrink-0">
+<div class="w-full grid grid-cols-2 gap-0.5">
+<div class="h-2 bg-[#1B4D30] rounded-[2px]"></div>
+<div class="h-2 bg-[#1B4D30] rounded-[2px]"></div>
+<div class="h-2 bg-[#173824] rounded-[2px]"></div>
+<div class="h-2 bg-[#173824] rounded-[2px]"></div>
+</div>
+<span class="self-start text-[9px] font-bold leading-none px-1 py-0.5 rounded bg-[#1E9E4F] text-white">XLSX</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-sm text-white truncate">Q3_Revenue_Forecast_2026.xlsx</span>
+<span class="font-body-sm text-[12px] text-[#858B9C] mt-0.5">1 week ago • 84.5 KB</span>
+</div>
+</div>
+<div class="flex items-center shrink-0">
+<button aria-label="Bookmark" class="w-10 h-10 flex items-center justify-center rounded-full text-[#858B9C] hover:text-[#4D8FF7] transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="More options" class="w-10 h-10 flex items-center justify-center rounded-full text-[#858B9C] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 5: NATIVE AD ROW (68pt tall) -->
+<div class="h-[68px] mx-5 my-1 px-3 bg-[#232838] rounded-2xl flex items-center justify-between cursor-pointer hover:bg-[#2B3144] transition-colors">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#1E5FD8] to-[#3B82F6] flex items-center justify-center text-white shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">cloud_sync</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-900/50 text-amber-300 leading-none">Ad</span>
+<span class="font-title-md text-sm text-white truncate">Clean Master Pro • 4.8★</span>
+</div>
+<span class="font-body-sm text-[12px] text-[#858B9C] mt-0.5 truncate">Speed up &amp; protect storage</span>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0 ml-2">
+<button class="px-3 py-1.5 rounded-full bg-[#4D8FF7]/20 text-[#4D8FF7] font-label-md text-label-md hover:bg-[#4D8FF7]/30 transition-colors">
+                      Install
+                    </button>
+<button aria-label="Ad options" class="w-8 h-8 flex items-center justify-center rounded-full text-[#858B9C] hover:text-white">
+<span class="material-symbols-outlined text-[16px]">info</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- F. FLOATING ACTION BUTTON (FAB) -->
+<button aria-label="Add file" class="absolute right-5 bottom-[136px] w-14 h-14 rounded-2xl bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-blue-500/40 hover:scale-105 active:scale-95 transition-all z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- G. DOCKED ADAPTIVE BANNER AD (60pt tall) -->
+<div class="h-[60px] w-full bg-[#1E2333] px-4 flex items-center justify-between shrink-0 relative z-20">
+<!-- AD pill tag -->
+<span class="absolute top-1 left-2 text-[9px] font-bold px-1.5 py-[1px] rounded bg-[#2A3042] text-[#858B9C]">AD</span>
+<div class="flex items-center gap-2.5 pl-7 min-w-0">
+<div class="w-7 h-7 rounded-lg bg-[#2A3350] flex items-center justify-center text-[#4D8FF7] shrink-0">
+<span class="material-symbols-outlined text-[18px]">cloud</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-[12px] text-white truncate">Google AdMob • 100GB Free Cloud Backup</span>
+<span class="font-body-sm text-[11px] text-[#858B9C] truncate">Secure all your PDF docs seamlessly</span>
+</div>
+</div>
+<button class="px-3 py-1 bg-[#4D8FF7] text-[#0A1020] text-[12px] font-bold rounded-full shrink-0 shadow-sm">
+                Open
+              </button>
+</div>
+<!-- H. BOTTOM NAVIGATION BAR (64pt tall) -->
+<div class="h-16 w-full bg-[#1A1D29] px-6 flex items-center justify-between shrink-0 z-20 shadow-[0_-2px_10px_rgba(0,0,0,0.3)]">
+<!-- Tab 1: All files (ACTIVE) -->
+<div class="flex flex-col items-center gap-0.5 cursor-pointer">
+<span class="material-symbols-outlined text-[#4D8FF7] text-[24px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="font-label-xs text-[11px] font-bold text-[#4D8FF7]">All files</span>
+</div>
+<!-- Tab 2: Tools -->
+<div class="flex flex-col items-center gap-0.5 cursor-pointer text-[#858B9C] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]">construction</span>
+<span class="font-label-xs text-[11px] font-medium text-[#858B9C]">Tools</span>
+</div>
+<!-- Tab 3: Settings -->
+<div class="flex flex-col items-center gap-0.5 cursor-pointer text-[#858B9C] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="font-label-xs text-[11px] font-medium text-[#858B9C]">Settings</span>
+</div>
+</div>
+<!-- Home indicator bar -->
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-30"></div>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- FRAME 3: SKELETON SHIMMER STATE                             -->
+<!-- ============================================================ -->
+<div class="flex flex-col items-center gap-3">
+<div class="flex items-center justify-between w-[393px] px-2 text-outline-variant font-label-md text-label-md">
+<span class="flex items-center gap-2 text-white">
+<span class="w-2.5 h-2.5 rounded-full bg-outline animate-pulse"></span>
+              SKELETON SHIMMER STATE
+            </span>
+<span class="text-outline">Index Cache Loading</span>
+</div>
+<!-- Phone Chassis: 393 x 852 pt -->
+<div class="w-[393px] h-[852px] bg-white rounded-[48px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col select-none">
+<!-- A. STATUS BAR -->
+<div class="h-11 w-full px-7 flex items-center justify-between z-30 pt-2 shrink-0 bg-white">
+<span class="font-label-md text-label-md text-[#11141C] tracking-tight">9:41</span>
+<!-- Dynamic Island Notch -->
+<div class="w-28 h-7 bg-black rounded-full flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-[#11141C]/80"></div>
+</div>
+<div class="flex items-center gap-1.5 text-[#11141C]">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- B. APP BAR SKELETON -->
+<div class="h-14 w-full px-5 flex items-center justify-between shrink-0 bg-white z-20">
+<div class="w-28 h-6 rounded-md bg-[#E9EDF5] animate-pulse"></div>
+<div class="w-9 h-9 rounded-full bg-[#E9EDF5] animate-pulse"></div>
+</div>
+<!-- SCROLLABLE BODY AREA SKELETON -->
+<div class="flex-1 overflow-y-auto no-scrollbar relative flex flex-col pb-32">
+<!-- C. CATEGORY GRID SKELETON (8 rounded cards) -->
+<div class="px-5 pt-2 pb-4">
+<div class="grid grid-cols-4 gap-2.5">
+<!-- Skeleton Tiles 1-8 -->
+<div class="bg-[#F5F7FB] rounded-[20px] p-2 flex flex-col items-center justify-center gap-1.5 animate-pulse">
+<div class="w-8 h-[38px] bg-[#E9EDF5] rounded-md"></div>
+<div class="w-8 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-12 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+<div class="bg-[#F5F7FB] rounded-[20px] p-2 flex flex-col items-center justify-center gap-1.5 animate-pulse">
+<div class="w-8 h-[38px] bg-[#E9EDF5] rounded-md"></div>
+<div class="w-8 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-10 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+<div class="bg-[#F5F7FB] rounded-[20px] p-2 flex flex-col items-center justify-center gap-1.5 animate-pulse">
+<div class="w-8 h-[38px] bg-[#E9EDF5] rounded-md"></div>
+<div class="w-8 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-10 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+<div class="bg-[#F5F7FB] rounded-[20px] p-2 flex flex-col items-center justify-center gap-1.5 animate-pulse">
+<div class="w-8 h-[38px] bg-[#E9EDF5] rounded-md"></div>
+<div class="w-8 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-8 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+<div class="bg-[#F5F7FB] rounded-[20px] p-2 flex flex-col items-center justify-center gap-1.5 animate-pulse">
+<div class="w-8 h-[38px] bg-[#E9EDF5] rounded-md"></div>
+<div class="w-8 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-8 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+<div class="bg-[#F5F7FB] rounded-[20px] p-2 flex flex-col items-center justify-center gap-1.5 animate-pulse">
+<div class="w-8 h-[38px] bg-[#E9EDF5] rounded-md"></div>
+<div class="w-8 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-8 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+<div class="bg-[#F5F7FB] rounded-[20px] p-2 flex flex-col items-center justify-center gap-1.5 animate-pulse">
+<div class="w-8 h-[38px] bg-[#E9EDF5] rounded-md"></div>
+<div class="w-8 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-12 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+<div class="bg-[#F5F7FB] rounded-[20px] p-2 flex flex-col items-center justify-center gap-1.5 animate-pulse">
+<div class="w-8 h-[38px] bg-[#E9EDF5] rounded-md"></div>
+<div class="w-8 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-10 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+</div>
+</div>
+<!-- D. DIVIDER BAND & TABS SKELETON -->
+<div class="h-1.5 w-full bg-[#F1F3F8]"></div>
+<div class="px-5 py-3 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="w-16 h-5 bg-[#E9EDF5] rounded-md animate-pulse"></div>
+<div class="w-20 h-5 bg-[#F0F3F9] rounded-md animate-pulse"></div>
+</div>
+<div class="w-6 h-6 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+<!-- E. RECENT ROWS SKELETON (5 shimmer rows, 68pt tall each) -->
+<div class="flex flex-col">
+<!-- Skeleton Row 1 -->
+<div class="h-[68px] px-5 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-12 h-14 bg-[#E9EDF5] rounded-[10px]"></div>
+<div class="flex flex-col gap-2">
+<div class="w-36 h-3.5 bg-[#E9EDF5] rounded"></div>
+<div class="w-24 h-3 bg-[#F0F3F9] rounded"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-full"></div>
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-full"></div>
+</div>
+</div>
+<!-- Skeleton Row 2 -->
+<div class="h-[68px] px-5 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-12 h-14 bg-[#E9EDF5] rounded-[10px]"></div>
+<div class="flex flex-col gap-2">
+<div class="w-44 h-3.5 bg-[#E9EDF5] rounded"></div>
+<div class="w-28 h-3 bg-[#F0F3F9] rounded"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-full"></div>
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-full"></div>
+</div>
+</div>
+<!-- Skeleton Row 3 -->
+<div class="h-[68px] px-5 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-12 h-14 bg-[#E9EDF5] rounded-[10px]"></div>
+<div class="flex flex-col gap-2">
+<div class="w-40 h-3.5 bg-[#E9EDF5] rounded"></div>
+<div class="w-20 h-3 bg-[#F0F3F9] rounded"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-full"></div>
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-full"></div>
+</div>
+</div>
+<!-- Skeleton Row 4 -->
+<div class="h-[68px] px-5 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-12 h-14 bg-[#E9EDF5] rounded-[10px]"></div>
+<div class="flex flex-col gap-2">
+<div class="w-48 h-3.5 bg-[#E9EDF5] rounded"></div>
+<div class="w-24 h-3 bg-[#F0F3F9] rounded"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-full"></div>
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-full"></div>
+</div>
+</div>
+<!-- Skeleton Row 5 (Native Ad placeholder) -->
+<div class="h-[68px] mx-5 my-1 px-3 bg-[#F5F7FB] rounded-2xl flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-[#E9EDF5] rounded-xl"></div>
+<div class="flex flex-col gap-2">
+<div class="w-32 h-3.5 bg-[#E9EDF5] rounded"></div>
+<div class="w-40 h-3 bg-[#F0F3F9] rounded"></div>
+</div>
+</div>
+<div class="w-14 h-7 bg-[#E9EDF5] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- F. FAB SKELETON -->
+<div class="absolute right-5 bottom-[136px] w-14 h-14 rounded-2xl bg-[#E9EDF5] animate-pulse z-30 shadow-md"></div>
+<!-- G. DOCKED ADAPTIVE BANNER AD SKELETON (60pt tall) -->
+<div class="h-[60px] w-full bg-[#F5F7FB] px-4 flex items-center justify-between shrink-0 relative z-20 animate-pulse">
+<!-- AD placeholder badge -->
+<span class="absolute top-1 left-2 text-[9px] font-bold px-1.5 py-[1px] rounded bg-white text-[#8A8F9C] shadow-sm">AD</span>
+<div class="flex items-center gap-2.5 pl-7 min-w-0">
+<div class="w-7 h-7 rounded-lg bg-[#E9EDF5]"></div>
+<div class="flex flex-col gap-1.5">
+<div class="w-44 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-32 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+</div>
+<div class="w-12 h-6 bg-[#E9EDF5] rounded-full"></div>
+</div>
+<!-- H. BOTTOM NAVIGATION BAR SKELETON (64pt tall) -->
+<div class="h-16 w-full bg-white px-6 flex items-center justify-between shrink-0 z-20 shadow-[0_-2px_10px_rgba(0,0,0,0.03)]">
+<!-- Tab Skeleton 1 -->
+<div class="flex flex-col items-center gap-1.5 animate-pulse">
+<div class="w-6 h-6 bg-[#E9EDF5] rounded-md"></div>
+<div class="w-8 h-2 bg-[#E9EDF5] rounded"></div>
+</div>
+<!-- Tab Skeleton 2 -->
+<div class="flex flex-col items-center gap-1.5 animate-pulse">
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-md"></div>
+<div class="w-8 h-2 bg-[#F0F3F9] rounded"></div>
+</div>
+<!-- Tab Skeleton 3 -->
+<div class="flex flex-col items-center gap-1.5 animate-pulse">
+<div class="w-6 h-6 bg-[#F0F3F9] rounded-md"></div>
+<div class="w-8 h-2 bg-[#F0F3F9] rounded"></div>
+</div>
+</div>
+<!-- Home indicator bar -->
+<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/20 rounded-full z-30"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ENGINEERING DESIGN SPECIFICATIONS & TOKENS PANEL -->
+<section class="w-full bg-[#0B0D14] py-16 px-6 lg:px-12 text-white">
+<div class="max-w-[1360px] mx-auto flex flex-col gap-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="font-label-xs text-label-xs text-primary-fixed uppercase tracking-wider">Engineering Specs</span>
+<h2 class="font-headline-lg text-headline-lg text-white mt-1">Spatial Metrics &amp; Token Architecture</h2>
+</div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-outline-variant">
+<span class="w-2 h-2 rounded-full bg-green-400"></span>
+          All tokens validated against Doc View Design System v2.4
+        </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Spec Card 1 -->
+<div class="bg-[#161A26] p-6 rounded-2xl flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-xl bg-primary/20 text-primary-fixed flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[22px]">grid_4x4</span>
+</div>
+<h3 class="font-title-md text-title-md text-white">Spatial Grid Strict 4pt</h3>
+<p class="font-body-md text-body-md text-outline-variant mt-2">
+              Page margin pinned at 20pt (1.25rem). Category tiles utilize rounded-[20px] radius with folded-corner glyph anchors.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-[#10131D] -mx-6 -mb-6 px-6 py-3 rounded-b-2xl flex justify-between font-label-xs text-label-xs text-tertiary-fixed-dim">
+<span>Tile Radius</span>
+<span class="font-bold text-white">20pt</span>
+</div>
+</div>
+<!-- Spec Card 2 -->
+<div class="bg-[#161A26] p-6 rounded-2xl flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[22px]">ad_units</span>
+</div>
+<h3 class="font-title-md text-title-md text-white">Dual Monetization</h3>
+<p class="font-body-md text-body-md text-outline-variant mt-2">
+              Docked Adaptive AdMob banner strictly bounded to 60pt with integrated AD pill. Native row ad with custom inline CTA.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-[#10131D] -mx-6 -mb-6 px-6 py-3 rounded-b-2xl flex justify-between font-label-xs text-label-xs text-tertiary-fixed-dim">
+<span>Docked AdMob</span>
+<span class="font-bold text-white">60pt exact</span>
+</div>
+</div>
+<!-- Spec Card 3 -->
+<div class="bg-[#161A26] p-6 rounded-2xl flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[22px]">touch_app</span>
+</div>
+<h3 class="font-title-md text-title-md text-white">Touch Ergonomics</h3>
+<p class="font-body-md text-body-md text-outline-variant mt-2">
+              All interactive hitboxes maintain a strict 48×48pt touch boundary. FAB engineered at 56×56pt with 16pt corner radius.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-[#10131D] -mx-6 -mb-6 px-6 py-3 rounded-b-2xl flex justify-between font-label-xs text-label-xs text-tertiary-fixed-dim">
+<span>Hitbox Min</span>
+<span class="font-bold text-white">48×48pt</span>
+</div>
+</div>
+<!-- Spec Card 4 -->
+<div class="bg-[#161A26] p-6 rounded-2xl flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[22px]">dark_mode</span>
+</div>
+<h3 class="font-title-md text-title-md text-white">Deep Navy Palettes</h3>
+<p class="font-body-md text-body-md text-outline-variant mt-2">
+              Dark mode utilizes deep navy #1A1D29 for foundational plane with #232838 surface tiles, avoiding OLED black clipping.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-[#10131D] -mx-6 -mb-6 px-6 py-3 rounded-b-2xl flex justify-between font-label-xs text-label-xs text-tertiary-fixed-dim">
+<span>Dark Baseline</span>
+<span class="font-bold text-white">#1A1D29</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-low py-space-xl text-on-surface-variant"><div class="w-full px-margin flex flex-col sm:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm"><div class="flex items-center gap-space-sm"><span class="font-label-md text-label-md text-on-surface">Doc View Engineering Suite</span><span class="text-outline">•</span><span>High-Efficiency Document Reader &amp; PDF Engine</span></div><div class="flex items-center gap-space-lg"><span class="text-outline">Spatial Grid: 4pt Strict</span><span class="text-outline">•</span><span>AdMob Docked: 60pt</span><span class="text-outline">•</span><span>Primary CTA: 56pt</span></div></div></footer></body></html>

@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Doc View Engineering Suite - UI Showcase Artboard</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"error-container":"#ffdad6","on-secondary":"#ffffff","on-primary-fixed-variant":"#004492","primary-container":"#1f71e0","surface-variant":"#e0e2ee","on-error":"#ffffff","surface-container-highest":"#e0e2ee","on-secondary-container":"#fefcff","tertiary":"#545d68","secondary-fixed":"#dae2ff","tertiary-fixed":"#dbe3f1","surface-dim":"#d8d9e5","tertiary-fixed-dim":"#bfc7d4","on-tertiary":"#ffffff","outline-variant":"#c2c6d5","background":"#faf8ff","tertiary-container":"#6d7581","outline":"#727785","on-error-container":"#93000a","on-tertiary-fixed":"#141c26","on-secondary-fixed":"#001847","surface-container-high":"#e6e7f3","on-background":"#181b24","surface-bright":"#faf8ff","surface":"#faf8ff","on-tertiary-container":"#fdfcff","primary-fixed-dim":"#acc7ff","error":"#ba1a1a","surface-container-lowest":"#ffffff","primary":"#0059ba","surface-container":"#ecedf9","secondary-container":"#276def","on-primary-container":"#fefcff","inverse-on-surface":"#eff0fc","primary-fixed":"#d7e2ff","inverse-primary":"#acc7ff","on-primary":"#ffffff","on-surface":"#181b24","surface-container-low":"#f2f3ff","secondary":"#0054cb","secondary-fixed-dim":"#b1c5ff","on-primary-fixed":"#001a40","on-tertiary-fixed-variant":"#3f4752","inverse-surface":"#2d3039","surface-tint":"#005bbf","on-secondary-fixed-variant":"#00409f","on-surface-variant":"#424753"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin":"1.25rem","space-sm":"0.5rem","space-xs":"0.25rem","space-xl":"1.5rem","gutter":"0.75rem","space-lg":"1rem","space-md":"0.75rem"},"fontFamily":{"label-md":["Inter"],"headline-xl":["Space Grotesk"],"body-sm":["Inter"],"body-md":["Inter"],"title-md":["Inter"],"headline-lg":["Space Grotesk"],"label-lg":["Inter"],"label-xs":["Inter"],"body-lg":["Inter"],"headline-sm":["Space Grotesk"]},"fontSize":{"label-md":["13px",{"lineHeight":"18px","fontWeight":"600"}],"headline-xl":["32px",{"lineHeight":"38px","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"title-md":["16px",{"lineHeight":"22px","fontWeight":"700"}],"headline-lg":["24px",{"lineHeight":"30px","fontWeight":"700"}],"label-lg":["15px",{"lineHeight":"20px","fontWeight":"600"}],"label-xs":["11px",{"lineHeight":"14px","fontWeight":"600"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"500"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-inverse-surface/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.12)]"><div class="h-14 w-full px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">layers</span></div><span class="font-headline-sm text-headline-sm text-inverse-on-surface tracking-tight">DocView</span></div><div class="h-4 w-px bg-tertiary-container"></div><div class="flex items-center gap-space-xs font-label-xs text-label-xs text-tertiary-fixed-dim"><span class="uppercase tracking-wider">Matrix</span><span>/</span><span class="text-inverse-on-surface">Artboard Comparison</span></div><div class="hidden lg:flex items-center gap-space-xs"><span class="px-space-sm py-0.5 rounded-full bg-surface-container-highest/20 font-label-xs text-label-xs text-tertiary-fixed">5 Variants</span><span class="px-space-sm py-0.5 rounded-full bg-primary/20 font-label-xs text-label-xs text-primary-fixed">Dual-Theme: Light &amp; Deep Navy</span></div></div><nav class="hidden md:flex items-center gap-space-sm" data-active-classes="bg-surface-container-highest/30 text-inverse-on-surface font-label-md text-label-md rounded px-space-md py-1.5"><a aria-current="page" class="transition-colors bg-surface-container-highest/30 text-inverse-on-surface font-label-md text-label-md rounded px-space-md py-1.5" data-path="artboard-overview" href="#">Artboard Overview</a><a class="px-space-md py-1.5 font-label-md text-label-md text-tertiary-fixed-dim hover:text-inverse-on-surface transition-colors" data-path="variant-inspector" href="#">Variant Inspector</a><a class="px-space-md py-1.5 font-label-md text-label-md text-tertiary-fixed-dim hover:text-inverse-on-surface transition-colors" data-path="token-matrix" href="#">Token Matrix</a><a class="px-space-md py-1.5 font-label-md text-label-md text-tertiary-fixed-dim hover:text-inverse-on-surface transition-colors" data-path="export-specifications" href="#">Export Specs</a></nav><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><span class="px-space-sm py-1 rounded bg-surface-container-highest/15 text-inverse-on-surface font-label-xs text-label-xs font-mono">393×852pt</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-14 bg-surface min-h-[calc(100vh-3.5rem)]"><div class="flex flex-col w-full">
+<!-- Artboard Canvas Master Header -->
+<div class="w-full bg-surface-container-low px-margin py-space-xl">
+<div class="max-w-[1720px] mx-auto flex flex-col md:flex-row md:items-end justify-between gap-space-lg">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-primary text-on-primary font-label-xs text-label-xs uppercase tracking-wider">Production Spec v3.4</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">iOS Standard 393 × 852 pt</span>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-xs text-label-xs">10 Matrix Instances</span>
+</div>
+<div class="space-y-1">
+<span class="font-headline-xl text-headline-xl text-on-surface tracking-tight block">Doc View Home Screen — 5 State Variants</span>
+<span class="font-body-md text-body-md text-on-surface-variant block">Dual-mode visual verification matrix comparing Light Theme and Deep Navy containers across system life-cycle states.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="bg-surface-container-highest/60 rounded p-space-xs flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm transition hover:bg-surface-bright flex items-center gap-space-xs" id="toggle-zoom" onclick="document.querySelectorAll('.matrix-col').forEach(c =&gt; c.classList.toggle('scale-95'))">
+<span class="material-symbols-outlined text-[16px]">fit_screen</span> Fit 95%
+          </button>
+<button class="px-space-md py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition flex items-center gap-space-xs" onclick="window.scrollTo({top: document.getElementById('token-specs').offsetTop - 60, behavior: 'smooth'})">
+<span class="material-symbols-outlined text-[16px]">tune</span> Specs &amp; Legend
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- State Navigation Bar (Sticky anchor selector) -->
+<div class="w-full bg-surface-container shadow-sm sticky top-14 z-40 px-margin py-space-sm">
+<div class="max-w-[1720px] mx-auto flex items-center justify-between gap-space-md overflow-x-auto">
+<div class="flex items-center gap-space-xs shrink-0">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mr-space-sm">Quick Jump:</span>
+<a class="px-space-md py-1 rounded bg-surface-container-lowest text-primary font-label-md text-label-md hover:bg-primary hover:text-on-primary transition" href="#variant-1">01. Bookmarks Active</a>
+<a class="px-space-md py-1 rounded bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-md text-label-md transition" href="#variant-2">02. Bookmarks Empty</a>
+<a class="px-space-md py-1 rounded bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-md text-label-md transition" href="#variant-3">03. Recent Empty</a>
+<a class="px-space-md py-1 rounded bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-md text-label-md transition" href="#variant-4">04. Indexing &amp; Scan</a>
+<a class="px-space-md py-1 rounded bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-md text-label-md transition" href="#variant-5">05. Permission Gate</a>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="font-label-xs text-label-xs text-on-surface-variant">Grid System: 4pt Strict Spatial</span>
+</div>
+</div>
+</div>
+<!-- Main Comparison Matrix Container -->
+<div class="w-full px-margin py-space-xl space-y-24 max-w-[1720px] mx-auto">
+<!-- ========================================================================= -->
+<!-- VARIANT 1: Bookmarks Tab Active with 3 Bookmarked Rows -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="variant-1">
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col lg:flex-row lg:items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-primary text-on-primary flex items-center justify-center font-title-md text-title-md shrink-0">01</div>
+<div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-lg text-headline-lg text-on-surface">Variant 1: Bookmarks Tab Active</span>
+<span class="px-space-sm py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-xs text-label-xs">Populated State</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">3 Pinned Documents</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant mt-1 block">Active "Bookmarks" tab with 3pt bottom indicator, populated file rows (PDF format), filled bookmark tokens, and 60pt docked AdMob monetization unit.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-xs text-label-xs">
+<span>Thumbnail: 48 × 56 pt</span>
+<span>•</span>
+<span>Row Height: 68 pt</span>
+<span>•</span>
+<span>Tap Radius: 20 pt</span>
+</div>
+</div>
+<!-- Dual Phone Comparison Row -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl">
+<!-- LIGHT PHONE -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span>Light Surface Mode (#FFFFFF • Tiles #F3F5FA)</span>
+</div>
+<!-- Phone Chassis: 393 x 852 pt -->
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-black/5">
+<!-- Screen Surface -->
+<div class="w-full h-full rounded-[41px] bg-white text-[#11141C] font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- iOS Status Bar & Dynamic Island -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#E9F2FF]">
+<span class="font-semibold text-[14px] text-[#11141C]">9:41</span>
+<!-- Dynamic Island Capsule -->
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3">
+<div class="w-2.5 h-2.5 rounded-full bg-[#1A1A1A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-[#11141C]">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Top Content Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header Gradient Bar -->
+<div class="w-full bg-gradient-to-b from-[#E9F2FF] to-white px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#1A66E8] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-[#11141C]">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/5 text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/5 text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Category Grid: 8 tiles -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<!-- All -->
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#1A66E8]/10 text-[#1A66E8] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</div>
+<span class="font-semibold text-[12px] text-[#11141C] leading-none">All</span>
+<span class="text-[10px] text-[#8A8F9C] mt-1">5,363</span>
+</div>
+<!-- PDF -->
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#E02B2B]/10 text-[#E02B2B] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</div>
+<span class="font-semibold text-[12px] text-[#11141C] leading-none">PDF</span>
+<span class="text-[10px] text-[#8A8F9C] mt-1">92</span>
+</div>
+<!-- Word -->
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/10 text-[#1E5FD8] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">article</span>
+</div>
+<span class="font-semibold text-[12px] text-[#11141C] leading-none">Word</span>
+<span class="text-[10px] text-[#8A8F9C] mt-1">20</span>
+</div>
+<!-- Excel -->
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/10 text-[#1E9E4F] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">table_chart</span>
+</div>
+<span class="font-semibold text-[12px] text-[#11141C] leading-none">Excel</span>
+<span class="text-[10px] text-[#8A8F9C] mt-1">7</span>
+</div>
+<!-- PPT -->
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#F26B1D]/10 text-[#F26B1D] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">slideshow</span>
+</div>
+<span class="font-semibold text-[12px] text-[#11141C] leading-none">PPT</span>
+<span class="text-[10px] text-[#8A8F9C] mt-1">4</span>
+</div>
+<!-- TXT -->
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/10 text-[#5B6B9A] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">subject</span>
+</div>
+<span class="font-semibold text-[12px] text-[#11141C] leading-none">TXT</span>
+<span class="text-[10px] text-[#8A8F9C] mt-1">7</span>
+</div>
+<!-- Images -->
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#FFB300]/15 text-[#C98200] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">photo_library</span>
+</div>
+<span class="font-semibold text-[12px] text-[#11141C] leading-none">Image</span>
+<span class="text-[10px] text-[#8A8F9C] mt-1">5,233</span>
+</div>
+<!-- Directories -->
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/10 text-[#2F7BEA] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+</div>
+<span class="font-semibold text-[12px] text-[#11141C] leading-none">Folders</span>
+<span class="text-[10px] text-[#8A8F9C] mt-1">Browse</span>
+</div>
+</div>
+</div>
+<!-- 8pt Divider Band -->
+<div class="w-full h-2 bg-[#F1F3F8]"></div>
+<!-- Section Tabs -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-medium text-[#8A8F9C]">
+                      Recent
+                    </button>
+<button class="relative py-2 text-[15px] font-bold text-[#11141C]">
+                      Bookmarks
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#1A66E8] rounded-full"></span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[19px]">checklist</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[19px]">sort</span>
+</button>
+</div>
+</div>
+<!-- Document Rows: 3 Bookmarked PDF Rows -->
+<div class="px-5 py-2 space-y-2">
+<!-- Row 1 -->
+<div class="w-full h-[68px] rounded-[18px] bg-[#F3F5FA] px-3 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Thumbnail 48x56 -->
+<div class="w-[42px] h-[50px] rounded-[10px] bg-white p-1 flex flex-col justify-between shrink-0 shadow-xs relative overflow-hidden">
+<div class="w-full h-1 bg-[#E02B2B] rounded-full"></div>
+<div class="space-y-1">
+<div class="w-full h-1 bg-[#E02B2B]/20 rounded"></div>
+<div class="w-3/4 h-1 bg-[#E02B2B]/20 rounded"></div>
+</div>
+<span class="text-[8px] font-bold text-[#E02B2B] self-end leading-none">PDF</span>
+</div>
+<div class="min-w-0">
+<span class="font-bold text-[13px] text-[#11141C] truncate block">Financial_Report_Q4_2025.pdf</span>
+<span class="text-[11px] text-[#8A8F9C] truncate block">Saved 2 hrs ago • 2.4 MB</span>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="w-9 h-9 flex items-center justify-center text-[#1A66E8]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="w-full h-[68px] rounded-[18px] bg-[#F3F5FA] px-3 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-white p-1 flex flex-col justify-between shrink-0 shadow-xs relative overflow-hidden">
+<div class="w-full h-1 bg-[#E02B2B] rounded-full"></div>
+<div class="space-y-1">
+<div class="w-full h-1 bg-[#E02B2B]/20 rounded"></div>
+<div class="w-3/4 h-1 bg-[#E02B2B]/20 rounded"></div>
+</div>
+<span class="text-[8px] font-bold text-[#E02B2B] self-end leading-none">PDF</span>
+</div>
+<div class="min-w-0">
+<span class="font-bold text-[13px] text-[#11141C] truncate block">Employment_Contract_Signed.pdf</span>
+<span class="text-[11px] text-[#8A8F9C] truncate block">Saved yesterday • 1.1 MB</span>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="w-9 h-9 flex items-center justify-center text-[#1A66E8]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="w-full h-[68px] rounded-[18px] bg-[#F3F5FA] px-3 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-white p-1 flex flex-col justify-between shrink-0 shadow-xs relative overflow-hidden">
+<div class="w-full h-1 bg-[#E02B2B] rounded-full"></div>
+<div class="space-y-1">
+<div class="w-full h-1 bg-[#E02B2B]/20 rounded"></div>
+<div class="w-3/4 h-1 bg-[#E02B2B]/20 rounded"></div>
+</div>
+<span class="text-[8px] font-bold text-[#E02B2B] self-end leading-none">PDF</span>
+</div>
+<div class="min-w-0">
+<span class="font-bold text-[13px] text-[#11141C] truncate block">Architectural_Blueprints_v3.pdf</span>
+<span class="text-[11px] text-[#8A8F9C] truncate block">Saved 3 days ago • 8.9 MB</span>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="w-9 h-9 flex items-center justify-center text-[#1A66E8]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (FAB 56x56) -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/35 z-30 transition transform active:scale-95">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Fixed Bottom Group: AdMob Banner + Bottom Navigation -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-white">
+<!-- AdMob Banner Container: 60pt tall -->
+<div class="w-full h-[60px] bg-[#FAF8FF] px-4 flex items-center justify-between shadow-inner">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#1F71E0]/15 flex items-center justify-center text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]">cloud_sync</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#E0E2EE] text-[#424753] leading-none">AD</span>
+<span class="font-bold text-[12px] text-[#11141C] leading-none">Cloud Backup Pro</span>
+</div>
+<span class="text-[10px] text-[#8A8F9C] mt-0.5 block">Sync and safeguard up to 500GB today.</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-[#1A66E8] text-white text-[11px] font-semibold">
+                    Install
+                  </button>
+</div>
+<!-- Bottom Bar: 64pt tall -->
+<div class="w-full h-[64px] bg-white px-8 flex items-center justify-between shadow-[0_-2px_8px_rgba(0,0,0,0.03)] pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]">folder</span>
+<span class="font-semibold text-[10px]">All files</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C] hover:text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">build</span>
+<span class="font-medium text-[10px]">Tools</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C] hover:text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="font-medium text-[10px]">Settings</span>
+</button>
+</div>
+<!-- Home Bar Indicator -->
+<div class="w-full bg-white pb-1 flex justify-center">
+<div class="w-32 h-1 bg-black/20 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK NAVY PHONE -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span>Deep Navy Surface Mode (#1A1D29 • Tiles #232838)</span>
+</div>
+<!-- Phone Chassis: 393 x 852 pt -->
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-white/10">
+<!-- Screen Surface -->
+<div class="w-full h-full rounded-[41px] bg-[#1A1D29] text-white font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- iOS Status Bar & Dynamic Island -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#1A1D29]">
+<span class="font-semibold text-[14px] text-white">9:41</span>
+<!-- Dynamic Island Capsule -->
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3 ring-1 ring-white/10">
+<div class="w-2.5 h-2.5 rounded-full bg-[#2A2A2A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-white">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Top Content Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header Gradient Bar -->
+<div class="w-full bg-[#1A1D29] px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#4D8FF7] flex items-center justify-center text-black font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-[#141C26]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-white">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-white">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-white">
+<span class="material-symbols-outlined text-[22px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Category Grid: 8 tiles -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<!-- All -->
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#4D8FF7]/20 text-[#4D8FF7] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</div>
+<span class="font-semibold text-[12px] text-white leading-none">All</span>
+<span class="text-[10px] text-[#858B9C] mt-1">5,363</span>
+</div>
+<!-- PDF -->
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#E02B2B]/20 text-[#FF6B6B] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</div>
+<span class="font-semibold text-[12px] text-white leading-none">PDF</span>
+<span class="text-[10px] text-[#858B9C] mt-1">92</span>
+</div>
+<!-- Word -->
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/20 text-[#6BA5FF] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">article</span>
+</div>
+<span class="font-semibold text-[12px] text-white leading-none">Word</span>
+<span class="text-[10px] text-[#858B9C] mt-1">20</span>
+</div>
+<!-- Excel -->
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/20 text-[#4EE387] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">table_chart</span>
+</div>
+<span class="font-semibold text-[12px] text-white leading-none">Excel</span>
+<span class="text-[10px] text-[#858B9C] mt-1">7</span>
+</div>
+<!-- PPT -->
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#F26B1D]/20 text-[#FFA066] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">slideshow</span>
+</div>
+<span class="font-semibold text-[12px] text-white leading-none">PPT</span>
+<span class="text-[10px] text-[#858B9C] mt-1">4</span>
+</div>
+<!-- TXT -->
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/20 text-[#A2B1DF] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">subject</span>
+</div>
+<span class="font-semibold text-[12px] text-white leading-none">TXT</span>
+<span class="text-[10px] text-[#858B9C] mt-1">7</span>
+</div>
+<!-- Images -->
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#FFB300]/20 text-[#FFD066] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">photo_library</span>
+</div>
+<span class="font-semibold text-[12px] text-white leading-none">Image</span>
+<span class="text-[10px] text-[#858B9C] mt-1">5,233</span>
+</div>
+<!-- Directories -->
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center shadow-xs">
+<div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/20 text-[#7BB1FF] flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+</div>
+<span class="font-semibold text-[12px] text-white leading-none">Folders</span>
+<span class="text-[10px] text-[#858B9C] mt-1">Browse</span>
+</div>
+</div>
+</div>
+<!-- 8pt Divider Band -->
+<div class="w-full h-2 bg-[#141722]"></div>
+<!-- Section Tabs -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-medium text-[#858B9C]">
+                      Recent
+                    </button>
+<button class="relative py-2 text-[15px] font-bold text-white">
+                      Bookmarks
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#4D8FF7] rounded-full"></span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#858B9C]">
+<span class="material-symbols-outlined text-[19px]">checklist</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#858B9C]">
+<span class="material-symbols-outlined text-[19px]">sort</span>
+</button>
+</div>
+</div>
+<!-- Document Rows: 3 Bookmarked PDF Rows -->
+<div class="px-5 py-2 space-y-2">
+<!-- Row 1 -->
+<div class="w-full h-[68px] rounded-[18px] bg-[#232838] px-3 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#141722] p-1 flex flex-col justify-between shrink-0 shadow-xs relative overflow-hidden">
+<div class="w-full h-1 bg-[#E02B2B] rounded-full"></div>
+<div class="space-y-1">
+<div class="w-full h-1 bg-white/20 rounded"></div>
+<div class="w-3/4 h-1 bg-white/20 rounded"></div>
+</div>
+<span class="text-[8px] font-bold text-[#FF6B6B] self-end leading-none">PDF</span>
+</div>
+<div class="min-w-0">
+<span class="font-bold text-[13px] text-white truncate block">Financial_Report_Q4_2025.pdf</span>
+<span class="text-[11px] text-[#858B9C] truncate block">Saved 2 hrs ago • 2.4 MB</span>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="w-9 h-9 flex items-center justify-center text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center text-[#858B9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="w-full h-[68px] rounded-[18px] bg-[#232838] px-3 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#141722] p-1 flex flex-col justify-between shrink-0 shadow-xs relative overflow-hidden">
+<div class="w-full h-1 bg-[#E02B2B] rounded-full"></div>
+<div class="space-y-1">
+<div class="w-full h-1 bg-white/20 rounded"></div>
+<div class="w-3/4 h-1 bg-white/20 rounded"></div>
+</div>
+<span class="text-[8px] font-bold text-[#FF6B6B] self-end leading-none">PDF</span>
+</div>
+<div class="min-w-0">
+<span class="font-bold text-[13px] text-white truncate block">Employment_Contract_Signed.pdf</span>
+<span class="text-[11px] text-[#858B9C] truncate block">Saved yesterday • 1.1 MB</span>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="w-9 h-9 flex items-center justify-center text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center text-[#858B9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="w-full h-[68px] rounded-[18px] bg-[#232838] px-3 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#141722] p-1 flex flex-col justify-between shrink-0 shadow-xs relative overflow-hidden">
+<div class="w-full h-1 bg-[#E02B2B] rounded-full"></div>
+<div class="space-y-1">
+<div class="w-full h-1 bg-white/20 rounded"></div>
+<div class="w-3/4 h-1 bg-white/20 rounded"></div>
+</div>
+<span class="text-[8px] font-bold text-[#FF6B6B] self-end leading-none">PDF</span>
+</div>
+<div class="min-w-0">
+<span class="font-bold text-[13px] text-white truncate block">Architectural_Blueprints_v3.pdf</span>
+<span class="text-[11px] text-[#858B9C] truncate block">Saved 3 days ago • 8.9 MB</span>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="w-9 h-9 flex items-center justify-center text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center text-[#858B9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (FAB 56x56) -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/40 z-30 transition transform active:scale-95">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Fixed Bottom Group: AdMob Banner + Bottom Navigation -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-[#1A1D29]">
+<!-- AdMob Banner Container: 60pt tall -->
+<div class="w-full h-[60px] bg-[#141722] px-4 flex items-center justify-between shadow-inner">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#4D8FF7]/20 flex items-center justify-center text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]">cloud_sync</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2A3042] text-[#858B9C] leading-none">AD</span>
+<span class="font-bold text-[12px] text-white leading-none">Cloud Backup Pro</span>
+</div>
+<span class="text-[10px] text-[#858B9C] mt-0.5 block">Sync and safeguard up to 500GB today.</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-[#1A66E8] text-white text-[11px] font-semibold">
+                    Install
+                  </button>
+</div>
+<!-- Bottom Bar: 64pt tall -->
+<div class="w-full h-[64px] bg-[#1A1D29] px-8 flex items-center justify-between shadow-[0_-2px_8px_rgba(0,0,0,0.25)] pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]">folder</span>
+<span class="font-semibold text-[10px]">All files</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C] hover:text-white">
+<span class="material-symbols-outlined text-[22px]">build</span>
+<span class="font-medium text-[10px]">Tools</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C] hover:text-white">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="font-medium text-[10px]">Settings</span>
+</button>
+</div>
+<!-- Home Bar Indicator -->
+<div class="w-full bg-[#1A1D29] pb-1 flex justify-center">
+<div class="w-32 h-1 bg-white/20 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- VARIANT 2: Bookmarks Tab Empty -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="variant-2">
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col lg:flex-row lg:items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-secondary text-on-secondary flex items-center justify-center font-title-md text-title-md shrink-0">02</div>
+<div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-lg text-headline-lg text-on-surface">Variant 2: Bookmarks Tab Empty State</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">Zero Bookmarks</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant mt-1 block">Bookmarks active with zero pinned documents. Custom SVG illustration with subtle document ribbon iconography.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-xs text-label-xs">
+<span>Illustration: Ribbon Glyphs</span>
+<span>•</span>
+<span>Action: Non-blocking Info</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl">
+<!-- LIGHT EMPTY BOOKMARKS -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span>Light Mode — Empty Bookmarks</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-black/5">
+<div class="w-full h-full rounded-[41px] bg-white text-[#11141C] font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- Status Bar -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#E9F2FF]">
+<span class="font-semibold text-[14px] text-[#11141C]">9:41</span>
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3">
+<div class="w-2.5 h-2.5 rounded-full bg-[#1A1A1A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-[#11141C]">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Main Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header -->
+<div class="w-full bg-gradient-to-b from-[#E9F2FF] to-white px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#1A66E8] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-[#11141C]">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/5 text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/5 text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- 8 Tiles Grid -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1A66E8]/10 text-[#1A66E8] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">grid_view</span></div><span class="font-semibold text-[12px] text-[#11141C]">All</span><span class="text-[10px] text-[#8A8F9C]">5,363</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#E02B2B]/10 text-[#E02B2B] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">picture_as_pdf</span></div><span class="font-semibold text-[12px] text-[#11141C]">PDF</span><span class="text-[10px] text-[#8A8F9C]">92</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/10 text-[#1E5FD8] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">article</span></div><span class="font-semibold text-[12px] text-[#11141C]">Word</span><span class="text-[10px] text-[#8A8F9C]">20</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/10 text-[#1E9E4F] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">table_chart</span></div><span class="font-semibold text-[12px] text-[#11141C]">Excel</span><span class="text-[10px] text-[#8A8F9C]">7</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#F26B1D]/10 text-[#F26B1D] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">slideshow</span></div><span class="font-semibold text-[12px] text-[#11141C]">PPT</span><span class="text-[10px] text-[#8A8F9C]">4</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/10 text-[#5B6B9A] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">subject</span></div><span class="font-semibold text-[12px] text-[#11141C]">TXT</span><span class="text-[10px] text-[#8A8F9C]">7</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#FFB300]/15 text-[#C98200] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">photo_library</span></div><span class="font-semibold text-[12px] text-[#11141C]">Image</span><span class="text-[10px] text-[#8A8F9C]">5,233</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/10 text-[#2F7BEA] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">folder_open</span></div><span class="font-semibold text-[12px] text-[#11141C]">Folders</span><span class="text-[10px] text-[#8A8F9C]">Browse</span></div>
+</div>
+</div>
+<div class="w-full h-2 bg-[#F1F3F8]"></div>
+<!-- Tabs -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-medium text-[#8A8F9C]">Recent</button>
+<button class="relative py-2 text-[15px] font-bold text-[#11141C]">
+                      Bookmarks
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#1A66E8] rounded-full"></span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A8F9C]"><span class="material-symbols-outlined text-[19px]">checklist</span></button>
+</div>
+</div>
+<!-- Empty State Content -->
+<div class="px-8 py-10 flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#E8F0FE] flex items-center justify-center mb-5 text-[#1A66E8] shadow-sm">
+<span class="material-symbols-outlined text-[48px]">bookmark_border</span>
+</div>
+<span class="font-bold text-[18px] text-[#11141C]">No bookmarks yet</span>
+<span class="text-[14px] font-medium text-[#8A8F9C] mt-2 max-w-[260px] leading-relaxed">
+                    Tap the bookmark icon on any file to find it here quickly.
+                  </span>
+</div>
+</div>
+<!-- FAB -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/35 z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Bottom Monetization & Nav -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-white">
+<div class="w-full h-[60px] bg-[#FAF8FF] px-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#1F71E0]/15 flex items-center justify-center text-[#1A66E8]"><span class="material-symbols-outlined text-[22px]">cloud_sync</span></div>
+<div>
+<div class="flex items-center gap-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#E0E2EE] text-[#424753] leading-none">AD</span><span class="font-bold text-[12px] text-[#11141C] leading-none">Cloud Backup Pro</span></div>
+<span class="text-[10px] text-[#8A8F9C] mt-0.5 block">Sync and safeguard up to 500GB today.</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-[#1A66E8] text-white text-[11px] font-semibold">Install</button>
+</div>
+<div class="w-full h-[64px] bg-white px-8 flex items-center justify-between pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#1A66E8]"><span class="material-symbols-outlined text-[22px]">folder</span><span class="font-semibold text-[10px]">All files</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">build</span><span class="font-medium text-[10px]">Tools</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">settings</span><span class="font-medium text-[10px]">Settings</span></button>
+</div>
+<div class="w-full bg-white pb-1 flex justify-center"><div class="w-32 h-1 bg-black/20 rounded-full"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK EMPTY BOOKMARKS -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span>Dark Navy Mode — Empty Bookmarks</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-white/10">
+<div class="w-full h-full rounded-[41px] bg-[#1A1D29] text-white font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- Status Bar -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#1A1D29]">
+<span class="font-semibold text-[14px] text-white">9:41</span>
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3 ring-1 ring-white/10">
+<div class="w-2.5 h-2.5 rounded-full bg-[#2A2A2A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-white">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Main Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header -->
+<div class="w-full bg-[#1A1D29] px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#4D8FF7] flex items-center justify-center text-black font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-[#141C26]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-white">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-white"><span class="material-symbols-outlined text-[22px]">search</span></button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-white"><span class="material-symbols-outlined text-[22px]">more_vert</span></button>
+</div>
+</div>
+<!-- 8 Tiles Grid -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#4D8FF7]/20 text-[#4D8FF7] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">grid_view</span></div><span class="font-semibold text-[12px] text-white">All</span><span class="text-[10px] text-[#858B9C]">5,363</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#E02B2B]/20 text-[#FF6B6B] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">picture_as_pdf</span></div><span class="font-semibold text-[12px] text-white">PDF</span><span class="text-[10px] text-[#858B9C]">92</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/20 text-[#6BA5FF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">article</span></div><span class="font-semibold text-[12px] text-white">Word</span><span class="text-[10px] text-[#858B9C]">20</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/20 text-[#4EE387] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">table_chart</span></div><span class="font-semibold text-[12px] text-white">Excel</span><span class="text-[10px] text-[#858B9C]">7</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#F26B1D]/20 text-[#FFA066] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">slideshow</span></div><span class="font-semibold text-[12px] text-white">PPT</span><span class="text-[10px] text-[#858B9C]">4</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/20 text-[#A2B1DF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">subject</span></div><span class="font-semibold text-[12px] text-white">TXT</span><span class="text-[10px] text-[#858B9C]">7</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#FFB300]/20 text-[#FFD066] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">photo_library</span></div><span class="font-semibold text-[12px] text-white">Image</span><span class="text-[10px] text-[#858B9C]">5,233</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/20 text-[#7BB1FF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">folder_open</span></div><span class="font-semibold text-[12px] text-white">Folders</span><span class="text-[10px] text-[#858B9C]">Browse</span></div>
+</div>
+</div>
+<div class="w-full h-2 bg-[#141722]"></div>
+<!-- Tabs -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-medium text-[#858B9C]">Recent</button>
+<button class="relative py-2 text-[15px] font-bold text-white">
+                      Bookmarks
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#4D8FF7] rounded-full"></span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#858B9C]"><span class="material-symbols-outlined text-[19px]">checklist</span></button>
+</div>
+</div>
+<!-- Empty State Content -->
+<div class="px-8 py-10 flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#1E2A45] flex items-center justify-center mb-5 text-[#4D8FF7] shadow-sm">
+<span class="material-symbols-outlined text-[48px]">bookmark_border</span>
+</div>
+<span class="font-bold text-[18px] text-white">No bookmarks yet</span>
+<span class="text-[14px] font-medium text-[#858B9C] mt-2 max-w-[260px] leading-relaxed">
+                    Tap the bookmark icon on any file to find it here quickly.
+                  </span>
+</div>
+</div>
+<!-- FAB -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/40 z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Bottom Monetization & Nav -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-[#1A1D29]">
+<div class="w-full h-[60px] bg-[#141722] px-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#4D8FF7]/20 flex items-center justify-center text-[#4D8FF7]"><span class="material-symbols-outlined text-[22px]">cloud_sync</span></div>
+<div>
+<div class="flex items-center gap-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2A3042] text-[#858B9C] leading-none">AD</span><span class="font-bold text-[12px] text-white leading-none">Cloud Backup Pro</span></div>
+<span class="text-[10px] text-[#858B9C] mt-0.5 block">Sync and safeguard up to 500GB today.</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-[#1A66E8] text-white text-[11px] font-semibold">Install</button>
+</div>
+<div class="w-full h-[64px] bg-[#1A1D29] px-8 flex items-center justify-between pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#4D8FF7]"><span class="material-symbols-outlined text-[22px]">folder</span><span class="font-semibold text-[10px]">All files</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">build</span><span class="font-medium text-[10px]">Tools</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">settings</span><span class="font-medium text-[10px]">Settings</span></button>
+</div>
+<div class="w-full bg-[#1A1D29] pb-1 flex justify-center"><div class="w-32 h-1 bg-white/20 rounded-full"></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- VARIANT 3: Recent Tab Empty -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="variant-3">
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col lg:flex-row lg:items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-secondary text-on-secondary flex items-center justify-center font-title-md text-title-md shrink-0">03</div>
+<div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-lg text-headline-lg text-on-surface">Variant 3: Recent Tab Empty State</span>
+<span class="px-space-sm py-0.5 rounded-full bg-primary text-on-primary font-label-xs text-label-xs">Active CTA</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">Recent Tab Active</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant mt-1 block">Active "Recent" tab with no documents opened. Includes prominent 56pt Primary Button "Import files" (radius 16) for direct file onboard flow.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-xs text-label-xs">
+<span>CTA: 56pt Solid Button</span>
+<span>•</span>
+<span>Radius: 16pt</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl">
+<!-- LIGHT RECENT EMPTY -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span>Light Mode — Empty Recent with Action CTA</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-black/5">
+<div class="w-full h-full rounded-[41px] bg-white text-[#11141C] font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- Status Bar -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#E9F2FF]">
+<span class="font-semibold text-[14px] text-[#11141C]">9:41</span>
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3">
+<div class="w-2.5 h-2.5 rounded-full bg-[#1A1A1A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-[#11141C]">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Main Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header -->
+<div class="w-full bg-gradient-to-b from-[#E9F2FF] to-white px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#1A66E8] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-[#11141C]">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/5 text-[#11141C]"><span class="material-symbols-outlined text-[22px]">search</span></button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/5 text-[#11141C]"><span class="material-symbols-outlined text-[22px]">more_vert</span></button>
+</div>
+</div>
+<!-- 8 Tiles Grid -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1A66E8]/10 text-[#1A66E8] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">grid_view</span></div><span class="font-semibold text-[12px] text-[#11141C]">All</span><span class="text-[10px] text-[#8A8F9C]">5,363</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#E02B2B]/10 text-[#E02B2B] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">picture_as_pdf</span></div><span class="font-semibold text-[12px] text-[#11141C]">PDF</span><span class="text-[10px] text-[#8A8F9C]">92</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/10 text-[#1E5FD8] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">article</span></div><span class="font-semibold text-[12px] text-[#11141C]">Word</span><span class="text-[10px] text-[#8A8F9C]">20</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/10 text-[#1E9E4F] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">table_chart</span></div><span class="font-semibold text-[12px] text-[#11141C]">Excel</span><span class="text-[10px] text-[#8A8F9C]">7</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#F26B1D]/10 text-[#F26B1D] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">slideshow</span></div><span class="font-semibold text-[12px] text-[#11141C]">PPT</span><span class="text-[10px] text-[#8A8F9C]">4</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/10 text-[#5B6B9A] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">subject</span></div><span class="font-semibold text-[12px] text-[#11141C]">TXT</span><span class="text-[10px] text-[#8A8F9C]">7</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#FFB300]/15 text-[#C98200] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">photo_library</span></div><span class="font-semibold text-[12px] text-[#11141C]">Image</span><span class="text-[10px] text-[#8A8F9C]">5,233</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/10 text-[#2F7BEA] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">folder_open</span></div><span class="font-semibold text-[12px] text-[#11141C]">Folders</span><span class="text-[10px] text-[#8A8F9C]">Browse</span></div>
+</div>
+</div>
+<div class="w-full h-2 bg-[#F1F3F8]"></div>
+<!-- Tabs: RECENT ACTIVE -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-bold text-[#11141C]">
+                      Recent
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#1A66E8] rounded-full"></span>
+</button>
+<button class="relative py-2 text-[15px] font-medium text-[#8A8F9C]">Bookmarks</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A8F9C]"><span class="material-symbols-outlined text-[19px]">checklist</span></button>
+</div>
+</div>
+<!-- Empty State Content with Button CTA -->
+<div class="px-8 py-8 flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#E8F0FE] flex items-center justify-center mb-4 text-[#1A66E8] shadow-sm">
+<span class="material-symbols-outlined text-[48px]">history_toggle_off</span>
+</div>
+<span class="font-bold text-[18px] text-[#11141C]">Nothing opened yet</span>
+<span class="text-[14px] font-medium text-[#8A8F9C] mt-2 max-w-[240px] leading-relaxed">
+                    Files you open will appear here for fast access.
+                  </span>
+<!-- 56pt Primary Button -->
+<button class="w-full h-14 rounded-[16px] bg-[#1A66E8] text-white font-semibold text-[16px] mt-6 flex items-center justify-center gap-2 shadow-md shadow-[#1A66E8]/25 active:scale-95 transition">
+<span class="material-symbols-outlined text-[22px]">upload_file</span>
+<span>Import files</span>
+</button>
+</div>
+</div>
+<!-- FAB -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/35 z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Bottom Monetization & Nav -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-white">
+<div class="w-full h-[60px] bg-[#FAF8FF] px-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#1F71E0]/15 flex items-center justify-center text-[#1A66E8]"><span class="material-symbols-outlined text-[22px]">cloud_sync</span></div>
+<div>
+<div class="flex items-center gap-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#E0E2EE] text-[#424753] leading-none">AD</span><span class="font-bold text-[12px] text-[#11141C] leading-none">Cloud Backup Pro</span></div>
+<span class="text-[10px] text-[#8A8F9C] mt-0.5 block">Sync and safeguard up to 500GB today.</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-[#1A66E8] text-white text-[11px] font-semibold">Install</button>
+</div>
+<div class="w-full h-[64px] bg-white px-8 flex items-center justify-between pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#1A66E8]"><span class="material-symbols-outlined text-[22px]">folder</span><span class="font-semibold text-[10px]">All files</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">build</span><span class="font-medium text-[10px]">Tools</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">settings</span><span class="font-medium text-[10px]">Settings</span></button>
+</div>
+<div class="w-full bg-white pb-1 flex justify-center"><div class="w-32 h-1 bg-black/20 rounded-full"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK RECENT EMPTY -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span>Dark Navy Mode — Empty Recent with Action CTA</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-white/10">
+<div class="w-full h-full rounded-[41px] bg-[#1A1D29] text-white font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- Status Bar -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#1A1D29]">
+<span class="font-semibold text-[14px] text-white">9:41</span>
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3 ring-1 ring-white/10">
+<div class="w-2.5 h-2.5 rounded-full bg-[#2A2A2A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-white">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Main Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header -->
+<div class="w-full bg-[#1A1D29] px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#4D8FF7] flex items-center justify-center text-black font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-[#141C26]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-white">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-white"><span class="material-symbols-outlined text-[22px]">search</span></button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-white"><span class="material-symbols-outlined text-[22px]">more_vert</span></button>
+</div>
+</div>
+<!-- 8 Tiles Grid -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#4D8FF7]/20 text-[#4D8FF7] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">grid_view</span></div><span class="font-semibold text-[12px] text-white">All</span><span class="text-[10px] text-[#858B9C]">5,363</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#E02B2B]/20 text-[#FF6B6B] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">picture_as_pdf</span></div><span class="font-semibold text-[12px] text-white">PDF</span><span class="text-[10px] text-[#858B9C]">92</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/20 text-[#6BA5FF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">article</span></div><span class="font-semibold text-[12px] text-white">Word</span><span class="text-[10px] text-[#858B9C]">20</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/20 text-[#4EE387] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">table_chart</span></div><span class="font-semibold text-[12px] text-white">Excel</span><span class="text-[10px] text-[#858B9C]">7</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#F26B1D]/20 text-[#FFA066] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">slideshow</span></div><span class="font-semibold text-[12px] text-white">PPT</span><span class="text-[10px] text-[#858B9C]">4</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/20 text-[#A2B1DF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">subject</span></div><span class="font-semibold text-[12px] text-white">TXT</span><span class="text-[10px] text-[#858B9C]">7</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#FFB300]/20 text-[#FFD066] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">photo_library</span></div><span class="font-semibold text-[12px] text-white">Image</span><span class="text-[10px] text-[#858B9C]">5,233</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/20 text-[#7BB1FF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">folder_open</span></div><span class="font-semibold text-[12px] text-white">Folders</span><span class="text-[10px] text-[#858B9C]">Browse</span></div>
+</div>
+</div>
+<div class="w-full h-2 bg-[#141722]"></div>
+<!-- Tabs: RECENT ACTIVE -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-bold text-white">
+                      Recent
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#4D8FF7] rounded-full"></span>
+</button>
+<button class="relative py-2 text-[15px] font-medium text-[#858B9C]">Bookmarks</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#858B9C]"><span class="material-symbols-outlined text-[19px]">checklist</span></button>
+</div>
+</div>
+<!-- Empty State Content with Button CTA -->
+<div class="px-8 py-8 flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#1E2A45] flex items-center justify-center mb-4 text-[#4D8FF7] shadow-sm">
+<span class="material-symbols-outlined text-[48px]">history_toggle_off</span>
+</div>
+<span class="font-bold text-[18px] text-white">Nothing opened yet</span>
+<span class="text-[14px] font-medium text-[#858B9C] mt-2 max-w-[240px] leading-relaxed">
+                    Files you open will appear here for fast access.
+                  </span>
+<!-- 56pt Primary Button -->
+<button class="w-full h-14 rounded-[16px] bg-[#1A66E8] text-white font-semibold text-[16px] mt-6 flex items-center justify-center gap-2 shadow-md shadow-[#1A66E8]/35 active:scale-95 transition">
+<span class="material-symbols-outlined text-[22px]">upload_file</span>
+<span>Import files</span>
+</button>
+</div>
+</div>
+<!-- FAB -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/40 z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Bottom Monetization & Nav -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-[#1A1D29]">
+<div class="w-full h-[60px] bg-[#141722] px-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#4D8FF7]/20 flex items-center justify-center text-[#4D8FF7]"><span class="material-symbols-outlined text-[22px]">cloud_sync</span></div>
+<div>
+<div class="flex items-center gap-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2A3042] text-[#858B9C] leading-none">AD</span><span class="font-bold text-[12px] text-white leading-none">Cloud Backup Pro</span></div>
+<span class="text-[10px] text-[#858B9C] mt-0.5 block">Sync and safeguard up to 500GB today.</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-[#1A66E8] text-white text-[11px] font-semibold">Install</button>
+</div>
+<div class="w-full h-[64px] bg-[#1A1D29] px-8 flex items-center justify-between pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#4D8FF7]"><span class="material-symbols-outlined text-[22px]">folder</span><span class="font-semibold text-[10px]">All files</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">build</span><span class="font-medium text-[10px]">Tools</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">settings</span><span class="font-medium text-[10px]">Settings</span></button>
+</div>
+<div class="w-full bg-[#1A1D29] pb-1 flex justify-center"><div class="w-32 h-1 bg-white/20 rounded-full"></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- VARIANT 4: First-launch Scanning -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="variant-4">
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col lg:flex-row lg:items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-primary text-on-primary flex items-center justify-center font-title-md text-title-md shrink-0">04</div>
+<div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-lg text-headline-lg text-on-surface">Variant 4: First-launch Scanning &amp; Indexing</span>
+<span class="px-space-sm py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-xs text-label-xs">Indeterminate Progress</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">Skeleton Shimmer</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant mt-1 block">Realtime scanning state with 3pt blue indeterminate bar, scanning pill chip “Scanning... 1,248 files found”, pulsing radar dot, and skeleton document shimmer placeholders.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-xs text-label-xs">
+<span>Bar: 3pt Shimmer</span>
+<span>•</span>
+<span>Skeletons: 4 Async Rows</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl">
+<!-- LIGHT SCANNING -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span>Light Mode — Active Background Indexing</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-black/5">
+<div class="w-full h-full rounded-[41px] bg-white text-[#11141C] font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- Status Bar -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#E9F2FF]">
+<span class="font-semibold text-[14px] text-[#11141C]">9:41</span>
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3">
+<div class="w-2.5 h-2.5 rounded-full bg-[#1A1A1A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-[#11141C]">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Main Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header -->
+<div class="w-full bg-gradient-to-b from-[#E9F2FF] to-white px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#1A66E8] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-[#11141C]">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">search</span></button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">more_vert</span></button>
+</div>
+</div>
+<!-- 3pt Blue Linear Progress Bar -->
+<div class="w-full h-[3px] bg-[#E9F2FF] rounded-full overflow-hidden mb-3">
+<div class="h-full bg-[#1A66E8] w-2/3 rounded-full animate-pulse"></div>
+</div>
+<!-- Scanning Pill Chip -->
+<div class="w-full bg-[#E8F0FE] rounded-full py-1.5 px-3 flex items-center justify-between mb-3 shadow-xs">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#1A66E8] animate-ping"></span>
+<span class="font-semibold text-[11px] text-[#1A66E8]">Scanning... 1,248 files found</span>
+</div>
+<span class="material-symbols-outlined text-[#1A66E8] text-[16px] animate-spin">autorenew</span>
+</div>
+<!-- Category Grid: 8 tiles with Shimmer Counts -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1A66E8]/10 text-[#1A66E8] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">grid_view</span></div><span class="font-semibold text-[12px] text-[#11141C]">All</span><div class="w-8 h-2 bg-[#E9EDF5] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#E02B2B]/10 text-[#E02B2B] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">picture_as_pdf</span></div><span class="font-semibold text-[12px] text-[#11141C]">PDF</span><div class="w-6 h-2 bg-[#E9EDF5] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/10 text-[#1E5FD8] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">article</span></div><span class="font-semibold text-[12px] text-[#11141C]">Word</span><div class="w-6 h-2 bg-[#E9EDF5] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/10 text-[#1E9E4F] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">table_chart</span></div><span class="font-semibold text-[12px] text-[#11141C]">Excel</span><div class="w-5 h-2 bg-[#E9EDF5] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#F26B1D]/10 text-[#F26B1D] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">slideshow</span></div><span class="font-semibold text-[12px] text-[#11141C]">PPT</span><div class="w-5 h-2 bg-[#E9EDF5] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/10 text-[#5B6B9A] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">subject</span></div><span class="font-semibold text-[12px] text-[#11141C]">TXT</span><div class="w-5 h-2 bg-[#E9EDF5] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#FFB300]/15 text-[#C98200] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">photo_library</span></div><span class="font-semibold text-[12px] text-[#11141C]">Image</span><div class="w-8 h-2 bg-[#E9EDF5] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/10 text-[#2F7BEA] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">folder_open</span></div><span class="font-semibold text-[12px] text-[#11141C]">Folders</span><span class="text-[10px] text-[#8A8F9C]">Browse</span></div>
+</div>
+</div>
+<div class="w-full h-2 bg-[#F1F3F8]"></div>
+<!-- Tabs -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-bold text-[#11141C]">
+                      Recent
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#1A66E8] rounded-full"></span>
+</button>
+<button class="relative py-2 text-[15px] font-medium text-[#8A8F9C]">Bookmarks</button>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-[#E9EDF5] animate-pulse"></div>
+</div>
+</div>
+<!-- 4 Skeleton Document Rows -->
+<div class="px-5 py-2 space-y-2.5">
+<div class="w-full h-[68px] rounded-[18px] bg-[#F3F5FA] px-3 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#E9EDF5]"></div>
+<div class="space-y-2">
+<div class="w-36 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-24 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-[#E9EDF5]"></div>
+</div>
+<div class="w-full h-[68px] rounded-[18px] bg-[#F3F5FA] px-3 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#E9EDF5]"></div>
+<div class="space-y-2">
+<div class="w-44 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-28 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-[#E9EDF5]"></div>
+</div>
+<div class="w-full h-[68px] rounded-[18px] bg-[#F3F5FA] px-3 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#E9EDF5]"></div>
+<div class="space-y-2">
+<div class="w-32 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-20 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-[#E9EDF5]"></div>
+</div>
+<div class="w-full h-[68px] rounded-[18px] bg-[#F3F5FA] px-3 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#E9EDF5]"></div>
+<div class="space-y-2">
+<div class="w-40 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-24 h-2.5 bg-[#E9EDF5] rounded"></div>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-[#E9EDF5]"></div>
+</div>
+</div>
+</div>
+<!-- FAB -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/35 z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Docked Monetization with Skeleton & Nav -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-white">
+<div class="w-full h-[60px] bg-[#FAF8FF] px-4 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#E9EDF5]"></div>
+<div class="space-y-1.5">
+<div class="w-28 h-3 bg-[#E9EDF5] rounded"></div>
+<div class="w-40 h-2 bg-[#E9EDF5] rounded"></div>
+</div>
+</div>
+<div class="w-16 h-7 rounded-full bg-[#E9EDF5]"></div>
+</div>
+<div class="w-full h-[64px] bg-white px-8 flex items-center justify-between pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#1A66E8]"><span class="material-symbols-outlined text-[22px]">folder</span><span class="font-semibold text-[10px]">All files</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">build</span><span class="font-medium text-[10px]">Tools</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">settings</span><span class="font-medium text-[10px]">Settings</span></button>
+</div>
+<div class="w-full bg-white pb-1 flex justify-center"><div class="w-32 h-1 bg-black/20 rounded-full"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK SCANNING -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span>Dark Navy Mode — Active Background Indexing</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-white/10">
+<div class="w-full h-full rounded-[41px] bg-[#1A1D29] text-white font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- Status Bar -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#1A1D29]">
+<span class="font-semibold text-[14px] text-white">9:41</span>
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3 ring-1 ring-white/10">
+<div class="w-2.5 h-2.5 rounded-full bg-[#2A2A2A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-white">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Main Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header -->
+<div class="w-full bg-[#1A1D29] px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#4D8FF7] flex items-center justify-center text-black font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-[#141C26]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-white">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">search</span></button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">more_vert</span></button>
+</div>
+</div>
+<!-- 3pt Indeterminate Progress Bar -->
+<div class="w-full h-[3px] bg-[#232838] rounded-full overflow-hidden mb-3">
+<div class="h-full bg-[#4D8FF7] w-2/3 rounded-full animate-pulse"></div>
+</div>
+<!-- Scanning Pill Chip -->
+<div class="w-full bg-[#1E2A45] rounded-full py-1.5 px-3 flex items-center justify-between mb-3 shadow-xs">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#4D8FF7] animate-ping"></span>
+<span class="font-semibold text-[11px] text-[#4D8FF7]">Scanning... 1,248 files found</span>
+</div>
+<span class="material-symbols-outlined text-[#4D8FF7] text-[16px] animate-spin">autorenew</span>
+</div>
+<!-- Category Grid: 8 tiles with Shimmer Counts -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#4D8FF7]/20 text-[#4D8FF7] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">grid_view</span></div><span class="font-semibold text-[12px] text-white">All</span><div class="w-8 h-2 bg-[#262B3A] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#E02B2B]/20 text-[#FF6B6B] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">picture_as_pdf</span></div><span class="font-semibold text-[12px] text-white">PDF</span><div class="w-6 h-2 bg-[#262B3A] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/20 text-[#6BA5FF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">article</span></div><span class="font-semibold text-[12px] text-white">Word</span><div class="w-6 h-2 bg-[#262B3A] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/20 text-[#4EE387] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">table_chart</span></div><span class="font-semibold text-[12px] text-white">Excel</span><div class="w-5 h-2 bg-[#262B3A] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#F26B1D]/20 text-[#FFA066] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">slideshow</span></div><span class="font-semibold text-[12px] text-white">PPT</span><div class="w-5 h-2 bg-[#262B3A] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/20 text-[#A2B1DF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">subject</span></div><span class="font-semibold text-[12px] text-white">TXT</span><div class="w-5 h-2 bg-[#262B3A] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#FFB300]/20 text-[#FFD066] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">photo_library</span></div><span class="font-semibold text-[12px] text-white">Image</span><div class="w-8 h-2 bg-[#262B3A] rounded animate-pulse mt-1.5"></div></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/20 text-[#7BB1FF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">folder_open</span></div><span class="font-semibold text-[12px] text-white">Folders</span><span class="text-[10px] text-[#858B9C]">Browse</span></div>
+</div>
+</div>
+<div class="w-full h-2 bg-[#141722]"></div>
+<!-- Tabs -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-bold text-white">
+                      Recent
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#4D8FF7] rounded-full"></span>
+</button>
+<button class="relative py-2 text-[15px] font-medium text-[#858B9C]">Bookmarks</button>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-[#262B3A] animate-pulse"></div>
+</div>
+</div>
+<!-- 4 Skeleton Document Rows -->
+<div class="px-5 py-2 space-y-2.5">
+<div class="w-full h-[68px] rounded-[18px] bg-[#232838] px-3 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#262B3A]"></div>
+<div class="space-y-2">
+<div class="w-36 h-3 bg-[#262B3A] rounded"></div>
+<div class="w-24 h-2.5 bg-[#262B3A] rounded"></div>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-[#262B3A]"></div>
+</div>
+<div class="w-full h-[68px] rounded-[18px] bg-[#232838] px-3 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#262B3A]"></div>
+<div class="space-y-2">
+<div class="w-44 h-3 bg-[#262B3A] rounded"></div>
+<div class="w-28 h-2.5 bg-[#262B3A] rounded"></div>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-[#262B3A]"></div>
+</div>
+<div class="w-full h-[68px] rounded-[18px] bg-[#232838] px-3 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#262B3A]"></div>
+<div class="space-y-2">
+<div class="w-32 h-3 bg-[#262B3A] rounded"></div>
+<div class="w-20 h-2.5 bg-[#262B3A] rounded"></div>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-[#262B3A]"></div>
+</div>
+<div class="w-full h-[68px] rounded-[18px] bg-[#232838] px-3 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-[42px] h-[50px] rounded-[10px] bg-[#262B3A]"></div>
+<div class="space-y-2">
+<div class="w-40 h-3 bg-[#262B3A] rounded"></div>
+<div class="w-24 h-2.5 bg-[#262B3A] rounded"></div>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-[#262B3A]"></div>
+</div>
+</div>
+</div>
+<!-- FAB -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/40 z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Docked Monetization with Skeleton & Nav -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-[#1A1D29]">
+<div class="w-full h-[60px] bg-[#141722] px-4 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#262B3A]"></div>
+<div class="space-y-1.5">
+<div class="w-28 h-3 bg-[#262B3A] rounded"></div>
+<div class="w-40 h-2 bg-[#262B3A] rounded"></div>
+</div>
+</div>
+<div class="w-16 h-7 rounded-full bg-[#262B3A]"></div>
+</div>
+<div class="w-full h-[64px] bg-[#1A1D29] px-8 flex items-center justify-between pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#4D8FF7]"><span class="material-symbols-outlined text-[22px]">folder</span><span class="font-semibold text-[10px]">All files</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">build</span><span class="font-medium text-[10px]">Tools</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">settings</span><span class="font-medium text-[10px]">Settings</span></button>
+</div>
+<div class="w-full bg-[#1A1D29] pb-1 flex justify-center"><div class="w-32 h-1 bg-white/20 rounded-full"></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- VARIANT 5: Fresh Install, No Permission Yet -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="variant-5">
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col lg:flex-row lg:items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-primary-container text-on-primary-container flex items-center justify-center font-title-md text-title-md shrink-0">05</div>
+<div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-lg text-headline-lg text-on-surface">Variant 5: Fresh Install, Storage Permission Card</span>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary text-on-secondary font-label-xs text-label-xs">Gated Access</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">0 Files Indexed</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant mt-1 block">Permission onboarding state. Top card (radius 20) requests scoped storage access with “Allow” CTA and fallback import link. All category counts render 0 files.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-xs text-label-xs">
+<span>Card: 20pt Radius</span>
+<span>•</span>
+<span>Button: 44pt SemiBold</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl">
+<!-- LIGHT PERMISSION -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span>Light Mode — Storage Permission Gate</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-black/5">
+<div class="w-full h-full rounded-[41px] bg-white text-[#11141C] font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- Status Bar -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#E9F2FF]">
+<span class="font-semibold text-[14px] text-[#11141C]">9:41</span>
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3">
+<div class="w-2.5 h-2.5 rounded-full bg-[#1A1A1A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-[#11141C]">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Main Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header -->
+<div class="w-full bg-gradient-to-b from-[#E9F2FF] to-white px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#1A66E8] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-[#11141C]">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/5 text-[#11141C]"><span class="material-symbols-outlined text-[22px]">search</span></button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/5 text-[#11141C]"><span class="material-symbols-outlined text-[22px]">more_vert</span></button>
+</div>
+</div>
+<!-- Permission Request Card (Radius 20) -->
+<div class="w-full bg-[#F3F5FA] rounded-[20px] p-4 mb-3 shadow-xs">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#1A66E8] text-white flex items-center justify-center shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[22px]">folder_shared</span>
+</div>
+<div>
+<span class="font-bold text-[14px] text-[#11141C] leading-snug block">Allow access to find your documents</span>
+<span class="text-[12px] text-[#8A8F9C] mt-1 block leading-relaxed">
+                          DocView needs permission to scan your storage and display PDFs, Office docs, and text files.
+                        </span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-3 mt-3.5">
+<button class="text-[13px] font-semibold text-[#8A8F9C] hover:text-[#11141C] px-2 py-1">
+                        Import files
+                      </button>
+<button class="px-5 h-11 rounded-[16px] bg-[#1A66E8] text-white text-[13px] font-semibold shadow-sm active:scale-95 transition">
+                        Allow
+                      </button>
+</div>
+</div>
+<!-- 8 Category Tiles: All with "0 files" -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1A66E8]/10 text-[#1A66E8] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">grid_view</span></div><span class="font-semibold text-[12px] text-[#11141C]">All</span><span class="text-[10px] text-[#8A8F9C]">0 files</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#E02B2B]/10 text-[#E02B2B] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">picture_as_pdf</span></div><span class="font-semibold text-[12px] text-[#11141C]">PDF</span><span class="text-[10px] text-[#8A8F9C]">0 files</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/10 text-[#1E5FD8] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">article</span></div><span class="font-semibold text-[12px] text-[#11141C]">Word</span><span class="text-[10px] text-[#8A8F9C]">0 files</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/10 text-[#1E9E4F] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">table_chart</span></div><span class="font-semibold text-[12px] text-[#11141C]">Excel</span><span class="text-[10px] text-[#8A8F9C]">0 files</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#F26B1D]/10 text-[#F26B1D] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">slideshow</span></div><span class="font-semibold text-[12px] text-[#11141C]">PPT</span><span class="text-[10px] text-[#8A8F9C]">0 files</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/10 text-[#5B6B9A] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">subject</span></div><span class="font-semibold text-[12px] text-[#11141C]">TXT</span><span class="text-[10px] text-[#8A8F9C]">0 files</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#FFB300]/15 text-[#C98200] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">photo_library</span></div><span class="font-semibold text-[12px] text-[#11141C]">Image</span><span class="text-[10px] text-[#8A8F9C]">0 files</span></div>
+<div class="bg-[#F3F5FA] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/10 text-[#2F7BEA] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">folder_open</span></div><span class="font-semibold text-[12px] text-[#11141C]">Folders</span><span class="text-[10px] text-[#8A8F9C]">Browse</span></div>
+</div>
+</div>
+<div class="w-full h-2 bg-[#F1F3F8]"></div>
+<!-- Tabs -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-bold text-[#11141C]">
+                      Recent
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#1A66E8] rounded-full"></span>
+</button>
+<button class="relative py-2 text-[15px] font-medium text-[#8A8F9C]">Bookmarks</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A8F9C]"><span class="material-symbols-outlined text-[19px]">checklist</span></button>
+</div>
+</div>
+<!-- Subtle Empty Notice -->
+<div class="px-8 py-10 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-[40px] text-[#8A8F9C] mb-2">lock_open</span>
+<span class="font-bold text-[15px] text-[#11141C]">Storage Access Needed</span>
+<span class="text-[13px] text-[#8A8F9C] mt-1 max-w-[220px]">Grant permission above or tap import to choose individual files manually.</span>
+</div>
+</div>
+<!-- FAB -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/35 z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Bottom Monetization & Nav -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-white">
+<div class="w-full h-[60px] bg-[#FAF8FF] px-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#1F71E0]/15 flex items-center justify-center text-[#1A66E8]"><span class="material-symbols-outlined text-[22px]">cloud_sync</span></div>
+<div>
+<div class="flex items-center gap-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#E0E2EE] text-[#424753] leading-none">AD</span><span class="font-bold text-[12px] text-[#11141C] leading-none">Cloud Backup Pro</span></div>
+<span class="text-[10px] text-[#8A8F9C] mt-0.5 block">Sync and safeguard up to 500GB today.</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-[#1A66E8] text-white text-[11px] font-semibold">Install</button>
+</div>
+<div class="w-full h-[64px] bg-white px-8 flex items-center justify-between pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#1A66E8]"><span class="material-symbols-outlined text-[22px]">folder</span><span class="font-semibold text-[10px]">All files</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">build</span><span class="font-medium text-[10px]">Tools</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#8A8F9C]"><span class="material-symbols-outlined text-[22px]">settings</span><span class="font-medium text-[10px]">Settings</span></button>
+</div>
+<div class="w-full bg-white pb-1 flex justify-center"><div class="w-32 h-1 bg-black/20 rounded-full"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK PERMISSION -->
+<div class="matrix-col flex flex-col items-center space-y-space-md transition-all duration-300">
+<div class="flex items-center gap-space-sm font-label-md text-label-md text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span>Dark Navy Mode — Storage Permission Gate</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[52px] bg-black p-[11px] shadow-2xl relative select-none shrink-0 ring-1 ring-white/10">
+<div class="w-full h-full rounded-[41px] bg-[#1A1D29] text-white font-['Inter'] relative overflow-hidden flex flex-col justify-between">
+<!-- Status Bar -->
+<div class="w-full pt-3 px-7 flex items-center justify-between z-30 shrink-0 bg-[#1A1D29]">
+<span class="font-semibold text-[14px] text-white">9:41</span>
+<div class="w-[124px] h-[34px] rounded-full bg-black -mt-1 mx-auto flex items-center justify-end px-3 ring-1 ring-white/10">
+<div class="w-2.5 h-2.5 rounded-full bg-[#2A2A2A]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-white">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Main Scrollable Area -->
+<div class="w-full flex-1 overflow-y-auto no-scrollbar pb-36">
+<!-- Header -->
+<div class="w-full bg-[#1A1D29] px-5 pt-3 pb-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-[#4D8FF7] flex items-center justify-center text-black font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-[#141C26]">description</span>
+</div>
+<span class="font-bold text-[20px] tracking-tight text-white">DocView</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-white"><span class="material-symbols-outlined text-[22px]">search</span></button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 text-white"><span class="material-symbols-outlined text-[22px]">more_vert</span></button>
+</div>
+</div>
+<!-- Permission Request Card (Radius 20) -->
+<div class="w-full bg-[#232838] rounded-[20px] p-4 mb-3 shadow-xs">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#4D8FF7] text-[#141C26] flex items-center justify-center shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[22px]">folder_shared</span>
+</div>
+<div>
+<span class="font-bold text-[14px] text-white leading-snug block">Allow access to find your documents</span>
+<span class="text-[12px] text-[#858B9C] mt-1 block leading-relaxed">
+                          DocView needs permission to scan your storage and display PDFs, Office docs, and text files.
+                        </span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-3 mt-3.5">
+<button class="text-[13px] font-semibold text-[#858B9C] hover:text-white px-2 py-1">
+                        Import files
+                      </button>
+<button class="px-5 h-11 rounded-[16px] bg-[#1A66E8] text-white text-[13px] font-semibold shadow-sm active:scale-95 transition">
+                        Allow
+                      </button>
+</div>
+</div>
+<!-- 8 Category Tiles: All with "0 files" -->
+<div class="grid grid-cols-4 gap-2 pt-1">
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#4D8FF7]/20 text-[#4D8FF7] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">grid_view</span></div><span class="font-semibold text-[12px] text-white">All</span><span class="text-[10px] text-[#858B9C]">0 files</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#E02B2B]/20 text-[#FF6B6B] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">picture_as_pdf</span></div><span class="font-semibold text-[12px] text-white">PDF</span><span class="text-[10px] text-[#858B9C]">0 files</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E5FD8]/20 text-[#6BA5FF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">article</span></div><span class="font-semibold text-[12px] text-white">Word</span><span class="text-[10px] text-[#858B9C]">0 files</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#1E9E4F]/20 text-[#4EE387] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">table_chart</span></div><span class="font-semibold text-[12px] text-white">Excel</span><span class="text-[10px] text-[#858B9C]">0 files</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#F26B1D]/20 text-[#FFA066] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">slideshow</span></div><span class="font-semibold text-[12px] text-white">PPT</span><span class="text-[10px] text-[#858B9C]">0 files</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#5B6B9A]/20 text-[#A2B1DF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">subject</span></div><span class="font-semibold text-[12px] text-white">TXT</span><span class="text-[10px] text-[#858B9C]">0 files</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#FFB300]/20 text-[#FFD066] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">photo_library</span></div><span class="font-semibold text-[12px] text-white">Image</span><span class="text-[10px] text-[#858B9C]">0 files</span></div>
+<div class="bg-[#232838] rounded-[18px] p-2.5 flex flex-col items-center justify-center text-center"><div class="w-8 h-8 rounded-lg bg-[#2F7BEA]/20 text-[#7BB1FF] flex items-center justify-center mb-1"><span class="material-symbols-outlined text-[20px]">folder_open</span></div><span class="font-semibold text-[12px] text-white">Folders</span><span class="text-[10px] text-[#858B9C]">Browse</span></div>
+</div>
+</div>
+<div class="w-full h-2 bg-[#141722]"></div>
+<!-- Tabs -->
+<div class="w-full px-5 pt-3 pb-1 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="relative py-2 text-[15px] font-bold text-white">
+                      Recent
+                      <span class="absolute bottom-0 left-0 right-0 h-[3px] bg-[#4D8FF7] rounded-full"></span>
+</button>
+<button class="relative py-2 text-[15px] font-medium text-[#858B9C]">Bookmarks</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#858B9C]"><span class="material-symbols-outlined text-[19px]">checklist</span></button>
+</div>
+</div>
+<!-- Subtle Empty Notice -->
+<div class="px-8 py-10 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-[40px] text-[#858B9C] mb-2">lock_open</span>
+<span class="font-bold text-[15px] text-white">Storage Access Needed</span>
+<span class="text-[13px] text-[#858B9C] mt-1 max-w-[220px]">Grant permission above or tap import to choose individual files manually.</span>
+</div>
+</div>
+<!-- FAB -->
+<button class="absolute bottom-[132px] right-5 w-14 h-14 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-lg shadow-[#1A66E8]/40 z-30">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Bottom Monetization & Nav -->
+<div class="w-full absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-[#1A1D29]">
+<div class="w-full h-[60px] bg-[#141722] px-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#4D8FF7]/20 flex items-center justify-center text-[#4D8FF7]"><span class="material-symbols-outlined text-[22px]">cloud_sync</span></div>
+<div>
+<div class="flex items-center gap-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#2A3042] text-[#858B9C] leading-none">AD</span><span class="font-bold text-[12px] text-white leading-none">Cloud Backup Pro</span></div>
+<span class="text-[10px] text-[#858B9C] mt-0.5 block">Sync and safeguard up to 500GB today.</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-[#1A66E8] text-white text-[11px] font-semibold">Install</button>
+</div>
+<div class="w-full h-[64px] bg-[#1A1D29] px-8 flex items-center justify-between pb-2">
+<button class="flex flex-col items-center gap-0.5 text-[#4D8FF7]"><span class="material-symbols-outlined text-[22px]">folder</span><span class="font-semibold text-[10px]">All files</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">build</span><span class="font-medium text-[10px]">Tools</span></button>
+<button class="flex flex-col items-center gap-0.5 text-[#858B9C]"><span class="material-symbols-outlined text-[22px]">settings</span><span class="font-medium text-[10px]">Settings</span></button>
+</div>
+<div class="w-full bg-[#1A1D29] pb-1 flex justify-center"><div class="w-32 h-1 bg-white/20 rounded-full"></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- ENGINEERING SPECIFICATIONS & DESIGN SYSTEM TOKENS -->
+<!-- ========================================================================= -->
+<section class="bg-surface-container-low rounded-xl p-space-xl space-y-space-lg shadow-sm" id="token-specs">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface">Design Tokens &amp; Ergonomic Rules</span>
+<span class="font-body-md text-body-md text-on-surface-variant block mt-1">Cross-platform styling variables applied across all 10 viewport instances.</span>
+</div>
+<div class="flex items-center gap-space-xs font-label-xs text-label-xs bg-surface-container px-space-md py-1.5 rounded-full text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Validated against Android 14 Scoped Storage &amp; iOS 18 Dynamic Island specs</span>
+</div>
+</div>
+<!-- Token Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+<!-- Spacing & Form Factor -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-xs space-y-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">aspect_ratio</span>
+<span class="font-title-md text-title-md text-on-surface">Spatial Grid</span>
+</div>
+<ul class="font-body-sm text-body-sm text-on-surface-variant space-y-1">
+<li>• <strong class="text-on-surface">Viewport:</strong> 393 × 852 pt (iPhone standard)</li>
+<li>• <strong class="text-on-surface">Side Margins:</strong> 20 pt (1.25rem)</li>
+<li>• <strong class="text-on-surface">Section Dividers:</strong> 8 pt band (#F1F3F8 / #141722)</li>
+<li>• <strong class="text-on-surface">Row Height:</strong> Fixed 68 pt document list cells</li>
+</ul>
+</div>
+<!-- Color Architecture -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-xs space-y-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">palette</span>
+<span class="font-title-md text-title-md text-on-surface">Dual Colorway</span>
+</div>
+<ul class="font-body-sm text-body-sm text-on-surface-variant space-y-1">
+<li>• <strong class="text-on-surface">Light BG:</strong> #FFFFFF with #E9F2FF gradient header</li>
+<li>• <strong class="text-on-surface">Dark BG:</strong> Deep Navy #1A1D29 (never pure #000)</li>
+<li>• <strong class="text-on-surface">Light Tiles:</strong> #F3F5FA | <strong class="text-on-surface">Dark Tiles:</strong> #232838</li>
+<li>• <strong class="text-on-surface">Action Blues:</strong> #1A66E8 (Light) | #4D8FF7 (Dark)</li>
+</ul>
+</div>
+<!-- File Format Signifiers -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-xs space-y-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">folder_special</span>
+<span class="font-title-md text-title-md text-on-surface">MIME Format Colors</span>
+</div>
+<div class="grid grid-cols-2 gap-1.5 font-label-xs text-label-xs">
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#E02B2B]"></span> PDF: #E02B2B</span>
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#1E5FD8]"></span> Word: #1E5FD8</span>
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#1E9E4F]"></span> Excel: #1E9E4F</span>
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#F26B1D]"></span> PPT: #F26B1D</span>
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#5B6B9A]"></span> TXT: #5B6B9A</span>
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FFB300]"></span> Image: #FFB300</span>
+</div>
+</div>
+<!-- Ergonomic Targets -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-xs space-y-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">touch_app</span>
+<span class="font-title-md text-title-md text-on-surface">Touch Ergonomics</span>
+</div>
+<ul class="font-body-sm text-body-sm text-on-surface-variant space-y-1">
+<li>• <strong class="text-on-surface">FAB:</strong> 56 × 56 pt floating trigger with 12pt halo</li>
+<li>• <strong class="text-on-surface">AdMob Dock:</strong> Strictly 60 pt banner container</li>
+<li>• <strong class="text-on-surface">Bottom Bar:</strong> 64 pt with thumb-arc hitboxes</li>
+<li>• <strong class="text-on-surface">Hit Targets:</strong> 48 × 48 pt minimum across all icons</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-space-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full px-margin flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-sm"><span class="font-label-md text-label-md text-on-surface">Doc View Suite Architecture</span><span>•</span><span>Handheld Screen Multi-Variant Matrix</span></div><div class="flex items-center gap-space-lg"><span class="font-label-xs text-label-xs">Grid: 4pt Spatial</span><span class="font-label-xs text-label-xs">Target: 393 × 852 pt</span><span class="font-label-xs text-label-xs">© 2025 Engineering UI Lab</span></div></div></footer></body></html>

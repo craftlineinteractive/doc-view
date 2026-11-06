@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Doc View Design Suite Workbench</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"background":"#faf8ff","secondary-fixed":"#dae2ff","outline-variant":"#c2c6d5","tertiary-fixed-dim":"#bfc7d4","outline":"#727785","on-secondary":"#ffffff","on-secondary-container":"#fefcff","error-container":"#ffdad6","on-tertiary-fixed-variant":"#3f4752","on-error-container":"#93000a","surface-dim":"#d8d9e5","on-primary-fixed":"#001a40","primary-fixed":"#d7e2ff","surface-container-low":"#f2f3ff","on-primary-container":"#fefcff","tertiary-container":"#6d7581","primary-container":"#1f71e0","surface-container-highest":"#e0e2ee","surface-bright":"#faf8ff","surface-container-high":"#e6e7f3","on-background":"#181b24","error":"#ba1a1a","on-tertiary":"#ffffff","on-primary-fixed-variant":"#004492","inverse-primary":"#acc7ff","on-secondary-fixed-variant":"#00409f","surface-container":"#ecedf9","on-tertiary-container":"#fdfcff","on-secondary-fixed":"#001847","tertiary-fixed":"#dbe3f1","primary-fixed-dim":"#acc7ff","on-surface-variant":"#424753","inverse-surface":"#2d3039","secondary-container":"#276def","inverse-on-surface":"#eff0fc","surface-container-lowest":"#ffffff","on-surface":"#181b24","secondary":"#0054cb","secondary-fixed-dim":"#b1c5ff","on-error":"#ffffff","tertiary":"#545d68","on-primary":"#ffffff","surface-tint":"#005bbf","surface-variant":"#e0e2ee","surface":"#faf8ff","primary":"#0059ba","on-tertiary-fixed":"#141c26"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"space-xs":"0.25rem","margin":"1.25rem","space-md":"0.75rem","space-sm":"0.5rem","space-xl":"1.5rem","gutter":"0.75rem","space-lg":"1rem"},"fontFamily":{"label-xs":["Inter"],"body-sm":["Inter"],"body-lg":["Inter"],"label-md":["Inter"],"headline-xl":["Space Grotesk"],"label-lg":["Inter"],"title-md":["Inter"],"body-md":["Inter"],"headline-sm":["Space Grotesk"],"headline-lg":["Space Grotesk"]},"fontSize":{"label-xs":["11px",{"lineHeight":"14px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"500"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"600"}],"headline-xl":["32px",{"lineHeight":"38px","fontWeight":"700"}],"label-lg":["15px",{"lineHeight":"20px","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"22px","fontWeight":"700"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"30px","fontWeight":"700"}]}}}};</script></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-margin flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-DEFAULT bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[20px]">menu_book</span></div><div><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface block leading-tight">Doc View</span><span class="font-label-xs text-label-xs text-outline tracking-wider uppercase block">Engine Workbench</span></div></div><div class="h-4 w-px bg-outline-variant hidden sm:block"></div><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-space-xs rounded-DEFAULT bg-surface-container-high"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="font-label-xs text-label-xs text-on-surface-variant font-medium tracking-wide">CANVAS: 393 × 852 PT</span></div></div><nav class="hidden md:flex items-center gap-space-xs p-space-xs rounded-DEFAULT bg-surface-container" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-DEFAULT"><a aria-current="page" class="px-space-md py-space-xs transition-colors bg-primary-container text-on-primary-container font-semibold rounded-DEFAULT" data-path="spec-workbench" href="#">Spec Workbench</a><a class="px-space-md py-space-xs font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="interactive-artboards" href="#">Interactive Artboards</a><a class="px-space-md py-space-xs font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="system-architecture" href="#">System Architecture</a><a class="px-space-md py-space-xs font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="token-registry" href="#">Token Registry</a></nav><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-sm px-space-md py-space-xs rounded-DEFAULT bg-surface-container-low text-tertiary font-label-xs text-label-xs"><span class="material-symbols-outlined text-[16px]">devices</span><span>iOS / Modern Mobile</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<!-- TOP CONTROL & ARCHITECTURE BANNER -->
+<section class="w-full bg-surface-container-low border-b border-outline-variant/30 py-space-xl px-margin">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-primary/10 text-primary font-label-xs text-label-xs tracking-wider uppercase">System Spec 2.4</span>
+<span class="text-outline font-label-xs text-label-xs">·</span>
+<span class="text-on-surface-variant font-label-xs text-label-xs font-medium">Android Scoped Storage &amp; POSIX Compliance</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Directories (Folder Browser) Suite</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+          Natively mapped mobile viewports (393 × 852 pt baseline) across 6 distinct operational states. High-efficiency ergonomic surfaces featuring zero layout shift, docked 60pt AdMob containers, and sub-200ms instantaneous skeleton buffers.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm bg-surface-container p-1.5 rounded-DEFAULT shadow-sm">
+<button class="px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md bg-primary text-on-primary shadow-sm transition-all" id="btn-show-all" onclick="filterFrames('all')">All 6 States</button>
+<button class="px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" id="btn-show-normal" onclick="filterFrames('frame-a')">A: Browser</button>
+<button class="px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" id="btn-show-security" onclick="filterFrames('frame-b-c')">B/C: Security</button>
+<button class="px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" id="btn-show-empty" onclick="filterFrames('frame-d-e')">D/E: Empty/Lost</button>
+<button class="px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" id="btn-show-shimmer" onclick="filterFrames('frame-f')">F: Skeleton</button>
+</div>
+</div>
+</section>
+<!-- METRIC QUICK STATS & SPEC CHIPS -->
+<section class="w-full bg-surface py-space-md px-margin border-b border-outline-variant/20">
+<div class="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-space-md">
+<div class="flex items-center gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">aspect_ratio</span>
+<div>
+<span class="block font-label-xs text-label-xs text-outline uppercase">Canvas Size</span>
+<span class="font-title-md text-title-md text-on-surface">393 × 852 pt</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">grid_4x4</span>
+<div>
+<span class="block font-label-xs text-label-xs text-outline uppercase">Rhythm</span>
+<span class="font-title-md text-title-md text-on-surface">4pt Strict Grid</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-[#1E9E4F] text-[22px]">ad</span>
+<div>
+<span class="block font-label-xs text-label-xs text-outline uppercase">Docked Ad Unit</span>
+<span class="font-title-md text-title-md text-on-surface">60pt Anchor</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-[#2F7BEA] text-[22px]">touch_app</span>
+<div>
+<span class="block font-label-xs text-label-xs text-outline uppercase">Min Hitbox</span>
+<span class="font-title-md text-title-md text-on-surface">48 × 48 pt</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-[#E02B2B] text-[22px]">rounded_corner</span>
+<div>
+<span class="block font-label-xs text-label-xs text-outline uppercase">Card / Button</span>
+<span class="font-title-md text-title-md text-on-surface">R20 / R16</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-[#FFB300] text-[22px]">bolt</span>
+<div>
+<span class="block font-label-xs text-label-xs text-outline uppercase">Time To First Row</span>
+<span class="font-title-md text-title-md text-on-surface">&lt;140 ms</span>
+</div>
+</div>
+</div>
+</section>
+<!-- WORKBENCH ARTBOARD STAGE -->
+<section class="w-full px-margin py-space-xl bg-surface-container-low/40">
+<div class="max-w-[1720px] mx-auto space-y-20">
+<!-- ========================================== -->
+<!-- FRAME A: NORMAL DIRECTORY / FILE BROWSER -->
+<!-- ========================================== -->
+<div class="artboard-card space-y-space-md" id="artboard-frame-a">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-xs border-b border-outline-variant/30 gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm">A</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Normal State: Folder &amp; File Browser</h2>
+<span class="hidden md:inline-block px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">Active Root Stack</span>
+</div>
+<span class="font-label-md text-label-md text-outline">Light Mode (#FFFFFF) &amp; Deep Navy (#1A1D29)</span>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl justify-items-center">
+<!-- LIGHT VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Mode: Crisp Utility Light</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold">393 × 852 pt</span>
+</div>
+<!-- Canvas 393 x 852 -->
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #FFFFFF; font-family: 'Inter', sans-serif;">
+<!-- TOP SECTION: HEADER + BREADCRUMBS -->
+<div class="w-full shrink-0" style="background: linear-gradient(180deg, #E9F2FF 0%, #FFFFFF 100%);">
+<!-- Status bar simulated -->
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-[#11141C]">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<!-- App Bar (56pt) -->
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-[#11141C] hover:bg-[#E8F0FE] transition-colors">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-[#11141C] tracking-tight">Directories</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-[#11141C] hover:bg-[#E8F0FE] transition-colors">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-[#11141C] hover:bg-[#E8F0FE] transition-colors">
+<span class="material-symbols-outlined text-[22px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Breadcrumb Bar (40pt) -->
+<div class="h-10 px-5 flex items-center gap-1.5 overflow-x-auto text-[13px] font-semibold border-b border-[#E6E9F0]">
+<span class="text-[#1A66E8] cursor-pointer hover:underline">Root</span>
+<span class="material-symbols-outlined text-[14px] text-[#8A8F9C]">chevron_right</span>
+<span class="text-[#1A66E8] cursor-pointer hover:underline">Download</span>
+<span class="material-symbols-outlined text-[14px] text-[#8A8F9C]">chevron_right</span>
+<span class="text-[#11141C]">Reports</span>
+</div>
+</div>
+<!-- SCROLL CONTENT -->
+<div class="flex-1 overflow-y-auto px-5 py-3 space-y-3">
+<!-- Section Header: FOLDERS -->
+<div class="flex items-center justify-between pt-1">
+<span class="text-[11px] font-bold tracking-wider uppercase text-[#8A94AE]">FOLDERS (4)</span>
+<span class="text-[11px] font-semibold text-[#8A8F9C]">Name ↑</span>
+</div>
+<!-- Folder 1: Download -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F3F5FA] hover:bg-[#EAF0F9] transition-all cursor-pointer shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E8F0FE] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#2F7BEA] text-[24px]">folder</span>
+</div>
+<div class="truncate">
+<span class="block text-[15px] font-bold text-[#11141C] truncate">Download</span>
+<span class="block text-[12px] font-medium text-[#8A8F9C]">Modified Oct 23 · 8 items</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#8A8F9C] shrink-0">chevron_right</span>
+</div>
+<!-- Folder 2: Documents -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F3F5FA] hover:bg-[#EAF0F9] transition-all cursor-pointer shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E8F0FE] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#2F7BEA] text-[24px]">folder</span>
+</div>
+<div class="truncate">
+<span class="block text-[15px] font-bold text-[#11141C] truncate">Documents</span>
+<span class="block text-[12px] font-medium text-[#8A8F9C]">Modified Oct 22 · 14 items</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#8A8F9C] shrink-0">chevron_right</span>
+</div>
+<!-- Folder 3: DCIM -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F3F5FA] hover:bg-[#EAF0F9] transition-all cursor-pointer shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E8F0FE] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#2F7BEA] text-[24px]">folder</span>
+</div>
+<div class="truncate">
+<span class="block text-[15px] font-bold text-[#11141C] truncate">DCIM</span>
+<span class="block text-[12px] font-medium text-[#8A8F9C]">Modified Oct 20 · 182 items</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#8A8F9C] shrink-0">chevron_right</span>
+</div>
+<!-- Folder 4: WhatsApp -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F3F5FA] hover:bg-[#EAF0F9] transition-all cursor-pointer shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E8F0FE] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#2F7BEA] text-[24px]">folder</span>
+</div>
+<div class="truncate">
+<span class="block text-[15px] font-bold text-[#11141C] truncate">WhatsApp</span>
+<span class="block text-[12px] font-medium text-[#8A8F9C]">Modified Oct 19 · 5 items</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#8A8F9C] shrink-0">chevron_right</span>
+</div>
+<!-- Section Divider Band (8pt) -->
+<div class="h-2 w-full bg-[#F1F3F8] rounded-full my-1"></div>
+<!-- Section Header: FILES -->
+<div class="flex items-center justify-between pt-1">
+<span class="text-[11px] font-bold tracking-wider uppercase text-[#8A94AE]">FILES (2)</span>
+<span class="text-[11px] font-semibold text-[#8A8F9C]">Size ↓</span>
+</div>
+<!-- File 1: Practical_1_to_13.pdf -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F3F5FA] hover:bg-[#EAF0F9] transition-all cursor-pointer shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Document Preview 48x56 -->
+<div class="w-12 h-14 rounded-[10px] bg-white border border-[#E6E9F0] overflow-hidden flex flex-col justify-between shrink-0 shadow-sm relative">
+<div class="p-1 space-y-0.5">
+<div class="h-1 bg-[#CCD2E3] rounded-full w-4/5"></div>
+<div class="h-1 bg-[#CCD2E3] rounded-full w-full"></div>
+<div class="h-1 bg-[#CCD2E3] rounded-full w-3/5"></div>
+</div>
+<div class="h-4 bg-[#E02B2B] text-white flex items-center justify-center font-bold text-[8px] tracking-wider uppercase">
+                        PDF
+                      </div>
+</div>
+<div class="truncate">
+<span class="block text-[14px] font-bold text-[#11141C] truncate">Practical_1_to_13.pdf</span>
+<span class="block text-[12px] font-medium text-[#8A8F9C]">120 pages · 4.2 MB · Oct 22</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A8F9C] hover:text-[#11141C]">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+<!-- File 2: Notes.txt -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F3F5FA] hover:bg-[#EAF0F9] transition-all cursor-pointer shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Text Icon Badge -->
+<div class="w-12 h-14 rounded-[10px] bg-[#EDF0F7] border border-[#CCD2E3] flex flex-col items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#5B6B9A] text-[24px]">description</span>
+<span class="text-[8px] font-bold uppercase text-[#5B6B9A] tracking-wider mt-0.5">TXT</span>
+</div>
+<div class="truncate">
+<span class="block text-[14px] font-bold text-[#11141C] truncate">Notes.txt</span>
+<span class="block text-[12px] font-medium text-[#8A8F9C]">14 KB · Oct 21</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A8F9C] hover:text-[#11141C]">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- DOCKED ADMOB BANNER (60pt) -->
+<div class="h-[60px] w-full shrink-0 bg-[#FFFFFF] border-t border-[#E6E9F0] px-4 flex items-center justify-between shadow-[0_-2px_6px_rgba(0,0,0,0.02)]">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#8A8F9C] text-[#8A8F9C] text-[9px] font-bold tracking-tight">AD</span>
+<div class="truncate">
+<span class="block text-[12px] font-bold text-[#11141C] truncate">Cloud Storage Backup Pro</span>
+<span class="block text-[10px] text-[#8A8F9C] truncate">Instant sync &amp; multi-device archive</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold shrink-0">Install</button>
+</div>
+<!-- BOTTOM NAVIGATION BAR (64pt) -->
+<div class="h-16 w-full shrink-0 bg-white border-t border-[#E6E9F0] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C] hover:text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C] hover:text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+<!-- DARK VARIANT (DEEP NAVY) -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Mode: Deep Navy Technical</span>
+<span class="font-label-xs text-label-xs text-[#4D8FF7] font-semibold">393 × 852 pt</span>
+</div>
+<!-- Canvas 393 x 852 -->
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #1A1D29; font-family: 'Inter', sans-serif;">
+<!-- TOP SECTION: HEADER + BREADCRUMBS -->
+<div class="w-full shrink-0 bg-[#1A1D29]">
+<!-- Status bar simulated -->
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-white">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<!-- App Bar (56pt) -->
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-white hover:bg-[#1E2A45] transition-colors">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-white tracking-tight">Directories</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-white hover:bg-[#1E2A45] transition-colors">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-white hover:bg-[#1E2A45] transition-colors">
+<span class="material-symbols-outlined text-[22px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Breadcrumb Bar (40pt) -->
+<div class="h-10 px-5 flex items-center gap-1.5 overflow-x-auto text-[13px] font-semibold border-b border-[#2A3042]">
+<span class="text-[#4D8FF7] cursor-pointer hover:underline">Root</span>
+<span class="material-symbols-outlined text-[14px] text-[#858B9C]">chevron_right</span>
+<span class="text-[#4D8FF7] cursor-pointer hover:underline">Download</span>
+<span class="material-symbols-outlined text-[14px] text-[#858B9C]">chevron_right</span>
+<span class="text-white">Reports</span>
+</div>
+</div>
+<!-- SCROLL CONTENT -->
+<div class="flex-1 overflow-y-auto px-5 py-3 space-y-3">
+<!-- Section Header: FOLDERS -->
+<div class="flex items-center justify-between pt-1">
+<span class="text-[11px] font-bold tracking-wider uppercase text-[#7F8AA8]">FOLDERS (4)</span>
+<span class="text-[11px] font-semibold text-[#858B9C]">Name ↑</span>
+</div>
+<!-- Folder 1: Download -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] hover:bg-[#2C3347] transition-all cursor-pointer border border-[#2A3042]/40 shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#1E2A45] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#4D8FF7] text-[24px]">folder</span>
+</div>
+<div class="truncate">
+<span class="block text-[15px] font-bold text-white truncate">Download</span>
+<span class="block text-[12px] font-medium text-[#858B9C]">Modified Oct 23 · 8 items</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#858B9C] shrink-0">chevron_right</span>
+</div>
+<!-- Folder 2: Documents -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] hover:bg-[#2C3347] transition-all cursor-pointer border border-[#2A3042]/40 shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#1E2A45] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#4D8FF7] text-[24px]">folder</span>
+</div>
+<div class="truncate">
+<span class="block text-[15px] font-bold text-white truncate">Documents</span>
+<span class="block text-[12px] font-medium text-[#858B9C]">Modified Oct 22 · 14 items</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#858B9C] shrink-0">chevron_right</span>
+</div>
+<!-- Folder 3: DCIM -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] hover:bg-[#2C3347] transition-all cursor-pointer border border-[#2A3042]/40 shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#1E2A45] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#4D8FF7] text-[24px]">folder</span>
+</div>
+<div class="truncate">
+<span class="block text-[15px] font-bold text-white truncate">DCIM</span>
+<span class="block text-[12px] font-medium text-[#858B9C]">Modified Oct 20 · 182 items</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#858B9C] shrink-0">chevron_right</span>
+</div>
+<!-- Folder 4: WhatsApp -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] hover:bg-[#2C3347] transition-all cursor-pointer border border-[#2A3042]/40 shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#1E2A45] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#4D8FF7] text-[24px]">folder</span>
+</div>
+<div class="truncate">
+<span class="block text-[15px] font-bold text-white truncate">WhatsApp</span>
+<span class="block text-[12px] font-medium text-[#858B9C]">Modified Oct 19 · 5 items</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#858B9C] shrink-0">chevron_right</span>
+</div>
+<!-- Section Divider Band (8pt) -->
+<div class="h-2 w-full bg-[#141722] rounded-full my-1"></div>
+<!-- Section Header: FILES -->
+<div class="flex items-center justify-between pt-1">
+<span class="text-[11px] font-bold tracking-wider uppercase text-[#7F8AA8]">FILES (2)</span>
+<span class="text-[11px] font-semibold text-[#858B9C]">Size ↓</span>
+</div>
+<!-- File 1: Practical_1_to_13.pdf -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] hover:bg-[#2C3347] transition-all cursor-pointer border border-[#2A3042]/40 shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Dark Document Preview 48x56 -->
+<div class="w-12 h-14 rounded-[10px] bg-[#1E2230] border border-[#2A3042] overflow-hidden flex flex-col justify-between shrink-0 shadow-sm">
+<div class="p-1 space-y-0.5">
+<div class="h-1 bg-[#373F57] rounded-full w-4/5"></div>
+<div class="h-1 bg-[#373F57] rounded-full w-full"></div>
+<div class="h-1 bg-[#373F57] rounded-full w-3/5"></div>
+</div>
+<div class="h-4 bg-[#E02B2B] text-white flex items-center justify-center font-bold text-[8px] tracking-wider uppercase">
+                        PDF
+                      </div>
+</div>
+<div class="truncate">
+<span class="block text-[14px] font-bold text-white truncate">Practical_1_to_13.pdf</span>
+<span class="block text-[12px] font-medium text-[#858B9C]">120 pages · 4.2 MB · Oct 22</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#858B9C] hover:text-white">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+<!-- File 2: Notes.txt -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] hover:bg-[#2C3347] transition-all cursor-pointer border border-[#2A3042]/40 shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Text Icon Badge -->
+<div class="w-12 h-14 rounded-[10px] bg-[#1E2230] border border-[#2A3042] flex flex-col items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#7283B5] text-[24px]">description</span>
+<span class="text-[8px] font-bold uppercase text-[#7283B5] tracking-wider mt-0.5">TXT</span>
+</div>
+<div class="truncate">
+<span class="block text-[14px] font-bold text-white truncate">Notes.txt</span>
+<span class="block text-[12px] font-medium text-[#858B9C]">14 KB · Oct 21</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-[#858B9C] hover:text-white">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- DOCKED ADMOB BANNER (60pt) -->
+<div class="h-[60px] w-full shrink-0 bg-[#1A1D29] border-t border-[#2A3042] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#858B9C] text-[#858B9C] text-[9px] font-bold tracking-tight">AD</span>
+<div class="truncate">
+<span class="block text-[12px] font-bold text-white truncate">Cloud Storage Backup Pro</span>
+<span class="block text-[10px] text-[#858B9C] truncate">Instant sync &amp; multi-device archive</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold shrink-0">Install</button>
+</div>
+<!-- BOTTOM NAVIGATION BAR (64pt) -->
+<div class="h-16 w-full shrink-0 bg-[#1A1D29] border-t border-[#2A3042] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C] hover:text-white">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C] hover:text-white">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- FRAME B: PERMISSION REQUIRED ("ALL FILES") -->
+<!-- ========================================== -->
+<div class="artboard-card space-y-space-md" id="artboard-frame-b">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-xs border-b border-outline-variant/30 gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm">B</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Permission Required (MANAGE_EXTERNAL_STORAGE)</h2>
+<span class="hidden md:inline-block px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">Storage Gate</span>
+</div>
+<span class="font-label-md text-label-md text-outline">Empty state illustration + 56pt Primary Button</span>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl justify-items-center">
+<!-- LIGHT VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Light Mode Permission Gate</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #FFFFFF; font-family: 'Inter', sans-serif;">
+<!-- Chrome Top -->
+<div class="w-full shrink-0 bg-[#FFFFFF]">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-[#11141C]">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between border-b border-[#E6E9F0]">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-[#11141C] tracking-tight">Directories</span>
+</div>
+</div>
+</div>
+<!-- Permission Content Center -->
+<div class="flex-1 px-6 flex flex-col items-center justify-center text-center">
+<!-- Illustrated Vector Symbol -->
+<div class="w-24 h-24 rounded-full bg-[#E8F0FE] flex items-center justify-center mb-6 shadow-inner relative">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#1A66E8] text-[36px]" style="font-variation-settings: 'FILL' 1;">folder_shared</span>
+</div>
+<span class="absolute bottom-1 right-1 w-7 h-7 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[16px]">lock_open</span>
+</span>
+</div>
+<h3 class="text-[18px] font-bold text-[#11141C] leading-snug mb-3 max-w-[280px]">
+                  Doc View needs All files access to browse your folders.
+                </h3>
+<p class="text-[13px] font-medium text-[#8A8F9C] leading-relaxed mb-8 max-w-[300px]">
+                  To browse and manage folders across your device storage, please grant storage management permission.
+                </p>
+<div class="w-full space-y-3">
+<button class="w-full h-14 rounded-[16px] bg-[#1A66E8] text-white text-[16px] font-semibold flex items-center justify-center shadow-md hover:bg-[#1557C7] transition-all">
+                    Grant access
+                  </button>
+<button class="w-full h-12 rounded-[16px] text-[#1A66E8] text-[14px] font-semibold flex items-center justify-center hover:bg-[#E8F0FE] transition-all">
+                    Import files instead
+                  </button>
+</div>
+</div>
+<!-- Docked Ad & Bottom Nav -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#FFFFFF] border-t border-[#E6E9F0] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#8A8F9C] text-[#8A8F9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-[#11141C]">Secure Vault Storage</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Open</button>
+</div>
+<div class="h-16 w-full bg-white border-t border-[#E6E9F0] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Dark Navy Permission Gate</span>
+<span class="font-label-xs text-label-xs text-[#4D8FF7] font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #1A1D29; font-family: 'Inter', sans-serif;">
+<!-- Chrome Top -->
+<div class="w-full shrink-0 bg-[#1A1D29]">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-white">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between border-b border-[#2A3042]">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-white tracking-tight">Directories</span>
+</div>
+</div>
+</div>
+<!-- Permission Content Center -->
+<div class="flex-1 px-6 flex flex-col items-center justify-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#1E2A45] flex items-center justify-center mb-6 relative">
+<div class="w-16 h-16 rounded-full bg-[#232838] flex items-center justify-center border border-[#2A3042]">
+<span class="material-symbols-outlined text-[#4D8FF7] text-[36px]" style="font-variation-settings: 'FILL' 1;">folder_shared</span>
+</div>
+<span class="absolute bottom-1 right-1 w-7 h-7 rounded-full bg-[#4D8FF7] text-[#1A1D29] flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[16px]">lock_open</span>
+</span>
+</div>
+<h3 class="text-[18px] font-bold text-white leading-snug mb-3 max-w-[280px]">
+                  Doc View needs All files access to browse your folders.
+                </h3>
+<p class="text-[13px] font-medium text-[#858B9C] leading-relaxed mb-8 max-w-[300px]">
+                  To browse and manage folders across your device storage, please grant storage management permission.
+                </p>
+<div class="w-full space-y-3">
+<button class="w-full h-14 rounded-[16px] bg-[#1A66E8] text-white text-[16px] font-semibold flex items-center justify-center shadow-md hover:bg-[#1557C7] transition-all">
+                    Grant access
+                  </button>
+<button class="w-full h-12 rounded-[16px] text-[#4D8FF7] text-[14px] font-semibold flex items-center justify-center hover:bg-[#1E2A45] transition-all">
+                    Import files instead
+                  </button>
+</div>
+</div>
+<!-- Docked Ad & Bottom Nav -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#1A1D29] border-t border-[#2A3042] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#858B9C] text-[#858B9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-white">Secure Vault Storage</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Open</button>
+</div>
+<div class="h-16 w-full bg-[#1A1D29] border-t border-[#2A3042] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- FRAME C: PROTECTED FOLDER -->
+<!-- ========================================== -->
+<div class="artboard-card space-y-space-md" id="artboard-frame-c">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-xs border-b border-outline-variant/30 gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm">C</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Protected Directory (Android 11+ Sandboxed)</h2>
+<span class="hidden md:inline-block px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">Android/data Restriction</span>
+</div>
+<span class="font-label-md text-label-md text-outline">System Security Banner + Dismiss Safe Action</span>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl justify-items-center">
+<!-- LIGHT VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Light Security Sandbox</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #FFFFFF; font-family: 'Inter', sans-serif;">
+<!-- Chrome Top -->
+<div class="w-full shrink-0 bg-[#FFFFFF]">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-[#11141C]">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-[#11141C] tracking-tight">Directories</span>
+</div>
+</div>
+<!-- Breadcrumbs at protected location -->
+<div class="h-10 px-5 flex items-center gap-1.5 text-[13px] font-semibold border-b border-[#E6E9F0]">
+<span class="text-[#1A66E8]">Android</span>
+<span class="material-symbols-outlined text-[14px] text-[#8A8F9C]">chevron_right</span>
+<span class="text-[#11141C]">data</span>
+</div>
+</div>
+<!-- Main Center Content -->
+<div class="flex-1 px-6 flex flex-col items-center justify-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#FFF1ED] flex items-center justify-center mb-6">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#F26B1D] text-[36px]">security</span>
+</div>
+</div>
+<h3 class="text-[18px] font-bold text-[#11141C] leading-snug mb-3 max-w-[280px]">
+                  This folder is protected by Android.
+                </h3>
+<p class="text-[13px] font-medium text-[#8A8F9C] leading-relaxed mb-8 max-w-[310px]">
+                  Android restricts access to system directories (like Android/data and Android/obb) to safeguard device security.
+                </p>
+<div class="w-full">
+<button class="w-full h-14 rounded-[16px] bg-[#1A66E8] text-white text-[16px] font-semibold flex items-center justify-center shadow-md">
+                    Go back
+                  </button>
+</div>
+</div>
+<!-- Docked Chrome -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#FFFFFF] border-t border-[#E6E9F0] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#8A8F9C] text-[#8A8F9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-[#11141C]">VPN Unlimited Shield</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Try Now</button>
+</div>
+<div class="h-16 w-full bg-white border-t border-[#E6E9F0] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Dark Security Sandbox</span>
+<span class="font-label-xs text-label-xs text-[#4D8FF7] font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #1A1D29; font-family: 'Inter', sans-serif;">
+<div class="w-full shrink-0 bg-[#1A1D29]">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-white">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-white tracking-tight">Directories</span>
+</div>
+</div>
+<div class="h-10 px-5 flex items-center gap-1.5 text-[13px] font-semibold border-b border-[#2A3042]">
+<span class="text-[#4D8FF7]">Android</span>
+<span class="material-symbols-outlined text-[14px] text-[#858B9C]">chevron_right</span>
+<span class="text-white">data</span>
+</div>
+</div>
+<!-- Main Center Content -->
+<div class="flex-1 px-6 flex flex-col items-center justify-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#352520] flex items-center justify-center mb-6">
+<div class="w-16 h-16 rounded-full bg-[#232838] border border-[#F26B1D]/40 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#F26B1D] text-[36px]">security</span>
+</div>
+</div>
+<h3 class="text-[18px] font-bold text-white leading-snug mb-3 max-w-[280px]">
+                  This folder is protected by Android.
+                </h3>
+<p class="text-[13px] font-medium text-[#858B9C] leading-relaxed mb-8 max-w-[310px]">
+                  Android restricts access to system directories (like Android/data and Android/obb) to safeguard device security.
+                </p>
+<div class="w-full">
+<button class="w-full h-14 rounded-[16px] bg-[#1A66E8] text-white text-[16px] font-semibold flex items-center justify-center shadow-md">
+                    Go back
+                  </button>
+</div>
+</div>
+<!-- Docked Chrome -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#1A1D29] border-t border-[#2A3042] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#858B9C] text-[#858B9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-white">VPN Unlimited Shield</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Try Now</button>
+</div>
+<div class="h-16 w-full bg-[#1A1D29] border-t border-[#2A3042] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- FRAME D: EMPTY DIRECTORY -->
+<!-- ========================================== -->
+<div class="artboard-card space-y-space-md" id="artboard-frame-d">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-xs border-b border-outline-variant/30 gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm">D</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Empty Directory State</h2>
+<span class="hidden md:inline-block px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">0 Items / Unsupported MIME</span>
+</div>
+<span class="font-label-md text-label-md text-outline">Minimalist Outline Glyph + Re-index Action</span>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl justify-items-center">
+<!-- LIGHT VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Light Empty Folder</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #FFFFFF; font-family: 'Inter', sans-serif;">
+<!-- Chrome Top -->
+<div class="w-full shrink-0 bg-[#FFFFFF]">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-[#11141C]">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-[#11141C] tracking-tight">Directories</span>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+</div>
+<div class="h-10 px-5 flex items-center gap-1.5 text-[13px] font-semibold border-b border-[#E6E9F0]">
+<span class="text-[#1A66E8]">Download</span>
+<span class="material-symbols-outlined text-[14px] text-[#8A8F9C]">chevron_right</span>
+<span class="text-[#11141C]">Old_Archive</span>
+</div>
+</div>
+<!-- Main Center Content -->
+<div class="flex-1 px-6 flex flex-col items-center justify-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#F3F5FA] flex items-center justify-center mb-6 border border-[#E6E9F0]">
+<span class="material-symbols-outlined text-[#8A8F9C] text-[44px]">folder_off</span>
+</div>
+<h3 class="text-[18px] font-bold text-[#11141C] leading-snug mb-2 max-w-[280px]">
+                  No supported files or folders here.
+                </h3>
+<p class="text-[13px] font-medium text-[#8A8F9C] leading-relaxed mb-6 max-w-[290px]">
+                  This folder is empty or contains file formats unsupported by Doc View.
+                </p>
+<button class="px-5 py-2.5 rounded-full bg-[#E8F0FE] text-[#1A66E8] text-[13px] font-bold flex items-center gap-2 hover:bg-[#D5E4FD] transition-all">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                  Refresh directory
+                </button>
+</div>
+<!-- Docked Chrome -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#FFFFFF] border-t border-[#E6E9F0] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#8A8F9C] text-[#8A8F9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-[#11141C]">Clean Master Pro Scanner</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Scan</button>
+</div>
+<div class="h-16 w-full bg-white border-t border-[#E6E9F0] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Dark Empty Folder</span>
+<span class="font-label-xs text-label-xs text-[#4D8FF7] font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #1A1D29; font-family: 'Inter', sans-serif;">
+<div class="w-full shrink-0 bg-[#1A1D29]">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-white">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-white tracking-tight">Directories</span>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+</div>
+<div class="h-10 px-5 flex items-center gap-1.5 text-[13px] font-semibold border-b border-[#2A3042]">
+<span class="text-[#4D8FF7]">Download</span>
+<span class="material-symbols-outlined text-[14px] text-[#858B9C]">chevron_right</span>
+<span class="text-white">Old_Archive</span>
+</div>
+</div>
+<!-- Main Center Content -->
+<div class="flex-1 px-6 flex flex-col items-center justify-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#232838] flex items-center justify-center mb-6 border border-[#2A3042]">
+<span class="material-symbols-outlined text-[#858B9C] text-[44px]">folder_off</span>
+</div>
+<h3 class="text-[18px] font-bold text-white leading-snug mb-2 max-w-[280px]">
+                  No supported files or folders here.
+                </h3>
+<p class="text-[13px] font-medium text-[#858B9C] leading-relaxed mb-6 max-w-[290px]">
+                  This folder is empty or contains file formats unsupported by Doc View.
+                </p>
+<button class="px-5 py-2.5 rounded-full bg-[#1E2A45] text-[#4D8FF7] text-[13px] font-bold flex items-center gap-2 hover:bg-[#28395E] transition-all">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                  Refresh directory
+                </button>
+</div>
+<!-- Docked Chrome -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#1A1D29] border-t border-[#2A3042] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#858B9C] text-[#858B9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-white">Clean Master Pro Scanner</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Scan</button>
+</div>
+<div class="h-16 w-full bg-[#1A1D29] border-t border-[#2A3042] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- FRAME E: NOT FOUND / DELETED FOLDER -->
+<!-- ========================================== -->
+<div class="artboard-card space-y-space-md" id="artboard-frame-e">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-xs border-b border-outline-variant/30 gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm">E</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Not Found / Deleted Folder (404 ENOENT)</h2>
+<span class="hidden md:inline-block px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">Orphaned Path</span>
+</div>
+<span class="font-label-md text-label-md text-outline">Warning Visual + Navigate Root CTA</span>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl justify-items-center">
+<!-- LIGHT VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Light Not Found</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #FFFFFF; font-family: 'Inter', sans-serif;">
+<div class="w-full shrink-0 bg-[#FFFFFF]">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-[#11141C]">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-[#11141C] tracking-tight">Directories</span>
+</div>
+</div>
+<div class="h-10 px-5 flex items-center gap-1.5 text-[13px] font-semibold border-b border-[#E6E9F0]">
+<span class="text-[#8A8F9C] line-through">Root</span>
+<span class="material-symbols-outlined text-[14px] text-[#8A8F9C]">chevron_right</span>
+<span class="text-[#E02B2B]">Temp_Invoices</span>
+</div>
+</div>
+<!-- Main Center Content -->
+<div class="flex-1 px-6 flex flex-col items-center justify-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#FEECEC] flex items-center justify-center mb-6">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#E02B2B] text-[36px]">folder_delete</span>
+</div>
+</div>
+<h3 class="text-[18px] font-bold text-[#11141C] leading-snug mb-3 max-w-[280px]">
+                  This folder no longer exists.
+                </h3>
+<p class="text-[13px] font-medium text-[#8A8F9C] leading-relaxed mb-8 max-w-[310px]">
+                  It may have been moved, renamed, or deleted by another app or system cleanup.
+                </p>
+<div class="w-full">
+<button class="w-full h-14 rounded-[16px] bg-[#1A66E8] text-white text-[16px] font-semibold flex items-center justify-center shadow-md">
+                    Go to root
+                  </button>
+</div>
+</div>
+<!-- Docked Chrome -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#FFFFFF] border-t border-[#E6E9F0] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#8A8F9C] text-[#8A8F9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-[#11141C]">Auto Recovery Toolkit</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Get</button>
+</div>
+<div class="h-16 w-full bg-white border-t border-[#E6E9F0] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Dark Not Found</span>
+<span class="font-label-xs text-label-xs text-[#4D8FF7] font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #1A1D29; font-family: 'Inter', sans-serif;">
+<div class="w-full shrink-0 bg-[#1A1D29]">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-white">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-white tracking-tight">Directories</span>
+</div>
+</div>
+<div class="h-10 px-5 flex items-center gap-1.5 text-[13px] font-semibold border-b border-[#2A3042]">
+<span class="text-[#858B9C] line-through">Root</span>
+<span class="material-symbols-outlined text-[14px] text-[#858B9C]">chevron_right</span>
+<span class="text-[#E02B2B]">Temp_Invoices</span>
+</div>
+</div>
+<!-- Main Center Content -->
+<div class="flex-1 px-6 flex flex-col items-center justify-center text-center">
+<div class="w-24 h-24 rounded-full bg-[#351E24] flex items-center justify-center mb-6">
+<div class="w-16 h-16 rounded-full bg-[#232838] border border-[#E02B2B]/40 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#E02B2B] text-[36px]">folder_delete</span>
+</div>
+</div>
+<h3 class="text-[18px] font-bold text-white leading-snug mb-3 max-w-[280px]">
+                  This folder no longer exists.
+                </h3>
+<p class="text-[13px] font-medium text-[#858B9C] leading-relaxed mb-8 max-w-[310px]">
+                  It may have been moved, renamed, or deleted by another app or system cleanup.
+                </p>
+<div class="w-full">
+<button class="w-full h-14 rounded-[16px] bg-[#1A66E8] text-white text-[16px] font-semibold flex items-center justify-center shadow-md">
+                    Go to root
+                  </button>
+</div>
+</div>
+<!-- Docked Chrome -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#1A1D29] border-t border-[#2A3042] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#858B9C] text-[#858B9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-white">Auto Recovery Toolkit</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Get</button>
+</div>
+<div class="h-16 w-full bg-[#1A1D29] border-t border-[#2A3042] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- FRAME F: SKELETON LIST (INSTANT SHIMMER) -->
+<!-- ========================================== -->
+<div class="artboard-card space-y-space-md" id="artboard-frame-f">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-xs border-b border-outline-variant/30 gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm">F</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Skeleton List (Zero Spinners &lt;200ms)</h2>
+<span class="hidden md:inline-block px-space-sm py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-xs text-label-xs">1.4s Sweep Pulse</span>
+</div>
+<span class="font-label-md text-label-md text-outline">Identical Row Geometries to Prevent Layout Shift</span>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl justify-items-center">
+<!-- LIGHT VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Light Shimmer Pulse (#E9EDF5 ↔ #F5F7FB)</span>
+<span class="font-label-xs text-label-xs text-primary font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #FFFFFF; font-family: 'Inter', sans-serif;">
+<!-- Chrome Top -->
+<div class="w-full shrink-0" style="background: linear-gradient(180deg, #E9F2FF 0%, #FFFFFF 100%);">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-[#11141C]">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-[#11141C] tracking-tight">Directories</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[22px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Skeleton Breadcrumb Bar -->
+<div class="h-10 px-5 flex items-center gap-2 border-b border-[#E6E9F0]">
+<div class="w-12 h-3.5 bg-[#E9EDF5] rounded-full animate-pulse"></div>
+<span class="material-symbols-outlined text-[14px] text-[#C5CAD8]">chevron_right</span>
+<div class="w-20 h-3.5 bg-[#E9EDF5] rounded-full animate-pulse"></div>
+<span class="material-symbols-outlined text-[14px] text-[#C5CAD8]">chevron_right</span>
+<div class="w-14 h-3.5 bg-[#E9EDF5] rounded-full animate-pulse"></div>
+</div>
+</div>
+<!-- Shimmer Content -->
+<div class="flex-1 overflow-y-auto px-5 py-3 space-y-3">
+<div class="w-24 h-3 bg-[#E9EDF5] rounded-full animate-pulse pt-1"></div>
+<!-- 4 Skeleton Folder Rows -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F5F7FB] border border-[#E6E9F0]/50 animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E9EDF5] shrink-0"></div>
+<div class="space-y-1.5 w-40">
+<div class="h-3.5 bg-[#E9EDF5] rounded-full w-28"></div>
+<div class="h-2.5 bg-[#E9EDF5] rounded-full w-36"></div>
+</div>
+</div>
+<div class="w-4 h-4 bg-[#E9EDF5] rounded-full"></div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F5F7FB] border border-[#E6E9F0]/50 animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E9EDF5] shrink-0"></div>
+<div class="space-y-1.5 w-40">
+<div class="h-3.5 bg-[#E9EDF5] rounded-full w-24"></div>
+<div class="h-2.5 bg-[#E9EDF5] rounded-full w-32"></div>
+</div>
+</div>
+<div class="w-4 h-4 bg-[#E9EDF5] rounded-full"></div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F5F7FB] border border-[#E6E9F0]/50 animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E9EDF5] shrink-0"></div>
+<div class="space-y-1.5 w-40">
+<div class="h-3.5 bg-[#E9EDF5] rounded-full w-16"></div>
+<div class="h-2.5 bg-[#E9EDF5] rounded-full w-36"></div>
+</div>
+</div>
+<div class="w-4 h-4 bg-[#E9EDF5] rounded-full"></div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F5F7FB] border border-[#E6E9F0]/50 animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E9EDF5] shrink-0"></div>
+<div class="space-y-1.5 w-40">
+<div class="h-3.5 bg-[#E9EDF5] rounded-full w-28"></div>
+<div class="h-2.5 bg-[#E9EDF5] rounded-full w-28"></div>
+</div>
+</div>
+<div class="w-4 h-4 bg-[#E9EDF5] rounded-full"></div>
+</div>
+<div class="h-2 w-full bg-[#F1F3F8] rounded-full my-1"></div>
+<div class="w-20 h-3 bg-[#E9EDF5] rounded-full animate-pulse pt-1"></div>
+<!-- 2 Skeleton File Rows (48x56) -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F5F7FB] border border-[#E6E9F0]/50 animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 rounded-[10px] bg-[#E9EDF5] shrink-0"></div>
+<div class="space-y-1.5 w-48">
+<div class="h-3.5 bg-[#E9EDF5] rounded-full w-36"></div>
+<div class="h-2.5 bg-[#E9EDF5] rounded-full w-28"></div>
+</div>
+</div>
+<div class="w-5 h-5 bg-[#E9EDF5] rounded-full"></div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#F5F7FB] border border-[#E6E9F0]/50 animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 rounded-[10px] bg-[#E9EDF5] shrink-0"></div>
+<div class="space-y-1.5 w-48">
+<div class="h-3.5 bg-[#E9EDF5] rounded-full w-28"></div>
+<div class="h-2.5 bg-[#E9EDF5] rounded-full w-20"></div>
+</div>
+</div>
+<div class="w-5 h-5 bg-[#E9EDF5] rounded-full"></div>
+</div>
+</div>
+<!-- Static AdMob & Nav Bar -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#FFFFFF] border-t border-[#E6E9F0] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#8A8F9C] text-[#8A8F9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-[#11141C]">Cloud Storage Backup Pro</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Install</button>
+</div>
+<div class="h-16 w-full bg-white border-t border-[#E6E9F0] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- DARK VARIANT -->
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-between w-[393px] px-space-xs mb-space-xs">
+<span class="font-label-xs text-label-xs text-outline uppercase tracking-wider">Dark Shimmer Pulse (#262B3A ↔ #30364A)</span>
+<span class="font-label-xs text-label-xs text-[#4D8FF7] font-semibold">393 × 852 pt</span>
+</div>
+<div class="w-[393px] h-[852px] rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col justify-between select-none" style="background-color: #1A1D29; font-family: 'Inter', sans-serif;">
+<!-- Chrome Top -->
+<div class="w-full shrink-0 bg-[#1A1D29]">
+<div class="h-11 px-6 flex items-center justify-between text-[13px] font-semibold text-white">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</div>
+<div class="h-14 px-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<span class="text-[20px] font-bold text-white tracking-tight">Directories</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[22px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Skeleton Breadcrumb Bar -->
+<div class="h-10 px-5 flex items-center gap-2 border-b border-[#2A3042]">
+<div class="w-12 h-3.5 bg-[#262B3A] rounded-full animate-pulse"></div>
+<span class="material-symbols-outlined text-[14px] text-[#4A5168]">chevron_right</span>
+<div class="w-20 h-3.5 bg-[#262B3A] rounded-full animate-pulse"></div>
+<span class="material-symbols-outlined text-[14px] text-[#4A5168]">chevron_right</span>
+<div class="w-14 h-3.5 bg-[#262B3A] rounded-full animate-pulse"></div>
+</div>
+</div>
+<!-- Shimmer Content -->
+<div class="flex-1 overflow-y-auto px-5 py-3 space-y-3">
+<div class="w-24 h-3 bg-[#262B3A] rounded-full animate-pulse pt-1"></div>
+<!-- 4 Skeleton Folder Rows -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] border border-[#2A3042] animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#30364A] shrink-0"></div>
+<div class="space-y-1.5 w-40">
+<div class="h-3.5 bg-[#30364A] rounded-full w-28"></div>
+<div class="h-2.5 bg-[#30364A] rounded-full w-36"></div>
+</div>
+</div>
+<div class="w-4 h-4 bg-[#30364A] rounded-full"></div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] border border-[#2A3042] animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#30364A] shrink-0"></div>
+<div class="space-y-1.5 w-40">
+<div class="h-3.5 bg-[#30364A] rounded-full w-24"></div>
+<div class="h-2.5 bg-[#30364A] rounded-full w-32"></div>
+</div>
+</div>
+<div class="w-4 h-4 bg-[#30364A] rounded-full"></div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] border border-[#2A3042] animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#30364A] shrink-0"></div>
+<div class="space-y-1.5 w-40">
+<div class="h-3.5 bg-[#30364A] rounded-full w-16"></div>
+<div class="h-2.5 bg-[#30364A] rounded-full w-36"></div>
+</div>
+</div>
+<div class="w-4 h-4 bg-[#30364A] rounded-full"></div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] border border-[#2A3042] animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#30364A] shrink-0"></div>
+<div class="space-y-1.5 w-40">
+<div class="h-3.5 bg-[#30364A] rounded-full w-28"></div>
+<div class="h-2.5 bg-[#30364A] rounded-full w-28"></div>
+</div>
+</div>
+<div class="w-4 h-4 bg-[#30364A] rounded-full"></div>
+</div>
+<div class="h-2 w-full bg-[#141722] rounded-full my-1"></div>
+<div class="w-20 h-3 bg-[#262B3A] rounded-full animate-pulse pt-1"></div>
+<!-- 2 Skeleton File Rows (48x56) -->
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] border border-[#2A3042] animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 rounded-[10px] bg-[#30364A] shrink-0"></div>
+<div class="space-y-1.5 w-48">
+<div class="h-3.5 bg-[#30364A] rounded-full w-36"></div>
+<div class="h-2.5 bg-[#30364A] rounded-full w-28"></div>
+</div>
+</div>
+<div class="w-5 h-5 bg-[#30364A] rounded-full"></div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-[20px] bg-[#232838] border border-[#2A3042] animate-pulse">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-12 h-14 rounded-[10px] bg-[#30364A] shrink-0"></div>
+<div class="space-y-1.5 w-48">
+<div class="h-3.5 bg-[#30364A] rounded-full w-28"></div>
+<div class="h-2.5 bg-[#30364A] rounded-full w-20"></div>
+</div>
+</div>
+<div class="w-5 h-5 bg-[#30364A] rounded-full"></div>
+</div>
+</div>
+<!-- Static AdMob & Nav Bar -->
+<div class="w-full shrink-0">
+<div class="h-[60px] w-full bg-[#1A1D29] border-t border-[#2A3042] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded-[4px] border border-[#858B9C] text-[#858B9C] text-[9px] font-bold">AD</span>
+<span class="text-[12px] font-bold text-white">Cloud Storage Backup Pro</span>
+</div>
+<button class="px-3 py-1.5 rounded-[12px] bg-[#1A66E8] text-white text-[11px] font-bold">Install</button>
+</div>
+<div class="h-16 w-full bg-[#1A1D29] border-t border-[#2A3042] flex items-center justify-around px-2">
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="text-[11px] font-bold mt-0.5">All files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-[11px] font-medium mt-0.5">Tools</span>
+</button>
+<button class="flex flex-col items-center justify-center w-20 h-full text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[11px] font-medium mt-0.5">Settings</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ENGINEERING SPECIFICATION CARDS & SYSTEM TOKENS -->
+<section class="w-full bg-surface-container py-space-xl px-margin border-t border-outline-variant/30">
+<div class="max-w-7xl mx-auto space-y-space-xl">
+<div class="space-y-space-xs">
+<span class="font-label-xs text-label-xs text-primary uppercase font-bold tracking-widest">Design System Tokens</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Doc View Engineering Manifest</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Complete cross-reference of the 4pt structural grid, tactile radii tokens, and color values mapped to modern Android Jetpack Compose and iOS SwiftUI frameworks.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- TOKEN CARD 1: COLOR ARCHITECTURE -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[24px]">palette</span>
+<h3 class="font-title-md text-title-md text-on-surface">Palette Specifications</h3>
+</div>
+<div class="space-y-space-xs font-label-xs text-label-xs">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Directories Primary</span>
+<span class="font-mono text-outline">#2F7BEA / #4D8FF7</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">PDF Saturated</span>
+<span class="font-mono text-outline">#E02B2B</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">TXT Neutral</span>
+<span class="font-mono text-outline">#5B6B9A</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Light BG / Hairline</span>
+<span class="font-mono text-outline">#FFFFFF / #E6E9F0</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Deep Navy BG / Hairline</span>
+<span class="font-mono text-outline">#1A1D29 / #2A3042</span>
+</div>
+</div>
+</div>
+<!-- TOKEN CARD 2: RADIUS & TOUCH SPATIALITY -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[24px]">straighten</span>
+<h3 class="font-title-md text-title-md text-on-surface">Structural &amp; Radius Rules</h3>
+</div>
+<div class="space-y-space-xs font-label-xs text-label-xs">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Card / Tile Radius</span>
+<span class="font-mono text-outline">20pt (rounded-[20px])</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Primary CTA Button Radius</span>
+<span class="font-mono text-outline">16pt (rounded-[16px])</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Document Thumbnail Radius</span>
+<span class="font-mono text-outline">10pt (rounded-[10px])</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Primary Button Height</span>
+<span class="font-mono text-outline">56pt</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Minimum Hitbox Target</span>
+<span class="font-mono text-outline">48 × 48 pt</span>
+</div>
+</div>
+</div>
+<!-- TOKEN CARD 3: CHROME & ADMOB CONSTRAINTS -->
+<div class="p-space-lg rounded-DEFAULT bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[24px]">dock</span>
+<h3 class="font-title-md text-title-md text-on-surface">Docked Chrome Architecture</h3>
+</div>
+<div class="space-y-space-xs font-label-xs text-label-xs">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Top App Bar Height</span>
+<span class="font-mono text-outline">56pt + Status Bar (44pt)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Breadcrumb Overflow Rail</span>
+<span class="font-mono text-outline">40pt (horizontal scroll)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Adaptive AdMob Banner</span>
+<span class="font-mono text-outline">Strictly 60pt (AD badge 9pt)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Bottom Navigation Bar</span>
+<span class="font-mono text-outline">Strictly 64pt</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<span class="font-semibold text-on-surface">Section Divider Band</span>
+<span class="font-mono text-outline">8pt (#F1F3F8 / #141722)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  function filterFrames(target) {
+    const cards = document.querySelectorAll('.artboard-card');
+    const buttons = [
+      document.getElementById('btn-show-all'),
+      document.getElementById('btn-show-normal'),
+      document.getElementById('btn-show-security'),
+      document.getElementById('btn-show-empty'),
+      document.getElementById('btn-show-shimmer')
+    ];
+
+    buttons.forEach(btn => {
+      btn.className = 'px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all';
+    });
+
+    if (target === 'all') {
+      document.getElementById('btn-show-all').className = 'px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md bg-primary text-on-primary shadow-sm transition-all';
+      cards.forEach(c => c.style.display = 'block');
+    } else if (target === 'frame-a') {
+      document.getElementById('btn-show-normal').className = 'px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md bg-primary text-on-primary shadow-sm transition-all';
+      cards.forEach(c => c.style.display = 'none');
+      document.getElementById('artboard-frame-a').style.display = 'block';
+    } else if (target === 'frame-b-c') {
+      document.getElementById('btn-show-security').className = 'px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md bg-primary text-on-primary shadow-sm transition-all';
+      cards.forEach(c => c.style.display = 'none');
+      document.getElementById('artboard-frame-b').style.display = 'block';
+      document.getElementById('artboard-frame-c').style.display = 'block';
+    } else if (target === 'frame-d-e') {
+      document.getElementById('btn-show-empty').className = 'px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md bg-primary text-on-primary shadow-sm transition-all';
+      cards.forEach(c => c.style.display = 'none');
+      document.getElementById('artboard-frame-d').style.display = 'block';
+      document.getElementById('artboard-frame-e').style.display = 'block';
+    } else if (target === 'frame-f') {
+      document.getElementById('btn-show-shimmer').className = 'px-space-md py-space-xs rounded-DEFAULT font-label-md text-label-md bg-primary text-on-primary shadow-sm transition-all';
+      cards.forEach(c => c.style.display = 'none');
+      document.getElementById('artboard-frame-f').style.display = 'block';
+    }
+  }
+</script></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_8px_rgba(0,0,0,0.02)] mt-space-xl"><div class="w-full px-margin py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg text-outline font-label-xs text-label-xs"><div class="flex flex-wrap items-center gap-space-lg"><span class="font-headline-sm text-headline-sm text-on-surface">Doc View Suite</span><span>Artboard Canvas 393×852pt Standard</span><span>Baseline Grid 4pt Structural</span><span>AdMob Docked: 60pt Unit</span></div><div class="flex items-center gap-space-lg text-tertiary"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[15px]">verified</span><span>Engineering Certified</span></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[15px]">token</span><span>M3 System Generated</span></div></div></div></footer></body></html>

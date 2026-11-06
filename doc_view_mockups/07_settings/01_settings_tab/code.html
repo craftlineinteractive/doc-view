@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doc View Settings Tab Suite</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(140, 150, 175, 0.3);
+    border-radius: 9999px;
+  }
+  /* Shimmer animation */
+  @keyframes shimmerLight {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  @keyframes shimmerDark {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  .skeleton-light {
+    background: linear-gradient(90deg, #E9EDF5 0%, #F5F7FB 50%, #E9EDF5 100%);
+    background-size: 800px 100%;
+    animation: shimmerLight 1.8s infinite ease-in-out;
+  }
+  .skeleton-dark {
+    background: linear-gradient(90deg, #262B3A 0%, #30364A 50%, #262B3A 100%);
+    background-size: 800px 100%;
+    animation: shimmerDark 1.8s infinite ease-in-out;
+  }
+</style>
+</head>
+<body class="bg-[#0B0D13] text-[#E1E4EA] min-h-screen p-6 md:p-10">
+
+  <!-- TOP SUITE HEADER & BENCHMARK CONTROLS -->
+  <header class="max-w-[1400px] mx-auto mb-10 pb-6 border-b border-[#1E2333] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+    <div>
+      <div class="flex items-center gap-3 mb-2">
+        <span class="px-2.5 py-1 rounded-full bg-[#1A66E8]/20 border border-[#1A66E8]/40 text-[#4D8FF7] text-xs font-mono font-semibold tracking-wide uppercase">System Spec v2.4</span>
+        <span class="px-2.5 py-1 rounded-full bg-[#1FA971]/20 border border-[#1FA971]/40 text-[#1FA971] text-xs font-mono font-semibold tracking-wide uppercase">393 × 852 pt Native Viewport</span>
+        <span class="px-2.5 py-1 rounded-full bg-[#8A94AE]/10 border border-[#8A94AE]/30 text-[#8A94AE] text-xs font-mono">Pixel-Strict Inter 4pt Grid</span>
+      </div>
+      <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">Doc View Settings Tab Suite</h1>
+      <p class="text-sm md:text-base text-[#858B9C] mt-1 max-w-3xl">
+        Complete bimodal presentation of the primary <span class="text-white font-semibold">Settings Tab</span> across Light Mode (<span class="font-mono text-xs">#FFFFFF</span>), Dark Mode Deep Navy (<span class="font-mono text-xs">#1A1D29</span>), and Zero-Spinner Shimmer Skeleton. Zero premium or language rows as strictly mandated.
+      </p>
+    </div>
+
+    <!-- Design Token Tags -->
+    <div class="flex flex-wrap items-center gap-2">
+      <div class="bg-[#141722] border border-[#232838] px-3 py-2 rounded-xl text-xs text-[#858B9C]">
+        <div class="font-mono text-white font-bold text-[13px]">20px / 16px</div>
+        <div>Tile & Button Radii</div>
+      </div>
+      <div class="bg-[#141722] border border-[#232838] px-3 py-2 rounded-xl text-xs text-[#858B9C]">
+        <div class="font-mono text-[#4D8FF7] font-bold text-[13px]">64pt + 60pt</div>
+        <div>Nav + Docked AdMob</div>
+      </div>
+      <div class="bg-[#141722] border border-[#232838] px-3 py-2 rounded-xl text-xs text-[#858B9C]">
+        <div class="font-mono text-[#1FA971] font-bold text-[13px]">&gt;= 56pt</div>
+        <div>Strict Hitbox Safety</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- WORKBENCH 3-COLUMN VIEWPORTS -->
+  <main class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
+
+    <!-- ========================================================================= -->
+    <!-- FRAME 1: LIGHT MODE SETTINGS TAB -->
+    <!-- ========================================================================= -->
+    <div class="flex flex-col items-center">
+      <div class="w-full flex items-center justify-between mb-3 px-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#1A66E8]"></span>
+          <span class="text-xs font-mono uppercase tracking-wider font-semibold text-white">Frame 01: Light Mode</span>
+        </div>
+        <span class="text-xs font-mono text-[#8A94AE]">#FFFFFF · #F3F5FA</span>
+      </div>
+
+      <!-- Device Chassis: 393 x 852 pt -->
+      <div class="w-[393px] h-[852px] rounded-[48px] bg-black p-[10px] shadow-2xl ring-1 ring-white/10 relative overflow-hidden select-none">
+        <!-- Inner Screen -->
+        <div class="w-full h-full rounded-[38px] bg-[#FFFFFF] text-[#11141C] flex flex-col overflow-hidden relative">
+
+          <!-- Dynamic Island / Status Bar -->
+          <div class="h-11 pt-2 px-6 flex items-center justify-between z-30 shrink-0 select-none">
+            <span class="text-[14px] font-bold tracking-tight text-[#11141C]">9:41</span>
+            <div class="w-24 h-5 bg-black rounded-full mx-auto"></div>
+            <div class="flex items-center gap-1.5 text-[#11141C]">
+              <!-- Cellular -->
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 16 16"><path d="M1 11h2v3H1v-3zm4-3h2v6H5V8zm4-3h2v9H9V5zm4-3h2v12h-2V2z"/></svg>
+              <!-- Wifi -->
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 16 16"><path d="M8 12.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-4.24-2.83a6 6 0 0 1 8.48 0 .75.75 0 0 1-1.06 1.06 4.5 4.5 0 0 0-6.36 0 .75.75 0 0 1-1.06-1.06zm-2.83-2.83a10 10 0 0 1 14.14 0 .75.75 0 1 1-1.06 1.06 8.5 8.5 0 0 0-12.02 0 .75.75 0 0 1-1.06-1.06z"/></svg>
+              <!-- Battery -->
+              <div class="w-5 h-2.5 rounded-sm border border-[#11141C] p-0.5 flex items-center">
+                <div class="w-3.5 h-full bg-[#11141C] rounded-[1px]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PALE-BLUE GRADIENT APP BAR (#E9F2FF to #FFFFFF) -->
+          <div class="px-5 pt-3 pb-3 bg-gradient-to-b from-[#E9F2FF] to-[#FFFFFF] border-b border-[#E6E9F0]/60 shrink-0">
+            <h2 class="text-[22px] font-bold text-[#11141C] tracking-tight">Settings</h2>
+          </div>
+
+          <!-- SCROLLABLE CONTENT BODY (page margin 20, tiles #F3F5FA, radius 20) -->
+          <div class="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+
+            <!-- TOP GROUP (3 items, 56pt+ min row) -->
+            <div class="bg-[#F3F5FA] rounded-[20px] p-1 border border-[#E6E9F0] shadow-sm divide-y divide-[#E6E9F0]/70 overflow-hidden">
+              
+              <!-- Row 1: File manager -->
+              <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                    <!-- 2px outline folder icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-[16px] font-semibold text-[#11141C] leading-snug">File manager</div>
+                  </div>
+                </div>
+                <!-- Trailing chevron -->
+                <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+
+              <!-- Row 2: Import files -->
+              <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                    <!-- 2px outline file-plus icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="12" y1="18" x2="12" y2="12"></line>
+                      <line x1="9" y1="15" x2="15" y2="15"></line>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Import files</div>
+                  </div>
+                </div>
+                <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+
+              <!-- Row 3: Rescan now -->
+              <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                    <!-- 2px outline refresh/sync icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                      <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Rescan now</div>
+                    <div class="text-[13px] font-medium text-[#8A8F9C]">Last scan: today, 4:31 PM</div>
+                  </div>
+                </div>
+                <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+
+            </div>
+
+            <!-- SECTION: GENERAL -->
+            <div>
+              <div class="px-1 mb-2 text-[14px] font-semibold text-[#8A94AE] uppercase tracking-wider">General</div>
+              <div class="bg-[#F3F5FA] rounded-[20px] p-1 border border-[#E6E9F0] shadow-sm divide-y divide-[#E6E9F0]/70 overflow-hidden">
+                
+                <!-- Scan settings -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Scan / Viewfinder icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                        <line x1="7" y1="12" x2="17" y2="12"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Scan settings</div>
+                      <div class="text-[13px] font-medium text-[#8A8F9C]">Scan on open</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- App theme -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Sun/Moon theme toggle icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">App theme</div>
+                      <div class="text-[13px] font-medium text-[#8A8F9C]">System default</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Clear recent history -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Trash / History icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Clear recent history</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+              </div>
+            </div>
+
+            <!-- SECTION: HELP -->
+            <div>
+              <div class="px-1 mb-2 text-[14px] font-semibold text-[#8A94AE] uppercase tracking-wider">Help</div>
+              <div class="bg-[#F3F5FA] rounded-[20px] p-1 border border-[#E6E9F0] shadow-sm divide-y divide-[#E6E9F0]/70 overflow-hidden">
+                
+                <!-- FAQ -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Help circle icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">FAQ</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Send feedback -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Mail / Message icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Send feedback</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Share app -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Share-2 icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Share app</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Rate us -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Star icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Rate us</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+              </div>
+            </div>
+
+            <!-- SECTION: ABOUT -->
+            <div>
+              <div class="px-1 mb-2 text-[14px] font-semibold text-[#8A94AE] uppercase tracking-wider">About</div>
+              <div class="bg-[#F3F5FA] rounded-[20px] p-1 border border-[#E6E9F0] shadow-sm divide-y divide-[#E6E9F0]/70 overflow-hidden">
+                
+                <!-- Privacy policy -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Shield / Lock icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Privacy policy</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Open-source licenses -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/60 transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Code / Terminal / License icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Open-source licenses</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#8A8F9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Version (value "1.0.0 (1)") -->
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8] shrink-0">
+                      <!-- Info icon -->
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#11141C] leading-snug">Version</div>
+                    </div>
+                  </div>
+                  <!-- Static Value -->
+                  <span class="text-[14px] font-medium text-[#8A8F9C] font-mono">1.0.0 (1)</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Bottom safe padding so content clears docked ad & nav -->
+            <div class="h-2"></div>
+          </div>
+
+          <!-- DOCKED ADMOB AD BANNER (60pt tall, with "AD" badge) -->
+          <div class="h-[60px] bg-[#F1F3F8] border-t border-[#E6E9F0] px-4 flex items-center justify-between shrink-0 z-20">
+            <div class="flex items-center gap-2.5">
+              <span class="px-1.5 py-0.5 rounded bg-[#8A8F9C]/20 border border-[#8A8F9C]/30 text-[10px] font-bold text-[#8A8F9C] uppercase tracking-wider">AD</span>
+              <div class="w-7 h-7 rounded-lg bg-[#2F7BEA]/10 border border-[#2F7BEA]/30 flex items-center justify-center text-[#1A66E8]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <div>
+                <div class="text-[12px] font-bold text-[#11141C] leading-none">Cloud Backup Vault</div>
+                <div class="text-[10px] text-[#8A8F9C] mt-0.5 leading-none">256-bit encryption for mobile docs</div>
+              </div>
+            </div>
+            <button class="px-3 py-1.5 bg-[#1A66E8] hover:bg-[#1555c4] text-white text-[11px] font-bold rounded-full">
+              Install
+            </button>
+          </div>
+
+          <!-- FIXED BOTTOM TAB BAR (64pt tall: All files, Tools, Settings ACTIVE) -->
+          <div class="h-[64px] bg-[#FFFFFF] border-t border-[#E6E9F0] px-6 grid grid-cols-3 items-center shrink-0 z-20">
+            
+            <!-- Tab 1: All files (inactive grey outline) -->
+            <button class="flex flex-col items-center justify-center gap-1 text-[#8A8F9C] hover:text-[#11141C] transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span class="text-[11px] font-medium">All files</span>
+            </button>
+
+            <!-- Tab 2: Tools (inactive grey outline) -->
+            <button class="flex flex-col items-center justify-center gap-1 text-[#8A8F9C] hover:text-[#11141C] transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+              <span class="text-[11px] font-medium">Tools</span>
+            </button>
+
+            <!-- Tab 3: Settings (ACTIVE filled blue) -->
+            <button class="flex flex-col items-center justify-center gap-1 text-[#1A66E8]">
+              <!-- Filled Active Icon -->
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 1a3 3 0 0 0-3 3v.3a6.9 6.9 0 0 0-1.8.8l-.2-.2a3 3 0 0 0-4.2 4.2l.2.2a6.9 6.9 0 0 0-.8 1.8H2a3 3 0 0 0-3 3v0a3 3 0 0 0 3 3h.2a6.9 6.9 0 0 0 .8 1.8l-.2.2a3 3 0 0 0 4.2 4.2l.2-.2a6.9 6.9 0 0 0 1.8.8V23a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3v-.2a6.9 6.9 0 0 0 1.8-.8l.2.2a3 3 0 0 0 4.2-4.2l-.2-.2a6.9 6.9 0 0 0 .8-1.8H22a3 3 0 0 0 3-3v0a3 3 0 0 0-3-3h-.2a6.9 6.9 0 0 0-.8-1.8l.2-.2a3 3 0 0 0-4.2-4.2l-.2.2a6.9 6.9 0 0 0-1.8-.8V4a3 3 0 0 0-3-3h0zm0 8a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+              </svg>
+              <span class="text-[11px] font-bold">Settings</span>
+            </button>
+
+          </div>
+
+          <!-- Bottom Home Bar Indicator -->
+          <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/30 rounded-full z-40 pointer-events-none"></div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- FRAME 2: DARK MODE (DEEP NAVY, NOT BLACK) -->
+    <!-- ========================================================================= -->
+    <div class="flex flex-col items-center">
+      <div class="w-full flex items-center justify-between mb-3 px-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#4D8FF7]"></span>
+          <span class="text-xs font-mono uppercase tracking-wider font-semibold text-white">Frame 02: Dark Navy Mode</span>
+        </div>
+        <span class="text-xs font-mono text-[#7F8AA8]">#1A1D29 · #232838</span>
+      </div>
+
+      <!-- Device Chassis: 393 x 852 pt -->
+      <div class="w-[393px] h-[852px] rounded-[48px] bg-black p-[10px] shadow-2xl ring-1 ring-white/10 relative overflow-hidden select-none">
+        <!-- Inner Screen -->
+        <div class="w-full h-full rounded-[38px] bg-[#1A1D29] text-[#FFFFFF] flex flex-col overflow-hidden relative">
+
+          <!-- Dynamic Island / Status Bar -->
+          <div class="h-11 pt-2 px-6 flex items-center justify-between z-30 shrink-0 select-none">
+            <span class="text-[14px] font-bold tracking-tight text-[#FFFFFF]">9:41</span>
+            <div class="w-24 h-5 bg-black rounded-full mx-auto"></div>
+            <div class="flex items-center gap-1.5 text-[#FFFFFF]">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 16 16"><path d="M1 11h2v3H1v-3zm4-3h2v6H5V8zm4-3h2v9H9V5zm4-3h2v12h-2V2z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 16 16"><path d="M8 12.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-4.24-2.83a6 6 0 0 1 8.48 0 .75.75 0 0 1-1.06 1.06 4.5 4.5 0 0 0-6.36 0 .75.75 0 0 1-1.06-1.06zm-2.83-2.83a10 10 0 0 1 14.14 0 .75.75 0 1 1-1.06 1.06 8.5 8.5 0 0 0-12.02 0 .75.75 0 0 1-1.06-1.06z"/></svg>
+              <div class="w-5 h-2.5 rounded-sm border border-white p-0.5 flex items-center">
+                <div class="w-3.5 h-full bg-white rounded-[1px]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DARK APP BAR (#1A1D29 with subtle border #2A3042) -->
+          <div class="px-5 pt-3 pb-3 bg-[#1A1D29] border-b border-[#2A3042]/70 shrink-0">
+            <h2 class="text-[22px] font-bold text-[#FFFFFF] tracking-tight">Settings</h2>
+          </div>
+
+          <!-- SCROLLABLE CONTENT BODY (tiles #232838, hairline #2A3042) -->
+          <div class="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+
+            <!-- TOP GROUP -->
+            <div class="bg-[#232838] rounded-[20px] p-1 border border-[#2A3042] shadow-sm divide-y divide-[#2A3042]/60 overflow-hidden">
+              
+              <!-- File manager -->
+              <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">File manager</div>
+                  </div>
+                </div>
+                <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+
+              <!-- Import files -->
+              <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="12" y1="18" x2="12" y2="12"></line>
+                      <line x1="9" y1="15" x2="15" y2="15"></line>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Import files</div>
+                  </div>
+                </div>
+                <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+
+              <!-- Rescan now -->
+              <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                      <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Rescan now</div>
+                    <div class="text-[13px] font-medium text-[#858B9C]">Last scan: today, 4:31 PM</div>
+                  </div>
+                </div>
+                <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+
+            </div>
+
+            <!-- SECTION: GENERAL -->
+            <div>
+              <div class="px-1 mb-2 text-[14px] font-semibold text-[#7F8AA8] uppercase tracking-wider">General</div>
+              <div class="bg-[#232838] rounded-[20px] p-1 border border-[#2A3042] shadow-sm divide-y divide-[#2A3042]/60 overflow-hidden">
+                
+                <!-- Scan settings -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                        <line x1="7" y1="12" x2="17" y2="12"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Scan settings</div>
+                      <div class="text-[13px] font-medium text-[#858B9C]">Scan on open</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- App theme -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">App theme</div>
+                      <div class="text-[13px] font-medium text-[#858B9C]">System default</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Clear recent history -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Clear recent history</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+              </div>
+            </div>
+
+            <!-- SECTION: HELP -->
+            <div>
+              <div class="px-1 mb-2 text-[14px] font-semibold text-[#7F8AA8] uppercase tracking-wider">Help</div>
+              <div class="bg-[#232838] rounded-[20px] p-1 border border-[#2A3042] shadow-sm divide-y divide-[#2A3042]/60 overflow-hidden">
+                
+                <!-- FAQ -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">FAQ</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Send feedback -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Send feedback</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Share app -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Share app</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Rate us -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Rate us</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+              </div>
+            </div>
+
+            <!-- SECTION: ABOUT -->
+            <div>
+              <div class="px-1 mb-2 text-[14px] font-semibold text-[#7F8AA8] uppercase tracking-wider">About</div>
+              <div class="bg-[#232838] rounded-[20px] p-1 border border-[#2A3042] shadow-sm divide-y divide-[#2A3042]/60 overflow-hidden">
+                
+                <!-- Privacy policy -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Privacy policy</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Open-source licenses -->
+                <button class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors group">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Open-source licenses</div>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-[#858B9C] group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Version -->
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] shrink-0 border border-[#4D8FF7]/20">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="text-[16px] font-semibold text-[#FFFFFF] leading-snug">Version</div>
+                    </div>
+                  </div>
+                  <span class="text-[14px] font-medium text-[#858B9C] font-mono">1.0.0 (1)</span>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="h-2"></div>
+          </div>
+
+          <!-- DOCKED ADMOB AD BANNER (#141722 with hairline #2A3042) -->
+          <div class="h-[60px] bg-[#141722] border-t border-[#2A3042] px-4 flex items-center justify-between shrink-0 z-20">
+            <div class="flex items-center gap-2.5">
+              <span class="px-1.5 py-0.5 rounded bg-[#858B9C]/20 border border-[#858B9C]/30 text-[10px] font-bold text-[#858B9C] uppercase tracking-wider">AD</span>
+              <div class="w-7 h-7 rounded-lg bg-[#4D8FF7]/15 border border-[#4D8FF7]/30 flex items-center justify-center text-[#4D8FF7]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <div>
+                <div class="text-[12px] font-bold text-[#FFFFFF] leading-none">Cloud Backup Vault</div>
+                <div class="text-[10px] text-[#858B9C] mt-0.5 leading-none">256-bit encryption for mobile docs</div>
+              </div>
+            </div>
+            <button class="px-3 py-1.5 bg-[#1A66E8] hover:bg-[#1555c4] text-white text-[11px] font-bold rounded-full">
+              Install
+            </button>
+          </div>
+
+          <!-- FIXED BOTTOM TAB BAR (64pt: Settings ACTIVE in #4D8FF7) -->
+          <div class="h-[64px] bg-[#1A1D29] border-t border-[#2A3042] px-6 grid grid-cols-3 items-center shrink-0 z-20">
+            
+            <!-- All files -->
+            <button class="flex flex-col items-center justify-center gap-1 text-[#858B9C] hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span class="text-[11px] font-medium">All files</span>
+            </button>
+
+            <!-- Tools -->
+            <button class="flex flex-col items-center justify-center gap-1 text-[#858B9C] hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+              <span class="text-[11px] font-medium">Tools</span>
+            </button>
+
+            <!-- Settings ACTIVE -->
+            <button class="flex flex-col items-center justify-center gap-1 text-[#4D8FF7]">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 1a3 3 0 0 0-3 3v.3a6.9 6.9 0 0 0-1.8.8l-.2-.2a3 3 0 0 0-4.2 4.2l.2.2a6.9 6.9 0 0 0-.8 1.8H2a3 3 0 0 0-3 3v0a3 3 0 0 0 3 3h.2a6.9 6.9 0 0 0 .8 1.8l-.2.2a3 3 0 0 0 4.2 4.2l.2-.2a6.9 6.9 0 0 0 1.8.8V23a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3v-.2a6.9 6.9 0 0 0 1.8-.8l.2.2a3 3 0 0 0 4.2-4.2l-.2-.2a6.9 6.9 0 0 0 .8-1.8H22a3 3 0 0 0 3-3v0a3 3 0 0 0-3-3h-.2a6.9 6.9 0 0 0-.8-1.8l.2-.2a3 3 0 0 0-4.2-4.2l-.2.2a6.9 6.9 0 0 0-1.8-.8V4a3 3 0 0 0-3-3h0zm0 8a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+              </svg>
+              <span class="text-[11px] font-bold">Settings</span>
+            </button>
+
+          </div>
+
+          <!-- Bottom Home Bar Indicator -->
+          <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full z-40 pointer-events-none"></div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- FRAME 3: ZERO-SPINNER SHIMMER SKELETON (LIGHT MODE <200MS) -->
+    <!-- ========================================================================= -->
+    <div class="flex flex-col items-center">
+      <div class="w-full flex items-center justify-between mb-3 px-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#1FA971]"></span>
+          <span class="text-xs font-mono uppercase tracking-wider font-semibold text-white">Frame 03: Skeleton State</span>
+        </div>
+        <span class="text-xs font-mono text-[#8A94AE]">Shimmer #E9EDF5 / #F5F7FB</span>
+      </div>
+
+      <!-- Device Chassis: 393 x 852 pt -->
+      <div class="w-[393px] h-[852px] rounded-[48px] bg-black p-[10px] shadow-2xl ring-1 ring-white/10 relative overflow-hidden select-none">
+        <!-- Inner Screen -->
+        <div class="w-full h-full rounded-[38px] bg-[#FFFFFF] text-[#11141C] flex flex-col overflow-hidden relative">
+
+          <!-- Dynamic Island / Status Bar -->
+          <div class="h-11 pt-2 px-6 flex items-center justify-between z-30 shrink-0 select-none">
+            <span class="text-[14px] font-bold tracking-tight text-[#11141C]">9:41</span>
+            <div class="w-24 h-5 bg-black rounded-full mx-auto"></div>
+            <div class="flex items-center gap-1.5 text-[#11141C]">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 16 16"><path d="M1 11h2v3H1v-3zm4-3h2v6H5V8zm4-3h2v9H9V5zm4-3h2v12h-2V2z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 16 16"><path d="M8 12.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-4.24-2.83a6 6 0 0 1 8.48 0 .75.75 0 0 1-1.06 1.06 4.5 4.5 0 0 0-6.36 0 .75.75 0 0 1-1.06-1.06zm-2.83-2.83a10 10 0 0 1 14.14 0 .75.75 0 1 1-1.06 1.06 8.5 8.5 0 0 0-12.02 0 .75.75 0 0 1-1.06-1.06z"/></svg>
+              <div class="w-5 h-2.5 rounded-sm border border-[#11141C] p-0.5 flex items-center">
+                <div class="w-3.5 h-full bg-[#11141C] rounded-[1px]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- APP BAR (Title Skeleton) -->
+          <div class="px-5 pt-3 pb-3 bg-gradient-to-b from-[#E9F2FF] to-[#FFFFFF] border-b border-[#E6E9F0]/60 shrink-0">
+            <div class="w-28 h-7 rounded-lg skeleton-light"></div>
+          </div>
+
+          <!-- SKELETON SHIMMER CONTENT (Exact same structural layout, NO SPINNERS) -->
+          <div class="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+
+            <!-- Top Group Skeleton (3 rows) -->
+            <div class="bg-[#F3F5FA] rounded-[20px] p-1 border border-[#E6E9F0] shadow-sm divide-y divide-[#E6E9F0]/70 overflow-hidden">
+              
+              <!-- Skeleton Row 1 -->
+              <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                  <div class="space-y-1.5">
+                    <div class="w-32 h-4 rounded-md skeleton-light"></div>
+                  </div>
+                </div>
+                <div class="w-4 h-4 rounded-md skeleton-light"></div>
+              </div>
+
+              <!-- Skeleton Row 2 -->
+              <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                  <div class="space-y-1.5">
+                    <div class="w-28 h-4 rounded-md skeleton-light"></div>
+                  </div>
+                </div>
+                <div class="w-4 h-4 rounded-md skeleton-light"></div>
+              </div>
+
+              <!-- Skeleton Row 3 (with subtitle shimmer) -->
+              <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                  <div class="space-y-1.5">
+                    <div class="w-30 h-4 rounded-md skeleton-light"></div>
+                    <div class="w-44 h-3 rounded-md skeleton-light"></div>
+                  </div>
+                </div>
+                <div class="w-4 h-4 rounded-md skeleton-light"></div>
+              </div>
+
+            </div>
+
+            <!-- Section 1 Skeleton: General -->
+            <div>
+              <div class="w-20 h-3.5 rounded-md skeleton-light mb-2.5 ml-1"></div>
+              <div class="bg-[#F3F5FA] rounded-[20px] p-1 border border-[#E6E9F0] shadow-sm divide-y divide-[#E6E9F0]/70 overflow-hidden">
+                
+                <!-- General Row 1 -->
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="space-y-1.5">
+                      <div class="w-32 h-4 rounded-md skeleton-light"></div>
+                      <div class="w-24 h-3 rounded-md skeleton-light"></div>
+                    </div>
+                  </div>
+                  <div class="w-4 h-4 rounded-md skeleton-light"></div>
+                </div>
+
+                <!-- General Row 2 -->
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="space-y-1.5">
+                      <div class="w-28 h-4 rounded-md skeleton-light"></div>
+                      <div class="w-28 h-3 rounded-md skeleton-light"></div>
+                    </div>
+                  </div>
+                  <div class="w-4 h-4 rounded-md skeleton-light"></div>
+                </div>
+
+                <!-- General Row 3 -->
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="space-y-1.5">
+                      <div class="w-36 h-4 rounded-md skeleton-light"></div>
+                    </div>
+                  </div>
+                  <div class="w-4 h-4 rounded-md skeleton-light"></div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Section 2 Skeleton: Help -->
+            <div>
+              <div class="w-16 h-3.5 rounded-md skeleton-light mb-2.5 ml-1"></div>
+              <div class="bg-[#F3F5FA] rounded-[20px] p-1 border border-[#E6E9F0] shadow-sm divide-y divide-[#E6E9F0]/70 overflow-hidden">
+                
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="w-16 h-4 rounded-md skeleton-light"></div>
+                  </div>
+                  <div class="w-4 h-4 rounded-md skeleton-light"></div>
+                </div>
+
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="w-28 h-4 rounded-md skeleton-light"></div>
+                  </div>
+                  <div class="w-4 h-4 rounded-md skeleton-light"></div>
+                </div>
+
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="w-24 h-4 rounded-md skeleton-light"></div>
+                  </div>
+                  <div class="w-4 h-4 rounded-md skeleton-light"></div>
+                </div>
+
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="w-20 h-4 rounded-md skeleton-light"></div>
+                  </div>
+                  <div class="w-4 h-4 rounded-md skeleton-light"></div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Section 3 Skeleton: About -->
+            <div>
+              <div class="w-18 h-3.5 rounded-md skeleton-light mb-2.5 ml-1"></div>
+              <div class="bg-[#F3F5FA] rounded-[20px] p-1 border border-[#E6E9F0] shadow-sm divide-y divide-[#E6E9F0]/70 overflow-hidden">
+                
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="w-32 h-4 rounded-md skeleton-light"></div>
+                  </div>
+                  <div class="w-4 h-4 rounded-md skeleton-light"></div>
+                </div>
+
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="w-40 h-4 rounded-md skeleton-light"></div>
+                  </div>
+                  <div class="w-4 h-4 rounded-md skeleton-light"></div>
+                </div>
+
+                <div class="w-full min-h-[58px] px-3.5 py-2.5 flex items-center justify-between">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-[14px] skeleton-light shrink-0"></div>
+                    <div class="w-20 h-4 rounded-md skeleton-light"></div>
+                  </div>
+                  <div class="w-16 h-3.5 rounded-md skeleton-light"></div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="h-2"></div>
+          </div>
+
+          <!-- SKELETON ADMOB AD (60pt) -->
+          <div class="h-[60px] bg-[#F1F3F8] border-t border-[#E6E9F0] px-4 flex items-center justify-between shrink-0 z-20">
+            <div class="flex items-center gap-2.5">
+              <div class="w-6 h-4 rounded skeleton-light"></div>
+              <div class="w-7 h-7 rounded-lg skeleton-light"></div>
+              <div class="space-y-1">
+                <div class="w-28 h-3 rounded skeleton-light"></div>
+                <div class="w-36 h-2 rounded skeleton-light"></div>
+              </div>
+            </div>
+            <div class="w-14 h-6 rounded-full skeleton-light"></div>
+          </div>
+
+          <!-- FIXED BOTTOM TAB BAR (Settings ACTIVE) -->
+          <div class="h-[64px] bg-[#FFFFFF] border-t border-[#E6E9F0] px-6 grid grid-cols-3 items-center shrink-0 z-20">
+            
+            <div class="flex flex-col items-center justify-center gap-1.5">
+              <div class="w-5 h-5 rounded-md skeleton-light"></div>
+              <div class="w-10 h-2.5 rounded-sm skeleton-light"></div>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-1.5">
+              <div class="w-5 h-5 rounded-md skeleton-light"></div>
+              <div class="w-8 h-2.5 rounded-sm skeleton-light"></div>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-1 text-[#1A66E8]">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 1a3 3 0 0 0-3 3v.3a6.9 6.9 0 0 0-1.8.8l-.2-.2a3 3 0 0 0-4.2 4.2l.2.2a6.9 6.9 0 0 0-.8 1.8H2a3 3 0 0 0-3 3v0a3 3 0 0 0 3 3h.2a6.9 6.9 0 0 0 .8 1.8l-.2.2a3 3 0 0 0 4.2 4.2l.2-.2a6.9 6.9 0 0 0 1.8.8V23a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3v-.2a6.9 6.9 0 0 0 1.8-.8l.2.2a3 3 0 0 0 4.2-4.2l-.2-.2a6.9 6.9 0 0 0 .8-1.8H22a3 3 0 0 0 3-3v0a3 3 0 0 0-3-3h-.2a6.9 6.9 0 0 0-.8-1.8l.2-.2a3 3 0 0 0-4.2-4.2l-.2.2a6.9 6.9 0 0 0-1.8-.8V4a3 3 0 0 0-3-3h0zm0 8a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+              </svg>
+              <span class="text-[11px] font-bold">Settings</span>
+            </div>
+
+          </div>
+
+          <!-- Bottom Home Bar Indicator -->
+          <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/30 rounded-full z-40 pointer-events-none"></div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ENGINEERING SPECIFICATION AUDIT FOOTER -->
+  <footer class="max-w-[1400px] mx-auto mt-12 pt-6 border-t border-[#1E2333] text-xs text-[#858B9C] flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-4">
+      <span class="font-mono text-white font-semibold">Doc View Design System v2.4</span>
+      <span>•</span>
+      <span>Strict 20px Rounded Tile Radii</span>
+      <span>•</span>
+      <span>Strict 56pt Minimum Hitbox Geometry</span>
+      <span>•</span>
+      <span>Zero Premium / Language Violations</span>
+    </div>
+    <div class="font-mono text-[#8A94AE]">
+      All 3 Frames Conforming (Light, Deep Navy, Skeleton)
+    </div>
+  </footer>
+
+</body>
+</html>

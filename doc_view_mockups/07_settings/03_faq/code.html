@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doc View FAQ Suite (Light, Dark & Skeleton)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #0c0f17;
+      color: #e2e8f0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.25);
+      border-radius: 9999px;
+    }
+    @keyframes shimmerLight {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes shimmerDark {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .skeleton-light {
+      background: linear-gradient(90deg, #E9EDF5 25%, #F5F7FB 50%, #E9EDF5 75%);
+      background-size: 200% 100%;
+      animation: shimmerLight 1.8s infinite ease-in-out;
+    }
+    .skeleton-dark {
+      background: linear-gradient(90deg, #262B3A 25%, #30364A 50%, #262B3A 75%);
+      background-size: 200% 100%;
+      animation: shimmerDark 1.8s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-6 lg:p-10 flex flex-col items-center justify-start">
+
+  <!-- Artboard Master Header -->
+  <header class="w-full max-w-[1440px] mb-8 flex flex-col md:flex-row md:items-end justify-between border-b border-slate-800 pb-6 gap-4">
+    <div>
+      <div class="flex items-center gap-3 mb-2">
+        <span class="px-2.5 py-1 text-xs font-semibold tracking-wider uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full">SYSTEM SPEC V2.4</span>
+        <span class="px-2.5 py-1 text-xs font-semibold tracking-wider uppercase bg-slate-800 text-slate-300 rounded-full">393 × 852 PT VIEWPORT</span>
+        <span class="px-2.5 py-1 text-xs font-semibold tracking-wider uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">ACCORDION FAQ ARCHITECTURE</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Doc View FAQ Screen Suite</h1>
+      <p class="text-sm md:text-base text-slate-400 max-w-3xl">
+        Complete bimodal presentation of the dedicated <strong class="text-slate-200">FAQ Screen</strong> across Light Mode, Deep Navy Dark Mode, and Zero-Spinner Shimmer Skeleton (<200ms). Featuring expandable question cards with animated chevrons, expanded rationale content, bottom feedback touch targets, and docked AdMob + Settings tab chrome.
+      </p>
+    </div>
+    <div class="flex flex-wrap items-center gap-3 text-xs text-slate-400 bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+      <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span><span>Tiles: 16px Radius</span></div>
+      <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span><span>Buttons: 16px / 56pt</span></div>
+      <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span><span>AdMob: 60pt Docked</span></div>
+    </div>
+  </header>
+
+  <!-- Frames Grid -->
+  <main class="w-full max-w-[1440px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center mb-12">
+
+    <!-- ========================================== -->
+    <!-- FRAME 01: LIGHT MODE                       -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="flex items-center justify-between w-[393px] mb-3 px-2 text-xs font-medium text-slate-400">
+        <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-400"></span>FRAME 01: LIGHT MODE</span>
+        <span class="font-mono text-slate-500">#FFFFFF / #F3F5FA</span>
+      </div>
+
+      <!-- Mobile Device Frame (393 x 852 pt) -->
+      <div class="w-[393px] h-[852px] bg-white rounded-[48px] shadow-2xl border-[7px] border-slate-700/80 overflow-hidden flex flex-col relative text-[#11141C] select-none">
+        
+        <!-- Status Bar -->
+        <div class="h-11 pt-3 px-7 flex items-center justify-between z-20 bg-[#E9F2FF] shrink-0">
+          <span class="text-xs font-semibold tracking-tight text-[#11141C]">9:41</span>
+          <!-- Dynamic Island Pill -->
+          <div class="w-24 h-4 bg-black rounded-full mx-auto"></div>
+          <div class="flex items-center gap-1.5 text-[#11141C]">
+            <!-- Cellular -->
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A10.938 10.938 0 0 1 1 12C1 5.92 5.92 1 12 1s11 4.92 11 11c0 2.3-.7 4.44-1.9 6.22l-.62-.62C21.35 16.05 22 14.1 22 12c0-4.97-4.03-9-9-9zm0 4c-2.76 0-5 2.24-5 5 0 1.25.46 2.39 1.22 3.28l.72-.72C8.38 13.9 8 13 8 12c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1-.38 1.9-.94 2.56l.72.72C16.54 14.39 17 13.25 17 12c0-2.76-2.24-5-5-5zm0 4c-.55 0-1 .45-1 1 0 .28.11.53.29.71l1.42 1.42.71-.71A.996.996 0 0 0 13 12c0-.55-.45-1-1-1z"/></svg>
+            <!-- Wifi -->
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 3c3.73 0 7.15 1.45 9.72 3.84L12 18.59 2.28 10.84C4.85 8.45 8.27 7 12 7z"/></svg>
+            <!-- Battery -->
+            <div class="w-5 h-2.5 border border-[#11141C] rounded-[3px] p-[1px] flex items-center">
+              <div class="h-full w-full bg-[#11141C] rounded-[1px]"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Bar with Pale-Blue Gradient Header -->
+        <div class="px-5 pb-3 pt-2 bg-gradient-to-b from-[#E9F2FF] to-white border-b border-[#E6E9F0] flex items-center justify-between shrink-0 z-10">
+          <div class="flex items-center gap-3">
+            <button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-[#11141C] active:bg-[#E8F0FE] transition-colors" aria-label="Go back">
+              <svg class="w-6 h-6 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+            <h2 class="text-[20px] font-bold tracking-tight text-[#11141C]">FAQ</h2>
+          </div>
+          <span class="text-xs font-semibold text-[#8A8F9C] bg-[#F3F5FA] px-2.5 py-1 rounded-full border border-[#E6E9F0]">6 Topics</span>
+        </div>
+
+        <!-- Scrollable FAQ Content -->
+        <div class="flex-1 overflow-y-auto px-5 py-4 space-y-3 custom-scrollbar bg-white">
+          
+          <!-- Card 1 (Collapsed) -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 transition-all hover:border-[#1A66E8]/30">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-[#11141C] leading-snug">Why does Doc View need All files access?</h3>
+              <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 border border-[#E6E9F0] text-[#8A8F9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 (EXPANDED STATE — High Visual Polish) -->
+          <div class="bg-[#F3F5FA] border-2 border-[#1A66E8] rounded-[16px] p-4 shadow-sm">
+            <div class="flex items-start justify-between gap-3 cursor-pointer mb-3">
+              <h3 class="text-[16px] font-bold text-[#1A66E8] leading-snug">Why doesn't it scan my whole iPhone?</h3>
+              <!-- Rotated chevron indicating opened accordion -->
+              <div class="w-7 h-7 rounded-full bg-[#1A66E8] flex items-center justify-center shrink-0 text-white shadow-sm">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round transform rotate-180" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Expanded Answer Content -->
+            <div class="pt-2 border-t border-[#E6E9F0] text-[15px] font-medium text-[#11141C] leading-relaxed">
+              <p class="mb-2.5">
+                iOS uses strict app sandboxing to safeguard device privacy. Apps can only access documents explicitly saved inside the <span class="font-semibold text-[#11141C]">Files app</span> or shared via the system Share Sheet.
+              </p>
+              <div class="bg-[#E8F0FE] p-3 rounded-[12px] flex items-start gap-2.5 text-xs text-[#1A66E8] border border-[#1A66E8]/20">
+                <svg class="w-4 h-4 shrink-0 mt-0.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24">
+                  <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <span>To view files, import them into the Doc View folder in the native Files app or use the <strong>Import files</strong> option in Settings.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 (Collapsed) -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 transition-all">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-[#11141C] leading-snug">Where are the PDFs I create saved?</h3>
+              <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 border border-[#E6E9F0] text-[#8A8F9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 (Collapsed) -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 transition-all">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-[#11141C] leading-snug">Why does my Word file look different?</h3>
+              <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 border border-[#E6E9F0] text-[#8A8F9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 (Collapsed) -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 transition-all">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-[#11141C] leading-snug">Can I open password-protected files?</h3>
+              <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 border border-[#E6E9F0] text-[#8A8F9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 (Collapsed) -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 transition-all">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-[#11141C] leading-snug">Is my data uploaded anywhere?</h3>
+              <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0 border border-[#E6E9F0] text-[#8A8F9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Tonal Action Button: "Still need help? Send feedback" -->
+          <div class="pt-2 pb-2">
+            <button class="w-full h-14 bg-[#E8F0FE] hover:bg-[#dbe7fd] text-[#1A66E8] font-semibold text-[15px] rounded-[16px] flex items-center justify-center gap-2.5 transition-colors border border-[#1A66E8]/20 shadow-sm active:scale-[0.99]">
+              <!-- Message 2px outline icon -->
+              <svg class="w-5 h-5 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              <span>Still need help? Send feedback</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Docked AdMob Adaptive Banner (60pt tall) -->
+        <div class="h-[60px] bg-[#F1F3F8] border-t border-[#E6E9F0] px-4 flex items-center justify-between shrink-0 z-10">
+          <div class="flex items-center gap-2.5">
+            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#8A8F9C] text-white tracking-wider">AD</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shrink-0">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-xs font-bold text-[#11141C] truncate max-w-[170px]">Cloud Backup Vault</span>
+              <span class="text-[10px] text-[#8A8F9C]">256-bit secure document sync</span>
+            </div>
+          </div>
+          <button class="px-3.5 py-1.5 bg-[#1A66E8] text-white text-xs font-semibold rounded-full shadow-sm hover:bg-blue-700">Install</button>
+        </div>
+
+        <!-- Bottom Navigation Bar (64pt tall, Settings active) -->
+        <nav class="h-[64px] bg-white border-t border-[#E6E9F0] px-6 grid grid-cols-3 items-center shrink-0 z-10">
+          <!-- All files (Inactive) -->
+          <div class="flex flex-col items-center justify-center gap-1 text-[#8A8F9C] cursor-pointer">
+            <svg class="w-5 h-5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24">
+              <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+              <polyline points="13 2 13 9 20 9"/>
+            </svg>
+            <span class="text-[11px] font-medium">All files</span>
+          </div>
+          <!-- Tools (Inactive) -->
+          <div class="flex flex-col items-center justify-center gap-1 text-[#8A8F9C] cursor-pointer">
+            <svg class="w-5 h-5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+            <span class="text-[11px] font-medium">Tools</span>
+          </div>
+          <!-- Settings (ACTIVE) -->
+          <div class="flex flex-col items-center justify-center gap-1 text-[#1A66E8] cursor-pointer">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+            </svg>
+            <span class="text-[11px] font-bold">Settings</span>
+          </div>
+        </nav>
+
+        <!-- Home Bar Indicator -->
+        <div class="h-5 bg-white flex items-center justify-center shrink-0">
+          <div class="w-32 h-1 bg-[#11141C]/30 rounded-full"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- FRAME 02: DARK MODE (DEEP NAVY)            -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="flex items-center justify-between w-[393px] mb-3 px-2 text-xs font-medium text-slate-400">
+        <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span>FRAME 02: DARK MODE (DEEP NAVY)</span>
+        <span class="font-mono text-slate-500">#1A1D29 / #232838</span>
+      </div>
+
+      <!-- Mobile Device Frame (393 x 852 pt) -->
+      <div class="w-[393px] h-[852px] bg-[#1A1D29] rounded-[48px] shadow-2xl border-[7px] border-slate-700/80 overflow-hidden flex flex-col relative text-[#FFFFFF] select-none">
+        
+        <!-- Status Bar -->
+        <div class="h-11 pt-3 px-7 flex items-center justify-between z-20 bg-[#1A1D29] shrink-0">
+          <span class="text-xs font-semibold tracking-tight text-white">9:41</span>
+          <!-- Dynamic Island Pill -->
+          <div class="w-24 h-4 bg-black rounded-full mx-auto"></div>
+          <div class="flex items-center gap-1.5 text-white">
+            <!-- Cellular -->
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A10.938 10.938 0 0 1 1 12C1 5.92 5.92 1 12 1s11 4.92 11 11c0 2.3-.7 4.44-1.9 6.22l-.62-.62C21.35 16.05 22 14.1 22 12c0-4.97-4.03-9-9-9zm0 4c-2.76 0-5 2.24-5 5 0 1.25.46 2.39 1.22 3.28l.72-.72C8.38 13.9 8 13 8 12c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1-.38 1.9-.94 2.56l.72.72C16.54 14.39 17 13.25 17 12c0-2.76-2.24-5-5-5zm0 4c-.55 0-1 .45-1 1 0 .28.11.53.29.71l1.42 1.42.71-.71A.996.996 0 0 0 13 12c0-.55-.45-1-1-1z"/></svg>
+            <!-- Wifi -->
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 3c3.73 0 7.15 1.45 9.72 3.84L12 18.59 2.28 10.84C4.85 8.45 8.27 7 12 7z"/></svg>
+            <!-- Battery -->
+            <div class="w-5 h-2.5 border border-white rounded-[3px] p-[1px] flex items-center">
+              <div class="h-full w-full bg-white rounded-[1px]"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Bar with Deep Navy Background -->
+        <div class="px-5 pb-3 pt-2 bg-[#1A1D29] border-b border-[#2A3042] flex items-center justify-between shrink-0 z-10">
+          <div class="flex items-center gap-3">
+            <button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-white active:bg-[#232838] transition-colors" aria-label="Go back">
+              <svg class="w-6 h-6 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+            <h2 class="text-[20px] font-bold tracking-tight text-white">FAQ</h2>
+          </div>
+          <span class="text-xs font-semibold text-[#858B9C] bg-[#232838] px-2.5 py-1 rounded-full border border-[#2A3042]">6 Topics</span>
+        </div>
+
+        <!-- Scrollable FAQ Content -->
+        <div class="flex-1 overflow-y-auto px-5 py-4 space-y-3 custom-scrollbar bg-[#1A1D29]">
+          
+          <!-- Card 1 (Collapsed) -->
+          <div class="bg-[#232838] border border-[#2A3042] rounded-[16px] p-4 transition-all hover:border-[#4D8FF7]/40">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-white leading-snug">Why does Doc View need All files access?</h3>
+              <div class="w-7 h-7 rounded-full bg-[#1A1D29] flex items-center justify-center shrink-0 border border-[#2A3042] text-[#858B9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 (EXPANDED STATE — Dark Navy Variant) -->
+          <div class="bg-[#232838] border-2 border-[#4D8FF7] rounded-[16px] p-4 shadow-lg shadow-blue-900/10">
+            <div class="flex items-start justify-between gap-3 cursor-pointer mb-3">
+              <h3 class="text-[16px] font-bold text-[#4D8FF7] leading-snug">Why doesn't it scan my whole iPhone?</h3>
+              <!-- Rotated chevron -->
+              <div class="w-7 h-7 rounded-full bg-[#4D8FF7] flex items-center justify-center shrink-0 text-[#1A1D29] font-bold shadow-sm">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.4] stroke-linecap-round stroke-linejoin-round transform rotate-180" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Expanded Answer Content -->
+            <div class="pt-2 border-t border-[#2A3042] text-[15px] font-medium text-[#FFFFFF] leading-relaxed">
+              <p class="mb-2.5 text-slate-200">
+                iOS uses strict app sandboxing to safeguard device privacy. Apps can only access documents explicitly saved inside the <span class="font-semibold text-white">Files app</span> or shared via the system Share Sheet.
+              </p>
+              <div class="bg-[#1E2A45] p-3 rounded-[12px] flex items-start gap-2.5 text-xs text-[#4D8FF7] border border-[#4D8FF7]/20">
+                <svg class="w-4 h-4 shrink-0 mt-0.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24">
+                  <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <span>To view files, import them into the Doc View folder in the native Files app or use the <strong>Import files</strong> option in Settings.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 (Collapsed) -->
+          <div class="bg-[#232838] border border-[#2A3042] rounded-[16px] p-4 transition-all">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-white leading-snug">Where are the PDFs I create saved?</h3>
+              <div class="w-7 h-7 rounded-full bg-[#1A1D29] flex items-center justify-center shrink-0 border border-[#2A3042] text-[#858B9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 (Collapsed) -->
+          <div class="bg-[#232838] border border-[#2A3042] rounded-[16px] p-4 transition-all">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-white leading-snug">Why does my Word file look different?</h3>
+              <div class="w-7 h-7 rounded-full bg-[#1A1D29] flex items-center justify-center shrink-0 border border-[#2A3042] text-[#858B9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 (Collapsed) -->
+          <div class="bg-[#232838] border border-[#2A3042] rounded-[16px] p-4 transition-all">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-white leading-snug">Can I open password-protected files?</h3>
+              <div class="w-7 h-7 rounded-full bg-[#1A1D29] flex items-center justify-center shrink-0 border border-[#2A3042] text-[#858B9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 (Collapsed) -->
+          <div class="bg-[#232838] border border-[#2A3042] rounded-[16px] p-4 transition-all">
+            <div class="flex items-start justify-between gap-3 cursor-pointer">
+              <h3 class="text-[16px] font-bold text-white leading-snug">Is my data uploaded anywhere?</h3>
+              <div class="w-7 h-7 rounded-full bg-[#1A1D29] flex items-center justify-center shrink-0 border border-[#2A3042] text-[#858B9C]">
+                <svg class="w-4 h-4 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Tonal Action Button: "Still need help? Send feedback" -->
+          <div class="pt-2 pb-2">
+            <button class="w-full h-14 bg-[#1E2A45] hover:bg-[#253658] text-[#4D8FF7] font-semibold text-[15px] rounded-[16px] flex items-center justify-center gap-2.5 transition-colors border border-[#4D8FF7]/30 shadow-md active:scale-[0.99]">
+              <!-- Message outline icon -->
+              <svg class="w-5 h-5 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              <span>Still need help? Send feedback</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Docked AdMob Adaptive Banner (60pt tall) -->
+        <div class="h-[60px] bg-[#141722] border-t border-[#2A3042] px-4 flex items-center justify-between shrink-0 z-10">
+          <div class="flex items-center gap-2.5">
+            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#2A3042] text-[#858B9C] tracking-wider">AD</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shrink-0">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-xs font-bold text-white truncate max-w-[170px]">Cloud Backup Vault</span>
+              <span class="text-[10px] text-[#858B9C]">256-bit secure document sync</span>
+            </div>
+          </div>
+          <button class="px-3.5 py-1.5 bg-[#1A66E8] text-white text-xs font-semibold rounded-full shadow-sm hover:bg-blue-500">Install</button>
+        </div>
+
+        <!-- Bottom Navigation Bar (64pt tall, Settings active) -->
+        <nav class="h-[64px] bg-[#1A1D29] border-t border-[#2A3042] px-6 grid grid-cols-3 items-center shrink-0 z-10">
+          <!-- All files (Inactive) -->
+          <div class="flex flex-col items-center justify-center gap-1 text-[#858B9C] cursor-pointer">
+            <svg class="w-5 h-5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24">
+              <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+              <polyline points="13 2 13 9 20 9"/>
+            </svg>
+            <span class="text-[11px] font-medium">All files</span>
+          </div>
+          <!-- Tools (Inactive) -->
+          <div class="flex flex-col items-center justify-center gap-1 text-[#858B9C] cursor-pointer">
+            <svg class="w-5 h-5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+            <span class="text-[11px] font-medium">Tools</span>
+          </div>
+          <!-- Settings (ACTIVE) -->
+          <div class="flex flex-col items-center justify-center gap-1 text-[#4D8FF7] cursor-pointer">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+            </svg>
+            <span class="text-[11px] font-bold">Settings</span>
+          </div>
+        </nav>
+
+        <!-- Home Bar Indicator -->
+        <div class="h-5 bg-[#1A1D29] flex items-center justify-center shrink-0">
+          <div class="w-32 h-1 bg-white/30 rounded-full"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- FRAME 03: SKELETON (SHIMMER BLOCKS)        -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="flex items-center justify-between w-[393px] mb-3 px-2 text-xs font-medium text-slate-400">
+        <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-400"></span>FRAME 03: SKELETON STATE</span>
+        <span class="font-mono text-slate-500">Shimmer &lt;200ms · Zero Spinners</span>
+      </div>
+
+      <!-- Mobile Device Frame (393 x 852 pt) -->
+      <div class="w-[393px] h-[852px] bg-white rounded-[48px] shadow-2xl border-[7px] border-slate-700/80 overflow-hidden flex flex-col relative select-none">
+        
+        <!-- Status Bar -->
+        <div class="h-11 pt-3 px-7 flex items-center justify-between z-20 bg-white shrink-0">
+          <span class="text-xs font-semibold tracking-tight text-slate-300">9:41</span>
+          <!-- Dynamic Island Pill -->
+          <div class="w-24 h-4 bg-black rounded-full mx-auto"></div>
+          <div class="flex items-center gap-1.5">
+            <div class="w-3.5 h-3.5 rounded bg-slate-200"></div>
+            <div class="w-3.5 h-3.5 rounded bg-slate-200"></div>
+            <div class="w-5 h-2.5 rounded bg-slate-200"></div>
+          </div>
+        </div>
+
+        <!-- App Bar Skeleton -->
+        <div class="px-5 pb-3 pt-2 bg-white border-b border-[#E6E9F0] flex items-center justify-between shrink-0 z-10">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full skeleton-light shrink-0"></div>
+            <div class="w-20 h-6 rounded-md skeleton-light"></div>
+          </div>
+          <div class="w-16 h-6 rounded-full skeleton-light"></div>
+        </div>
+
+        <!-- Scrollable Skeleton Content (Zero Spinners) -->
+        <div class="flex-1 overflow-y-auto px-5 py-4 space-y-3 custom-scrollbar bg-white">
+          
+          <!-- Skeleton Card 1 -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 flex items-center justify-between">
+            <div class="space-y-2 w-3/4">
+              <div class="w-full h-4 rounded skeleton-light"></div>
+              <div class="w-2/3 h-4 rounded skeleton-light"></div>
+            </div>
+            <div class="w-7 h-7 rounded-full skeleton-light shrink-0"></div>
+          </div>
+
+          <!-- Skeleton Card 2 (Expanded Layout Representation) -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="w-4/5 h-4 rounded skeleton-light"></div>
+              <div class="w-7 h-7 rounded-full skeleton-light shrink-0"></div>
+            </div>
+            <div class="pt-2 border-t border-[#E6E9F0] space-y-2">
+              <div class="w-full h-3 rounded skeleton-light"></div>
+              <div class="w-11/12 h-3 rounded skeleton-light"></div>
+              <div class="w-3/4 h-3 rounded skeleton-light"></div>
+              <div class="w-full h-12 rounded-[12px] skeleton-light mt-2"></div>
+            </div>
+          </div>
+
+          <!-- Skeleton Card 3 -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 flex items-center justify-between">
+            <div class="w-3/4 h-4 rounded skeleton-light"></div>
+            <div class="w-7 h-7 rounded-full skeleton-light shrink-0"></div>
+          </div>
+
+          <!-- Skeleton Card 4 -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 flex items-center justify-between">
+            <div class="w-4/5 h-4 rounded skeleton-light"></div>
+            <div class="w-7 h-7 rounded-full skeleton-light shrink-0"></div>
+          </div>
+
+          <!-- Skeleton Card 5 -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 flex items-center justify-between">
+            <div class="w-2/3 h-4 rounded skeleton-light"></div>
+            <div class="w-7 h-7 rounded-full skeleton-light shrink-0"></div>
+          </div>
+
+          <!-- Skeleton Card 6 -->
+          <div class="bg-[#F3F5FA] border border-[#E6E9F0] rounded-[16px] p-4 flex items-center justify-between">
+            <div class="w-3/4 h-4 rounded skeleton-light"></div>
+            <div class="w-7 h-7 rounded-full skeleton-light shrink-0"></div>
+          </div>
+
+          <!-- Bottom Button Skeleton -->
+          <div class="pt-2 pb-2">
+            <div class="w-full h-14 rounded-[16px] skeleton-light"></div>
+          </div>
+
+        </div>
+
+        <!-- Docked AdMob Banner Skeleton -->
+        <div class="h-[60px] bg-[#F1F3F8] border-t border-[#E6E9F0] px-4 flex items-center justify-between shrink-0 z-10">
+          <div class="flex items-center gap-2.5">
+            <div class="w-6 h-4 rounded skeleton-light"></div>
+            <div class="w-8 h-8 rounded-lg skeleton-light shrink-0"></div>
+            <div class="space-y-1.5">
+              <div class="w-28 h-3 rounded skeleton-light"></div>
+              <div class="w-20 h-2.5 rounded skeleton-light"></div>
+            </div>
+          </div>
+          <div class="w-16 h-7 rounded-full skeleton-light"></div>
+        </div>
+
+        <!-- Bottom Navigation Skeleton -->
+        <div class="h-[64px] bg-white border-t border-[#E6E9F0] px-6 grid grid-cols-3 items-center shrink-0 z-10">
+          <div class="flex flex-col items-center gap-1.5">
+            <div class="w-5 h-5 rounded-md skeleton-light"></div>
+            <div class="w-10 h-2.5 rounded skeleton-light"></div>
+          </div>
+          <div class="flex flex-col items-center gap-1.5">
+            <div class="w-5 h-5 rounded-md skeleton-light"></div>
+            <div class="w-10 h-2.5 rounded skeleton-light"></div>
+          </div>
+          <div class="flex flex-col items-center gap-1.5">
+            <div class="w-5 h-5 rounded-md skeleton-light"></div>
+            <div class="w-10 h-2.5 rounded skeleton-light"></div>
+          </div>
+        </div>
+
+        <!-- Home Bar Indicator -->
+        <div class="h-5 bg-white flex items-center justify-center shrink-0">
+          <div class="w-32 h-1 bg-[#11141C]/20 rounded-full"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Technical Spec & Implementation Tokens Summary -->
+  <footer class="w-full max-w-[1440px] bg-slate-900/90 border border-slate-800 rounded-3xl p-6 text-xs text-slate-400">
+    <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+        <span class="font-bold text-white uppercase tracking-wider">Doc View Design System Matrix (FAQ Sub-Screen)</span>
+      </div>
+      <span class="font-mono text-slate-500">Spec Compliance: 100% · Android Jetpack Compose & iOS SwiftUI Ready</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div>
+        <h4 class="font-bold text-white mb-1.5">Accordion Architecture</h4>
+        <p class="leading-relaxed">Cards set to <code class="text-blue-400">16px radius</code> on tile backgrounds (<code class="text-slate-300">#F3F5FA</code> / <code class="text-slate-300">#232838</code>). Questions styled in Inter Bold 16 with smooth 180° rotating chevrons.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-1.5">Expanded Hierarchy</h4>
+        <p class="leading-relaxed">Answer content in Inter Medium 15 with comfortable 1.5 line height, paired with a contextual highlighted hint chip for practical next actions.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-1.5">Tonal Action Button</h4>
+        <p class="leading-relaxed">Docked feedback CTA styled in tonal primary fill (<code class="text-blue-400">#E8F0FE</code> / <code class="text-blue-400">#1E2A45</code>) at strictly <code class="text-amber-400">56pt height</code> with <code class="text-amber-400">16px corner radius</code>.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-1.5">Zero-Spinner Skeleton</h4>
+        <p class="leading-relaxed">Precision geometric match with shimmer animations (<code class="text-slate-300">#E9EDF5</code> to <code class="text-slate-300">#F5F7FB</code>) preventing layout shift while data is indexed.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doc View Settings Sub-Screens Suite</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+      colors: {
+        // Light tokens
+        'doc-light-bg': '#FFFFFF',
+        'doc-light-tile': '#F3F5FA',
+        'doc-light-divider': '#F1F3F8',
+        'doc-light-hairline': '#E6E9F0',
+        'doc-light-text': '#11141C',
+        'doc-light-secondary': '#8A8F9C',
+        'doc-light-section': '#8A94AE',
+        'doc-light-blue': '#1A66E8',
+        'doc-light-blue-tint': '#E8F0FE',
+        // Dark tokens
+        'doc-dark-bg': '#1A1D29',
+        'doc-dark-tile': '#232838',
+        'doc-dark-divider': '#141722',
+        'doc-dark-hairline': '#2A3042',
+        'doc-dark-text': '#FFFFFF',
+        'doc-dark-secondary': '#858B9C',
+        'doc-dark-section': '#7F8AA8',
+        'doc-dark-blue': '#4D8FF7',
+        'doc-dark-btn-blue': '#1A66E8',
+        'doc-dark-tint': '#1E2A45',
+        // Semantic
+        'doc-success': '#1FA971',
+        'doc-warning': '#F5A524',
+        'doc-error': '#E5484D',
+      }
+    }
+  }
+}
+</script>
+<style>
+  body {
+    background-color: #0b0d14;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Native mobile frame standard */
+  .mobile-viewport {
+    width: 393px;
+    height: 852px;
+    position: relative;
+    border-radius: 48px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 10px #1e2433, 0 0 0 12px #323a4d;
+    flex-shrink: 0;
+  }
+  .dynamic-island {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 124px;
+    height: 35px;
+    background: #000000;
+    border-radius: 20px;
+    z-index: 50;
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+</head>
+<body class="p-6 md:p-12 lg:p-16 flex flex-col items-center min-h-screen">
+
+  <!-- Board Header & System Meta -->
+  <header class="w-full max-w-7xl mb-12">
+    <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-800">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-blue-600/20 text-blue-400 border border-blue-500/30">System Spec v2.4</span>
+          <span class="px-3 py-1 text-xs font-semibold rounded-full bg-emerald-600/20 text-emerald-400 border border-emerald-500/30">393 × 852 pt Viewport</span>
+          <span class="px-3 py-1 text-xs font-semibold rounded-full bg-purple-600/20 text-purple-400 border border-purple-500/30">Pixel-Strict Inter 4pt Grid</span>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white">Doc View Settings Sub-Screens Suite</h1>
+        <p class="text-slate-400 mt-2 max-w-3xl text-sm leading-relaxed">
+          Comprehensive presentation of the Settings sub-navigation architecture: <strong class="text-slate-200">Frame 01: App Theme Bottom Sheet</strong> (dimmed background + preview cards), <strong class="text-slate-200">Frame 02: Scan Settings Screen</strong> (storage diagnostics, toggle switches, rescan CTA), and <strong class="text-slate-200">Frame 03: Snackbar State</strong> with interactive undo/rescan triggers.
+        </p>
+      </div>
+
+      <!-- Quick Metrics Pill -->
+      <div class="grid grid-cols-2 gap-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+        <div>
+          <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Card / Tile Radii</span>
+          <span class="text-sm font-bold text-white font-mono">20px (rounded-2xl)</span>
+        </div>
+        <div>
+          <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Sheet Top Radius</span>
+          <span class="text-sm font-bold text-blue-400 font-mono">28px Top Spec</span>
+        </div>
+        <div>
+          <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Buttons & Hits</span>
+          <span class="text-sm font-bold text-white font-mono">56pt / Radius 16px</span>
+        </div>
+        <div>
+          <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Docked AdMob</span>
+          <span class="text-sm font-bold text-emerald-400 font-mono">60pt Adaptive Ad</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 1: FRAME 1 - APP THEME BOTTOM SHEET OVER DIMMED SETTINGS -->
+  <!-- ========================================================================= -->
+  <section class="w-full max-w-7xl mb-20">
+    <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-800/80">
+      <div class="flex items-center gap-3">
+        <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-xs">1</span>
+        <h2 class="text-xl font-bold text-white tracking-tight">Frame 01: App Theme Bottom Sheet (Over Dimmed Settings)</h2>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Dim Scrim: 60% Light / 75% Dark</span>
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Sheet Radius: 28px</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 justify-items-center">
+      
+      <!-- 1A: LIGHT MODE THEME BOTTOM SHEET -->
+      <div class="flex flex-col items-center">
+        <div class="flex items-center justify-between w-[393px] px-2 mb-3 text-xs font-mono text-slate-400">
+          <span class="font-bold text-white">LIGHT MODE (#FFFFFF)</span>
+          <span>Theme Selector Active</span>
+        </div>
+        
+        <div class="mobile-viewport bg-[#FFFFFF] text-[#11141C] flex flex-col justify-between select-none">
+          <div class="dynamic-island"></div>
+
+          <!-- Dimmed Background Container (Mimicking Settings Screen) -->
+          <div class="absolute inset-0 z-0 bg-[#FFFFFF] flex flex-col overflow-hidden">
+            <!-- Header with soft gradient -->
+            <div class="pt-12 px-5 pb-3 bg-gradient-to-b from-[#E9F2FF] to-[#FFFFFF]">
+              <div class="flex items-center justify-between mb-3 text-[14px] font-semibold text-[#11141C]">
+                <span>9:41</span>
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.28 19.59 10.6 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+                  <div class="w-5 h-2.5 border border-current rounded-sm flex items-center p-0.5"><div class="w-full h-full bg-current rounded-2xs"></div></div>
+                </div>
+              </div>
+              <h2 class="text-[22px] font-bold tracking-tight text-[#11141C]">Settings</h2>
+            </div>
+            
+            <!-- Dimmed background rows -->
+            <div class="px-5 space-y-3 opacity-30 mt-2">
+              <div class="bg-[#F3F5FA] rounded-2xl p-4 flex items-center justify-between">
+                <span class="font-semibold text-sm">File manager</span>
+                <span class="text-slate-400">›</span>
+              </div>
+              <div class="bg-[#F3F5FA] rounded-2xl p-4 flex items-center justify-between">
+                <span class="font-semibold text-sm">Import files</span>
+                <span class="text-slate-400">›</span>
+              </div>
+              <div class="bg-[#F3F5FA] rounded-2xl p-4 flex items-center justify-between">
+                <div>
+                  <div class="font-semibold text-sm">Scan settings</div>
+                  <div class="text-xs text-[#8A8F9C]">Scan on open</div>
+                </div>
+                <span class="text-slate-400">›</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dimming Scrim Layer -->
+          <div class="absolute inset-0 z-10 bg-black/60 backdrop-blur-[2px]"></div>
+
+          <!-- Bottom Sheet (28px top radius) -->
+          <div class="absolute bottom-0 inset-x-0 z-20 bg-[#FFFFFF] rounded-t-[28px] shadow-[0_-15px_40px_rgba(0,0,0,0.35)] pt-3 pb-8 px-5 border-t border-[#E6E9F0]">
+            <!-- Drag Handle -->
+            <div class="w-10 h-1.5 bg-[#E6E9F0] rounded-full mx-auto mb-4"></div>
+
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-[18px] font-bold tracking-tight text-[#11141C]">App theme</h3>
+                <p class="text-[13px] font-medium text-[#8A8F9C] mt-0.5">Select visual appearance for Doc View</p>
+              </div>
+              <button class="w-8 h-8 rounded-full bg-[#F3F5FA] flex items-center justify-center text-[#8A8F9C] active:scale-95 transition-transform">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            <!-- 3 Theme Cards in a Row -->
+            <div class="grid grid-cols-3 gap-3 mb-6">
+              
+              <!-- Card 1: System default (Selected) -->
+              <div class="relative bg-[#F3F5FA] border-2 border-[#1A66E8] rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer shadow-sm">
+                <!-- Selected Badge -->
+                <div class="absolute -top-2 -right-1.5 w-5 h-5 rounded-full bg-[#1A66E8] text-white flex items-center justify-center shadow-sm">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <!-- Mini Phone Preview (Split Light/Dark) -->
+                <div class="w-full h-24 rounded-xl overflow-hidden border border-[#E6E9F0] bg-white mb-2 relative flex shadow-inner">
+                  <div class="w-1/2 h-full bg-[#FFFFFF] p-1 flex flex-col gap-1 border-r border-[#E6E9F0]">
+                    <div class="w-full h-1.5 bg-[#E9F2FF] rounded-full"></div>
+                    <div class="w-3/4 h-1 bg-[#F3F5FA] rounded-full"></div>
+                    <div class="w-full h-4 bg-[#F3F5FA] rounded-md mt-auto"></div>
+                  </div>
+                  <div class="w-1/2 h-full bg-[#1A1D29] p-1 flex flex-col gap-1">
+                    <div class="w-full h-1.5 bg-[#2A3042] rounded-full"></div>
+                    <div class="w-3/4 h-1 bg-[#232838] rounded-full"></div>
+                    <div class="w-full h-4 bg-[#232838] rounded-md mt-auto"></div>
+                  </div>
+                  <!-- Split Icon Center -->
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="w-5 h-5 rounded-full bg-white shadow-sm border border-[#E6E9F0] flex items-center justify-center text-[#1A66E8]">
+                      <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M12 2a10 10 0 0 0 0 20M12 2a10 10 0 0 1 0 20"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <span class="text-[13px] font-bold text-[#1A66E8] leading-tight">System</span>
+                <span class="text-[11px] font-medium text-[#8A8F9C]">default</span>
+              </div>
+
+              <!-- Card 2: Light -->
+              <div class="relative bg-[#F3F5FA] border border-[#E6E9F0] rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer hover:border-slate-300">
+                <!-- Mini Phone Preview (Pure Light) -->
+                <div class="w-full h-24 rounded-xl overflow-hidden border border-[#E6E9F0] bg-[#FFFFFF] mb-2 p-1 flex flex-col gap-1 shadow-inner">
+                  <div class="w-full h-2 bg-gradient-to-r from-[#E9F2FF] to-[#FFFFFF] rounded-full"></div>
+                  <div class="w-full h-3 bg-[#F3F5FA] rounded-md mt-0.5"></div>
+                  <div class="w-full h-3 bg-[#F3F5FA] rounded-md"></div>
+                  <div class="w-full h-3 bg-[#F3F5FA] rounded-md"></div>
+                  <div class="w-full h-3 bg-[#E8F0FE] rounded-md mt-auto flex items-center justify-center">
+                    <span class="text-[7px] font-bold text-[#1A66E8]">Light</span>
+                  </div>
+                </div>
+                <span class="text-[13px] font-semibold text-[#11141C] leading-tight">Light</span>
+                <span class="text-[11px] font-medium text-[#8A8F9C]">Clean white</span>
+              </div>
+
+              <!-- Card 3: Dark -->
+              <div class="relative bg-[#F3F5FA] border border-[#E6E9F0] rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer hover:border-slate-300">
+                <!-- Mini Phone Preview (Deep Navy) -->
+                <div class="w-full h-24 rounded-xl overflow-hidden border border-[#2A3042] bg-[#1A1D29] mb-2 p-1 flex flex-col gap-1 shadow-inner">
+                  <div class="w-full h-2 bg-[#232838] rounded-full"></div>
+                  <div class="w-full h-3 bg-[#232838] rounded-md mt-0.5"></div>
+                  <div class="w-full h-3 bg-[#232838] rounded-md"></div>
+                  <div class="w-full h-3 bg-[#232838] rounded-md"></div>
+                  <div class="w-full h-3 bg-[#1E2A45] rounded-md mt-auto flex items-center justify-center">
+                    <span class="text-[7px] font-bold text-[#4D8FF7]">Navy</span>
+                  </div>
+                </div>
+                <span class="text-[13px] font-semibold text-[#11141C] leading-tight">Dark</span>
+                <span class="text-[11px] font-medium text-[#8A8F9C]">Deep navy</span>
+              </div>
+
+            </div>
+
+            <!-- Apply Primary CTA Button (56 tall, radius 16) -->
+            <button class="w-full h-14 bg-[#1A66E8] active:bg-[#1553be] text-white font-bold text-[16px] rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20 transition-all">
+              Apply theme
+            </button>
+          </div>
+
+          <!-- Bottom Home Indicator -->
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/40 rounded-full z-30"></div>
+        </div>
+      </div>
+
+      <!-- 1B: DARK MODE THEME BOTTOM SHEET -->
+      <div class="flex flex-col items-center">
+        <div class="flex items-center justify-between w-[393px] px-2 mb-3 text-xs font-mono text-slate-400">
+          <span class="font-bold text-blue-400">DARK MODE (#1A1D29)</span>
+          <span>Theme Selector Active</span>
+        </div>
+        
+        <div class="mobile-viewport bg-[#1A1D29] text-[#FFFFFF] flex flex-col justify-between select-none">
+          <div class="dynamic-island"></div>
+
+          <!-- Dimmed Background Container (Dark Settings) -->
+          <div class="absolute inset-0 z-0 bg-[#1A1D29] flex flex-col overflow-hidden">
+            <div class="pt-12 px-5 pb-3 bg-[#1A1D29]">
+              <div class="flex items-center justify-between mb-3 text-[14px] font-semibold text-[#FFFFFF]">
+                <span>9:41</span>
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.28 19.59 10.6 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+                  <div class="w-5 h-2.5 border border-current rounded-sm flex items-center p-0.5"><div class="w-full h-full bg-current rounded-2xs"></div></div>
+                </div>
+              </div>
+              <h2 class="text-[22px] font-bold tracking-tight text-[#FFFFFF]">Settings</h2>
+            </div>
+            
+            <div class="px-5 space-y-3 opacity-25 mt-2">
+              <div class="bg-[#232838] rounded-2xl p-4 flex items-center justify-between">
+                <span class="font-semibold text-sm">File manager</span>
+                <span class="text-slate-500">›</span>
+              </div>
+              <div class="bg-[#232838] rounded-2xl p-4 flex items-center justify-between">
+                <span class="font-semibold text-sm">Import files</span>
+                <span class="text-slate-500">›</span>
+              </div>
+              <div class="bg-[#232838] rounded-2xl p-4 flex items-center justify-between">
+                <div>
+                  <div class="font-semibold text-sm">Scan settings</div>
+                  <div class="text-xs text-[#858B9C]">Scan on open</div>
+                </div>
+                <span class="text-slate-500">›</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dimming Scrim Layer (75% Scrim on Navy) -->
+          <div class="absolute inset-0 z-10 bg-black/75 backdrop-blur-[2px]"></div>
+
+          <!-- Bottom Sheet (Dark Navy #232838, Hairline #2A3042, Top Radius 28px) -->
+          <div class="absolute bottom-0 inset-x-0 z-20 bg-[#232838] rounded-t-[28px] shadow-[0_-15px_40px_rgba(0,0,0,0.65)] pt-3 pb-8 px-5 border-t border-[#2A3042]">
+            <!-- Drag Handle -->
+            <div class="w-10 h-1.5 bg-[#2A3042] rounded-full mx-auto mb-4"></div>
+
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-[18px] font-bold tracking-tight text-[#FFFFFF]">App theme</h3>
+                <p class="text-[13px] font-medium text-[#858B9C] mt-0.5">Select visual appearance for Doc View</p>
+              </div>
+              <button class="w-8 h-8 rounded-full bg-[#1A1D29] flex items-center justify-center text-[#858B9C] active:scale-95 transition-transform">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            <!-- 3 Theme Cards in a Row (Dark Mode Selected) -->
+            <div class="grid grid-cols-3 gap-3 mb-6">
+              
+              <!-- Card 1: System default -->
+              <div class="relative bg-[#1A1D29] border border-[#2A3042] rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer hover:border-slate-600">
+                <div class="w-full h-24 rounded-xl overflow-hidden border border-[#2A3042] bg-white mb-2 relative flex shadow-inner">
+                  <div class="w-1/2 h-full bg-[#FFFFFF] p-1 flex flex-col gap-1 border-r border-[#E6E9F0]">
+                    <div class="w-full h-1.5 bg-[#E9F2FF] rounded-full"></div>
+                    <div class="w-3/4 h-1 bg-[#F3F5FA] rounded-full"></div>
+                    <div class="w-full h-4 bg-[#F3F5FA] rounded-md mt-auto"></div>
+                  </div>
+                  <div class="w-1/2 h-full bg-[#1A1D29] p-1 flex flex-col gap-1">
+                    <div class="w-full h-1.5 bg-[#2A3042] rounded-full"></div>
+                    <div class="w-3/4 h-1 bg-[#232838] rounded-full"></div>
+                    <div class="w-full h-4 bg-[#232838] rounded-md mt-auto"></div>
+                  </div>
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="w-5 h-5 rounded-full bg-[#232838] border border-[#2A3042] flex items-center justify-center text-[#4D8FF7]">
+                      <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M12 2a10 10 0 0 0 0 20M12 2a10 10 0 0 1 0 20"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <span class="text-[13px] font-semibold text-[#FFFFFF] leading-tight">System</span>
+                <span class="text-[11px] font-medium text-[#858B9C]">default</span>
+              </div>
+
+              <!-- Card 2: Light -->
+              <div class="relative bg-[#1A1D29] border border-[#2A3042] rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer hover:border-slate-600">
+                <div class="w-full h-24 rounded-xl overflow-hidden border border-[#E6E9F0] bg-[#FFFFFF] mb-2 p-1 flex flex-col gap-1 shadow-inner">
+                  <div class="w-full h-2 bg-gradient-to-r from-[#E9F2FF] to-[#FFFFFF] rounded-full"></div>
+                  <div class="w-full h-3 bg-[#F3F5FA] rounded-md mt-0.5"></div>
+                  <div class="w-full h-3 bg-[#F3F5FA] rounded-md"></div>
+                  <div class="w-full h-3 bg-[#F3F5FA] rounded-md"></div>
+                  <div class="w-full h-3 bg-[#E8F0FE] rounded-md mt-auto flex items-center justify-center">
+                    <span class="text-[7px] font-bold text-[#1A66E8]">Light</span>
+                  </div>
+                </div>
+                <span class="text-[13px] font-semibold text-[#FFFFFF] leading-tight">Light</span>
+                <span class="text-[11px] font-medium text-[#858B9C]">Clean white</span>
+              </div>
+
+              <!-- Card 3: Dark (Selected) -->
+              <div class="relative bg-[#1A1D29] border-2 border-[#4D8FF7] rounded-2xl p-2.5 flex flex-col items-center text-center cursor-pointer shadow-md">
+                <!-- Selected Badge -->
+                <div class="absolute -top-2 -right-1.5 w-5 h-5 rounded-full bg-[#4D8FF7] text-[#1A1D29] flex items-center justify-center shadow-md">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <!-- Mini Phone Preview (Deep Navy) -->
+                <div class="w-full h-24 rounded-xl overflow-hidden border border-[#4D8FF7]/40 bg-[#1A1D29] mb-2 p-1 flex flex-col gap-1 shadow-inner">
+                  <div class="w-full h-2 bg-[#232838] rounded-full"></div>
+                  <div class="w-full h-3 bg-[#232838] rounded-md mt-0.5"></div>
+                  <div class="w-full h-3 bg-[#232838] rounded-md"></div>
+                  <div class="w-full h-3 bg-[#232838] rounded-md"></div>
+                  <div class="w-full h-3 bg-[#1E2A45] rounded-md mt-auto flex items-center justify-center">
+                    <span class="text-[7px] font-bold text-[#4D8FF7]">Navy Active</span>
+                  </div>
+                </div>
+                <span class="text-[13px] font-bold text-[#4D8FF7] leading-tight">Dark</span>
+                <span class="text-[11px] font-medium text-[#858B9C]">Deep navy</span>
+              </div>
+
+            </div>
+
+            <!-- Apply Primary CTA Button (56 tall, radius 16) -->
+            <button class="w-full h-14 bg-[#1A66E8] active:bg-[#1553be] text-white font-bold text-[16px] rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25 transition-all">
+              Apply theme
+            </button>
+          </div>
+
+          <!-- Bottom Home Indicator -->
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full z-30"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 2: FRAME 2 - SCAN SETTINGS SCREEN -->
+  <!-- ========================================================================= -->
+  <section class="w-full max-w-7xl mb-20">
+    <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-800/80">
+      <div class="flex items-center gap-3">
+        <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-xs">2</span>
+        <h2 class="text-xl font-bold text-white tracking-tight">Frame 02: Scan Settings Screen (Sub-Screen View)</h2>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Back App Bar (48pt touch target)</span>
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Docked 60pt Banner + 64pt Nav</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 justify-items-center">
+      
+      <!-- 2A: LIGHT MODE SCAN SETTINGS -->
+      <div class="flex flex-col items-center">
+        <div class="flex items-center justify-between w-[393px] px-2 mb-3 text-xs font-mono text-slate-400">
+          <span class="font-bold text-white">LIGHT MODE (#FFFFFF)</span>
+          <span>Full Sub-Screen Navigation</span>
+        </div>
+        
+        <div class="mobile-viewport bg-[#FFFFFF] text-[#11141C] flex flex-col justify-between select-none">
+          <div class="dynamic-island"></div>
+
+          <!-- Top App Bar with gradient -->
+          <div class="pt-12 px-5 pb-3 bg-gradient-to-b from-[#E9F2FF] to-[#FFFFFF] border-b border-[#E6E9F0]/60 z-20">
+            <div class="flex items-center justify-between mb-2 text-[14px] font-semibold text-[#11141C]">
+              <span>9:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.28 19.59 10.6 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+                <div class="w-5 h-2.5 border border-current rounded-sm flex items-center p-0.5"><div class="w-full h-full bg-current rounded-2xs"></div></div>
+              </div>
+            </div>
+
+            <!-- Back Row -->
+            <div class="flex items-center gap-3 h-12">
+              <button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center active:bg-blue-100/60 transition-colors">
+                <svg class="w-6 h-6 text-[#11141C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <h1 class="text-[20px] font-bold tracking-tight text-[#11141C]">Scan settings</h1>
+            </div>
+          </div>
+
+          <!-- Main Scrollable Content -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar px-5 py-4 space-y-5">
+            
+            <!-- SECTION 1: SCAN FREQUENCY RADIO GROUP -->
+            <div>
+              <span class="text-[13px] font-semibold text-[#8A94AE] uppercase tracking-wider block mb-2 px-1">Scan frequency</span>
+              <div class="bg-[#F3F5FA] rounded-2xl border border-[#E6E9F0] divide-y divide-[#E6E9F0] overflow-hidden">
+                
+                <!-- Radio Option 1: Selected -->
+                <label class="flex items-start gap-3.5 p-4 cursor-pointer active:bg-[#eaedf5] transition-colors">
+                  <div class="w-5 h-5 rounded-full border-2 border-[#1A66E8] flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#1A66E8]"></div>
+                  </div>
+                  <div class="flex-1">
+                    <div class="text-[15px] font-semibold text-[#11141C] leading-snug">Scan on app open</div>
+                    <div class="text-[13px] font-medium text-[#8A8F9C] mt-0.5">Automatically indexes newly added and updated documents at launch</div>
+                  </div>
+                </label>
+
+                <!-- Radio Option 2: Unselected -->
+                <label class="flex items-start gap-3.5 p-4 cursor-pointer active:bg-[#eaedf5] transition-colors">
+                  <div class="w-5 h-5 rounded-full border-2 border-[#8A8F9C] flex items-center justify-center mt-0.5 flex-shrink-0"></div>
+                  <div class="flex-1">
+                    <div class="text-[15px] font-semibold text-[#11141C] leading-snug">Manual only</div>
+                    <div class="text-[13px] font-medium text-[#8A8F9C] mt-0.5">Saves device battery by refreshing your storage only when requested</div>
+                  </div>
+                </label>
+
+              </div>
+            </div>
+
+            <!-- SECTION 2: MEDIA FILTERING SWITCH -->
+            <div>
+              <span class="text-[13px] font-semibold text-[#8A94AE] uppercase tracking-wider block mb-2 px-1">Document filters</span>
+              <div class="bg-[#F3F5FA] rounded-2xl border border-[#E6E9F0] p-4 flex items-start justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#FFB300]" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    <span class="text-[15px] font-semibold text-[#11141C]">Include images</span>
+                  </div>
+                  <p class="text-[13px] font-medium text-[#8A8F9C] mt-1 leading-relaxed">Turn off to hide thousands of photos from your document list</p>
+                </div>
+                <!-- Active iOS/Android Styled Switch -->
+                <button class="w-12 h-7 bg-[#1A66E8] rounded-full p-0.5 relative transition-colors flex-shrink-0 mt-0.5">
+                  <div class="w-6 h-6 bg-white rounded-full shadow-md translate-x-5 transition-transform"></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- SECTION 3: ANDROID ALL FILES ACCESS INFO CARD -->
+            <div>
+              <span class="text-[13px] font-semibold text-[#8A94AE] uppercase tracking-wider block mb-2 px-1">Storage diagnostics</span>
+              <div class="bg-[#F3F5FA] rounded-2xl border border-[#E6E9F0] p-4">
+                <div class="flex items-start gap-3 mb-3">
+                  <div class="w-9 h-9 rounded-xl bg-[#E8F0FE] text-[#1A66E8] flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="text-[14px] font-bold text-[#11141C]">All files access granted</h4>
+                    <p class="text-[12px] font-medium text-[#8A8F9C] mt-0.5 leading-normal">Doc View has permission to discover files in Downloads and SD cards.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2 border-t border-[#E6E9F0]">
+                  <span class="text-[12px] font-mono text-[#8A8F9C]">MANAGE_EXTERNAL_STORAGE</span>
+                  <button class="h-9 px-3.5 bg-white border border-[#E6E9F0] text-[#1A66E8] font-semibold text-[13px] rounded-xl hover:bg-slate-50 transition-colors shadow-2xs">
+                    Open settings
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 4: OUTLINED RESCAN BUTTON -->
+            <div class="pt-1">
+              <button class="w-full h-14 bg-white border-2 border-[#1A66E8] text-[#1A66E8] font-bold text-[15px] rounded-2xl flex items-center justify-center gap-2 active:bg-blue-50 transition-colors">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                Rescan now
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Docked Adaptive AdMob Banner (60pt) -->
+          <div class="w-full h-[60px] bg-[#F3F5FA] border-t border-[#E6E9F0] px-4 flex items-center justify-between z-20 flex-shrink-0">
+            <div class="flex items-center gap-2.5">
+              <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#8A8F9C]/25 text-[#11141C] border border-[#8A8F9C]/30">AD</span>
+              <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                ☁
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[12px] font-bold text-[#11141C] leading-none">Cloud Backup Vault</span>
+                <span class="text-[10px] font-medium text-[#8A8F9C] mt-0.5">Automatic cloud drive sync</span>
+              </div>
+            </div>
+            <button class="h-7 px-3 bg-[#1A66E8] text-white text-[11px] font-bold rounded-lg shadow-sm">
+              Install
+            </button>
+          </div>
+
+          <!-- Bottom Navigation Bar (64pt, Settings tab active) -->
+          <div class="w-full h-[64px] bg-[#FFFFFF] border-t border-[#E6E9F0] grid grid-cols-3 items-center z-20 flex-shrink-0">
+            <!-- Tab 1: All files -->
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#8A8F9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="text-[10px] font-medium text-[#8A8F9C]">All files</span>
+            </div>
+            <!-- Tab 2: Tools -->
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#8A8F9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              <span class="text-[10px] font-medium text-[#8A8F9C]">Tools</span>
+            </div>
+            <!-- Tab 3: Settings (Active Filled Blue) -->
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#1A66E8]" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+              <span class="text-[10px] font-bold text-[#1A66E8]">Settings</span>
+            </div>
+          </div>
+
+          <!-- Bottom Home Indicator -->
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/40 rounded-full z-30"></div>
+        </div>
+      </div>
+
+      <!-- 2B: DARK MODE SCAN SETTINGS -->
+      <div class="flex flex-col items-center">
+        <div class="flex items-center justify-between w-[393px] px-2 mb-3 text-xs font-mono text-slate-400">
+          <span class="font-bold text-blue-400">DARK MODE (#1A1D29)</span>
+          <span>Full Sub-Screen Navigation</span>
+        </div>
+        
+        <div class="mobile-viewport bg-[#1A1D29] text-[#FFFFFF] flex flex-col justify-between select-none">
+          <div class="dynamic-island"></div>
+
+          <!-- Top App Bar -->
+          <div class="pt-12 px-5 pb-3 bg-[#1A1D29] border-b border-[#2A3042] z-20">
+            <div class="flex items-center justify-between mb-2 text-[14px] font-semibold text-[#FFFFFF]">
+              <span>9:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.28 19.59 10.6 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+                <div class="w-5 h-2.5 border border-current rounded-sm flex items-center p-0.5"><div class="w-full h-full bg-current rounded-2xs"></div></div>
+              </div>
+            </div>
+
+            <!-- Back Row -->
+            <div class="flex items-center gap-3 h-12">
+              <button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center active:bg-slate-800 transition-colors">
+                <svg class="w-6 h-6 text-[#FFFFFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <h1 class="text-[20px] font-bold tracking-tight text-[#FFFFFF]">Scan settings</h1>
+            </div>
+          </div>
+
+          <!-- Main Scrollable Content -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar px-5 py-4 space-y-5">
+            
+            <!-- SECTION 1: SCAN FREQUENCY RADIO GROUP -->
+            <div>
+              <span class="text-[13px] font-semibold text-[#7F8AA8] uppercase tracking-wider block mb-2 px-1">Scan frequency</span>
+              <div class="bg-[#232838] rounded-2xl border border-[#2A3042] divide-y divide-[#2A3042] overflow-hidden">
+                
+                <!-- Radio Option 1: Selected -->
+                <label class="flex items-start gap-3.5 p-4 cursor-pointer active:bg-[#2c3347] transition-colors">
+                  <div class="w-5 h-5 rounded-full border-2 border-[#4D8FF7] flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#4D8FF7]"></div>
+                  </div>
+                  <div class="flex-1">
+                    <div class="text-[15px] font-semibold text-[#FFFFFF] leading-snug">Scan on app open</div>
+                    <div class="text-[13px] font-medium text-[#858B9C] mt-0.5">Automatically indexes newly added and updated documents at launch</div>
+                  </div>
+                </label>
+
+                <!-- Radio Option 2: Unselected -->
+                <label class="flex items-start gap-3.5 p-4 cursor-pointer active:bg-[#2c3347] transition-colors">
+                  <div class="w-5 h-5 rounded-full border-2 border-[#858B9C] flex items-center justify-center mt-0.5 flex-shrink-0"></div>
+                  <div class="flex-1">
+                    <div class="text-[15px] font-semibold text-[#FFFFFF] leading-snug">Manual only</div>
+                    <div class="text-[13px] font-medium text-[#858B9C] mt-0.5">Saves device battery by refreshing your storage only when requested</div>
+                  </div>
+                </label>
+
+              </div>
+            </div>
+
+            <!-- SECTION 2: MEDIA FILTERING SWITCH -->
+            <div>
+              <span class="text-[13px] font-semibold text-[#7F8AA8] uppercase tracking-wider block mb-2 px-1">Document filters</span>
+              <div class="bg-[#232838] rounded-2xl border border-[#2A3042] p-4 flex items-start justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#FFB300]" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    <span class="text-[15px] font-semibold text-[#FFFFFF]">Include images</span>
+                  </div>
+                  <p class="text-[13px] font-medium text-[#858B9C] mt-1 leading-relaxed">Turn off to hide thousands of photos from your document list</p>
+                </div>
+                <!-- Active iOS/Android Styled Switch -->
+                <button class="w-12 h-7 bg-[#4D8FF7] rounded-full p-0.5 relative transition-colors flex-shrink-0 mt-0.5">
+                  <div class="w-6 h-6 bg-white rounded-full shadow-md translate-x-5 transition-transform"></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- SECTION 3: ANDROID ALL FILES ACCESS INFO CARD -->
+            <div>
+              <span class="text-[13px] font-semibold text-[#7F8AA8] uppercase tracking-wider block mb-2 px-1">Storage diagnostics</span>
+              <div class="bg-[#232838] rounded-2xl border border-[#2A3042] p-4">
+                <div class="flex items-start gap-3 mb-3">
+                  <div class="w-9 h-9 rounded-xl bg-[#1E2A45] text-[#4D8FF7] flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="text-[14px] font-bold text-[#FFFFFF]">All files access granted</h4>
+                    <p class="text-[12px] font-medium text-[#858B9C] mt-0.5 leading-normal">Doc View has permission to discover files in Downloads and SD cards.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2 border-t border-[#2A3042]">
+                  <span class="text-[12px] font-mono text-[#858B9C]">MANAGE_EXTERNAL_STORAGE</span>
+                  <button class="h-9 px-3.5 bg-[#1A1D29] border border-[#2A3042] text-[#4D8FF7] font-semibold text-[13px] rounded-xl hover:bg-slate-900 transition-colors shadow-2xs">
+                    Open settings
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 4: OUTLINED RESCAN BUTTON -->
+            <div class="pt-1">
+              <button class="w-full h-14 bg-transparent border-2 border-[#4D8FF7] text-[#4D8FF7] font-bold text-[15px] rounded-2xl flex items-center justify-center gap-2 active:bg-blue-950/40 transition-colors">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                Rescan now
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Docked Adaptive AdMob Banner (60pt) -->
+          <div class="w-full h-[60px] bg-[#232838] border-t border-[#2A3042] px-4 flex items-center justify-between z-20 flex-shrink-0">
+            <div class="flex items-center gap-2.5">
+              <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#858B9C]/25 text-[#FFFFFF] border border-[#858B9C]/30">AD</span>
+              <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                ☁
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[12px] font-bold text-[#FFFFFF] leading-none">Cloud Backup Vault</span>
+                <span class="text-[10px] font-medium text-[#858B9C] mt-0.5">Automatic cloud drive sync</span>
+              </div>
+            </div>
+            <button class="h-7 px-3 bg-[#1A66E8] text-white text-[11px] font-bold rounded-lg shadow-sm">
+              Install
+            </button>
+          </div>
+
+          <!-- Bottom Navigation Bar (64pt, Settings tab active) -->
+          <div class="w-full h-[64px] bg-[#1A1D29] border-t border-[#2A3042] grid grid-cols-3 items-center z-20 flex-shrink-0">
+            <!-- Tab 1: All files -->
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#858B9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="text-[10px] font-medium text-[#858B9C]">All files</span>
+            </div>
+            <!-- Tab 2: Tools -->
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#858B9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              <span class="text-[10px] font-medium text-[#858B9C]">Tools</span>
+            </div>
+            <!-- Tab 3: Settings (Active Filled Blue) -->
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#4D8FF7]" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+              <span class="text-[10px] font-bold text-[#4D8FF7]">Settings</span>
+            </div>
+          </div>
+
+          <!-- Bottom Home Indicator -->
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full z-30"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 3: FRAME 3 - SNACKBAR AFTER TOGGLING "INCLUDE IMAGES" -->
+  <!-- ========================================================================= -->
+  <section class="w-full max-w-7xl mb-12">
+    <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-800/80">
+      <div class="flex items-center gap-3">
+        <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-xs">3</span>
+        <h2 class="text-xl font-bold text-white tracking-tight">Frame 03: Snackbar Feedback State ("Image list updated")</h2>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Floating Toast: 16px Above AdMob</span>
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Instant Actionable Trigger</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 justify-items-center">
+      
+      <!-- 3A: LIGHT MODE SNACKBAR -->
+      <div class="flex flex-col items-center">
+        <div class="flex items-center justify-between w-[393px] px-2 mb-3 text-xs font-mono text-slate-400">
+          <span class="font-bold text-white">LIGHT MODE (#FFFFFF)</span>
+          <span>Dark High-Contrast Toast</span>
+        </div>
+        
+        <div class="mobile-viewport bg-[#FFFFFF] text-[#11141C] flex flex-col justify-between select-none">
+          <div class="dynamic-island"></div>
+
+          <!-- Top App Bar -->
+          <div class="pt-12 px-5 pb-3 bg-gradient-to-b from-[#E9F2FF] to-[#FFFFFF] border-b border-[#E6E9F0]/60 z-20">
+            <div class="flex items-center justify-between mb-2 text-[14px] font-semibold text-[#11141C]">
+              <span>9:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.28 19.59 10.6 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+                <div class="w-5 h-2.5 border border-current rounded-sm flex items-center p-0.5"><div class="w-full h-full bg-current rounded-2xs"></div></div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 h-12">
+              <button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#11141C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <h1 class="text-[20px] font-bold tracking-tight text-[#11141C]">Scan settings</h1>
+            </div>
+          </div>
+
+          <!-- Body with toggled switch (Turned OFF) -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar px-5 py-4 space-y-5">
+            <!-- Scan frequency -->
+            <div class="bg-[#F3F5FA] rounded-2xl border border-[#E6E9F0] divide-y divide-[#E6E9F0] p-4 text-xs text-[#8A8F9C]">
+              <span class="font-semibold text-[#11141C] text-sm">Scan on app open (Active)</span>
+            </div>
+
+            <!-- Toggled Switch (Now Inactive / Grayed Out) -->
+            <div class="bg-[#F3F5FA] rounded-2xl border-2 border-[#1A66E8]/30 p-4 flex items-start justify-between gap-4 shadow-sm">
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-[#8A8F9C]" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                  <span class="text-[15px] font-semibold text-[#11141C]">Include images</span>
+                </div>
+                <p class="text-[13px] font-medium text-[#8A8F9C] mt-1 leading-relaxed">Turn off to hide thousands of photos from your document list</p>
+              </div>
+              <!-- Toggled OFF switch -->
+              <button class="w-12 h-7 bg-[#E6E9F0] rounded-full p-0.5 relative transition-colors flex-shrink-0 mt-0.5">
+                <div class="w-6 h-6 bg-white rounded-full shadow-md translate-x-0 transition-transform"></div>
+              </button>
+            </div>
+
+            <!-- Diagnostics -->
+            <div class="bg-[#F3F5FA] rounded-2xl border border-[#E6E9F0] p-4 text-xs text-[#8A8F9C]">
+              <span class="font-semibold text-[#11141C] text-sm">Storage permissions active</span>
+            </div>
+          </div>
+
+          <!-- FLOATING SNACKBAR / TOAST CONTAINER (Positioned directly above Docked AdMob) -->
+          <div class="absolute bottom-[136px] inset-x-5 z-40 animate-fade-in-up">
+            <div class="w-full bg-[#11141C] text-white rounded-2xl p-3.5 px-4 shadow-2xl flex items-center justify-between border border-slate-700/60">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+                <span class="text-[14px] font-semibold tracking-tight">Image list updated</span>
+              </div>
+              <button class="h-9 px-3 bg-blue-600/30 hover:bg-blue-600/50 text-[#4D8FF7] font-bold text-[13px] rounded-xl flex items-center gap-1.5 transition-colors">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                Rescan now
+              </button>
+            </div>
+          </div>
+
+          <!-- Docked Adaptive AdMob Banner (60pt) -->
+          <div class="w-full h-[60px] bg-[#F3F5FA] border-t border-[#E6E9F0] px-4 flex items-center justify-between z-20 flex-shrink-0">
+            <div class="flex items-center gap-2.5">
+              <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#8A8F9C]/25 text-[#11141C] border border-[#8A8F9C]/30">AD</span>
+              <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                ☁
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[12px] font-bold text-[#11141C] leading-none">Cloud Backup Vault</span>
+                <span class="text-[10px] font-medium text-[#8A8F9C] mt-0.5">Automatic cloud drive sync</span>
+              </div>
+            </div>
+            <button class="h-7 px-3 bg-[#1A66E8] text-white text-[11px] font-bold rounded-lg shadow-sm">
+              Install
+            </button>
+          </div>
+
+          <!-- Bottom Navigation Bar (64pt, Settings tab active) -->
+          <div class="w-full h-[64px] bg-[#FFFFFF] border-t border-[#E6E9F0] grid grid-cols-3 items-center z-20 flex-shrink-0">
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#8A8F9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="text-[10px] font-medium text-[#8A8F9C]">All files</span>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#8A8F9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              <span class="text-[10px] font-medium text-[#8A8F9C]">Tools</span>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#1A66E8]" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+              <span class="text-[10px] font-bold text-[#1A66E8]">Settings</span>
+            </div>
+          </div>
+
+          <!-- Bottom Home Indicator -->
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/40 rounded-full z-30"></div>
+        </div>
+      </div>
+
+      <!-- 3B: DARK MODE SNACKBAR -->
+      <div class="flex flex-col items-center">
+        <div class="flex items-center justify-between w-[393px] px-2 mb-3 text-xs font-mono text-slate-400">
+          <span class="font-bold text-blue-400">DARK MODE (#1A1D29)</span>
+          <span>Navy Luminous Toast</span>
+        </div>
+        
+        <div class="mobile-viewport bg-[#1A1D29] text-[#FFFFFF] flex flex-col justify-between select-none">
+          <div class="dynamic-island"></div>
+
+          <!-- Top App Bar -->
+          <div class="pt-12 px-5 pb-3 bg-[#1A1D29] border-b border-[#2A3042] z-20">
+            <div class="flex items-center justify-between mb-2 text-[14px] font-semibold text-[#FFFFFF]">
+              <span>9:41</span>
+              <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.28 19.59 10.6 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+                <div class="w-5 h-2.5 border border-current rounded-sm flex items-center p-0.5"><div class="w-full h-full bg-current rounded-2xs"></div></div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 h-12">
+              <button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#FFFFFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <h1 class="text-[20px] font-bold tracking-tight text-[#FFFFFF]">Scan settings</h1>
+            </div>
+          </div>
+
+          <!-- Body with toggled switch (Turned OFF) -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar px-5 py-4 space-y-5">
+            <div class="bg-[#232838] rounded-2xl border border-[#2A3042] p-4 text-xs text-[#858B9C]">
+              <span class="font-semibold text-[#FFFFFF] text-sm">Scan on app open (Active)</span>
+            </div>
+
+            <!-- Toggled Switch (Turned OFF in Dark Mode) -->
+            <div class="bg-[#232838] rounded-2xl border-2 border-[#4D8FF7]/30 p-4 flex items-start justify-between gap-4 shadow-sm">
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-[#858B9C]" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                  <span class="text-[15px] font-semibold text-[#FFFFFF]">Include images</span>
+                </div>
+                <p class="text-[13px] font-medium text-[#858B9C] mt-1 leading-relaxed">Turn off to hide thousands of photos from your document list</p>
+              </div>
+              <button class="w-12 h-7 bg-[#2A3042] rounded-full p-0.5 relative transition-colors flex-shrink-0 mt-0.5">
+                <div class="w-6 h-6 bg-slate-400 rounded-full shadow-md translate-x-0 transition-transform"></div>
+              </button>
+            </div>
+
+            <div class="bg-[#232838] rounded-2xl border border-[#2A3042] p-4 text-xs text-[#858B9C]">
+              <span class="font-semibold text-[#FFFFFF] text-sm">Storage permissions active</span>
+            </div>
+          </div>
+
+          <!-- FLOATING SNACKBAR / TOAST CONTAINER (Dark Mode with Tint #1E2A45) -->
+          <div class="absolute bottom-[136px] inset-x-5 z-40 animate-fade-in-up">
+            <div class="w-full bg-[#232838] text-white rounded-2xl p-3.5 px-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex items-center justify-between border border-[#2A3042]">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></div>
+                <span class="text-[14px] font-semibold tracking-tight text-white">Image list updated</span>
+              </div>
+              <button class="h-9 px-3 bg-[#1E2A45] hover:bg-blue-900/40 text-[#4D8FF7] font-bold text-[13px] rounded-xl flex items-center gap-1.5 transition-colors border border-[#4D8FF7]/30">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                Rescan now
+              </button>
+            </div>
+          </div>
+
+          <!-- Docked Adaptive AdMob Banner (60pt) -->
+          <div class="w-full h-[60px] bg-[#232838] border-t border-[#2A3042] px-4 flex items-center justify-between z-20 flex-shrink-0">
+            <div class="flex items-center gap-2.5">
+              <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#858B9C]/25 text-[#FFFFFF] border border-[#858B9C]/30">AD</span>
+              <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                ☁
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[12px] font-bold text-[#FFFFFF] leading-none">Cloud Backup Vault</span>
+                <span class="text-[10px] font-medium text-[#858B9C] mt-0.5">Automatic cloud drive sync</span>
+              </div>
+            </div>
+            <button class="h-7 px-3 bg-[#1A66E8] text-white text-[11px] font-bold rounded-lg shadow-sm">
+              Install
+            </button>
+          </div>
+
+          <!-- Bottom Navigation Bar (64pt, Settings tab active) -->
+          <div class="w-full h-[64px] bg-[#1A1D29] border-t border-[#2A3042] grid grid-cols-3 items-center z-20 flex-shrink-0">
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#858B9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="text-[10px] font-medium text-[#858B9C]">All files</span>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#858B9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              <span class="text-[10px] font-medium text-[#858B9C]">Tools</span>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-5 h-5 text-[#4D8FF7]" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+              <span class="text-[10px] font-bold text-[#4D8FF7]">Settings</span>
+            </div>
+          </div>
+
+          <!-- Bottom Home Indicator -->
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full z-30"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Engineering Tokens Footer Reference -->
+  <footer class="w-full max-w-7xl pt-8 border-t border-slate-800 text-slate-500 text-xs flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-6">
+      <span><strong>Doc View Design System v2.4</strong></span>
+      <span>• 20px Tile / Card Radii</span>
+      <span>• 28px Bottom Sheet Top Radius</span>
+      <span>• 56pt Primary CTAs</span>
+      <span>• Strict Bimodal Light / Deep Navy Palettes</span>
+    </div>
+    <div class="font-mono text-slate-400">
+      Android 14+ Jetpack Compose & iOS 17 SwiftUI Ready
+    </div>
+  </footer>
+
+</body>
+</html>

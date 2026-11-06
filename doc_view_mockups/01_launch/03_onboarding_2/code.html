@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doc View Onboarding Screen 2 (Light & Dark)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            // Light Tokens
+            lCanvas: '#FFFFFF',
+            lTile: '#F3F5FA',
+            lDivider: '#F1F3F8',
+            lHairline: '#E6E9F0',
+            lText: '#11141C',
+            lSecondary: '#8A8F9C',
+            lSection: '#8A94AE',
+            lPrimary: '#1A66E8',
+            lTint: '#E8F0FE',
+            // Dark Tokens
+            dCanvas: '#1A1D29',
+            dTile: '#232838',
+            dDivider: '#141722',
+            dHairline: '#2A3042',
+            dText: '#FFFFFF',
+            dSecondary: '#858B9C',
+            dSection: '#7F8AA8',
+            dActive: '#4D8FF7',
+            dBtn: '#1A66E8',
+            dTint: '#1E2A45',
+            // File Types
+            fPdf: '#E02B2B',
+            fWord: '#1E5FD8',
+            fExcel: '#1E9E4F',
+            fPpt: '#F26B1D',
+            fTxt: '#5B6B9A',
+            fImg: '#FFB300',
+            fDir: '#2F7BEA',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0B0E14;
+      color: #E2E8F0;
+    }
+    .device-frame {
+      width: 393px;
+      height: 852px;
+      position: relative;
+      border-radius: 54px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 10px #1e2430;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-10 px-4 flex flex-col items-center justify-center">
+
+  <!-- Header Context Badge -->
+  <div class="mb-8 text-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wide uppercase mb-3">
+      Doc View Design System • 393 × 852 pt
+    </div>
+    <h1 class="text-3xl font-extrabold text-white tracking-tight">Onboarding Screen 2 of 3</h1>
+    <p class="text-slate-400 text-sm mt-1">Light (#FFFFFF) &amp; Dark Deep Navy (#1A1D29) variants • PDF Reader &amp; Floating Previews</p>
+  </div>
+
+  <!-- Showcase Canvas: 2 Mobile Phones Side-by-Side -->
+  <div class="flex flex-wrap items-center justify-center gap-12 max-w-7xl">
+
+    <!-- ========================================== -->
+    <!-- 1. LIGHT MODE VARIANT -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 flex items-center gap-2 text-xs font-semibold text-slate-300">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+        LIGHT MODE <span class="text-slate-500 font-mono">#FFFFFF</span>
+      </div>
+
+      <div class="device-frame bg-[#FFFFFF] flex flex-col justify-between p-5 select-none relative">
+        
+        <!-- Status Bar & Top Nav -->
+        <div>
+          <!-- iOS Status Bar -->
+          <div class="flex justify-between items-center pt-2 px-3 text-[#11141C] text-xs font-bold tracking-tight">
+            <span>9:41</span>
+            <!-- Dynamic Island -->
+            <div class="w-28 h-7 bg-black rounded-full mx-auto -mt-1 flex items-center justify-end pr-2.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-[#1c1c1e] border border-[#2c2c2e]"></div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+              <div class="w-5 h-2.5 border border-current rounded-sm p-0.5 flex items-center">
+                <div class="w-full h-full bg-current rounded-2xs"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Action Bar (Skip) -->
+          <div class="flex justify-end items-center mt-3 px-1 h-9">
+            <button class="text-[#8A8F9C] hover:text-[#11141C] text-sm font-semibold px-2 py-1.5 transition-colors">
+              Skip
+            </button>
+          </div>
+        </div>
+
+        <!-- Illustration Area (Top 55% of content space) -->
+        <div class="relative w-full h-[370px] flex items-center justify-center overflow-visible">
+          <!-- Subtle pale-blue ambient glow background blobs -->
+          <div class="absolute w-64 h-64 bg-blue-100/60 rounded-full blur-3xl -top-6 left-1/2 -translate-x-1/2 pointer-events-none"></div>
+          <div class="absolute w-44 h-44 bg-indigo-100/50 rounded-full blur-2xl bottom-4 right-2 pointer-events-none"></div>
+
+          <!-- FLOATING EXCEL PREVIEW CARD (Back-Left, rotated -8deg) -->
+          <div class="absolute left-1 top-12 w-[140px] bg-white rounded-[16px] p-2.5 shadow-[0_12px_32px_rgba(20,40,90,0.12)] border border-[#E6E9F0] -rotate-8 z-10 transform hover:scale-105 transition-transform">
+            <div class="flex items-center gap-1.5 mb-2">
+              <span class="w-5 h-5 rounded-md bg-[#1E9E4F] flex items-center justify-center text-white text-[9px] font-black">X</span>
+              <div class="flex-1 truncate">
+                <p class="text-[9px] font-bold text-[#11141C] truncate">Budget_Q4.xlsx</p>
+                <p class="text-[7.5px] text-[#8A8F9C]">Sheet 1 • 4.2 MB</p>
+              </div>
+            </div>
+            <!-- Mini Spreadsheet Grid Preview -->
+            <div class="border border-[#E6E9F0] rounded-md overflow-hidden bg-[#FAFCFB] text-[7.5px]">
+              <div class="grid grid-cols-3 bg-[#EAF7EE] text-[#1E9E4F] font-bold px-1 py-0.5 border-b border-[#D8EEDF]">
+                <span>Dept</span><span>Plan</span><span>Actual</span>
+              </div>
+              <div class="grid grid-cols-3 px-1 py-0.5 border-b border-[#F0F4F2] text-[#424855]">
+                <span class="font-medium">Ops</span><span>$84k</span><span class="text-[#1E9E4F] font-bold">$79k</span>
+              </div>
+              <div class="grid grid-cols-3 px-1 py-0.5 border-b border-[#F0F4F2] text-[#424855]">
+                <span class="font-medium">Mktg</span><span>$42k</span><span>$45k</span>
+              </div>
+              <div class="grid grid-cols-3 px-1 py-0.5 text-[#424855]">
+                <span class="font-medium">Dev</span><span>$120k</span><span class="text-[#1E9E4F] font-bold">$118k</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FLOATING WORD PREVIEW CARD (Back-Right, rotated +9deg) -->
+          <div class="absolute right-1 top-8 w-[140px] bg-white rounded-[16px] p-2.5 shadow-[0_14px_36px_rgba(20,40,90,0.12)] border border-[#E6E9F0] rotate-9 z-10 transform hover:scale-105 transition-transform">
+            <div class="flex items-center gap-1.5 mb-2">
+              <span class="w-5 h-5 rounded-md bg-[#1E5FD8] flex items-center justify-center text-white text-[9px] font-black">W</span>
+              <div class="flex-1 truncate">
+                <p class="text-[9px] font-bold text-[#11141C] truncate">Contract_v2.docx</p>
+                <p class="text-[7.5px] text-[#8A8F9C]">Clause 8 • Signed</p>
+              </div>
+            </div>
+            <!-- Mini Word Lines Preview -->
+            <div class="space-y-1.5 bg-[#F9FAFC] p-2 rounded-md border border-[#E6E9F0]">
+              <div class="w-16 h-1.5 bg-[#1E5FD8] rounded-full"></div>
+              <div class="space-y-1">
+                <div class="w-full h-1 bg-[#D3D8E2] rounded-full"></div>
+                <div class="w-11/12 h-1 bg-[#D3D8E2] rounded-full"></div>
+                <div class="w-4/5 h-1 bg-[#D3D8E2] rounded-full"></div>
+              </div>
+              <div class="pt-0.5 flex items-center gap-1">
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                </div>
+                <span class="text-[7.5px] text-emerald-600 font-semibold">Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- HERO CENTERED PHONE MOCKUP (Showing realistic PDF Reader UI) -->
+          <div class="relative w-[196px] h-[330px] bg-white rounded-[26px] shadow-[0_20px_50px_rgba(26,102,232,0.18)] border-[3.5px] border-[#FFFFFF] ring-1 ring-[#D8E1F0] flex flex-col overflow-hidden z-20">
+            <!-- Mini Reader App Bar -->
+            <div class="h-10 bg-white border-b border-[#F1F3F8] px-2.5 flex items-center justify-between flex-shrink-0">
+              <div class="flex items-center gap-1.5">
+                <div class="w-4 h-4 rounded-full bg-[#F3F5FA] flex items-center justify-center">
+                  <svg class="w-2.5 h-2.5 text-[#11141C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                </div>
+                <div class="w-3.5 h-3.5 rounded bg-[#E02B2B] flex items-center justify-center text-white text-[7px] font-bold">P</div>
+              </div>
+              <span class="text-[9px] font-bold text-[#11141C] truncate max-w-[85px]">Annual_Report.pdf</span>
+              <div class="flex items-center gap-1 text-[#8A8F9C]">
+                <!-- Bookmark Icon active -->
+                <svg class="w-3 h-3 text-[#1A66E8] fill-current" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                <svg class="w-3 h-3 text-[#8A8F9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </div>
+            </div>
+
+            <!-- PDF Page Realistic Body -->
+            <div class="flex-1 bg-[#F3F5FA] p-2 flex flex-col justify-start relative overflow-hidden">
+              <!-- Actual White Document Sheet -->
+              <div class="w-full flex-1 bg-white rounded-lg p-2.5 shadow-sm border border-[#E6E9F0] flex flex-col">
+                <!-- Document Header with tiny badge -->
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <span class="text-[6.5px] uppercase font-bold text-[#1A66E8] tracking-wider">Executive Summary</span>
+                    <h4 class="text-[10px] font-extrabold text-[#11141C] leading-tight mt-0.5">Financial Growth &amp; Strategy</h4>
+                  </div>
+                  <div class="w-3 h-3 rounded bg-blue-50 text-[#1A66E8] flex items-center justify-center text-[7px] font-bold">§</div>
+                </div>
+
+                <!-- Paragraph Text Lines -->
+                <div class="space-y-1 mb-2">
+                  <div class="w-full h-1 bg-[#CBD3DF] rounded-full"></div>
+                  <div class="w-full h-1 bg-[#CBD3DF] rounded-full"></div>
+                  <div class="w-10/12 h-1 bg-[#CBD3DF] rounded-full"></div>
+                  <div class="w-3/4 h-1 bg-[#CBD3DF] rounded-full"></div>
+                </div>
+
+                <!-- Realistic Chart / Graphic Box inside page -->
+                <div class="bg-[#F8FAFC] border border-[#E9EEF5] rounded-md p-1.5 mb-2 flex items-center justify-between">
+                  <div class="space-y-1 w-1/2">
+                    <div class="w-10 h-1 bg-[#8A94AE] rounded-full"></div>
+                    <div class="w-14 h-1 bg-[#CBD3DF] rounded-full"></div>
+                  </div>
+                  <!-- Mini Bar Chart -->
+                  <div class="flex items-end gap-1 h-5">
+                    <div class="w-1.5 h-2 bg-blue-300 rounded-2xs"></div>
+                    <div class="w-1.5 h-3 bg-blue-400 rounded-2xs"></div>
+                    <div class="w-1.5 h-5 bg-[#1A66E8] rounded-2xs"></div>
+                  </div>
+                </div>
+
+                <!-- Secondary paragraph -->
+                <div class="space-y-1">
+                  <div class="w-full h-1 bg-[#CBD3DF] rounded-full"></div>
+                  <div class="w-4/5 h-1 bg-[#CBD3DF] rounded-full"></div>
+                </div>
+              </div>
+
+              <!-- FLOATING PAGE NUMBER PILL ("3 / 120") -->
+              <div class="absolute bottom-11 left-1/2 -translate-x-1/2 bg-[#11141C]/85 backdrop-blur-md text-white text-[8px] font-semibold px-2 py-0.5 rounded-full shadow-md flex items-center gap-1 border border-white/15">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#1A66E8]"></span>
+                <span>3 / 120</span>
+              </div>
+
+              <!-- BOTTOM READER SCRUBBER BAR -->
+              <div class="mt-1 bg-white border border-[#E6E9F0] rounded-xl px-2 py-1.5 shadow-sm flex items-center gap-2">
+                <span class="text-[7px] font-bold text-[#8A8F9C]">03</span>
+                <div class="flex-1 relative flex items-center">
+                  <div class="w-full h-1 bg-[#E6E9F0] rounded-full"></div>
+                  <div class="absolute left-0 w-1/4 h-1 bg-[#1A66E8] rounded-full"></div>
+                  <!-- Scrubber Knob -->
+                  <div class="absolute left-1/4 -translate-x-1/2 w-2.5 h-2.5 bg-white border-2 border-[#1A66E8] rounded-full shadow-sm"></div>
+                </div>
+                <span class="text-[7px] font-bold text-[#8A8F9C]">120</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography & Content (Headline + Subtitle) -->
+        <div class="text-center px-4 mt-2">
+          <h2 class="text-[28px] font-extrabold text-[#11141C] leading-[34px] tracking-tight">
+            Read anything,<br>beautifully
+          </h2>
+          <p class="text-[15px] font-medium text-[#8A8F9C] leading-snug mt-2.5 max-w-[310px] mx-auto">
+            Open PDFs, Word, Excel and PowerPoint files with a fast, clean reader. Search, bookmark and pick up where you left off.
+          </p>
+        </div>
+
+        <!-- Indicator Row & Action Area -->
+        <div class="mt-4 pb-2 px-1">
+          <!-- Page Indicator with "Back" button on the left -->
+          <div class="relative flex items-center justify-center mb-5 h-7">
+            <!-- Back text button on the left -->
+            <button class="absolute left-1 text-[#8A8F9C] hover:text-[#11141C] text-sm font-semibold flex items-center gap-1 transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+              <span>Back</span>
+            </button>
+
+            <!-- 3 Dots Indicator: Dot 2 is elongated blue pill -->
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-[#E6E9F0]"></div>
+              <div class="w-8 h-2 rounded-full bg-[#1A66E8]"></div>
+              <div class="w-2 h-2 rounded-full bg-[#E6E9F0]"></div>
+            </div>
+          </div>
+
+          <!-- Full-width Primary Button "Next" (56 tall, radius 16) -->
+          <button class="w-full h-14 bg-[#1A66E8] hover:bg-[#1557c7] active:scale-[0.99] text-white text-base font-semibold rounded-[16px] shadow-[0_8px_20px_rgba(26,102,232,0.25)] flex items-center justify-center transition-all">
+            Next
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 2. DARK MODE (DEEP NAVY) VARIANT -->
+    <!-- ========================================== -->
+    <div class="flex flex-col items-center">
+      <div class="mb-3 flex items-center gap-2 text-xs font-semibold text-slate-300">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+        DARK MODE (DEEP NAVY) <span class="text-slate-500 font-mono">#1A1D29</span>
+      </div>
+
+      <div class="device-frame bg-[#1A1D29] flex flex-col justify-between p-5 select-none relative">
+        
+        <!-- Status Bar & Top Nav -->
+        <div>
+          <!-- iOS Status Bar -->
+          <div class="flex justify-between items-center pt-2 px-3 text-[#FFFFFF] text-xs font-bold tracking-tight">
+            <span>9:41</span>
+            <!-- Dynamic Island -->
+            <div class="w-28 h-7 bg-black rounded-full mx-auto -mt-1 flex items-center justify-end pr-2.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-[#1c1c1e] border border-[#2c2c2e]"></div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+              <div class="w-5 h-2.5 border border-current rounded-sm p-0.5 flex items-center">
+                <div class="w-full h-full bg-current rounded-2xs"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Action Bar (Skip) -->
+          <div class="flex justify-end items-center mt-3 px-1 h-9">
+            <button class="text-[#858B9C] hover:text-[#FFFFFF] text-sm font-semibold px-2 py-1.5 transition-colors">
+              Skip
+            </button>
+          </div>
+        </div>
+
+        <!-- Illustration Area (Top 55% of content space) -->
+        <div class="relative w-full h-[370px] flex items-center justify-center overflow-visible">
+          <!-- Subtle deep blue ambient glow background blobs -->
+          <div class="absolute w-64 h-64 bg-blue-600/15 rounded-full blur-3xl -top-6 left-1/2 -translate-x-1/2 pointer-events-none"></div>
+          <div class="absolute w-44 h-44 bg-indigo-600/15 rounded-full blur-2xl bottom-4 right-2 pointer-events-none"></div>
+
+          <!-- FLOATING EXCEL PREVIEW CARD (Back-Left, rotated -8deg) -->
+          <div class="absolute left-1 top-12 w-[140px] bg-[#232838] rounded-[16px] p-2.5 shadow-[0_16px_36px_rgba(0,0,0,0.45)] border border-[#2A3042] -rotate-8 z-10 transform hover:scale-105 transition-transform">
+            <div class="flex items-center gap-1.5 mb-2">
+              <span class="w-5 h-5 rounded-md bg-[#1E9E4F] flex items-center justify-center text-white text-[9px] font-black">X</span>
+              <div class="flex-1 truncate">
+                <p class="text-[9px] font-bold text-[#FFFFFF] truncate">Budget_Q4.xlsx</p>
+                <p class="text-[7.5px] text-[#858B9C]">Sheet 1 • 4.2 MB</p>
+              </div>
+            </div>
+            <!-- Mini Spreadsheet Grid Preview -->
+            <div class="border border-[#2A3042] rounded-md overflow-hidden bg-[#1A1D29] text-[7.5px]">
+              <div class="grid grid-cols-3 bg-[#132A20] text-[#4ADE80] font-bold px-1 py-0.5 border-b border-[#1E4331]">
+                <span>Dept</span><span>Plan</span><span>Actual</span>
+              </div>
+              <div class="grid grid-cols-3 px-1 py-0.5 border-b border-[#232838] text-[#CBD5E1]">
+                <span class="font-medium text-white">Ops</span><span>$84k</span><span class="text-[#4ADE80] font-bold">$79k</span>
+              </div>
+              <div class="grid grid-cols-3 px-1 py-0.5 border-b border-[#232838] text-[#CBD5E1]">
+                <span class="font-medium text-white">Mktg</span><span>$42k</span><span>$45k</span>
+              </div>
+              <div class="grid grid-cols-3 px-1 py-0.5 text-[#CBD5E1]">
+                <span class="font-medium text-white">Dev</span><span>$120k</span><span class="text-[#4ADE80] font-bold">$118k</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FLOATING WORD PREVIEW CARD (Back-Right, rotated +9deg) -->
+          <div class="absolute right-1 top-8 w-[140px] bg-[#232838] rounded-[16px] p-2.5 shadow-[0_16px_36px_rgba(0,0,0,0.45)] border border-[#2A3042] rotate-9 z-10 transform hover:scale-105 transition-transform">
+            <div class="flex items-center gap-1.5 mb-2">
+              <span class="w-5 h-5 rounded-md bg-[#1E5FD8] flex items-center justify-center text-white text-[9px] font-black">W</span>
+              <div class="flex-1 truncate">
+                <p class="text-[9px] font-bold text-[#FFFFFF] truncate">Contract_v2.docx</p>
+                <p class="text-[7.5px] text-[#858B9C]">Clause 8 • Signed</p>
+              </div>
+            </div>
+            <!-- Mini Word Lines Preview -->
+            <div class="space-y-1.5 bg-[#1A1D29] p-2 rounded-md border border-[#2A3042]">
+              <div class="w-16 h-1.5 bg-[#4D8FF7] rounded-full"></div>
+              <div class="space-y-1">
+                <div class="w-full h-1 bg-[#3A4259] rounded-full"></div>
+                <div class="w-11/12 h-1 bg-[#3A4259] rounded-full"></div>
+                <div class="w-4/5 h-1 bg-[#3A4259] rounded-full"></div>
+              </div>
+              <div class="pt-0.5 flex items-center gap-1">
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                  <div class="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
+                </div>
+                <span class="text-[7.5px] text-emerald-400 font-semibold">Verified</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- HERO CENTERED PHONE MOCKUP (Showing realistic PDF Reader UI) -->
+          <div class="relative w-[196px] h-[330px] bg-[#141722] rounded-[26px] shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-[3.5px] border-[#2A3042] ring-1 ring-[#1A1D29] flex flex-col overflow-hidden z-20">
+            <!-- Mini Reader App Bar -->
+            <div class="h-10 bg-[#1A1D29] border-b border-[#2A3042] px-2.5 flex items-center justify-between flex-shrink-0">
+              <div class="flex items-center gap-1.5">
+                <div class="w-4 h-4 rounded-full bg-[#232838] flex items-center justify-center">
+                  <svg class="w-2.5 h-2.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                </div>
+                <div class="w-3.5 h-3.5 rounded bg-[#E02B2B] flex items-center justify-center text-white text-[7px] font-bold">P</div>
+              </div>
+              <span class="text-[9px] font-bold text-white truncate max-w-[85px]">Annual_Report.pdf</span>
+              <div class="flex items-center gap-1 text-[#858B9C]">
+                <!-- Bookmark Icon active -->
+                <svg class="w-3 h-3 text-[#4D8FF7] fill-current" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                <svg class="w-3 h-3 text-[#858B9C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </div>
+            </div>
+
+            <!-- PDF Page Realistic Body -->
+            <div class="flex-1 bg-[#141722] p-2 flex flex-col justify-start relative overflow-hidden">
+              <!-- Actual Dark Document Sheet -->
+              <div class="w-full flex-1 bg-[#232838] rounded-lg p-2.5 shadow-sm border border-[#2A3042] flex flex-col">
+                <!-- Document Header with tiny badge -->
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <span class="text-[6.5px] uppercase font-bold text-[#4D8FF7] tracking-wider">Executive Summary</span>
+                    <h4 class="text-[10px] font-extrabold text-white leading-tight mt-0.5">Financial Growth &amp; Strategy</h4>
+                  </div>
+                  <div class="w-3 h-3 rounded bg-blue-900/40 text-[#4D8FF7] flex items-center justify-center text-[7px] font-bold">§</div>
+                </div>
+
+                <!-- Paragraph Text Lines -->
+                <div class="space-y-1 mb-2">
+                  <div class="w-full h-1 bg-[#3A4259] rounded-full"></div>
+                  <div class="w-full h-1 bg-[#3A4259] rounded-full"></div>
+                  <div class="w-10/12 h-1 bg-[#3A4259] rounded-full"></div>
+                  <div class="w-3/4 h-1 bg-[#3A4259] rounded-full"></div>
+                </div>
+
+                <!-- Realistic Chart / Graphic Box inside page -->
+                <div class="bg-[#1A1D29] border border-[#2A3042] rounded-md p-1.5 mb-2 flex items-center justify-between">
+                  <div class="space-y-1 w-1/2">
+                    <div class="w-10 h-1 bg-[#7F8AA8] rounded-full"></div>
+                    <div class="w-14 h-1 bg-[#3A4259] rounded-full"></div>
+                  </div>
+                  <!-- Mini Bar Chart -->
+                  <div class="flex items-end gap-1 h-5">
+                    <div class="w-1.5 h-2 bg-blue-900 rounded-2xs"></div>
+                    <div class="w-1.5 h-3 bg-blue-600 rounded-2xs"></div>
+                    <div class="w-1.5 h-5 bg-[#4D8FF7] rounded-2xs"></div>
+                  </div>
+                </div>
+
+                <!-- Secondary paragraph -->
+                <div class="space-y-1">
+                  <div class="w-full h-1 bg-[#3A4259] rounded-full"></div>
+                  <div class="w-4/5 h-1 bg-[#3A4259] rounded-full"></div>
+                </div>
+              </div>
+
+              <!-- FLOATING PAGE NUMBER PILL ("3 / 120") -->
+              <div class="absolute bottom-11 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md text-white text-[8px] font-semibold px-2 py-0.5 rounded-full shadow-md flex items-center gap-1 border border-white/20">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#4D8FF7]"></span>
+                <span>3 / 120</span>
+              </div>
+
+              <!-- BOTTOM READER SCRUBBER BAR -->
+              <div class="mt-1 bg-[#232838] border border-[#2A3042] rounded-xl px-2 py-1.5 shadow-sm flex items-center gap-2">
+                <span class="text-[7px] font-bold text-[#858B9C]">03</span>
+                <div class="flex-1 relative flex items-center">
+                  <div class="w-full h-1 bg-[#1A1D29] rounded-full"></div>
+                  <div class="absolute left-0 w-1/4 h-1 bg-[#4D8FF7] rounded-full"></div>
+                  <!-- Scrubber Knob -->
+                  <div class="absolute left-1/4 -translate-x-1/2 w-2.5 h-2.5 bg-white border-2 border-[#4D8FF7] rounded-full shadow-sm"></div>
+                </div>
+                <span class="text-[7px] font-bold text-[#858B9C]">120</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography & Content (Headline + Subtitle) -->
+        <div class="text-center px-4 mt-2">
+          <h2 class="text-[28px] font-extrabold text-[#FFFFFF] leading-[34px] tracking-tight">
+            Read anything,<br>beautifully
+          </h2>
+          <p class="text-[15px] font-medium text-[#858B9C] leading-snug mt-2.5 max-w-[310px] mx-auto">
+            Open PDFs, Word, Excel and PowerPoint files with a fast, clean reader. Search, bookmark and pick up where you left off.
+          </p>
+        </div>
+
+        <!-- Indicator Row & Action Area -->
+        <div class="mt-4 pb-2 px-1">
+          <!-- Page Indicator with "Back" button on the left -->
+          <div class="relative flex items-center justify-center mb-5 h-7">
+            <!-- Back text button on the left -->
+            <button class="absolute left-1 text-[#858B9C] hover:text-[#FFFFFF] text-sm font-semibold flex items-center gap-1 transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+              <span>Back</span>
+            </button>
+
+            <!-- 3 Dots Indicator: Dot 2 is elongated blue pill -->
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-[#2A3042]"></div>
+              <div class="w-8 h-2 rounded-full bg-[#4D8FF7]"></div>
+              <div class="w-2 h-2 rounded-full bg-[#2A3042]"></div>
+            </div>
+          </div>
+
+          <!-- Full-width Primary Button "Next" (56 tall, radius 16) -->
+          <button class="w-full h-14 bg-[#1A66E8] hover:bg-[#1557c7] active:scale-[0.99] text-white text-base font-semibold rounded-[16px] shadow-[0_8px_20px_rgba(26,102,232,0.35)] flex items-center justify-center transition-all">
+            Next
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

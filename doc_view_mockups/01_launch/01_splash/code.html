@@ -1,0 +1,326 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doc View Splash Screen (Light &amp; Dark)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0c0e14;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    @keyframes shimmerMove {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+    
+    .animate-shimmer {
+      animation: shimmerMove 1.8s infinite ease-in-out;
+    }
+
+    @keyframes floatSlow1 {
+      0%, 100% { transform: translate(0, 0) rotate(-6deg); }
+      50% { transform: translate(6px, -12px) rotate(-3deg); }
+    }
+
+    @keyframes floatSlow2 {
+      0%, 100% { transform: translate(0, 0) rotate(8deg); }
+      50% { transform: translate(-8px, -10px) rotate(12deg); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.08); }
+    }
+
+    .float-card-1 {
+      animation: floatSlow1 7s ease-in-out infinite;
+    }
+    .float-card-2 {
+      animation: floatSlow2 8.5s ease-in-out infinite;
+    }
+    .pulse-glow {
+      animation: pulseGlow 4.5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#0C0E14] text-slate-100 flex flex-col items-center py-8 px-4 sm:px-6">
+
+  <!-- Header Banner -->
+  <header class="w-full max-w-[840px] mb-8 text-center flex flex-col items-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-2">
+      Doc View Design System · 393 × 852 pt
+    </div>
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Splash Screen Variants</h1>
+    <p class="text-sm text-slate-400 mt-1">Light (#FFFFFF + Pale Blue Glow) &amp; Dark (#1A1D29 Deep Navy) side-by-side</p>
+  </header>
+
+  <!-- Screens Container (Side-by-side or stacked on small screens) -->
+  <main class="w-full max-w-[840px] flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-10 pb-12">
+
+    <!-- ============================================== -->
+    <!-- LIGHT MODE SPLASH SCREEN (393 x 852 pt frame) -->
+    <!-- ============================================== -->
+    <div class="flex flex-col items-center">
+      <div class="flex items-center justify-between w-[393px] px-2 mb-2 text-xs font-semibold text-slate-400">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          LIGHT MODE
+        </span>
+        <span class="text-[11px] font-mono opacity-70">#FFFFFF / Inter / 393×852</span>
+      </div>
+
+      <!-- Phone Device Frame -->
+      <section aria-label="Doc View Light Splash Screen" class="relative w-[393px] h-[852px] rounded-[44px] overflow-hidden shadow-2xl border-[6px] border-[#2A2E3D] bg-white flex flex-col justify-between select-none" style="background: #FFFFFF;">
+        <!-- Pale blue radial gradient at the top -->
+        
+
+        <!-- System Status Bar (iOS style) -->
+        <div class="relative z-20 w-full pt-3 px-7 flex items-center justify-between text-[#11141C]">
+          <span class="text-[14px] font-semibold tracking-tight font-sans">9:41</span>
+          <!-- Dynamic Island / Speaker Pill indicator subtly rendered -->
+          <div class="w-28 h-7 bg-[#11141C] rounded-full mx-auto -mt-1 hidden sm:block"></div>
+          <div class="flex items-center gap-1.5 text-[#11141C]">
+            <!-- Cellular -->
+            <svg class="w-4 h-3.5 fill-current" viewBox="0 0 17 12"><path d="M1 9h2v3H1zM5 6.5h2v5.5H5zM9 4h2v8H9zM13 1h2v11h-2z"></path></svg>
+            <!-- Wifi -->
+            <svg class="w-4 h-3.5 fill-current" viewBox="0 0 16 12"><path d="M8 2.5C4.9 2.5 2.1 3.8.3 6l1.5 1.5C3.3 5.9 5.5 4.8 8 4.8s4.7 1.1 6.2 2.7L15.7 6C13.9 3.8 11.1 2.5 8 2.5zm0 4.6c-1.8 0-3.4.8-4.5 2.1l1.5 1.5C5.7 9.8 6.8 9.3 8 9.3s2.3.5 3 1.4l1.5-1.5C11.4 7.9 9.8 7.1 8 7.1zm0 4.6c-.7 0-1.3.6-1.3 1.3 0 .7.6 1.3 1.3 1.3s1.3-.6 1.3-1.3c0-.7-.6-1.3-1.3-1.3z"></path></svg>
+            <!-- Battery -->
+            <div class="w-5 h-2.5 rounded-[4px] border border-[#11141C] p-0.5 flex items-center">
+              <div class="w-full h-full bg-[#11141C] rounded-[2px]"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Brand Composition -->
+        <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-6">
+          
+          <!-- Brand Mark Container with Drifting Floating Sheets & Glow -->
+          <div class="relative w-52 h-52 flex items-center justify-center mb-6">
+            
+            <!-- Soft Blue Glow behind icon -->
+            
+            
+            <!-- Secondary ambient halo -->
+            
+
+            <!-- Drifting Translucent Document Shapes (Background Layer) -->
+            <!-- Floating sheet 1 (top-left angled back) -->
+            <div class="absolute -top-3 -left-4 w-28 h-36 rounded-2xl bg-white/60 border border-[#1A66E8]/15 shadow-sm float-card-1 pointer-events-none backdrop-blur-[2px]">
+              <!-- Mini folded corner hint -->
+              <div class="absolute top-0 right-0 w-6 h-6 border-b border-l border-[#1A66E8]/20 bg-[#E8F0FE]/70 rounded-bl-lg"></div>
+              <!-- Skeleton lines inside floating doc -->
+              <div class="mt-8 ml-4 w-12 h-1.5 rounded-full bg-[#1A66E8]/10"></div>
+              <div class="mt-2.5 ml-4 w-16 h-1.5 rounded-full bg-[#1A66E8]/10"></div>
+              <div class="mt-2 ml-4 w-10 h-1.5 rounded-full bg-[#1A66E8]/10"></div>
+            </div>
+
+            <!-- Floating sheet 2 (bottom-right angled back) -->
+            <div class="absolute -bottom-4 -right-3 w-32 h-40 rounded-2xl bg-[#F0F5FF]/70 border border-[#1A66E8]/20 shadow-md float-card-2 pointer-events-none backdrop-blur-[2px]">
+              <!-- Mini folded corner hint -->
+              <div class="absolute top-0 right-0 w-7 h-7 border-b border-l border-[#1A66E8]/25 bg-white/80 rounded-bl-lg"></div>
+              <div class="mt-9 ml-4 w-14 h-1.5 rounded-full bg-[#1A66E8]/15"></div>
+              <div class="mt-2.5 ml-4 w-20 h-1.5 rounded-full bg-[#1A66E8]/15"></div>
+              <div class="mt-2 ml-4 w-12 h-1.5 rounded-full bg-[#1A66E8]/15"></div>
+            </div>
+
+            <!-- PRIMARY APP ICON (Centered Large Vivid-Blue Rounded Square) -->
+            <div class="relative z-10 w-28 h-28 rounded-[28px] bg-[#1A66E8] shadow-[0_16px_36px_rgba(26,102,232,0.36),0_4px_12px_rgba(26,102,232,0.2)] flex items-center justify-center border border-white/20">
+              <!-- Subtle inner top reflection highlight -->
+              <div class="absolute inset-x-2 top-1.5 h-10 rounded-t-[22px] bg-gradient-to-b from-white/25 to-transparent pointer-events-none"></div>
+
+              <!-- Page Silhouette with Folded Top-Right Corner -->
+              <div class="relative w-14 h-[68px] drop-shadow-[0_4px_8px_rgba(0,0,0,0.12)]">
+                <!-- SVG Page Silhouette -->
+                <svg viewBox="0 0 56 68" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                  <!-- Base Page Path with Top-Right Fold notch cut -->
+                  <path d="M0 6C0 2.68629 2.68629 0 6 0H38L56 18V62C56 65.3137 53.3137 68 50 68H6C2.68629 68 0 65.3137 0 62V6Z" fill="#FFFFFF"></path>
+                  <!-- Folded Corner Flap Triangle -->
+                  <path d="M38 0V13C38 15.7614 40.2386 18 43 18H56L38 0Z" fill="#E2EDFC"></path>
+                  <!-- Corner flap shadow -->
+                  <path d="M38 0L56 18H43C40.2386 18 38 15.7614 38 13V0Z" fill="black" fill-opacity="0.08"></path>
+                  
+                  <!-- Clean Document Lines inside icon -->
+                  <rect x="10" y="27" width="36" height="4" rx="2" fill="#1A66E8" fill-opacity="0.9"></rect>
+                  <rect x="10" y="36" width="36" height="4" rx="2" fill="#1A66E8" fill-opacity="0.9"></rect>
+                  <rect x="10" y="45" width="24" height="4" rx="2" fill="#1A66E8" fill-opacity="0.9"></rect>
+                  
+                  <!-- Tiny Accent File Tag / Badge -->
+                  <rect x="10" y="54" width="12" height="3" rx="1.5" fill="#E02B2B"></rect>
+                  <rect x="25" y="54" width="12" height="3" rx="1.5" fill="#1E5FD8"></rect>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- App Title: "Doc View" in Inter ExtraBold 32 -->
+          <h2 class="text-[32px] font-[800] leading-none tracking-tight text-[#11141C] text-center mb-2.5">
+            Doc View
+          </h2>
+
+          <!-- Tagline: "All your documents, one place." in Medium secondary text -->
+          <p class="text-[15px] font-[500] leading-snug text-[#8A8F9C] text-center tracking-normal">
+            All your documents, one place.
+          </p>
+        </div>
+
+        <!-- Bottom: Version label and thin 120pt shimmer line -->
+        <div class="relative z-10 pb-12 flex flex-col items-center">
+          
+          <!-- 120pt (120px) wide shimmer progress line (NOT a spinner) -->
+          <div class="w-[120px] h-[3.5px] rounded-full bg-[#E9EDF5] overflow-hidden relative mb-4">
+            <div class="absolute inset-y-0 w-2/3 bg-gradient-to-r from-transparent via-[#1A66E8] to-transparent animate-shimmer rounded-full"></div>
+          </div>
+
+          <!-- Small label "Version 1.0.0" -->
+          <span class="text-[12px] font-medium text-[#8A8F9C] tracking-wide">
+            Version 1.0.0
+          </span>
+
+          <!-- Home Indicator Bar -->
+          
+        </div>
+      </section>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- DARK MODE SPLASH SCREEN (393 x 852 pt frame)  -->
+    <!-- ============================================== -->
+    <div class="flex flex-col items-center">
+      <div class="flex items-center justify-between w-[393px] px-2 mb-2 text-xs font-semibold text-slate-400">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+          DARK MODE (DEEP NAVY)
+        </span>
+        <span class="text-[11px] font-mono opacity-70">#1A1D29 / Inter / 393×852</span>
+      </div>
+
+      <!-- Phone Device Frame -->
+      <section aria-label="Doc View Dark Splash Screen" class="relative w-[393px] h-[852px] rounded-[44px] overflow-hidden shadow-2xl border-[6px] border-[#2A2E3D] bg-[#1A1D29] flex flex-col justify-between select-none" style="background: #1A1D29;">
+        <!-- Faint blue radial glow centered on dark navy canvas -->
+        
+
+        <!-- Subtle top gradient ambient -->
+        
+
+        <!-- System Status Bar (iOS style Dark) -->
+        <div class="relative z-20 w-full pt-3 px-7 flex items-center justify-between text-white">
+          <span class="text-[14px] font-semibold tracking-tight font-sans">9:41</span>
+          <!-- Dynamic Island / Speaker Pill indicator -->
+          <div class="w-28 h-7 bg-black rounded-full mx-auto -mt-1 hidden sm:block border border-white/5"></div>
+          <div class="flex items-center gap-1.5 text-white">
+            <!-- Cellular -->
+            <svg class="w-4 h-3.5 fill-current" viewBox="0 0 17 12"><path d="M1 9h2v3H1zM5 6.5h2v5.5H5zM9 4h2v8H9zM13 1h2v11h-2z"></path></svg>
+            <!-- Wifi -->
+            <svg class="w-4 h-3.5 fill-current" viewBox="0 0 16 12"><path d="M8 2.5C4.9 2.5 2.1 3.8.3 6l1.5 1.5C3.3 5.9 5.5 4.8 8 4.8s4.7 1.1 6.2 2.7L15.7 6C13.9 3.8 11.1 2.5 8 2.5zm0 4.6c-1.8 0-3.4.8-4.5 2.1l1.5 1.5C5.7 9.8 6.8 9.3 8 9.3s2.3.5 3 1.4l1.5-1.5C11.4 7.9 9.8 7.1 8 7.1zm0 4.6c-.7 0-1.3.6-1.3 1.3 0 .7.6 1.3 1.3 1.3s1.3-.6 1.3-1.3c0-.7-.6-1.3-1.3-1.3z"></path></svg>
+            <!-- Battery -->
+            <div class="w-5 h-2.5 rounded-[4px] border border-white p-0.5 flex items-center">
+              <div class="w-full h-full bg-white rounded-[2px]"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Brand Composition -->
+        <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-6">
+          
+          <!-- Brand Mark Container with Drifting Floating Sheets & Glow -->
+          <div class="relative w-52 h-52 flex items-center justify-center mb-6">
+            
+            <!-- Vivid Blue Glow behind icon -->
+            
+            
+            <!-- Secondary Ambient Active Blue Glow -->
+            
+
+            <!-- Drifting Translucent Document Shapes (Dark Theme) -->
+            <!-- Floating sheet 1 (top-left angled back) -->
+            <div class="absolute -top-3 -left-4 w-28 h-36 rounded-2xl bg-[#232838]/80 border border-[#2A3042] shadow-lg float-card-1 pointer-events-none backdrop-blur-sm">
+              <!-- Mini folded corner hint -->
+              <div class="absolute top-0 right-0 w-6 h-6 border-b border-l border-[#2A3042] bg-[#1E2A45] rounded-bl-lg"></div>
+              <!-- Skeleton lines inside floating doc -->
+              <div class="mt-8 ml-4 w-12 h-1.5 rounded-full bg-[#4D8FF7]/20"></div>
+              <div class="mt-2.5 ml-4 w-16 h-1.5 rounded-full bg-[#4D8FF7]/15"></div>
+              <div class="mt-2 ml-4 w-10 h-1.5 rounded-full bg-[#4D8FF7]/15"></div>
+            </div>
+
+            <!-- Floating sheet 2 (bottom-right angled back) -->
+            <div class="absolute -bottom-4 -right-3 w-32 h-40 rounded-2xl bg-[#1E2A45]/70 border border-[#2A3042] shadow-xl float-card-2 pointer-events-none backdrop-blur-sm">
+              <!-- Mini folded corner hint -->
+              <div class="absolute top-0 right-0 w-7 h-7 border-b border-l border-[#2A3042] bg-[#232838] rounded-bl-lg"></div>
+              <div class="mt-9 ml-4 w-14 h-1.5 rounded-full bg-[#4D8FF7]/25"></div>
+              <div class="mt-2.5 ml-4 w-20 h-1.5 rounded-full bg-[#4D8FF7]/15"></div>
+              <div class="mt-2 ml-4 w-12 h-1.5 rounded-full bg-[#4D8FF7]/15"></div>
+            </div>
+
+            <!-- PRIMARY APP ICON (Centered Large Vivid-Blue Rounded Square) -->
+            <div class="relative z-10 w-28 h-28 rounded-[28px] bg-[#1A66E8] shadow-[0_16px_40px_rgba(26,102,232,0.55),0_0_24px_rgba(77,143,247,0.35)] flex items-center justify-center border border-white/20">
+              <!-- Subtle inner top reflection highlight -->
+              <div class="absolute inset-x-2 top-1.5 h-10 rounded-t-[22px] bg-gradient-to-b from-white/30 to-transparent pointer-events-none"></div>
+
+              <!-- Page Silhouette with Folded Top-Right Corner -->
+              <div class="relative w-14 h-[68px] drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
+                <!-- SVG Page Silhouette -->
+                <svg viewBox="0 0 56 68" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                  <!-- Base Page Path with Top-Right Fold notch cut -->
+                  <path d="M0 6C0 2.68629 2.68629 0 6 0H38L56 18V62C56 65.3137 53.3137 68 50 68H6C2.68629 68 0 65.3137 0 62V6Z" fill="#FFFFFF"></path>
+                  <!-- Folded Corner Flap Triangle -->
+                  <path d="M38 0V13C38 15.7614 40.2386 18 43 18H56L38 0Z" fill="#DBE8FA"></path>
+                  <!-- Corner flap shadow -->
+                  <path d="M38 0L56 18H43C40.2386 18 38 15.7614 38 13V0Z" fill="black" fill-opacity="0.12"></path>
+                  
+                  <!-- Clean Document Lines inside icon -->
+                  <rect x="10" y="27" width="36" height="4" rx="2" fill="#1A66E8" fill-opacity="0.95"></rect>
+                  <rect x="10" y="36" width="36" height="4" rx="2" fill="#1A66E8" fill-opacity="0.95"></rect>
+                  <rect x="10" y="45" width="24" height="4" rx="2" fill="#1A66E8" fill-opacity="0.95"></rect>
+                  
+                  <!-- Accent File Tags -->
+                  <rect x="10" y="54" width="12" height="3" rx="1.5" fill="#E02B2B"></rect>
+                  <rect x="25" y="54" width="12" height="3" rx="1.5" fill="#4D8FF7"></rect>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- App Title: "Doc View" in Inter ExtraBold 32 -->
+          <h2 class="text-[32px] font-[800] leading-none tracking-tight text-[#FFFFFF] text-center mb-2.5">
+            Doc View
+          </h2>
+
+          <!-- Tagline: "All your documents, one place." in Medium secondary text -->
+          <p class="text-[15px] font-[500] leading-snug text-[#858B9C] text-center tracking-normal">
+            All your documents, one place.
+          </p>
+        </div>
+
+        <!-- Bottom: Version label and thin 120pt shimmer line -->
+        <div class="relative z-10 pb-12 flex flex-col items-center">
+          
+          <!-- 120pt (120px) wide shimmer progress line (Dark shimmer: #262B3A to #30364A with blue pulse) -->
+          <div class="w-[120px] h-[3.5px] rounded-full bg-[#262B3A] overflow-hidden relative mb-4">
+            <div class="absolute inset-y-0 w-2/3 bg-gradient-to-r from-transparent via-[#4D8FF7] to-transparent animate-shimmer rounded-full"></div>
+          </div>
+
+          <!-- Small label "Version 1.0.0" -->
+          <span class="text-[12px] font-medium text-[#858B9C] tracking-wide">
+            Version 1.0.0
+          </span>
+
+          <!-- Home Indicator Bar -->
+          
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+
+
+</body></html>

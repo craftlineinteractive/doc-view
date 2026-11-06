@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-background": "#181b24", "on-surface": "#181b24", "tertiary-fixed-dim": "#bfc7d4", "primary-fixed-dim": "#acc7ff", "secondary-container": "#276def", "surface": "#faf8ff", "on-primary-fixed": "#001a40", "error": "#ba1a1a", "surface-container-lowest": "#ffffff", "surface-container-low": "#f2f3ff", "tertiary": "#545d68", "surface-container": "#ecedf9", "on-surface-variant": "#424753", "secondary-fixed-dim": "#b1c5ff", "on-secondary-fixed-variant": "#00409f", "inverse-surface": "#2d3039", "on-error-container": "#93000a", "on-error": "#ffffff", "on-secondary-container": "#fefcff", "error-container": "#ffdad6", "surface-tint": "#005bbf", "secondary": "#0054cb", "surface-dim": "#d8d9e5", "on-primary-fixed-variant": "#004492", "inverse-on-surface": "#eff0fc", "on-primary": "#ffffff", "outline-variant": "#c2c6d5", "tertiary-container": "#6d7581", "primary-fixed": "#d7e2ff", "primary-container": "#1f71e0", "background": "#faf8ff", "primary": "#0059ba", "on-primary-container": "#fefcff", "inverse-primary": "#acc7ff", "on-secondary-fixed": "#001847", "on-tertiary-container": "#fdfcff", "surface-container-high": "#e6e7f3", "on-secondary": "#ffffff", "surface-container-highest": "#e0e2ee", "on-tertiary": "#ffffff", "on-tertiary-fixed": "#141c26", "on-tertiary-fixed-variant": "#3f4752", "outline": "#727785", "surface-bright": "#faf8ff", "secondary-fixed": "#dae2ff", "tertiary-fixed": "#dbe3f1", "surface-variant": "#e0e2ee" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "0.75rem", "space-xs": "0.25rem", "space-xl": "1.5rem", "space-sm": "0.5rem", "gutter": "0.75rem", "space-lg": "1rem", "margin": "1.25rem" }, "fontFamily": { "headline-xl": [ "Space Grotesk" ], "body-sm": [ "Inter" ], "label-xs": [ "Inter" ], "body-md": [ "Inter" ], "body-lg": [ "Inter" ], "headline-sm": [ "Space Grotesk" ], "headline-lg": [ "Space Grotesk" ], "label-md": [ "Inter" ], "label-lg": [ "Inter" ], "title-md": [ "Inter" ] }, "fontSize": { "headline-xl": [ "32px", { "lineHeight": "38px", "fontWeight": "700" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "label-xs": [ "11px", { "lineHeight": "14px", "fontWeight": "600" } ], "body-md": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "body-lg": [ "15px", { "lineHeight": "22px", "fontWeight": "500" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "fontWeight": "600" } ], "headline-lg": [ "24px", { "lineHeight": "30px", "fontWeight": "700" } ], "label-md": [ "13px", { "lineHeight": "18px", "fontWeight": "600" } ], "label-lg": [ "15px", { "lineHeight": "20px", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "22px", "fontWeight": "700" } ] } } } }</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between py-space-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-xl"><div class="px-space-xl flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-DEFAULT bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[20px]">view_quilt</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">DocView</span><span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mt-0.5">Artboard Studio</span></div></div><span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-label-xs text-label-xs">v2.4</span></div><div class="px-space-md"><div class="px-space-sm mb-space-xs font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-semibold">Spec Artboards</div><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-sm"><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT transition-all bg-primary-container text-on-primary-container font-semibold shadow-sm" data-path="artboard-overview" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-md text-label-md">Multi-Frame Canvas</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="docked-banner-spec" href="#"><span class="material-symbols-outlined text-[20px]">ad_units</span><span class="font-label-md text-label-md">Adaptive Banner (60pt)</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="native-inline-units" href="#"><span class="material-symbols-outlined text-[20px]">splitscreen</span><span class="font-label-md text-label-md">Inline File Feed Ads</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="interstitial-modal-spec" href="#"><span class="material-symbols-outlined text-[20px]">fullscreen</span><span class="font-label-md text-label-md">Full Interstitial Modal</span></a></nav></div><div class="px-space-md"><div class="px-space-sm mb-space-xs font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant font-semibold">Compliance &amp; Specs</div><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-sm"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="admob-compliance-rules" href="#"><span class="material-symbols-outlined text-[20px]">verified_user</span><span class="font-label-md text-label-md">Policy &amp; Hitbox Rules</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="tokens-and-geometry" href="#"><span class="material-symbols-outlined text-[20px]">straighten</span><span class="font-label-md text-label-md">4pt Grid &amp; Dimensions</span></a></nav></div></div><div class="px-space-md pt-space-md border-t border-surface-container-high flex flex-col gap-space-sm"><div class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-xs text-label-xs font-semibold text-on-surface">Device Target</span><span class="font-label-xs text-label-xs text-primary font-bold">393 × 852 pt</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">iPhone standard viewport with dynamic safe-zone metrics.</p></div><div class="flex items-center justify-between px-space-sm py-space-xs"><span class="font-label-xs text-label-xs text-on-surface-variant">Scale Preset</span><span class="font-label-xs text-label-xs font-semibold text-on-surface">100% (1:1 Native)</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-margin"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"><span class="text-on-surface font-semibold">Ad Placements Spec</span><span>/</span><span>Google AdMob Workbench</span></div><div class="h-4 w-[1px] bg-outline-variant"></div><div class="flex items-center gap-space-xs"><button class="h-8 px-space-md rounded-DEFAULT bg-surface-container hover:bg-surface-container-high text-on-surface font-label-xs text-label-xs flex items-center gap-space-xs transition-colors"><span class="material-symbols-outlined text-[16px]">devices</span><span>Viewport Switcher</span></button><button class="h-8 px-space-md rounded-DEFAULT bg-surface-container hover:bg-surface-container-high text-on-surface font-label-xs text-label-xs flex items-center gap-space-xs transition-colors"><span class="material-symbols-outlined text-[16px]">tune</span><span>Toggle Hitboxes</span></button></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-DEFAULT p-0.5"><button class="h-8 px-space-md rounded-DEFAULT bg-surface-container-lowest text-on-surface shadow-sm font-label-xs text-label-xs flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">grid_on</span><span>Artboards</span></button><button class="h-8 px-space-md rounded-DEFAULT text-on-surface-variant hover:text-on-surface font-label-xs text-label-xs flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">code</span><span>Inspect Specs</span></button></div><button class="w-9 h-9 rounded-DEFAULT bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-[20px]">share</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Spec Board Control Bar & Meta Header -->
+<div class="px-margin py-space-xl bg-surface-container-lowest shadow-sm flex flex-col md:flex-row md:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-xs text-label-xs uppercase tracking-wider font-bold">DocView Spec v2.4</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-xs text-label-xs">Production Ready · 4pt Grid</span>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-xs text-label-xs font-semibold">Dual Mode: Light &amp; Deep Navy</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Google AdMob Placements &amp; Policy Design Board</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-4xl">
+        Architectural monetization guideline for modern handheld form factors (393 × 852 pt baseline). Strict compliance with Google AdMob accidental click prevention, zero reader disruption, and 16pt dynamic touch buffers.
+      </p>
+</div>
+<!-- Quick Mode & Visual Filter Indicators -->
+<div class="flex items-center gap-space-sm self-start md:self-end">
+<div class="flex items-center gap-2 px-space-md py-space-sm bg-surface-container rounded-DEFAULT">
+<div class="w-3 h-3 rounded-full bg-[#1A66E8]"></div>
+<span class="font-label-xs text-label-xs text-on-surface">Light (#FFFFFF / #F3F5FA)</span>
+</div>
+<div class="flex items-center gap-2 px-space-md py-space-sm bg-surface-container rounded-DEFAULT">
+<div class="w-3 h-3 rounded-full bg-[#1A1D29]"></div>
+<span class="font-label-xs text-label-xs text-on-surface">Dark Navy (#1A1D29 / #232838)</span>
+</div>
+</div>
+</div>
+<!-- Metric Badges Strip -->
+<div class="px-margin py-space-md bg-surface-container-low flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-lg flex-wrap">
+<div class="flex items-center gap-2">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">Baseline Viewport:</span>
+<span class="font-label-md text-label-md text-primary font-bold">393 × 852 pt (iPhone 15 Pro)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">Docked Banner:</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">60pt Adaptive Height</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">In-Feed Native:</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">68pt Rhythm Match</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-on-surface-variant">Hitbox Buffer:</span>
+<span class="font-label-md text-label-md text-error font-bold">≥ 16pt FAB Separation</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">policy</span>
+<span>Policy Audit Status: Compliant 100%</span>
+</div>
+</div>
+<div class="px-margin py-space-xl flex flex-col gap-16">
+<!-- ========================================================================= -->
+<!-- SECTION 1: ADAPTIVE BANNER SPEC (60pt Docked above 64pt Bottom Nav)       -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-label-xs text-label-xs flex items-center justify-center font-bold">01</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Adaptive Banner Spec (60pt Docked)</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Pinned persistently above the 64pt system bottom navigation bar. Must strictly preserve a ≥ 16pt vertical buffer between any floating action button (FAB) and the banner hitbox.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-space-sm py-1 rounded bg-surface-container font-label-xs text-label-xs text-on-surface-variant font-semibold">Specs: 60pt Ad · 64pt Nav · 56pt FAB (16pt gap)</span>
+</div>
+</div>
+<!-- Comparison Grid: Light Loaded, Light Skeleton, Dark Loaded, Dark Skeleton -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+<!-- Light Mode Sub-Canvas -->
+<div class="p-space-lg rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#1A66E8]"></span>
+<span class="font-title-md text-title-md text-[#11141C]">Light Mode Runtime</span>
+</div>
+<span class="font-label-xs text-label-xs text-[#8A8F9C] uppercase tracking-wider font-semibold">Canvas #FFFFFF · Tiles #F3F5FA</span>
+</div>
+<!-- Phone Simulation Frame Light -->
+<div class="w-full bg-[#FFFFFF] rounded-[24px] shadow-md overflow-hidden flex flex-col relative">
+<!-- Simulated App Top Bar -->
+<div class="px-space-md pt-3 pb-2 flex items-center justify-between bg-[#FFFFFF]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-[#11141C]">folder</span>
+<span class="font-label-lg text-label-lg text-[#11141C] font-bold">Internal Storage</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#8A8F9C]">search</span>
+</div>
+<!-- Simulated Body Content with Documents -->
+<div class="p-space-md flex flex-col gap-2 relative min-h-[220px] bg-[#FFFFFF]">
+<div class="flex items-center gap-space-md p-space-sm rounded-[14px] bg-[#F3F5FA]">
+<div class="w-10 h-10 rounded-[10px] bg-[#E02B2B]/10 flex items-center justify-center text-[#E02B2B]">
+<span class="material-symbols-outlined text-[22px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-label-md text-label-md text-[#11141C] font-bold truncate">Q3_Financial_Review.pdf</span>
+<span class="font-body-sm text-body-sm text-[#8A8F9C]">2.4 MB · 12 mins ago</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md p-space-sm rounded-[14px] bg-[#F3F5FA]">
+<div class="w-10 h-10 rounded-[10px] bg-[#1A66E8]/10 flex items-center justify-center text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]">description</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-label-md text-label-md text-[#11141C] font-bold truncate">Project_Spec_Design_2024.docx</span>
+<span class="font-body-sm text-body-sm text-[#8A8F9C]">840 KB · Yesterday</span>
+</div>
+</div>
+<!-- FAB with Clearance Marker -->
+<div class="absolute right-5 bottom-4 flex flex-col items-center">
+<!-- Annotation pointer -->
+<div class="absolute -top-7 right-0 px-2 py-0.5 rounded bg-error text-on-error font-label-xs text-label-xs flex items-center gap-1 shadow-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px]">straighten</span>
+<span>16pt clearance</span>
+</div>
+<!-- 56pt FAB -->
+<button class="w-14 h-14 rounded-full bg-[#1A66E8] text-white shadow-lg flex items-center justify-center hover:bg-[#1453bd] transition-colors">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+</div>
+</div>
+<!-- Buffer indicator bar (visual guide) -->
+<div class="h-4 w-full bg-error/10 flex items-center justify-center">
+<span class="font-label-xs text-[10px] text-error font-semibold uppercase tracking-wider">Safe Separation Gap (16pt strictly observed)</span>
+</div>
+<!-- ADAPTIVE BANNER 60pt LOADED -->
+<div class="h-[60pt] w-full bg-[#FFFFFF] px-space-md flex items-center justify-between shadow-inner relative">
+<!-- AD Tag -->
+<div class="absolute top-1.5 left-2 px-1 py-0.2 rounded-[4px] bg-transparent text-[#8A8F9C] font-label-xs text-[9px] uppercase tracking-wider font-bold">
+                AD
+              </div>
+<div class="flex items-center gap-space-sm pl-4">
+<div class="w-10 h-10 rounded-[10px] bg-[#E8F0FE] flex items-center justify-center text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]">cloud</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-[#11141C] font-bold leading-none">CloudDrive Pro</span>
+<span class="px-1 py-0.5 rounded bg-[#E8F0FE] text-[#1A66E8] font-label-xs text-[9px] font-bold">PRO</span>
+</div>
+<span class="font-body-sm text-body-sm text-[#8A8F9C] mt-0.5">15GB Free cloud storage</span>
+</div>
+</div>
+<button class="h-[36pt] px-4 rounded-[12px] bg-[#1A66E8] text-white font-label-md text-label-md font-semibold hover:bg-[#1554c0] shadow-sm flex items-center">
+                Install
+              </button>
+</div>
+<!-- DOCKED 64pt BOTTOM NAV -->
+<div class="h-[64pt] w-full bg-[#F3F5FA] px-space-xl flex items-center justify-around">
+<div class="flex flex-col items-center gap-0.5 text-[#1A66E8]">
+<span class="material-symbols-outlined text-[22px]">folder</span>
+<span class="font-label-xs text-[10px] font-bold">Files</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">build</span>
+<span class="font-label-xs text-[10px] font-medium">Tools</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="font-label-xs text-[10px] font-medium">Settings</span>
+</div>
+</div>
+</div>
+<!-- Skeleton State Callout Light -->
+<div class="mt-space-sm p-space-md rounded-[16px] bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Pre-load Skeleton State (Light)</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant font-mono">Zero layout jump</span>
+</div>
+<!-- Skeleton 60pt container -->
+<div class="h-[60pt] w-full bg-[#FFFFFF] rounded-[12px] px-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-[10px] bg-gradient-to-r from-[#E9EDF5] via-[#F5F7FB] to-[#E9EDF5] animate-pulse"></div>
+<div class="flex flex-col gap-2">
+<div class="w-28 h-3.5 rounded bg-gradient-to-r from-[#E9EDF5] via-[#F5F7FB] to-[#E9EDF5] animate-pulse"></div>
+<div class="w-40 h-2.5 rounded bg-gradient-to-r from-[#E9EDF5] via-[#F5F7FB] to-[#E9EDF5] animate-pulse"></div>
+</div>
+</div>
+<div class="w-16 h-[32pt] rounded-[12px] bg-gradient-to-r from-[#E9EDF5] via-[#F5F7FB] to-[#E9EDF5] animate-pulse"></div>
+</div>
+</div>
+</div>
+<!-- Dark Navy Sub-Canvas -->
+<div class="p-space-lg rounded-lg bg-[#141722] text-white shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#4D8FF7]"></span>
+<span class="font-title-md text-title-md text-white">Dark Mode Runtime</span>
+</div>
+<span class="font-label-xs text-label-xs text-[#858B9C] uppercase tracking-wider font-semibold">Canvas #1A1D29 · Tiles #232838</span>
+</div>
+<!-- Phone Simulation Frame Dark -->
+<div class="w-full bg-[#1A1D29] rounded-[24px] shadow-md overflow-hidden flex flex-col relative">
+<!-- Simulated App Top Bar -->
+<div class="px-space-md pt-3 pb-2 flex items-center justify-between bg-[#1A1D29]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-white">folder</span>
+<span class="font-label-lg text-label-lg text-white font-bold">Internal Storage</span>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#858B9C]">search</span>
+</div>
+<!-- Simulated Body Content with Documents -->
+<div class="p-space-md flex flex-col gap-2 relative min-h-[220px] bg-[#1A1D29]">
+<div class="flex items-center gap-space-md p-space-sm rounded-[14px] bg-[#232838]">
+<div class="w-10 h-10 rounded-[10px] bg-[#E02B2B]/20 flex items-center justify-center text-[#ff6b6b]">
+<span class="material-symbols-outlined text-[22px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-label-md text-label-md text-white font-bold truncate">Q3_Financial_Review.pdf</span>
+<span class="font-body-sm text-body-sm text-[#858B9C]">2.4 MB · 12 mins ago</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md p-space-sm rounded-[14px] bg-[#232838]">
+<div class="w-10 h-10 rounded-[10px] bg-[#4D8FF7]/20 flex items-center justify-center text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]">description</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-label-md text-label-md text-white font-bold truncate">Project_Spec_Design_2024.docx</span>
+<span class="font-body-sm text-body-sm text-[#858B9C]">840 KB · Yesterday</span>
+</div>
+</div>
+<!-- FAB with Clearance Marker -->
+<div class="absolute right-5 bottom-4 flex flex-col items-center">
+<div class="absolute -top-7 right-0 px-2 py-0.5 rounded bg-error text-white font-label-xs text-label-xs flex items-center gap-1 shadow-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px]">straighten</span>
+<span>16pt clearance</span>
+</div>
+<button class="w-14 h-14 rounded-full bg-[#1A66E8] text-white shadow-lg flex items-center justify-center hover:bg-[#4D8FF7] transition-colors">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+</div>
+</div>
+<!-- Buffer indicator bar (visual guide) -->
+<div class="h-4 w-full bg-error/20 flex items-center justify-center">
+<span class="font-label-xs text-[10px] text-[#ffdad6] font-semibold uppercase tracking-wider">Safe Separation Gap (16pt strictly observed)</span>
+</div>
+<!-- ADAPTIVE BANNER 60pt LOADED (Dark) -->
+<div class="h-[60pt] w-full bg-[#1A1D29] px-space-md flex items-center justify-between shadow-inner relative">
+<div class="absolute top-1.5 left-2 px-1 py-0.2 rounded-[4px] bg-transparent text-[#858B9C] font-label-xs text-[9px] uppercase tracking-wider font-bold">
+                AD
+              </div>
+<div class="flex items-center gap-space-sm pl-4">
+<div class="w-10 h-10 rounded-[10px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]">cloud</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-white font-bold leading-none">CloudDrive Pro</span>
+<span class="px-1 py-0.5 rounded bg-[#1E2A45] text-[#4D8FF7] font-label-xs text-[9px] font-bold">PRO</span>
+</div>
+<span class="font-body-sm text-body-sm text-[#858B9C] mt-0.5">15GB Free cloud storage</span>
+</div>
+</div>
+<button class="h-[36pt] px-4 rounded-[12px] bg-[#1A66E8] text-white font-label-md text-label-md font-semibold hover:bg-[#4D8FF7] shadow-sm flex items-center">
+                Install
+              </button>
+</div>
+<!-- DOCKED 64pt BOTTOM NAV (Dark) -->
+<div class="h-[64pt] w-full bg-[#232838] px-space-xl flex items-center justify-around">
+<div class="flex flex-col items-center gap-0.5 text-[#4D8FF7]">
+<span class="material-symbols-outlined text-[22px]">folder</span>
+<span class="font-label-xs text-[10px] font-bold">Files</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">build</span>
+<span class="font-label-xs text-[10px] font-medium">Tools</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#858B9C]">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="font-label-xs text-[10px] font-medium">Settings</span>
+</div>
+</div>
+</div>
+<!-- Skeleton State Callout Dark -->
+<div class="mt-space-sm p-space-md rounded-[16px] bg-[#232838] flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-white font-semibold">Pre-load Skeleton State (Dark Navy)</span>
+<span class="font-label-xs text-label-xs text-[#858B9C] font-mono">Zero layout jump</span>
+</div>
+<!-- Skeleton 60pt container -->
+<div class="h-[60pt] w-full bg-[#1A1D29] rounded-[12px] px-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-[10px] bg-gradient-to-r from-[#262B3A] via-[#30364A] to-[#262B3A] animate-pulse"></div>
+<div class="flex flex-col gap-2">
+<div class="w-28 h-3.5 rounded bg-gradient-to-r from-[#262B3A] via-[#30364A] to-[#262B3A] animate-pulse"></div>
+<div class="w-40 h-2.5 rounded bg-gradient-to-r from-[#262B3A] via-[#30364A] to-[#262B3A] animate-pulse"></div>
+</div>
+</div>
+<div class="w-16 h-[32pt] rounded-[12px] bg-gradient-to-r from-[#262B3A] via-[#30364A] to-[#262B3A] animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 2: NATIVE AD AS A LIST ROW (In-Feed 68pt Height)                  -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-label-xs text-label-xs flex items-center justify-center font-bold">02</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Native Ad in Document List (68pt In-Feed)</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Engineered to blend organically with standard document file tiles. Strictly preserves the exact 68pt row height, 10px icon radius, and typography scales while clearly displaying compliant Ad attribution.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-space-sm py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-semibold">Frequency: 1 Native Row per 8 Files</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+<!-- Light Mode List Feed -->
+<div class="p-space-lg rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-title-md text-title-md text-[#11141C]">Document Feed (Light)</span>
+<span class="font-label-xs text-label-xs text-primary font-bold">68pt Canonical Height</span>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Row 1: Document -->
+<div class="h-[68pt] px-space-md rounded-[16px] bg-[#F3F5FA] flex items-center justify-between">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E02B2B]/10 flex items-center justify-center text-[#E02B2B] flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-[#11141C] font-bold truncate">Practical_Part1_Workbook.pdf</span>
+<span class="font-body-sm text-body-sm text-[#8A8F9C]">4.1 MB · Modified Today, 10:42 AM</span>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full hover:bg-surface-container flex items-center justify-center text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Row 2: NATIVE AD ROW (68pt) -->
+<div class="h-[68pt] px-space-md rounded-[16px] bg-[#F3F5FA] flex items-center justify-between shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-[#1A66E8]"></div>
+<div class="flex items-center gap-space-md min-w-0 flex-1">
+<div class="w-10 h-10 rounded-[10px] bg-[#1A66E8] flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">vpn_lock</span>
+</div>
+<div class="flex flex-col min-w-0 pr-2 flex-1">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded-[6px] bg-[#E8F0FE] text-[#1A66E8] font-label-xs text-[10px] font-bold tracking-tight">Ad</span>
+<span class="font-label-md text-label-md text-[#11141C] font-bold truncate">NordVPN Ultra Shield</span>
+</div>
+<span class="font-body-sm text-body-sm text-[#8A8F9C] truncate mt-0.5">Encrypt documents on public Wi-Fi</span>
+</div>
+</div>
+<button class="h-[32pt] px-3.5 rounded-[12px] bg-[#1A66E8] text-white font-label-md text-[12px] font-semibold hover:bg-[#1554c0] flex-shrink-0">
+                Install
+              </button>
+</div>
+<!-- Row 3: Document -->
+<div class="h-[68pt] px-space-md rounded-[16px] bg-[#F3F5FA] flex items-center justify-between">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-tertiary/10 flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">article</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-[#11141C] font-bold truncate">Meeting_Notes_Quarterly_Strategy.txt</span>
+<span class="font-body-sm text-body-sm text-[#8A8F9C]">14 KB · Oct 14</span>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full hover:bg-surface-container flex items-center justify-center text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dark Navy List Feed -->
+<div class="p-space-lg rounded-lg bg-[#141722] text-white shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-title-md text-title-md text-white">Document Feed (Dark Navy)</span>
+<span class="font-label-xs text-label-xs text-[#4D8FF7] font-bold">68pt Canonical Height</span>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Row 1: Document -->
+<div class="h-[68pt] px-space-md rounded-[16px] bg-[#232838] flex items-center justify-between">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-[#E02B2B]/20 flex items-center justify-center text-[#ff6b6b] flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-white font-bold truncate">Practical_Part1_Workbook.pdf</span>
+<span class="font-body-sm text-body-sm text-[#858B9C]">4.1 MB · Modified Today, 10:42 AM</span>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full hover:bg-[#1A1D29] flex items-center justify-center text-[#858B9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Row 2: NATIVE AD ROW (Dark 68pt) -->
+<div class="h-[68pt] px-space-md rounded-[16px] bg-[#232838] flex items-center justify-between shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-[#4D8FF7]"></div>
+<div class="flex items-center gap-space-md min-w-0 flex-1">
+<div class="w-10 h-10 rounded-[10px] bg-[#1E2A45] flex items-center justify-center text-[#4D8FF7] flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">vpn_lock</span>
+</div>
+<div class="flex flex-col min-w-0 pr-2 flex-1">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 rounded-[6px] bg-[#1E2A45] text-[#4D8FF7] font-label-xs text-[10px] font-bold tracking-tight">Ad</span>
+<span class="font-label-md text-label-md text-white font-bold truncate">NordVPN Ultra Shield</span>
+</div>
+<span class="font-body-sm text-body-sm text-[#858B9C] truncate mt-0.5">Encrypt documents on public Wi-Fi</span>
+</div>
+</div>
+<button class="h-[32pt] px-3.5 rounded-[12px] bg-[#1A66E8] text-white font-label-md text-[12px] font-semibold hover:bg-[#4D8FF7] flex-shrink-0">
+                Install
+              </button>
+</div>
+<!-- Row 3: Document -->
+<div class="h-[68pt] px-space-md rounded-[16px] bg-[#232838] flex items-center justify-between">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-[10px] bg-tertiary-fixed/20 flex items-center justify-center text-tertiary-fixed-dim flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">article</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-white font-bold truncate">Meeting_Notes_Quarterly_Strategy.txt</span>
+<span class="font-body-sm text-body-sm text-[#858B9C]">14 KB · Oct 14</span>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full hover:bg-[#1A1D29] flex items-center justify-center text-[#858B9C]">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 3: NATIVE AD CARD (Between-Section Card Unit)                     -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-label-xs text-label-xs flex items-center justify-center font-bold">03</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Native Ad Card (Between-Section Modular)</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            20px radius card container positioned between recent documents and tool workflows. Features 16:9 media asset canvas, advertiser metadata, verified rating, and full-width 48pt CTA button.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-space-sm py-1 rounded bg-surface-container font-label-xs text-label-xs text-on-surface-variant font-semibold">Placement: Between Section Banding</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+<!-- Card Unit Light -->
+<div class="p-space-lg rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-[#11141C]">Light Mode Native Card</span>
+<span class="font-label-xs text-label-xs text-[#8A8F9C]">Radius: 20px · 48pt CTA</span>
+</div>
+<!-- The Ad Card -->
+<div class="rounded-[20px] bg-[#F3F5FA] p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- 16:9 Media Aspect Container -->
+<div class="w-full aspect-[16/9] rounded-[14px] overflow-hidden relative bg-[#E8F0FE] flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Modern technical isometric visual of sleek cloud servers and digital document encryption locks with glowing electric blue neon accents on a clean light architectural background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk-Lj8H0lJnDJkE63YyQmkT109P9i1m6Ac0QfOXkCx4HeeNXfuOiCv9fkXI9ZUtfA_pxJnGq25jsypCCj1P278GySrw9setYKhs5iQ8bw82B9k7ZMmDiRqNABsV6Z_q7G8VMxDNHIm8795lWNW8D8Nlp8g-xLrAlG95_QXZjERRsY0N00a1tNYdqURzbUAAQ4D2YXnlBG0GhvkkRNHCfExFPLaYobPVcFGS35yKME"/>
+<!-- Overlay Badges -->
+<div class="absolute top-3 left-3 px-2 py-0.5 rounded-[6px] bg-[#11141C]/80 backdrop-blur-md text-white font-label-xs text-[10px] uppercase font-bold tracking-wider">
+                Sponsored
+              </div>
+<div class="absolute top-3 right-3 px-2 py-0.5 rounded-[6px] bg-[#FFFFFF]/90 backdrop-blur-md text-[#11141C] font-label-xs text-[10px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-[#E02B2B]">verified</span>
+<span>Verified Partner</span>
+</div>
+</div>
+<!-- Ad Content Body -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-[10px] bg-[#1A66E8] text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">cloud_sync</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-[#11141C] font-bold leading-tight">Syncdrive Cloud Storage</span>
+<div class="flex items-center gap-1 text-[#8A8F9C] font-body-sm text-body-sm">
+<span class="font-bold text-[#11141C]">4.8</span>
+<div class="flex text-[#ffb703]">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="text-[11px]">(32k reviews)</span>
+</div>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-[6px] bg-[#E8F0FE] text-[#1A66E8] font-label-xs text-[11px] font-bold">Free 50GB</span>
+</div>
+<p class="font-body-md text-body-md text-[#424753] line-clamp-2">
+                Zero-knowledge encryption for your sensitive PDFs and docs. Automatic background sync across macOS, iOS, and Web.
+              </p>
+<!-- Full width 48pt CTA Button -->
+<button class="h-[48pt] w-full rounded-[16px] bg-[#1A66E8] text-white font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 hover:bg-[#1554c0] shadow-md transition-all">
+<span>Download Free</span>
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Unit Dark Navy -->
+<div class="p-space-lg rounded-lg bg-[#141722] text-white shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-white">Dark Mode Native Card</span>
+<span class="font-label-xs text-label-xs text-[#858B9C]">Radius: 20px · 48pt CTA</span>
+</div>
+<!-- The Ad Card Dark -->
+<div class="rounded-[20px] bg-[#232838] p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- 16:9 Media Aspect Container -->
+<div class="w-full aspect-[16/9] rounded-[14px] overflow-hidden relative bg-[#1E2A45] flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="High tech deep navy blue server visualization with glowing cyan fiber optic connections and security padlock emblem in 3D isometric rendering" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB15X_948eKTbii8qRXkVh7kohcfanLuIFppyPKUfeMC7pCET1hqpIiVJ_Ch66iUjaqS9dBtdFmFKsZxw02EullJm7rk6gh1bUMNUoCDhY2m-2Ov_WUVlCYxjGGCYpwj4f6ZVM-HczBOK0JaLio-E48BUzQNbgGs8-apgfbGbA6uQY9QWCa9VaLbEA66ZWcAVPoMcwYjTIWlYS5yaKNWIRZfYV7d_tEPUi1Y6qx--k"/>
+<!-- Overlay Badges -->
+<div class="absolute top-3 left-3 px-2 py-0.5 rounded-[6px] bg-[#1A1D29]/90 backdrop-blur-md text-white font-label-xs text-[10px] uppercase font-bold tracking-wider">
+                Sponsored
+              </div>
+<div class="absolute top-3 right-3 px-2 py-0.5 rounded-[6px] bg-[#1E2A45]/90 backdrop-blur-md text-[#4D8FF7] font-label-xs text-[10px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+<span>Verified Partner</span>
+</div>
+</div>
+<!-- Ad Content Body -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-[10px] bg-[#1E2A45] text-[#4D8FF7] flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">cloud_sync</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-white font-bold leading-tight">Syncdrive Cloud Storage</span>
+<div class="flex items-center gap-1 text-[#858B9C] font-body-sm text-body-sm">
+<span class="font-bold text-white">4.8</span>
+<div class="flex text-[#ffb703]">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="text-[11px]">(32k reviews)</span>
+</div>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-[6px] bg-[#1E2A45] text-[#4D8FF7] font-label-xs text-[11px] font-bold">Free 50GB</span>
+</div>
+<p class="font-body-md text-body-md text-[#858B9C] line-clamp-2">
+                Zero-knowledge encryption for your sensitive PDFs and docs. Automatic background sync across macOS, iOS, and Web.
+              </p>
+<!-- Full width 48pt CTA Button -->
+<button class="h-[48pt] w-full rounded-[16px] bg-[#1A66E8] text-white font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 hover:bg-[#4D8FF7] shadow-md transition-all">
+<span>Download Free</span>
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 4: INTERSTITIAL FULL-SCREEN MODAL LAYOUT                          -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-label-xs text-label-xs flex items-center justify-center font-bold">04</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Interstitial Full-Screen Modal (393 × 852 pt)</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Displaying high-impact post-task interstitial with 5-second animated circular countdown and policy trigger boundaries.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-space-sm py-1 rounded bg-error-container text-on-error-container font-label-xs text-label-xs font-bold">Strict Policy Trigger Guardrail</span>
+</div>
+</div>
+<!-- Policy Guardrail Banner -->
+<div class="p-space-md rounded-[16px] bg-primary-fixed text-on-primary-fixed flex items-start gap-space-md shadow-sm">
+<span class="material-symbols-outlined text-[24px] text-primary flex-shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-lg text-label-lg font-bold">POLICY SPEC: ADMOB UNEXPECTED LAUNCH &amp; DISRUPTION RULE</span>
+<p class="font-body-md text-body-md text-on-primary-fixed-variant">
+            Interstitial is triggered <strong>strictly after completed user-initiated export actions</strong> (e.g. "PDF Created", "Merge Finished", "Split Done") immediately following the user tapping the explicit "Done" button. It is <strong>NEVER</strong> triggered during app launch, on splash screen, mid-reading, or while navigating folders.
+          </p>
+</div>
+</div>
+<!-- Side-by-side full screen frames -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+<!-- Light Interstitial Mockup -->
+<div class="flex flex-col items-center">
+<span class="font-label-md text-label-md text-on-surface-variant mb-space-sm">Light Mode Modal (Post-Merge Trigger)</span>
+<div class="w-full max-w-[393px] h-[720px] rounded-[32px] bg-[#FFFFFF] shadow-2xl overflow-hidden flex flex-col justify-between p-space-lg relative border-4 border-surface-container-high">
+<!-- Top Controls Bar -->
+<div class="flex items-center justify-between w-full pt-2">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F3F5FA]">
+<span class="material-symbols-outlined text-[16px] text-[#8A8F9C]">info</span>
+<span class="font-label-xs text-[11px] text-[#8A8F9C] font-semibold">Ad · Sponsored</span>
+</div>
+<!-- Animated 5s Countdown Ring & Close button -->
+<div class="relative w-10 h-10 flex items-center justify-center">
+<svg class="w-10 h-10 transform -rotate-90">
+<circle cx="20" cy="20" fill="transparent" r="16" stroke="#E6E9F0" stroke-width="3"></circle>
+<circle cx="20" cy="20" fill="transparent" r="16" stroke="#1A66E8" stroke-dasharray="100" stroke-dashoffset="30" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<span class="absolute font-label-xs text-[11px] font-bold text-[#11141C]">5s</span>
+</div>
+</div>
+<!-- Creative Body Area -->
+<div class="flex flex-col gap-space-lg my-auto">
+<!-- Hero 16:9 Showcase Creative -->
+<div class="w-full aspect-[16/9] rounded-[20px] overflow-hidden shadow-md relative bg-[#E8F0FE]">
+<img class="w-full h-full object-cover" data-alt="High tech cinematic rendering of encrypted military-grade document safety vaults with layered glass shields and glowing cobalt blue neon data streams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnh24pZDWyVepS6gsXg9-xPXw7XRO4ZYkEECFEfElFP6I9qwOfPpFbNiNrlvxwCWw-WmQoy4WJC5050srdgBfFdbmU0rQOae1rZnv9Oj2ECSaql9x1rAjpFAS7dL9yXj5Smy72L-fwn1eXR2K_v4JlnTNLuxfmielL7oJjY3hW5s_DL0Z7ZxXK6LVjHTmS6Wqe544XJKmbiKIDLwr9W8CFVn0HkPcLo-_wtqIt8XA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+</div>
+<div class="flex flex-col gap-space-sm text-center items-center">
+<div class="w-14 h-14 rounded-[14px] bg-[#1A66E8] text-white flex items-center justify-center shadow-lg -mt-7 z-10">
+<span class="material-symbols-outlined text-[32px]">security</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-[#11141C] font-bold">CloudDrive Pro — Secure File Vault</h3>
+<div class="flex items-center gap-1.5 text-[#8A8F9C] font-body-sm text-body-sm">
+<span class="font-bold text-[#11141C]">4.9</span>
+<div class="flex text-[#ffb703]">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span>· Productivity Tool</span>
+</div>
+<!-- Feature Bullets -->
+<div class="w-full mt-2 flex flex-col gap-2 p-space-md rounded-[16px] bg-[#F3F5FA] text-left">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#1A66E8]">check_circle</span>
+<span class="font-label-md text-label-md text-[#11141C]">Zero-Knowledge AES-256 Encryption</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#1A66E8]">check_circle</span>
+<span class="font-label-md text-label-md text-[#11141C]">15GB Free cloud storage on sign up</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#1A66E8]">check_circle</span>
+<span class="font-label-md text-label-md text-[#11141C]">Instant Document OCR Scanner</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Full-Width 56pt Primary Button -->
+<div class="w-full flex flex-col gap-2 pb-2">
+<button class="h-[56pt] w-full rounded-[16px] bg-[#1A66E8] text-white font-label-lg text-label-lg font-bold shadow-lg hover:bg-[#1554c0] flex items-center justify-center gap-2">
+<span>Install Now</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<span class="font-body-sm text-[11px] text-[#8A8F9C] text-center">Tap to visit Google Play Store</span>
+</div>
+</div>
+</div>
+<!-- Dark Interstitial Mockup -->
+<div class="flex flex-col items-center">
+<span class="font-label-md text-label-md text-on-surface-variant mb-space-sm">Dark Navy Mode Modal (Post-Merge Trigger)</span>
+<div class="w-full max-w-[393px] h-[720px] rounded-[32px] bg-[#1A1D29] shadow-2xl overflow-hidden flex flex-col justify-between p-space-lg relative border-4 border-[#2A3042]">
+<!-- Top Controls Bar -->
+<div class="flex items-center justify-between w-full pt-2">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#232838]">
+<span class="material-symbols-outlined text-[16px] text-[#858B9C]">info</span>
+<span class="font-label-xs text-[11px] text-[#858B9C] font-semibold">Ad · Sponsored</span>
+</div>
+<!-- Animated 5s Countdown Ring & Close button -->
+<div class="relative w-10 h-10 flex items-center justify-center">
+<svg class="w-10 h-10 transform -rotate-90">
+<circle cx="20" cy="20" fill="transparent" r="16" stroke="#2A3042" stroke-width="3"></circle>
+<circle cx="20" cy="20" fill="transparent" r="16" stroke="#4D8FF7" stroke-dasharray="100" stroke-dashoffset="30" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<span class="absolute font-label-xs text-[11px] font-bold text-white">5s</span>
+</div>
+</div>
+<!-- Creative Body Area -->
+<div class="flex flex-col gap-space-lg my-auto">
+<!-- Hero 16:9 Showcase Creative -->
+<div class="w-full aspect-[16/9] rounded-[20px] overflow-hidden shadow-md relative bg-[#1E2A45]">
+<img class="w-full h-full object-cover" data-alt="Dark neon futuristic 3D rendered document vault floating in cyberspace with intense electric cyan glow and cryptographic symbols" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDovtGDion7TRjdwBmZM46r-SkKeS5m_AawYVASBlB7PN52E_LSJd88pCGuDk6leYJloJGg6GuKusc4xL5LUGAPCxuPXh-lgX-QoQBqpA6a9qJRdGRc82pKO-JDvb9tlUFuEprXq0YIrHGeymxWTV3pMsQ6Z3fdlxaoePq1xbtaCNA4nlQ5fQCYKr2oX_-P4b0m3qAHT_-da34yeeNXgPPQsxOPM9ypRUPdm-JoPWs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+</div>
+<div class="flex flex-col gap-space-sm text-center items-center">
+<div class="w-14 h-14 rounded-[14px] bg-[#4D8FF7] text-[#1A1D29] flex items-center justify-center shadow-lg -mt-7 z-10">
+<span class="material-symbols-outlined text-[32px]">security</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-white font-bold">CloudDrive Pro — Secure File Vault</h3>
+<div class="flex items-center gap-1.5 text-[#858B9C] font-body-sm text-body-sm">
+<span class="font-bold text-white">4.9</span>
+<div class="flex text-[#ffb703]">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span>· Productivity Tool</span>
+</div>
+<!-- Feature Bullets -->
+<div class="w-full mt-2 flex flex-col gap-2 p-space-md rounded-[16px] bg-[#232838] text-left">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#4D8FF7]">check_circle</span>
+<span class="font-label-md text-label-md text-white">Zero-Knowledge AES-256 Encryption</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#4D8FF7]">check_circle</span>
+<span class="font-label-md text-label-md text-white">15GB Free cloud storage on sign up</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#4D8FF7]">check_circle</span>
+<span class="font-label-md text-label-md text-white">Instant Document OCR Scanner</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Full-Width 56pt Primary Button -->
+<div class="w-full flex flex-col gap-2 pb-2">
+<button class="h-[56pt] w-full rounded-[16px] bg-[#1A66E8] text-white font-label-lg text-label-lg font-bold shadow-lg hover:bg-[#4D8FF7] flex items-center justify-center gap-2">
+<span>Install Now</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<span class="font-body-sm text-[11px] text-[#858B9C] text-center">Tap to visit Google Play Store</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 5: ARCHITECTURAL PLACEMENT MAP & COMPLIANCE MATRIX                -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-label-xs text-label-xs flex items-center justify-center font-bold">05</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Architectural Placement Map &amp; Compliance Matrix</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Complete inventory of application viewports, detailing permissible monetization formats, suppression conditions, and accidental click buffers.
+          </p>
+</div>
+</div>
+<!-- Screen Cards Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- 1. Home Screen -->
+<div class="p-space-lg rounded-[20px] bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">1. Home Screen (Files)</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-bold">Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Primary entry viewport showing recent documents and device folders.</p>
+<div class="mt-2 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Docked 60pt Banner</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold text-[11px]">ALLOWED (YES)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Native Row Feed</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold text-[11px]">1 PER 8 FILES</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Interstitial Modal</span>
+<span class="px-2 py-0.5 rounded bg-error-container text-error font-bold text-[11px]">STRICTLY NO</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low p-space-sm rounded-DEFAULT text-on-surface-variant font-label-xs text-label-xs">
+            16pt gap mandatory between FAB and banner.
+          </div>
+</div>
+<!-- 2. Search View -->
+<div class="p-space-lg rounded-[20px] bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">2. Search View</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-xs text-label-xs font-bold">Dynamic</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Search bar input with active virtual software keyboard.</p>
+<div class="mt-2 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Docked 60pt Banner</span>
+<span class="px-2 py-0.5 rounded bg-error-container text-error font-bold text-[11px]">SUPPRESSED (NO)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Native Row Feed</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold text-[11px]">YES (6th RESULT)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Interstitial Modal</span>
+<span class="px-2 py-0.5 rounded bg-error-container text-error font-bold text-[11px]">STRICTLY NO</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low p-space-sm rounded-DEFAULT text-on-surface-variant font-label-xs text-label-xs">
+            Banner hidden to prevent soft-keyboard overlapping clicks.
+          </div>
+</div>
+<!-- 3. Document / PDF Reader (CRITICAL POLICY) -->
+<div class="p-space-lg rounded-[20px] bg-error-container/20 shadow-sm flex flex-col justify-between border-2 border-error/30">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-error font-bold">3. PDF Reader Canvas</span>
+<span class="px-2 py-0.5 rounded-full bg-error text-white font-label-xs text-label-xs font-bold">ZERO ADS</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">User is reading, highlighting, or annotating multi-page documents.</p>
+<div class="mt-2 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Docked 60pt Banner</span>
+<span class="px-2 py-0.5 rounded bg-error text-white font-bold text-[11px]">PROHIBITED (0%)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Native Overlay</span>
+<span class="px-2 py-0.5 rounded bg-error text-white font-bold text-[11px]">PROHIBITED (0%)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Interstitial Modal</span>
+<span class="px-2 py-0.5 rounded bg-error text-white font-bold text-[11px]">PROHIBITED (0%)</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-error/10 p-space-sm rounded-DEFAULT text-error font-label-xs text-label-xs font-bold">
+            Zero Reader Intrusion Policy: 100% Ad-Free reading canvas.
+          </div>
+</div>
+<!-- 4. Tools Tab -->
+<div class="p-space-lg rounded-[20px] bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">4. Tools Tab Workspace</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-bold">Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Merge PDF, Compress, Split, Convert to Word, Watermark.</p>
+<div class="mt-2 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Docked 60pt Banner</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold text-[11px]">ALLOWED (YES)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Native Ad Card</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold text-[11px]">BETWEEN TOOLS</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Interstitial Modal</span>
+<span class="px-2 py-0.5 rounded bg-error-container text-error font-bold text-[11px]">STRICTLY NO</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low p-space-sm rounded-DEFAULT text-on-surface-variant font-label-xs text-label-xs">
+            Card placed cleanly between "Quick Tools" and "Utilities".
+          </div>
+</div>
+<!-- 5. Merge / Split Tool Flow -->
+<div class="p-space-lg rounded-[20px] bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">5. Merge / Split Export Flow</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-xs text-label-xs font-bold">Post-Action</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Step 1: File selection -&gt; Step 2: Processing -&gt; Step 3: Success Sheet.</p>
+<div class="mt-2 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Active Processing Dialog</span>
+<span class="px-2 py-0.5 rounded bg-error-container text-error font-bold text-[11px]">NO ADS</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Result Confirmation</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-bold text-[11px]">CLEAN DIALOG</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">On Tapping "Done"</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold text-[11px]">INTERSTITIAL (YES)</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low p-space-sm rounded-DEFAULT text-on-surface-variant font-label-xs text-label-xs">
+            Frequency capped at max 1 interstitial per 3 successful exports.
+          </div>
+</div>
+<!-- 6. Settings & Profile -->
+<div class="p-space-lg rounded-[20px] bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">6. Settings &amp; System</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-bold">Standard</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">App preferences, storage analytics, and theme switcher.</p>
+<div class="mt-2 flex flex-col gap-2">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Docked 60pt Banner</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-bold text-[11px]">ALLOWED (YES)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Native Row Feed</span>
+<span class="px-2 py-0.5 rounded bg-error-container text-error font-bold text-[11px]">NO (CLEAN LIST)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface font-medium">Interstitial Modal</span>
+<span class="px-2 py-0.5 rounded bg-error-container text-error font-bold text-[11px]">STRICTLY NO</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low p-space-sm rounded-DEFAULT text-on-surface-variant font-label-xs text-label-xs">
+            Standard docked banner retained without disruptive overlays.
+          </div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 6: AD-FAILED / COLLAPSE STATE (Smooth Zero-Height)                -->
+<!-- ========================================================================= -->
+<section class="flex flex-col gap-space-lg pb-16">
+<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-label-xs text-label-xs flex items-center justify-center font-bold">06</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Ad-Failed / NO_FILL Zero-Height Graceful Collapse</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Engineered response for network drops, timeouts, or AdMob inventory exhaustion. Eliminates jarring white/black empty blocks and sudden layout jump pops.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-space-sm py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-semibold">Transition: cubic-bezier(0.2, 0, 0, 1) · 240ms</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+<!-- Before / Loading State Simulation -->
+<div class="p-space-lg rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">Attempting Ad Fill (Initial Request)</span>
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-xs text-label-xs">Height: 60pt (Pre-allocated)</span>
+</div>
+<!-- Phone frame loaded with placeholder -->
+<div class="w-full bg-[#FFFFFF] rounded-[20px] shadow-sm p-space-md flex flex-col gap-2">
+<div class="p-3 rounded-[12px] bg-[#F3F5FA] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-[#1A66E8]">description</span>
+<span class="font-label-md text-label-md text-[#11141C]">Contract_Agreement_Signed.pdf</span>
+</div>
+<span class="font-body-sm text-body-sm text-[#8A8F9C]">1.2 MB</span>
+</div>
+<!-- Ad Container Pre-allocated (Shimmering) -->
+<div class="h-[60pt] w-full rounded-[14px] bg-[#E8F0FE]/50 flex items-center justify-center relative overflow-hidden">
+<div class="flex items-center gap-2 text-[#1A66E8]">
+<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span>
+<span class="font-label-xs text-label-xs font-semibold">Requesting AdMob network token...</span>
+</div>
+</div>
+<!-- Docked Navigation Bar -->
+<div class="h-[54pt] w-full bg-[#F3F5FA] rounded-[14px] flex items-center justify-around text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[20px] text-[#1A66E8]">folder</span>
+<span class="material-symbols-outlined text-[20px]">build</span>
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Slot holds exactly 60pt to avoid initial pop during normal network conditions.</span>
+</div>
+<!-- Graceful Collapse State Simulation -->
+<div class="p-space-lg rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">Result: NO_FILL Received (Smooth Zero-Collapse)</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-primary font-label-xs text-label-xs font-bold">Height: 0pt · Smooth Transition</span>
+</div>
+<!-- Phone frame showing seamless collapsed state -->
+<div class="w-full bg-[#FFFFFF] rounded-[20px] shadow-sm p-space-md flex flex-col gap-2">
+<div class="p-3 rounded-[12px] bg-[#F3F5FA] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-[#1A66E8]">description</span>
+<span class="font-label-md text-label-md text-[#11141C]">Contract_Agreement_Signed.pdf</span>
+</div>
+<span class="font-body-sm text-body-sm text-[#8A8F9C]">1.2 MB</span>
+</div>
+<div class="p-3 rounded-[12px] bg-[#F3F5FA] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-[#E02B2B]">picture_as_pdf</span>
+<span class="font-label-md text-label-md text-[#11141C]">Annual_Tax_Documentation_2023.pdf</span>
+</div>
+<span class="font-body-sm text-body-sm text-[#8A8F9C]">3.8 MB</span>
+</div>
+<!-- ZERO HEIGHT COLLAPSED MARKER -->
+<div class="h-0 w-full overflow-hidden opacity-0 m-0 transition-all duration-300">
+<!-- Collapsed slot -->
+</div>
+<!-- Docked Navigation Bar touching content seamlessly -->
+<div class="h-[54pt] w-full bg-[#F3F5FA] rounded-[14px] flex items-center justify-around text-[#8A8F9C]">
+<span class="material-symbols-outlined text-[20px] text-[#1A66E8]">folder</span>
+<span class="material-symbols-outlined text-[20px]">build</span>
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-primary font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Policy Spec Verified: No blank voids or phantom ad containers displayed to users.</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div></main></div></body></html>

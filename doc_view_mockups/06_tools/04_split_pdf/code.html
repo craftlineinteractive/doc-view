@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary":"#ffffff","surface":"#faf8ff","outline-variant":"#c2c6d5","primary":"#0059ba","error":"#ba1a1a","surface-container":"#ecedf9","surface-tint":"#005bbf","surface-container-highest":"#e0e2ee","secondary":"#0054cb","on-surface-variant":"#424753","on-error":"#ffffff","surface-dim":"#d8d9e5","on-tertiary-container":"#fdfcff","surface-container-high":"#e6e7f3","secondary-container":"#276def","on-primary":"#ffffff","on-tertiary-fixed":"#141c26","inverse-on-surface":"#eff0fc","surface-container-low":"#f2f3ff","on-primary-fixed":"#001a40","error-container":"#ffdad6","secondary-fixed":"#dae2ff","inverse-primary":"#acc7ff","surface-container-lowest":"#ffffff","tertiary-fixed-dim":"#bfc7d4","primary-fixed":"#d7e2ff","primary-container":"#1f71e0","background":"#faf8ff","tertiary":"#545d68","on-tertiary-fixed-variant":"#3f4752","on-primary-container":"#fefcff","tertiary-fixed":"#dbe3f1","on-secondary-fixed":"#001847","outline":"#727785","on-background":"#181b24","primary-fixed-dim":"#acc7ff","on-secondary-container":"#fefcff","secondary-fixed-dim":"#b1c5ff","surface-variant":"#e0e2ee","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#00409f","tertiary-container":"#6d7581","on-surface":"#181b24","inverse-surface":"#2d3039","on-primary-fixed-variant":"#004492","on-error-container":"#93000a","surface-bright":"#faf8ff"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"space-md":"0.75rem","space-sm":"0.5rem","space-lg":"1rem","space-xs":"0.25rem","gutter":"0.75rem","space-xl":"1.5rem","margin":"1.25rem"},"fontFamily":{"body-lg":["Inter"],"label-md":["Inter"],"headline-xl":["Space Grotesk"],"title-md":["Inter"],"body-md":["Inter"],"label-lg":["Inter"],"headline-sm":["Space Grotesk"],"body-sm":["Inter"],"label-xs":["Inter"],"headline-lg":["Space Grotesk"]},"fontSize":{"body-lg":["15px",{"lineHeight":"22px","fontWeight":"500"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"600"}],"headline-xl":["32px",{"lineHeight":"38px","fontWeight":"700"}],"title-md":["16px",{"lineHeight":"22px","fontWeight":"700"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"label-lg":["15px",{"lineHeight":"20px","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-xs":["11px",{"lineHeight":"14px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"30px","fontWeight":"700"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between py-space-xl px-space-lg"><div class="flex flex-col gap-space-lg"><div class="flex items-center gap-space-sm px-space-sm"><div class="w-9 h-9 rounded-DEFAULT bg-primary flex items-center justify-center text-on-primary font-headline-sm text-headline-sm">DV</div><div><div class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Doc View</div><div class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Workbench v2.4</div></div></div><nav class="flex flex-col gap-space-xs mt-space-md" data-active-classes="bg-primary-container text-on-primary-container font-label-md text-label-md"><a aria-current="page" class="flex items-center gap-space-md px-space-md py-space-sm rounded-DEFAULT transition-all bg-primary-container text-on-primary-container font-label-md text-label-md" data-path="stage-artboard" href="#"><span class="material-symbols-outlined">devices</span><span class="font-label-md text-label-md">Stage Artboards</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="runtime-specs" href="#"><span class="material-symbols-outlined">speed</span><span class="font-label-md text-label-md">Engine Runtime</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="token-compliance" href="#"><span class="material-symbols-outlined">palette</span><span class="font-label-md text-label-md">Token Matrix</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="compilation-audit" href="#"><span class="material-symbols-outlined">terminal</span><span class="font-label-md text-label-md">Offline Pipeline</span></a></nav></div><div class="flex flex-col gap-space-md px-space-sm"><div class="p-space-md bg-surface-container rounded-DEFAULT flex flex-col gap-space-xs"><div class="font-label-xs text-label-xs text-on-surface-variant uppercase">Target Device Scale</div><div class="font-label-md text-label-md text-on-surface">393 × 852 pt @3x Retina</div><div class="font-body-sm text-body-sm text-tertiary">Strict Clean Sandbox</div></div><div class="flex items-center justify-between pt-space-sm"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface">Lead Architect</span><span class="font-label-xs text-label-xs text-on-surface-variant">Engine Team</span></div></div><span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-xl"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm text-on-surface">Suite Presentation Stage</span><span class="inline-flex items-center px-space-sm py-space-xs rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs font-semibold">4K ARTBOARD READY</span></div><div class="flex items-center gap-space-lg"><nav class="hidden xl:flex items-center gap-space-lg" data-active-classes="text-primary font-label-md text-label-md"><a aria-current="page" class="transition-colors text-primary font-label-md text-label-md" data-path="stage-artboard" href="#">Viewports</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="runtime-specs" href="#">Telemetry</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="compilation-audit" href="#">Build Log</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="token-compliance" href="#">Inspect</a></nav><div class="flex items-center gap-space-sm"><button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">zoom_in</span></button><button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">fit_screen</span></button><button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">tune</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Artboard Studio Stage Bar -->
+<section class="w-full bg-surface-container-low px-space-xl py-space-lg shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary text-on-primary font-label-xs text-label-xs uppercase tracking-wider">PRODUCTION CANVAS</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant font-mono">SPEC: 393 × 852 PT @ 3X (iOS RETINA STRICT)</span>
+<span class="font-label-xs text-label-xs text-tertiary">| NO BOTTOM NAV | ZERO AD INTERSTITIALS</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Doc View Split PDF Suite Execution Pipeline</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Zero-Spill In-Memory Range Parser · 100% Native Sandbox · Micro-Threaded Compilation</p>
+</div>
+<!-- Telemetry Pills -->
+<div class="flex flex-wrap items-center gap-space-sm font-mono text-label-xs">
+<div class="px-space-md py-space-xs bg-surface-container rounded-DEFAULT flex items-center gap-space-xs text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span>HEAP: 14.8 MB</span>
+</div>
+<div class="px-space-md py-space-xs bg-surface-container rounded-DEFAULT flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-primary">memory</span>
+<span>V8 WASM V2</span>
+</div>
+<div class="px-space-md py-space-xs bg-surface-container rounded-DEFAULT flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-primary">bolt</span>
+<span>PARSE LATENCY &lt; 4ms</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Viewport Grid Workspace -->
+<div class="w-full px-space-xl py-space-xl overflow-x-auto">
+<div class="inline-flex items-start gap-space-xl min-w-max pb-space-lg">
+<!-- ========================================== -->
+<!-- FRAME 1: Picker (Single Select) - Light    -->
+<!-- ========================================== -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs font-mono text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-bold text-on-surface">FRAME 01</span>
+<span>Picker (Single Select)</span>
+</div>
+<span class="text-tertiary">LIGHT #FFFFFF</span>
+</div>
+<!-- Phone Shell Container (393x852 pt) -->
+<div class="relative w-[393px] h-[852px] bg-white rounded-[44px] shadow-2xl flex flex-col justify-between overflow-hidden select-none">
+<!-- Ambient subtle top gradient -->
+<div class="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#E9F2FF] to-white pointer-events-none"></div>
+<!-- Dynamic Island Notch Mock -->
+<div class="relative z-10 w-full pt-3 px-6 flex justify-between items-center text-xs font-semibold text-[#11141C]">
+<span>9:41</span>
+<div class="w-28 h-7 bg-black rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<!-- Frame 1 App Bar -->
+<header class="relative z-10 px-5 pt-3 pb-2 flex items-center justify-between">
+<button aria-label="Back" class="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-[#F3F5FA] transition-colors">
+<span class="material-symbols-outlined text-[#11141C] text-2xl font-bold">arrow_back</span>
+</button>
+<h2 class="font-title-md text-title-md text-[#11141C] tracking-tight">Select PDF to split</h2>
+<button aria-label="Search files" class="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-[#F3F5FA] transition-colors">
+<span class="material-symbols-outlined text-[#11141C] text-2xl">search</span>
+</button>
+</header>
+<!-- Search Filter Subhead -->
+<div class="relative z-10 px-5 py-1 flex items-center justify-between font-label-xs text-label-xs text-[#8A8F9C]">
+<span class="uppercase font-semibold tracking-wider">ALL LOCAL DOCUMENTS (4)</span>
+<span class="font-medium">SORT BY DATE</span>
+</div>
+<!-- Document List Viewport (Scrollable) -->
+<div class="relative z-10 flex-1 px-5 py-2 flex flex-col gap-3 overflow-y-auto">
+<!-- Item 1: Selected File -->
+<div class="p-3.5 bg-[#F3F5FA] rounded-2xl flex items-center justify-between shadow-sm cursor-pointer transition-all">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Page Thumbnail with PDF Red Tag -->
+<div class="relative w-12 h-14 bg-white rounded-[10px] shadow-sm flex flex-col items-center justify-center overflow-hidden shrink-0">
+<div class="w-8 h-1 bg-[#E02B2B] rounded-full mt-1 mb-1"></div>
+<div class="w-7 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-6 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-7 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="absolute bottom-0 inset-x-0 bg-[#E02B2B] text-white font-label-xs text-[9px] py-0.5 text-center font-bold">PDF</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-[#11141C] truncate leading-tight">Practical_1_to_13.pdf</span>
+<span class="font-body-sm text-body-sm text-[#8A8F9C] mt-0.5">120 pages · 4.2 MB</span>
+<span class="font-label-xs text-[10px] text-[#1A66E8] font-semibold mt-0.5">Scanned Lecture Suite</span>
+</div>
+</div>
+<!-- Radio Button Selected -->
+<div class="w-6 h-6 rounded-full bg-[#1A66E8] flex items-center justify-center shrink-0">
+<div class="w-2.5 h-2.5 rounded-full bg-white"></div>
+</div>
+</div>
+<!-- Item 2: Unselected -->
+<div class="p-3.5 bg-[#F3F5FA] rounded-2xl flex items-center justify-between shadow-sm cursor-pointer hover:bg-[#EAEFF7] transition-all">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative w-12 h-14 bg-white rounded-[10px] shadow-sm flex flex-col items-center justify-center overflow-hidden shrink-0">
+<div class="w-8 h-1 bg-[#E02B2B] rounded-full mt-1 mb-1"></div>
+<div class="w-7 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-7 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-5 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="absolute bottom-0 inset-x-0 bg-[#E02B2B] text-white font-label-xs text-[9px] py-0.5 text-center font-bold">PDF</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-[#11141C] truncate leading-tight">Q3_Audited_Statement.pdf</span>
+<span class="font-body-sm text-body-sm text-[#8A8F9C] mt-0.5">48 pages · 1.8 MB</span>
+<span class="font-label-xs text-[10px] text-[#8A8F9C] mt-0.5">Yesterday, 14:20</span>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-white shadow-inner shrink-0"></div>
+</div>
+<!-- Item 3: Unselected -->
+<div class="p-3.5 bg-[#F3F5FA] rounded-2xl flex items-center justify-between shadow-sm cursor-pointer hover:bg-[#EAEFF7] transition-all">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative w-12 h-14 bg-white rounded-[10px] shadow-sm flex flex-col items-center justify-center overflow-hidden shrink-0">
+<div class="w-8 h-1 bg-[#E02B2B] rounded-full mt-1 mb-1"></div>
+<div class="w-7 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-6 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-7 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="absolute bottom-0 inset-x-0 bg-[#E02B2B] text-white font-label-xs text-[9px] py-0.5 text-center font-bold">PDF</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-[#11141C] truncate leading-tight">Architecture_Whitepaper_v4.pdf</span>
+<span class="font-body-sm text-body-sm text-[#8A8F9C] mt-0.5">86 pages · 9.4 MB</span>
+<span class="font-label-xs text-[10px] text-[#8A8F9C] mt-0.5">Oct 24, 2024</span>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-white shadow-inner shrink-0"></div>
+</div>
+<!-- Item 4: Unselected -->
+<div class="p-3.5 bg-[#F3F5FA] rounded-2xl flex items-center justify-between shadow-sm cursor-pointer hover:bg-[#EAEFF7] transition-all">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative w-12 h-14 bg-white rounded-[10px] shadow-sm flex flex-col items-center justify-center overflow-hidden shrink-0">
+<div class="w-8 h-1 bg-[#E02B2B] rounded-full mt-1 mb-1"></div>
+<div class="w-6 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-7 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-5 h-0.5 bg-[#E6E9F0] my-0.5"></div>
+<div class="absolute bottom-0 inset-x-0 bg-[#E02B2B] text-white font-label-xs text-[9px] py-0.5 text-center font-bold">PDF</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-[#11141C] truncate leading-tight">BioMech_Textbook_Chapter2.pdf</span>
+<span class="font-body-sm text-body-sm text-[#8A8F9C] mt-0.5">32 pages · 3.1 MB</span>
+<span class="font-label-xs text-[10px] text-[#8A8F9C] mt-0.5">Oct 19, 2024</span>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-white shadow-inner shrink-0"></div>
+</div>
+</div>
+<!-- Sticky Bottom Dock Bar -->
+<footer class="relative z-20 px-5 pt-3 pb-7 bg-white shadow-[0_-4px_24px_rgba(17,20,28,0.06)] flex flex-col gap-3">
+<div class="flex items-center justify-between px-1 font-label-md text-label-md">
+<span class="text-[#11141C] font-semibold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#1A66E8]"></span>
+                1 PDF selected
+              </span>
+<span class="text-[#8A8F9C]">120 pages active</span>
+</div>
+<!-- Primary 56 tall button (radius 16px) -->
+<button class="w-full h-14 bg-[#1A66E8] text-white font-title-md text-title-md rounded-2xl flex items-center justify-center gap-2 shadow-md hover:bg-[#1557c6] active:scale-[0.99] transition-all">
+<span>Next</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</footer>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- FRAME 2: Split Screen - Light              -->
+<!-- ========================================== -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs font-mono text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-[#1A66E8]"></span>
+<span class="font-bold text-on-surface">FRAME 02</span>
+<span>Split Screen (Config)</span>
+</div>
+<span class="text-tertiary">PARSED LIVE</span>
+</div>
+<!-- Phone Shell Container (393x852 pt) -->
+<div class="relative w-[393px] h-[852px] bg-white rounded-[44px] shadow-2xl flex flex-col justify-between overflow-hidden select-none">
+<div class="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#E9F2FF] to-white pointer-events-none"></div>
+<!-- Top Status Bar -->
+<div class="relative z-10 w-full pt-3 px-6 flex justify-between items-center text-xs font-semibold text-[#11141C]">
+<span>9:41</span>
+<div class="w-28 h-7 bg-black rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<!-- App Bar -->
+<header class="relative z-10 px-5 pt-3 pb-2 flex items-center justify-between">
+<button aria-label="Back" class="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-[#F3F5FA] transition-colors">
+<span class="material-symbols-outlined text-[#11141C] text-2xl font-bold">arrow_back</span>
+</button>
+<h2 class="font-title-md text-title-md text-[#11141C] tracking-tight">Split PDF</h2>
+<button class="w-12 h-12 flex items-center justify-center text-[#1A66E8] font-label-md text-label-md hover:bg-[#E8F0FE] rounded-2xl transition-colors">
+              Reset
+            </button>
+</header>
+<!-- Core Workspace Body -->
+<div class="relative z-10 flex-1 px-5 py-2 flex flex-col gap-4 overflow-y-auto">
+<!-- Large Document Preview Card (Tile radius 20px) -->
+<div class="p-4 bg-[#F3F5FA] rounded-2xl flex items-center gap-4 shadow-sm">
+<div class="relative w-20 h-24 bg-white rounded-[10px] shadow-sm flex flex-col items-center justify-center overflow-hidden shrink-0">
+<div class="w-14 h-1.5 bg-[#E02B2B] rounded-full mb-1.5"></div>
+<div class="w-12 h-1 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-14 h-1 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-10 h-1 bg-[#E6E9F0] my-0.5"></div>
+<div class="w-12 h-1 bg-[#E6E9F0] my-0.5"></div>
+<div class="absolute bottom-0 inset-x-0 bg-[#E02B2B] text-white font-label-xs text-[10px] py-1 text-center font-bold">PDF</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-[#11141C] truncate">Practical_1_to_13.pdf</span>
+<span class="font-body-md text-body-md text-[#8A8F9C] mt-1">120 pages · 4.2 MB</span>
+<div class="inline-flex items-center gap-1.5 mt-2 text-[#1A66E8] font-label-xs text-label-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>Validated Catalog Buffer</span>
+</div>
+</div>
+</div>
+<!-- Page Ranges Input Section -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-[13px] text-[#8A94AE] font-semibold tracking-wider uppercase">PAGE RANGES</label>
+<span class="font-label-xs text-label-xs text-[#8A8F9C]">Syntax: 1-3, 5, 8-10</span>
+</div>
+<!-- Input Box (52 tall, radius 16px) -->
+<div class="h-[52px] bg-[#F3F5FA] rounded-2xl px-4 flex items-center justify-between shadow-inner">
+<input aria-label="Page ranges" class="w-full bg-transparent font-title-md text-title-md text-[#11141C] focus:outline-none" type="text" value="1-3, 5, 8-10"/>
+<button aria-label="Clear or edit" class="w-8 h-8 rounded-full flex items-center justify-center text-[#8A8F9C] hover:text-[#11141C] hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+<p class="font-body-sm text-[12px] text-[#8A8F9C] font-medium px-1">
+                Each range becomes a separate PDF file instantly.
+              </p>
+</div>
+<!-- Live Parsed Chips Row -->
+<div class="flex flex-col gap-2">
+<span class="font-label-xs text-label-xs text-[#8A8F9C] uppercase font-semibold">GENERATED ARTIFACTS (3)</span>
+<div class="flex flex-wrap gap-2">
+<!-- Chip 1 -->
+<div class="px-3 py-1.5 bg-[#E8F0FE] text-[#1A66E8] rounded-[10px] flex items-center gap-2 font-label-md text-label-md shadow-sm">
+<span class="font-semibold">Pages 1–3</span>
+<span class="px-1.5 py-0.2 bg-white text-[#1A66E8] text-[10px] font-bold rounded-full">3 pgs</span>
+</div>
+<!-- Chip 2 -->
+<div class="px-3 py-1.5 bg-[#E8F0FE] text-[#1A66E8] rounded-[10px] flex items-center gap-2 font-label-md text-label-md shadow-sm">
+<span class="font-semibold">Page 5</span>
+<span class="px-1.5 py-0.2 bg-white text-[#1A66E8] text-[10px] font-bold rounded-full">1 pg</span>
+</div>
+<!-- Chip 3 -->
+<div class="px-3 py-1.5 bg-[#E8F0FE] text-[#1A66E8] rounded-[10px] flex items-center gap-2 font-label-md text-label-md shadow-sm">
+<span class="font-semibold">Pages 8–10</span>
+<span class="px-1.5 py-0.2 bg-white text-[#1A66E8] text-[10px] font-bold rounded-full">3 pgs</span>
+</div>
+</div>
+</div>
+<!-- Quick Shortcut Chips -->
+<div class="flex flex-col gap-2 pt-1">
+<span class="font-label-xs text-label-xs text-[#8A8F9C] uppercase font-semibold">QUICK SELECT MACROS</span>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-2 bg-[#F3F5FA] text-[#11141C] text-label-md font-medium rounded-xl hover:bg-[#EAEFF7] transition-all">All pages</button>
+<button class="px-3 py-2 bg-[#F3F5FA] text-[#11141C] text-label-md font-medium rounded-xl hover:bg-[#EAEFF7] transition-all">Odd pages</button>
+<button class="px-3 py-2 bg-[#F3F5FA] text-[#11141C] text-label-md font-medium rounded-xl hover:bg-[#EAEFF7] transition-all">Even pages</button>
+<button class="px-3 py-2 bg-[#F3F5FA] text-[#11141C] text-label-md font-medium rounded-xl hover:bg-[#EAEFF7] transition-all">Every 5 pages</button>
+</div>
+</div>
+<!-- Output Summary Tile (radius 20px) -->
+<div class="p-3.5 bg-[#F1F3F8] rounded-2xl flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[#1A66E8] text-[20px]">layers</span>
+<span class="font-label-md text-label-md text-[#11141C]">Output: 3 files · 7 pages extracted</span>
+</div>
+<span class="font-label-xs text-label-xs text-[#8A8F9C] font-mono">EST: 280 KB</span>
+</div>
+</div>
+<!-- Sticky Docked Action Button -->
+<footer class="relative z-20 px-5 pt-3 pb-7 bg-white shadow-[0_-4px_24px_rgba(17,20,28,0.06)]">
+<button class="w-full h-14 bg-[#1A66E8] text-white font-title-md text-title-md rounded-2xl flex items-center justify-center gap-2 shadow-md hover:bg-[#1557c6] active:scale-[0.99] transition-all">
+<span class="material-symbols-outlined text-[20px]">call_split</span>
+<span>Split into 3 PDFs</span>
+</button>
+</footer>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- FRAME 3: Error State - Dark Mode (#1A1D29) -->
+<!-- ========================================== -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs font-mono text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-[#E5484D]"></span>
+<span class="font-bold text-on-surface">FRAME 03</span>
+<span>Error State</span>
+</div>
+<span class="text-tertiary">DARK NAVY #1A1D29</span>
+</div>
+<!-- Phone Shell Container (393x852 pt) Dark Navy -->
+<div class="relative w-[393px] h-[852px] bg-[#1A1D29] rounded-[44px] shadow-2xl flex flex-col justify-between overflow-hidden select-none">
+<!-- Top Status Bar Dark -->
+<div class="relative z-10 w-full pt-3 px-6 flex justify-between items-center text-xs font-semibold text-white">
+<span>9:41</span>
+<div class="w-28 h-7 bg-black rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<!-- App Bar Dark -->
+<header class="relative z-10 px-5 pt-3 pb-2 flex items-center justify-between">
+<button aria-label="Back" class="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-[#232838] transition-colors">
+<span class="material-symbols-outlined text-white text-2xl font-bold">arrow_back</span>
+</button>
+<h2 class="font-title-md text-title-md text-white tracking-tight">Split PDF</h2>
+<button class="w-12 h-12 flex items-center justify-center text-[#4D8FF7] font-label-md text-label-md hover:bg-[#1E2A45] rounded-2xl transition-colors">
+              Reset
+            </button>
+</header>
+<!-- Core Workspace Dark Body -->
+<div class="relative z-10 flex-1 px-5 py-2 flex flex-col gap-4 overflow-y-auto">
+<!-- Large Document Card (Dark #232838) -->
+<div class="p-4 bg-[#232838] rounded-2xl flex items-center gap-4 shadow-sm">
+<div class="relative w-20 h-24 bg-[#141722] rounded-[10px] shadow-sm flex flex-col items-center justify-center overflow-hidden shrink-0">
+<div class="w-14 h-1.5 bg-[#E02B2B] rounded-full mb-1.5"></div>
+<div class="w-12 h-1 bg-[#2A3042] my-0.5"></div>
+<div class="w-14 h-1 bg-[#2A3042] my-0.5"></div>
+<div class="w-10 h-1 bg-[#2A3042] my-0.5"></div>
+<div class="w-12 h-1 bg-[#2A3042] my-0.5"></div>
+<div class="absolute bottom-0 inset-x-0 bg-[#E02B2B] text-white font-label-xs text-[10px] py-1 text-center font-bold">PDF</div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-white truncate">Practical_1_to_13.pdf</span>
+<span class="font-body-md text-body-md text-[#858B9C] mt-1">120 pages · 4.2 MB</span>
+<div class="inline-flex items-center gap-1.5 mt-2 text-[#4D8FF7] font-label-xs text-label-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">task_alt</span>
+<span>Parser Standby</span>
+</div>
+</div>
+</div>
+<!-- Page Ranges Input with Error State -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-[13px] text-[#858B9C] font-semibold tracking-wider uppercase">PAGE RANGES</label>
+<span class="font-label-xs text-label-xs text-[#E5484D] font-mono">PARSER SYNTAX ERROR</span>
+</div>
+<!-- Input Box with Error Red Highlighting and Tint -->
+<div class="h-[52px] bg-[#2d1b22] rounded-2xl px-4 flex items-center justify-between shadow-inner">
+<input aria-label="Page ranges invalid" class="w-full bg-transparent font-title-md text-title-md text-white focus:outline-none" type="text" value="1-3, 5-2, 8-10"/>
+<button aria-label="Clear range" class="w-8 h-8 rounded-full flex items-center justify-center text-[#E5484D] hover:bg-[#3d1f27] transition-colors">
+<span class="material-symbols-outlined text-[18px]">error</span>
+</button>
+</div>
+<!-- Inline Error Box Helper -->
+<div class="p-3 bg-[#3d181e] rounded-xl flex items-center gap-2.5 shadow-sm">
+<span class="material-symbols-outlined text-[#E5484D] text-[20px] shrink-0">warning</span>
+<span class="font-body-md text-body-md text-[#E5484D] font-semibold">Range 5-2 is reversed. Start page must be smaller than end page.</span>
+</div>
+</div>
+<!-- Chips Hidden Notification / State Message -->
+<div class="p-4 bg-[#141722] rounded-2xl flex flex-col items-center justify-center gap-2 text-center my-auto">
+<span class="material-symbols-outlined text-[#858B9C] text-[28px]">rule</span>
+<span class="font-title-md text-title-md text-white">Live Chips Suspended</span>
+<span class="font-body-sm text-body-sm text-[#858B9C]">Resolve the reversed index interval above to reconstruct extraction pipeline.</span>
+</div>
+<!-- Dark Disabled Summary -->
+<div class="p-3.5 bg-[#141722] rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-2 text-[#858B9C]">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span class="font-label-md text-label-md">Output pending valid ranges</span>
+</div>
+<span class="font-label-xs text-label-xs text-[#858B9C] font-mono">0 FILES</span>
+</div>
+</div>
+<!-- Sticky Docked Disabled Action Button -->
+<footer class="relative z-20 px-5 pt-3 pb-7 bg-[#1A1D29] shadow-[0_-4px_24px_rgba(0,0,0,0.45)]">
+<button class="w-full h-14 bg-[#262B3A] text-[#858B9C] font-title-md text-title-md rounded-2xl flex items-center justify-center gap-2 cursor-not-allowed select-none" disabled="">
+<span class="material-symbols-outlined text-[20px]">call_split</span>
+<span>Split into PDFs</span>
+</button>
+</footer>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- FRAME 4: Shimmer Skeleton - Light          -->
+<!-- ========================================== -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs font-mono text-label-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-bold text-on-surface">FRAME 04</span>
+<span>Shimmer Skeleton</span>
+</div>
+<span class="text-tertiary">INDEX CACHING</span>
+</div>
+<!-- Phone Shell Container (393x852 pt) Skeleton -->
+<div class="relative w-[393px] h-[852px] bg-white rounded-[44px] shadow-2xl flex flex-col justify-between overflow-hidden select-none">
+<!-- Top Status Bar -->
+<div class="relative z-10 w-full pt-3 px-6 flex justify-between items-center text-xs font-semibold text-[#11141C]">
+<span>9:41</span>
+<div class="w-28 h-7 bg-black rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5">
+<div class="w-4 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-4 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-6 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+</div>
+<!-- App Bar Skeleton -->
+<header class="relative z-10 px-5 pt-3 pb-2 flex items-center justify-between">
+<div class="w-10 h-10 bg-[#E9EDF5] rounded-2xl animate-pulse"></div>
+<div class="w-32 h-6 bg-[#E9EDF5] rounded-lg animate-pulse"></div>
+<div class="w-12 h-6 bg-[#E9EDF5] rounded-lg animate-pulse"></div>
+</header>
+<!-- Core Skeleton Body -->
+<div class="relative z-10 flex-1 px-5 py-2 flex flex-col gap-5 overflow-y-auto">
+<!-- Document Card Skeleton -->
+<div class="p-4 bg-[#F5F7FB] rounded-2xl flex items-center gap-4">
+<div class="w-20 h-24 bg-[#E9EDF5] rounded-[10px] animate-pulse shrink-0"></div>
+<div class="flex flex-col gap-2.5 w-full">
+<div class="w-3/4 h-5 bg-[#E9EDF5] rounded-lg animate-pulse"></div>
+<div class="w-1/2 h-4 bg-[#E9EDF5] rounded-md animate-pulse"></div>
+<div class="w-1/3 h-3.5 bg-[#E9EDF5] rounded-md animate-pulse mt-1"></div>
+</div>
+</div>
+<!-- Page Ranges Input Skeleton -->
+<div class="flex flex-col gap-2">
+<div class="w-28 h-4 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="h-[52px] bg-[#F5F7FB] rounded-2xl p-3 flex items-center justify-between">
+<div class="w-1/2 h-5 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-6 h-6 bg-[#E9EDF5] rounded-full animate-pulse"></div>
+</div>
+<div class="w-48 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+<!-- Live Parsed Chips Row Skeleton -->
+<div class="flex flex-col gap-2.5">
+<div class="w-36 h-3.5 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="flex gap-2">
+<div class="w-24 h-9 bg-[#E9EDF5] rounded-[10px] animate-pulse"></div>
+<div class="w-20 h-9 bg-[#E9EDF5] rounded-[10px] animate-pulse"></div>
+<div class="w-24 h-9 bg-[#E9EDF5] rounded-[10px] animate-pulse"></div>
+</div>
+</div>
+<!-- Shortcut Macro Skeletons -->
+<div class="flex flex-col gap-2.5 pt-2">
+<div class="w-32 h-3.5 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="flex flex-wrap gap-2">
+<div class="w-20 h-8 bg-[#F5F7FB] rounded-xl animate-pulse"></div>
+<div class="w-24 h-8 bg-[#F5F7FB] rounded-xl animate-pulse"></div>
+<div class="w-24 h-8 bg-[#F5F7FB] rounded-xl animate-pulse"></div>
+<div class="w-28 h-8 bg-[#F5F7FB] rounded-xl animate-pulse"></div>
+</div>
+</div>
+<!-- Output Summary Block Skeleton -->
+<div class="p-4 bg-[#F5F7FB] rounded-2xl flex items-center justify-between mt-auto">
+<div class="w-44 h-4 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-16 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+</div>
+<!-- Bottom Button Skeleton (56 tall, radius 16px) -->
+<footer class="relative z-20 px-5 pt-3 pb-7 bg-white shadow-[0_-4px_24px_rgba(17,20,28,0.06)]">
+<div class="w-full h-14 bg-[#E9EDF5] rounded-2xl animate-pulse"></div>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Verification & Compliance Matrix Section -->
+<section class="w-full px-space-xl py-space-xl bg-surface-container-low shadow-inner">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+<!-- Card 1 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-2xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined">straighten</span>
+<span class="font-title-md text-title-md text-on-surface">Spatial Spec Audit</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">393 × 852 pt baseline canvas. 20pt fixed screen horizontal margins with 4pt strictly aligned base units.</p>
+<span class="font-label-xs text-label-xs text-primary font-mono mt-space-sm">PASS: 100% RETINA SAFE</span>
+</div>
+<!-- Card 2 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-2xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined">touch_app</span>
+<span class="font-title-md text-title-md text-on-surface">Ergonomic Hitboxes</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Primary actions locked at 56pt height with 16pt border radius. Minimum interactive hitboxes enforced at 48pt.</p>
+<span class="font-label-xs text-label-xs text-primary font-mono mt-space-sm">PASS: ZERO CLIPPING</span>
+</div>
+<!-- Card 3 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-2xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined">block</span>
+<span class="font-title-md text-title-md text-on-surface">Layout Isolation</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Zero AdMob docked banners and zero bottom tabs across all split tool operational workspaces.</p>
+<span class="font-label-xs text-label-xs text-primary font-mono mt-space-sm">PASS: CLEAN RUNTIME</span>
+</div>
+<!-- Card 4 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-2xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-title-md text-title-md text-on-surface">Bimodal Palette</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Light (#FFFFFF / #F3F5FA) and Dark Navy (#1A1D29 / #232838) with strict #E5484D error syntax bounds.</p>
+<span class="font-label-xs text-label-xs text-primary font-mono mt-space-sm">PASS: WCAG AAA CONTRAST</span>
+</div>
+</div>
+</section>
+</div></main></div></body></html>

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-container": "#fdfcff", "on-surface": "#181b24", "on-tertiary-fixed-variant": "#3f4752", "tertiary-fixed": "#dbe3f1", "surface-container-lowest": "#ffffff", "tertiary": "#545d68", "surface-container": "#ecedf9", "surface-container-high": "#e6e7f3", "on-tertiary-fixed": "#141c26", "tertiary-container": "#6d7581", "on-surface-variant": "#424753", "secondary-container": "#276def", "on-secondary-fixed": "#001847", "error-container": "#ffdad6", "on-secondary-fixed-variant": "#00409f", "on-secondary-container": "#fefcff", "inverse-on-surface": "#eff0fc", "on-background": "#181b24", "tertiary-fixed-dim": "#bfc7d4", "inverse-surface": "#2d3039", "on-primary-fixed": "#001a40", "surface-container-highest": "#e0e2ee", "background": "#faf8ff", "on-error-container": "#93000a", "primary-fixed-dim": "#acc7ff", "on-primary-container": "#fefcff", "outline": "#727785", "surface-dim": "#d8d9e5", "surface-variant": "#e0e2ee", "on-secondary": "#ffffff", "primary-fixed": "#d7e2ff", "secondary-fixed": "#dae2ff", "secondary-fixed-dim": "#b1c5ff", "on-tertiary": "#ffffff", "secondary": "#0054cb", "surface": "#faf8ff", "primary": "#0059ba", "on-error": "#ffffff", "surface-tint": "#005bbf", "primary-container": "#1f71e0", "error": "#ba1a1a", "surface-bright": "#faf8ff", "surface-container-low": "#f2f3ff", "on-primary-fixed-variant": "#004492", "outline-variant": "#c2c6d5", "on-primary": "#ffffff", "inverse-primary": "#acc7ff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "margin": "1.25rem", "space-md": "0.75rem", "gutter": "0.75rem", "space-xl": "1.5rem", "space-xs": "0.25rem", "space-lg": "1rem", "space-sm": "0.5rem" }, "fontFamily": { "title-md": ["Inter"], "headline-sm": ["Space Grotesk"], "body-md": ["Inter"], "headline-lg": ["Space Grotesk"], "label-md": ["Inter"], "body-sm": ["Inter"], "headline-xl": ["Space Grotesk"], "body-lg": ["Inter"], "label-lg": ["Inter"], "label-xs": ["Inter"] }, "fontSize": { "title-md": ["16px", {"lineHeight": "22px", "fontWeight": "700"}], "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}], "body-md": ["13px", {"lineHeight": "18px", "fontWeight": "400"}], "headline-lg": ["24px", {"lineHeight": "30px", "fontWeight": "700"}], "label-md": ["13px", {"lineHeight": "18px", "fontWeight": "600"}], "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}], "headline-xl": ["32px", {"lineHeight": "38px", "fontWeight": "700"}], "body-lg": ["15px", {"lineHeight": "22px", "fontWeight": "500"}], "label-lg": ["15px", {"lineHeight": "20px", "fontWeight": "600"}], "label-xs": ["11px", {"lineHeight": "14px", "fontWeight": "600"}] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-margin flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary text-[22px]">terminal</span><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">DocEng Suite Runtime Workbench</span></div><div class="h-4 w-[1px] bg-outline-variant hidden md:block"></div><div class="hidden md:flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm"><span class="font-label-md text-label-md text-primary">Core Engine</span><span>/</span><span>Runtime Tools</span><span>/</span><span class="text-on-surface font-label-md text-label-md">Doc View Tools Tab Suite</span></div></div><div class="flex items-center gap-space-lg"><nav class="flex items-center gap-space-sm" data-active-classes="bg-primary-container text-on-primary-container font-label-md text-label-md rounded px-space-md py-space-xs"><a aria-current="page" class="transition-colors bg-primary-container text-on-primary-container font-label-md text-label-md rounded px-space-md py-space-xs" data-path="stage-board" href="#">Stage Board</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-space-xs transition-colors" data-path="specifications" href="#">Spec Matrix</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-space-xs transition-colors" data-path="runtime-telemetry" href="#">Runtime Telemetry</a></nav><div class="flex items-center gap-space-sm bg-surface-container px-space-md py-space-xs rounded"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-xs text-label-xs text-on-surface tracking-wide uppercase">Desktop Stage Mode</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<div class="w-full bg-surface px-margin py-space-xl flex flex-col gap-space-xl">
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="bg-primary text-on-primary font-label-xs text-label-xs px-space-sm py-space-xs rounded-full">SPEC STAGE BOARD</span>
+<span class="bg-surface-container-high text-on-surface font-label-xs text-label-xs px-space-sm py-space-xs rounded-full">CANVAS: 393 × 852 PT</span>
+<span class="bg-surface-container-high text-on-surface font-label-xs text-label-xs px-space-sm py-space-xs rounded-full">GRID: 4PT RIGID</span>
+<span class="bg-primary-container text-on-primary-container font-label-xs text-label-xs px-space-sm py-space-xs rounded-full">STRICT 4-TOOL CONTRACT</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Doc View • Tools Tab Runtime Suite</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-4xl">
+          System verification of the high-throughput 4-tool mobile workspace. Complete runtime matrix comparing Light Mode, Deep Navy Dark Mode, Shimmer Cache Preload, and Empty Local Sandboxing with Docked 60pt Adaptive AdMob containers.
+        </p>
+</div>
+<div class="flex items-center gap-space-md self-start md:self-center bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex flex-col px-space-sm">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Format Engine</span>
+<span class="font-title-md text-title-md text-on-surface">Offline Skia/PDF</span>
+</div>
+<div class="w-px h-8 bg-surface-container-highest"></div>
+<div class="flex flex-col px-space-sm">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Touch Targets</span>
+<span class="font-title-md text-title-md text-primary">≥ 48 × 48 pt</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-xl items-start justify-items-center">
+<!-- FRAME 01: Light Mode -->
+<div class="flex flex-col gap-space-sm w-full max-w-[393px]">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Frame 01: Light Runtime</span>
+</div>
+<span class="font-label-xs text-label-xs bg-surface-container-high px-space-sm py-0.5 rounded text-on-surface-variant">Active Workspace</span>
+</div>
+<div class="w-[393px] h-[852px] bg-white text-[#11141C] font-title-md rounded-[44px] shadow-2xl relative overflow-hidden flex flex-col justify-between select-none">
+<div class="w-full flex flex-col flex-1 overflow-hidden">
+<!-- iOS Status Bar -->
+<div class="w-full h-11 px-6 flex items-center justify-between text-[#11141C] text-[14px] font-semibold pt-1">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Top Header with Soft Gradient -->
+<div class="w-full px-5 pt-2 pb-3 bg-gradient-to-b from-[#E9F2FF] to-white flex items-center justify-between">
+<div>
+<span class="text-[11px] font-bold text-[#1A66E8] uppercase tracking-wider">Workspace</span>
+<h2 class="text-[24px] font-bold text-[#11141C] leading-7">Tools</h2>
+</div>
+<div class="w-10 h-10 rounded-full bg-[#F3F5FA] flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+</div>
+<!-- Main Scrollable Canvas -->
+<div class="flex-1 overflow-y-auto px-5 py-2 flex flex-col gap-5">
+<!-- Section 1: Convert & Create -->
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#8A94AE] uppercase tracking-wider">Convert &amp; Create</span>
+<span class="text-[11px] font-semibold text-[#1A66E8]">2 Utilities</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Tool 1: Image to PDF -->
+<div class="h-[132px] bg-[#F3F5FA] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#EAF0F9] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFB300] to-[#E02B2B] p-2 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[24px]">photo_library</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-[#11141C] leading-snug">Image to PDF</div>
+<div class="font-normal text-[11px] text-[#8A8F9C] line-clamp-1">Turn photos into one PDF</div>
+</div>
+</div>
+<!-- Tool 2: Scan to PDF -->
+<div class="h-[132px] bg-[#F3F5FA] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#EAF0F9] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#00BCD4] to-[#009688] p-2 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[24px]">document_scanner</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-[#11141C] leading-snug">Scan to PDF</div>
+<div class="font-normal text-[11px] text-[#8A8F9C] line-clamp-1">Scan paper with camera</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Edit & Manage -->
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#8A94AE] uppercase tracking-wider">Edit &amp; Manage</span>
+<span class="text-[11px] font-semibold text-[#1A66E8]">Engine 4.18</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Tool 3: Merge PDF -->
+<div class="h-[132px] bg-[#F3F5FA] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#EAF0F9] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#1A66E8] to-[#0D47A1] p-2 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[24px]">call_merge</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-[#11141C] leading-snug">Merge PDF</div>
+<div class="font-normal text-[11px] text-[#8A8F9C] line-clamp-1">Combine PDFs into one</div>
+</div>
+</div>
+<!-- Tool 4: Split PDF -->
+<div class="h-[132px] bg-[#F3F5FA] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#EAF0F9] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#1E9E4F] to-[#0E622F] p-2 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[24px]">call_split</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-[#11141C] leading-snug">Split PDF</div>
+<div class="font-normal text-[11px] text-[#8A8F9C] line-clamp-1">Extract pages or ranges</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Created by you -->
+<div class="flex flex-col gap-2.5 pb-2">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#8A94AE] uppercase tracking-wider">Created by you</span>
+<span class="text-[12px] font-semibold text-[#1A66E8]">See All</span>
+</div>
+<div class="flex gap-3 overflow-x-hidden">
+<!-- PDF Card 1 -->
+<div class="w-[148px] flex-shrink-0 bg-[#F3F5FA] rounded-[20px] p-2.5 flex flex-col gap-2">
+<div class="w-full h-[88px] bg-white rounded-[12px] p-2 relative flex flex-col justify-between overflow-hidden shadow-sm">
+<div class="w-full h-full flex flex-col gap-1.5 opacity-60">
+<div class="h-2 w-3/4 bg-[#11141C]/20 rounded"></div>
+<div class="h-1.5 w-full bg-[#11141C]/10 rounded"></div>
+<div class="h-1.5 w-5/6 bg-[#11141C]/10 rounded"></div>
+<div class="h-1.5 w-4/6 bg-[#11141C]/10 rounded"></div>
+</div>
+<div class="absolute top-2 right-2 bg-[#E02B2B] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-[4px]">PDF</div>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-[12px] text-[#11141C] truncate">Invoice_Scan_Nov.pdf</span>
+<span class="text-[10px] text-[#8A8F9C]">Today • 1.2 MB</span>
+</div>
+</div>
+<!-- PDF Card 2 -->
+<div class="w-[148px] flex-shrink-0 bg-[#F3F5FA] rounded-[20px] p-2.5 flex flex-col gap-2">
+<div class="w-full h-[88px] bg-white rounded-[12px] p-2 relative flex flex-col justify-between overflow-hidden shadow-sm">
+<div class="w-full h-full flex flex-col gap-1.5 opacity-60">
+<div class="h-2 w-1/2 bg-[#11141C]/20 rounded"></div>
+<div class="h-1.5 w-full bg-[#11141C]/10 rounded"></div>
+<div class="h-1.5 w-full bg-[#11141C]/10 rounded"></div>
+<div class="h-1.5 w-3/5 bg-[#11141C]/10 rounded"></div>
+</div>
+<div class="absolute top-2 right-2 bg-[#E02B2B] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-[4px]">PDF</div>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-[12px] text-[#11141C] truncate">Receipts_Batch_04.pdf</span>
+<span class="text-[10px] text-[#8A8F9C]">Today • 2.4 MB</span>
+</div>
+</div>
+<!-- PDF Card 3 -->
+<div class="w-[80px] flex-shrink-0 bg-[#F3F5FA] rounded-[20px] p-2.5 flex flex-col gap-2 opacity-50">
+<div class="w-full h-[88px] bg-white rounded-[12px] p-2 flex flex-col justify-between">
+<div class="h-2 w-2/3 bg-[#11141C]/20 rounded"></div>
+<div class="h-1.5 w-full bg-[#11141C]/10 rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Docked Bottom Zone: AdMob + Nav -->
+<div class="w-full flex flex-col bg-white">
+<!-- 60pt Adaptive AdMob Banner -->
+<div class="w-full h-[60px] bg-[#F8FAFC] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="text-[9px] font-bold text-[#8A8F9C] px-1 py-0.5 rounded bg-white shadow-sm">AD</span>
+<div class="flex flex-col">
+<span class="font-bold text-[11px] text-[#11141C]">Google Workspace Business</span>
+<span class="text-[10px] text-[#8A8F9C]">Secure cloud collaboration for teams</span>
+</div>
+</div>
+<button class="bg-[#1A66E8] text-white font-bold text-[11px] px-3 py-1.5 rounded-[10px]">Open</button>
+</div>
+<!-- 64pt Docked Bottom Bar -->
+<div class="w-full h-[64px] bg-white px-6 flex items-center justify-between">
+<div class="flex flex-col items-center gap-0.5 text-[#8A8F9C] w-16">
+<span class="material-symbols-outlined text-[22px]">description</span>
+<span class="text-[10px] font-semibold">All Files</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#1A66E8] w-16">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">build</span>
+<span class="text-[10px] font-bold">Tools</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#8A8F9C] w-16">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[10px] font-semibold">Settings</span>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="w-full h-5 flex justify-center items-center pb-1">
+<div class="w-32 h-1 bg-[#11141C]/20 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- FRAME 02: Dark Navy Mode -->
+<div class="flex flex-col gap-space-sm w-full max-w-[393px]">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-[#4D8FF7]"></span>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Frame 02: Dark Navy</span>
+</div>
+<span class="font-label-xs text-label-xs bg-surface-container-high px-space-sm py-0.5 rounded text-on-surface-variant">Chassis #1A1D29</span>
+</div>
+<div class="w-[393px] h-[852px] bg-[#1A1D29] text-white font-title-md rounded-[44px] shadow-2xl relative overflow-hidden flex flex-col justify-between select-none">
+<div class="w-full flex flex-col flex-1 overflow-hidden">
+<!-- iOS Status Bar -->
+<div class="w-full h-11 px-6 flex items-center justify-between text-white text-[14px] font-semibold pt-1">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Top Header -->
+<div class="w-full px-5 pt-2 pb-3 bg-gradient-to-b from-[#141722] to-[#1A1D29] flex items-center justify-between">
+<div>
+<span class="text-[11px] font-bold text-[#4D8FF7] uppercase tracking-wider">Workspace</span>
+<h2 class="text-[24px] font-bold text-white leading-7">Tools</h2>
+</div>
+<div class="w-10 h-10 rounded-full bg-[#232838] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+</div>
+<!-- Main Scrollable Canvas -->
+<div class="flex-1 overflow-y-auto px-5 py-2 flex flex-col gap-5">
+<!-- Section 1: Convert & Create -->
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#7F8AA8] uppercase tracking-wider">Convert &amp; Create</span>
+<span class="text-[11px] font-semibold text-[#4D8FF7]">2 Utilities</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Tool 1: Image to PDF -->
+<div class="h-[132px] bg-[#232838] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#2C3347] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFB300] to-[#E02B2B] p-2 flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-white text-[24px]">photo_library</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-white leading-snug">Image to PDF</div>
+<div class="font-normal text-[11px] text-[#858B9C] line-clamp-1">Turn photos into one PDF</div>
+</div>
+</div>
+<!-- Tool 2: Scan to PDF -->
+<div class="h-[132px] bg-[#232838] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#2C3347] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#00BCD4] to-[#009688] p-2 flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-white text-[24px]">document_scanner</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-white leading-snug">Scan to PDF</div>
+<div class="font-normal text-[11px] text-[#858B9C] line-clamp-1">Scan paper with camera</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Edit & Manage -->
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#7F8AA8] uppercase tracking-wider">Edit &amp; Manage</span>
+<span class="text-[11px] font-semibold text-[#4D8FF7]">Engine 4.18</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Tool 3: Merge PDF -->
+<div class="h-[132px] bg-[#232838] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#2C3347] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#1A66E8] to-[#0D47A1] p-2 flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-white text-[24px]">call_merge</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-white leading-snug">Merge PDF</div>
+<div class="font-normal text-[11px] text-[#858B9C] line-clamp-1">Combine PDFs into one</div>
+</div>
+</div>
+<!-- Tool 4: Split PDF -->
+<div class="h-[132px] bg-[#232838] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#2C3347] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#1E9E4F] to-[#0E622F] p-2 flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-white text-[24px]">call_split</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-white leading-snug">Split PDF</div>
+<div class="font-normal text-[11px] text-[#858B9C] line-clamp-1">Extract pages or ranges</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Created by you -->
+<div class="flex flex-col gap-2.5 pb-2">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#7F8AA8] uppercase tracking-wider">Created by you</span>
+<span class="text-[12px] font-semibold text-[#4D8FF7]">See All</span>
+</div>
+<div class="flex gap-3 overflow-x-hidden">
+<!-- PDF Card 1 -->
+<div class="w-[148px] flex-shrink-0 bg-[#232838] rounded-[20px] p-2.5 flex flex-col gap-2">
+<div class="w-full h-[88px] bg-[#141722] rounded-[12px] p-2 relative flex flex-col justify-between overflow-hidden shadow-inner">
+<div class="w-full h-full flex flex-col gap-1.5 opacity-60">
+<div class="h-2 w-3/4 bg-white/20 rounded"></div>
+<div class="h-1.5 w-full bg-white/10 rounded"></div>
+<div class="h-1.5 w-5/6 bg-white/10 rounded"></div>
+<div class="h-1.5 w-4/6 bg-white/10 rounded"></div>
+</div>
+<div class="absolute top-2 right-2 bg-[#E02B2B] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-[4px]">PDF</div>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-[12px] text-white truncate">Invoice_Scan_Nov.pdf</span>
+<span class="text-[10px] text-[#858B9C]">Today • 1.2 MB</span>
+</div>
+</div>
+<!-- PDF Card 2 -->
+<div class="w-[148px] flex-shrink-0 bg-[#232838] rounded-[20px] p-2.5 flex flex-col gap-2">
+<div class="w-full h-[88px] bg-[#141722] rounded-[12px] p-2 relative flex flex-col justify-between overflow-hidden shadow-inner">
+<div class="w-full h-full flex flex-col gap-1.5 opacity-60">
+<div class="h-2 w-1/2 bg-white/20 rounded"></div>
+<div class="h-1.5 w-full bg-white/10 rounded"></div>
+<div class="h-1.5 w-full bg-white/10 rounded"></div>
+<div class="h-1.5 w-3/5 bg-white/10 rounded"></div>
+</div>
+<div class="absolute top-2 right-2 bg-[#E02B2B] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-[4px]">PDF</div>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-[12px] text-white truncate">Receipts_Batch_04.pdf</span>
+<span class="text-[10px] text-[#858B9C]">Today • 2.4 MB</span>
+</div>
+</div>
+<!-- PDF Card 3 -->
+<div class="w-[80px] flex-shrink-0 bg-[#232838] rounded-[20px] p-2.5 flex flex-col gap-2 opacity-40">
+<div class="w-full h-[88px] bg-[#141722] rounded-[12px] p-2 flex flex-col justify-between">
+<div class="h-2 w-2/3 bg-white/20 rounded"></div>
+<div class="h-1.5 w-full bg-white/10 rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Docked Bottom Zone: AdMob + Nav -->
+<div class="w-full flex flex-col bg-[#1A1D29]">
+<!-- 60pt Adaptive AdMob Banner -->
+<div class="w-full h-[60px] bg-[#141722] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="text-[9px] font-bold text-[#858B9C] px-1 py-0.5 rounded bg-[#232838]">AD</span>
+<div class="flex flex-col">
+<span class="font-bold text-[11px] text-white">Google Workspace Business</span>
+<span class="text-[10px] text-[#858B9C]">Secure cloud collaboration for teams</span>
+</div>
+</div>
+<button class="bg-[#1A66E8] text-white font-bold text-[11px] px-3 py-1.5 rounded-[10px]">Open</button>
+</div>
+<!-- 64pt Docked Bottom Bar -->
+<div class="w-full h-[64px] bg-[#1A1D29] px-6 flex items-center justify-between">
+<div class="flex flex-col items-center gap-0.5 text-[#858B9C] w-16">
+<span class="material-symbols-outlined text-[22px]">description</span>
+<span class="text-[10px] font-semibold">All Files</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#4D8FF7] w-16">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">build</span>
+<span class="text-[10px] font-bold">Tools</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#858B9C] w-16">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[10px] font-semibold">Settings</span>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="w-full h-5 flex justify-center items-center pb-1">
+<div class="w-32 h-1 bg-white/20 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- FRAME 03: Skeleton Shimmer State -->
+<div class="flex flex-col gap-space-sm w-full max-w-[393px]">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Frame 03: Shimmer State</span>
+</div>
+<span class="font-label-xs text-label-xs bg-surface-container-high px-space-sm py-0.5 rounded text-on-surface-variant">&lt;200ms Preload</span>
+</div>
+<div class="w-[393px] h-[852px] bg-white text-[#11141C] font-title-md rounded-[44px] shadow-2xl relative overflow-hidden flex flex-col justify-between select-none">
+<div class="w-full flex flex-col flex-1 overflow-hidden">
+<!-- iOS Status Bar -->
+<div class="w-full h-11 px-6 flex items-center justify-between text-[#11141C] text-[14px] font-semibold pt-1">
+<span>9:41</span>
+<div class="flex items-center gap-1.5 opacity-30">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Top Header Skeleton -->
+<div class="w-full px-5 pt-2 pb-3 bg-gradient-to-b from-[#E9F2FF] to-white flex items-center justify-between">
+<div class="flex flex-col gap-2">
+<div class="w-16 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-24 h-7 bg-[#E9EDF5] rounded-lg animate-pulse"></div>
+</div>
+<div class="w-10 h-10 rounded-full bg-[#E9EDF5] animate-pulse"></div>
+</div>
+<!-- Main Scrollable Canvas Skeleton -->
+<div class="flex-1 overflow-y-auto px-5 py-2 flex flex-col gap-5">
+<!-- Section 1 Skeleton -->
+<div class="flex flex-col gap-2.5">
+<div class="w-32 h-3.5 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Skeleton Card 1 -->
+<div class="h-[132px] bg-[#F5F7FB] rounded-[20px] p-3.5 flex flex-col justify-between">
+<div class="w-12 h-12 rounded-[14px] bg-[#E9EDF5] animate-pulse"></div>
+<div class="flex flex-col gap-2">
+<div class="w-24 h-4 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-32 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+</div>
+<!-- Skeleton Card 2 -->
+<div class="h-[132px] bg-[#F5F7FB] rounded-[20px] p-3.5 flex flex-col justify-between">
+<div class="w-12 h-12 rounded-[14px] bg-[#E9EDF5] animate-pulse"></div>
+<div class="flex flex-col gap-2">
+<div class="w-24 h-4 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-32 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2 Skeleton -->
+<div class="flex flex-col gap-2.5">
+<div class="w-28 h-3.5 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Skeleton Card 3 -->
+<div class="h-[132px] bg-[#F5F7FB] rounded-[20px] p-3.5 flex flex-col justify-between">
+<div class="w-12 h-12 rounded-[14px] bg-[#E9EDF5] animate-pulse"></div>
+<div class="flex flex-col gap-2">
+<div class="w-24 h-4 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-32 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+</div>
+<!-- Skeleton Card 4 -->
+<div class="h-[132px] bg-[#F5F7FB] rounded-[20px] p-3.5 flex flex-col justify-between">
+<div class="w-12 h-12 rounded-[14px] bg-[#E9EDF5] animate-pulse"></div>
+<div class="flex flex-col gap-2">
+<div class="w-24 h-4 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-32 h-3 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3 Skeleton -->
+<div class="flex flex-col gap-2.5 pb-2">
+<div class="w-32 h-3.5 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="flex gap-3 overflow-x-hidden">
+<div class="w-[148px] flex-shrink-0 bg-[#F5F7FB] rounded-[20px] p-2.5 flex flex-col gap-2">
+<div class="w-full h-[88px] bg-[#E9EDF5] rounded-[12px] animate-pulse"></div>
+<div class="w-28 h-3.5 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-20 h-2.5 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+<div class="w-[148px] flex-shrink-0 bg-[#F5F7FB] rounded-[20px] p-2.5 flex flex-col gap-2">
+<div class="w-full h-[88px] bg-[#E9EDF5] rounded-[12px] animate-pulse"></div>
+<div class="w-28 h-3.5 bg-[#E9EDF5] rounded animate-pulse"></div>
+<div class="w-20 h-2.5 bg-[#E9EDF5] rounded animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Docked Bottom Zone Skeleton -->
+<div class="w-full flex flex-col bg-white">
+<div class="w-full h-[60px] bg-[#F5F7FB] px-4 flex items-center justify-between animate-pulse">
+<div class="flex items-center gap-2">
+<div class="w-6 h-4 bg-[#E9EDF5] rounded"></div>
+<div class="w-36 h-3 bg-[#E9EDF5] rounded"></div>
+</div>
+<div class="w-14 h-6 bg-[#E9EDF5] rounded-[10px]"></div>
+</div>
+<div class="w-full h-[64px] bg-white px-6 flex items-center justify-between">
+<div class="w-12 h-8 bg-[#F5F7FB] rounded-lg animate-pulse"></div>
+<div class="w-12 h-8 bg-[#E9EDF5] rounded-lg animate-pulse"></div>
+<div class="w-12 h-8 bg-[#F5F7FB] rounded-lg animate-pulse"></div>
+</div>
+<div class="w-full h-5 flex justify-center items-center pb-1">
+<div class="w-32 h-1 bg-[#11141C]/20 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- FRAME 04: Empty State Variant -->
+<div class="flex flex-col gap-space-sm w-full max-w-[393px]">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Frame 04: Zero Sandbox</span>
+</div>
+<span class="font-label-xs text-label-xs bg-surface-container-high px-space-sm py-0.5 rounded text-on-surface-variant">Empty Local Store</span>
+</div>
+<div class="w-[393px] h-[852px] bg-white text-[#11141C] font-title-md rounded-[44px] shadow-2xl relative overflow-hidden flex flex-col justify-between select-none">
+<div class="w-full flex flex-col flex-1 overflow-hidden">
+<!-- iOS Status Bar -->
+<div class="w-full h-11 px-6 flex items-center justify-between text-[#11141C] text-[14px] font-semibold pt-1">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Top Header -->
+<div class="w-full px-5 pt-2 pb-3 bg-gradient-to-b from-[#E9F2FF] to-white flex items-center justify-between">
+<div>
+<span class="text-[11px] font-bold text-[#1A66E8] uppercase tracking-wider">Workspace</span>
+<h2 class="text-[24px] font-bold text-[#11141C] leading-7">Tools</h2>
+</div>
+<div class="w-10 h-10 rounded-full bg-[#F3F5FA] flex items-center justify-center text-[#11141C]">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+</div>
+<!-- Main Scrollable Canvas -->
+<div class="flex-1 overflow-y-auto px-5 py-2 flex flex-col gap-5">
+<!-- Section 1: Convert & Create -->
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#8A94AE] uppercase tracking-wider">Convert &amp; Create</span>
+<span class="text-[11px] font-semibold text-[#1A66E8]">2 Utilities</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Tool 1: Image to PDF -->
+<div class="h-[132px] bg-[#F3F5FA] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#EAF0F9] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFB300] to-[#E02B2B] p-2 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[24px]">photo_library</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-[#11141C] leading-snug">Image to PDF</div>
+<div class="font-normal text-[11px] text-[#8A8F9C] line-clamp-1">Turn photos into one PDF</div>
+</div>
+</div>
+<!-- Tool 2: Scan to PDF -->
+<div class="h-[132px] bg-[#F3F5FA] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#EAF0F9] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#00BCD4] to-[#009688] p-2 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[24px]">document_scanner</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-[#11141C] leading-snug">Scan to PDF</div>
+<div class="font-normal text-[11px] text-[#8A8F9C] line-clamp-1">Scan paper with camera</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Edit & Manage -->
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="text-[13px] font-semibold text-[#8A94AE] uppercase tracking-wider">Edit &amp; Manage</span>
+<span class="text-[11px] font-semibold text-[#1A66E8]">Engine 4.18</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Tool 3: Merge PDF -->
+<div class="h-[132px] bg-[#F3F5FA] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#EAF0F9] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#1A66E8] to-[#0D47A1] p-2 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[24px]">call_merge</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-[#11141C] leading-snug">Merge PDF</div>
+<div class="font-normal text-[11px] text-[#8A8F9C] line-clamp-1">Combine PDFs into one</div>
+</div>
+</div>
+<!-- Tool 4: Split PDF -->
+<div class="h-[132px] bg-[#F3F5FA] rounded-[20px] p-3.5 flex flex-col justify-between hover:bg-[#EAF0F9] transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#1E9E4F] to-[#0E622F] p-2 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[24px]">call_split</span>
+</div>
+<div>
+<div class="font-bold text-[15px] text-[#11141C] leading-snug">Split PDF</div>
+<div class="font-normal text-[11px] text-[#8A8F9C] line-clamp-1">Extract pages or ranges</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Created by you (EMPTY STATE) -->
+<div class="flex flex-col gap-2.5 pb-2">
+<span class="text-[13px] font-semibold text-[#8A94AE] uppercase tracking-wider">Created by you</span>
+<div class="w-full h-[126px] bg-[#F3F5FA] rounded-[20px] p-5 flex items-center gap-4">
+<div class="w-12 h-12 rounded-[16px] bg-white flex items-center justify-center text-[#8A8F9C] shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">folder_open</span>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-[14px] text-[#11141C] leading-tight">PDFs you create appear here</span>
+<span class="text-[11px] text-[#8A8F9C] leading-snug mt-1">Converted, scanned, or merged documents will be saved locally.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Docked Bottom Zone: AdMob + Nav -->
+<div class="w-full flex flex-col bg-white">
+<!-- 60pt Adaptive AdMob Banner -->
+<div class="w-full h-[60px] bg-[#F8FAFC] px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="text-[9px] font-bold text-[#8A8F9C] px-1 py-0.5 rounded bg-white shadow-sm">AD</span>
+<div class="flex flex-col">
+<span class="font-bold text-[11px] text-[#11141C]">Google Workspace Business</span>
+<span class="text-[10px] text-[#8A8F9C]">Secure cloud collaboration for teams</span>
+</div>
+</div>
+<button class="bg-[#1A66E8] text-white font-bold text-[11px] px-3 py-1.5 rounded-[10px]">Open</button>
+</div>
+<!-- 64pt Docked Bottom Bar -->
+<div class="w-full h-[64px] bg-white px-6 flex items-center justify-between">
+<div class="flex flex-col items-center gap-0.5 text-[#8A8F9C] w-16">
+<span class="material-symbols-outlined text-[22px]">description</span>
+<span class="text-[10px] font-semibold">All Files</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#1A66E8] w-16">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">build</span>
+<span class="text-[10px] font-bold">Tools</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-[#8A8F9C] w-16">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-[10px] font-semibold">Settings</span>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="w-full h-5 flex justify-center items-center pb-1">
+<div class="w-32 h-1 bg-[#11141C]/20 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Architectural Directives Grid -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between flex-wrap gap-space-sm">
+<div>
+<span class="font-label-xs text-label-xs text-primary uppercase tracking-wider">Engine Verification</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Architectural Directives &amp; Boundary Guardrails</h3>
+</div>
+<span class="bg-surface-container-highest text-on-surface font-label-xs text-label-xs px-space-md py-space-xs rounded-full">Verification Pass: 100%</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+<div class="bg-surface-container-lowest p-space-lg rounded flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[20px]">security</span>
+<span class="font-label-md text-label-md">Local Sandbox Only</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Zero cloud transmission. PDF conversion, scanning OCR, merging, and splitting process natively inside private application sandbox memory.
+          </p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[20px]">ads_click</span>
+<span class="font-label-md text-label-md">60pt Docked AdMob</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Fixed vertical height strictly maintained above the 64pt bottom navigation. Standardized 16×10pt "AD" badge eliminates monetization layout shifts.
+          </p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span class="font-label-md text-label-md">Fast Cache Hydration</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Pre-computed SQLite indices ensure instant transition between skeleton shimmer and actionable UI tiles within 180 milliseconds.
+          </p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-primary">
+<span class="material-symbols-outlined text-[20px]">dashboard_customize</span>
+<span class="font-label-md text-label-md">Strict 4-Tool Boundary</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Intentional constraint avoiding tool bloat: Convert (Image, Scan) &amp; Manage (Merge, Split) presented with 20pt radius touch tiles.
+          </p>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-space-xl"><div class="w-full px-margin flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm"><div>DocEng Technical Specification • Baseline Viewport 393 × 852 pt • Runtime Verification System</div><div class="flex items-center gap-space-lg font-label-xs text-label-xs"><span class="bg-surface-container-highest px-space-sm py-space-xs rounded text-on-surface">Engine: v4.18.2</span><span class="bg-surface-container-highest px-space-sm py-space-xs rounded text-on-surface">Renderer: Native Skia/PDF</span><span>Strict Precision Grid</span></div></div></footer></body></html>

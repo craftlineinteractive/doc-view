@@ -1,0 +1,1080 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-container": "#276def", "on-tertiary": "#ffffff", "primary": "#0059ba", "on-tertiary-fixed": "#141c26", "error": "#ba1a1a", "primary-container": "#1f71e0", "surface-container-highest": "#e0e2ee", "primary-fixed": "#d7e2ff", "outline-variant": "#c2c6d5", "inverse-on-surface": "#eff0fc", "on-primary": "#ffffff", "on-secondary": "#ffffff", "tertiary-container": "#6d7581", "on-background": "#181b24", "tertiary-fixed-dim": "#bfc7d4", "on-error": "#ffffff", "inverse-primary": "#acc7ff", "surface-container": "#ecedf9", "surface-container-low": "#f2f3ff", "surface-container-high": "#e6e7f3", "surface-container-lowest": "#ffffff", "outline": "#727785", "on-secondary-fixed": "#001847", "on-primary-fixed-variant": "#004492", "error-container": "#ffdad6", "surface-bright": "#faf8ff", "tertiary-fixed": "#dbe3f1", "on-secondary-fixed-variant": "#00409f", "secondary-fixed": "#dae2ff", "on-tertiary-container": "#fdfcff", "on-primary-container": "#fefcff", "on-surface-variant": "#424753", "surface-tint": "#005bbf", "primary-fixed-dim": "#acc7ff", "on-error-container": "#93000a", "on-secondary-container": "#fefcff", "on-tertiary-fixed-variant": "#3f4752", "inverse-surface": "#2d3039", "on-primary-fixed": "#001a40", "surface-variant": "#e0e2ee", "surface": "#faf8ff", "on-surface": "#181b24", "surface-dim": "#d8d9e5", "background": "#faf8ff", "secondary": "#0054cb", "secondary-fixed-dim": "#b1c5ff", "tertiary": "#545d68" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "0.75rem", "gutter": "0.75rem", "space-xl": "1.5rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "margin": "1.25rem", "space-lg": "1rem" }, "fontFamily": { "title-md": [ "Inter" ], "headline-xl": [ "Space Grotesk" ], "label-md": [ "Inter" ], "body-sm": [ "Inter" ], "headline-sm": [ "Space Grotesk" ], "body-md": [ "Inter" ], "headline-lg": [ "Space Grotesk" ], "body-lg": [ "Inter" ], "label-xs": [ "Inter" ], "label-lg": [ "Inter" ] }, "fontSize": { "title-md": [ "16px", { "lineHeight": "22px", "fontWeight": "700" } ], "headline-xl": [ "32px", { "lineHeight": "38px", "fontWeight": "700" } ], "label-md": [ "13px", { "lineHeight": "18px", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "fontWeight": "600" } ], "body-md": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "headline-lg": [ "24px", { "lineHeight": "30px", "fontWeight": "700" } ], "body-lg": [ "15px", { "lineHeight": "22px", "fontWeight": "500" } ], "label-xs": [ "11px", { "lineHeight": "14px", "fontWeight": "600" } ], "label-lg": [ "15px", { "lineHeight": "20px", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">draft</span></div><span class="font-headline-sm text-headline-sm text-on-surface font-bold">Doc View Specification</span></div><div class="flex items-center gap-space-xs font-label-md text-label-md"><span class="text-tertiary">Office Suite</span><span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span><span class="text-on-surface font-semibold">Executive Board</span></div></div><nav class="hidden md:flex items-center gap-space-md" data-active-classes="bg-primary-container text-on-primary-container"><a aria-current="page" class="font-label-md px-space-sm py-space-xs rounded transition-colors bg-primary-container text-on-primary-container" data-path="overview-board" href="#">Overview</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-sm py-space-xs rounded transition-colors" data-path="docx-viewer" href="#">DOCX Engine</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-sm py-space-xs rounded transition-colors" data-path="xlsx-sheet-viewer" href="#">XLSX Matrix</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-sm py-space-xs rounded transition-colors" data-path="pptx-slide-deck" href="#">PPTX Canvas</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-sm py-space-xs rounded transition-colors" data-path="component-guidelines" href="#">Design Tokens</a></nav><div class="flex items-center gap-space-md"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Spec Board Sub-Header / HUD Overview -->
+<section class="w-full px-margin py-space-xl bg-surface-container-low">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-space-lg">
+<div class="space-y-space-xs">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-0.5 rounded-full bg-primary/10 text-primary font-label-xs text-label-xs uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          Engineering &amp; UI Master Spec • v2.4 Native Handheld
+        </div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Doc View Mobile Engine</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Complete high-fidelity presentation specification for high-performance offline document rendering. Baseline 393 × 852 pt mobile canvas with dual Light Mode &amp; Dark Navy Mode side-by-side verification.
+        </p>
+</div>
+<!-- Quick Telemetry Badges -->
+<div class="flex flex-wrap gap-space-sm items-center">
+<div class="px-space-md py-space-xs rounded bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">speed</span>
+<span class="">Zero-Ad Document Viewports</span>
+</div>
+<div class="px-space-md py-space-xs rounded bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">memory</span>
+<span class="">Rust OpenXML Native Parser</span>
+</div>
+<div class="px-space-md py-space-xs rounded bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary">devices</span>
+<span class="">393 × 852 pt Strict Ratio</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Filter Tabs -->
+<div class="w-full px-margin py-space-md bg-surface-container border-b-0 sticky top-16 z-40 backdrop-blur-md">
+<div class="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto gap-space-md">
+<div class="flex items-center gap-space-xs">
+<a class="px-space-md py-space-xs rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-all hover:opacity-90" href="#section-docx">Frame 01: DOCX</a>
+<a class="px-space-md py-space-xs rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all" href="#section-xlsx">Frame 02: XLSX</a>
+<a class="px-space-md py-space-xs rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all" href="#section-pptx">Frame 03: PPTX</a>
+<a class="px-space-md py-space-xs rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all" href="#section-search">Frame 04: Search</a>
+<a class="px-space-md py-space-xs rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all" href="#section-outline">Frame 05: Outline</a>
+<a class="px-space-md py-space-xs rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all" href="#section-error">Frame 06: Auth &amp; Shimmer</a>
+</div>
+<div class="hidden lg:flex items-center gap-space-sm text-tertiary font-label-xs text-label-xs">
+<span class="">Dual Surface Rendering Mode</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span class="">1:1 Precision Pixels</span>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto w-full px-margin py-space-xl space-y-24">
+<!-- ========================================================================= -->
+<!-- SECTION 1: FRAME 1 — DOCX VIEWER -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="section-docx">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded font-label-xs text-label-xs text-white" style="background-color: #1E5FD8;">WORD DOCX</span>
+<span class="font-label-md text-label-md text-tertiary">Operational Unit 01</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">DOCX Engine Viewport</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Edge-to-edge full width non-inverted canvas with flat square pages, hairline dividers, and floating page indicator pill.</p>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs text-tertiary">Spec ID: DOCX-VIEW-2026</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl place-items-center">
+<!-- Light Mode Device Mockup -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> Light Canvas (#EEF0F5 / #FFFFFF Page)
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #EEF0F5; box-shadow: 0 25px 60px -15px rgba(0,0,0,0.18);">
+<!-- Bezel Outer Ring -->
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #EEF0F5;">
+<!-- Dynamic Island & Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30" style="background-color: #FFFFFF;">
+<span class="font-label-xs text-label-xs font-semibold text-slate-900">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-slate-900">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Top Bar -->
+<div class="h-14 w-full flex items-center justify-between px-4 shrink-0 shadow-sm z-20" style="background-color: #FFFFFF;">
+<div class="flex items-center gap-2 min-w-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-800 active:scale-95">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</button>
+<div class="truncate font-title-md text-[15px] font-bold text-slate-900">Quarterly_Review_Q3.docx</div>
+</div>
+<div class="flex items-center gap-0.5 shrink-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">search</span></button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">toc</span></button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">bookmark_border</span></button>
+<button class="w-8 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<!-- Warning Banner -->
+<div class="w-full px-4 py-2 shrink-0 flex items-center justify-between text-xs font-medium" style="background-color: #FFF8E1; color: #8A6D00;">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" style="color: #F5A524;">info</span>
+<span class="">Legacy format: text only</span>
+</div>
+<span class="text-[11px] underline cursor-pointer">Learn more</span>
+</div>
+<!-- Document Scroll Container -->
+<div class="flex-1 overflow-y-auto divide-y divide-slate-200 relative bg-white"><div class="w-full p-5 space-y-4 bg-white"><div class="flex justify-between items-start"><div class="text-[9px] uppercase tracking-wider font-semibold text-slate-400">Section 01 / Strategic Plan</div><span class="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-50 text-blue-700">STRICT REPRODUCTION</span></div><h3 class="font-headline-sm text-headline-sm text-slate-900 leading-snug">Quarterly Business Strategy 2026</h3><div class="text-[11px] text-slate-500 font-medium pb-2 border-b border-slate-100">Authored: Executive Operations • Target Canvas 393pt</div><div class="space-y-2 text-[12px] text-slate-700 leading-relaxed font-body-sm"><p class="">Doc View delivers zero-latency native OpenXML parsing. Documents with deep formatting maintain visual hierarchy without cloud dependency.</p><ul class="list-disc pl-4 space-y-1 text-slate-600"><li class="">Rust-driven uncompressed ZIP parsing in under 60ms.</li><li class="">Vector hairline layout preservation without font emulation drift.</li><li class="">Strict offline sandboxing compliant with enterprise security.</li></ul></div><div class="overflow-hidden bg-slate-50"><div class="grid grid-cols-3 bg-slate-100 text-[10px] font-semibold text-slate-600 px-2 py-1.5"><span class="">Stream</span><span class="text-right">Run Rate</span><span class="text-right">MoM Growth</span></div><div class="grid grid-cols-3 px-2 py-1.5 text-[11px] text-slate-800 border-t border-slate-200"><span class="font-medium">Direct Reader</span><span class="text-right font-mono">$1.42M</span><span class="text-right text-emerald-600 font-semibold">+18.4%</span></div><div class="grid grid-cols-3 px-2 py-1.5 text-[11px] text-slate-800 border-t border-slate-100"><span class="font-medium">OpenXML Engine</span><span class="text-right font-mono">$840K</span><span class="text-right text-emerald-600 font-semibold">+24.1%</span></div></div><div class="space-y-1"><div class="text-[10px] font-semibold text-slate-500">Exhibit 3.1: Segment Trajectory</div><div class="w-full h-28 bg-slate-100 overflow-hidden relative"><img class="w-full h-full object-cover" data-alt="Technical line chart showing document parsing throughput metrics with blue and green data curves over a light gray grid background, clean modern visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7aEQrxaMZ4UBrRyWf1CL0c70i73yhqA03QOIX2rHftSYWl53ad-983cU86DYQ5i7lXOIGQMR8h_Mn9GcKrpeCy9JBA2--KIv0re_5rvJkzbnpcvekRPsq6WHTajBEHh1GB74YkKVE6FfyC0zu_lmidoSF3KjfEzUGUylwwWwmxiK-DPEqIr9k9SwWrIFbmDxxz-bRW7-UjSBD2vr3tKTOj-OU6cLRCP05INBacRc"></div></div><p class="text-[11px] text-slate-600 leading-relaxed">Continued optimizations in memory management allow cached pagination directly inside GPU textures.</p></div><div class="w-full p-5 space-y-3 bg-white"><div class="text-[9px] uppercase tracking-wider font-semibold text-slate-400">Section 02 / Operational Benchmarks</div><h4 class="font-headline-sm text-slate-900 text-[15px] font-bold">Page 2: Memory Footprint &amp; Thread Allocations</h4><p class="text-[12px] text-slate-600 leading-relaxed">Linear uncompressed streaming guarantees predictable consumption bounds across baseline memory budgets.</p></div></div>
+<!-- Floating Page Pill -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30">
+<div class="px-3 py-1 rounded-full text-xs font-semibold text-white shadow-lg backdrop-blur-md" style="background-color: rgba(17, 20, 28, 0.75);">
+                  1 / 8
+                </div>
+</div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-transparent">
+<div class="w-32 h-1 rounded-full bg-slate-900/30"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dark Navy Mode Device Mockup -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full" style="background-color: #1A1D29;"></span> Dark Canvas (#11131B / White Page Fidelity)
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #11131B; box-shadow: 0 25px 60px -15px rgba(0,0,0,0.6);">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #11131B;">
+<!-- Dynamic Island & Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30" style="background-color: #1A1D29;">
+<span class="font-label-xs text-label-xs font-semibold text-white">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Top Bar -->
+<div class="h-14 w-full flex items-center justify-between px-4 shrink-0 shadow-sm z-20" style="background-color: #1A1D29;">
+<div class="flex items-center gap-2 min-w-0">
+<button class="w-10 h-10 flex items-center justify-center text-white active:scale-95">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</button>
+<div class="truncate font-title-md text-[15px] font-bold text-white">Quarterly_Review_Q3.docx</div>
+</div>
+<div class="flex items-center gap-0.5 shrink-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">search</span></button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">toc</span></button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">bookmark_border</span></button>
+<button class="w-8 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<!-- Warning Banner -->
+<div class="w-full px-4 py-2 shrink-0 flex items-center justify-between text-xs font-medium" style="background-color: #2D240E; color: #F5A524;">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span class="">Legacy format: text only</span>
+</div>
+<span class="text-[11px] underline cursor-pointer text-amber-200">Learn more</span>
+</div>
+<!-- Document Scroll Container with Preserved Clean White Page -->
+<div class="flex-1 overflow-y-auto divide-y divide-slate-200 relative bg-white"><div class="w-full p-5 space-y-4 bg-white"><div class="flex justify-between items-start"><div class="text-[9px] uppercase tracking-wider font-semibold text-slate-400">Section 01 / Strategic Plan</div><span class="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-50 text-blue-700">DOCUMENT FIDELITY</span></div><h3 class="font-headline-sm text-headline-sm text-slate-900 leading-snug">Quarterly Business Strategy 2026</h3><div class="text-[11px] text-slate-500 font-medium pb-2 border-b border-slate-100">Authored: Executive Operations • Target Canvas 393pt</div><div class="space-y-2 text-[12px] text-slate-700 leading-relaxed font-body-sm"><p class="">Doc View delivers zero-latency native OpenXML parsing. Documents maintain authentic typography without synthetic inversion.</p><ul class="list-disc pl-4 space-y-1 text-slate-600"><li class="">Rust-driven uncompressed ZIP parsing in under 60ms.</li><li class="">Vector hairline layout preservation without font emulation drift.</li><li class="">Strict offline sandboxing compliant with enterprise security.</li></ul></div><div class="overflow-hidden bg-slate-50"><div class="grid grid-cols-3 bg-slate-100 text-[10px] font-semibold text-slate-600 px-2 py-1.5"><span class="">Stream</span><span class="text-right">Run Rate</span><span class="text-right">MoM Growth</span></div><div class="grid grid-cols-3 px-2 py-1.5 text-[11px] text-slate-800 border-t border-slate-200"><span class="font-medium">Direct Reader</span><span class="text-right font-mono">$1.42M</span><span class="text-right text-emerald-600 font-semibold">+18.4%</span></div><div class="grid grid-cols-3 px-2 py-1.5 text-[11px] text-slate-800 border-t border-slate-100"><span class="font-medium">OpenXML Engine</span><span class="text-right font-mono">$840K</span><span class="text-right text-emerald-600 font-semibold">+24.1%</span></div></div><div class="space-y-1"><div class="text-[10px] font-semibold text-slate-500">Exhibit 3.1: Segment Trajectory</div><div class="w-full h-28 bg-slate-100 overflow-hidden relative"><img class="w-full h-full object-cover" data-alt="Financial growth chart on pure white paper texture with clean indigo accents and data markers, sharp vector styling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhY20MQoipuG1KKB3iH7yxUJiZM0kj-PfX0XUE-eCx0B9FkZ0GEubUFg9zvy1G3lc5KmDCSzl65mCTCwn8CGWTv4H3ITFPf-jyzZHbKwPxpvafpGIvgUrYuWiLjTdvyzqQDGpqbGsoo0rdYq9FqpswFw_GV14BuViuKidZnzsK2ljqI3IkBD3AKeCTGFnkWhegpSU3bZgDgG3XuwtczR36hevXadYQXowtZlPrJAk"></div></div></div><div class="w-full p-5 space-y-3 bg-white"><div class="text-[9px] uppercase tracking-wider font-semibold text-slate-400">Section 02 / Operational Benchmarks</div><h4 class="font-headline-sm text-slate-900 text-[15px] font-bold">Page 2: Memory Footprint &amp; Thread Allocations</h4><p class="text-[12px] text-slate-600 leading-relaxed">Linear uncompressed streaming guarantees predictable consumption bounds across baseline memory budgets.</p></div></div>
+<!-- Floating Page Pill -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30">
+<div class="px-3 py-1 rounded-full text-xs font-semibold text-white shadow-lg backdrop-blur-md" style="background-color: #232838;">
+                  1 / 8
+                </div>
+</div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-transparent">
+<div class="w-32 h-1 rounded-full bg-white/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 2: FRAME 2 — XLSX VIEWER -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="section-xlsx">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded font-label-xs text-label-xs text-white" style="background-color: #1E9E4F;">EXCEL XLSX</span>
+<span class="font-label-md text-label-md text-tertiary">Operational Unit 02</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">XLSX Matrix &amp; Virtualized Sheet</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Frozen headers (A-H / Rows 1-10), large data clamping notice, tabular data, and 48pt touch sheet tab switcher.</p>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs text-tertiary">Spec ID: XLSX-GRID-3000</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl place-items-center">
+<!-- Light Mode XLSX -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> XLSX Light Grid
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #EEF0F5;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative bg-white">
+<!-- Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30 bg-white">
+<span class="font-label-xs text-label-xs font-semibold text-slate-900">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-slate-900">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Top Bar -->
+<div class="h-14 w-full flex items-center justify-between px-4 shrink-0 bg-white shadow-sm z-20">
+<div class="flex items-center gap-2 min-w-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-800"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button>
+<div class="truncate font-title-md text-[15px] font-bold text-slate-900">Annual_Budget_2026.xlsx</div>
+</div>
+<div class="flex items-center gap-0.5 shrink-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">search</span></button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">table_view</span></button>
+<button class="w-8 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<!-- System Notice Banner -->
+<div class="w-full px-4 py-1.5 shrink-0 flex items-center justify-between text-[11px] font-medium" style="background-color: #F1F4F9; color: #545D68;">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]" style="color: #1E9E4F;">dataset</span>
+<span class="">Large spreadsheet: showing first 3000 rows</span>
+</div>
+<span class="text-primary font-semibold cursor-pointer">Filter</span>
+</div>
+<!-- Spreadsheet Matrix Canvas -->
+<div class="flex-1 overflow-x-auto overflow-y-auto relative bg-white">
+<div class="min-w-[620px]">
+<!-- Frozen Column Headers -->
+<div class="flex sticky top-0 z-20 bg-slate-100 text-[11px] font-semibold text-slate-600 border-b border-slate-200">
+<div class="w-10 h-8 flex items-center justify-center shrink-0 bg-slate-200 text-slate-400">#</div>
+<div class="w-28 h-8 flex items-center px-2 shrink-0 border-r border-slate-200">A (Cost Center)</div>
+<div class="w-24 h-8 flex items-center justify-end px-2 shrink-0 border-r border-slate-200">B (Q1 Actual)</div>
+<div class="w-24 h-8 flex items-center justify-end px-2 shrink-0 border-r border-slate-200">C (Q2 Plan)</div>
+<div class="w-20 h-8 flex items-center justify-end px-2 shrink-0 border-r border-slate-200">D (Variance)</div>
+<div class="w-24 h-8 flex items-center justify-end px-2 shrink-0 border-r border-slate-200">E (Units)</div>
+<div class="w-20 h-8 flex items-center justify-center px-2 shrink-0 border-r border-slate-200">F (Status)</div>
+</div>
+<!-- Rows 1 to 10 -->
+<div class="text-[12px] divide-y divide-slate-100 font-mono">
+<div class="flex items-center hover:bg-slate-50">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-slate-50 text-slate-400">1</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-900 truncate">Infrastructure</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$42,500.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$40,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-emerald-600 font-semibold">+6.25%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-600">1,420</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-emerald-50 text-emerald-700 font-semibold">PASS</span></div>
+</div>
+<div class="flex items-center hover:bg-slate-50 bg-emerald-50/20">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-slate-50 text-slate-400">2</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-900 truncate">R&amp;D Engines</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$188,400.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$175,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-emerald-600 font-semibold">+7.65%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-600">3,110</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-emerald-50 text-emerald-700 font-semibold">PASS</span></div>
+</div>
+<div class="flex items-center hover:bg-slate-50">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-slate-50 text-slate-400">3</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-900 truncate">Security Audit</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$19,250.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$25,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-rose-600 font-semibold">-23.00%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-600">450</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-amber-50 text-amber-700 font-semibold">HOLD</span></div>
+</div>
+<div class="flex items-center hover:bg-slate-50">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-slate-50 text-slate-400">4</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-900 truncate">Mobile UI Shell</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$74,000.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$70,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-emerald-600 font-semibold">+5.71%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-600">880</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-emerald-50 text-emerald-700 font-semibold">PASS</span></div>
+</div>
+<div class="flex items-center hover:bg-slate-50">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-slate-50 text-slate-400">5</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-900 truncate">OpenXML Parser</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$93,500.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$85,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-emerald-600 font-semibold">+10.00%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-600">2,600</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-emerald-50 text-emerald-700 font-semibold">PASS</span></div>
+</div>
+<div class="flex items-center hover:bg-slate-50">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-slate-50 text-slate-400">6</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-900 truncate">Edge Telemetry</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$12,800.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$15,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-rose-600 font-semibold">-14.60%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-600">320</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-amber-50 text-amber-700 font-semibold">HOLD</span></div>
+</div>
+<div class="flex items-center hover:bg-slate-50">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-slate-50 text-slate-400">7</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-900 truncate">Direct License</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$310,000.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-800">$290,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-emerald-600 font-semibold">+6.90%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-600">12,400</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-emerald-50 text-emerald-700 font-semibold">PASS</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sheet Tab Strip (48pt touch targets) -->
+<div class="h-12 w-full bg-slate-100 border-t border-slate-200 px-2 flex items-center justify-between shrink-0">
+<div class="flex items-center gap-1">
+<!-- Active Tab -->
+<button class="h-9 px-4 rounded bg-white text-emerald-700 font-semibold text-xs shadow-sm flex items-center gap-1.5 border-b-2 border-emerald-600">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span class="">Sales</span>
+</button>
+<button class="h-9 px-4 rounded text-slate-600 font-medium text-xs hover:bg-slate-200 flex items-center">
+                    Summary
+                  </button>
+<button class="h-9 px-4 rounded text-slate-600 font-medium text-xs hover:bg-slate-200 flex items-center">
+                    Data
+                  </button>
+</div>
+<div class="flex items-center pr-1 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-white">
+<div class="w-32 h-1 rounded-full bg-slate-900/30"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dark Navy Mode XLSX -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full" style="background-color: #1A1D29;"></span> XLSX Dark Matrix
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #11131B;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #1A1D29;">
+<!-- Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30" style="background-color: #1A1D29;">
+<span class="font-label-xs text-label-xs font-semibold text-white">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Top Bar -->
+<div class="h-14 w-full flex items-center justify-between px-4 shrink-0 shadow-sm z-20" style="background-color: #1A1D29;">
+<div class="flex items-center gap-2 min-w-0">
+<button class="w-10 h-10 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button>
+<div class="truncate font-title-md text-[15px] font-bold text-white">Annual_Budget_2026.xlsx</div>
+</div>
+<div class="flex items-center gap-0.5 shrink-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">search</span></button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">table_view</span></button>
+<button class="w-8 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<!-- System Notice Banner -->
+<div class="w-full px-4 py-1.5 shrink-0 flex items-center justify-between text-[11px] font-medium" style="background-color: #131722; color: #858B9C;">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]" style="color: #1E9E4F;">dataset</span>
+<span class="">Large spreadsheet: showing first 3000 rows</span>
+</div>
+<span class="text-blue-400 font-semibold cursor-pointer">Filter</span>
+</div>
+<!-- Spreadsheet Matrix Canvas Dark -->
+<div class="flex-1 overflow-x-auto overflow-y-auto relative" style="background-color: #151824;">
+<div class="min-w-[620px]">
+<div class="flex sticky top-0 z-20 text-[11px] font-semibold text-slate-300" style="background-color: #232838;">
+<div class="w-10 h-8 flex items-center justify-center shrink-0 bg-[#1e2333] text-slate-500">#</div>
+<div class="w-28 h-8 flex items-center px-2 shrink-0 border-r border-[#2A3042]">A (Cost Center)</div>
+<div class="w-24 h-8 flex items-center justify-end px-2 shrink-0 border-r border-[#2A3042]">B (Q1 Actual)</div>
+<div class="w-24 h-8 flex items-center justify-end px-2 shrink-0 border-r border-[#2A3042]">C (Q2 Plan)</div>
+<div class="w-20 h-8 flex items-center justify-end px-2 shrink-0 border-r border-[#2A3042]">D (Variance)</div>
+<div class="w-24 h-8 flex items-center justify-end px-2 shrink-0 border-r border-[#2A3042]">E (Units)</div>
+<div class="w-20 h-8 flex items-center justify-center px-2 shrink-0 border-r border-[#2A3042]">F (Status)</div>
+</div>
+<div class="text-[12px] divide-y divide-[#2A3042]/50 font-mono">
+<div class="flex items-center hover:bg-[#1E2333]">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-[#1a1e2d] text-slate-500">1</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-100 truncate">Infrastructure</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-200">$42,500.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-200">$40,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-emerald-400 font-semibold">+6.25%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-400">1,420</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-emerald-950/80 text-emerald-300 font-semibold">PASS</span></div>
+</div>
+<div class="flex items-center hover:bg-[#1E2333] bg-emerald-900/10">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-[#1a1e2d] text-slate-500">2</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-100 truncate">R&amp;D Engines</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-200">$188,400.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-200">$175,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-emerald-400 font-semibold">+7.65%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-400">3,110</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-emerald-950/80 text-emerald-300 font-semibold">PASS</span></div>
+</div>
+<div class="flex items-center hover:bg-[#1E2333]">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-[#1a1e2d] text-slate-500">3</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-100 truncate">Security Audit</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-200">$19,250.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-200">$25,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-rose-400 font-semibold">-23.00%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-400">450</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-amber-950/80 text-amber-300 font-semibold">HOLD</span></div>
+</div>
+<div class="flex items-center hover:bg-[#1E2333]">
+<div class="w-10 h-9 flex items-center justify-center shrink-0 font-sans text-[11px] font-semibold bg-[#1a1e2d] text-slate-500">4</div>
+<div class="w-28 h-9 flex items-center px-2 shrink-0 font-sans font-medium text-slate-100 truncate">Mobile UI Shell</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-200">$74,000.00</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-200">$70,000.00</div>
+<div class="w-20 h-9 flex items-center justify-end px-2 shrink-0 text-emerald-400 font-semibold">+5.71%</div>
+<div class="w-24 h-9 flex items-center justify-end px-2 shrink-0 text-slate-400">880</div>
+<div class="w-20 h-9 flex items-center justify-center px-2 shrink-0 font-sans"><span class="px-1.5 py-0.5 rounded text-[10px] bg-emerald-950/80 text-emerald-300 font-semibold">PASS</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sheet Tab Strip -->
+<div class="h-12 w-full border-t border-[#2A3042] px-2 flex items-center justify-between shrink-0" style="background-color: #171A26;">
+<div class="flex items-center gap-1">
+<button class="h-9 px-4 rounded text-white font-semibold text-xs shadow-sm flex items-center gap-1.5 border-b-2 border-emerald-400" style="background-color: #232838;">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="">Sales</span>
+</button>
+<button class="h-9 px-4 rounded text-slate-400 font-medium text-xs hover:bg-[#232838] flex items-center">
+                    Summary
+                  </button>
+<button class="h-9 px-4 rounded text-slate-400 font-medium text-xs hover:bg-[#232838] flex items-center">
+                    Data
+                  </button>
+</div>
+<div class="flex items-center pr-1 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-transparent">
+<div class="w-32 h-1 rounded-full bg-white/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 3: FRAME 3 — PPTX VIEWER -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="section-pptx">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded font-label-xs text-label-xs text-white" style="background-color: #F26B1D;">POWERPOINT PPTX</span>
+<span class="font-label-md text-label-md text-tertiary">Operational Unit 03</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">PPTX Slide Canvas Deck</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Continuous vertical 16:9 edge-to-edge slides with hairline divider lines, zero corner radiuses, and floating slide counter.</p>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs text-tertiary">Spec ID: PPTX-SLIDE-169</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl place-items-center">
+<!-- Light PPTX -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> PPTX Vertical Stream (Light)
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #EEF0F5;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #EEF0F5;">
+<!-- Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30 bg-white">
+<span class="font-label-xs text-label-xs font-semibold text-slate-900">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-slate-900">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Top Bar -->
+<div class="h-14 w-full flex items-center justify-between px-4 shrink-0 bg-white shadow-sm z-20">
+<div class="flex items-center gap-2 min-w-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-800"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button>
+<div class="truncate font-title-md text-[15px] font-bold text-slate-900">Product_Roadmap_Deck.pptx</div>
+</div>
+<div class="flex items-center gap-0.5 shrink-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">search</span></button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">view_carousel</span></button>
+<button class="w-8 h-10 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<!-- Slide Deck Vertical Stack Canvas -->
+<div class="flex-1 overflow-y-auto divide-y divide-slate-200 relative bg-white"><div class="w-full p-4 flex flex-col justify-end bg-white"><span class="text-[10px] font-bold text-orange-600">SLIDE 01</span><span class="font-title-md text-[13px] text-slate-700">Executive Summary &amp; Vision</span></div><div class="w-full aspect-[16/9] bg-white p-4 flex flex-col justify-between"><div class="flex items-center justify-between"><span class="text-[9px] uppercase font-bold tracking-wider text-orange-600">Slide 2 • Core Initiative</span><span class="text-[9px] font-mono text-slate-400">DOCX_CORP</span></div><div class="space-y-1"><h3 class="font-headline-sm text-[16px] text-slate-900 font-bold leading-tight">Q4 Platform Modernization</h3><p class="text-[10px] text-slate-500">Accelerating runtime document parse speeds to &lt; 50ms.</p></div><div class="grid grid-cols-2 gap-2 my-1"><div class="p-2 bg-orange-50 space-y-0.5"><div class="flex items-center gap-1 text-orange-700 font-bold text-[10px]"><span class="material-symbols-outlined text-[13px]">bolt</span> Rust Parsing</div><div class="text-[9px] text-slate-600">Native non-blocking thread</div></div><div class="p-2 bg-blue-50 space-y-0.5"><div class="flex items-center gap-1 text-blue-700 font-bold text-[10px]"><span class="material-symbols-outlined text-[13px]">shield</span> Sandboxed</div><div class="text-[9px] text-slate-600">Pure local document reads</div></div></div><div class="flex items-center justify-between pt-1 border-t border-slate-100 text-[9px] text-slate-400"><span class="">Confidential • Internal Distribution</span><span class="">Q4 2026</span></div></div><div class="w-full p-4 space-y-1 bg-white"><span class="text-[9px] uppercase font-bold tracking-wider text-orange-600">Slide 3 • Architecture</span><div class="font-title-md text-[13px] text-slate-900">Virtual Grid Pipeline for XLSX</div><div class="text-[10px] text-slate-500">Viewport-bound rendering reduces peak memory allocation by 74%.</div></div></div>
+<!-- Floating Slide Chip -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30">
+<div class="px-3.5 py-1 rounded-full text-xs font-semibold text-white shadow-lg backdrop-blur-md" style="background-color: rgba(17, 20, 28, 0.75);">
+                  2 / 18
+                </div>
+</div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-transparent">
+<div class="w-32 h-1 rounded-full bg-slate-900/30"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dark PPTX -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full" style="background-color: #1A1D29;"></span> PPTX Vertical Stream (Dark Navy)
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #11131B;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #11131B;">
+<!-- Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30" style="background-color: #1A1D29;">
+<span class="font-label-xs text-label-xs font-semibold text-white">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Top Bar -->
+<div class="h-14 w-full flex items-center justify-between px-4 shrink-0 shadow-sm z-20" style="background-color: #1A1D29;">
+<div class="flex items-center gap-2 min-w-0">
+<button class="w-10 h-10 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button>
+<div class="truncate font-title-md text-[15px] font-bold text-white">Product_Roadmap_Deck.pptx</div>
+</div>
+<div class="flex items-center gap-0.5 shrink-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">search</span></button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">view_carousel</span></button>
+<button class="w-8 h-10 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</div>
+<!-- Slide Deck Vertical Stack Canvas Dark (White Slides Preserved) -->
+<div class="flex-1 overflow-y-auto divide-y divide-slate-200 relative bg-white"><div class="w-full p-4 flex flex-col justify-end bg-white"><span class="text-[10px] font-bold text-orange-600">SLIDE 01</span><span class="font-title-md text-[13px] text-slate-700">Executive Summary &amp; Vision</span></div><div class="w-full aspect-[16/9] bg-white p-4 flex flex-col justify-between"><div class="flex items-center justify-between"><span class="text-[9px] uppercase font-bold tracking-wider text-orange-600">Slide 2 • Core Initiative</span><span class="text-[9px] font-mono text-slate-400">DOCX_CORP</span></div><div class="space-y-1"><h3 class="font-headline-sm text-[16px] text-slate-900 font-bold leading-tight">Q4 Platform Modernization</h3><p class="text-[10px] text-slate-500">Accelerating runtime document parse speeds to &lt; 50ms.</p></div><div class="grid grid-cols-2 gap-2 my-1"><div class="p-2 bg-orange-50 space-y-0.5"><div class="flex items-center gap-1 text-orange-700 font-bold text-[10px]"><span class="material-symbols-outlined text-[13px]">bolt</span> Rust Parsing</div><div class="text-[9px] text-slate-600">Native non-blocking thread</div></div><div class="p-2 bg-blue-50 space-y-0.5"><div class="flex items-center gap-1 text-blue-700 font-bold text-[10px]"><span class="material-symbols-outlined text-[13px]">shield</span> Sandboxed</div><div class="text-[9px] text-slate-600">Pure local document reads</div></div></div><div class="flex items-center justify-between pt-1 border-t border-slate-100 text-[9px] text-slate-400"><span class="">Confidential • Internal Distribution</span><span class="">Q4 2026</span></div></div><div class="w-full p-4 space-y-1 bg-white"><span class="text-[9px] uppercase font-bold tracking-wider text-orange-600">Slide 3 • Architecture</span><div class="font-title-md text-[13px] text-slate-900">Virtual Grid Pipeline for XLSX</div><div class="text-[10px] text-slate-500">Viewport-bound rendering reduces peak memory allocation by 74%.</div></div></div>
+<!-- Floating Slide Chip -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30">
+<div class="px-3.5 py-1 rounded-full text-xs font-semibold text-white shadow-lg backdrop-blur-md" style="background-color: #232838;">
+                  2 / 18
+                </div>
+</div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-transparent">
+<div class="w-32 h-1 rounded-full bg-white/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 4: FRAME 4 — ACTIVE IN-DOCUMENT SEARCH -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="section-search">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded font-label-xs text-label-xs bg-amber-500 text-white">SEARCH ENGINE</span>
+<span class="font-label-md text-label-md text-tertiary">Operational Unit 04</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">In-Document Token Search &amp; Highlight</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Top bar morphs into active search HUD with match count pill (5 matches), navigation chevrons, and active token focus ring.</p>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs text-tertiary">Spec ID: SRCH-MATCH-HL</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl place-items-center">
+<!-- Light Mode Search -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> Active Search (Light)
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #EEF0F5;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #EEF0F5;">
+<!-- Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30 bg-white">
+<span class="font-label-xs text-label-xs font-semibold text-slate-900">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-slate-900">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Morphed Search Top Bar -->
+<div class="h-16 w-full flex items-center gap-2 px-3 shrink-0 bg-white shadow-md z-30">
+<button class="w-9 h-9 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[20px]">arrow_back</span></button>
+<div class="flex-1 h-10 rounded-xl bg-slate-100 flex items-center px-3 gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-500">search</span>
+<span class="font-body-md text-slate-900 font-semibold flex-1">growth</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-primary">2 of 5</span>
+</div>
+<div class="flex items-center">
+<button class="w-8 h-8 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[18px]">expand_less</span></button>
+<button class="w-8 h-8 flex items-center justify-center text-slate-700"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
+<button class="w-8 h-8 flex items-center justify-center text-slate-500"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<!-- Body with Yellow Matches -->
+<div class="flex-1 overflow-y-auto divide-y divide-slate-200 relative bg-white"><div class="w-full p-5 space-y-4 bg-white"><h3 class="font-headline-sm text-headline-sm text-slate-900">Strategic Business Trajectory</h3><p class="text-[12px] text-slate-700 leading-relaxed font-body-sm">In the previous cycle, target enterprise <span class="bg-amber-200 text-slate-900 px-1 py-0.5 font-semibold">growth</span> outpaced industry medians across standard vectors. Mobile execution enabled swift capture.</p><div class="p-3 bg-blue-50/50 space-y-2 border-l-2 border-primary"><div class="text-[11px] font-semibold text-slate-900">Quarterly Drivers:</div><p class="text-[12px] text-slate-700 leading-relaxed">Primary drivers include scalable offline engines. Real-time document parsing delivers continuous <span class="bg-amber-300 text-slate-900 px-1.5 py-0.5 font-bold shadow-sm ring-2 ring-primary ring-offset-1 inline-block">growth</span> efficiency across all teams without requiring cloud infrastructure.</p></div><p class="text-[12px] text-slate-700 leading-relaxed font-body-sm">Sustained commercial <span class="bg-amber-200 text-slate-900 px-1 py-0.5 font-semibold">growth</span> in international territories confirmed product market fit across the enterprise subscriber cohort.</p></div><div class="w-full p-5 space-y-2 bg-white"><div class="text-[9px] uppercase tracking-wider font-semibold text-slate-400">Search Continued • Page 2</div><p class="text-[12px] text-slate-600">Additional occurrences indexed across subsidiary reports.</p></div></div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-transparent">
+<div class="w-32 h-1 rounded-full bg-slate-900/30"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dark Navy Mode Search -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full" style="background-color: #1A1D29;"></span> Active Search (Dark Navy)
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #11131B;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #11131B;">
+<!-- Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30" style="background-color: #1A1D29;">
+<span class="font-label-xs text-label-xs font-semibold text-white">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Morphed Search Top Bar Dark -->
+<div class="h-16 w-full flex items-center gap-2 px-3 shrink-0 shadow-md z-30" style="background-color: #1A1D29;">
+<button class="w-9 h-9 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[20px]">arrow_back</span></button>
+<div class="flex-1 h-10 rounded-xl flex items-center px-3 gap-2" style="background-color: #232838;">
+<span class="material-symbols-outlined text-[18px] text-slate-400">search</span>
+<span class="font-body-md text-white font-semibold flex-1">growth</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-900/60 text-blue-300">2 of 5</span>
+</div>
+<div class="flex items-center">
+<button class="w-8 h-8 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[18px]">expand_less</span></button>
+<button class="w-8 h-8 flex items-center justify-center text-slate-300"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<!-- Body with Yellow Matches on White Paper -->
+<div class="flex-1 overflow-y-auto divide-y divide-slate-200 relative bg-white"><div class="w-full p-5 space-y-4 bg-white"><h3 class="font-headline-sm text-headline-sm text-slate-900">Strategic Business Trajectory</h3><p class="text-[12px] text-slate-700 leading-relaxed font-body-sm">In the previous cycle, target enterprise <span class="bg-amber-200 text-slate-900 px-1 py-0.5 font-semibold">growth</span> outpaced industry medians across standard vectors. Mobile execution enabled swift capture.</p><div class="p-3 bg-blue-50/50 space-y-2 border-l-2 border-primary"><div class="text-[11px] font-semibold text-slate-900">Quarterly Drivers:</div><p class="text-[12px] text-slate-700 leading-relaxed">Primary drivers include scalable offline engines. Real-time document parsing delivers continuous <span class="bg-amber-300 text-slate-900 px-1.5 py-0.5 font-bold shadow-sm ring-2 ring-blue-600 ring-offset-1 inline-block">growth</span> efficiency across all teams without requiring cloud infrastructure.</p></div><p class="text-[12px] text-slate-700 leading-relaxed font-body-sm">Sustained commercial <span class="bg-amber-200 text-slate-900 px-1 py-0.5 font-semibold">growth</span> in international territories confirmed product market fit across the enterprise subscriber cohort.</p></div><div class="w-full p-5 space-y-2 bg-white"><div class="text-[9px] uppercase tracking-wider font-semibold text-slate-400">Search Continued • Page 2</div><p class="text-[12px] text-slate-600">Additional occurrences indexed across subsidiary reports.</p></div></div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-transparent">
+<div class="w-32 h-1 rounded-full bg-white/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 5: FRAME 5 — OUTLINE BOTTOM SHEET -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="section-outline">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded font-label-xs text-label-xs bg-indigo-600 text-white">NAVIGATOR</span>
+<span class="font-label-md text-label-md text-tertiary">Operational Unit 05</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">Hierarchical Outline Sheet Modal</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">28px top corner radius bottom modal rendered over a 50% dimmed document scrim with indented headings and page jump tags.</p>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs text-tertiary">Spec ID: OUTLN-TREE-JUMP</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl place-items-center">
+<!-- Light Mode Outline Sheet -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> Outline Modal (Light)
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #EEF0F5;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #EEF0F5;">
+<!-- Background Screen (Dimmed by Scrim) -->
+<div class="w-full h-full flex flex-col relative filter blur-[1px]">
+<div class="h-11 w-full bg-white"></div>
+<div class="h-14 w-full bg-white shadow-sm"></div>
+<div class="flex-1 p-4 space-y-3">
+<div class="w-full h-40 bg-white rounded-lg"></div>
+<div class="w-full h-60 bg-white rounded-lg"></div>
+</div>
+</div>
+<!-- 50% Scrim Overlay -->
+<div class="absolute inset-0 bg-slate-900/50 z-30"></div>
+<!-- Bottom Sheet Container (28px top radius) -->
+<div class="absolute bottom-0 inset-x-0 rounded-t-[28px] bg-white z-40 shadow-2xl flex flex-col" style="max-height: 520px;">
+<!-- Drag Handle Pill -->
+<div class="w-full pt-3 pb-2 flex justify-center">
+<div class="w-10 h-1.2 rounded-full bg-slate-300"></div>
+</div>
+<!-- Sheet Header -->
+<div class="px-5 py-2 flex items-center justify-between border-b border-slate-100">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">format_list_bulleted</span>
+<h4 class="font-title-md text-[16px] text-slate-900 font-bold">Document Outline</h4>
+</div>
+<span class="text-xs text-slate-400 font-medium">8 Jump Nodes</span>
+</div>
+<!-- Hierarchical Tree -->
+<div class="p-3 overflow-y-auto space-y-1">
+<!-- Node 1 -->
+<div class="px-3 py-2.5 rounded-lg hover:bg-slate-50 flex items-center justify-between cursor-pointer">
+<span class="font-title-md text-[13px] text-slate-900 font-bold">1. Executive Summary</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-slate-100 text-slate-500">p. 1</span>
+</div>
+<!-- Sub Node 1.1 -->
+<div class="pl-7 pr-3 py-2 rounded-lg hover:bg-slate-50 flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+<span class="font-body-md text-[13px] text-slate-700">1.1 Market Context</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-slate-100 text-slate-500">p. 1</span>
+</div>
+<!-- Sub Node 1.2 (Active selection) -->
+<div class="pl-7 pr-3 py-2 rounded-lg bg-blue-50 flex items-center justify-between cursor-pointer border-l-2 border-primary">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-body-md text-[13px] text-primary font-semibold">1.2 Key Growth Vectors</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-primary text-white">p. 2</span>
+</div>
+<!-- Node 2 -->
+<div class="px-3 py-2.5 rounded-lg hover:bg-slate-50 flex items-center justify-between cursor-pointer">
+<span class="font-title-md text-[13px] text-slate-900 font-bold">2. Financial Metrics</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-slate-100 text-slate-500">p. 3</span>
+</div>
+<!-- Node 3 -->
+<div class="px-3 py-2.5 rounded-lg hover:bg-slate-50 flex items-center justify-between cursor-pointer">
+<span class="font-title-md text-[13px] text-slate-900 font-bold">3. Implementation Timeline</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-slate-100 text-slate-500">p. 6</span>
+</div>
+</div>
+<!-- Bottom Safe Area & Home Indicator -->
+<div class="h-7 w-full flex items-center justify-center shrink-0">
+<div class="w-32 h-1 rounded-full bg-slate-900/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dark Navy Mode Outline Sheet -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full" style="background-color: #1A1D29;"></span> Outline Modal (Dark Navy)
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #11131B;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #11131B;">
+<!-- Background Screen (Dimmed by Scrim) -->
+<div class="w-full h-full flex flex-col relative filter blur-[1px]">
+<div class="h-11 w-full" style="background-color: #1A1D29;"></div>
+<div class="h-14 w-full" style="background-color: #1A1D29;"></div>
+<div class="flex-1 p-4 space-y-3">
+<div class="w-full h-40 rounded-lg" style="background-color: #232838;"></div>
+<div class="w-full h-60 rounded-lg" style="background-color: #232838;"></div>
+</div>
+</div>
+<!-- 50% Scrim Overlay -->
+<div class="absolute inset-0 bg-black/60 z-30"></div>
+<!-- Bottom Sheet Container Dark -->
+<div class="absolute bottom-0 inset-x-0 rounded-t-[28px] z-40 shadow-2xl flex flex-col" style="background-color: #1E2333; max-height: 520px;">
+<!-- Drag Handle -->
+<div class="w-full pt-3 pb-2 flex justify-center">
+<div class="w-10 h-1.2 rounded-full bg-slate-600"></div>
+</div>
+<!-- Header -->
+<div class="px-5 py-2 flex items-center justify-between border-b border-[#2A3042]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-blue-400">format_list_bulleted</span>
+<h4 class="font-title-md text-[16px] text-white font-bold">Document Outline</h4>
+</div>
+<span class="text-xs text-slate-400 font-medium">8 Jump Nodes</span>
+</div>
+<!-- Tree -->
+<div class="p-3 overflow-y-auto space-y-1">
+<div class="px-3 py-2.5 rounded-lg hover:bg-[#232838] flex items-center justify-between cursor-pointer">
+<span class="font-title-md text-[13px] text-white font-bold">1. Executive Summary</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#2A3042] text-slate-300">p. 1</span>
+</div>
+<div class="pl-7 pr-3 py-2 rounded-lg hover:bg-[#232838] flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+<span class="font-body-md text-[13px] text-slate-300">1.1 Market Context</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#2A3042] text-slate-300">p. 1</span>
+</div>
+<div class="pl-7 pr-3 py-2 rounded-lg flex items-center justify-between cursor-pointer border-l-2 border-blue-400" style="background-color: #263352;">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+<span class="font-body-md text-[13px] text-blue-200 font-semibold">1.2 Key Growth Vectors</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-blue-600 text-white">p. 2</span>
+</div>
+<div class="px-3 py-2.5 rounded-lg hover:bg-[#232838] flex items-center justify-between cursor-pointer">
+<span class="font-title-md text-[13px] text-white font-bold">2. Financial Metrics</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#2A3042] text-slate-300">p. 3</span>
+</div>
+<div class="px-3 py-2.5 rounded-lg hover:bg-[#232838] flex items-center justify-between cursor-pointer">
+<span class="font-title-md text-[13px] text-white font-bold">3. Implementation Timeline</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#2A3042] text-slate-300">p. 6</span>
+</div>
+</div>
+<div class="h-7 w-full flex items-center justify-center shrink-0">
+<div class="w-32 h-1 rounded-full bg-white/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 6: FRAME 6 — PASSWORD ERROR & SKELETON SHIMMER -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="section-error">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded font-label-xs text-label-xs bg-rose-600 text-white">SECURITY &amp; LOADING</span>
+<span class="font-label-md text-label-md text-tertiary">Operational Unit 06</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">Exception Fallback &amp; Shimmer Skeleton</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Zero-spinner progressive shimmer sweep (1.4s) alongside standard cryptographic exception resolution.</p>
+</div>
+<div class="text-right">
+<span class="font-label-xs text-label-xs text-tertiary">Spec ID: SEC-ERR-SHMR</span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-space-xl place-items-center">
+<!-- Frame 6A: Password Exception Error Screen -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Password Exception Dialog
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #EEF0F5;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative bg-white">
+<!-- Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30 bg-white">
+<span class="font-label-xs text-label-xs font-semibold text-slate-900">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-slate-900">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Top Bar -->
+<div class="h-14 w-full flex items-center justify-between px-4 shrink-0 bg-white shadow-sm z-20">
+<div class="flex items-center gap-2 min-w-0">
+<button class="w-10 h-10 flex items-center justify-center text-slate-800"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button>
+<div class="truncate font-title-md text-[15px] font-bold text-slate-900">Confidential_Audit.docx</div>
+</div>
+<button class="w-8 h-10 flex items-center justify-center text-slate-400"><span class="material-symbols-outlined text-[20px]">lock</span></button>
+</div>
+<!-- Centered Security Exception Layout -->
+<div class="flex-1 px-8 flex flex-col items-center justify-center text-center space-y-6">
+<!-- Lock Icon Badge -->
+<div class="w-24 h-24 rounded-full bg-rose-50 flex items-center justify-center relative shadow-sm">
+<span class="material-symbols-outlined text-[48px] text-rose-600">lock</span>
+<span class="material-symbols-outlined text-[20px] text-rose-600 absolute bottom-3 right-3 bg-white rounded-full p-0.5 shadow-sm">priority_high</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-sm text-headline-sm text-slate-900 font-bold leading-tight">
+                    Password-protected files can't be opened here
+                  </h3>
+<p class="font-body-md text-body-md text-slate-500 max-w-xs leading-relaxed">
+                    Office formats with proprietary encryption require external native suites with authorized cryptographic keys.
+                  </p>
+</div>
+<!-- Action CTAs -->
+<div class="w-full space-y-3 pt-4">
+<!-- Primary Action: 56pt height, 16pt radius -->
+<button class="w-full h-14 rounded-2xl bg-primary text-white font-title-md text-[16px] font-semibold shadow-md active:scale-98 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+<span class="">Open in another app</span>
+</button>
+<button class="w-full h-12 rounded-xl text-slate-600 font-title-md text-[15px] hover:bg-slate-100 transition-all">
+                    Back to Recent Files
+                  </button>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-white">
+<div class="w-32 h-1 rounded-full bg-slate-900/30"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Frame 6B: Skeleton Shimmer State (DOCX / XLSX) -->
+<div class="flex flex-col items-center">
+<div class="font-label-md text-label-md text-tertiary mb-space-sm flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zero-Spinner Shimmer Indexing
+          </div>
+<div class="w-[393px] h-[852px] rounded-[52px] p-3 shadow-2xl relative select-none overflow-hidden" style="background-color: #EEF0F5;">
+<div class="w-full h-full rounded-[42px] overflow-hidden flex flex-col relative" style="background-color: #EEF0F5;">
+<!-- Status Bar -->
+<div class="h-11 w-full flex items-center justify-between px-7 shrink-0 z-30 bg-white">
+<span class="font-label-xs text-label-xs font-semibold text-slate-900">9:41</span>
+<div class="w-24 h-6 rounded-full bg-black flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+</div>
+<div class="flex items-center gap-1 text-slate-900">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_full</span>
+</div>
+</div>
+<!-- Shimmer Top Bar -->
+<div class="h-14 w-full flex items-center justify-between px-4 shrink-0 bg-white shadow-sm z-20">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 animate-pulse"></div>
+<div class="w-36 h-4 rounded bg-slate-200 animate-pulse"></div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-slate-100 animate-pulse"></div>
+<div class="w-7 h-7 rounded bg-slate-100 animate-pulse"></div>
+</div>
+</div>
+<!-- Shimmer Document Card Canvas -->
+<div class="flex-1 p-4 space-y-4 overflow-hidden relative">
+<div class="w-full rounded-xl bg-white p-5 space-y-5 shadow-sm">
+<!-- Shimmer Title -->
+<div class="space-y-2">
+<div class="w-3/4 h-6 rounded-md bg-slate-200 animate-pulse"></div>
+<div class="w-1/3 h-3 rounded bg-slate-100 animate-pulse"></div>
+</div>
+<!-- Shimmer Paragraph Blocks -->
+<div class="space-y-2.5">
+<div class="w-full h-3 rounded bg-slate-200/70 animate-pulse"></div>
+<div class="w-full h-3 rounded bg-slate-200/70 animate-pulse"></div>
+<div class="w-4/5 h-3 rounded bg-slate-200/70 animate-pulse"></div>
+</div>
+<!-- Shimmer Table Grid -->
+<div class="rounded-lg border border-slate-100 overflow-hidden space-y-1 p-2 bg-slate-50">
+<div class="grid grid-cols-3 gap-2">
+<div class="h-4 rounded bg-slate-200 animate-pulse"></div>
+<div class="h-4 rounded bg-slate-200 animate-pulse"></div>
+<div class="h-4 rounded bg-slate-200 animate-pulse"></div>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-2">
+<div class="h-3 rounded bg-slate-200/60 animate-pulse"></div>
+<div class="h-3 rounded bg-slate-200/60 animate-pulse"></div>
+<div class="h-3 rounded bg-slate-200/60 animate-pulse"></div>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-1">
+<div class="h-3 rounded bg-slate-200/60 animate-pulse"></div>
+<div class="h-3 rounded bg-slate-200/60 animate-pulse"></div>
+<div class="h-3 rounded bg-slate-200/60 animate-pulse"></div>
+</div>
+</div>
+<!-- Shimmer Image Block -->
+<div class="w-full h-28 rounded-lg bg-slate-200/80 animate-pulse flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-300 text-[32px]">image</span>
+</div>
+<div class="space-y-2">
+<div class="w-full h-3 rounded bg-slate-200/70 animate-pulse"></div>
+<div class="w-2/3 h-3 rounded bg-slate-200/70 animate-pulse"></div>
+</div>
+</div>
+</div>
+<!-- Floating Page Shimmer Pill -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30">
+<div class="w-16 h-6 rounded-full bg-slate-400 animate-pulse"></div>
+</div>
+<!-- Home Indicator -->
+<div class="h-5 w-full flex items-center justify-center shrink-0 z-40 bg-transparent">
+<div class="w-32 h-1 rounded-full bg-slate-900/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- ENGINEERING CONTRACT SPECIFICATION TILES -->
+<!-- ========================================================================= -->
+<section class="space-y-space-md pt-8 border-t border-slate-200">
+<div class="space-y-1">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Architectural Directives</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Core rendering rules and engine parameters enforced across handheld devices.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Tile 1 -->
+<div class="p-space-lg rounded bg-surface-container space-y-2">
+<div class="flex items-center gap-2 text-primary font-title-md text-title-md">
+<span class="material-symbols-outlined text-[20px]">offline_bolt</span>
+<span class="">Offline Rust Engine</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            POI/OpenXML decompressed in memory using zero-copy Rust streaming. Uncompressed packages are validated entirely inside the local device sandbox.
+          </p>
+</div>
+<!-- Tile 2 -->
+<div class="p-space-lg rounded bg-surface-container space-y-2">
+<div class="flex items-center gap-2 text-secondary font-title-md text-title-md">
+<span class="material-symbols-outlined text-[20px]">view_column</span>
+<span class="">3,000-Row Clamping</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            XLSX grids mount a maximum window of 3,000 continuous rows into the DOM. Cell virtualization unmounts off-screen matrix items to restrict footprint under 65MB.
+          </p>
+</div>
+<!-- Tile 3 -->
+<div class="p-space-lg rounded bg-surface-container space-y-2">
+<div class="flex items-center gap-2 text-on-surface font-title-md text-title-md">
+<span class="material-symbols-outlined text-[20px]">invert_colors_off</span>
+<span class="">Non-Inversion Fidelity</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            In Dark Navy mode, outer canvas transforms to #11131B, but the document sheets remain clean #FFFFFF. High-contrast diagrams and corporate typography are never inverted.
+          </p>
+</div>
+<!-- Tile 4 -->
+<div class="p-space-lg rounded bg-surface-container space-y-2">
+<div class="flex items-center gap-2 text-error font-title-md text-title-md">
+<span class="material-symbols-outlined text-[20px]">block</span>
+<span class="">Zero In-Reader Ads</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Document viewports have a strict zero-ad and zero-bottom-navigation mandate. Screen real estate is entirely preserved for uninterrupted reading and matrix manipulation.
+          </p>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script>
+  // Simple smooth scroll behavior for board index navigation
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script></main><footer class="w-full bg-surface-container-low py-space-lg"><div class="w-full px-margin flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-on-surface">Doc View</span><span class="font-body-sm text-body-sm text-tertiary">Office Document Viewer Suite • Design System v2.4</span></div><div class="flex items-center gap-space-lg font-body-sm text-body-sm text-on-surface-variant"><span class="">Canvas 393 × 852 pt</span><span class="">Hairline Tokens (1px)</span><span class="">AdMob Dock 60pt</span></div></div></footer>
+
+</body></html>
