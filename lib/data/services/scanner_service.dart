@@ -27,6 +27,20 @@ class ScanProgress {
   );
 }
 
+/// Pure function determining whether a file path is a supported document during filesystem scans.
+/// When [includeImages] is false, image file extensions are excluded.
+FileCategory? resolveScannedCategory(
+  String filePath, {
+  required bool includeImages,
+}) {
+  final category = categoryFromPath(filePath);
+  if (category == null) return null;
+  if (!includeImages && category == FileCategory.image) {
+    return null;
+  }
+  return category;
+}
+
 /// Service that walks the Android filesystem in a background Isolate to index documents.
 class ScannerService {
   ScannerService({FileRepository? repository})
@@ -46,7 +60,10 @@ class ScannerService {
 
   /// Starts a full filesystem scan on Android.
   /// If a scan is already running, or if the platform is not Android, this is a no-op.
-  Future<void> startScan({String rootPath = androidRoot}) async {
+  Future<void> startScan({
+    String rootPath = androidRoot,
+    bool includeImages = true,
+  }) async {
     if (_isScanning) {
       return;
     }
@@ -82,6 +99,7 @@ class ScannerService {
         _IsolateConfig(
           rootPath: rootPath,
           sendPort: receivePort.sendPort,
+          includeImages: includeImages,
         ),
       );
 
@@ -155,10 +173,12 @@ class _IsolateConfig {
   const _IsolateConfig({
     required this.rootPath,
     required this.sendPort,
+    required this.includeImages,
   });
 
   final String rootPath;
   final SendPort sendPort;
+  final bool includeImages;
 }
 
 /// Entry point executed inside the spawned background [Isolate].
@@ -170,7 +190,13 @@ void _scannerIsolateEntryPoint(_IsolateConfig config) {
   final seenPaths = <String>{};
 
   try {
-    _walkDirectory(rootDir, sendPort, buffer, seenPaths);
+    _walkDirectory(
+      rootDir,
+      sendPort,
+      buffer,
+      seenPaths,
+      config.includeImages,
+    );
 
     // Flush any remaining items in the buffer
     if (buffer.isNotEmpty) {
@@ -199,17 +225,27 @@ void _walkDirectory(
   SendPort sendPort,
   List<Map<String, dynamic>> buffer,
   Set<String> seenPaths,
+  bool includeImages,
 ) {
   try {
     final entities = currentDir.listSync(followLinks: false);
     for (final entity in entities) {
       if (entity is Directory) {
         if (!_shouldSkipDirectory(entity)) {
-          _walkDirectory(entity, sendPort, buffer, seenPaths);
+          _walkDirectory(
+            entity,
+            sendPort,
+            buffer,
+            seenPaths,
+            includeImages,
+          );
         }
       } else if (entity is File) {
         final filePath = entity.path;
-        final category = categoryFromPath(filePath);
+        final category = resolveScannedCategory(
+          filePath,
+          includeImages: includeImages,
+        );
 
         if (category != null) {
           try {

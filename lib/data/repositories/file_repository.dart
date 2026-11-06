@@ -247,6 +247,16 @@ class FileRepository {
     return rows.map(DocFile.fromMap).toList();
   }
 
+  /// Clears recent history by resetting last_opened to NULL for all records.
+  Future<int> clearRecentHistory() async {
+    final db = await _database.database;
+    return db.update(
+      AppDatabase.tableFiles,
+      {'last_opened': null},
+      where: 'last_opened IS NOT NULL',
+    );
+  }
+
   /// Searches files matching [query] on file name with LIKE, optional category filter, and limit.
   Future<List<DocFile>> searchFiles(
     String query, {

@@ -6,9 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/file_types.dart';
 import '../../data/db/app_database.dart';
+import '../../data/models/app_settings.dart';
 import '../../data/models/doc_file.dart';
 import '../../data/models/sort_option.dart';
 import '../../data/repositories/file_repository.dart';
+import '../../data/repositories/settings_repository.dart';
 import '../../data/services/file_operations_service.dart';
 import '../../data/services/import_service.dart';
 import '../../data/services/open_with_service.dart';
@@ -121,6 +123,48 @@ final pdfSplitServiceProvider = Provider<PdfSplitService>((ref) {
 /// Key for persisting last completed scan timestamp in SharedPreferences.
 const String keyLastScanTime = 'last_completed_scan_timestamp';
 
+/// Settings repository provider.
+final settingsRepositoryProvider = Provider<SettingsRepository>((ref) {
+  return SettingsRepository();
+});
+
+/// Notifier managing application settings state and persistence.
+class SettingsNotifier extends Notifier<AppSettings> {
+  @override
+  AppSettings build() {
+    _loadSettings();
+    return const AppSettings();
+  }
+
+  Future<void> _loadSettings() async {
+    final repository = ref.read(settingsRepositoryProvider);
+    state = await repository.loadSettings();
+  }
+
+  Future<void> setThemeMode(ThemeMode mode) async {
+    state = state.copyWith(themeMode: mode);
+    final repository = ref.read(settingsRepositoryProvider);
+    await repository.saveThemeMode(mode);
+  }
+
+  Future<void> setAutoScanMode(AutoScanMode mode) async {
+    state = state.copyWith(autoScanMode: mode);
+    final repository = ref.read(settingsRepositoryProvider);
+    await repository.saveAutoScanMode(mode);
+  }
+
+  Future<void> setIncludeImages(bool include) async {
+    state = state.copyWith(includeImages: include);
+    final repository = ref.read(settingsRepositoryProvider);
+    await repository.saveIncludeImages(include);
+  }
+}
+
+/// Provider exposing application preferences.
+final settingsProvider = NotifierProvider<SettingsNotifier, AppSettings>(
+  SettingsNotifier.new,
+);
+
 /// Notifier tracking background scan state, progress counts, and completion.
 class ScanStateNotifier extends Notifier<ScanProgress> {
   StreamSubscription<ScanProgress>? _subscription;
@@ -148,12 +192,17 @@ class ScanStateNotifier extends Notifier<ScanProgress> {
   }
 
   /// Triggers a background scan.
-  Future<void> startScan({String? rootPath}) async {
+  Future<void> startScan({String? rootPath, bool? includeImages}) async {
     final scanner = ref.read(scannerServiceProvider);
+    final shouldIncludeImages =
+        includeImages ?? ref.read(settingsProvider).includeImages;
     if (rootPath != null) {
-      await scanner.startScan(rootPath: rootPath);
+      await scanner.startScan(
+        rootPath: rootPath,
+        includeImages: shouldIncludeImages,
+      );
     } else {
-      await scanner.startScan();
+      await scanner.startScan(includeImages: shouldIncludeImages);
     }
   }
 
@@ -193,7 +242,8 @@ class ScanStateNotifier extends Notifier<ScanProgress> {
         }
       });
 
-      await scanner.startScan();
+      final shouldIncludeImages = ref.read(settingsProvider).includeImages;
+      await scanner.startScan(includeImages: shouldIncludeImages);
       return completer.future;
     }
 
@@ -407,6 +457,14 @@ class FileActionsController {
   Future<void> shareFiles(List<DocFile> files) async {
     final service = _ref.read(fileOperationsServiceProvider);
     await service.share(files);
+  }
+
+  /// Clears recent history by resetting last_opened to NULL for all records.
+  Future<int> clearRecentHistory() async {
+    final repository = _ref.read(fileRepositoryProvider);
+    final count = await repository.clearRecentHistory();
+    _ref.invalidate(recentsProvider);
+    return count;
   }
 
   /// Invalidates all document-related providers across the app.

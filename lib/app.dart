@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/constants/app_constants.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
+import 'data/models/app_settings.dart';
 import 'features/files/open_document.dart';
 import 'features/providers/providers.dart';
 
@@ -101,7 +102,10 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
       final hasAccess =
           await ref.read(allFilesAccessProvider.notifier).refreshAccess();
       if (hasAccess) {
-        ref.read(scanStateProvider.notifier).startScan();
+        final settings = ref.read(settingsProvider);
+        if (settings.autoScanMode != AutoScanMode.manualOnly) {
+          ref.read(scanStateProvider.notifier).startScan();
+        }
       } else {
         _showStoragePermissionDialog();
       }
@@ -126,6 +130,9 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     final hasAccess =
         await ref.read(allFilesAccessProvider.notifier).refreshAccess();
     if (hasAccess) {
+      final settings = ref.read(settingsProvider);
+      if (settings.autoScanMode == AutoScanMode.manualOnly) return;
+
       final scanState = ref.read(scanStateProvider);
       if (!scanState.isScanning) {
         final prefs = await SharedPreferences.getInstance();
@@ -195,13 +202,14 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
   @override
   Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
+    final settings = ref.watch(settingsProvider);
 
     return MaterialApp.router(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: settings.themeMode,
       routerConfig: router,
     );
   }

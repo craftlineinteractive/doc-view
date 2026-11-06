@@ -6,13 +6,18 @@ import 'package:docview/core/utils/file_name_utils.dart';
 import 'package:docview/core/utils/format_utils.dart';
 import 'package:docview/core/utils/page_range_parser.dart';
 import 'package:docview/core/utils/root_path_resolver.dart';
+import 'package:docview/data/models/app_settings.dart';
 import 'package:docview/data/models/doc_file.dart';
 import 'package:docview/data/models/sort_option.dart';
+import 'package:docview/data/repositories/settings_repository.dart';
 import 'package:docview/data/services/pdf/image_to_pdf_service.dart';
 import 'package:docview/data/services/pdf/pdf_output_service.dart';
+import 'package:docview/data/services/scanner_service.dart';
 import 'package:docview/features/directories/services/directory_lister.dart';
 import 'package:docview/features/viewer/txt_viewer_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   group('FileTypes & Category Classification Tests', () {
@@ -543,6 +548,97 @@ void main() {
       expect(pdfBytes.isNotEmpty, isTrue);
       final header = utf8.decode(pdfBytes.sublist(0, 5));
       expect(header, '%PDF-');
+    });
+  });
+
+  group('SettingsRepository & Preferences Tests', () {
+    setUp(() {
+      SharedPreferences.setMockInitialValues({});
+    });
+
+    test('loadSettings returns default values when empty', () async {
+      final repo = SettingsRepository();
+      final settings = await repo.loadSettings();
+
+      expect(settings.themeMode, ThemeMode.system);
+      expect(settings.autoScanMode, AutoScanMode.onOpen);
+      expect(settings.includeImages, isTrue);
+    });
+
+    test('save and load settings round-trip correctly', () async {
+      final repo = SettingsRepository();
+
+      await repo.saveThemeMode(ThemeMode.dark);
+      await repo.saveAutoScanMode(AutoScanMode.manualOnly);
+      await repo.saveIncludeImages(false);
+
+      final loaded = await repo.loadSettings();
+
+      expect(loaded.themeMode, ThemeMode.dark);
+      expect(loaded.autoScanMode, AutoScanMode.manualOnly);
+      expect(loaded.includeImages, isFalse);
+    });
+
+    test('loadSettings recovers gracefully from corrupted or invalid string values', () async {
+      SharedPreferences.setMockInitialValues({
+        SettingsRepository.keyThemeMode: 'invalid_mode_name',
+        SettingsRepository.keyAutoScanMode: 'corrupted_scan_mode',
+      });
+
+      final repo = SettingsRepository();
+      final loaded = await repo.loadSettings();
+
+      expect(loaded.themeMode, ThemeMode.system);
+      expect(loaded.autoScanMode, AutoScanMode.onOpen);
+      expect(loaded.includeImages, isTrue);
+    });
+  });
+
+  group('resolveScannedCategory Extension Filter Tests', () {
+    test('respects includeImages when true', () {
+      expect(
+        resolveScannedCategory('photo.jpg', includeImages: true),
+        FileCategory.image,
+      );
+      expect(
+        resolveScannedCategory('/storage/DCIM/pic.png', includeImages: true),
+        FileCategory.image,
+      );
+      expect(
+        resolveScannedCategory('/storage/Downloads/doc.pdf', includeImages: true),
+        FileCategory.pdf,
+      );
+      expect(
+        resolveScannedCategory('/storage/notes.txt', includeImages: true),
+        FileCategory.txt,
+      );
+    });
+
+    test('excludes images when includeImages is false but preserves other documents', () {
+      expect(
+        resolveScannedCategory('photo.jpg', includeImages: false),
+        isNull,
+      );
+      expect(
+        resolveScannedCategory('/storage/DCIM/pic.png', includeImages: false),
+        isNull,
+      );
+      expect(
+        resolveScannedCategory('/storage/pic.webp', includeImages: false),
+        isNull,
+      );
+      expect(
+        resolveScannedCategory('/storage/Downloads/doc.pdf', includeImages: false),
+        FileCategory.pdf,
+      );
+      expect(
+        resolveScannedCategory('/storage/notes.txt', includeImages: false),
+        FileCategory.txt,
+      );
+      expect(
+        resolveScannedCategory('/storage/calc.xlsx', includeImages: false),
+        FileCategory.excel,
+      );
     });
   });
 }

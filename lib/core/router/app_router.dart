@@ -8,6 +8,7 @@ import '../../features/directories/directories_screen.dart';
 import '../../features/files/files_screen.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/search/search_screen.dart';
+import '../../features/settings/faq_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/shell/main_shell.dart';
 import '../../features/tools/tools_screen.dart';
@@ -86,6 +87,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'directories',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const DirectoriesScreen(),
+      ),
+      GoRoute(
+        path: '/faq',
+        name: 'faq',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const FaqScreen(),
       ),
       GoRoute(
         path: '/viewer',

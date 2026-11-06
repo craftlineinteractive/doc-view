@@ -1,9 +1,11 @@
 import 'package:docview/app.dart';
+import 'package:docview/core/constants/app_constants.dart';
 import 'package:docview/core/constants/file_types.dart';
 import 'package:docview/core/theme/app_theme.dart';
 import 'package:docview/data/services/permission_service.dart';
 import 'package:docview/features/directories/directories_screen.dart';
 import 'package:docview/features/providers/providers.dart';
+import 'package:docview/features/settings/settings_screen.dart';
 import 'package:docview/features/tools/tools_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -135,5 +137,43 @@ void main() {
     await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
     await expectLater(tester, meetsGuideline(textContrastGuideline));
     handle.dispose();
+  });
+
+  testWidgets(
+      'SettingsScreen hides rows when corresponding AppConstants are empty',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(800, 2400);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MaterialApp(
+          home: SettingsScreen(),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // Verify presence of core, non-conditional settings rows
+    expect(find.byKey(const Key('settings_file_manager')), findsOneWidget);
+    expect(find.byKey(const Key('settings_app_theme')), findsOneWidget);
+    expect(find.byKey(const Key('settings_scan_settings')), findsOneWidget);
+    expect(find.byKey(const Key('settings_clear_history')), findsOneWidget);
+    expect(find.byKey(const Key('settings_faq')), findsOneWidget);
+    expect(find.byKey(const Key('settings_licenses')), findsOneWidget);
+    expect(find.byKey(const Key('settings_fonts_license')), findsOneWidget);
+
+    // Conditional rows whose constants are empty ('') MUST NOT appear
+    expect(AppConstants.supportEmail, isEmpty);
+    expect(AppConstants.storeShareUrl, isEmpty);
+    expect(AppConstants.storeRateUrl, isEmpty);
+    expect(AppConstants.privacyPolicyUrl, isEmpty);
+
+    expect(find.byKey(const Key('settings_feedback')), findsNothing);
+    expect(find.byKey(const Key('settings_share_app')), findsNothing);
+    expect(find.byKey(const Key('settings_rate_us')), findsNothing);
+    expect(find.byKey(const Key('settings_privacy_policy')), findsNothing);
   });
 }
