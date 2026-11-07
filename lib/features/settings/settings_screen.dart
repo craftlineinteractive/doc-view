@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../data/models/app_settings.dart';
+import '../debug/component_gallery_screen.dart';
 import '../providers/providers.dart';
 
 /// Screen managing application preferences, file management tools, offline FAQs, and legal info.
@@ -643,6 +645,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   iconColor: theme.colorScheme.primary,
                   title: AppConstants.appName,
                   subtitle: appVersionStr,
+                  onLongPress: kDebugMode
+                      ? () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => const ComponentGalleryScreen(),
+                            ),
+                          );
+                        }
+                      : null,
                 ),
                 if (AppConstants.privacyPolicyUrl.isNotEmpty) ...[
                   const _TileDivider(),
@@ -720,6 +731,7 @@ class _SettingsTile extends StatelessWidget {
     this.subtitle,
     this.trailing,
     this.onTap,
+    this.onLongPress,
   });
 
   final IconData icon;
@@ -728,16 +740,18 @@ class _SettingsTile extends StatelessWidget {
   final String? subtitle;
   final Widget? trailing;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Semantics(
-      button: onTap != null,
+      button: onTap != null || onLongPress != null,
       label: subtitle != null ? '$title, $subtitle' : title,
       child: InkWell(
         onTap: onTap,
+        onLongPress: onLongPress,
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: 56),
           child: Padding(

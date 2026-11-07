@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/file_types.dart';
 import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
+import '../../../shared/widgets/tiles/file_type_badge.dart';
 import '../../providers/providers.dart';
 import '../open_document.dart';
 import 'file_options_sheet.dart';
@@ -33,7 +34,6 @@ class FileTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final categoryColor = file.category.color;
 
     final bookmarkLabel = file.isBookmarked ? ', bookmarked' : '';
     final selectionLabel =
@@ -72,48 +72,55 @@ class FileTile extends ConsumerWidget {
         },
         onLongPress: onLongPress,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: file.category == FileCategory.image
-              ? SizedBox(
-                  width: 48,
-                  height: 48,
-                  child: Image.file(
-                    File(file.path),
-                    width: 48,
-                    height: 48,
-                    cacheWidth: 120,
-                    fit: BoxFit.cover,
-                    filterQuality: FilterQuality.low,
-                    gaplessPlayback: true,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      width: 48,
-                      height: 48,
-                      color: categoryColor.withValues(alpha: 0.15),
-                      alignment: Alignment.center,
-                      child: Icon(
-                        file.category.icon,
-                        color: categoryColor,
-                        size: 24,
-                      ),
-                    ),
-                  ),
-                )
-              : Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: categoryColor.withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  alignment: Alignment.center,
-                  child: Icon(
-                    file.category.icon,
-                    color: categoryColor,
-                    size: 24,
+        leading: file.category == FileCategory.image
+            ? Container(
+                width: 48,
+                height: 56,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color(0xFF2A3042)
+                        : const Color(0xFFE6E9F0),
+                    width: 0.8,
                   ),
                 ),
-        ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(9.2),
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: Image.file(
+                          File(file.path),
+                          width: 48,
+                          height: 56,
+                          cacheWidth: 120,
+                          fit: BoxFit.cover,
+                          filterQuality: FilterQuality.low,
+                          gaplessPlayback: true,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const FileTypeBadge(
+                            category: FileCategory.image,
+                            size: BadgeSize.large,
+                          ),
+                        ),
+                      ),
+                      const Positioned(
+                        left: 4,
+                        bottom: 4,
+                        child: FileTypeBadge(
+                          category: FileCategory.image,
+                          size: BadgeSize.small,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            : FileTypeBadge(
+                category: file.category,
+                size: BadgeSize.large,
+              ),
         title: Text(
           file.name,
           maxLines: 1,

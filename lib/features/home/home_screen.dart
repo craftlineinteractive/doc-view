@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../shared/widgets/tiles/category_tile.dart';
 import '../files/open_document.dart';
 import '../files/widgets/file_tile.dart';
 import '../providers/providers.dart';
@@ -87,80 +88,70 @@ class HomeScreen extends ConsumerWidget {
                   padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
                   child: Builder(
                     builder: (context) {
+                      final size = MediaQuery.sizeOf(context);
                       final textScale =
                           MediaQuery.textScalerOf(context).scale(1.0);
-                      final categoryAspectRatio = textScale > 1.4
-                          ? 0.60
-                          : (textScale > 1.1 ? 0.72 : 0.88);
+                      final double categoryAspectRatio;
+                      if (size.width > 500) {
+                        categoryAspectRatio = 1.6;
+                      } else {
+                        categoryAspectRatio = textScale > 1.4
+                            ? 0.65
+                            : (textScale > 1.1 ? 0.72 : 0.82);
+                      }
 
                       return GridView.count(
                         crossAxisCount: 4,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
                         childAspectRatio: categoryAspectRatio,
                         children: [
-                          _CategoryTile(
+                          CategoryTile(
                             label: 'All',
-                            icon: Icons.folder_copy_rounded,
-                            color: const Color(0xFF1A73E8),
-                            count: '$totalFiles files',
+                            subtitle: '$totalFiles files',
                             onTap: () => context.push('/files?category=all'),
                           ),
-                          _CategoryTile(
-                            label: FileCategory.pdf.label,
-                            icon: FileCategory.pdf.icon,
-                            color: FileCategory.pdf.color,
-                            count:
-                                '${categoryCounts[FileCategory.pdf] ?? 0} files',
+                          CategoryTile(
+                            category: FileCategory.pdf,
+                            label: 'PDF',
+                            subtitle: '${categoryCounts[FileCategory.pdf] ?? 0} files',
                             onTap: () => context.push('/files?category=pdf'),
                           ),
-                          _CategoryTile(
-                            label: FileCategory.word.label,
-                            icon: FileCategory.word.icon,
-                            color: FileCategory.word.color,
-                            count:
-                                '${categoryCounts[FileCategory.word] ?? 0} files',
+                          CategoryTile(
+                            category: FileCategory.word,
+                            label: 'Word',
+                            subtitle: '${categoryCounts[FileCategory.word] ?? 0} files',
                             onTap: () => context.push('/files?category=word'),
                           ),
-                          _CategoryTile(
-                            label: FileCategory.excel.label,
-                            icon: FileCategory.excel.icon,
-                            color: FileCategory.excel.color,
-                            count:
-                                '${categoryCounts[FileCategory.excel] ?? 0} files',
+                          CategoryTile(
+                            category: FileCategory.excel,
+                            label: 'Excel',
+                            subtitle: '${categoryCounts[FileCategory.excel] ?? 0} files',
                             onTap: () => context.push('/files?category=excel'),
                           ),
-                          _CategoryTile(
-                            label: FileCategory.ppt.label,
-                            icon: FileCategory.ppt.icon,
-                            color: FileCategory.ppt.color,
-                            count:
-                                '${categoryCounts[FileCategory.ppt] ?? 0} files',
+                          CategoryTile(
+                            category: FileCategory.ppt,
+                            label: 'PPT',
+                            subtitle: '${categoryCounts[FileCategory.ppt] ?? 0} files',
                             onTap: () => context.push('/files?category=ppt'),
                           ),
-                          _CategoryTile(
-                            label: FileCategory.txt.label,
-                            icon: FileCategory.txt.icon,
-                            color: FileCategory.txt.color,
-                            count:
-                                '${categoryCounts[FileCategory.txt] ?? 0} files',
+                          CategoryTile(
+                            category: FileCategory.txt,
+                            label: 'TXT',
+                            subtitle: '${categoryCounts[FileCategory.txt] ?? 0} files',
                             onTap: () => context.push('/files?category=txt'),
                           ),
-                          _CategoryTile(
-                            label: FileCategory.image.label,
-                            icon: FileCategory.image.icon,
-                            color: FileCategory.image.color,
-                            count:
-                                '${categoryCounts[FileCategory.image] ?? 0} files',
+                          CategoryTile(
+                            category: FileCategory.image,
+                            label: 'Image',
+                            subtitle: '${categoryCounts[FileCategory.image] ?? 0} files',
                             onTap: () => context.push('/files?category=image'),
                           ),
-                          _CategoryTile(
-                            label: 'Directories',
-                            icon: Icons.snippet_folder_rounded,
-                            color: const Color(0xFF8E24AA),
-                            count: 'Browse',
+                          CategoryTile(
+                            label: 'Folders',
+                            subtitle: 'Browse',
                             onTap: () => context.push('/directories'),
                           ),
                         ],
@@ -257,89 +248,6 @@ class _TabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(_TabBarHeaderDelegate oldDelegate) {
     return tabBar != oldDelegate.tabBar ||
         backgroundColor != oldDelegate.backgroundColor;
-  }
-}
-
-class _CategoryTile extends StatelessWidget {
-  const _CategoryTile({
-    required this.label,
-    required this.icon,
-    required this.color,
-    required this.count,
-    required this.onTap,
-  });
-
-  final String label;
-  final IconData icon;
-  final Color color;
-  final String count;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Semantics(
-      button: true,
-      label: '$label, $count',
-      child: Material(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(12),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: theme.dividerColor.withValues(alpha: 0.1),
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 38,
-                  height: 38,
-                  decoration: BoxDecoration(
-                    color: color.withValues(alpha: 0.15),
-                    shape: BoxShape.circle,
-                  ),
-                  alignment: Alignment.center,
-                  child: Icon(
-                    icon,
-                    color: color,
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  count,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color:
-                        theme.textTheme.bodySmall?.color?.withValues(alpha: 0.6),
-                    fontSize: 10,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
 

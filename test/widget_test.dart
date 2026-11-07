@@ -49,7 +49,7 @@ void main() {
     expect(find.text('All files'), findsWidgets);
     expect(find.text('Tools'), findsOneWidget);
     expect(find.text('Settings'), findsOneWidget);
-    expect(find.text('PDF'), findsOneWidget);
+    expect(find.text('PDF'), findsWidgets);
     expect(find.text('Word'), findsOneWidget);
     expect(find.text('Recent'), findsOneWidget);
     expect(find.text('Bookmarks'), findsOneWidget);

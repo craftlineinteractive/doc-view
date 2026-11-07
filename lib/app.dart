@@ -211,6 +211,11 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
       darkTheme: AppTheme.darkTheme,
       themeMode: settings.themeMode,
       routerConfig: router,
+      builder: (context, child) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+        AppTheme.configureSystemUI(isDark ? Brightness.dark : Brightness.light);
+        return child ?? const SizedBox.shrink();
+      },
     );
   }
 }
