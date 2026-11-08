@@ -79,8 +79,19 @@ class SkeletonTileGrid extends StatelessWidget {
           childAspectRatio: 0.85,
         ),
         itemCount: itemCount,
-        itemBuilder: (context, index) => const SkeletonBox(
-          borderRadius: 20,
+        itemBuilder: (context, index) => const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 2, vertical: 4),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SkeletonBox(width: 36, height: 44, borderRadius: 5),
+              SizedBox(height: 6),
+              SkeletonBox(width: 36, height: 12, borderRadius: 3),
+              SizedBox(height: 4),
+              SkeletonBox(width: 44, height: 10, borderRadius: 2),
+            ],
+          ),
         ),
       ),
     );

@@ -197,37 +197,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                                     ),
                                 ],
                               ),
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  // Top reflection highlight
-                                  Positioned(
-                                    top: 6,
-                                    left: 8,
-                                    right: 8,
-                                    height: 40,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.vertical(
-                                          top: Radius.circular(22),
-                                        ),
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [
-                                            Colors.white.withValues(
-                                              alpha: isDark ? 0.30 : 0.25,
-                                            ),
-                                            Colors.transparent,
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  // Page Silhouette with folded corner
-                                  const _AppIconSilhouette(),
-                                ],
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(27),
+                                child: Image.asset(
+                                  'assets/docview_icon.png',
+                                  width: 112,
+                                  height: 112,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ],
@@ -441,123 +418,4 @@ class _FloatingSheet extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Scaled SVG-like custom painted page silhouette with folded corner.
-class _AppIconSilhouette extends StatelessWidget {
-  const _AppIconSilhouette();
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 56,
-      height: 68,
-      child: CustomPaint(
-        painter: _AppIconPainter(),
-      ),
-    );
-  }
-}
-
-class _AppIconPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final w = size.width;
-    final h = size.height;
-    const cornerSize = 18.0;
-
-    // Base document page path with top-right fold cut
-    final pagePath = Path()
-      ..moveTo(6, 0)
-      ..lineTo(w - cornerSize, 0)
-      ..lineTo(w, cornerSize)
-      ..lineTo(w, h - 6)
-      ..arcToPoint(Offset(w - 6, h), radius: const Radius.circular(6))
-      ..lineTo(6, h)
-      ..arcToPoint(Offset(0, h - 6), radius: const Radius.circular(6))
-      ..lineTo(0, 6)
-      ..arcToPoint(const Offset(6, 0), radius: const Radius.circular(6))
-      ..close();
-
-    // Page drop shadow
-    canvas.drawShadow(pagePath, Colors.black, 4, false);
-
-    // Draw page base in pure white
-    final pagePaint = Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.fill;
-    canvas.drawPath(pagePath, pagePaint);
-
-    // Folded top-right flap
-    final flapPath = Path()
-      ..moveTo(w - cornerSize, 0)
-      ..lineTo(w - cornerSize, cornerSize - 4)
-      ..arcToPoint(
-        Offset(w - cornerSize + 4, cornerSize),
-        radius: const Radius.circular(4),
-      )
-      ..lineTo(w, cornerSize)
-      ..close();
-
-    final flapPaint = Paint()
-      ..color = const Color(0xFFE2EDFC)
-      ..style = PaintingStyle.fill;
-    canvas.drawPath(flapPath, flapPaint);
-
-    // Document lines inside icon
-    final linePaint = Paint()
-      ..color = const Color(0xFF1A66E8).withValues(alpha: 0.9)
-      ..style = PaintingStyle.fill;
-
-    // Line 1
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        const Rect.fromLTWH(10, 27, 36, 4),
-        const Radius.circular(2),
-      ),
-      linePaint,
-    );
-    // Line 2
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        const Rect.fromLTWH(10, 36, 36, 4),
-        const Radius.circular(2),
-      ),
-      linePaint,
-    );
-    // Line 3
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        const Rect.fromLTWH(10, 45, 24, 4),
-        const Radius.circular(2),
-      ),
-      linePaint,
-    );
-
-    // Accent file tags (Red PDF + Blue DOCX)
-    final redPaint = Paint()
-      ..color = const Color(0xFFE02B2B)
-      ..style = PaintingStyle.fill;
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        const Rect.fromLTWH(10, 54, 12, 3),
-        const Radius.circular(1.5),
-      ),
-      redPaint,
-    );
-
-    final bluePaint = Paint()
-      ..color = const Color(0xFF1E5FD8)
-      ..style = PaintingStyle.fill;
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        const Rect.fromLTWH(25, 54, 12, 3),
-        const Radius.circular(1.5),
-      ),
-      bluePaint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

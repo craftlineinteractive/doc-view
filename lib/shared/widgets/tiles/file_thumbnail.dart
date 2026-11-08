@@ -75,21 +75,13 @@ class _FileThumbnailState extends State<FileThumbnail> {
   Widget build(BuildContext context) {
     final tokens = context.tokens;
 
-    final fallback = ClipRRect(
-      borderRadius: BorderRadius.circular(widget.borderRadius),
-      child: Container(
-        width: widget.width,
-        height: widget.height,
-        decoration: BoxDecoration(
-          color: tokens.surface,
-          borderRadius: BorderRadius.circular(widget.borderRadius),
-          border: Border.all(color: tokens.hairline, width: 0.5),
-        ),
-        child: Center(
-          child: FileTypeBadge(
-            category: widget.category,
-            size: BadgeSize.large,
-          ),
+    final fallback = SizedBox(
+      width: widget.width,
+      height: widget.height,
+      child: Center(
+        child: FileTypeBadge(
+          category: widget.category,
+          size: BadgeSize.large,
         ),
       ),
     );
