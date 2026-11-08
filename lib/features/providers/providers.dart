@@ -482,3 +482,31 @@ final fileActionsControllerProvider = Provider<FileActionsController>((ref) {
   return FileActionsController(ref);
 });
 
+/// Notifier managing persisted recent search queries.
+class RecentSearchesNotifier extends AsyncNotifier<List<String>> {
+  @override
+  Future<List<String>> build() async {
+    final repository = ref.read(settingsRepositoryProvider);
+    return repository.loadRecentSearches();
+  }
+
+  Future<void> addSearch(String query) async {
+    final repository = ref.read(settingsRepositoryProvider);
+    final updated = await repository.addRecentSearch(query);
+    state = AsyncData(updated);
+  }
+
+  Future<void> clearAll() async {
+    final repository = ref.read(settingsRepositoryProvider);
+    await repository.clearRecentSearches();
+    state = const AsyncData([]);
+  }
+}
+
+/// Provider exposing reactive recent search queries list.
+final recentSearchesProvider =
+    AsyncNotifierProvider<RecentSearchesNotifier, List<String>>(
+  RecentSearchesNotifier.new,
+);
+
+

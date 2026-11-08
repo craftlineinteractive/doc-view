@@ -11,6 +11,7 @@ class DocUnderlineTabs extends StatelessWidget {
   final int recentCount;
   final int bookmarksCount;
   final ValueChanged<int> onTabSelected;
+  final Widget? trailing;
 
   const DocUnderlineTabs({
     super.key,
@@ -18,6 +19,7 @@ class DocUnderlineTabs extends StatelessWidget {
     required this.recentCount,
     required this.bookmarksCount,
     required this.onTabSelected,
+    this.trailing,
   });
 
   @override
@@ -48,6 +50,12 @@ class DocUnderlineTabs extends StatelessWidget {
             activeColor: activeColor,
             onTap: () => onTabSelected(1),
           ),
+          if (trailing != null) ...[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: trailing!,
+            ),
+          ],
         ],
       ),
     );
@@ -82,7 +90,7 @@ class _TabItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 14),
+                padding: const EdgeInsets.only(top: 11, bottom: 9),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

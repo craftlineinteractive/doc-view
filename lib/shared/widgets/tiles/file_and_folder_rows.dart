@@ -6,6 +6,7 @@ import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import '../buttons/doc_icon_button.dart';
 import 'file_thumbnail.dart';
+import 'pdf_thumbnail_source.dart';
 
 /// 68pt document row matching the precision mockup layout.
 /// Supports default, bookmarked, and multi-selection states.
@@ -18,6 +19,7 @@ class FileRow extends StatelessWidget {
   final bool isBookmarked;
   final bool isSelected;
   final bool isSelectionMode;
+  final String? highlightQuery;
   final VoidCallback onTap;
   final VoidCallback? onLongPress;
   final VoidCallback? onToggleBookmark;
@@ -33,11 +35,82 @@ class FileRow extends StatelessWidget {
     this.isBookmarked = false,
     this.isSelected = false,
     this.isSelectionMode = false,
+    this.highlightQuery,
     required this.onTap,
     this.onLongPress,
     this.onToggleBookmark,
     this.onOptions,
   });
+
+  Widget _buildTitle(DocViewTokens tokens) {
+    if (highlightQuery == null || highlightQuery!.trim().isEmpty) {
+      return Text(
+        title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: DocViewTypography.titleMd.copyWith(
+          fontSize: 15,
+          color: tokens.textPrimary,
+        ),
+      );
+    }
+
+    final query = highlightQuery!.toLowerCase();
+    final lowerTitle = title.toLowerCase();
+    if (!lowerTitle.contains(query)) {
+      return Text(
+        title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: DocViewTypography.titleMd.copyWith(
+          fontSize: 15,
+          color: tokens.textPrimary,
+        ),
+      );
+    }
+
+    final spans = <TextSpan>[];
+    int start = 0;
+    while (true) {
+      final index = lowerTitle.indexOf(query, start);
+      if (index == -1) {
+        if (start < title.length) {
+          spans.add(TextSpan(
+            text: title.substring(start),
+            style: DocViewTypography.titleMd.copyWith(
+              fontSize: 15,
+              color: tokens.textPrimary,
+            ),
+          ));
+        }
+        break;
+      }
+      if (index > start) {
+        spans.add(TextSpan(
+          text: title.substring(start, index),
+          style: DocViewTypography.titleMd.copyWith(
+            fontSize: 15,
+            color: tokens.textPrimary,
+          ),
+        ));
+      }
+      spans.add(TextSpan(
+        text: title.substring(index, index + query.length),
+        style: DocViewTypography.titleMd.copyWith(
+          fontSize: 15,
+          color: tokens.primaryBlue,
+          fontWeight: FontWeight.w700,
+        ),
+      ));
+      start = index + query.length;
+    }
+
+    return RichText(
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      text: TextSpan(children: spans),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +164,10 @@ class FileRow extends StatelessWidget {
                   FileThumbnail(
                     filePath: filePath,
                     category: category,
-                    source: thumbnailSource,
+                    source: thumbnailSource ??
+                        (category == FileCategory.pdf
+                            ? PdfThumbnailSource.instance
+                            : null),
                   ),
                 ],
                 const SizedBox(width: 14),
@@ -101,15 +177,7 @@ class FileRow extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: DocViewTypography.titleMd.copyWith(
-                          fontSize: 15,
-                          color: tokens.textPrimary,
-                        ),
-                      ),
+                      _buildTitle(tokens),
                       const SizedBox(height: 4),
                       Text(
                         metadata,

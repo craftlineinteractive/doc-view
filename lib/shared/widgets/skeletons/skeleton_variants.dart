@@ -208,3 +208,32 @@ class SkeletonAdSlot extends StatelessWidget {
   }
 }
 
+/// Skeleton placeholder for the 3-column image gallery grid.
+class SkeletonImageGrid extends StatelessWidget {
+  final int itemCount;
+
+  const SkeletonImageGrid({super.key, this.itemCount = 18});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer(
+      child: GridView.builder(
+        padding: const EdgeInsets.all(4),
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4,
+          childAspectRatio: 1.0,
+        ),
+        itemCount: itemCount,
+        itemBuilder: (context, index) => const SkeletonBox(
+          borderRadius: 8,
+        ),
+      ),
+    );
+  }
+}
+
+
