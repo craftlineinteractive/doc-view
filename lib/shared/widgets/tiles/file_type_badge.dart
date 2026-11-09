@@ -7,7 +7,7 @@ import 'doc_folded_icon.dart';
 enum BadgeSize {
   small(24, 18, 8, 3),
   medium(34, 22, 9, 4),
-  large(48, 56, 9, 10);
+  large(40, 48, 11, 7);
 
   final double width;
   final double height;
@@ -105,6 +105,7 @@ class FileTypeBadge extends StatelessWidget {
       width: size.width,
       height: size.height,
       borderRadius: size.radius,
+      fontSize: size.fontSize,
     );
   }
 }

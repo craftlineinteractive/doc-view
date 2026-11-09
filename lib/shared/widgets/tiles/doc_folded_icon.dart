@@ -24,6 +24,7 @@ class DocFoldedIcon extends StatelessWidget {
   final double? foldSize;
   final double? fontSize;
   final double? iconSize;
+  final bool hasFold;
 
   const DocFoldedIcon({
     super.key,
@@ -31,18 +32,23 @@ class DocFoldedIcon extends StatelessWidget {
     this.label,
     this.icon,
     this.color,
-    this.width = 36,
-    this.height = 44,
+    this.width = 32,
+    this.height = 38,
     this.borderRadius = 5.0,
     this.foldSize,
     this.fontSize,
     this.iconSize,
+    this.hasFold = true,
   });
 
   Color _defaultColor() {
     if (color != null) return color!;
     if (category == null) {
-      return DocViewColors.primaryBlue;
+      final clean = label?.toLowerCase() ?? '';
+      if (clean.contains('folder') || clean.contains('director')) {
+        return DocViewColors.folderSolid;
+      }
+      return DocViewColors.interactiveBlue;
     }
     switch (category!) {
       case FileCategory.pdf:
@@ -66,7 +72,7 @@ class DocFoldedIcon extends StatelessWidget {
     if (icon != null) {
       return Icon(
         icon,
-        size: iconSize ?? (width * 0.48),
+        size: iconSize ?? (width * 0.50),
         color: Colors.white,
       );
     }
@@ -76,13 +82,13 @@ class DocFoldedIcon extends StatelessWidget {
       if (cleanLabel.contains('folder') || cleanLabel.contains('director')) {
         return Icon(
           Icons.manage_search,
-          size: iconSize ?? (width * 0.50),
+          size: iconSize ?? (width * 0.52),
           color: Colors.white,
         );
       }
       return Icon(
         Icons.folder,
-        size: iconSize ?? (width * 0.50),
+        size: iconSize ?? (width * 0.52),
         color: Colors.white,
       );
     }
@@ -93,7 +99,7 @@ class DocFoldedIcon extends StatelessWidget {
           label ?? 'PDF',
           style: TextStyle(
             fontFamily: 'SpaceGrotesk',
-            fontSize: fontSize ?? (width * 0.31),
+            fontSize: fontSize ?? (width * 0.32),
             fontWeight: FontWeight.w800,
             color: Colors.white,
             letterSpacing: -0.5,
@@ -124,7 +130,7 @@ class DocFoldedIcon extends StatelessWidget {
           label ?? 'PPT',
           style: TextStyle(
             fontFamily: 'SpaceGrotesk',
-            fontSize: fontSize ?? (width * 0.31),
+            fontSize: fontSize ?? (width * 0.32),
             fontWeight: FontWeight.w800,
             color: Colors.white,
             letterSpacing: -0.5,
@@ -144,13 +150,13 @@ class DocFoldedIcon extends StatelessWidget {
       case FileCategory.image:
         return Icon(
           Icons.photo_camera_outlined,
-          size: iconSize ?? (width * 0.50),
+          size: iconSize ?? (width * 0.52),
           color: Colors.white,
         );
       case FileCategory.other:
         return Icon(
           Icons.insert_drive_file,
-          size: iconSize ?? (width * 0.48),
+          size: iconSize ?? (width * 0.50),
           color: Colors.white,
         );
     }
@@ -159,7 +165,7 @@ class DocFoldedIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveColor = _defaultColor();
-    final effectiveFold = foldSize ?? (width * 0.28).clamp(8.0, 14.0);
+    final effectiveFold = foldSize ?? (width * 0.28).clamp(7.0, 12.0);
 
     return SizedBox(
       width: width,
@@ -173,10 +179,11 @@ class DocFoldedIcon extends StatelessWidget {
               color: effectiveColor,
               borderRadius: borderRadius,
               foldSize: effectiveFold,
+              hasFold: hasFold,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: effectiveFold * 0.2),
+            padding: EdgeInsets.only(top: hasFold ? (effectiveFold * 0.15) : 0),
             child: _buildContent(),
           ),
         ],
@@ -189,11 +196,13 @@ class _DocFoldedPainter extends CustomPainter {
   final Color color;
   final double borderRadius;
   final double foldSize;
+  final bool hasFold;
 
   const _DocFoldedPainter({
     required this.color,
     required this.borderRadius,
     required this.foldSize,
+    required this.hasFold,
   });
 
   @override
@@ -202,6 +211,24 @@ class _DocFoldedPainter extends CustomPainter {
     final h = size.height;
     final r = borderRadius.clamp(0.0, w / 4);
     final fold = foldSize.clamp(4.0, w / 2);
+
+    if (!hasFold) {
+      // Clean rounded square / rectangle for Folders and All categories
+      final rrect = RRect.fromRectAndRadius(
+        Offset.zero & size,
+        Radius.circular(r),
+      );
+      final shadowPaint = Paint()
+        ..color = const Color(0x1F000000)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 2);
+      canvas.drawRRect(rrect.shift(const Offset(0, 1.2)), shadowPaint);
+
+      final bodyPaint = Paint()
+        ..color = color
+        ..style = PaintingStyle.fill;
+      canvas.drawRRect(rrect, bodyPaint);
+      return;
+    }
 
     // 1. Base document path with diagonal cut at top-right
     final bodyPath = Path()
@@ -220,7 +247,7 @@ class _DocFoldedPainter extends CustomPainter {
     final shadowPaint = Paint()
       ..color = const Color(0x1F000000)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 2);
-    canvas.drawPath(bodyPath.shift(const Offset(0, 1.5)), shadowPaint);
+    canvas.drawPath(bodyPath.shift(const Offset(0, 1.2)), shadowPaint);
 
     // 3. Fill document body with vibrant category color
     final bodyPaint = Paint()
@@ -228,34 +255,30 @@ class _DocFoldedPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
     canvas.drawPath(bodyPath, bodyPaint);
 
-    // 4. Subtle inner crease shadow under the folded flap
-    final creaseShadowPath = Path()
-      ..moveTo(w - fold, 0)
-      ..lineTo(w, fold)
-      ..lineTo(w - fold, fold)
-      ..close();
-    final creasePaint = Paint()
-      ..color = Colors.black.withValues(alpha: 0.22)
-      ..style = PaintingStyle.fill;
-    canvas.drawPath(creaseShadowPath, creasePaint);
-
-    // 5. Folded corner flap path (folded forward onto the front face)
+    // 4. Folded corner flap path (folded forward onto the front face)
+    // Triangle: (w - fold, 0) -> (w - fold, fold) -> (w, fold)
     final flapPath = Path()
       ..moveTo(w - fold, 0)
-      ..lineTo(w - fold, fold - 2)
-      ..arcToPoint(Offset(w - fold + 2, fold), radius: const Radius.circular(2))
+      ..lineTo(w - fold, fold - 1.5)
+      ..arcToPoint(Offset(w - fold + 1.5, fold), radius: const Radius.circular(1.5))
       ..lineTo(w, fold)
       ..close();
 
-    // Fill flap with semi-translucent white (paper front highlight)
+    // 5. Crease drop shadow under the flap onto the body (to bottom-left)
+    final flapShadowPaint = Paint()
+      ..color = Colors.black.withValues(alpha: 0.18)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1.5);
+    canvas.drawPath(flapPath.shift(const Offset(-0.8, 0.8)), flapShadowPaint);
+
+    // 6. Fill flap with crisp paper highlight
     final flapFill = Paint()
-      ..color = Colors.white.withValues(alpha: 0.38)
+      ..color = Colors.white.withValues(alpha: 0.36)
       ..style = PaintingStyle.fill;
     canvas.drawPath(flapPath, flapFill);
 
-    // Flap outline for high-contrast crispness
+    // 7. Flap outline for high-contrast crispness
     final flapStroke = Paint()
-      ..color = Colors.white.withValues(alpha: 0.65)
+      ..color = Colors.white.withValues(alpha: 0.70)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.75;
     canvas.drawPath(flapPath, flapStroke);
@@ -265,7 +288,7 @@ class _DocFoldedPainter extends CustomPainter {
   bool shouldRepaint(covariant _DocFoldedPainter oldDelegate) {
     return oldDelegate.color != color ||
         oldDelegate.borderRadius != borderRadius ||
-        oldDelegate.foldSize != foldSize;
+        oldDelegate.foldSize != foldSize ||
+        oldDelegate.hasFold != hasFold;
   }
 }
-

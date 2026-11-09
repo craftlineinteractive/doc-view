@@ -1,96 +1,69 @@
-# Task Plan: Phase 2 (R-C) - Launch Flow, Home, Search, Category File Lists, PDF Thumbnails & Tests
+# Task Plan: Phase 3 (R-D2) - Document Viewers Redesign & Precision Engineering
 
-## Global Constraints & Rules
-- UI layer only. Keep all existing behavior, providers, services, DB, scanner, isolates and tests working.
-- Tools tab has EXACTLY 4 tools (Image to PDF, Scan to PDF, Merge PDF, Split PDF).
-- Android first and iOS with the same UI; no iPhone chrome.
-- Isolate safety: top-level/static functions only receiving primitives or plain DTOs.
-- No new packages. Use already installed `pdfrx` for PDF thumbnails.
-- Const constructors; no logic in build(); touch targets >= 48x48; skeletons (no spinners); respect reduced motion; no overflow at text scale 2.0.
-- Run `flutter analyze` after each numbered step and fix all issues before proceeding.
+## Scope Guard & Hard Rules
+- UI layer only. Tools tab has EXACTLY 4 tools (Image to PDF, Scan to PDF, Merge PDF, Split PDF).
+- Use only shared components, tokens, and ad placeholders from R-B; NO new packages.
+- Viewers show REAL opened files (`pdfrx` for PDF, `offline_document_viewer` for Office, `Image.file` for images, real text for TXT).
+- NO ads anywhere in viewers (no banner, no native, no interstitial).
+- Dark mode keeps PDF page white on dark canvas (#11131B, never invert page).
+- FORBIDDEN: OCR, Print, Add Password, Unlock (tool), Signature, "Share via Secure Link", toolkit sheets, in-PDF text search, annotations, export tools, marketing modals, "256-bit encryption", network/cloud features, hard-coded demo documents.
+- Run `flutter analyze` after each step.
 
 ## Implementation Steps
 
-- [x] **Step 1: Splash Screen Redesign (`doc_view_mockups/01_launch/01_splash`)**
-  - Path: `lib/features/splash/splash_screen.dart`
-  - Wordmark "Doc View" on ONE line in Space Grotesk 32pt Bold.
-  - Subtle floating pages / documents decoration, radial glow (Light `#E9F2FF`, Dark `#1E2A45`).
-  - 120pt horizontal shimmer sweep line.
-  - Version text "Version 1.0.0" from package_info_plus if available, else AppConstants.
-  - Startup gate: minimum 1000ms display + await DB open + settings loaded + onboarding status.
-  - Verification: `flutter analyze` clean, test startup route resolution.
+- [x] **Step 1: File Details Bottom Sheet Reusable Component**
+  - Path: `lib/features/files/widgets/file_details_sheet.dart`
+  - 120x150 preview, key-value rows (Name, Type, Size as "2.5 MB (2,621,440 bytes)", Modified, Location with copy button and snackbar, Bookmarked).
+  - Page count chip "PG 1/N" on preview only if known.
+  - Primary "Open file" CTA button.
 
-- [x] **Step 2: Onboarding Flow Redesign (`doc_view_mockups/01_launch/02_onboarding_1`, `03_onboarding_2`, `04_onboarding_3`)**
-  - Path: `lib/features/onboarding/onboarding_screen.dart`, `lib/features/onboarding/widgets/*`
-  - 3-step `PageView` with shared page container and bottom navigation controls.
-  - Pages 1 & 2: top right "Skip" button.
-  - Page 3: top left back button, "Step 3 of 3" counter, and "Get Started" CTA button.
-  - Page indicator: 3 dots with active 24x6pt elongated pill (`#1A66E8`) and 6x6pt inactive dots.
-  - Custom illustrations built with Flutter widgets/CustomPaint (zero images, zero new packages).
-  - Page 3 displays exactly the four tools (Image to PDF, Scan to PDF, Merge PDF, Split PDF).
-  - Persist `onboarding_complete` flag via shared_preferences / SettingsRepository.
-  - Verification: `flutter analyze` clean.
+- [x] **Step 2: PDF Reader Chassis & Floating Controls (`05_viewers/01_pdf_reader`)**
+  - Path: `lib/features/viewer/pdf_viewer_screen.dart`, `lib/features/viewer/widgets/*`
+  - Auto-hiding top bar: back, file name with "N Pages • size" subtitle, bookmark toggle, 3-dot overflow.
+  - Reader canvas: Light `#EEF0F5`, Dark `#11131B`, faint page shadow, un-inverted white pages in dark mode.
+  - Floating tabular page pill "3 / 120" with idle auto-fade and scroll-trigger reappearance.
+  - Floating bottom toolbar: Pages, Go to, Share, More.
+  - Pages bottom sheet: Page NUMBER tiles grid (no thumbnails), current page highlighted, jumps to page on tap.
+  - More sheet: Share, Open in another app, Details, Add/Remove bookmark.
+  - Shimmer skeleton placeholder while loading.
+  - Android gesture navigation safe-area padding.
 
-- [x] **Step 3: Permissions & Privacy Flow (`doc_view_mockups/01_launch/05_permissions_privacy`)**
-  - Path: `lib/features/permissions/permissions_screen.dart`
-  - Frame A (Android): "All files access" (`MANAGE_EXTERNAL_STORAGE`) explainer card with icon, rationale, "Grant Access" and "Not Now" buttons.
-  - Frame B (iOS): Document import and file sharing guide (never shown on Android).
-  - Frame C ("Free with ads"): Explainer shown after onboarding and before app shell. UI only (no consent SDK yet).
-  - Reuse existing permission providers / requests.
-  - Verification: `flutter analyze` clean.
+- [x] **Step 3: PDF States (`05_viewers/02_pdf_reader_states`)**
+  - Password dialog over blurred backdrop: lock icon, obscure eye toggle, error on retry, Cancel and Unlock.
+  - Go to page dialog: number field, hint "Enter a page between 1 and N", inline validation, Cancel and Go.
+  - Corrupt file screen: "Can't open this PDF" with "Open in another app" and "Back".
+  - Missing file screen: "This file no longer exists" with "Back to files" (deletes DB record).
 
-- [x] **Step 4: Home Screen Redesign & State Variants (`02_home/01_home_all_files`, `02_home_state_variants`)**
-  - Path: `lib/features/home/home_screen.dart`
-  - Header: gradient background, Space Grotesk "Doc View" headline, search action button.
-  - 4x2 Category Grid: $32 \times 38\text{pt}$ format cards, $20\text{pt}$ radius container, label, and document counts.
-  - Underline tabs: "Recent" and "Bookmarks" with selection/sort action icon.
-  - File rows using `FileRow` with $48 \times 56\text{pt}$ preview thumbnails and format pill badges.
-  - Native ad placeholder row (`NativeAdRow`) inserted after the 4th Recent item.
-  - Docked AdMob banner slot (60pt) directly above bottom nav bar.
-  - FAB: primary blue '+' button positioned with $\ge 16\text{pt}$ clearance from any ad widget.
-  - Implement all 6 states: populated, bookmarks empty, recent empty, scanning (progress banner + shimmer count badges), permission gate, and full skeleton state.
-  - Verification: `flutter analyze` clean, all 60 tests pass.
+- [x] **Step 4: Office Viewer (`05_viewers/03_office_viewer`)**
+  - Path: `lib/features/viewer/office_viewer_screen.dart`
+  - Kept `offline_document_viewer` imported ONLY in `office_viewer_screen.dart`.
+  - Shared bar: back, file name, search, outline (shown only when outline exists), bookmark, 3-dot.
+  - Banners: "Legacy format: text only" for doc/ppt/xls/rtf; "Large spreadsheet: showing the first 3000 rows" when truncated. Dismissible.
+  - Search mode: search field with match counter ("5 matches"), prev/next chevrons.
+  - Outline sheet: indented list, jumps on tap.
+  - Error states: password-protected, too large, unsupported, generic, all with "Open in another app".
+  - Skeleton page while opening.
 
-- [x] **Step 5: Search Screen Redesign (`03_search/01_search_states`)**
-  - Path: `lib/features/search/search_screen.dart`, `lib/features/search/widgets/*`
-  - Implement all 5 states:
-    1. Empty query with Recent Searches (last 10 queries persisted in SharedPreferences) + "Clear" button.
-    2. Typing / Active search: real-time filtered results highlighting matched text with bold primary blue style.
-    3. No results state: search illustration + "No matching documents found".
-    4. Loading skeleton state (`SkeletonFileRow`).
-    5. Keyboard active state with responsive layout and clear search button.
-  - Native ad placeholder (`NativeAdRow`) strictly at result position 6 only. No docked banner.
-  - Verification: `flutter analyze` clean.
+- [x] **Step 5: Image Viewer (`05_viewers/04_image_txt_viewer`)**
+  - Path: `lib/features/viewer/image_viewer_screen.dart`
+  - Black canvas, `InteractiveViewer` (1x-5x), double-tap zoom to 2.5x/1x.
+  - Tap-to-toggle translucent top bar.
+  - Bottom info chip: "W × H • size" decoded from real image metadata.
+  - Zoom pill "2.5x" visible only when scaled with Reset action.
+  - Skeleton while decoding.
 
-- [x] **Step 6: Category File Lists & Image Photo Grid**
-  - Path: `lib/features/files/files_screen.dart`, `lib/features/files/widgets/sort_bottom_sheet.dart`
-  - Document lists (PDF, Word, Excel, PPT, TXT):
-    - SubAppBar with category title + file count ("PDF • 92 files"), search icon, sort icon, selection icon.
-    - `FileRow` items with `NativeAdRow` after 4th and every 8th item.
-    - Skeletons and empty states.
-  - Image category: 3-column thumbnail grid with 4pt gaps.
-    - `ResizeImage` with `cacheWidth: 300`, `gaplessPlayback: true`, error fallback.
-    - Long-press selection mode showing top-right check badge on selected thumbnails.
-  - Sort bottom sheet: Date, Name, Size (Ascending/Descending), wired to `sortOptionProvider`.
-  - Verification: `flutter analyze` clean, all 60 tests pass.
+- [x] **Step 6: TXT Viewer (`05_viewers/04_image_txt_viewer`)**
+  - Path: `lib/features/viewer/txt_viewer_screen.dart`
+  - 1 MB cap, isolate read, line height 1.5, `SelectionArea`.
+  - Top bar: back, file name, "A-", "A+", monospace toggle, bookmark, typography sheet button, 3-dot.
+  - Persisted font size (12-28) and monospace settings.
+  - Truncation banner "Showing first 1 MB • Open in another app for full content".
+  - Typography bottom sheet with slider (12-28) and live preview line.
+  - Skeleton text lines while reading; error state with "Open in another app".
 
-- [x] **Step 7: pdfrx-based PDF Thumbnail Source (`ThumbnailSource`)**
-  - Path: `lib/shared/widgets/tiles/pdf_thumbnail_source.dart`, `lib/shared/widgets/tiles/file_thumbnail.dart`
-  - Concurrency limit: maximum 2 PDF renders at a time using a queue.
-  - Render small size (~144px width) for visible rows only.
-  - Disk cache in app cache directory (`/cache/pdf_thumbnails/`) keyed by pure Dart hash of `(path + modified + size)`.
-  - Cache size cap 100 MB with oldest-first eviction on startup.
-  - 3-second timeout, error or encrypted PDF gracefully returns null (falls back to red PDF type glyph).
-  - Verify scrolling in profile mode (`flutter run --profile`).
-  - Verification: `flutter analyze` clean.
-
-- [x] **Step 8: Automated Widget & Integration Tests**
-  - Path: `test/phase2_redesign_test.dart`
-  - Tested Home states (populated with NativeAdRow, empty recent, empty bookmarks).
-  - Tested Search states (recent searches, query matching, bold blue highlight, no results).
-  - Tested Image category 3-column grid and selection mode.
-  - Tested Onboarding 3-step navigation, Skip, Step 3 of 3, 4 tools, and persistence.
-  - Tested PDF ThumbnailSource fallback to red PDF glyph.
-  - Verified all 67 tests in the suite pass (100% pass rate).
-  - Verification: `flutter test` and `dart analyze` clean (0 errors, 0 warnings).
-  - Live emulator verification on `emulator-5554` with screenshots captured.
+- [x] **Step 7: Automated Tests & Verification**
+  - Unit/widget tests in `test/features/viewer_test.dart` for PDF password dialog, Go to dialog validation, Pages sheet jump, DocFoldedIcon labels, FileTypeBadge.
+  - All 72 tests passing.
+  - `flutter analyze` 0 issues.
+  - Direct splash launch verified on emulator-5554.
+  - Home screen category icons verified without rounded border background.

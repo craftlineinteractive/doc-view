@@ -4,10 +4,9 @@ import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import 'doc_folded_icon.dart';
 
-/// 4-column category grid item on the Home screen.
-/// Features a vibrant document icon with folded top-right corner,
-/// category label, and document count / subtitle.
-/// Border/card background removed for a clean, borderless appearance.
+/// 4-column category grid item on the Home screen matching the design system.
+/// Features a 20pt rounded container with cardBackground (#F3F5FA light, #232838 dark),
+/// vibrant document icon with folded top-right corner, category label, and document count.
 class CategoryTile extends StatelessWidget {
   final FileCategory? category;
   final String label;
@@ -40,17 +39,21 @@ class CategoryTile extends StatelessWidget {
       final isFolders =
           label.toLowerCase() == 'folders' || label.toLowerCase() == 'directories';
       return DocFoldedIcon(
-        icon: icon ?? (isFolders ? Icons.manage_search : Icons.folder),
-        width: 36,
-        height: 44,
+        icon: icon ?? (isFolders ? Icons.manage_search_rounded : Icons.folder_rounded),
+        width: 38,
+        height: 42,
+        borderRadius: 8.0,
+        hasFold: false,
       );
     }
 
     return DocFoldedIcon(
       category: category,
       icon: icon,
-      width: 36,
-      height: 44,
+      width: 38,
+      height: 42,
+      borderRadius: 7.0,
+      foldSize: 10.0,
     );
   }
 
@@ -67,6 +70,7 @@ class CategoryTile extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(16),
+          hoverColor: tokens.surfaceHover,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
             child: Column(
@@ -84,6 +88,7 @@ class CategoryTile extends StatelessWidget {
                     style: DocViewTypography.labelMd.copyWith(
                       color: tokens.textPrimary,
                       fontSize: 13,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),

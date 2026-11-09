@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path/path.dart' as p;
@@ -12,6 +11,7 @@ import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
 import '../../../data/services/file_operations_service.dart';
 import '../../providers/providers.dart';
+import 'file_details_sheet.dart';
 import '../open_document.dart';
 
 /// Bottom sheet presenting contextual options for a single [DocFile].
@@ -173,7 +173,7 @@ class FileOptionsSheet extends ConsumerWidget {
               label: 'Details',
               onTap: () {
                 Navigator.of(context).pop();
-                _showDetailsSheet(targetContext, file);
+                FileDetailsSheet.show(targetContext, file);
               },
             ),
 
@@ -358,95 +358,6 @@ class FileOptionsSheet extends ConsumerWidget {
       },
     );
   }
-
-  static void _showDetailsSheet(BuildContext parentContext, DocFile file) {
-    final theme = Theme.of(parentContext);
-
-    showModalBottomSheet<void>(
-      context: parentContext,
-      isScrollControlled: true,
-      showDragHandle: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (sheetContext) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'File Details',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                _DetailRow(label: 'Name', value: file.name),
-                _DetailRow(
-                  label: 'Type',
-                  value: '${file.category.label} (${file.extension.toUpperCase()})',
-                ),
-                _DetailRow(
-                  label: 'Size',
-                  value: '${FormatUtils.formatFileSize(file.sizeBytes)} (${file.sizeBytes} bytes)',
-                ),
-                _DetailRow(
-                  label: 'Modified',
-                  value: '${FormatUtils.formatDate(file.modified)} ${file.modified.hour.toString().padLeft(2, '0')}:${file.modified.minute.toString().padLeft(2, '0')}',
-                ),
-                _DetailRow(
-                  label: 'Bookmarked',
-                  value: file.isBookmarked ? 'Yes' : 'No',
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Path',
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.6),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Expanded(
-                      child: SelectableText(
-                        file.path,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontFamily: 'monospace',
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.copy, size: 20),
-                      tooltip: 'Copy path',
-                      onPressed: () {
-                        Clipboard.setData(ClipboardData(text: file.path));
-                        ScaffoldMessenger.of(sheetContext).showSnackBar(
-                          const SnackBar(content: Text('Path copied to clipboard')),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () => Navigator.of(sheetContext).pop(),
-                    child: const Text('Close'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
 }
 
 class _ActionTile extends StatelessWidget {
@@ -494,48 +405,6 @@ class _ActionTile extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _DetailRow extends StatelessWidget {
-  const _DetailRow({
-    required this.label,
-    required this.value,
-  });
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 100,
-            child: Text(
-              label,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.6),
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
