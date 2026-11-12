@@ -59,6 +59,16 @@ Each entry is explicitly tagged with a proposed resolution:
 
 ---
 
+## 5. Owner-Approved Design Deviations (Prompt R-E1)
+
+| # | Feature / Area | Specification in Mockup | Owner-Approved Deviation | Status |
+| :- | :--- | :--- | :--- | :--- |
+| 5.1 | **Home Category Tiles Background** | Rounded rectangular container cards with background tint and border. | **Borderless with no card background**: category tiles display directly on header/scaffold background without enclosing rounded box cards. | `[approved & kept]` |
+| 5.2 | **Home Category Icons Geometry** | Standard rounded square icons with full-bleed flat fill. | **44x44 rounded squares (11pt radius) with folded corner**: folded top-right corner front side, white glyphs (PDF, W, X, PPT, TXT, Image icon). | `[approved & kept]` |
+| 5.3 | **Launcher App Icon** | Single blue document square with white folded corner. | **4-Quadrant Launcher Icon**: 4 rounded quadrants (Red PDF, Blue Word, Green Excel, Orange PPT) inside adaptive icon squircle. | `[approved & kept]` |
+
+---
+
 ## 4. Summary of Actions
 
 - **Total Items Categorized**: 29
