@@ -7,7 +7,9 @@ import '../../core/utils/format_utils.dart';
 import '../../data/models/doc_file.dart';
 import '../providers/providers.dart';
 import 'widgets/library_pdf_picker_screen.dart';
-import 'widgets/tool_result_bottom_sheet.dart';
+import 'widgets/tool_error_sheet.dart';
+import 'widgets/tool_progress_dialog.dart';
+import 'widgets/tool_result_sheet.dart';
 
 /// Screen allowing users to inspect, reorder, delete, and add PDF documents before merging them into a single file.
 class MergeScreen extends ConsumerStatefulWidget {
@@ -98,22 +100,10 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
           builder: (context, setDialogState) {
             dialogSetState = setDialogState;
             final progressValue = total > 0 ? progressDone / total : 0.0;
-            return PopScope(
-              canPop: false,
-              child: AlertDialog(
-                title: const Text('Merging PDFs'),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    LinearProgressIndicator(value: progressValue),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Merging document $progressDone of $total...',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ),
+            return ToolProgressDialog(
+              title: 'Merging PDFs',
+              message: 'Merging document $progressDone of $total...',
+              progress: progressValue,
             );
           },
         );
@@ -135,7 +125,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isMerging = false);
 
-        await ToolResultBottomSheet.show(
+        await ToolResultSheet.show(
           context,
           files: [mergedDoc],
           onDone: () {
@@ -149,11 +139,11 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isMerging = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(e.toString()),
-            backgroundColor: Colors.redAccent,
-          ),
+        await ToolErrorSheet.show(
+          context,
+          title: "Couldn't merge PDFs",
+          errorMessage: e.toString(),
+          onRetry: _mergePdfs,
         );
       }
     }

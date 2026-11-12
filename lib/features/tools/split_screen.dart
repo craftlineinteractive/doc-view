@@ -8,7 +8,9 @@ import '../../core/utils/format_utils.dart';
 import '../../core/utils/page_range_parser.dart';
 import '../../data/models/doc_file.dart';
 import '../providers/providers.dart';
-import 'widgets/tool_result_bottom_sheet.dart';
+import 'widgets/tool_error_sheet.dart';
+import 'widgets/tool_progress_dialog.dart';
+import 'widgets/tool_result_sheet.dart';
 
 /// Screen enabling users to inspect page counts, define custom page ranges with live validation,
 /// and split a PDF document into multiple files.
@@ -125,22 +127,10 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
           builder: (context, setDialogState) {
             dialogSetState = setDialogState;
             final progressValue = total > 0 ? progressDone / total : 0.0;
-            return PopScope(
-              canPop: false,
-              child: AlertDialog(
-                title: const Text('Splitting PDF'),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    LinearProgressIndicator(value: progressValue),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Generating file $progressDone of $total...',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ),
+            return ToolProgressDialog(
+              title: 'Splitting PDF',
+              message: 'Generating file $progressDone of $total...',
+              progress: progressValue,
             );
           },
         );
@@ -162,7 +152,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isSplitting = false);
 
-        await ToolResultBottomSheet.show(
+        await ToolResultSheet.show(
           context,
           files: createdFiles,
           onDone: () {
@@ -176,11 +166,11 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isSplitting = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(e.toString()),
-            backgroundColor: Colors.redAccent,
-          ),
+        await ToolErrorSheet.show(
+          context,
+          title: "Couldn't split PDF",
+          errorMessage: e.toString(),
+          onRetry: _splitPdf,
         );
       }
     }
