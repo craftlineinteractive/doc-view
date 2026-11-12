@@ -353,6 +353,12 @@ final recentsProvider = FutureProvider<List<DocFile>>((ref) async {
   return repository.getRecents(limit: 30);
 });
 
+/// Provider fetching documents created by Doc View tools.
+final createdFilesProvider = FutureProvider<List<DocFile>>((ref) async {
+  final repository = ref.watch(fileRepositoryProvider);
+  return repository.getCreatedFiles(limit: 50);
+});
+
 /// Notifier managing the current text search query.
 class SearchQueryNotifier extends Notifier<String> {
   @override
@@ -471,6 +477,7 @@ class FileActionsController {
   void invalidateAll() {
     _ref.invalidate(bookmarksProvider);
     _ref.invalidate(recentsProvider);
+    _ref.invalidate(createdFilesProvider);
     _ref.invalidate(filesProvider);
     _ref.invalidate(categoryCountsProvider);
     _ref.invalidate(searchResultsProvider);

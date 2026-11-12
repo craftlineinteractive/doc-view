@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../../../core/constants/ad_config.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
+
+export '../../../core/constants/ad_config.dart';
 
 /// Data model representing ad content for placeholder rendering.
 @immutable
@@ -39,6 +42,10 @@ class AdBannerSlot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!AdConfig.showPlaceholders) {
+      return const SizedBox.shrink();
+    }
+
     final tokens = context.tokens;
 
     return AnimatedContainer(
@@ -97,28 +104,33 @@ class AdBannerSlot extends StatelessWidget {
                         const SizedBox(width: 12),
                         // Advertiser title & copy
                         Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                ad.title,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: DocViewTypography.labelMd.copyWith(
-                                  color: tokens.textPrimary,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  ad.title,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: DocViewTypography.labelMd.copyWith(
+                                    color: tokens.textPrimary,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                ad.description,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: DocViewTypography.bodySm.copyWith(
-                                  color: tokens.textSecondary,
-                                  fontSize: 11,
+                                Text(
+                                  ad.description,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: DocViewTypography.bodySm.copyWith(
+                                    color: tokens.textSecondary,
+                                    fontSize: 11,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -163,12 +175,12 @@ class NativeAdRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isLoaded) return const SizedBox.shrink();
+    if (!isLoaded || !AdConfig.showPlaceholders) return const SizedBox.shrink();
 
     final tokens = context.tokens;
 
     return Container(
-      height: 68,
+      constraints: const BoxConstraints(minHeight: 68),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
@@ -282,6 +294,10 @@ class NativeAdCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!AdConfig.showPlaceholders) {
+      return const SizedBox.shrink();
+    }
+
     final tokens = context.tokens;
 
     return Container(
@@ -421,6 +437,11 @@ class _InterstitialPlaceholderState extends State<InterstitialPlaceholder> {
 
   @override
   Widget build(BuildContext context) {
+    if (!AdConfig.showPlaceholders) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => widget.onDismiss());
+      return const SizedBox.shrink();
+    }
+
     final tokens = context.tokens;
     final canClose = _secondsRemaining <= 0;
 

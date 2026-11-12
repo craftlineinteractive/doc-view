@@ -2,13 +2,22 @@ import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../core/theme/app_icons.dart';
+import '../../core/theme/doc_view_tokens.dart';
+import '../../core/theme/doc_view_typography.dart';
+import '../../shared/widgets/buttons/doc_icon_button.dart';
+import '../../shared/widgets/navigation/doc_scaffold.dart';
 import 'image_list_editor_screen.dart';
 import 'merge_screen.dart';
 import 'split_screen.dart';
+import 'widgets/created_by_you_section.dart';
 import 'widgets/library_pdf_picker_screen.dart';
+import 'widgets/tool_card.dart';
 
-/// Tools hub organizing PDF creation and editing features in a clean, accessible 4-column grid.
+/// Tools hub organizing PDF creation and editing features in a clean,
+/// accessible layout with strictly 4 tools and a "Created by you" section.
 class ToolsScreen extends ConsumerWidget {
   const ToolsScreen({super.key});
 
@@ -95,189 +104,158 @@ class ToolsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textScale = MediaQuery.textScalerOf(context).scale(1.0);
-    final childAspectRatio =
-        textScale > 1.4 ? 0.60 : (textScale > 1.1 ? 0.72 : 0.88);
+    final tokens = context.tokens;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final overlineColor = isDark ? tokens.interactiveBlue : const Color(0xFF0050C7);
+    final sectionColor = isDark ? tokens.textSecondary : const Color(0xFF5A6275);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tools'),
-        centerTitle: false,
+    return DocScaffold(
+      applyHeaderGradient: true,
+      showDockedBanner: true,
+      isAdLoaded: true,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(64),
+        child: SafeArea(
+          bottom: false,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 16, 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'WORKSPACE',
+                      style: DocViewTypography.captionXs.copyWith(
+                        color: overlineColor,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                        fontSize: 11,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Tools',
+                      style: DocViewTypography.headlineLg.copyWith(
+                        fontFamily: 'SpaceGrotesk',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 26,
+                        color: tokens.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+                DocIconButton(
+                  icon: AppIcons.search,
+                  tooltip: 'Search documents',
+                  onPressed: () => context.push('/search'),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section 1: Convert & Create
-            _SectionHeader(
-              title: 'Convert & Create',
-              subtitle: 'Generate standard PDF documents from images or scans',
+            Text(
+              'CONVERT & CREATE',
+              style: DocViewTypography.captionXs.copyWith(
+                color: sectionColor,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.0,
+                fontSize: 12,
+              ),
             ),
-            const SizedBox(height: 12),
-            GridView.count(
-              crossAxisCount: 4,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: childAspectRatio,
+            const SizedBox(height: 10),
+            Row(
               children: [
-                _ToolTile(
-                  key: const Key('tool_image_to_pdf'),
-                  label: 'Image to PDF',
-                  icon: Icons.image_rounded,
-                  color: const Color(0xFFF57C00),
-                  onTap: () => _onImageToPdf(context),
+                Expanded(
+                  child: ToolCard(
+                    key: const Key('tool_image_to_pdf'),
+                    title: 'Image to PDF',
+                    subtitle: 'Turn photos into one PDF',
+                    icon: Icons.image_rounded,
+                    gradientColors: const [
+                      Color(0xFFFFB300),
+                      Color(0xFFE02B2B),
+                    ],
+                    onTap: () => _onImageToPdf(context),
+                  ),
                 ),
-                _ToolTile(
-                  key: const Key('tool_scan_to_pdf'),
-                  label: 'Scan to PDF',
-                  icon: Icons.document_scanner_rounded,
-                  color: const Color(0xFF00897B),
-                  onTap: () => _onScanToPdf(context),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ToolCard(
+                    key: const Key('tool_scan_to_pdf'),
+                    title: 'Scan to PDF',
+                    subtitle: 'Scan paper with camera',
+                    icon: Icons.document_scanner_rounded,
+                    gradientColors: const [
+                      Color(0xFF00BCD4),
+                      Color(0xFF009688),
+                    ],
+                    onTap: () => _onScanToPdf(context),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+
+            // Section 2: Edit & Manage
+            Text(
+              'EDIT & MANAGE',
+              style: DocViewTypography.captionXs.copyWith(
+                color: sectionColor,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.0,
+                fontSize: 12,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: ToolCard(
+                    key: const Key('tool_merge_pdf'),
+                    title: 'Merge PDF',
+                    subtitle: 'Combine PDFs into one',
+                    icon: Icons.call_merge_rounded,
+                    gradientColors: const [
+                      Color(0xFF2979FF),
+                      Color(0xFF1565C0),
+                    ],
+                    onTap: () => _onMergePdf(context),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ToolCard(
+                    key: const Key('tool_split_pdf'),
+                    title: 'Split PDF',
+                    subtitle: 'Extract pages or ranges',
+                    icon: Icons.call_split_rounded,
+                    gradientColors: const [
+                      Color(0xFF1E9E4F),
+                      Color(0xFF0E622F),
+                    ],
+                    onTap: () => _onSplitPdf(context),
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 28),
 
-            // Section 2: Edit & Manage
-            _SectionHeader(
-              title: 'Edit & Manage',
-              subtitle: 'Reorganize, combine, and divide existing PDF documents',
-            ),
-            const SizedBox(height: 12),
-            GridView.count(
-              crossAxisCount: 4,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: childAspectRatio,
-              children: [
-                _ToolTile(
-                  key: const Key('tool_merge_pdf'),
-                  label: 'Merge PDF',
-                  icon: Icons.call_merge_rounded,
-                  color: const Color(0xFF1E88E5),
-                  onTap: () => _onMergePdf(context),
-                ),
-                _ToolTile(
-                  key: const Key('tool_split_pdf'),
-                  label: 'Split PDF',
-                  icon: Icons.call_split_rounded,
-                  color: const Color(0xFF8E24AA),
-                  onTap: () => _onSplitPdf(context),
-                ),
-              ],
+            // Section 3: Created by you
+            CreatedByYouSection(
+              onSeeAll: () => context.push('/tools/created'),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({
-    required this.title,
-    required this.subtitle,
-  });
-
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 2),
-        Text(
-          subtitle,
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _ToolTile extends StatelessWidget {
-  const _ToolTile({
-    required this.label,
-    required this.icon,
-    required this.color,
-    required this.onTap,
-    super.key,
-  });
-
-  final String label;
-  final IconData icon;
-  final Color color;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Semantics(
-      button: true,
-      label: label,
-      child: Material(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(12),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: theme.dividerColor.withValues(alpha: 0.1),
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 38,
-                  height: 38,
-                  decoration: BoxDecoration(
-                    color: color.withValues(alpha: 0.15),
-                    shape: BoxShape.circle,
-                  ),
-                  alignment: Alignment.center,
-                  child: Icon(
-                    icon,
-                    color: color,
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  label,
-                  maxLines: 2,
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 11,
-                  ),
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );

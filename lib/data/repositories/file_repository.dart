@@ -224,6 +224,25 @@ class FileRepository {
     );
   }
 
+  /// Returns read-only list of PDFs created by the app (inside the app's created folder).
+  Future<List<DocFile>> getCreatedFiles({
+    int limit = 50,
+    int offset = 0,
+  }) async {
+    final db = await _database.database;
+    final rows = await db.rawQuery(
+      '''
+      SELECT * FROM ${AppDatabase.tableFiles}
+      WHERE (path LIKE '%/created/%' OR path LIKE '%\\\\created\\\\%')
+        AND LOWER(extension) = 'pdf'
+      ORDER BY modified DESC
+      LIMIT ? OFFSET ?
+      ''',
+      [limit, offset],
+    );
+    return rows.map(DocFile.fromMap).toList();
+  }
+
   /// Returns all bookmarked files, newest modified first.
   Future<List<DocFile>> getBookmarks() async {
     final db = await _database.database;

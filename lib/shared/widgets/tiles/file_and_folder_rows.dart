@@ -128,8 +128,8 @@ class FileRow extends StatelessWidget {
           onTap: onTap,
           onLongPress: onLongPress,
           child: Container(
-            height: 68,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            constraints: const BoxConstraints(minHeight: 68),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(color: tokens.hairline, width: 0.5),
@@ -239,8 +239,8 @@ class FolderRow extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: Container(
-            height: 56,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            constraints: const BoxConstraints(minHeight: 56),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(color: tokens.hairline, width: 0.5),

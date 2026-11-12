@@ -15,6 +15,7 @@ import '../../features/settings/faq_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/shell/main_shell.dart';
 import '../../features/splash/splash_screen.dart';
+import '../../features/tools/created_documents_screen.dart';
 import '../../features/tools/tools_screen.dart';
 import '../../features/viewer/viewer_screen.dart';
 
@@ -96,6 +97,12 @@ final routerProvider = Provider<GoRouter>((ref) {
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: '/tools/created',
+        name: 'tools-created',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const CreatedDocumentsScreen(),
       ),
       GoRoute(
         path: '/files',

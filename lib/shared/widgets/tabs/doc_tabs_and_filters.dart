@@ -94,12 +94,16 @@ class _TabItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      label,
-                      style: DocViewTypography.titleMd.copyWith(
-                        fontSize: 15,
-                        color: isSelected ? activeColor : tokens.textSecondary,
-                        fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                    Flexible(
+                      child: Text(
+                        label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: DocViewTypography.titleMd.copyWith(
+                          fontSize: 15,
+                          color: isSelected ? activeColor : tokens.textSecondary,
+                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 6),

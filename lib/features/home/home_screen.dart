@@ -264,6 +264,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               pinned: true,
               delegate: _DocTabsHeaderDelegate(
                 backgroundColor: tokens.surface,
+                extent: (48.0 * MediaQuery.textScalerOf(context).scale(1.0)).clamp(48.0, 72.0),
                 child: DocUnderlineTabs(
                   selectedIndex: _selectedTabIndex,
                   recentCount: recentFiles.length,
@@ -425,17 +426,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 class _DocTabsHeaderDelegate extends SliverPersistentHeaderDelegate {
   final Widget child;
   final Color backgroundColor;
+  final double extent;
 
   _DocTabsHeaderDelegate({
     required this.child,
     required this.backgroundColor,
+    this.extent = 48,
   });
 
   @override
-  double get minExtent => 48;
+  double get minExtent => extent;
 
   @override
-  double get maxExtent => 48;
+  double get maxExtent => extent;
 
   @override
   Widget build(
@@ -453,6 +456,7 @@ class _DocTabsHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(_DocTabsHeaderDelegate oldDelegate) {
     return child != oldDelegate.child ||
-        backgroundColor != oldDelegate.backgroundColor;
+        backgroundColor != oldDelegate.backgroundColor ||
+        extent != oldDelegate.extent;
   }
 }

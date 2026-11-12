@@ -97,6 +97,7 @@ class DocFoldedIcon extends StatelessWidget {
       case FileCategory.pdf:
         return Text(
           label ?? 'PDF',
+          textScaler: TextScaler.noScaling,
           style: TextStyle(
             fontFamily: 'SpaceGrotesk',
             fontSize: fontSize ?? (width * 0.32),
@@ -108,6 +109,7 @@ class DocFoldedIcon extends StatelessWidget {
       case FileCategory.word:
         return Text(
           label ?? 'W',
+          textScaler: TextScaler.noScaling,
           style: TextStyle(
             fontFamily: 'SpaceGrotesk',
             fontSize: fontSize ?? (width * 0.44),
@@ -118,6 +120,7 @@ class DocFoldedIcon extends StatelessWidget {
       case FileCategory.excel:
         return Text(
           label ?? 'X',
+          textScaler: TextScaler.noScaling,
           style: TextStyle(
             fontFamily: 'SpaceGrotesk',
             fontSize: fontSize ?? (width * 0.44),
@@ -128,9 +131,10 @@ class DocFoldedIcon extends StatelessWidget {
       case FileCategory.ppt:
         return Text(
           label ?? 'PPT',
+          textScaler: TextScaler.noScaling,
           style: TextStyle(
             fontFamily: 'SpaceGrotesk',
-            fontSize: fontSize ?? (width * 0.32),
+            fontSize: fontSize ?? (width * 0.30),
             fontWeight: FontWeight.w800,
             color: Colors.white,
             letterSpacing: -0.5,
@@ -139,6 +143,7 @@ class DocFoldedIcon extends StatelessWidget {
       case FileCategory.txt:
         return Text(
           label ?? 'TXT',
+          textScaler: TextScaler.noScaling,
           style: TextStyle(
             fontFamily: 'SpaceGrotesk',
             fontSize: fontSize ?? (width * 0.28),
@@ -149,7 +154,7 @@ class DocFoldedIcon extends StatelessWidget {
         );
       case FileCategory.image:
         return Icon(
-          Icons.photo_camera_outlined,
+          Icons.image_rounded,
           size: iconSize ?? (width * 0.52),
           color: Colors.white,
         );

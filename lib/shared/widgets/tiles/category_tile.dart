@@ -39,10 +39,10 @@ class CategoryTile extends StatelessWidget {
       final isFolders =
           label.toLowerCase() == 'folders' || label.toLowerCase() == 'directories';
       return DocFoldedIcon(
-        icon: icon ?? (isFolders ? Icons.manage_search_rounded : Icons.folder_rounded),
-        width: 38,
-        height: 42,
-        borderRadius: 8.0,
+        icon: icon ?? (isFolders ? Icons.folder_open_rounded : Icons.folder_rounded),
+        width: 44,
+        height: 44,
+        borderRadius: 11.0,
         hasFold: false,
       );
     }
@@ -50,10 +50,10 @@ class CategoryTile extends StatelessWidget {
     return DocFoldedIcon(
       category: category,
       icon: icon,
-      width: 38,
-      height: 42,
-      borderRadius: 7.0,
-      foldSize: 10.0,
+      width: 44,
+      height: 44,
+      borderRadius: 11.0,
+      foldSize: 11.0,
     );
   }
 
