@@ -69,6 +69,15 @@ Each entry is explicitly tagged with a proposed resolution:
 
 ---
 
+## 6. Technical Limitations & Gaps (Prompt R-E2)
+
+| # | Feature / Area | Specification in Mockup | Behavior & Resolution | Status |
+| :- | :--- | :--- | :--- | :--- |
+| 6.1 | **PPTX Offline Viewer Fallback** | All presentation files expected to render offline in-app. | Valid PPTX files with standard slides, slide layouts, and slide masters (`presentation_1.pptx`, `Dickinson_Template_basic.pptx`) render with high fidelity in both debug and release. Incomplete archives lacking masters or presentations with 0 slides (`sample.pptx`, `Dickinson_Template_black.pptx`) trigger `RendererFailure: no_slides`. Respected existing fallback: "Can't open this document. The document could not be rendered offline. [Open in another app]" via `OpenFilex`. | `[verified & documented]` |
+| 6.2 | **Split PDF Macros: Odd/Even Pages Omission** | Mockups illustrate "Odd pages" and "Even pages" split macros. | In Split PDF, each extracted range becomes an independent output PDF file. Generating 50 separate 1-page PDFs for odd/even pages violates user intent. Omitted per Owner Decision; implemented only "All pages" and "Every 5 pages" macros (disabled above 100 files). | `[omit]` |
+
+---
+
 ## 4. Summary of Actions
 
 - **Total Items Categorized**: 29

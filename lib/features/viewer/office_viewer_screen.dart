@@ -510,6 +510,9 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
             child: DocumentView(
               source: _source,
               controller: _controller,
+              onFailure: (failure) {
+                debugPrint('DOCUMENT_VIEW_FAILURE: $failure (${failure.runtimeType}) detail: ${failure.detail}');
+              },
               placeholderBuilder: (context) {
                 return _buildOpeningSkeleton(tokens);
               },
