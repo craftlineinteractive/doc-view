@@ -13,7 +13,8 @@ import 'image_list_editor_screen.dart';
 import 'merge_screen.dart';
 import 'split_screen.dart';
 import 'widgets/created_by_you_section.dart';
-import 'widgets/library_pdf_picker_screen.dart';
+import 'widgets/merge_pdf_picker_screen.dart';
+import 'widgets/split_picker_screen.dart';
 import 'widgets/tool_card.dart';
 
 /// Tools hub organizing PDF creation and editing features in a clean,
@@ -70,10 +71,9 @@ class ToolsScreen extends ConsumerWidget {
   }
 
   Future<void> _onMergePdf(BuildContext context) async {
-    final picked = await LibraryPdfPickerScreen.pick(
+    final picked = await MergePdfPickerScreen.pick(
       context,
-      multiSelect: true,
-      title: 'Select PDFs to Merge',
+      title: 'Select PDFs',
       minSelection: 2,
     );
 
@@ -87,16 +87,12 @@ class ToolsScreen extends ConsumerWidget {
   }
 
   Future<void> _onSplitPdf(BuildContext context) async {
-    final picked = await LibraryPdfPickerScreen.pick(
-      context,
-      multiSelect: false,
-      title: 'Select PDF to Split',
-    );
+    final picked = await SplitPickerScreen.pick(context);
 
-    if (picked != null && picked.isNotEmpty && context.mounted) {
+    if (picked != null && context.mounted) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => SplitScreen(file: picked.first),
+          builder: (context) => SplitScreen(file: picked),
         ),
       );
     }

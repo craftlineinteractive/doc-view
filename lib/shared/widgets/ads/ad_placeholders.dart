@@ -405,6 +405,20 @@ class InterstitialPlaceholder extends StatefulWidget {
     this.ad = const AdPlaceholderModel(),
   });
 
+  /// Presents the fullscreen Interstitial ad placeholder if enabled.
+  /// In release mode, completes immediately with zero delay.
+  static Future<void> show(BuildContext context) {
+    if (!AdConfig.showPlaceholders) return Future.value();
+    return Navigator.of(context).push<void>(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (dialogContext) => InterstitialPlaceholder(
+          onDismiss: () => Navigator.of(dialogContext).pop(),
+        ),
+      ),
+    );
+  }
+
   @override
   State<InterstitialPlaceholder> createState() => _InterstitialPlaceholderState();
 }

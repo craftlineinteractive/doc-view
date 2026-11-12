@@ -6,6 +6,9 @@ import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
 import '../../providers/providers.dart';
 
+import 'merge_pdf_picker_screen.dart';
+import 'split_picker_screen.dart';
+
 /// Reusable document picker that loads indexed PDFs from SQLite, supporting both
 /// single-select (e.g. for Split PDF) and multi-select (e.g. for Merge PDF).
 class LibraryPdfPickerScreen extends ConsumerStatefulWidget {
@@ -31,16 +34,17 @@ class LibraryPdfPickerScreen extends ConsumerStatefulWidget {
     bool multiSelect = true,
     String? title,
     int minSelection = 1,
-  }) {
-    return Navigator.of(context).push<List<DocFile>>(
-      MaterialPageRoute(
-        builder: (context) => LibraryPdfPickerScreen(
-          multiSelect: multiSelect,
-          title: title,
-          minSelection: minSelection,
-        ),
-      ),
-    );
+  }) async {
+    if (multiSelect) {
+      return MergePdfPickerScreen.pick(
+        context,
+        title: title,
+        minSelection: minSelection,
+      );
+    } else {
+      final single = await SplitPickerScreen.pick(context);
+      return single != null ? [single] : null;
+    }
   }
 
   @override

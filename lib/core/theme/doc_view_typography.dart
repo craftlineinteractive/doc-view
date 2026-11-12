@@ -82,6 +82,8 @@ abstract final class DocViewTypography {
     letterSpacing: 0.0,
   );
 
+  static const TextStyle bodyMedium = bodyMd;
+
   static const TextStyle bodySm = TextStyle(
     fontFamily: fontInter,
     fontSize: 12,

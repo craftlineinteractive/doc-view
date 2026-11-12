@@ -56,6 +56,8 @@ class DocViewTokens extends ThemeExtension<DocViewTokens> {
   final FileTypeColors folder;
   final FileTypeColors other;
 
+  Color get error => DocViewColors.error;
+
   const DocViewTokens({
     required this.surface,
     required this.surfaceHover,

@@ -12,6 +12,7 @@ import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../core/utils/format_utils.dart';
 import '../../data/services/pdf/image_to_pdf_service.dart';
+import '../../shared/widgets/ads/ad_placeholders.dart';
 import '../../shared/widgets/buttons/doc_buttons.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
 import '../../shared/widgets/navigation/doc_app_bar.dart';
@@ -218,9 +219,12 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
         await ToolResultSheet.show(
           context,
           files: [docFile],
-          onDone: () {
+          onDone: () async {
             if (mounted) {
-              Navigator.of(context).pop();
+              await InterstitialPlaceholder.show(context);
+              if (mounted) {
+                Navigator.of(context).pop();
+              }
             }
           },
         );
