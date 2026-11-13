@@ -109,50 +109,44 @@ class ToolsScreen extends ConsumerWidget {
       applyHeaderGradient: true,
       showDockedBanner: true,
       isAdLoaded: true,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(64),
-        child: SafeArea(
-          bottom: false,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 16, 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'WORKSPACE',
-                      style: DocViewTypography.captionXs.copyWith(
-                        color: overlineColor,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                        fontSize: 11,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      'Tools',
-                      style: DocViewTypography.headlineLg.copyWith(
-                        fontFamily: 'SpaceGrotesk',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 26,
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-                DocIconButton(
-                  icon: AppIcons.search,
-                  tooltip: 'Search documents',
-                  onPressed: () => context.push('/search'),
-                ),
-              ],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        titleSpacing: 20,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'WORKSPACE',
+              style: DocViewTypography.captionXs.copyWith(
+                color: overlineColor,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+                fontSize: 11,
+              ),
             ),
-          ),
+            const SizedBox(height: 2),
+            Text(
+              'Tools',
+              style: DocViewTypography.headlineLg.copyWith(
+                fontFamily: 'SpaceGrotesk',
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: tokens.textPrimary,
+              ),
+            ),
+          ],
         ),
+        actions: [
+          DocIconButton(
+            icon: AppIcons.search,
+            tooltip: 'Search documents',
+            onPressed: () => context.push('/search'),
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
@@ -171,6 +165,7 @@ class ToolsScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 10),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: ToolCard(
@@ -215,6 +210,7 @@ class ToolsScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 10),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: ToolCard(

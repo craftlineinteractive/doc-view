@@ -306,23 +306,29 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    DocIconButton(
-                      icon: AppIcons.back,
-                      tooltip: 'Back',
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      'Split PDF',
-                      style: DocViewTypography.headlineSm.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: tokens.textPrimary,
+                Expanded(
+                  child: Row(
+                    children: [
+                      DocIconButton(
+                        icon: AppIcons.back,
+                        tooltip: 'Back',
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: Text(
+                          'Split PDF',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: DocViewTypography.headlineSm.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: tokens.textPrimary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 TextButton(
                   onPressed: _isLoadingInfo || _isSplitting ? null : _onReset,
@@ -436,20 +442,24 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'PAGE RANGES',
-              style: DocViewTypography.captionXs.copyWith(
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.1,
-                color: tokens.textSecondary,
-                fontSize: 11,
+            Expanded(
+              child: Text(
+                'PAGE RANGES',
+                style: DocViewTypography.captionXs.copyWith(
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.1,
+                  color: tokens.textSecondary,
+                  fontSize: 11,
+                ),
               ),
             ),
-            Text(
-              'Syntax: 1-3, 5, 8-10',
-              style: DocViewTypography.captionXs.copyWith(
-                color: tokens.textSecondary,
-                fontSize: 11,
+            Flexible(
+              child: Text(
+                'Syntax: 1-3, 5, 8-10',
+                style: DocViewTypography.captionXs.copyWith(
+                  color: tokens.textSecondary,
+                  fontSize: 11,
+                ),
               ),
             ),
           ],
@@ -787,24 +797,31 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Icon(
-                Icons.layers_rounded,
-                color: tokens.primaryBlue,
-                size: 20,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                'Output: $fileCount files · $extracted pages extracted',
-                style: DocViewTypography.labelMd.copyWith(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: tokens.textPrimary,
+          Expanded(
+            child: Row(
+              children: [
+                Icon(
+                  Icons.layers_rounded,
+                  color: tokens.primaryBlue,
+                  size: 20,
                 ),
-              ),
-            ],
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'Output: $fileCount files · $extracted pages extracted',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: DocViewTypography.labelMd.copyWith(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: tokens.textPrimary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
+          const SizedBox(width: 8),
           Text(
             'EST ~ $estStr',
             style: DocViewTypography.captionXs.copyWith(

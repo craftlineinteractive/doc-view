@@ -107,15 +107,16 @@ class _FaqScreenState extends State<FaqScreen> {
                     onPressed: () => Navigator.of(context).maybePop(),
                   ),
                   const SizedBox(width: 4),
-                  Text(
-                    'FAQ',
-                    style: DocViewTypography.headlineLg.copyWith(
-                      color: tokens.textPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                  Expanded(
+                    child: Text(
+                      'FAQ',
+                      style: DocViewTypography.headlineLg.copyWith(
+                        color: tokens.textPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
-                  const Spacer(),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10,

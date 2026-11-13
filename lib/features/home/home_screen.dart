@@ -165,8 +165,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             categoryAspectRatio = 1.6;
                           } else {
                             categoryAspectRatio = textScale > 1.4
-                                ? 0.65
-                                : (textScale > 1.1 ? 0.72 : 0.82);
+                                ? 0.58
+                                : (textScale > 1.1
+                                    ? 0.68
+                                    : (size.width <= 360 ? 0.72 : 0.80));
                           }
 
                           return GridView.count(

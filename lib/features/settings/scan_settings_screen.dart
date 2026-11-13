@@ -106,12 +106,14 @@ class ScanSettingsScreen extends ConsumerWidget {
                             color: tokens.image.solid,
                           ),
                           const SizedBox(width: 8),
-                          Text(
-                            'Include images',
-                            style: DocViewTypography.titleMd.copyWith(
-                              color: tokens.textPrimary,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
+                          Expanded(
+                            child: Text(
+                              'Include images',
+                              style: DocViewTypography.titleMd.copyWith(
+                                color: tokens.textPrimary,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                              ),
                             ),
                           ),
                         ],
@@ -238,15 +240,19 @@ class ScanSettingsScreen extends ConsumerWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'MANAGE_EXTERNAL_STORAGE',
-                        style: DocViewTypography.captionXs.copyWith(
-                          color: tokens.textSecondary,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 11,
-                          letterSpacing: 0.3,
+                      Expanded(
+                        child: Text(
+                          'MANAGE_EXTERNAL_STORAGE',
+                          overflow: TextOverflow.ellipsis,
+                          style: DocViewTypography.captionXs.copyWith(
+                            color: tokens.textSecondary,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 11,
+                            letterSpacing: 0.3,
+                          ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       if (hasAllFilesAccess)
                         OutlinedButton(
                           key: const Key('btn_open_storage_settings'),
