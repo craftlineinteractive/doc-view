@@ -181,7 +181,7 @@ class ScanSettingsScreen extends ConsumerWidget {
                         height: 38,
                         decoration: BoxDecoration(
                           color: hasAllFilesAccess
-                              ? tokens.blueTint
+                              ? tokens.excel.tint
                               : tokens.ppt.tint,
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -192,7 +192,7 @@ class ScanSettingsScreen extends ConsumerWidget {
                               : Icons.warning_amber_rounded,
                           size: 20,
                           color: hasAllFilesAccess
-                              ? tokens.primaryBlue
+                              ? tokens.excel.solid
                               : tokens.ppt.solid,
                         ),
                       ),
@@ -313,48 +313,42 @@ class ScanSettingsScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 24),
 
-            // Section 4: Outlined Rescan Button (Android only)
-            SizedBox(
-              width: double.infinity,
-              height: 56,
-              child: OutlinedButton(
-                key: const Key('btn_scan_settings_rescan'),
-                onPressed: scanState.isScanning
-                    ? null
-                    : () async {
-                        if (!hasAllFilesAccess) {
-                          final granted = await ref
-                              .read(allFilesAccessProvider.notifier)
-                              .requestAccess();
-                          if (!granted) return;
-                        }
-                        await ref.read(scanStateProvider.notifier).startScan();
-                      },
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(
-                    color: tokens.primaryBlue,
-                    width: 2.0,
-                  ),
-                  backgroundColor: tokens.surface,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+            // Section 4: Outlined Rescan Button or Linear Progress Banner (Android only)
+            if (scanState.isScanning)
+              Container(
+                key: const Key('scanning_progress_container'),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: tokens.blueTint,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: tokens.primaryBlue.withValues(alpha: 0.25),
                   ),
                 ),
-                child: scanState.isScanning
-                    ? Row(
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: [
+                    LinearProgressIndicator(
+                      minHeight: 3.0,
+                      backgroundColor: tokens.hairline,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        tokens.primaryBlue,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            width: 18,
-                            height: 18,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                tokens.primaryBlue,
-                              ),
-                            ),
+                          Icon(
+                            AppIcons.refresh,
+                            size: 18,
+                            color: tokens.primaryBlue,
                           ),
-                          const SizedBox(width: 10),
+                          const SizedBox(width: 8),
                           Text(
                             'Scanning... ${scanState.filesFound} files found',
                             style: DocViewTypography.labelLg.copyWith(
@@ -364,28 +358,57 @@ class ScanSettingsScreen extends ConsumerWidget {
                             ),
                           ),
                         ],
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            AppIcons.refresh,
-                            color: tokens.primaryBlue,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'Rescan now',
-                            style: DocViewTypography.labelLg.copyWith(
-                              color: tokens.primaryBlue,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
                       ),
+                    ),
+                  ],
+                ),
+              )
+            else
+              SizedBox(
+                width: double.infinity,
+                height: 56,
+                child: OutlinedButton(
+                  key: const Key('btn_scan_settings_rescan'),
+                  onPressed: () async {
+                    if (!hasAllFilesAccess) {
+                      final granted = await ref
+                          .read(allFilesAccessProvider.notifier)
+                          .requestAccess();
+                      if (!granted) return;
+                    }
+                    await ref.read(scanStateProvider.notifier).startScan();
+                  },
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(
+                      color: tokens.primaryBlue,
+                      width: 2.0,
+                    ),
+                    backgroundColor: tokens.surface,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        AppIcons.refresh,
+                        color: tokens.primaryBlue,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Rescan now',
+                        style: DocViewTypography.labelLg.copyWith(
+                          color: tokens.primaryBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
           ],
           const SizedBox(height: 20),
         ],

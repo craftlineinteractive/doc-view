@@ -127,15 +127,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       color: tokens.blueTint,
                       child: Row(
                         children: [
-                          SizedBox(
-                            width: 14,
-                            height: 14,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                tokens.primaryBlue,
-                              ),
-                            ),
+                          Icon(
+                            AppIcons.refresh,
+                            size: 14,
+                            color: tokens.primaryBlue,
                           ),
                           const SizedBox(width: 10),
                           Expanded(

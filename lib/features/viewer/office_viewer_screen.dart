@@ -588,13 +588,16 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
                 ),
                 const Spacer(),
                 Center(
-                  child: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2.5,
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(tokens.primaryBlue),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(2),
+                    child: SizedBox(
+                      width: 140,
+                      height: 3,
+                      child: LinearProgressIndicator(
+                        backgroundColor: tokens.hairline,
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(tokens.primaryBlue),
+                      ),
                     ),
                   ),
                 ),

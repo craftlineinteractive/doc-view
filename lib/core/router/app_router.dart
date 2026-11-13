@@ -162,7 +162,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               }
             });
             return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
+              body: SizedBox.shrink(),
             );
           }
           return ViewerScreen(file: file);

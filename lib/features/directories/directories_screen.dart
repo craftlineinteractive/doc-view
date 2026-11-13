@@ -7,6 +7,7 @@ import 'package:path/path.dart' as p;
 import '../../core/constants/file_types.dart';
 import '../../core/utils/root_path_resolver.dart';
 import '../../data/models/doc_file.dart';
+import '../../shared/widgets/skeletons/skeleton_variants.dart';
 import '../files/open_document.dart';
 import '../files/widgets/file_tile.dart';
 import '../providers/providers.dart';
@@ -308,7 +309,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
     final state = _viewState;
 
     if (state is DirectoryLoadingState) {
-      return const Center(child: CircularProgressIndicator());
+      return const SkeletonFileList(itemCount: 6);
     }
 
     if (state is DirectoryFolderAccessDeniedState) {

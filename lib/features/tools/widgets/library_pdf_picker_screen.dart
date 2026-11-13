@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/file_types.dart';
 import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
+import '../../../shared/widgets/skeletons/skeleton_variants.dart';
 import '../../providers/providers.dart';
 
 import 'merge_pdf_picker_screen.dart';
@@ -245,7 +246,7 @@ class _LibraryPdfPickerScreenState
             },
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const SkeletonFileList(itemCount: 6),
         error: (err, _) => Center(child: Text('Error loading files: $err')),
       ),
       bottomNavigationBar: widget.multiSelect

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 
-/// Single unified shimmer engine using a single 1.4s linear sweep.
+/// Single unified shimmer controller using a single 1.4s linear sweep.
 /// Automatically respects reduced motion via [MediaQuery.disableAnimationsOf].
 class Shimmer extends StatefulWidget {
   final Widget child;

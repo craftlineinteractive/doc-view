@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_filex/open_filex.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../core/theme/doc_view_tokens.dart';
 import '../../data/models/doc_file.dart';
 import '../providers/providers.dart';
 import 'image_viewer_screen.dart';
@@ -88,8 +89,19 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
     if (_isChecking) {
       return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: const Center(
-          child: CircularProgressIndicator(),
+        body: Center(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: SizedBox(
+              width: 140,
+              height: 3,
+              child: LinearProgressIndicator(
+                backgroundColor: context.tokens.hairline,
+                valueColor:
+                    AlwaysStoppedAnimation<Color>(context.tokens.primaryBlue),
+              ),
+            ),
+          ),
         ),
       );
     }

@@ -8,7 +8,7 @@ import 'package:pdfrx/pdfrx.dart';
 
 import 'file_thumbnail.dart';
 
-/// Production-ready PDF thumbnail source utilizing pdfrx engine.
+/// Production-ready PDF thumbnail source utilizing pdfrx.
 /// Features:
 /// - Concurrency queue limiting active PDF renders to at most 2.
 /// - Downscales to small thumbnails (~144px width) for 60fps scrolling.

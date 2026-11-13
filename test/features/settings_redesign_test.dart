@@ -233,17 +233,24 @@ void main() {
         expect(find.byKey(Key('faq_card_$i')), findsOneWidget);
       }
 
-      // Second question (index 1: "Is my data uploaded anywhere?") is expanded by default
-      expect(find.text('Is my data uploaded anywhere?'), findsOneWidget);
+      // Second question (index 1: "Why doesn't it scan my whole iPhone?") is expanded by default per mockup
+      expect(find.text('Why doesn\'t it scan my whole iPhone?'), findsOneWidget);
+      expect(find.textContaining('iOS uses strict app sandboxing'), findsOneWidget);
+
+      // Tap 6th question ("Is my data uploaded anywhere?") to verify exact privacy text
+      await tester.tap(find.text('Is my data uploaded anywhere?'));
+      await tester.pumpAndSettle();
+
       final exactRequiredPrivacyAnswer =
           'Your documents never leave your device. Doc View opens, converts and stores files locally. The app shows ads served by Google AdMob, which can use limited device data as described in our Privacy Policy.';
       expect(find.text(exactRequiredPrivacyAnswer), findsOneWidget);
+      expect(find.textContaining('iOS uses strict app sandboxing'), findsNothing);
 
       // Single-expand accordion behavior: tap question 0
-      await tester.tap(find.text('Why does Doc View need All files access on Android?'));
+      await tester.tap(find.text('Why does Doc View need All files access?'));
       await tester.pumpAndSettle();
 
-      // Question 0 expanded, question 1 collapsed
+      // Question 0 expanded, question 5 collapsed
       expect(find.textContaining('MANAGE_EXTERNAL_STORAGE'), findsOneWidget);
       expect(find.text(exactRequiredPrivacyAnswer), findsNothing);
 

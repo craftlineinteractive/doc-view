@@ -251,13 +251,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           title: 'Rescan now',
                           subtitle: lastScanSubtitle,
                           trailing: scanState.isScanning
-                              ? SizedBox(
-                                  width: 18,
-                                  height: 18,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      tokens.primaryBlue,
+                              ? Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: tokens.blueTint,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Text(
+                                    'Scanning...',
+                                    style: DocViewTypography.captionXs.copyWith(
+                                      color: tokens.primaryBlue,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 )

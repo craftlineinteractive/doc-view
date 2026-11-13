@@ -27,14 +27,14 @@ class FaqScreen extends StatefulWidget {
 
   static const List<FaqItem> defaultQuestions = [
     FaqItem(
-      question: 'Why does Doc View need All files access on Android?',
+      question: 'Why does Doc View need All files access?',
       answer:
           'Doc View requires All files access (MANAGE_EXTERNAL_STORAGE) on Android 11+ to discover and index supported documents (PDF, Word, Excel, PowerPoint, Text, and Images) stored in shared folders such as Downloads and Documents.\n\nWithout this permission, Android restricts file access to the app\'s private internal folder, preventing Doc View from browsing or opening files located across your device.',
     ),
     FaqItem(
-      question: 'Is my data uploaded anywhere?',
+      question: 'Why doesn\'t it scan my whole iPhone?',
       answer:
-          'Your documents never leave your device. Doc View opens, converts and stores files locally. The app shows ads served by Google AdMob, which can use limited device data as described in our Privacy Policy.',
+          'iOS uses strict app sandboxing to safeguard device privacy. Apps can only access documents explicitly saved inside the Files app or shared via the system Share Sheet.\n\nTo view files on iOS, import them into the Doc View folder in the native Files app or use the Import files option in Settings.',
     ),
     FaqItem(
       question: 'Where are the PDFs I create saved?',
@@ -44,7 +44,7 @@ class FaqScreen extends StatefulWidget {
     FaqItem(
       question: 'Why does my Word file look different?',
       answer:
-          'Doc View uses a high-speed offline document engine to render files directly on your device without sending private data to cloud converters. Complex formatting or custom shapes render with native offline approximations.',
+          'Doc View renders files directly on your device using local offline parsers without sending private data to cloud converters. Complex formatting or custom shapes render with native offline approximations.',
     ),
     FaqItem(
       question: 'Can I open password-protected files?',
@@ -52,9 +52,9 @@ class FaqScreen extends StatefulWidget {
           'Yes, Doc View supports opening password-protected PDF documents. When opening an encrypted PDF, enter the password in the dialog to decrypt and view the document on your device.',
     ),
     FaqItem(
-      question: 'Why doesn\'t it scan my whole iPhone?',
+      question: 'Is my data uploaded anywhere?',
       answer:
-          'iOS uses strict app sandboxing to safeguard device privacy. Apps can only access documents explicitly saved inside the Files app or shared via the system Share Sheet.\n\nTo view files on iOS, import them into the Doc View folder in the native Files app or use the Import files option in Settings.',
+          'Your documents never leave your device. Doc View opens, converts and stores files locally. The app shows ads served by Google AdMob, which can use limited device data as described in our Privacy Policy.',
     ),
   ];
 
