@@ -259,7 +259,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               pinned: true,
               delegate: _DocTabsHeaderDelegate(
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                extent: (48.0 * MediaQuery.textScalerOf(context).scale(1.0)).clamp(48.0, 72.0),
+                extent: (49.0 * MediaQuery.textScalerOf(context).scale(1.0)).clamp(49.0, 72.0),
                 child: DocUnderlineTabs(
                   selectedIndex: _selectedTabIndex,
                   recentCount: recentFiles.length,

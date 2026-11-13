@@ -12,8 +12,8 @@ abstract final class DocViewColors {
   static const Color dividerBandLight = Color(0xFFF1F3F8);
   static const Color hairlineLight = Color(0xFFE6E9F0);
   static const Color textPrimaryLight = Color(0xFF11141C);
-  static const Color textSecondaryLight = Color(0xFF8A8F9C);
-  static const Color sectionHeaderLight = Color(0xFF8A94AE);
+  static const Color textSecondaryLight = Color(0xFF656B7B);
+  static const Color sectionHeaderLight = Color(0xFF5E6780);
   static const Color primaryBlue = Color(0xFF1A66E8);
   static const Color interactiveBlue = Color(0xFF2F7BEA);
   static const Color blueTintLight = Color(0xFFE8F0FE);
@@ -32,8 +32,8 @@ abstract final class DocViewColors {
   static const Color dividerBandDark = Color(0xFF141722);
   static const Color hairlineDark = Color(0xFF2A3042);
   static const Color textPrimaryDark = Color(0xFFFFFFFF);
-  static const Color textSecondaryDark = Color(0xFF858B9C);
-  static const Color sectionHeaderDark = Color(0xFF7F8AA8);
+  static const Color textSecondaryDark = Color(0xFF9EA5B7);
+  static const Color sectionHeaderDark = Color(0xFFA2ACC7);
   static const Color primaryButtonDark = Color(0xFF1A66E8);
   static const Color activeBlueDark = Color(0xFF4D8FF7);
   static const Color blueTintDark = Color(0xFF1E2A45);

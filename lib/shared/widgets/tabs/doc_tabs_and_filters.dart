@@ -29,6 +29,7 @@ class DocUnderlineTabs extends StatelessWidget {
     final activeColor = isDark ? tokens.interactiveBlue : tokens.primaryBlue;
 
     return Container(
+      constraints: const BoxConstraints(minHeight: 48),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: tokens.hairline, width: 1),
@@ -86,12 +87,15 @@ class _TabItem extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 11, bottom: 9),
-                child: Row(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 48),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 13, bottom: 9),
+                  child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Flexible(
@@ -133,6 +137,7 @@ class _TabItem extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }
