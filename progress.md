@@ -1,14 +1,9 @@
-# Progress Log - Phase 4 (Prompt R-E2)
+# Execution Progress
 
-## Session Info
-- Date: 2026-11-12
-- Prompt: R-E2 (Merge PDF, Split PDF, Operation Flow QA & Step 0 Deep Verification)
+## Session Started: 2026-11-13 11:20
 
-## Current Status
-- Step 0: In Progress (testing PPTX failure in debug/release, benchmark cold start, profile scroll frame times, adaptive icon check, 5-photo PDF verification)
-- Step 1: Not started
-- Step 2: Not started
-- Step 3: Not started
-- Step 4: Not started
-- Step 5: Not started
-- Step 6: Not started
+### Step 0: Loose Ends from R-F1
+- [ ] FAQ question ordering & default expanded question.
+- [ ] Scan settings: replace spinner on "Rescan now" with LinearProgressIndicator & check CircularProgressIndicator across `lib/`.
+- [ ] Storage diagnostics card: states, tints, button actions & emulator verification.
+- [ ] Step 0 greps, output correctness tests, and cold start runs.
