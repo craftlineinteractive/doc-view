@@ -66,6 +66,21 @@ abstract final class DocViewTypography {
     fontFeatures: [FontFeature.tabularFigures()],
   );
 
+  static const TextStyle labelSm = TextStyle(
+    fontFamily: fontInter,
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    height: 18 / 13,
+    letterSpacing: 0.0,
+  );
+
+  static const TextStyle sectionHeader = TextStyle(
+    fontFamily: fontInter,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.8,
+  );
+
   static const TextStyle bodyLg = TextStyle(
     fontFamily: fontInter,
     fontSize: 15,

@@ -123,6 +123,14 @@ final pdfSplitServiceProvider = Provider<PdfSplitService>((ref) {
 /// Key for persisting last completed scan timestamp in SharedPreferences.
 const String keyLastScanTime = 'last_completed_scan_timestamp';
 
+/// Provider exposing the last scan completed timestamp.
+final lastScanTimeProvider = FutureProvider<DateTime?>((ref) async {
+  final prefs = await SharedPreferences.getInstance();
+  final timestamp = prefs.getInt(keyLastScanTime);
+  if (timestamp == null) return null;
+  return DateTime.fromMillisecondsSinceEpoch(timestamp);
+});
+
 /// Settings repository provider.
 final settingsRepositoryProvider = Provider<SettingsRepository>((ref) {
   return SettingsRepository();
@@ -183,6 +191,7 @@ class ScanStateNotifier extends Notifier<ScanProgress> {
         // Automatically refresh category counts and active file queries upon completion
         ref.invalidate(categoryCountsProvider);
         ref.invalidate(filesProvider);
+        ref.invalidate(lastScanTimeProvider);
       }
     });
     ref.onDispose(() {

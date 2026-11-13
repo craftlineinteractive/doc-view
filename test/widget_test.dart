@@ -163,7 +163,7 @@ void main() {
     expect(find.byKey(const Key('settings_clear_history')), findsOneWidget);
     expect(find.byKey(const Key('settings_faq')), findsOneWidget);
     expect(find.byKey(const Key('settings_licenses')), findsOneWidget);
-    expect(find.byKey(const Key('settings_fonts_license')), findsOneWidget);
+    expect(find.byKey(const Key('settings_version')), findsOneWidget);
 
     // Conditional rows whose constants are empty ('') MUST NOT appear
     expect(AppConstants.supportEmail, isEmpty);
@@ -171,6 +171,7 @@ void main() {
     expect(AppConstants.storeRateUrl, isEmpty);
     expect(AppConstants.privacyPolicyUrl, isEmpty);
 
+    expect(find.byKey(const Key('settings_send_feedback')), findsNothing);
     expect(find.byKey(const Key('settings_feedback')), findsNothing);
     expect(find.byKey(const Key('settings_share_app')), findsNothing);
     expect(find.byKey(const Key('settings_rate_us')), findsNothing);

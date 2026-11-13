@@ -1,6 +1,6 @@
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -8,11 +8,21 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/theme/app_icons.dart';
+import '../../core/theme/doc_view_tokens.dart';
+import '../../core/theme/doc_view_typography.dart';
+import '../../core/utils/format_utils.dart';
 import '../../data/models/app_settings.dart';
+import '../../shared/widgets/dialogs/doc_dialog.dart';
+import '../../shared/widgets/navigation/doc_scaffold.dart';
+import '../../shared/widgets/tiles/settings_row.dart';
 import '../debug/component_gallery_screen.dart';
 import '../providers/providers.dart';
+import 'widgets/theme_selection_sheet.dart';
 
-/// Screen managing application preferences, file management tools, offline FAQs, and legal info.
+/// Main Settings tab matching mockups 07_settings/01_settings_tab.
+/// Implements grouped settings cards, live theme sheet, scan configuration,
+/// clear recent history dialog, legal links, and package version info.
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
@@ -42,280 +52,43 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
-  Future<void> _showDocumentEngineLicense(BuildContext context) async {
-    String licenseText = '';
+  Future<void> _handleImportFiles() async {
     try {
-      licenseText = await rootBundle.loadString(
-        'packages/offline_document_viewer/assets/licenses/LICENSE-liberation',
-      );
-    } catch (_) {
-      return;
+      final count = await ref.read(importServiceProvider).importFiles();
+      ref.invalidate(categoryCountsProvider);
+      ref.invalidate(filesProvider);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('$count files imported')),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Import failed: $e')),
+        );
+      }
     }
-
-    if (!context.mounted || licenseText.isEmpty) return;
-
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (context) {
-          final theme = Theme.of(context);
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Liberation Font License'),
-            ),
-            body: SelectionArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  licenseText,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontFamily: 'monospace',
-                    height: 1.4,
-                    color: theme.colorScheme.onSurface,
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  void _showThemeDialog(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (sheetContext) {
-        return Consumer(
-          builder: (context, ref, _) {
-            final liveTheme = ref.watch(settingsProvider).themeMode;
-            final theme = Theme.of(context);
-
-            return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 8,
-                      ),
-                      child: Text(
-                        'Choose App Theme',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    RadioGroup<ThemeMode>(
-                      groupValue: liveTheme,
-                      onChanged: (mode) {
-                        if (mode != null) {
-                          ref
-                              .read(settingsProvider.notifier)
-                              .setThemeMode(mode);
-                          Navigator.of(sheetContext).pop();
-                        }
-                      },
-                      child: const Column(
-                        children: [
-                          RadioListTile<ThemeMode>(
-                            value: ThemeMode.system,
-                            title: Text('System default'),
-                            subtitle: Text('Follows device system appearance'),
-                          ),
-                          RadioListTile<ThemeMode>(
-                            value: ThemeMode.light,
-                            title: Text('Light'),
-                            subtitle: Text('Clean, bright appearance'),
-                          ),
-                          RadioListTile<ThemeMode>(
-                            value: ThemeMode.dark,
-                            title: Text('Dark'),
-                            subtitle: Text('Easier on the eyes in low light'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  void _showScanSettingsSheet(BuildContext context, AppSettings settings) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (sheetContext) {
-        return Consumer(
-          builder: (context, ref, _) {
-            final liveSettings = ref.watch(settingsProvider);
-            final theme = Theme.of(context);
-
-            return SafeArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 8,
-                      ),
-                      child: Text(
-                        'Scan Settings',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Text(
-                        'Configure how Doc View scans storage and indexes your documents.',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Text(
-                        'Auto-Scan Mode',
-                        style: theme.textTheme.labelLarge?.copyWith(
-                          color: theme.colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    RadioGroup<AutoScanMode>(
-                      groupValue: liveSettings.autoScanMode,
-                      onChanged: (mode) {
-                        if (mode != null) {
-                          ref
-                              .read(settingsProvider.notifier)
-                              .setAutoScanMode(mode);
-                        }
-                      },
-                      child: Column(
-                        children: [
-                          RadioListTile<AutoScanMode>(
-                            value: AutoScanMode.onOpen,
-                            title: Text(AutoScanMode.onOpen.label),
-                            subtitle: Text(AutoScanMode.onOpen.description),
-                          ),
-                          RadioListTile<AutoScanMode>(
-                            value: AutoScanMode.manualOnly,
-                            title: Text(AutoScanMode.manualOnly.label),
-                            subtitle: Text(AutoScanMode.manualOnly.description),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Divider(height: 24),
-                    SwitchListTile(
-                      value: liveSettings.includeImages,
-                      title: const Text('Include images'),
-                      subtitle: const Text(
-                        'Scan and index image files (JPG, PNG, WEBP). When turned off, non-imported images are removed on next scan.',
-                      ),
-                      onChanged: (value) {
-                        ref
-                            .read(settingsProvider.notifier)
-                            .setIncludeImages(value);
-
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                value
-                                    ? 'Images will be included in storage scans.'
-                                    : 'Images will be excluded from scans.',
-                              ),
-                              action: SnackBarAction(
-                                label: 'Rescan now',
-                                onPressed: () {
-                                  ref
-                                      .read(scanStateProvider.notifier)
-                                      .startScan();
-                                },
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
   }
 
   Future<void> _confirmClearHistory(BuildContext context) async {
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showDocConfirmDialog(
       context: context,
-      builder: (dialogContext) {
-        return AlertDialog(
-          icon: const Icon(
-            Icons.history_toggle_off_rounded,
-            size: 36,
-            color: Colors.amber,
-          ),
-          title: const Text('Clear Recent History?'),
-          content: const Text(
-            'This will clear all entries from your Recently Opened list.\n\n'
-            'Your actual documents on storage will not be affected or deleted.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext, false),
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(dialogContext).colorScheme.error,
-                foregroundColor: Theme.of(dialogContext).colorScheme.onError,
-              ),
-              onPressed: () => Navigator.pop(dialogContext, true),
-              child: const Text('Clear'),
-            ),
-          ],
-        );
-      },
+      title: 'Clear recent history?',
+      body:
+          'Files will be removed from Recent. Your files and bookmarks are not affected.',
+      confirmLabel: 'Clear',
+      cancelLabel: 'Cancel',
+      isDestructive: true,
     );
 
     if (confirmed == true && context.mounted) {
-      final count = await ref
-          .read(fileActionsControllerProvider)
-          .clearRecentHistory();
+      await ref.read(fileActionsControllerProvider).clearRecentHistory();
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              count > 0
-                  ? 'Cleared $count recent history entries.'
-                  : 'Recent history is already empty.',
-            ),
+          const SnackBar(
+            content: Text('Recent history cleared'),
           ),
         );
       }
@@ -323,6 +96,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   Future<void> _sendFeedback(BuildContext context) async {
+    if (AppConstants.supportEmail.isEmpty) return;
     final version = _packageInfo?.version ?? '1.0.0';
     final build = _packageInfo?.buildNumber ?? '1';
     final platform = Theme.of(context).platform.name;
@@ -354,7 +128,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
-  Future<void> _shareApp(BuildContext context) async {
+  Future<void> _shareApp() async {
+    if (AppConstants.storeShareUrl.isEmpty) return;
     try {
       await SharePlus.instance.share(
         ShareParams(
@@ -366,7 +141,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } catch (_) {}
   }
 
-  Future<void> _rateApp(BuildContext context) async {
+  Future<void> _rateApp() async {
+    if (AppConstants.storeRateUrl.isEmpty) return;
     final uri = Uri.parse(AppConstants.storeRateUrl);
     try {
       if (await canLaunchUrl(uri)) {
@@ -375,7 +151,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } catch (_) {}
   }
 
-  Future<void> _openPrivacyPolicy(BuildContext context) async {
+  Future<void> _openPrivacyPolicy() async {
+    if (AppConstants.privacyPolicyUrl.isEmpty) return;
     final uri = Uri.parse(AppConstants.privacyPolicyUrl);
     try {
       if (await canLaunchUrl(uri)) {
@@ -397,427 +174,242 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final tokens = context.tokens;
     final settings = ref.watch(settingsProvider);
     final scanState = ref.watch(scanStateProvider);
+    final lastScanTimeAsync = ref.watch(lastScanTimeProvider);
     final permissionService = ref.watch(permissionServiceProvider);
-    final isAndroid = permissionService.isAndroid;
+    final isAndroid = Platform.isAndroid;
 
     final appVersionStr = _packageInfo != null
-        ? 'Version ${_packageInfo!.version} (Build ${_packageInfo!.buildNumber})'
-        : 'Version 1.0.0';
+        ? '${_packageInfo!.version} (${_packageInfo!.buildNumber})'
+        : '1.0.0 (1)';
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-        centerTitle: false,
-      ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        children: [
-          // Section: File Management
-          _SectionHeader(title: 'File Management'),
-          Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(
-                color: theme.dividerColor.withValues(alpha: 0.1),
+    final lastScanSubtitle = scanState.isScanning
+        ? 'Scanning... ${scanState.filesFound} files found'
+        : FormatUtils.formatLastScanTime(lastScanTimeAsync.value);
+
+    // Filter dynamic Help rows based on constant presence
+    final hasFeedback = AppConstants.supportEmail.isNotEmpty;
+    final hasShare = AppConstants.storeShareUrl.isNotEmpty;
+    final hasRate = AppConstants.storeRateUrl.isNotEmpty;
+    final hasPrivacy = AppConstants.privacyPolicyUrl.isNotEmpty;
+
+    return DocScaffold(
+      applyHeaderGradient: true,
+      showDockedBanner: true,
+      isAdLoaded: true,
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            // Pale-Blue Gradient App Bar Header
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Settings',
+                style: DocViewTypography.headlineLg.copyWith(
+                  color: tokens.textPrimary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
               ),
             ),
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                _SettingsTile(
-                  key: const Key('settings_file_manager'),
-                  icon: Icons.folder_open_rounded,
-                  iconColor: theme.colorScheme.primary,
-                  title: 'File manager',
-                  subtitle: 'Browse storage directories and folders',
-                  onTap: () => context.push('/directories'),
-                ),
-                if (isAndroid) ...[
-                  const _TileDivider(),
-                  _SettingsTile(
-                    key: const Key('settings_rescan_now'),
-                    icon: Icons.sync_rounded,
-                    iconColor: theme.colorScheme.primary,
-                    title: 'Rescan now',
-                    subtitle: scanState.isScanning
-                        ? 'Scanning storage... ${scanState.filesFound} files found'
-                        : 'Scan device storage to refresh the document catalog',
-                    trailing: scanState.isScanning
-                        ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        : const Icon(Icons.chevron_right_rounded),
-                    onTap: scanState.isScanning
-                        ? null
-                        : () async {
-                            final hasAccess =
-                                await permissionService.hasAllFilesAccess();
-                            if (!hasAccess) {
-                              final granted = await permissionService
-                                  .requestAllFilesAccess();
-                              if (!granted) {
-                                if (context.mounted) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        'All files access is required to scan storage',
-                                      ),
-                                    ),
-                                  );
-                                }
-                                return;
-                              }
-                            }
-                            await ref
-                                .read(scanStateProvider.notifier)
-                                .startScan();
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Scanning started...'),
-                                ),
-                              );
-                            }
-                          },
-                  ),
-                ],
-                const _TileDivider(),
-                _SettingsTile(
-                  key: const Key('settings_import_files'),
-                  icon: Icons.file_upload_outlined,
-                  iconColor: Colors.green,
-                  title: 'Import files',
-                  subtitle: 'Import documents into Doc View private storage',
-                  onTap: () async {
-                    try {
-                      final count =
-                          await ref.read(importServiceProvider).importFiles();
-                      ref.invalidate(categoryCountsProvider);
-                      ref.invalidate(filesProvider);
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('$count files imported')),
-                        );
-                      }
-                    } catch (e) {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Import error: $e')),
-                        );
-                      }
-                    }
-                  },
-                ),
-              ],
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: tokens.hairline,
             ),
-          ),
-
-          const SizedBox(height: 20),
-
-          // Section: General
-          _SectionHeader(title: 'General'),
-          Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(
-                color: theme.dividerColor.withValues(alpha: 0.1),
-              ),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                _SettingsTile(
-                  key: const Key('settings_app_theme'),
-                  icon: Icons.palette_outlined,
-                  iconColor: Colors.purple,
-                  title: 'App theme',
-                  subtitle: _themeModeLabel(settings.themeMode),
-                  onTap: () => _showThemeDialog(context),
-                ),
-                const _TileDivider(),
-                _SettingsTile(
-                  key: const Key('settings_scan_settings'),
-                  icon: Icons.manage_search_rounded,
-                  iconColor: Colors.teal,
-                  title: 'Scan settings',
-                  subtitle:
-                      '${settings.autoScanMode.label} • Images ${settings.includeImages ? "on" : "off"}',
-                  onTap: () => _showScanSettingsSheet(context, settings),
-                ),
-                const _TileDivider(),
-                _SettingsTile(
-                  key: const Key('settings_clear_history'),
-                  icon: Icons.history_toggle_off_rounded,
-                  iconColor: Colors.orange,
-                  title: 'Clear recent history',
-                  subtitle: 'Reset recently opened documents list',
-                  onTap: () => _confirmClearHistory(context),
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          // Section: Help
-          _SectionHeader(title: 'Help'),
-          Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(
-                color: theme.dividerColor.withValues(alpha: 0.1),
-              ),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                _SettingsTile(
-                  key: const Key('settings_faq'),
-                  icon: Icons.help_outline_rounded,
-                  iconColor: Colors.blue,
-                  title: 'FAQ',
-                  subtitle: 'Frequently asked questions & privacy details',
-                  onTap: () => context.push('/faq'),
-                ),
-                if (AppConstants.supportEmail.isNotEmpty) ...[
-                  const _TileDivider(),
-                  _SettingsTile(
-                    key: const Key('settings_feedback'),
-                    icon: Icons.mail_outline_rounded,
-                    iconColor: Colors.indigo,
-                    title: 'Send feedback',
-                    subtitle: 'Report an issue or suggest an improvement',
-                    onTap: () => _sendFeedback(context),
-                  ),
-                ],
-                if (AppConstants.storeShareUrl.isNotEmpty) ...[
-                  const _TileDivider(),
-                  _SettingsTile(
-                    key: const Key('settings_share_app'),
-                    icon: Icons.share_outlined,
-                    iconColor: Colors.green,
-                    title: 'Share app',
-                    subtitle: 'Share Doc View with colleagues or friends',
-                    onTap: () => _shareApp(context),
-                  ),
-                ],
-                if (AppConstants.storeRateUrl.isNotEmpty) ...[
-                  const _TileDivider(),
-                  _SettingsTile(
-                    key: const Key('settings_rate_us'),
-                    icon: Icons.star_outline_rounded,
-                    iconColor: Colors.amber,
-                    title: 'Rate us',
-                    subtitle: 'Rate Doc View on the app store',
-                    onTap: () => _rateApp(context),
-                  ),
-                ],
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          // Section: About
-          _SectionHeader(title: 'About'),
-          Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(
-                color: theme.dividerColor.withValues(alpha: 0.1),
-              ),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                _SettingsTile(
-                  key: const Key('settings_app_info'),
-                  icon: Icons.info_outline_rounded,
-                  iconColor: theme.colorScheme.primary,
-                  title: AppConstants.appName,
-                  subtitle: appVersionStr,
-                  onLongPress: kDebugMode
-                      ? () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute<void>(
-                              builder: (_) => const ComponentGalleryScreen(),
-                            ),
-                          );
-                        }
-                      : null,
-                ),
-                if (AppConstants.privacyPolicyUrl.isNotEmpty) ...[
-                  const _TileDivider(),
-                  _SettingsTile(
-                    key: const Key('settings_privacy_policy'),
-                    icon: Icons.privacy_tip_outlined,
-                    iconColor: Colors.teal,
-                    title: 'Privacy policy',
-                    subtitle: 'Read our privacy commitments',
-                    onTap: () => _openPrivacyPolicy(context),
-                  ),
-                ],
-                const _TileDivider(),
-                _SettingsTile(
-                  key: const Key('settings_licenses'),
-                  icon: Icons.description_outlined,
-                  iconColor: theme.colorScheme.secondary,
-                  title: 'Open-source licenses',
-                  subtitle: 'Third-party libraries used in Doc View',
-                  onTap: () {
-                    showLicensePage(
-                      context: context,
-                      applicationName: AppConstants.appName,
-                      applicationVersion: appVersionStr,
-                    );
-                  },
-                ),
-                const _TileDivider(),
-                _SettingsTile(
-                  key: const Key('settings_fonts_license'),
-                  icon: Icons.font_download_outlined,
-                  iconColor: theme.colorScheme.secondary,
-                  title: 'Document engine fonts license',
-                  subtitle: 'Liberation Fonts and third-party notices',
-                  onTap: () => _showDocumentEngineLicense(context),
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 32),
-        ],
-      ),
-    );
-  }
-}
-
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.only(left: 4, bottom: 8),
-      child: Text(
-        title,
-        style: theme.textTheme.titleSmall?.copyWith(
-          color: theme.colorScheme.primary,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-    );
-  }
-}
-
-class _SettingsTile extends StatelessWidget {
-  const _SettingsTile({
-    super.key,
-    required this.icon,
-    required this.iconColor,
-    required this.title,
-    this.subtitle,
-    this.trailing,
-    this.onTap,
-    this.onLongPress,
-  });
-
-  final IconData icon;
-  final Color iconColor;
-  final String title;
-  final String? subtitle;
-  final Widget? trailing;
-  final VoidCallback? onTap;
-  final VoidCallback? onLongPress;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Semantics(
-      button: onTap != null || onLongPress != null,
-      label: subtitle != null ? '$title, $subtitle' : title,
-      child: InkWell(
-        onTap: onTap,
-        onLongPress: onLongPress,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 56),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              children: [
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: iconColor.withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(icon, color: iconColor, size: 20),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+            // Scrollable Content
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                children: [
+                  // 1. TOP GROUP (File manager, Import files, Rescan now on Android)
+                  SettingsGroupCard(
                     children: [
-                      Text(
-                        title,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w500,
-                        ),
+                      SettingsRow(
+                        key: const Key('settings_file_manager'),
+                        icon: Icons.folder_open_rounded,
+                        title: 'File manager',
+                        subtitle: 'Browse storage directories and folders',
+                        onTap: () => context.push('/directories'),
                       ),
-                      if (subtitle != null) ...[
-                        const SizedBox(height: 2),
-                        Text(
-                          subtitle!,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
+                      SettingsRow(
+                        key: const Key('settings_import_files'),
+                        icon: Icons.note_add_outlined,
+                        title: 'Import files',
+                        subtitle:
+                            'Import documents into Doc View private storage',
+                        onTap: _handleImportFiles,
+                      ),
+                      if (isAndroid)
+                        SettingsRow(
+                          key: const Key('settings_rescan_now'),
+                          icon: AppIcons.refresh,
+                          title: 'Rescan now',
+                          subtitle: lastScanSubtitle,
+                          trailing: scanState.isScanning
+                              ? SizedBox(
+                                  width: 18,
+                                  height: 18,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      tokens.primaryBlue,
+                                    ),
+                                  ),
+                                )
+                              : null,
+                          onTap: scanState.isScanning
+                              ? null
+                              : () async {
+                                  final hasAccess = await permissionService
+                                      .hasAllFilesAccess();
+                                  if (!hasAccess) {
+                                    final granted = await permissionService
+                                        .requestAllFilesAccess();
+                                    if (!granted) return;
+                                  }
+                                  await ref
+                                      .read(scanStateProvider.notifier)
+                                      .startScan();
+                                },
                         ),
-                      ],
                     ],
                   ),
-                ),
-                if (trailing != null)
-                  trailing!
-                else if (onTap != null)
-                  Icon(
-                    Icons.chevron_right_rounded,
-                    color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                  const SizedBox(height: 12),
+
+                  // 2. SECTION: GENERAL
+                  const SettingsSectionHeader(title: 'General'),
+                  SettingsGroupCard(
+                    children: [
+                      SettingsRow(
+                        key: const Key('settings_scan_settings'),
+                        icon: Icons.filter_center_focus_rounded,
+                        title: 'Scan settings',
+                        subtitle: settings.autoScanMode == AutoScanMode.onOpen
+                            ? 'Scan on open'
+                            : 'Manual only',
+                        onTap: () => context.push('/settings/scan-settings'),
+                      ),
+                      SettingsRow(
+                        key: const Key('settings_app_theme'),
+                        icon: Icons.wb_sunny_outlined,
+                        title: 'App theme',
+                        subtitle: _themeModeLabel(settings.themeMode),
+                        onTap: () => ThemeSelectionSheet.show(context),
+                      ),
+                      SettingsRow(
+                        key: const Key('settings_clear_history'),
+                        icon: Icons.delete_outline_rounded,
+                        title: 'Clear recent history',
+                        subtitle: 'Clear opened document history',
+                        onTap: () => _confirmClearHistory(context),
+                      ),
+                    ],
                   ),
-              ],
+                  const SizedBox(height: 12),
+
+                  // 3. SECTION: HELP
+                  const SettingsSectionHeader(title: 'Help'),
+                  SettingsGroupCard(
+                    children: [
+                      SettingsRow(
+                        key: const Key('settings_faq'),
+                        icon: Icons.help_outline_rounded,
+                        title: 'FAQ',
+                        subtitle: 'Frequently asked questions',
+                        onTap: () => context.push('/faq'),
+                      ),
+                      if (hasFeedback)
+                        SettingsRow(
+                          key: const Key('settings_send_feedback'),
+                          icon: Icons.chat_bubble_outline_rounded,
+                          title: 'Send feedback',
+                          subtitle: 'Report bugs or suggest features',
+                          onTap: () => _sendFeedback(context),
+                        ),
+                      if (hasShare)
+                        SettingsRow(
+                          key: const Key('settings_share_app'),
+                          icon: Icons.share_outlined,
+                          title: 'Share app',
+                          subtitle: 'Recommend Doc View to friends',
+                          onTap: _shareApp,
+                        ),
+                      if (hasRate)
+                        SettingsRow(
+                          key: const Key('settings_rate_us'),
+                          icon: Icons.star_outline_rounded,
+                          title: 'Rate us',
+                          subtitle: 'Leave a review on Google Play',
+                          onTap: _rateApp,
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+
+                  // 4. SECTION: ABOUT
+                  const SettingsSectionHeader(title: 'About'),
+                  SettingsGroupCard(
+                    children: [
+                      if (hasPrivacy)
+                        SettingsRow(
+                          key: const Key('settings_privacy_policy'),
+                          icon: Icons.shield_outlined,
+                          title: 'Privacy policy',
+                          subtitle: 'Read our terms and privacy policy',
+                          onTap: _openPrivacyPolicy,
+                        ),
+                      SettingsRow(
+                        key: const Key('settings_licenses'),
+                        icon: Icons.description_outlined,
+                        title: 'Open-source licenses',
+                        subtitle: 'Third-party software libraries',
+                        onTap: () {
+                          showLicensePage(
+                            context: context,
+                            applicationName: 'Doc View',
+                            applicationVersion: appVersionStr,
+                          );
+                        },
+                      ),
+                      // Version Row: Tap does nothing; long press in kDebugMode opens Component Gallery
+                      SettingsRow(
+                        key: const Key('settings_version'),
+                        icon: Icons.info_outline_rounded,
+                        title: 'Version',
+                        trailing: Text(
+                          appVersionStr,
+                          style: DocViewTypography.bodyMedium.copyWith(
+                            color: tokens.textSecondary,
+                            fontWeight: FontWeight.w500,
+                            fontFeatures: const [FontFeature.tabularFigures()],
+                          ),
+                        ),
+                        onTap: () {}, // Tap does nothing per owner decision
+                        onLongPress: kDebugMode
+                            ? () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (_) =>
+                                        const ComponentGalleryScreen(),
+                                  ),
+                                );
+                              }
+                            : null,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
-    );
-  }
-}
-
-class _TileDivider extends StatelessWidget {
-  const _TileDivider();
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Divider(
-      height: 1,
-      thickness: 1,
-      indent: 68,
-      color: theme.dividerColor.withValues(alpha: 0.08),
     );
   }
 }

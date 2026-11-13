@@ -31,6 +31,22 @@ class FormatUtils {
   static String formatSubtitle(DateTime date, int bytes) {
     return '${formatDate(date)} · ${formatFileSize(bytes)}';
   }
+
+  /// Formats a last scan [DateTime] into owner-specified string: "Last scan: today, 4:31 PM" or "Never scanned".
+  static String formatLastScanTime(DateTime? date) {
+    if (date == null) return 'Never scanned';
+    final now = DateTime.now();
+    final timeStr = DateFormat('h:mm a').format(date);
+    if (date.year == now.year && date.month == now.month && date.day == now.day) {
+      return 'Last scan: today, $timeStr';
+    }
+    final yesterday = now.subtract(const Duration(days: 1));
+    if (date.year == yesterday.year && date.month == yesterday.month && date.day == yesterday.day) {
+      return 'Last scan: yesterday, $timeStr';
+    }
+    final dateStr = DateFormat('MMM d').format(date);
+    return 'Last scan: $dateStr, $timeStr';
+  }
 }
 
 /// Escapes SQLite LIKE wildcards (`%`, `_`, and `\`) for safe literal matching.

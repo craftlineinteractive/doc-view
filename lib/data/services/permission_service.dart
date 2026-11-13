@@ -94,5 +94,8 @@ class PermissionService {
       return false;
     }
   }
+
+  /// Opens app settings for Doc View.
+  Future<bool> openAppSettingsScreen() => openAppSettings();
 }
 
