@@ -554,10 +554,9 @@ packages:
   offline_document_viewer:
     dependency: "direct main"
     description:
-      name: offline_document_viewer
-      sha256: "6233c9703af98108f65fd5d9ba9a54dd157bfbcf6b5722018143ca2b9875c48f"
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/offline_document_viewer"
+      relative: true
+    source: path
     version: "0.1.0"
   open_filex:
     dependency: "direct main"

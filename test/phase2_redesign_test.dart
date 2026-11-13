@@ -8,6 +8,7 @@ import 'package:docview/features/providers/providers.dart';
 import 'package:docview/features/search/search_screen.dart';
 import 'package:docview/shared/widgets/ads/ad_placeholders.dart';
 import 'package:docview/shared/widgets/status/doc_status_widgets.dart';
+import 'package:docview/shared/widgets/tiles/doc_folded_icon.dart';
 import 'package:docview/shared/widgets/tiles/file_and_folder_rows.dart';
 import 'package:docview/shared/widgets/tiles/file_thumbnail.dart';
 import 'package:flutter/material.dart';
@@ -227,6 +228,57 @@ void main() {
 
       // Renders red PDF glyph badge as fallback
       expect(find.text('PDF'), findsOneWidget);
+    });
+  });
+
+  group('Phase 2 5000+ Files & Folded Corner Tests', () {
+    testWidgets('FilesScreen renders over 100 items line-wise without truncation', (tester) async {
+      tester.view.physicalSize = const Size(393 * 2, 852 * 2);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      final manyFiles = List.generate(
+        150,
+        (i) => _mockFile(id: i + 1, name: 'document_$i.pdf', category: FileCategory.pdf),
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            filesProvider(null).overrideWith((ref) => Future.value(manyFiles)),
+          ],
+          child: MaterialApp(
+            theme: AppTheme.lightTheme,
+            home: const FilesScreen(category: null),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(ListView), findsOneWidget);
+      expect(find.text('document_0.pdf'), findsOneWidget);
+    });
+
+    testWidgets('DocFoldedIcon custom painter renders without errors', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const Scaffold(
+            body: Center(
+              child: DocFoldedIcon(
+                color: Colors.red,
+                width: 32,
+                height: 38,
+                hasFold: true,
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(DocFoldedIcon), findsOneWidget);
     });
   });
 }

@@ -329,7 +329,7 @@ class SortOptionNotifier extends Notifier<SortOption> {
 final sortOptionProvider =
     NotifierProvider<SortOptionNotifier, SortOption>(SortOptionNotifier.new);
 
-/// Family provider loading the first 100 files for a specific [FileCategory] (or all if null), sorted by [sortOptionProvider].
+/// Family provider loading all files for a specific [FileCategory] (or all if null), sorted by [sortOptionProvider].
 final filesProvider =
     FutureProvider.family<List<DocFile>, FileCategory?>((ref, category) async {
   final repository = ref.watch(fileRepositoryProvider);
@@ -337,7 +337,7 @@ final filesProvider =
   return repository.getFiles(
     category: category,
     sortOption: sortOption,
-    limit: 100,
+    limit: null,
   );
 });
 

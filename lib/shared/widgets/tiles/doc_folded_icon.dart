@@ -275,15 +275,15 @@ class _DocFoldedPainter extends CustomPainter {
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1.5);
     canvas.drawPath(flapPath.shift(const Offset(-0.8, 0.8)), flapShadowPaint);
 
-    // 6. Fill flap with crisp paper highlight
+    // 6. Fill flap with the exact same color as the document body
     final flapFill = Paint()
-      ..color = Colors.white.withValues(alpha: 0.36)
+      ..color = color
       ..style = PaintingStyle.fill;
     canvas.drawPath(flapPath, flapFill);
 
-    // 7. Flap outline for high-contrast crispness
+    // 7. Subtle flap edge for crispness
     final flapStroke = Paint()
-      ..color = Colors.white.withValues(alpha: 0.70)
+      ..color = Color.lerp(color, Colors.black, 0.12)!
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.75;
     canvas.drawPath(flapPath, flapStroke);

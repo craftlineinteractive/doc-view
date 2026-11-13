@@ -148,7 +148,7 @@ class FileRepository {
     FileCategory? category,
     String? query,
     SortOption? sortOption,
-    int limit = 100,
+    int? limit,
     int offset = 0,
   }) async {
     final db = await _database.database;
@@ -178,7 +178,7 @@ class FileRepository {
       whereArgs: whereArgs.isNotEmpty ? whereArgs : null,
       orderBy: orderBy,
       limit: limit,
-      offset: offset,
+      offset: offset > 0 ? offset : null,
     );
 
     return rows.map(DocFile.fromMap).toList();
@@ -280,7 +280,7 @@ class FileRepository {
   Future<List<DocFile>> searchFiles(
     String query, {
     FileCategory? category,
-    int limit = 100,
+    int? limit,
   }) async {
     final trimmed = query.trim();
     if (trimmed.isEmpty) return const [];

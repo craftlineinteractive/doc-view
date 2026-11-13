@@ -263,7 +263,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             SliverPersistentHeader(
               pinned: true,
               delegate: _DocTabsHeaderDelegate(
-                backgroundColor: tokens.surface,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 extent: (48.0 * MediaQuery.textScalerOf(context).scale(1.0)).clamp(48.0, 72.0),
                 child: DocUnderlineTabs(
                   selectedIndex: _selectedTabIndex,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/doc_view_tokens.dart';
 import '../ads/ad_placeholders.dart';
 
 /// App scaffold enforcing edge-to-edge layout, header background gradients,
@@ -30,37 +29,7 @@ class DocScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tokens = context.tokens;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     Widget content = body;
-
-    // Apply pale-blue to white radial/linear header gradient in Light mode if requested
-    if (applyHeaderGradient && !isDark) {
-      content = Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 220,
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    tokens.headerGradientStart,
-                    tokens.headerGradientEnd,
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Positioned.fill(child: body),
-        ],
-      );
-    }
 
     // Build bottom area combining docked ad banner (if enabled) + bottomNavigationBar
     Widget? combinedBottomArea;
@@ -89,7 +58,7 @@ class DocScaffold extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: isDark ? tokens.readerCanvas : tokens.surface,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: appBar,
       body: content,
       floatingActionButton: positionedFab,

@@ -118,3 +118,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+dependency_overrides:
+  offline_document_viewer:
+    path: packages/offline_document_viewer
+
