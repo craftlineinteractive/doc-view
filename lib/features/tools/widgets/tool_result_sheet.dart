@@ -80,8 +80,8 @@ class ToolResultSheet extends ConsumerWidget {
               Container(
                 width: 52,
                 height: 52,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF1FA971),
+                decoration: BoxDecoration(
+                  color: tokens.excel.solid,
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(

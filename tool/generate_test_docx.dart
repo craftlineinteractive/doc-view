@@ -1,3 +1,4 @@
+// ignore_for_file: depend_on_referenced_packages, avoid_print
 import 'dart:convert';
 import 'dart:io';
 import 'package:archive/archive.dart';
@@ -170,7 +171,7 @@ void main() {
   addFile('word/numbering.xml', numbering);
   addFile('word/document.xml', docXml.toString());
 
-  final zipBytes = ZipEncoder().encode(archive)!;
+  final zipBytes = ZipEncoder().encode(archive);
   File('multipage_bullets.docx').writeAsBytesSync(zipBytes);
   print('Successfully created multipage_bullets.docx (${zipBytes.length} bytes)');
 }

@@ -102,8 +102,8 @@ class ToolsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = context.tokens;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final overlineColor = isDark ? tokens.interactiveBlue : const Color(0xFF0050C7);
-    final sectionColor = isDark ? tokens.textSecondary : const Color(0xFF5A6275);
+    final overlineColor = isDark ? tokens.interactiveBlue : tokens.primaryBlue;
+    final sectionColor = isDark ? tokens.sectionHeader : const Color(0xFF5A6275);
 
     return DocScaffold(
       applyHeaderGradient: true,

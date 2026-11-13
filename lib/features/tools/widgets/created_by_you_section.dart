@@ -72,7 +72,7 @@ class CreatedByYouSection extends StatelessWidget {
                 style: DocViewTypography.labelMd.copyWith(
                   color: Theme.of(context).brightness == Brightness.dark
                       ? tokens.interactiveBlue
-                      : const Color(0xFF0050C7),
+                      : tokens.primaryBlue,
                   fontWeight: FontWeight.w600,
                 ),
               ),

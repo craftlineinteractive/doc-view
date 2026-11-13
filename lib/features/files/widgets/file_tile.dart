@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/file_types.dart';
+import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
 import '../../../shared/widgets/tiles/file_type_badge.dart';
@@ -34,6 +35,7 @@ class FileTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final tokens = context.tokens;
 
     final bookmarkLabel = file.isBookmarked ? ', bookmarked' : '';
     final selectionLabel =
@@ -79,9 +81,7 @@ class FileTile extends ConsumerWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? const Color(0xFF2A3042)
-                        : const Color(0xFFE6E9F0),
+                    color: tokens.hairline,
                     width: 0.8,
                   ),
                 ),

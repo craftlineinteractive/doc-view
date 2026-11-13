@@ -421,33 +421,6 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
                     fontSize: 13,
                   ),
                 ),
-                const SizedBox(height: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: tokens.blueTint,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.verified_rounded,
-                        size: 14,
-                        color: tokens.primaryBlue,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        'Validated Catalog Buffer',
-                        style: DocViewTypography.captionXs.copyWith(
-                          color: tokens.primaryBlue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),

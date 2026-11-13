@@ -490,7 +490,7 @@ void main() {
       expect(find.text('Reset'), findsOneWidget);
       expect(find.text('Lecture_Notes.pdf'), findsOneWidget);
       expect(find.text('10 pages · 4.0 MB'), findsOneWidget);
-      expect(find.text('Validated Catalog Buffer'), findsOneWidget);
+      expect(find.text('Validated Catalog Buffer'), findsNothing);
       expect(find.text('PAGE RANGES'), findsOneWidget);
       expect(find.text('Syntax: 1-3, 5, 8-10'), findsOneWidget);
       expect(find.text('QUICK SELECT'), findsOneWidget);
