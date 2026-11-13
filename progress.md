@@ -1,54 +1,14 @@
-# Progress Log: Doc View Redesign (Phase 2 / R-C)
+# Progress Log - Phase 4 (Prompt R-E2)
 
-- **Phase 1 (R-B) Complete**:
-  - Fonts bundled: Inter (400, 500, 600, 700), Space Grotesk (600, 700) with OFL licenses.
-  - Theme system established: `DocViewColors`, `DocViewTokens` ThemeExtension, `DocViewTypography`.
-  - Shared component library created: Scaffolds, AppBars, UnderlineTabs, CategoryTile, FileTypeBadge, FileThumbnail, Button family, Input family, Modal family, Skeleton shimmer primitives, Ad placeholder family (`AdBannerSlot`, `NativeAdRow`).
-  - All 60 automated unit, widget, and component tests passing.
-  - Live emulator verification on Android API 36 x86_64 emulator (`emulator-5554`) for Light and Dark modes.
+## Session Info
+- Date: 2026-11-12
+- Prompt: R-E2 (Merge PDF, Split PDF, Operation Flow QA & Step 0 Deep Verification)
 
-- **Phase 2 (R-C) Completed**:
-  - [x] **Task 1: Splash Screen Redesign**:
-    - Single-line Space Grotesk 32pt bold wordmark, radial glow, floating sheet decorations, 120pt horizontal shimmer line.
-    - Version display (from package info or constant), startup gate (min 1000ms display + await DB, settings, onboarding flag).
-  - [x] **Task 2: Onboarding Flow (3 Pages)**:
-    - 3-step PageView with shared layout: "Skip" on pages 1-2, back arrow & "Step 3 of 3" on page 3.
-    - Elongated active indicator pill (24x6pt, `#1A66E8`), custom Flutter widget illustrations (zero images, zero new packages).
-    - Page 3 features exactly 4 tools (Image to PDF, Scan to PDF, Merge PDF, Split PDF).
-    - Persisted in `shared_preferences` via `SettingsRepository.setOnboardingCompleted(true)`.
-  - [x] **Task 3: Permissions & Privacy Flow**:
-    - Frame A (Android): "All files access" (`MANAGE_EXTERNAL_STORAGE`) explainer card with "Grant access" and "Import files instead".
-    - Frame B (iOS): Document import and file sharing guide (strict platform isolation, never shown on Android).
-    - Frame C: "Free with ads" pre-consent UI shown after onboarding and before main shell.
-  - [x] **Task 4: Home Screen Redesign & States**:
-    - Header with gradient background, Space Grotesk "Doc View", search icon, pull-to-refresh scanner.
-    - 4x2 Category Grid with 32x38pt vibrant solid badges, 20pt radius container, count subtitles.
-    - Underline tabs (Recent / Bookmarks) with selection icon.
-    - Populated file list using `FileRow`, with `NativeAdRow` positioned after 4th item.
-    - Docked 60pt AdMob banner slot positioned above bottom nav.
-    - Primary CTA FAB with >= 16pt clearance from all ad widgets.
-    - All 6 states implemented: populated recent/bookmarks, empty recent, empty bookmarks, scanning banner with progress + shimmer counts, permission gate, full skeleton.
-  - [x] **Task 5: Search Screen Redesign**:
-    - All 5 states implemented: empty query with last 10 persisted recent searches + "Clear" button, active typing with real-time bold primary blue query matching in `FileRow`, no results state, skeleton loading, keyboard handling.
-    - Native ad placeholder row strictly at result position 6 (no docked banner).
-  - [x] **Task 6: Category File Lists & Image Grid**:
-    - Document lists (PDF, Word, Excel, PPT, TXT) with `_CategorySubAppBar` ("Title • count", search, sort, select), `FileRow`, native ad after 4th and every 8th item.
-    - Image category: 3-column thumbnail grid with 4pt gaps, `ImageGridTile`, and selection check badge.
-    - Sort bottom sheet: Date modified, Document name, File size (Ascending/Descending), wired to `sortOptionProvider`.
-  - [x] **Task 7: pdfrx-based PDF Thumbnail Source**:
-    - `PdfThumbnailSource` implementation with max 2 concurrent render slots via queue.
-    - ~144px width downscaling for 60fps scrolling.
-    - Persistent disk cache in app cache directory (`/cache/pdf_thumbnails/`) with pure Dart FNV-1a hash key.
-    - Cache size cap 100MB with oldest-first cleanup.
-    - 3-second timeout with fallback to red PDF glyph.
-  - [x] **Task 8: Tests & Live Verification**:
-    - Added `test/phase2_redesign_test.dart` covering Onboarding flow, Home populated/empty states, Search typing/empty states, Image grid, and Thumbnail fallback.
-    - All 67 tests in the test suite pass (100% pass rate).
-    - `dart analyze` passes with 0 errors and 0 warnings.
-    - Live emulator verification on Android API 36 x86_64 emulator (`emulator-5554`):
-      - Captured Onboarding Pages 1, 2, 3.
-      - Captured Permissions Frame A & Frame C.
-      - Captured Home Screen in Light and Dark modes.
-      - Captured Search Screen (empty state & active query).
-      - Captured Image Category 3-column grid.
-      - Captured Sort Bottom Sheet.
+## Current Status
+- Step 0: In Progress (testing PPTX failure in debug/release, benchmark cold start, profile scroll frame times, adaptive icon check, 5-photo PDF verification)
+- Step 1: Not started
+- Step 2: Not started
+- Step 3: Not started
+- Step 4: Not started
+- Step 5: Not started
+- Step 6: Not started
