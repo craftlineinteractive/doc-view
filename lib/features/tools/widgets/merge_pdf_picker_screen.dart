@@ -308,10 +308,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                         itemBuilder: (context, index) {
                           // In-feed native ad row strictly after 5th item (index 5 in combined list)
                           if (filteredFiles.length >= 5 && index == 5) {
-                            return const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 4),
-                              child: NativeAdRow(isLoaded: true),
-                            );
+                            return const NativeAdRow(isLoaded: true);
                           }
 
                           final fileIndex =

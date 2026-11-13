@@ -321,15 +321,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         if (hasAd && index == 4) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 4),
-                            child: NativeAdRow(
-                              ad: AdPlaceholderModel(
-                                title: 'Clean Master Pro • 4.8★',
-                                description: 'Speed up & protect storage',
-                                ctaLabel: 'Install',
-                                icon: Icons.cloud_sync,
-                              ),
+                          return const NativeAdRow(
+                            ad: AdPlaceholderModel(
+                              title: 'Clean Master Pro • 4.8★',
+                              description: 'Speed up & protect storage',
+                              ctaLabel: 'Install',
+                              icon: Icons.cloud_sync,
                             ),
                           );
                         }

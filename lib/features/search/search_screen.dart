@@ -392,23 +392,20 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 }
 
                 // STATE 1: TYPING STATE MATCHES WITH HIGHLIGHTING
-                // Native ad placeholder strictly at result position 6 (after 5 items, index 5)
-                final hasAd = files.length >= 5;
+                // Native ad placeholder strictly at result position 6 (after 5 items, index 5), suppressed in selection mode
+                final hasAd = !selection.isSelectionMode && files.length >= 5;
                 final totalItems = files.length + (hasAd ? 1 : 0);
 
                 return ListView.builder(
                   itemCount: totalItems,
                   itemBuilder: (context, index) {
                     if (hasAd && index == 5) {
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 4),
-                        child: NativeAdRow(
-                          ad: AdPlaceholderModel(
-                            title: 'Clean Master Pro • 4.8★',
-                            description: 'Speed up & protect storage',
-                            ctaLabel: 'Install',
-                            icon: Icons.cloud_sync,
-                          ),
+                      return const NativeAdRow(
+                        ad: AdPlaceholderModel(
+                          title: 'Clean Master Pro • 4.8★',
+                          description: 'Speed up & protect storage',
+                          ctaLabel: 'Install',
+                          icon: Icons.cloud_sync,
                         ),
                       );
                     }

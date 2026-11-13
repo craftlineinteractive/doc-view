@@ -65,7 +65,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     final minDisplayFuture = Future.delayed(const Duration(milliseconds: 1000));
 
     // Ensure database and settings are initialized
-    final dbFuture = ref.read(appDatabaseProvider).database;
+    Future<void> initDb() async {
+      try {
+        await ref.read(appDatabaseProvider).database;
+      } catch (_) {}
+    }
+    final dbFuture = initDb();
     final settingsFuture = ref.read(settingsRepositoryProvider).loadSettings();
     final onboardingFuture =
         ref.read(settingsRepositoryProvider).isOnboardingCompleted();

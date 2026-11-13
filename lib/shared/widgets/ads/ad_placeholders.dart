@@ -75,17 +75,23 @@ class AdBannerSlot extends StatelessWidget {
                     child: Row(
                       children: [
                         // "AD" badge
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: tokens.hairline,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            'AD',
-                            style: DocViewTypography.captionXs.copyWith(
-                              color: tokens.textSecondary,
-                              fontSize: 9,
+                        Semantics(
+                          label: 'Advertisement',
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: tokens.hairline,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              'AD',
+                              style: DocViewTypography.captionXs.copyWith(
+                                color: tokens.textSecondary,
+                                fontSize: 9,
+                              ),
                             ),
                           ),
                         ),
@@ -181,7 +187,7 @@ class NativeAdRow extends StatelessWidget {
 
     return Container(
       constraints: const BoxConstraints(minHeight: 68),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: tokens.surfaceAlt,
@@ -215,18 +221,24 @@ class NativeAdRow extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-                          margin: const EdgeInsets.only(right: 6),
-                          decoration: BoxDecoration(
-                            color: tokens.hairline,
-                            borderRadius: BorderRadius.circular(3),
-                          ),
-                          child: Text(
-                            'AD',
-                            style: DocViewTypography.captionXs.copyWith(
-                              color: tokens.textSecondary,
-                              fontSize: 9,
+                        Semantics(
+                          label: 'Advertisement',
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                              vertical: 1,
+                            ),
+                            margin: const EdgeInsets.only(right: 6),
+                            decoration: BoxDecoration(
+                              color: tokens.hairline,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            child: Text(
+                              'AD',
+                              style: DocViewTypography.captionXs.copyWith(
+                                color: tokens.textSecondary,
+                                fontSize: 9,
+                              ),
                             ),
                           ),
                         ),

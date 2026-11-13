@@ -432,34 +432,40 @@ class _FrameAView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 1),
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(2),
-              ),
-              child: Text(
-                label,
-                style: const TextStyle(
-                  fontSize: 6,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+        Expanded(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 2.5, vertical: 1),
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    fontSize: 6,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(width: 4),
-            Container(
-              width: 24,
-              height: 4,
-              decoration: BoxDecoration(
-                color: tokens.hairline,
-                borderRadius: BorderRadius.circular(2),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Container(
+                  width: 16,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: tokens.hairline,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+        const SizedBox(width: 2),
         Text(
           size,
           style: TextStyle(

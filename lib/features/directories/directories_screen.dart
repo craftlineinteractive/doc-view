@@ -7,6 +7,7 @@ import 'package:path/path.dart' as p;
 import '../../core/constants/file_types.dart';
 import '../../core/utils/root_path_resolver.dart';
 import '../../data/models/doc_file.dart';
+import '../../shared/widgets/ads/ad_placeholders.dart';
 import '../../shared/widgets/skeletons/skeleton_variants.dart';
 import '../files/open_document.dart';
 import '../files/widgets/file_tile.dart';
@@ -250,6 +251,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
                   ),
                 ],
               ),
+        bottomNavigationBar: const AdBannerSlot(isLoaded: true),
       ),
     );
   }

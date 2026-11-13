@@ -120,7 +120,7 @@ class FilesScreen extends ConsumerWidget {
         selectionNotifier.clear();
       },
       child: DocScaffold(
-        showDockedBanner: false, // Category lists do not show docked banner
+        showDockedBanner: !selection.isSelectionMode,
         applyHeaderGradient: false,
         appBar: selection.isSelectionMode
             ? DocSelectionAppBar(
@@ -252,28 +252,27 @@ class FilesScreen extends ConsumerWidget {
               }
 
               // --- DOCUMENT CATEGORIES: LIST VIEW WITH NATIVE ADS ---
-              final totalCount = _totalItemCount(files.length);
+              final showAds = !selection.isSelectionMode;
+              final totalCount =
+                  showAds ? _totalItemCount(files.length) : files.length;
 
               return ListView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: totalCount,
                 itemBuilder: (context, index) {
-                  // In-feed Native Ad Slot
-                  if (_isAdIndex(index)) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 4),
-                      child: NativeAdRow(
-                        ad: AdPlaceholderModel(
-                          title: 'Clean Master Pro • 4.8★',
-                          description: 'Speed up & protect storage',
-                          ctaLabel: 'Install',
-                          icon: Icons.cloud_sync,
-                        ),
+                  // In-feed Native Ad Slot (suppressed in selection mode)
+                  if (showAds && _isAdIndex(index)) {
+                    return const NativeAdRow(
+                      ad: AdPlaceholderModel(
+                        title: 'Clean Master Pro • 4.8★',
+                        description: 'Speed up & protect storage',
+                        ctaLabel: 'Install',
+                        icon: Icons.cloud_sync,
                       ),
                     );
                   }
 
-                  final fileIndex = _fileIndex(index);
+                  final fileIndex = showAds ? _fileIndex(index) : index;
                   final file = files[fileIndex];
                   final isSelected = selection.isSelected(file.path);
 
