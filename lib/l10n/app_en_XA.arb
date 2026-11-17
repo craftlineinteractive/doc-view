@@ -423,5 +423,187 @@
   "actionPrivacyPolicy": "[Þřîṽàçý þôłîçý ẋẋẋẋẋẋ]",
   "@actionPrivacyPolicy": {
     "description": "Button to open privacy policy webpage"
+  },
+  "filesImportedSuccess": "{count, plural, =1{[Îɱþôřţéđ 1 ƒîłé ẋẋẋẋẋẋ]} other{[Îɱþôřţéđ {count} ƒîłéš ẋẋẋẋẋẋẋẋẋ]}}",
+  "@filesImportedSuccess": {
+    "description": "Snackbar shown when files are imported via system picker",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "importFailedError": "[Ƒàîłéđ ţô îɱþôřţ ƒîłéš ẋẋẋẋẋẋẋẋẋ]",
+  "@importFailedError": {
+    "description": "Snackbar shown when file import fails"
+  },
+  "tooltipImportDocuments": "[Îɱþôřţ đôçûɱéñţš ẋẋẋẋẋẋẋ]",
+  "@tooltipImportDocuments": {
+    "description": "Tooltip for floating action button to import documents"
+  },
+  "homeScanProgressCount": "{count, plural, =1{[1 ƒîłé ƒôûñđ ẋẋẋẋẋ]} other{[{count} ƒîłéš ƒôûñđ ẋẋẋẋẋẋẋẋ]}}",
+  "@homeScanProgressCount": {
+    "description": "Document scan progress counter",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "42"
+      }
+    }
+  },
+  "scanningStatus": "[Šçàññîñĝ... ẋẋẋẋẋ]",
+  "@scanningStatus": {
+    "description": "Active document scanning progress text"
+  },
+  "fileCountPlural": "{count, plural, =1{[1 ƒîłé ẋẋẋ]} other{[{count} ƒîłéš ẋẋẋẋẋẋ]}}",
+  "@fileCountPlural": {
+    "description": "Pluralized count of files in category or folder",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "categoryFolders": "[Ƒôłđéřš ẋẋẋ]",
+  "@categoryFolders": {
+    "description": "Category tile label for Folders browser"
+  },
+  "errorLoadingRecent": "[Éřřôř łôàđîñĝ řéçéñţ ƒîłéš ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorLoadingRecent": {
+    "description": "Error message when recent files query fails"
+  },
+  "emptyStateTitle": "[Éɱþţý ẋẋ]",
+  "@emptyStateTitle": {
+    "description": "Generic title for empty list tab or screen"
+  },
+  "emptyRecentDescription": "[Řéçéñţłý ôþéñéđ ƒîłéš ŵîłł àþþéàř ĥéřé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@emptyRecentDescription": {
+    "description": "Placeholder explanation for recent files tab"
+  },
+  "errorLoadingBookmarks": "[Éřřôř łôàđîñĝ ƀôôƙɱàřƙéđ ƒîłéš ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorLoadingBookmarks": {
+    "description": "Error message when bookmarked files query fails"
+  },
+  "emptyBookmarksDescription": "[Ɓôôƙɱàřƙéđ đôçûɱéñţš ŵîłł àþþéàř ĥéřé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@emptyBookmarksDescription": {
+    "description": "Placeholder explanation for bookmarks tab"
+  },
+  "dialogDeleteTitle": "[Ðéłéţé šéłéçţéđ ƒîłéš? ẋẋẋẋẋẋẋẋẋ]",
+  "@dialogDeleteTitle": {
+    "description": "Dialog headline for batch file deletion confirmation"
+  },
+  "dialogDeleteBody": "{count, plural, =1{[Ðéłéţé 1 ƒîłé? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]} other{[Ðéłéţé {count} ƒîłéš? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]}}",
+  "@dialogDeleteBody": {
+    "description": "Dialog body explaining that batch deletion is permanent",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "filesDeletedSuccess": "{count, plural, =1{[Ðéłéţéđ 1 ƒîłé ẋẋẋẋẋẋ]} other{[Ðéłéţéđ {count} ƒîłéš ẋẋẋẋẋẋẋẋẋ]}}",
+  "@filesDeletedSuccess": {
+    "description": "Snackbar message indicating successful batch file deletion",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "filesDeleteFailed": "[Ƒàîłéđ ţô đéłéţé ƒîłéš ẋẋẋẋẋẋẋẋẋ]",
+  "@filesDeleteFailed": {
+    "description": "Snackbar message when deleting files fails"
+  },
+  "actionDelete": "[Ðéłéţé ẋẋẋ]",
+  "@actionDelete": {
+    "description": "Action button text to confirm deletion"
+  },
+  "searchRecentSearchesHeader": "[ŘÉÇÉÑŤ ŠÉÅŘÇĦÉŠ ẋẋẋẋẋẋ]",
+  "@searchRecentSearchesHeader": {
+    "description": "Section header for recent search queries"
+  },
+  "actionClear": "[Çłéàř ẋẋ]",
+  "@actionClear": {
+    "description": "Action button to clear recent search history"
+  },
+  "searchPromptTitle": "[Ťýþé ţô šéàřçĥ đôçûɱéñţš ẋẋẋẋẋẋẋẋẋẋ]",
+  "@searchPromptTitle": {
+    "description": "Headline in search idle empty state"
+  },
+  "searchPromptMessage": "[Šéàřçĥ àçřôšš àłł łôçàł ƒôłđéřš ƀý ƒîłéñàɱé ôř éẋţéñšîôñ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@searchPromptMessage": {
+    "description": "Message in search idle empty state"
+  },
+  "searchError": "[Éřřôř šéàřçĥîñĝ đôçûɱéñţš ẋẋẋẋẋẋẋẋẋẋ]",
+  "@searchError": {
+    "description": "Error message when search query fails"
+  },
+  "searchNoResultsTitle": "[Ñô ɱàţçĥîñĝ đôçûɱéñţš ƒôûñđ ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@searchNoResultsTitle": {
+    "description": "Headline when search produces zero results"
+  },
+  "searchNoResultsMessage": "[Ťřý šéàřçĥîñĝ ŵîţĥ à đîƒƒéřéñţ ƒîłéñàɱé ƙéýŵôřđ ôř ƒôřɱàţ ƒîłţéř ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@searchNoResultsMessage": {
+    "description": "Explanation when search produces zero results"
+  },
+  "tooltipSortOptions": "[Šôřţ ôþţîôñš ẋẋẋẋẋ]",
+  "@tooltipSortOptions": {
+    "description": "Tooltip for sort options button in category sub app bar"
+  },
+  "sortSheetTitle": "[Šôřţ ƀý ẋẋẋ]",
+  "@sortSheetTitle": {
+    "description": "Title of the sort options modal bottom sheet"
+  },
+  "sortOptionDate": "[Ðàţé ɱôđîƒîéđ ẋẋẋẋẋẋ]",
+  "@sortOptionDate": {
+    "description": "Sort option label for ordering by modification date"
+  },
+  "sortOptionName": "[Ðôçûɱéñţ ñàɱé ẋẋẋẋẋẋ]",
+  "@sortOptionName": {
+    "description": "Sort option label for ordering by document name"
+  },
+  "sortOptionSize": "[Ƒîłé šîžé ẋẋẋẋ]",
+  "@sortOptionSize": {
+    "description": "Sort option label for ordering by file size"
+  },
+  "sortAscendingOrder": "[Åšçéñđîñĝ ôřđéř ẋẋẋẋẋẋ]",
+  "@sortAscendingOrder": {
+    "description": "Switch label for ascending sort direction"
+  },
+  "sortAscendingSubtitle": "[Öłđéšţ ƒîřšţ / Å ţô Ž / Šɱàłłéšţ ƒîřšţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@sortAscendingSubtitle": {
+    "description": "Subtitle describing ascending sort order"
+  },
+  "sortDescendingSubtitle": "[Ñéŵéšţ ƒîřšţ / Ž ţô Å / Łàřĝéšţ ƒîřšţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@sortDescendingSubtitle": {
+    "description": "Subtitle describing descending sort order"
+  },
+  "categoryAllFiles": "[Åłł ƒîłéš ẋẋẋẋ]",
+  "@categoryAllFiles": {
+    "description": "Title for the all files category screen"
+  },
+  "loadingStatus": "[Łôàđîñĝ... ẋẋẋẋ]",
+  "@loadingStatus": {
+    "description": "Generic loading status indicator"
+  },
+  "emptyCategoryImagesTitle": "[Ñô îɱàĝéš ƒôûñđ ẋẋẋẋẋẋ]",
+  "@emptyCategoryImagesTitle": {
+    "description": "Headline when image category has no files"
+  },
+  "emptyCategoryImagesMessage": "[Îɱàĝéš ƒôûñđ ôñ ţĥîš đéṽîçé ŵîłł àþþéàř ĥéřé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@emptyCategoryImagesMessage": {
+    "description": "Message when image category has no files"
+  },
+  "emptyCategoryDocsTitle": "[Ñô đôçûɱéñţš ƒôûñđ ẋẋẋẋẋẋẋẋ]",
+  "@emptyCategoryDocsTitle": {
+    "description": "Headline when a document category has no files"
+  },
+  "emptyCategoryDocsMessage": "[Ðôçûɱéñţš ôƒ ţĥîš ƒôřɱàţ ŵîłł àþþéàř ĥéřé àƒţéř šçàññîñĝ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@emptyCategoryDocsMessage": {
+    "description": "Message when a document category has no files"
   }
 }

@@ -423,5 +423,187 @@
   "actionPrivacyPolicy": "Privacy policy",
   "@actionPrivacyPolicy": {
     "description": "Button to open privacy policy webpage"
+  },
+  "filesImportedSuccess": "{count, plural, =1{Imported 1 file} other{Imported {count} files}}",
+  "@filesImportedSuccess": {
+    "description": "Snackbar shown when files are imported via system picker",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "importFailedError": "Failed to import files",
+  "@importFailedError": {
+    "description": "Snackbar shown when file import fails"
+  },
+  "tooltipImportDocuments": "Import documents",
+  "@tooltipImportDocuments": {
+    "description": "Tooltip for floating action button to import documents"
+  },
+  "homeScanProgressCount": "{count, plural, =1{1 file found} other{{count} files found}}",
+  "@homeScanProgressCount": {
+    "description": "Document scan progress counter",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "42"
+      }
+    }
+  },
+  "scanningStatus": "Scanning...",
+  "@scanningStatus": {
+    "description": "Active document scanning progress text"
+  },
+  "fileCountPlural": "{count, plural, =1{1 file} other{{count} files}}",
+  "@fileCountPlural": {
+    "description": "Pluralized count of files in category or folder",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "categoryFolders": "Folders",
+  "@categoryFolders": {
+    "description": "Category tile label for Folders browser"
+  },
+  "errorLoadingRecent": "Error loading recent files",
+  "@errorLoadingRecent": {
+    "description": "Error message when recent files query fails"
+  },
+  "emptyStateTitle": "Empty",
+  "@emptyStateTitle": {
+    "description": "Generic title for empty list tab or screen"
+  },
+  "emptyRecentDescription": "Recently opened files will appear here",
+  "@emptyRecentDescription": {
+    "description": "Placeholder explanation for recent files tab"
+  },
+  "errorLoadingBookmarks": "Error loading bookmarked files",
+  "@errorLoadingBookmarks": {
+    "description": "Error message when bookmarked files query fails"
+  },
+  "emptyBookmarksDescription": "Bookmarked documents will appear here",
+  "@emptyBookmarksDescription": {
+    "description": "Placeholder explanation for bookmarks tab"
+  },
+  "dialogDeleteTitle": "Delete selected files?",
+  "@dialogDeleteTitle": {
+    "description": "Dialog headline for batch file deletion confirmation"
+  },
+  "dialogDeleteBody": "{count, plural, =1{Delete 1 file? This cannot be undone.} other{Delete {count} files? This cannot be undone.}}",
+  "@dialogDeleteBody": {
+    "description": "Dialog body explaining that batch deletion is permanent",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "filesDeletedSuccess": "{count, plural, =1{Deleted 1 file} other{Deleted {count} files}}",
+  "@filesDeletedSuccess": {
+    "description": "Snackbar message indicating successful batch file deletion",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "filesDeleteFailed": "Failed to delete files",
+  "@filesDeleteFailed": {
+    "description": "Snackbar message when deleting files fails"
+  },
+  "actionDelete": "Delete",
+  "@actionDelete": {
+    "description": "Action button text to confirm deletion"
+  },
+  "searchRecentSearchesHeader": "RECENT SEARCHES",
+  "@searchRecentSearchesHeader": {
+    "description": "Section header for recent search queries"
+  },
+  "actionClear": "Clear",
+  "@actionClear": {
+    "description": "Action button to clear recent search history"
+  },
+  "searchPromptTitle": "Type to search documents",
+  "@searchPromptTitle": {
+    "description": "Headline in search idle empty state"
+  },
+  "searchPromptMessage": "Search across all local folders by filename or extension",
+  "@searchPromptMessage": {
+    "description": "Message in search idle empty state"
+  },
+  "searchError": "Error searching documents",
+  "@searchError": {
+    "description": "Error message when search query fails"
+  },
+  "searchNoResultsTitle": "No matching documents found",
+  "@searchNoResultsTitle": {
+    "description": "Headline when search produces zero results"
+  },
+  "searchNoResultsMessage": "Try searching with a different filename keyword or format filter",
+  "@searchNoResultsMessage": {
+    "description": "Explanation when search produces zero results"
+  },
+  "tooltipSortOptions": "Sort options",
+  "@tooltipSortOptions": {
+    "description": "Tooltip for sort options button in category sub app bar"
+  },
+  "sortSheetTitle": "Sort by",
+  "@sortSheetTitle": {
+    "description": "Title of the sort options modal bottom sheet"
+  },
+  "sortOptionDate": "Date modified",
+  "@sortOptionDate": {
+    "description": "Sort option label for ordering by modification date"
+  },
+  "sortOptionName": "Document name",
+  "@sortOptionName": {
+    "description": "Sort option label for ordering by document name"
+  },
+  "sortOptionSize": "File size",
+  "@sortOptionSize": {
+    "description": "Sort option label for ordering by file size"
+  },
+  "sortAscendingOrder": "Ascending order",
+  "@sortAscendingOrder": {
+    "description": "Switch label for ascending sort direction"
+  },
+  "sortAscendingSubtitle": "Oldest first / A to Z / Smallest first",
+  "@sortAscendingSubtitle": {
+    "description": "Subtitle describing ascending sort order"
+  },
+  "sortDescendingSubtitle": "Newest first / Z to A / Largest first",
+  "@sortDescendingSubtitle": {
+    "description": "Subtitle describing descending sort order"
+  },
+  "categoryAllFiles": "All files",
+  "@categoryAllFiles": {
+    "description": "Title for the all files category screen"
+  },
+  "loadingStatus": "Loading...",
+  "@loadingStatus": {
+    "description": "Generic loading status indicator"
+  },
+  "emptyCategoryImagesTitle": "No images found",
+  "@emptyCategoryImagesTitle": {
+    "description": "Headline when image category has no files"
+  },
+  "emptyCategoryImagesMessage": "Images found on this device will appear here",
+  "@emptyCategoryImagesMessage": {
+    "description": "Message when image category has no files"
+  },
+  "emptyCategoryDocsTitle": "No documents found",
+  "@emptyCategoryDocsTitle": {
+    "description": "Headline when a document category has no files"
+  },
+  "emptyCategoryDocsMessage": "Documents of this format will appear here after scanning",
+  "@emptyCategoryDocsMessage": {
+    "description": "Message when a document category has no files"
   }
 }

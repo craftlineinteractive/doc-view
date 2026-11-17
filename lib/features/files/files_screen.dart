@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
@@ -62,14 +63,14 @@ class FilesScreen extends ConsumerWidget {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('Delete selected files?'),
+          title: Text(context.l10n.dialogDeleteTitle),
           content: Text(
-            'Delete ${selectedFiles.length} file(s)? This cannot be undone.',
+            context.l10n.dialogDeleteBody(selectedFiles.length),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text('Cancel'),
+              child: Text(context.l10n.actionCancel),
             ),
             FilledButton(
               style: FilledButton.styleFrom(
@@ -79,6 +80,7 @@ class FilesScreen extends ConsumerWidget {
               onPressed: () async {
                 Navigator.of(dialogContext).pop();
                 final messenger = ScaffoldMessenger.of(context);
+                final l10n = context.l10n;
                 final result = await ref
                     .read(fileActionsControllerProvider)
                     .deleteFiles(selectedFiles);
@@ -90,13 +92,13 @@ class FilesScreen extends ConsumerWidget {
                   SnackBar(
                     content: Text(
                       result.hasDeletions
-                          ? 'Deleted ${result.deletedCount} file(s)'
-                          : (result.errorMessage ?? 'Failed to delete files'),
+                          ? l10n.filesDeletedSuccess(result.deletedCount)
+                          : (result.errorMessage ?? l10n.filesDeleteFailed),
                     ),
                   ),
                 );
               },
-              child: const Text('Delete'),
+              child: Text(context.l10n.actionDelete),
             ),
           ],
         );
@@ -110,7 +112,8 @@ class FilesScreen extends ConsumerWidget {
     final selection = ref.watch(selectionProvider);
     final selectionNotifier = ref.read(selectionProvider.notifier);
 
-    final categoryLabel = category != null ? category!.label : 'All files';
+    final categoryLabel =
+        category != null ? category!.label : context.l10n.categoryAllFiles;
     final isImageCategory = category == FileCategory.image;
 
     return PopScope(
@@ -152,7 +155,7 @@ class FilesScreen extends ConsumerWidget {
                 child: filesAsync.maybeWhen(
                   data: (files) => _CategorySubAppBar(
                     title: categoryLabel,
-                    subtitle: '${files.length} files',
+                    subtitle: context.l10n.fileCountPlural(files.length),
                     onBack: () => Navigator.of(context).maybePop(),
                     onSearch: () {
                       if (category != null) {
@@ -171,7 +174,7 @@ class FilesScreen extends ConsumerWidget {
                   ),
                   orElse: () => _CategorySubAppBar(
                     title: categoryLabel,
-                    subtitle: 'Loading...',
+                    subtitle: context.l10n.loadingStatus,
                     onBack: () => Navigator.of(context).maybePop(),
                     onSearch: () => context.push('/search'),
                     onSort: () => SortBottomSheet.show(context),
@@ -189,7 +192,7 @@ class FilesScreen extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: DocErrorState(
-                  message: 'Error loading files: $error',
+                  message: context.l10n.errorGenericTitle,
                   onRetry: () => ref.invalidate(filesProvider(category)),
                 ),
               ),
@@ -202,11 +205,11 @@ class FilesScreen extends ConsumerWidget {
                         ? Icons.photo_library_outlined
                         : (category?.icon ?? Icons.description),
                     title: isImageCategory
-                        ? 'No images found'
-                        : 'No ${category?.label ?? "document"} files found',
+                        ? context.l10n.emptyCategoryImagesTitle
+                        : context.l10n.emptyCategoryDocsTitle,
                     message: isImageCategory
-                        ? 'Images found on this device will appear here'
-                        : 'Documents of this format will appear here after scanning',
+                        ? context.l10n.emptyCategoryImagesMessage
+                        : context.l10n.emptyCategoryDocsMessage,
                   ),
                 );
               }
@@ -345,7 +348,7 @@ class _CategorySubAppBar extends StatelessWidget implements PreferredSizeWidget 
       scrolledUnderElevation: 0,
       leading: DocIconButton(
         icon: AppIcons.back,
-        tooltip: 'Back',
+        tooltip: context.l10n.tooltipBack,
         onPressed: onBack,
       ),
       titleSpacing: 0,
@@ -372,17 +375,17 @@ class _CategorySubAppBar extends StatelessWidget implements PreferredSizeWidget 
       actions: [
         DocIconButton(
           icon: AppIcons.search,
-          tooltip: 'Search',
+          tooltip: context.l10n.tooltipSearch,
           onPressed: onSearch,
         ),
         DocIconButton(
           icon: AppIcons.sort,
-          tooltip: 'Sort options',
+          tooltip: context.l10n.tooltipSortOptions,
           onPressed: onSort,
         ),
         DocIconButton(
           icon: AppIcons.selectAll,
-          tooltip: 'Select files',
+          tooltip: context.l10n.tooltipSelectFiles,
           onPressed: onSelect,
         ),
         const SizedBox(width: 8),

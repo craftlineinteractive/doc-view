@@ -111,7 +111,7 @@ void main() {
 
       // Note: During initial setup before Tasks 6-8 extraction, violations may exist.
       // After Tasks 6-8 extraction, violations MUST be 0!
-      // expect(violations, isEmpty);
+      expect(violations, isEmpty);
     });
   });
 }

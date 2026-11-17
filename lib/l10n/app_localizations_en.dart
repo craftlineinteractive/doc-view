@@ -325,6 +325,165 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionPrivacyPolicy => 'Privacy policy';
+
+  @override
+  String filesImportedSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Imported $count files',
+      one: 'Imported 1 file',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importFailedError => 'Failed to import files';
+
+  @override
+  String get tooltipImportDocuments => 'Import documents';
+
+  @override
+  String homeScanProgressCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count files found',
+      one: '1 file found',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get scanningStatus => 'Scanning...';
+
+  @override
+  String fileCountPlural(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count files',
+      one: '1 file',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoryFolders => 'Folders';
+
+  @override
+  String get errorLoadingRecent => 'Error loading recent files';
+
+  @override
+  String get emptyStateTitle => 'Empty';
+
+  @override
+  String get emptyRecentDescription => 'Recently opened files will appear here';
+
+  @override
+  String get errorLoadingBookmarks => 'Error loading bookmarked files';
+
+  @override
+  String get emptyBookmarksDescription =>
+      'Bookmarked documents will appear here';
+
+  @override
+  String get dialogDeleteTitle => 'Delete selected files?';
+
+  @override
+  String dialogDeleteBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Delete $count files? This cannot be undone.',
+      one: 'Delete 1 file? This cannot be undone.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String filesDeletedSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Deleted $count files',
+      one: 'Deleted 1 file',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get filesDeleteFailed => 'Failed to delete files';
+
+  @override
+  String get actionDelete => 'Delete';
+
+  @override
+  String get searchRecentSearchesHeader => 'RECENT SEARCHES';
+
+  @override
+  String get actionClear => 'Clear';
+
+  @override
+  String get searchPromptTitle => 'Type to search documents';
+
+  @override
+  String get searchPromptMessage =>
+      'Search across all local folders by filename or extension';
+
+  @override
+  String get searchError => 'Error searching documents';
+
+  @override
+  String get searchNoResultsTitle => 'No matching documents found';
+
+  @override
+  String get searchNoResultsMessage =>
+      'Try searching with a different filename keyword or format filter';
+
+  @override
+  String get tooltipSortOptions => 'Sort options';
+
+  @override
+  String get sortSheetTitle => 'Sort by';
+
+  @override
+  String get sortOptionDate => 'Date modified';
+
+  @override
+  String get sortOptionName => 'Document name';
+
+  @override
+  String get sortOptionSize => 'File size';
+
+  @override
+  String get sortAscendingOrder => 'Ascending order';
+
+  @override
+  String get sortAscendingSubtitle => 'Oldest first / A to Z / Smallest first';
+
+  @override
+  String get sortDescendingSubtitle => 'Newest first / Z to A / Largest first';
+
+  @override
+  String get categoryAllFiles => 'All files';
+
+  @override
+  String get loadingStatus => 'Loading...';
+
+  @override
+  String get emptyCategoryImagesTitle => 'No images found';
+
+  @override
+  String get emptyCategoryImagesMessage =>
+      'Images found on this device will appear here';
+
+  @override
+  String get emptyCategoryDocsTitle => 'No documents found';
+
+  @override
+  String get emptyCategoryDocsMessage =>
+      'Documents of this format will appear here after scanning';
 }
 
 /// The translations for English (`en_XA`).
@@ -656,4 +815,168 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get actionPrivacyPolicy => '[Þřîṽàçý þôłîçý ẋẋẋẋẋẋ]';
+
+  @override
+  String filesImportedSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[Îɱþôřţéđ $count ƒîłéš ẋẋẋẋẋẋẋẋẋ]',
+      one: '[Îɱþôřţéđ 1 ƒîłé ẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get importFailedError => '[Ƒàîłéđ ţô îɱþôřţ ƒîłéš ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get tooltipImportDocuments => '[Îɱþôřţ đôçûɱéñţš ẋẋẋẋẋẋẋ]';
+
+  @override
+  String homeScanProgressCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count ƒîłéš ƒôûñđ ẋẋẋẋẋẋẋẋ]',
+      one: '[1 ƒîłé ƒôûñđ ẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get scanningStatus => '[Šçàññîñĝ... ẋẋẋẋẋ]';
+
+  @override
+  String fileCountPlural(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count ƒîłéš ẋẋẋẋẋẋ]',
+      one: '[1 ƒîłé ẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get categoryFolders => '[Ƒôłđéřš ẋẋẋ]';
+
+  @override
+  String get errorLoadingRecent => '[Éřřôř łôàđîñĝ řéçéñţ ƒîłéš ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get emptyStateTitle => '[Éɱþţý ẋẋ]';
+
+  @override
+  String get emptyRecentDescription =>
+      '[Řéçéñţłý ôþéñéđ ƒîłéš ŵîłł àþþéàř ĥéřé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get errorLoadingBookmarks =>
+      '[Éřřôř łôàđîñĝ ƀôôƙɱàřƙéđ ƒîłéš ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get emptyBookmarksDescription =>
+      '[Ɓôôƙɱàřƙéđ đôçûɱéñţš ŵîłł àþþéàř ĥéřé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get dialogDeleteTitle => '[Ðéłéţé šéłéçţéđ ƒîłéš? ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String dialogDeleteBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[Ðéłéţé $count ƒîłéš? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]',
+      one: '[Ðéłéţé 1 ƒîłé? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String filesDeletedSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[Ðéłéţéđ $count ƒîłéš ẋẋẋẋẋẋẋẋẋ]',
+      one: '[Ðéłéţéđ 1 ƒîłé ẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get filesDeleteFailed => '[Ƒàîłéđ ţô đéłéţé ƒîłéš ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get actionDelete => '[Ðéłéţé ẋẋẋ]';
+
+  @override
+  String get searchRecentSearchesHeader => '[ŘÉÇÉÑŤ ŠÉÅŘÇĦÉŠ ẋẋẋẋẋẋ]';
+
+  @override
+  String get actionClear => '[Çłéàř ẋẋ]';
+
+  @override
+  String get searchPromptTitle => '[Ťýþé ţô šéàřçĥ đôçûɱéñţš ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get searchPromptMessage =>
+      '[Šéàřçĥ àçřôšš àłł łôçàł ƒôłđéřš ƀý ƒîłéñàɱé ôř éẋţéñšîôñ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get searchError => '[Éřřôř šéàřçĥîñĝ đôçûɱéñţš ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get searchNoResultsTitle =>
+      '[Ñô ɱàţçĥîñĝ đôçûɱéñţš ƒôûñđ ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get searchNoResultsMessage =>
+      '[Ťřý šéàřçĥîñĝ ŵîţĥ à đîƒƒéřéñţ ƒîłéñàɱé ƙéýŵôřđ ôř ƒôřɱàţ ƒîłţéř ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get tooltipSortOptions => '[Šôřţ ôþţîôñš ẋẋẋẋẋ]';
+
+  @override
+  String get sortSheetTitle => '[Šôřţ ƀý ẋẋẋ]';
+
+  @override
+  String get sortOptionDate => '[Ðàţé ɱôđîƒîéđ ẋẋẋẋẋẋ]';
+
+  @override
+  String get sortOptionName => '[Ðôçûɱéñţ ñàɱé ẋẋẋẋẋẋ]';
+
+  @override
+  String get sortOptionSize => '[Ƒîłé šîžé ẋẋẋẋ]';
+
+  @override
+  String get sortAscendingOrder => '[Åšçéñđîñĝ ôřđéř ẋẋẋẋẋẋ]';
+
+  @override
+  String get sortAscendingSubtitle =>
+      '[Öłđéšţ ƒîřšţ / Å ţô Ž / Šɱàłłéšţ ƒîřšţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get sortDescendingSubtitle =>
+      '[Ñéŵéšţ ƒîřšţ / Ž ţô Å / Łàřĝéšţ ƒîřšţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get categoryAllFiles => '[Åłł ƒîłéš ẋẋẋẋ]';
+
+  @override
+  String get loadingStatus => '[Łôàđîñĝ... ẋẋẋẋ]';
+
+  @override
+  String get emptyCategoryImagesTitle => '[Ñô îɱàĝéš ƒôûñđ ẋẋẋẋẋẋ]';
+
+  @override
+  String get emptyCategoryImagesMessage =>
+      '[Îɱàĝéš ƒôûñđ ôñ ţĥîš đéṽîçé ŵîłł àþþéàř ĥéřé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get emptyCategoryDocsTitle => '[Ñô đôçûɱéñţš ƒôûñđ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get emptyCategoryDocsMessage =>
+      '[Ðôçûɱéñţš ôƒ ţĥîš ƒôřɱàţ ŵîłł àþþéàř ĥéřé àƒţéř šçàññîñĝ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
 }

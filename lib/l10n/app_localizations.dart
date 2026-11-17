@@ -660,6 +660,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Privacy policy'**
   String get actionPrivacyPolicy;
+
+  /// Snackbar shown when files are imported via system picker
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Imported 1 file} other{Imported {count} files}}'**
+  String filesImportedSuccess(int count);
+
+  /// Snackbar shown when file import fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to import files'**
+  String get importFailedError;
+
+  /// Tooltip for floating action button to import documents
+  ///
+  /// In en, this message translates to:
+  /// **'Import documents'**
+  String get tooltipImportDocuments;
+
+  /// Document scan progress counter
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 file found} other{{count} files found}}'**
+  String homeScanProgressCount(int count);
+
+  /// Active document scanning progress text
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning...'**
+  String get scanningStatus;
+
+  /// Pluralized count of files in category or folder
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 file} other{{count} files}}'**
+  String fileCountPlural(int count);
+
+  /// Category tile label for Folders browser
+  ///
+  /// In en, this message translates to:
+  /// **'Folders'**
+  String get categoryFolders;
+
+  /// Error message when recent files query fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading recent files'**
+  String get errorLoadingRecent;
+
+  /// Generic title for empty list tab or screen
+  ///
+  /// In en, this message translates to:
+  /// **'Empty'**
+  String get emptyStateTitle;
+
+  /// Placeholder explanation for recent files tab
+  ///
+  /// In en, this message translates to:
+  /// **'Recently opened files will appear here'**
+  String get emptyRecentDescription;
+
+  /// Error message when bookmarked files query fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading bookmarked files'**
+  String get errorLoadingBookmarks;
+
+  /// Placeholder explanation for bookmarks tab
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmarked documents will appear here'**
+  String get emptyBookmarksDescription;
+
+  /// Dialog headline for batch file deletion confirmation
+  ///
+  /// In en, this message translates to:
+  /// **'Delete selected files?'**
+  String get dialogDeleteTitle;
+
+  /// Dialog body explaining that batch deletion is permanent
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Delete 1 file? This cannot be undone.} other{Delete {count} files? This cannot be undone.}}'**
+  String dialogDeleteBody(int count);
+
+  /// Snackbar message indicating successful batch file deletion
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Deleted 1 file} other{Deleted {count} files}}'**
+  String filesDeletedSuccess(int count);
+
+  /// Snackbar message when deleting files fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete files'**
+  String get filesDeleteFailed;
+
+  /// Action button text to confirm deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get actionDelete;
+
+  /// Section header for recent search queries
+  ///
+  /// In en, this message translates to:
+  /// **'RECENT SEARCHES'**
+  String get searchRecentSearchesHeader;
+
+  /// Action button to clear recent search history
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get actionClear;
+
+  /// Headline in search idle empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Type to search documents'**
+  String get searchPromptTitle;
+
+  /// Message in search idle empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Search across all local folders by filename or extension'**
+  String get searchPromptMessage;
+
+  /// Error message when search query fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error searching documents'**
+  String get searchError;
+
+  /// Headline when search produces zero results
+  ///
+  /// In en, this message translates to:
+  /// **'No matching documents found'**
+  String get searchNoResultsTitle;
+
+  /// Explanation when search produces zero results
+  ///
+  /// In en, this message translates to:
+  /// **'Try searching with a different filename keyword or format filter'**
+  String get searchNoResultsMessage;
+
+  /// Tooltip for sort options button in category sub app bar
+  ///
+  /// In en, this message translates to:
+  /// **'Sort options'**
+  String get tooltipSortOptions;
+
+  /// Title of the sort options modal bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get sortSheetTitle;
+
+  /// Sort option label for ordering by modification date
+  ///
+  /// In en, this message translates to:
+  /// **'Date modified'**
+  String get sortOptionDate;
+
+  /// Sort option label for ordering by document name
+  ///
+  /// In en, this message translates to:
+  /// **'Document name'**
+  String get sortOptionName;
+
+  /// Sort option label for ordering by file size
+  ///
+  /// In en, this message translates to:
+  /// **'File size'**
+  String get sortOptionSize;
+
+  /// Switch label for ascending sort direction
+  ///
+  /// In en, this message translates to:
+  /// **'Ascending order'**
+  String get sortAscendingOrder;
+
+  /// Subtitle describing ascending sort order
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest first / A to Z / Smallest first'**
+  String get sortAscendingSubtitle;
+
+  /// Subtitle describing descending sort order
+  ///
+  /// In en, this message translates to:
+  /// **'Newest first / Z to A / Largest first'**
+  String get sortDescendingSubtitle;
+
+  /// Title for the all files category screen
+  ///
+  /// In en, this message translates to:
+  /// **'All files'**
+  String get categoryAllFiles;
+
+  /// Generic loading status indicator
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loadingStatus;
+
+  /// Headline when image category has no files
+  ///
+  /// In en, this message translates to:
+  /// **'No images found'**
+  String get emptyCategoryImagesTitle;
+
+  /// Message when image category has no files
+  ///
+  /// In en, this message translates to:
+  /// **'Images found on this device will appear here'**
+  String get emptyCategoryImagesMessage;
+
+  /// Headline when a document category has no files
+  ///
+  /// In en, this message translates to:
+  /// **'No documents found'**
+  String get emptyCategoryDocsTitle;
+
+  /// Message when a document category has no files
+  ///
+  /// In en, this message translates to:
+  /// **'Documents of this format will appear here after scanning'**
+  String get emptyCategoryDocsMessage;
 }
 
 class _AppLocalizationsDelegate

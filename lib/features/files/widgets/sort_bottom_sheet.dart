@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import '../../../data/models/sort_option.dart';
@@ -35,7 +36,7 @@ class SortBottomSheet extends ConsumerWidget {
       child: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 12, 20, 24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +56,7 @@ class SortBottomSheet extends ConsumerWidget {
 
               // Title
               Text(
-                'Sort by',
+                context.l10n.sortSheetTitle,
                 style: DocViewTypography.headlineSm.copyWith(
                   color: tokens.textPrimary,
                   fontWeight: FontWeight.w700,
@@ -65,7 +66,7 @@ class SortBottomSheet extends ConsumerWidget {
 
               // Sort Field Options
               _SortFieldOption(
-                label: 'Date modified',
+                label: context.l10n.sortOptionDate,
                 field: SortField.date,
                 selectedField: currentSort.field,
                 onSelect: (field) {
@@ -75,7 +76,7 @@ class SortBottomSheet extends ConsumerWidget {
                 },
               ),
               _SortFieldOption(
-                label: 'Document name',
+                label: context.l10n.sortOptionName,
                 field: SortField.name,
                 selectedField: currentSort.field,
                 onSelect: (field) {
@@ -85,7 +86,7 @@ class SortBottomSheet extends ConsumerWidget {
                 },
               ),
               _SortFieldOption(
-                label: 'File size',
+                label: context.l10n.sortOptionSize,
                 field: SortField.size,
                 selectedField: currentSort.field,
                 onSelect: (field) {
@@ -104,7 +105,7 @@ class SortBottomSheet extends ConsumerWidget {
                 contentPadding: EdgeInsets.zero,
                 activeThumbColor: tokens.primaryBlue,
                 title: Text(
-                  'Ascending order',
+                  context.l10n.sortAscendingOrder,
                   style: DocViewTypography.titleMd.copyWith(
                     color: tokens.textPrimary,
                     fontSize: 15,
@@ -112,8 +113,8 @@ class SortBottomSheet extends ConsumerWidget {
                 ),
                 subtitle: Text(
                   currentSort.direction == SortDirection.asc
-                      ? 'Oldest first / A to Z / Smallest first'
-                      : 'Newest first / Z to A / Largest first',
+                      ? context.l10n.sortAscendingSubtitle
+                      : context.l10n.sortDescendingSubtitle,
                   style: DocViewTypography.bodySm.copyWith(
                     color: tokens.textSecondary,
                   ),
@@ -159,7 +160,7 @@ class _SortFieldOption extends StatelessWidget {
       onTap: () => onSelect(field),
       borderRadius: BorderRadius.circular(12),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+        padding: const EdgeInsetsDirectional.symmetric(vertical: 12, horizontal: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

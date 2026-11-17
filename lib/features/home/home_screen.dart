@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
@@ -42,13 +43,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('$count files imported')),
+          SnackBar(content: Text(context.l10n.filesImportedSuccess(count))),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Import failed: $e')),
+          SnackBar(content: Text(context.l10n.importFailedError)),
         );
       }
     }
@@ -99,7 +100,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         foregroundColor: Colors.white,
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        tooltip: 'Import documents',
+        tooltip: context.l10n.tooltipImportDocuments,
         child: const Icon(Icons.add, size: 28),
       ),
       body: RefreshIndicator(
@@ -120,7 +121,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
+                      padding: const EdgeInsetsDirectional.symmetric(
                         horizontal: 16,
                         vertical: 8,
                       ),
@@ -135,7 +136,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'Scanning... ${scanState.filesFound} files found',
+                              '${context.l10n.scanningStatus} ${context.l10n.homeScanProgressCount(scanState.filesFound)}',
                               style: DocViewTypography.bodySm.copyWith(
                                 color: tokens.primaryBlue,
                                 fontWeight: FontWeight.w600,
@@ -152,7 +153,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             // 2. 4x2 Category Grid (or Skeleton during initial load)
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
                 child: countsAsync.isLoading
                     ? const SkeletonTileGrid(itemCount: 8)
                     : Builder(
@@ -180,34 +181,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             childAspectRatio: categoryAspectRatio,
                             children: [
                               CategoryTile(
-                                label: 'All',
+                                label: context.l10n.filterCategoryAll,
                                 subtitle: scanState.isScanning
-                                    ? 'Scanning...'
-                                    : '$totalFiles files',
+                                    ? context.l10n.scanningStatus
+                                    : context.l10n.fileCountPlural(totalFiles),
                                 onTap: () => context.push('/files?category=all'),
                               ),
                               CategoryTile(
                                 category: FileCategory.pdf,
                                 label: 'PDF',
                                 subtitle: scanState.isScanning
-                                    ? '...'
-                                    : '${categoryCounts[FileCategory.pdf] ?? 0} files',
+                                    ? context.l10n.scanningStatus
+                                    : context.l10n.fileCountPlural(categoryCounts[FileCategory.pdf] ?? 0),
                                 onTap: () => context.push('/files?category=pdf'),
                               ),
                               CategoryTile(
                                 category: FileCategory.word,
                                 label: 'Word',
                                 subtitle: scanState.isScanning
-                                    ? '...'
-                                    : '${categoryCounts[FileCategory.word] ?? 0} files',
+                                    ? context.l10n.scanningStatus
+                                    : context.l10n.fileCountPlural(categoryCounts[FileCategory.word] ?? 0),
                                 onTap: () => context.push('/files?category=word'),
                               ),
                               CategoryTile(
                                 category: FileCategory.excel,
                                 label: 'Excel',
                                 subtitle: scanState.isScanning
-                                    ? '...'
-                                    : '${categoryCounts[FileCategory.excel] ?? 0} files',
+                                    ? context.l10n.scanningStatus
+                                    : context.l10n.fileCountPlural(categoryCounts[FileCategory.excel] ?? 0),
                                 onTap: () =>
                                     context.push('/files?category=excel'),
                               ),
@@ -215,30 +216,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 category: FileCategory.ppt,
                                 label: 'PPT',
                                 subtitle: scanState.isScanning
-                                    ? '...'
-                                    : '${categoryCounts[FileCategory.ppt] ?? 0} files',
+                                    ? context.l10n.scanningStatus
+                                    : context.l10n.fileCountPlural(categoryCounts[FileCategory.ppt] ?? 0),
                                 onTap: () => context.push('/files?category=ppt'),
                               ),
                               CategoryTile(
                                 category: FileCategory.txt,
                                 label: 'TXT',
                                 subtitle: scanState.isScanning
-                                    ? '...'
-                                    : '${categoryCounts[FileCategory.txt] ?? 0} files',
+                                    ? context.l10n.scanningStatus
+                                    : context.l10n.fileCountPlural(categoryCounts[FileCategory.txt] ?? 0),
                                 onTap: () => context.push('/files?category=txt'),
                               ),
                               CategoryTile(
                                 category: FileCategory.image,
                                 label: 'Image',
                                 subtitle: scanState.isScanning
-                                    ? '...'
-                                    : '${categoryCounts[FileCategory.image] ?? 0} files',
+                                    ? context.l10n.scanningStatus
+                                    : context.l10n.fileCountPlural(categoryCounts[FileCategory.image] ?? 0),
                                 onTap: () =>
                                     context.push('/files?category=image'),
                               ),
                               CategoryTile(
-                                label: 'Folders',
-                                subtitle: 'Browse',
+                                label: context.l10n.categoryFolders,
+                                subtitle: context.l10n.actionBrowse,
                                 onTap: () => context.push('/directories'),
                               ),
                             ],
@@ -271,7 +272,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   },
                   trailing: DocIconButton(
                     icon: AppIcons.selectAll,
-                    tooltip: 'Select files',
+                    tooltip: context.l10n.tooltipSelectFiles,
                     color: tokens.textSecondary,
                     onPressed: () => context.push('/files?category=all'),
                   ),
@@ -300,17 +301,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 error: (error, _) => SliverToBoxAdapter(
                   child: DocErrorState(
-                    message: 'Error loading recent files: $error',
+                    message: context.l10n.errorLoadingRecent,
                     onRetry: () => ref.invalidate(recentsProvider),
                   ),
                 ),
                 data: (files) {
                   if (files.isEmpty) {
-                    return const SliverToBoxAdapter(
+                    return SliverToBoxAdapter(
                       child: DocEmptyState(
                         icon: AppIcons.history,
-                        title: 'Empty',
-                        message: 'Recently opened files will appear here',
+                        title: context.l10n.emptyStateTitle,
+                        message: context.l10n.emptyRecentDescription,
                       ),
                     );
                   }
@@ -365,17 +366,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 error: (error, _) => SliverToBoxAdapter(
                   child: DocErrorState(
-                    message: 'Error loading bookmarked files: $error',
+                    message: context.l10n.errorLoadingBookmarks,
                     onRetry: () => ref.invalidate(bookmarksProvider),
                   ),
                 ),
                 data: (files) {
                   if (files.isEmpty) {
-                    return const SliverToBoxAdapter(
+                    return SliverToBoxAdapter(
                       child: DocEmptyState(
                         icon: AppIcons.bookmarkOutline,
-                        title: 'Empty',
-                        message: 'Bookmarked documents will appear here',
+                        title: context.l10n.emptyStateTitle,
+                        message: context.l10n.emptyBookmarksDescription,
                       ),
                     );
                   }

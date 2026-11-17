@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
@@ -75,14 +76,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('Delete selected files?'),
+          title: Text(context.l10n.dialogDeleteTitle),
           content: Text(
-            'Delete ${selectedFiles.length} file(s)? This cannot be undone.',
+            context.l10n.dialogDeleteBody(selectedFiles.length),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text('Cancel'),
+              child: Text(context.l10n.actionCancel),
             ),
             FilledButton(
               style: FilledButton.styleFrom(
@@ -92,6 +93,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               onPressed: () async {
                 Navigator.of(dialogContext).pop();
                 final messenger = ScaffoldMessenger.of(context);
+                final l10n = context.l10n;
                 final result = await ref
                     .read(fileActionsControllerProvider)
                     .deleteFiles(selectedFiles);
@@ -103,13 +105,13 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   SnackBar(
                     content: Text(
                       result.hasDeletions
-                          ? 'Deleted ${result.deletedCount} file(s)'
-                          : (result.errorMessage ?? 'Failed to delete files'),
+                          ? l10n.filesDeletedSuccess(result.deletedCount)
+                          : (result.errorMessage ?? l10n.filesDeleteFailed),
                     ),
                   ),
                 );
               },
-              child: const Text('Delete'),
+              child: Text(context.l10n.actionDelete),
             ),
           ],
         );
@@ -172,12 +174,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     children: [
                       // Search Input Bar
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 8, 16, 6),
+                        padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 16, 6),
                         child: Row(
                           children: [
                             DocIconButton(
                               icon: AppIcons.back,
-                              tooltip: 'Back',
+                              tooltip: context.l10n.tooltipBack,
                               onPressed: () => Navigator.of(context).maybePop(),
                             ),
                             const SizedBox(width: 4),
@@ -216,7 +218,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                         onChanged: _onQueryChanged,
                                         onSubmitted: _submitSearch,
                                         decoration: InputDecoration(
-                                          hintText: 'Search documents, files...',
+                                          hintText: context.l10n.searchHint,
                                           hintStyle: DocViewTypography.bodyMd
                                               .copyWith(
                                             color: tokens.textSecondary,
@@ -231,7 +233,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                       IconButton(
                                         icon: const Icon(AppIcons.close, size: 18),
                                         color: tokens.textSecondary,
-                                        tooltip: 'Clear search',
+                                        tooltip: context.l10n.tooltipClearSearch,
                                         onPressed: _onClear,
                                       ),
                                     const SizedBox(width: 6),
@@ -266,7 +268,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding: const EdgeInsetsDirectional.symmetric(
                         horizontal: 16,
                         vertical: 10,
                       ),
@@ -274,7 +276,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'RECENT SEARCHES',
+                            context.l10n.searchRecentSearchesHeader,
                             style: DocViewTypography.labelXs.copyWith(
                               color: tokens.sectionHeader,
                               fontWeight: FontWeight.w700,
@@ -288,7 +290,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                   .clearAll();
                             },
                             child: Text(
-                              'Clear',
+                              context.l10n.actionClear,
                               style: DocViewTypography.labelMd.copyWith(
                                 color: tokens.primaryBlue,
                               ),
@@ -345,14 +347,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'Type to search documents',
+                        context.l10n.searchPromptTitle,
                         style: DocViewTypography.titleMd.copyWith(
                           color: tokens.textPrimary,
                         ),
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Search across all local folders by filename or extension',
+                        context.l10n.searchPromptMessage,
                         textAlign: TextAlign.center,
                         style: DocViewTypography.bodySm.copyWith(
                           color: tokens.textSecondary,
@@ -374,7 +376,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: DocErrorState(
-                    message: 'Error searching documents: $error',
+                    message: context.l10n.searchError,
                     onRetry: () => ref.invalidate(searchResultsProvider),
                   ),
                 ),
@@ -383,11 +385,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               data: (files) {
                 // STATE 3: NO RESULTS FOUND
                 if (files.isEmpty) {
-                  return const DocEmptyState(
+                  return DocEmptyState(
                     icon: AppIcons.search,
-                    title: 'No matching documents found',
-                    message:
-                        'Try searching with a different filename keyword or format filter',
+                    title: context.l10n.searchNoResultsTitle,
+                    message: context.l10n.searchNoResultsMessage,
                   );
                 }
 
