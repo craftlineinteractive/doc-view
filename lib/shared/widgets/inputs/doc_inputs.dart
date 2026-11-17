@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -8,7 +9,7 @@ class DocSearchField extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
   final VoidCallback? onClear;
-  final String hintText;
+  final String? hintText;
   final bool autofocus;
 
   const DocSearchField({
@@ -16,13 +17,14 @@ class DocSearchField extends StatelessWidget {
     required this.controller,
     this.onChanged,
     this.onClear,
-    this.hintText = 'Search documents...',
+    this.hintText,
     this.autofocus = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
+    final effectiveHint = hintText ?? context.l10n.searchHint;
 
     return Container(
       height: 48,
@@ -43,7 +45,7 @@ class DocSearchField extends StatelessWidget {
               onChanged: onChanged,
               style: DocViewTypography.bodyLg.copyWith(color: tokens.textPrimary),
               decoration: InputDecoration(
-                hintText: hintText,
+                hintText: effectiveHint,
                 hintStyle: DocViewTypography.bodyMd.copyWith(color: tokens.textSecondary),
                 border: InputBorder.none,
                 isDense: true,
@@ -52,14 +54,17 @@ class DocSearchField extends StatelessWidget {
             ),
           ),
           if (controller.text.isNotEmpty)
-            GestureDetector(
-              onTap: () {
-                controller.clear();
-                onClear?.call();
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Icon(AppIcons.close, size: 18, color: tokens.textSecondary),
+            Tooltip(
+              message: context.l10n.tooltipClearSearch,
+              child: GestureDetector(
+                onTap: () {
+                  controller.clear();
+                  onClear?.call();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Icon(AppIcons.close, size: 18, color: tokens.textSecondary),
+                ),
               ),
             ),
         ],

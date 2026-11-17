@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../extensions/l10n_extension.dart';
 
 import '../../core/constants/file_types.dart';
 import '../../data/models/doc_file.dart';
@@ -156,7 +157,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('No document selected')),
+                  SnackBar(content: Text(context.l10n.noDocumentSelected)),
                 );
                 context.pop();
               }

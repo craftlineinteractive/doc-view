@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/file_types.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -38,14 +39,14 @@ class DocUnderlineTabs extends StatelessWidget {
       child: Row(
         children: [
           _TabItem(
-            label: 'Recent',
+            label: context.l10n.tabRecent,
             count: recentCount,
             isSelected: selectedIndex == 0,
             activeColor: activeColor,
             onTap: () => onTabSelected(0),
           ),
           _TabItem(
-            label: 'Bookmarks',
+            label: context.l10n.tabBookmarks,
             count: bookmarksCount,
             isSelected: selectedIndex == 1,
             activeColor: activeColor,
@@ -53,7 +54,7 @@ class DocUnderlineTabs extends StatelessWidget {
           ),
           if (trailing != null) ...[
             Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+              padding: const EdgeInsetsDirectional.only(end: 8.0),
               child: trailing!,
             ),
           ],
@@ -180,7 +181,7 @@ class DocFilterChipRow extends StatelessWidget {
         itemBuilder: (context, index) {
           final category = categories[index];
           final isSelected = category == selectedCategory;
-          final label = category == null ? 'All' : category.label;
+          final label = category == null ? context.l10n.filterCategoryAll : category.label;
           final count = category != null && counts != null ? counts![category] : null;
 
           Color? dotColor;
@@ -209,7 +210,7 @@ class DocFilterChipRow extends StatelessWidget {
                     Container(
                       width: 8,
                       height: 8,
-                      margin: const EdgeInsets.only(right: 6),
+                      margin: const EdgeInsetsDirectional.only(end: 6),
                       decoration: BoxDecoration(
                         color: isSelected ? Colors.white : dotColor,
                         shape: BoxShape.circle,

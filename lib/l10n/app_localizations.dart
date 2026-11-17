@@ -120,6 +120,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get navSettings;
+
+  /// Error message when opening viewer without a selected document
+  ///
+  /// In en, this message translates to:
+  /// **'No document selected'**
+  String get noDocumentSelected;
+
+  /// Tooltip for closing an ad dialog or banner
+  ///
+  /// In en, this message translates to:
+  /// **'Close ad'**
+  String get tooltipCloseAd;
+
+  /// Tooltip for standard close button
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get tooltipClose;
+
+  /// Tooltip for refreshing/rescanning documents
+  ///
+  /// In en, this message translates to:
+  /// **'Rescan documents'**
+  String get tooltipRescan;
+
+  /// Tooltip for opening document search
+  ///
+  /// In en, this message translates to:
+  /// **'Search documents'**
+  String get tooltipSearch;
+
+  /// Tooltip for entering multi-selection mode
+  ///
+  /// In en, this message translates to:
+  /// **'Select files'**
+  String get tooltipSelectFiles;
+
+  /// Tooltip for navigating back
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get tooltipBack;
+
+  /// Tooltip for cancelling multi-selection mode
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel selection'**
+  String get tooltipCancelSelection;
+
+  /// Number of files currently selected
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 selected} other{{count} selected}}'**
+  String selectionCount(int count);
+
+  /// Action to select all items
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get actionSelectAll;
+
+  /// Action to deselect all items
+  ///
+  /// In en, this message translates to:
+  /// **'Deselect all'**
+  String get actionDeselectAll;
+
+  /// Tooltip for deleting selected items
+  ///
+  /// In en, this message translates to:
+  /// **'Delete selected'**
+  String get tooltipDeleteSelected;
+
+  /// Tooltip for clearing the search field text
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get tooltipClearSearch;
+
+  /// Placeholder hint text in document search bars
+  ///
+  /// In en, this message translates to:
+  /// **'Search documents, folders...'**
+  String get searchHint;
+
+  /// Accessibility announcement for the floating page indicator
+  ///
+  /// In en, this message translates to:
+  /// **'Page {page} of {total}'**
+  String pageIndicatorSemantics(int page, int total);
+
+  /// Headline for generic error state
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get errorGenericTitle;
+
+  /// Action button to retry a failed operation
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get actionRetry;
+
+  /// Headline when all files access permission is needed
+  ///
+  /// In en, this message translates to:
+  /// **'All Files Access Required'**
+  String get permissionAllFilesTitle;
+
+  /// Rationale text explaining why all files access is requested
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View needs All files access to browse folders and organize your documents completely offline.'**
+  String get permissionAllFilesExplanation;
+
+  /// Button to open system settings for granting storage permission
+  ///
+  /// In en, this message translates to:
+  /// **'Grant Access'**
+  String get actionGrantAccess;
+
+  /// Button to import files via system picker without full storage permission
+  ///
+  /// In en, this message translates to:
+  /// **'Import Files Instead'**
+  String get actionImportFilesInstead;
+
+  /// Tooltip to unbookmark a document
+  ///
+  /// In en, this message translates to:
+  /// **'Remove bookmark'**
+  String get tooltipRemoveBookmark;
+
+  /// Tooltip to bookmark a document
+  ///
+  /// In en, this message translates to:
+  /// **'Add bookmark'**
+  String get tooltipAddBookmark;
+
+  /// Accessibility tooltip for document options button
+  ///
+  /// In en, this message translates to:
+  /// **'File options for {title}'**
+  String tooltipFileOptions(String title);
+
+  /// Accessibility label for a folder item in directory browser
+  ///
+  /// In en, this message translates to:
+  /// **'Folder, {name}{subtitle}'**
+  String folderSemantics(String name, String subtitle);
+
+  /// Full uppercase label for advertisement container
+  ///
+  /// In en, this message translates to:
+  /// **'ADVERTISEMENT'**
+  String get adAdvertisementBadge;
+
+  /// Default confirmation button label in dialogs
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get actionConfirm;
+
+  /// Default cancellation button label in dialogs
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get actionCancel;
+
+  /// Recent documents tab label
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get tabRecent;
+
+  /// Bookmarked documents tab label
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmarks'**
+  String get tabBookmarks;
+
+  /// Filter chip label to show all document categories
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterCategoryAll;
+
+  /// Browse subtitle action in folder category tile
+  ///
+  /// In en, this message translates to:
+  /// **'Browse'**
+  String get actionBrowse;
+
+  /// Button to cancel an active processing operation
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Operation'**
+  String get actionCancelOperation;
+
+  /// Headline for operation complete bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Operation Complete'**
+  String get operationComplete;
+
+  /// Button to open a newly generated document
+  ///
+  /// In en, this message translates to:
+  /// **'Open Document'**
+  String get actionOpenDocument;
+
+  /// Button to share a generated document
+  ///
+  /// In en, this message translates to:
+  /// **'Share Document'**
+  String get actionShareDocument;
 }
 
 class _AppLocalizationsDelegate

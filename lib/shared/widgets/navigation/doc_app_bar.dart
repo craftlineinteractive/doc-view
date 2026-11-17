@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
@@ -41,17 +42,17 @@ class DocHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         if (onScanTap != null)
           DocIconButton(
             icon: AppIcons.refresh,
-            tooltip: 'Rescan documents',
+            tooltip: context.l10n.tooltipRescan,
             onPressed: onScanTap,
           ),
         DocIconButton(
           icon: AppIcons.search,
-          tooltip: 'Search documents',
+          tooltip: context.l10n.tooltipSearch,
           onPressed: onSearchTap,
         ),
         DocIconButton(
           icon: AppIcons.selectAll,
-          tooltip: 'Select files',
+          tooltip: context.l10n.tooltipSelectFiles,
           onPressed: onSelectTap,
         ),
         const SizedBox(width: 8),
@@ -92,7 +93,7 @@ class DocSubAppBar extends StatelessWidget implements PreferredSizeWidget {
           (Navigator.canPop(context) || onBack != null
               ? DocIconButton(
                   icon: AppIcons.back,
-                  tooltip: 'Back',
+                  tooltip: context.l10n.tooltipBack,
                   onPressed: onBack ?? () => Navigator.of(context).maybePop(),
                 )
               : null),
@@ -139,11 +140,11 @@ class DocSelectionAppBar extends StatelessWidget implements PreferredSizeWidget 
       scrolledUnderElevation: 0,
       leading: DocIconButton(
         icon: AppIcons.close,
-        tooltip: 'Cancel selection',
+        tooltip: context.l10n.tooltipCancelSelection,
         onPressed: onCancel,
       ),
       title: Text(
-        '$selectedCount selected',
+        context.l10n.selectionCount(selectedCount),
         style: DocViewTypography.headlineSm.copyWith(
           color: tokens.textPrimary,
         ),
@@ -152,7 +153,7 @@ class DocSelectionAppBar extends StatelessWidget implements PreferredSizeWidget 
         TextButton(
           onPressed: onSelectAll,
           child: Text(
-            allSelected ? 'Deselect all' : 'Select all',
+            allSelected ? context.l10n.actionDeselectAll : context.l10n.actionSelectAll,
             style: DocViewTypography.labelMd.copyWith(
               color: tokens.primaryBlue,
             ),
@@ -161,7 +162,7 @@ class DocSelectionAppBar extends StatelessWidget implements PreferredSizeWidget 
         if (onDelete != null && selectedCount > 0)
           DocIconButton(
             icon: AppIcons.delete,
-            tooltip: 'Delete selected',
+            tooltip: context.l10n.tooltipDeleteSelected,
             color: DocViewColors.error,
             onPressed: onDelete,
           ),
@@ -177,7 +178,7 @@ class DocSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final ValueChanged<String>? onChanged;
   final VoidCallback? onClear;
   final VoidCallback? onBack;
-  final String hintText;
+  final String? hintText;
   final bool autofocus;
 
   const DocSearchAppBar({
@@ -186,7 +187,7 @@ class DocSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onChanged,
     this.onClear,
     this.onBack,
-    this.hintText = 'Search documents, folders...',
+    this.hintText,
     this.autofocus = true,
   });
 
@@ -196,6 +197,7 @@ class DocSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
+    final effectiveHint = hintText ?? context.l10n.searchHint;
 
     return AppBar(
       backgroundColor: Colors.transparent,
@@ -203,12 +205,12 @@ class DocSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       leading: DocIconButton(
         icon: AppIcons.back,
-        tooltip: 'Back',
+        tooltip: context.l10n.tooltipBack,
         onPressed: onBack ?? () => Navigator.of(context).maybePop(),
       ),
       titleSpacing: 0,
       title: Padding(
-        padding: const EdgeInsets.only(right: 16),
+        padding: const EdgeInsetsDirectional.only(end: 16),
         child: Container(
           height: 44,
           decoration: BoxDecoration(
@@ -222,13 +224,13 @@ class DocSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
             onChanged: onChanged,
             style: DocViewTypography.bodyLg.copyWith(color: tokens.textPrimary),
             decoration: InputDecoration(
-              hintText: hintText,
+              hintText: effectiveHint,
               hintStyle: DocViewTypography.bodyMd.copyWith(color: tokens.textSecondary),
               prefixIcon: Icon(AppIcons.search, size: 20, color: tokens.textSecondary),
               suffixIcon: controller.text.isNotEmpty
                   ? IconButton(
                       icon: const Icon(AppIcons.close, size: 18),
-                      tooltip: 'Clear search',
+                      tooltip: context.l10n.tooltipClearSearch,
                       onPressed: () {
                         controller.clear();
                         onClear?.call();

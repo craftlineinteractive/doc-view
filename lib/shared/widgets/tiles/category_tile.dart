@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/file_types.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import 'doc_folded_icon.dart';
@@ -25,11 +26,11 @@ class CategoryTile extends StatelessWidget {
     required this.onTap,
   });
 
-  String _resolvedSubtitle() {
+  String _resolvedSubtitle(BuildContext context) {
     if (subtitle != null) return subtitle!;
     if (count != null) return count.toString();
     if (label.toLowerCase() == 'folders' || label.toLowerCase() == 'directories') {
-      return 'Browse';
+      return context.l10n.actionBrowse;
     }
     return '';
   }
@@ -60,7 +61,7 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    final subText = _resolvedSubtitle();
+    final subText = _resolvedSubtitle(context);
 
     return Semantics(
       button: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
@@ -175,8 +176,8 @@ class OptionsListTile extends StatelessWidget {
 class DocDialog extends StatelessWidget {
   final String title;
   final Widget content;
-  final String confirmLabel;
-  final String cancelLabel;
+  final String? confirmLabel;
+  final String? cancelLabel;
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
   final bool isDestructive;
@@ -185,8 +186,8 @@ class DocDialog extends StatelessWidget {
     super.key,
     required this.title,
     required this.content,
-    this.confirmLabel = 'Confirm',
-    this.cancelLabel = 'Cancel',
+    this.confirmLabel,
+    this.cancelLabel,
     required this.onConfirm,
     this.onCancel,
     this.isDestructive = false,
@@ -196,8 +197,8 @@ class DocDialog extends StatelessWidget {
     required BuildContext context,
     required String title,
     required Widget content,
-    String confirmLabel = 'Confirm',
-    String cancelLabel = 'Cancel',
+    String? confirmLabel,
+    String? cancelLabel,
     required VoidCallback onConfirm,
     VoidCallback? onCancel,
     bool isDestructive = false,
@@ -220,6 +221,8 @@ class DocDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokens = context.tokens;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final effectiveConfirm = confirmLabel ?? context.l10n.actionConfirm;
+    final effectiveCancel = cancelLabel ?? context.l10n.actionCancel;
 
     return Dialog(
       backgroundColor: isDark ? tokens.surface : Colors.white,
@@ -250,7 +253,7 @@ class DocDialog extends StatelessWidget {
                     onCancel?.call();
                   },
                   child: Text(
-                    cancelLabel,
+                    effectiveCancel,
                     style: DocViewTypography.labelLg.copyWith(
                       color: tokens.textSecondary,
                     ),
@@ -270,7 +273,7 @@ class DocDialog extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: Text(confirmLabel),
+                    child: Text(effectiveConfirm),
                   )
                 else
                   ElevatedButton(
@@ -285,7 +288,7 @@ class DocDialog extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: Text(confirmLabel),
+                    child: Text(effectiveConfirm),
                   ),
               ],
             ),
@@ -352,7 +355,7 @@ class ProgressSheet extends StatelessWidget {
           if (onCancel != null) ...[
             const SizedBox(height: 20),
             DocSecondaryButton(
-              label: 'Cancel Operation',
+              label: context.l10n.actionCancelOperation,
               height: 44,
               onPressed: onCancel,
             ),
@@ -365,7 +368,7 @@ class ProgressSheet extends StatelessWidget {
 
 /// Result sheet shown upon successful PDF generation (image-to-pdf, merge, split).
 class ResultSheet extends StatelessWidget {
-  final String title;
+  final String? title;
   final String fileName;
   final String metadata;
   final VoidCallback onOpen;
@@ -374,7 +377,7 @@ class ResultSheet extends StatelessWidget {
 
   const ResultSheet({
     super.key,
-    this.title = 'Operation Complete',
+    this.title,
     required this.fileName,
     required this.metadata,
     required this.onOpen,
@@ -385,6 +388,7 @@ class ResultSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
+    final effectiveTitle = title ?? context.l10n.operationComplete;
 
     return Padding(
       padding: const EdgeInsets.all(24.0),
@@ -403,7 +407,7 @@ class ResultSheet extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            title,
+            effectiveTitle,
             style: DocViewTypography.headlineSm.copyWith(color: tokens.textPrimary),
           ),
           const SizedBox(height: 16),
@@ -451,13 +455,13 @@ class ResultSheet extends StatelessWidget {
           const SizedBox(height: 24),
           // Action buttons: Open PDF (Primary), Share (Secondary)
           DocPrimaryButton(
-            label: 'Open Document',
+            label: context.l10n.actionOpenDocument,
             icon: const Icon(AppIcons.openWith, size: 20),
             onPressed: onOpen,
           ),
           const SizedBox(height: 10),
           DocSecondaryButton(
-            label: 'Share Document',
+            label: context.l10n.actionShareDocument,
             icon: const Icon(AppIcons.share, size: 20),
             onPressed: onShare,
           ),

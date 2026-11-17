@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
@@ -67,7 +68,7 @@ class PageNumberPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Page $currentPage of $totalPages',
+      label: context.l10n.pageIndicatorSemantics(currentPage, totalPages),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
         decoration: BoxDecoration(
@@ -81,11 +82,14 @@ class PageNumberPill extends StatelessWidget {
             ),
           ],
         ),
-        child: Text(
-          '$currentPage / $totalPages',
-          style: DocViewTypography.labelXs.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Text(
+            '$currentPage / $totalPages',
+            style: DocViewTypography.labelXs.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
       ),
@@ -194,7 +198,7 @@ class DocErrorState extends StatelessWidget {
             ),
             const SizedBox(height: 18),
             Text(
-              'Something went wrong',
+              context.l10n.errorGenericTitle,
               textAlign: TextAlign.center,
               style: DocViewTypography.headlineSm.copyWith(color: tokens.textPrimary),
             ),
@@ -206,7 +210,7 @@ class DocErrorState extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             DocSecondaryButton(
-              label: 'Retry',
+              label: context.l10n.actionRetry,
               icon: const Icon(AppIcons.refresh, size: 18),
               width: 150,
               height: 46,
@@ -251,24 +255,24 @@ class DocPermissionRequiredState extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              'All Files Access Required',
+              context.l10n.permissionAllFilesTitle,
               textAlign: TextAlign.center,
               style: DocViewTypography.headlineSm.copyWith(color: tokens.textPrimary),
             ),
             const SizedBox(height: 10),
             Text(
-              'Doc View needs All files access to browse folders and organize your documents completely offline.',
+              context.l10n.permissionAllFilesExplanation,
               textAlign: TextAlign.center,
               style: DocViewTypography.bodyMd.copyWith(color: tokens.textSecondary),
             ),
             const SizedBox(height: 28),
             DocPrimaryButton(
-              label: 'Grant Access',
+              label: context.l10n.actionGrantAccess,
               onPressed: onGrantAccess,
             ),
             const SizedBox(height: 12),
             DocSecondaryButton(
-              label: 'Import Files Instead',
+              label: context.l10n.actionImportFilesInstead,
               onPressed: onImportFiles,
             ),
           ],
@@ -361,7 +365,7 @@ class SectionHeader extends StatelessWidget {
     final tokens = context.tokens;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
+      padding: const EdgeInsetsDirectional.fromSTEB(16, 20, 16, 8),
       child: Text(
         title.toUpperCase(),
         style: DocViewTypography.labelXs.copyWith(
@@ -420,7 +424,7 @@ class _ExpandableFaqCardState extends State<ExpandableFaqCard> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          childrenPadding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
           children: [
             Text(
               widget.answer,

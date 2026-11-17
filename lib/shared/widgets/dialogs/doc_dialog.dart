@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 
@@ -8,8 +9,8 @@ import '../../../core/theme/doc_view_typography.dart';
 class DocDialog extends StatelessWidget {
   final String title;
   final String body;
-  final String confirmLabel;
-  final String cancelLabel;
+  final String? confirmLabel;
+  final String? cancelLabel;
   final bool isDestructive;
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
@@ -18,8 +19,8 @@ class DocDialog extends StatelessWidget {
     super.key,
     required this.title,
     required this.body,
-    this.confirmLabel = 'Confirm',
-    this.cancelLabel = 'Cancel',
+    this.confirmLabel,
+    this.cancelLabel,
     this.isDestructive = false,
     required this.onConfirm,
     required this.onCancel,
@@ -28,6 +29,8 @@ class DocDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
+    final effectiveConfirm = confirmLabel ?? context.l10n.actionConfirm;
+    final effectiveCancel = cancelLabel ?? context.l10n.actionCancel;
 
     return Dialog(
       backgroundColor: tokens.surface,
@@ -38,7 +41,7 @@ class DocDialog extends StatelessWidget {
       ),
       insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+        padding: const EdgeInsetsDirectional.fromSTEB(24, 24, 24, 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +82,7 @@ class DocDialog extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    cancelLabel,
+                    effectiveCancel,
                     style: DocViewTypography.labelLg.copyWith(
                       color: tokens.textSecondary,
                       fontWeight: FontWeight.w600,
@@ -105,7 +108,7 @@ class DocDialog extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    confirmLabel,
+                    effectiveConfirm,
                     style: DocViewTypography.labelLg.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -126,8 +129,8 @@ Future<bool?> showDocConfirmDialog({
   required BuildContext context,
   required String title,
   required String body,
-  String confirmLabel = 'Confirm',
-  String cancelLabel = 'Cancel',
+  String? confirmLabel,
+  String? cancelLabel,
   bool isDestructive = false,
 }) {
   return showDialog<bool>(

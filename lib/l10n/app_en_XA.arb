@@ -15,5 +15,181 @@
   "navSettings": "[Šéţţîñĝš ẋẋẋẋ]",
   "@navSettings": {
     "description": "Bottom navigation bar label for the settings tab"
+  },
+  "noDocumentSelected": "[Ñô đôçûɱéñţ šéłéçţéđ ẋẋẋẋẋẋẋẋ]",
+  "@noDocumentSelected": {
+    "description": "Error message when opening viewer without a selected document"
+  },
+  "tooltipCloseAd": "[Çłôšé àđ ẋẋẋẋ]",
+  "@tooltipCloseAd": {
+    "description": "Tooltip for closing an ad dialog or banner"
+  },
+  "tooltipClose": "[Çłôšé ẋẋ]",
+  "@tooltipClose": {
+    "description": "Tooltip for standard close button"
+  },
+  "tooltipRescan": "[Řéšçàñ đôçûɱéñţš ẋẋẋẋẋẋẋ]",
+  "@tooltipRescan": {
+    "description": "Tooltip for refreshing/rescanning documents"
+  },
+  "tooltipSearch": "[Šéàřçĥ đôçûɱéñţš ẋẋẋẋẋẋẋ]",
+  "@tooltipSearch": {
+    "description": "Tooltip for opening document search"
+  },
+  "tooltipSelectFiles": "[Šéłéçţ ƒîłéš ẋẋẋẋẋ]",
+  "@tooltipSelectFiles": {
+    "description": "Tooltip for entering multi-selection mode"
+  },
+  "tooltipBack": "[Ɓàçƙ ẋẋ]",
+  "@tooltipBack": {
+    "description": "Tooltip for navigating back"
+  },
+  "tooltipCancelSelection": "[Çàñçéł šéłéçţîôñ ẋẋẋẋẋẋẋ]",
+  "@tooltipCancelSelection": {
+    "description": "Tooltip for cancelling multi-selection mode"
+  },
+  "selectionCount": "{count, plural, =1{[1 šéłéçţéđ ẋẋẋẋ]} other{[{count} šéłéçţéđ ẋẋẋẋẋẋẋ]}}",
+  "@selectionCount": {
+    "description": "Number of files currently selected",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "actionSelectAll": "[Šéłéçţ àłł ẋẋẋẋ]",
+  "@actionSelectAll": {
+    "description": "Action to select all items"
+  },
+  "actionDeselectAll": "[Ðéšéłéçţ àłł ẋẋẋẋẋ]",
+  "@actionDeselectAll": {
+    "description": "Action to deselect all items"
+  },
+  "tooltipDeleteSelected": "[Ðéłéţé šéłéçţéđ ẋẋẋẋẋẋ]",
+  "@tooltipDeleteSelected": {
+    "description": "Tooltip for deleting selected items"
+  },
+  "tooltipClearSearch": "[Çłéàř šéàřçĥ ẋẋẋẋẋ]",
+  "@tooltipClearSearch": {
+    "description": "Tooltip for clearing the search field text"
+  },
+  "searchHint": "[Šéàřçĥ đôçûɱéñţš, ƒôłđéřš... ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@searchHint": {
+    "description": "Placeholder hint text in document search bars"
+  },
+  "pageIndicatorSemantics": "[Þàĝé {page} ôƒ {total} ẋẋẋẋẋẋẋẋẋ]",
+  "@pageIndicatorSemantics": {
+    "description": "Accessibility announcement for the floating page indicator",
+    "placeholders": {
+      "page": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "errorGenericTitle": "[Šôɱéţĥîñĝ ŵéñţ ŵřôñĝ ẋẋẋẋẋẋẋẋ]",
+  "@errorGenericTitle": {
+    "description": "Headline for generic error state"
+  },
+  "actionRetry": "[Řéţřý ẋẋ]",
+  "@actionRetry": {
+    "description": "Action button to retry a failed operation"
+  },
+  "permissionAllFilesTitle": "[Åłł Ƒîłéš Åççéšš Řéʠûîřéđ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionAllFilesTitle": {
+    "description": "Headline when all files access permission is needed"
+  },
+  "permissionAllFilesExplanation": "[Ðôç Ṽîéŵ ñééđš Åłł ƒîłéš àççéšš ţô ƀřôŵšé ƒôłđéřš àñđ ôřĝàñîžé ýôûř đôçûɱéñţš çôɱþłéţéłý ôƒƒłîñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionAllFilesExplanation": {
+    "description": "Rationale text explaining why all files access is requested"
+  },
+  "actionGrantAccess": "[Ĝřàñţ Åççéšš ẋẋẋẋẋ]",
+  "@actionGrantAccess": {
+    "description": "Button to open system settings for granting storage permission"
+  },
+  "actionImportFilesInstead": "[Îɱþôřţ Ƒîłéš Îñšţéàđ ẋẋẋẋẋẋẋẋ]",
+  "@actionImportFilesInstead": {
+    "description": "Button to import files via system picker without full storage permission"
+  },
+  "tooltipRemoveBookmark": "[Řéɱôṽé ƀôôƙɱàřƙ ẋẋẋẋẋẋ]",
+  "@tooltipRemoveBookmark": {
+    "description": "Tooltip to unbookmark a document"
+  },
+  "tooltipAddBookmark": "[Åđđ ƀôôƙɱàřƙ ẋẋẋẋẋ]",
+  "@tooltipAddBookmark": {
+    "description": "Tooltip to bookmark a document"
+  },
+  "tooltipFileOptions": "[Ƒîłé ôþţîôñš ƒôř {title} ẋẋẋẋẋẋẋẋẋẋ]",
+  "@tooltipFileOptions": {
+    "description": "Accessibility tooltip for document options button",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Contract.pdf"
+      }
+    }
+  },
+  "folderSemantics": "[Ƒôłđéř, {name}{subtitle} ẋẋẋẋẋẋẋẋẋẋ]",
+  "@folderSemantics": {
+    "description": "Accessibility label for a folder item in directory browser",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Documents"
+      },
+      "subtitle": {
+        "type": "String",
+        "example": ", 5 files"
+      }
+    }
+  },
+  "adAdvertisementBadge": "[ÅÐṼÉŘŤÎŠÉṀÉÑŤ ẋẋẋẋẋẋ]",
+  "@adAdvertisementBadge": {
+    "description": "Full uppercase label for advertisement container"
+  },
+  "actionConfirm": "[Çôñƒîřɱ ẋẋẋ]",
+  "@actionConfirm": {
+    "description": "Default confirmation button label in dialogs"
+  },
+  "actionCancel": "[Çàñçéł ẋẋẋ]",
+  "@actionCancel": {
+    "description": "Default cancellation button label in dialogs"
+  },
+  "tabRecent": "[Řéçéñţ ẋẋẋ]",
+  "@tabRecent": {
+    "description": "Recent documents tab label"
+  },
+  "tabBookmarks": "[Ɓôôƙɱàřƙš ẋẋẋẋ]",
+  "@tabBookmarks": {
+    "description": "Bookmarked documents tab label"
+  },
+  "filterCategoryAll": "[Åłł ẋẋ]",
+  "@filterCategoryAll": {
+    "description": "Filter chip label to show all document categories"
+  },
+  "actionBrowse": "[Ɓřôŵšé ẋẋẋ]",
+  "@actionBrowse": {
+    "description": "Browse subtitle action in folder category tile"
+  },
+  "actionCancelOperation": "[Çàñçéł Öþéřàţîôñ ẋẋẋẋẋẋẋ]",
+  "@actionCancelOperation": {
+    "description": "Button to cancel an active processing operation"
+  },
+  "operationComplete": "[Öþéřàţîôñ Çôɱþłéţé ẋẋẋẋẋẋẋẋ]",
+  "@operationComplete": {
+    "description": "Headline for operation complete bottom sheet"
+  },
+  "actionOpenDocument": "[Öþéñ Ðôçûɱéñţ ẋẋẋẋẋẋ]",
+  "@actionOpenDocument": {
+    "description": "Button to open a newly generated document"
+  },
+  "actionShareDocument": "[Šĥàřé Ðôçûɱéñţ ẋẋẋẋẋẋ]",
+  "@actionShareDocument": {
+    "description": "Button to share a generated document"
   }
 }

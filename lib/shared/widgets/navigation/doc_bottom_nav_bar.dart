@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -38,7 +39,7 @@ class DocBottomNavBar extends StatelessWidget {
               _NavItem(
                 index: 0,
                 selectedIndex: currentIndex,
-                label: 'All files',
+                label: context.l10n.navHome,
                 activeIcon: AppIcons.allFilesActive,
                 inactiveIcon: AppIcons.allFilesInactive,
                 activeColor: activeColor,
@@ -48,7 +49,7 @@ class DocBottomNavBar extends StatelessWidget {
               _NavItem(
                 index: 1,
                 selectedIndex: currentIndex,
-                label: 'Tools',
+                label: context.l10n.navTools,
                 activeIcon: AppIcons.toolsActive,
                 inactiveIcon: AppIcons.toolsInactive,
                 activeColor: activeColor,
@@ -58,7 +59,7 @@ class DocBottomNavBar extends StatelessWidget {
               _NavItem(
                 index: 2,
                 selectedIndex: currentIndex,
-                label: 'Settings',
+                label: context.l10n.navSettings,
                 activeIcon: AppIcons.settingsActive,
                 inactiveIcon: AppIcons.settingsInactive,
                 activeColor: activeColor,

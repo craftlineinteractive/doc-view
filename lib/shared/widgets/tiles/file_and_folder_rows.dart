@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/file_types.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
@@ -194,13 +195,13 @@ class FileRow extends StatelessWidget {
                 if (!isSelectionMode) ...[
                   DocIconButton(
                     icon: isBookmarked ? AppIcons.bookmark : AppIcons.bookmarkOutline,
-                    tooltip: isBookmarked ? 'Remove bookmark' : 'Add bookmark',
+                    tooltip: isBookmarked ? context.l10n.tooltipRemoveBookmark : context.l10n.tooltipAddBookmark,
                     color: isBookmarked ? DocViewColors.warning : tokens.textSecondary,
                     onPressed: onToggleBookmark,
                   ),
                   DocIconButton(
                     icon: AppIcons.moreVert,
-                    tooltip: 'File options for $title',
+                    tooltip: context.l10n.tooltipFileOptions(title),
                     color: tokens.textSecondary,
                     onPressed: onOptions,
                   ),
@@ -233,7 +234,7 @@ class FolderRow extends StatelessWidget {
 
     return Semantics(
       button: true,
-      label: 'Folder, $folderName${subtitle != null ? ", $subtitle" : ""}',
+      label: context.l10n.folderSemantics(folderName, subtitle != null ? ', $subtitle' : ''),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -340,9 +341,9 @@ class ImageGridTile extends StatelessWidget {
               ),
             ),
           if (isSelectionMode)
-            Positioned(
+            PositionedDirectional(
               top: 6,
-              right: 6,
+              end: 6,
               child: Container(
                 width: 22,
                 height: 22,

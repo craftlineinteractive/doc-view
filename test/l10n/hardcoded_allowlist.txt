@@ -18,3 +18,4 @@ lib/features/files/widgets/file_details_sheet.dart | ALL | Deferred to phase G1b
 lib/features/files/open_document.dart | ALL | Deferred to phase G1b per scope guard
 lib/features/files/controllers/selection_controller.dart | ALL | Deferred to phase G1b per scope guard
 lib/features/files/widgets/file_tile.dart | ALL | Deferred to phase G1b per scope guard
+lib/shared/widgets/tools/doc_tool_widgets.dart | ALL | Deferred to phase G1b per scope guard (tools)

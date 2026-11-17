@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 
@@ -33,7 +34,7 @@ class DocBottomSheet extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 12, 20, 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,6 +66,7 @@ class DocBottomSheet extends StatelessWidget {
                   ),
                   if (showCloseButton)
                     IconButton(
+                      tooltip: context.l10n.tooltipClose,
                       icon: const Icon(Icons.close_rounded, size: 20),
                       color: tokens.textSecondary,
                       onPressed: onClose ?? () => Navigator.of(context).pop(),

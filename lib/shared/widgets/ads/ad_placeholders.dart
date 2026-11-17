@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../../core/constants/ad_config.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
@@ -489,7 +490,7 @@ class _InterstitialPlaceholderState extends State<InterstitialPlaceholder> {
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
-                      'ADVERTISEMENT',
+                      context.l10n.adAdvertisementBadge,
                       style: DocViewTypography.captionXs.copyWith(
                         color: tokens.textSecondary,
                       ),
@@ -497,7 +498,7 @@ class _InterstitialPlaceholderState extends State<InterstitialPlaceholder> {
                   ),
                   if (canClose)
                     IconButton(
-                      tooltip: 'Close ad',
+                      tooltip: context.l10n.tooltipCloseAd,
                       icon: const Icon(AppIcons.close),
                       onPressed: widget.onDismiss,
                       color: tokens.textPrimary,

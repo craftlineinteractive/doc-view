@@ -77,9 +77,10 @@ class FileTypeBadge extends StatelessWidget {
     final formatTag = _formatTag();
     final formatColor = _formatColor();
 
+    Widget content;
     if (size != BadgeSize.large) {
       // Small/medium compact pill badge
-      return Container(
+      content = Container(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
         decoration: BoxDecoration(
           color: formatColor,
@@ -96,16 +97,21 @@ class FileTypeBadge extends StatelessWidget {
           ),
         ),
       );
+    } else {
+      // Large format renders the document icon with folded top-right corner
+      content = DocFoldedIcon(
+        category: category,
+        label: formatTag,
+        width: size.width,
+        height: size.height,
+        borderRadius: size.radius,
+        fontSize: size.fontSize,
+      );
     }
 
-    // Large format renders the document icon with folded top-right corner
-    return DocFoldedIcon(
-      category: category,
-      label: formatTag,
-      width: size.width,
-      height: size.height,
-      borderRadius: size.radius,
-      fontSize: size.fontSize,
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: content,
     );
   }
 }

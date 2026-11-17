@@ -15,5 +15,181 @@
   "navSettings": "Settings",
   "@navSettings": {
     "description": "Bottom navigation bar label for the settings tab"
+  },
+  "noDocumentSelected": "No document selected",
+  "@noDocumentSelected": {
+    "description": "Error message when opening viewer without a selected document"
+  },
+  "tooltipCloseAd": "Close ad",
+  "@tooltipCloseAd": {
+    "description": "Tooltip for closing an ad dialog or banner"
+  },
+  "tooltipClose": "Close",
+  "@tooltipClose": {
+    "description": "Tooltip for standard close button"
+  },
+  "tooltipRescan": "Rescan documents",
+  "@tooltipRescan": {
+    "description": "Tooltip for refreshing/rescanning documents"
+  },
+  "tooltipSearch": "Search documents",
+  "@tooltipSearch": {
+    "description": "Tooltip for opening document search"
+  },
+  "tooltipSelectFiles": "Select files",
+  "@tooltipSelectFiles": {
+    "description": "Tooltip for entering multi-selection mode"
+  },
+  "tooltipBack": "Back",
+  "@tooltipBack": {
+    "description": "Tooltip for navigating back"
+  },
+  "tooltipCancelSelection": "Cancel selection",
+  "@tooltipCancelSelection": {
+    "description": "Tooltip for cancelling multi-selection mode"
+  },
+  "selectionCount": "{count, plural, =1{1 selected} other{{count} selected}}",
+  "@selectionCount": {
+    "description": "Number of files currently selected",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "actionSelectAll": "Select all",
+  "@actionSelectAll": {
+    "description": "Action to select all items"
+  },
+  "actionDeselectAll": "Deselect all",
+  "@actionDeselectAll": {
+    "description": "Action to deselect all items"
+  },
+  "tooltipDeleteSelected": "Delete selected",
+  "@tooltipDeleteSelected": {
+    "description": "Tooltip for deleting selected items"
+  },
+  "tooltipClearSearch": "Clear search",
+  "@tooltipClearSearch": {
+    "description": "Tooltip for clearing the search field text"
+  },
+  "searchHint": "Search documents, folders...",
+  "@searchHint": {
+    "description": "Placeholder hint text in document search bars"
+  },
+  "pageIndicatorSemantics": "Page {page} of {total}",
+  "@pageIndicatorSemantics": {
+    "description": "Accessibility announcement for the floating page indicator",
+    "placeholders": {
+      "page": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "errorGenericTitle": "Something went wrong",
+  "@errorGenericTitle": {
+    "description": "Headline for generic error state"
+  },
+  "actionRetry": "Retry",
+  "@actionRetry": {
+    "description": "Action button to retry a failed operation"
+  },
+  "permissionAllFilesTitle": "All Files Access Required",
+  "@permissionAllFilesTitle": {
+    "description": "Headline when all files access permission is needed"
+  },
+  "permissionAllFilesExplanation": "Doc View needs All files access to browse folders and organize your documents completely offline.",
+  "@permissionAllFilesExplanation": {
+    "description": "Rationale text explaining why all files access is requested"
+  },
+  "actionGrantAccess": "Grant Access",
+  "@actionGrantAccess": {
+    "description": "Button to open system settings for granting storage permission"
+  },
+  "actionImportFilesInstead": "Import Files Instead",
+  "@actionImportFilesInstead": {
+    "description": "Button to import files via system picker without full storage permission"
+  },
+  "tooltipRemoveBookmark": "Remove bookmark",
+  "@tooltipRemoveBookmark": {
+    "description": "Tooltip to unbookmark a document"
+  },
+  "tooltipAddBookmark": "Add bookmark",
+  "@tooltipAddBookmark": {
+    "description": "Tooltip to bookmark a document"
+  },
+  "tooltipFileOptions": "File options for {title}",
+  "@tooltipFileOptions": {
+    "description": "Accessibility tooltip for document options button",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Contract.pdf"
+      }
+    }
+  },
+  "folderSemantics": "Folder, {name}{subtitle}",
+  "@folderSemantics": {
+    "description": "Accessibility label for a folder item in directory browser",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Documents"
+      },
+      "subtitle": {
+        "type": "String",
+        "example": ", 5 files"
+      }
+    }
+  },
+  "adAdvertisementBadge": "ADVERTISEMENT",
+  "@adAdvertisementBadge": {
+    "description": "Full uppercase label for advertisement container"
+  },
+  "actionConfirm": "Confirm",
+  "@actionConfirm": {
+    "description": "Default confirmation button label in dialogs"
+  },
+  "actionCancel": "Cancel",
+  "@actionCancel": {
+    "description": "Default cancellation button label in dialogs"
+  },
+  "tabRecent": "Recent",
+  "@tabRecent": {
+    "description": "Recent documents tab label"
+  },
+  "tabBookmarks": "Bookmarks",
+  "@tabBookmarks": {
+    "description": "Bookmarked documents tab label"
+  },
+  "filterCategoryAll": "All",
+  "@filterCategoryAll": {
+    "description": "Filter chip label to show all document categories"
+  },
+  "actionBrowse": "Browse",
+  "@actionBrowse": {
+    "description": "Browse subtitle action in folder category tile"
+  },
+  "actionCancelOperation": "Cancel Operation",
+  "@actionCancelOperation": {
+    "description": "Button to cancel an active processing operation"
+  },
+  "operationComplete": "Operation Complete",
+  "@operationComplete": {
+    "description": "Headline for operation complete bottom sheet"
+  },
+  "actionOpenDocument": "Open Document",
+  "@actionOpenDocument": {
+    "description": "Button to open a newly generated document"
+  },
+  "actionShareDocument": "Share Document",
+  "@actionShareDocument": {
+    "description": "Button to share a generated document"
   }
 }
