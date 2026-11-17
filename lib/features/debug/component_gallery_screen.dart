@@ -34,6 +34,8 @@ class ComponentGalleryScreen extends StatefulWidget {
 class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
   bool _isDark = false;
   double _textScale = 1.0;
+  bool _usePseudoLocale = false;
+  bool _isRtl = false;
   int _selectedNavTab = 0;
   int _selectedUnderlineTab = 0;
   FileCategory? _selectedCategory;
@@ -65,33 +67,93 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
         data: MediaQuery.of(context).copyWith(
           textScaler: TextScaler.linear(_textScale),
         ),
-        child: Builder(
-          builder: (themedContext) {
-            final tokens = themedContext.tokens;
+        child: Directionality(
+          textDirection: _isRtl ? TextDirection.rtl : TextDirection.ltr,
+          child: Localizations.override(
+            context: context,
+            locale: _usePseudoLocale ? const Locale('en', 'XA') : const Locale('en'),
+            child: Builder(
+              builder: (themedContext) {
+                final tokens = themedContext.tokens;
 
-            return DocScaffold(
-              applyHeaderGradient: true,
-              appBar: DocSubAppBar(
-                title: 'Component Gallery',
-                actions: [
-                  DocIconButton(
-                    icon: _isDark ? Icons.light_mode : Icons.dark_mode,
-                    tooltip: _isDark ? 'Switch to Light' : 'Switch to Dark',
-                    onPressed: () => setState(() => _isDark = !_isDark),
+                return DocScaffold(
+                  applyHeaderGradient: true,
+                  appBar: DocSubAppBar(
+                    title: 'Component Gallery',
+                    actions: [
+                      DocIconButton(
+                        icon: Icons.language,
+                        tooltip: _usePseudoLocale
+                            ? 'Switch to English'
+                            : 'Switch to Pseudo-locale (en_XA)',
+                        color: _usePseudoLocale
+                            ? tokens.primaryBlue
+                            : tokens.textSecondary,
+                        onPressed: () =>
+                            setState(() => _usePseudoLocale = !_usePseudoLocale),
+                      ),
+                      DocIconButton(
+                        icon: Icons.format_textdirection_r_to_l,
+                        tooltip: _isRtl ? 'Switch to LTR' : 'Switch to RTL',
+                        color: _isRtl ? tokens.primaryBlue : tokens.textSecondary,
+                        onPressed: () => setState(() => _isRtl = !_isRtl),
+                      ),
+                      DocIconButton(
+                        icon: _isDark ? Icons.light_mode : Icons.dark_mode,
+                        tooltip: _isDark ? 'Switch to Light' : 'Switch to Dark',
+                        onPressed: () => setState(() => _isDark = !_isDark),
+                      ),
+                      DocIconButton(
+                        icon: Icons.text_fields,
+                        tooltip: 'Text scale: ${_textScale}x (tap to toggle)',
+                        onPressed: () => setState(
+                          () => _textScale = _textScale == 1.0 ? 2.0 : 1.0,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                    ],
                   ),
-                  DocIconButton(
-                    icon: Icons.text_fields,
-                    tooltip: 'Text scale: ${_textScale}x (tap to toggle)',
-                    onPressed: () => setState(() => _textScale = _textScale == 1.0 ? 2.0 : 1.0),
-                  ),
-                  const SizedBox(width: 8),
-                ],
-              ),
-              body: ListView(
-                padding: const EdgeInsets.only(bottom: 40),
-                children: [
-                  // --- Section 1: Typography & Tokens ---
-                  const SectionHeader(title: '1. Typography & Tokens'),
+                  body: ListView(
+                    padding: const EdgeInsets.only(bottom: 40),
+                    children: [
+                      // --- Section 0: Environment Controls ---
+                      const SectionHeader(title: '0. Environment Controls'),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Card(
+                          color: tokens.surface,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            side: BorderSide(color: tokens.hairline),
+                          ),
+                          child: Column(
+                            children: [
+                              SwitchListTile(
+                                title: const Text('Pseudo-locale (en_XA)'),
+                                subtitle: Text(_usePseudoLocale
+                                    ? 'Active: [!!! Hêéllôö wôörld !!!] (+40% expansion)'
+                                    : 'Standard English (en)'),
+                                value: _usePseudoLocale,
+                                onChanged: (val) =>
+                                    setState(() => _usePseudoLocale = val),
+                              ),
+                              Divider(color: tokens.hairline, height: 1),
+                              SwitchListTile(
+                                title: const Text('Force RTL'),
+                                subtitle: Text(_isRtl
+                                    ? 'Right-to-Left layout active'
+                                    : 'Left-to-Right layout active'),
+                                value: _isRtl,
+                                onChanged: (val) => setState(() => _isRtl = val),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      // --- Section 1: Typography & Tokens ---
+                      const SectionHeader(title: '1. Typography & Tokens'),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
@@ -480,7 +542,9 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
           },
         ),
       ),
-    );
+    ),
+  ),
+);
   }
 }
 

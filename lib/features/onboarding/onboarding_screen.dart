@@ -81,27 +81,32 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         color: tokens.textPrimary,
                         tooltip: context.l10n.tooltipBack,
                         onPressed: _previousPage,
-                      )
-                    else
-                      const SizedBox(width: 48),
+                      ),
 
                     if (_currentPage == 2)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: tokens.surface,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: tokens.hairline),
-                        ),
-                        child: Text(
-                          context.l10n.onboardingStep(3, 3),
-                          style: DocViewTypography.labelXs.copyWith(
-                            color: tokens.textSecondary,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 1.0,
+                      Expanded(
+                        child: Center(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: tokens.surface,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(color: tokens.hairline),
+                              ),
+                              child: Text(
+                                context.l10n.onboardingStep(3, 3),
+                                style: DocViewTypography.labelXs.copyWith(
+                                  color: tokens.textSecondary,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 1.0,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       )
@@ -109,13 +114,17 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       const Spacer(),
 
                     if (_currentPage < 2)
-                      TextButton(
-                        onPressed: _completeOnboarding,
-                        child: Text(
-                          context.l10n.actionSkip,
-                          style: DocViewTypography.labelLg.copyWith(
-                            color: tokens.textSecondary,
-                            fontWeight: FontWeight.w600,
+                      Flexible(
+                        child: TextButton(
+                          onPressed: _completeOnboarding,
+                          child: Text(
+                            context.l10n.actionSkip,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: DocViewTypography.labelLg.copyWith(
+                              color: tokens.textSecondary,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       )
@@ -209,19 +218,29 @@ class _OnboardingPageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          // Illustration Area
-          Expanded(
-            child: Center(
-              child: SizedBox(
-                width: 320,
-                height: 320,
-                child: Stack(
-                  alignment: Alignment.center,
-                  clipBehavior: Clip.none,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: IntrinsicHeight(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    // Illustration Area
+                    Expanded(
+                      child: Center(
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: MediaQuery.withNoTextScaling(
+                            child: SizedBox(
+                              width: 320,
+                              height: 320,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                clipBehavior: Clip.none,
                   children: [
                     // Ambient decorative gradient blob
                     Container(
@@ -536,6 +555,8 @@ class _OnboardingPageOne extends StatelessWidget {
               ),
             ),
           ),
+        ),
+      ),
 
           // Typography
           Text(
@@ -559,7 +580,12 @@ class _OnboardingPageOne extends StatelessWidget {
           const SizedBox(height: 12),
         ],
       ),
-    );
+    ),
+  ),
+),
+);
+},
+);
   }
 }
 
@@ -574,18 +600,28 @@ class _OnboardingPageTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          Expanded(
-            child: Center(
-              child: SizedBox(
-                width: 300,
-                height: 320,
-                child: Stack(
-                  alignment: Alignment.center,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: IntrinsicHeight(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
                   children: [
+                    Expanded(
+                      child: Center(
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: MediaQuery.withNoTextScaling(
+                            child: SizedBox(
+                              width: 300,
+                              height: 320,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
                     // Ambient circular glow
                     Container(
                       width: 240,
@@ -838,6 +874,8 @@ class _OnboardingPageTwo extends StatelessWidget {
               ),
             ),
           ),
+        ),
+      ),
 
           // Typography
           Text(
@@ -861,7 +899,12 @@ class _OnboardingPageTwo extends StatelessWidget {
           const SizedBox(height: 12),
         ],
       ),
-    );
+    ),
+  ),
+),
+);
+},
+);
   }
 }
 
