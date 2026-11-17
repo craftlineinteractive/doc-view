@@ -1,0 +1,20 @@
+# Doc View Hardcoded Strings Allowlist
+# Format: <relative_path> | <literal_or_pattern> | <reason>
+
+lib/core/constants/app_constants.dart | Doc View | Untranslatable brand name
+lib/core/constants/app_constants.dart | PDF | Untranslatable file extension
+lib/core/constants/app_constants.dart | DOCX | Untranslatable file extension
+lib/core/constants/app_constants.dart | XLSX | Untranslatable file extension
+lib/core/constants/app_constants.dart | PPTX | Untranslatable file extension
+lib/core/constants/app_constants.dart | TXT | Untranslatable file extension
+lib/core/constants/app_constants.dart | DOC | Untranslatable file extension
+lib/core/constants/app_constants.dart | XLS | Untranslatable file extension
+lib/core/constants/app_constants.dart | PPT | Untranslatable file extension
+lib/shared/widgets/ads/ad_placeholders.dart | Ad | Standard ad disclosure badge per ad compliance rules
+lib/shared/widgets/tiles/file_type_badge.dart | PDF | Untranslatable file badge text
+lib/shared/widgets/tiles/doc_folded_icon.dart | PDF | Untranslatable file badge text
+lib/features/files/widgets/file_options_sheet.dart | ALL | Deferred to phase G1b per scope guard
+lib/features/files/widgets/file_details_sheet.dart | ALL | Deferred to phase G1b per scope guard
+lib/features/files/open_document.dart | ALL | Deferred to phase G1b per scope guard
+lib/features/files/controllers/selection_controller.dart | ALL | Deferred to phase G1b per scope guard
+lib/features/files/widgets/file_tile.dart | ALL | Deferred to phase G1b per scope guard
