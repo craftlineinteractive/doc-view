@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "appTitle": "Doc View",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "navHome": "All files",
+  "@navHome": {
+    "description": "Bottom navigation bar label for the all files / home tab"
+  },
+  "navTools": "Tools",
+  "@navTools": {
+    "description": "Bottom navigation bar label for the tools tab"
+  },
+  "navSettings": "Settings",
+  "@navSettings": {
+    "description": "Bottom navigation bar label for the settings tab"
+  }
+}

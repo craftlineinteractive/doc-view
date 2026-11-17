@@ -1,0 +1,19 @@
+{
+  "@@locale": "en_XA",
+  "appTitle": "[Ðôç Ṽîéŵ ẋẋẋẋ]",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "navHome": "[Åłł ƒîłéš ẋẋẋẋ]",
+  "@navHome": {
+    "description": "Bottom navigation bar label for the all files / home tab"
+  },
+  "navTools": "[Ťôôłš ẋẋ]",
+  "@navTools": {
+    "description": "Bottom navigation bar label for the tools tab"
+  },
+  "navSettings": "[Šéţţîñĝš ẋẋẋẋ]",
+  "@navSettings": {
+    "description": "Bottom navigation bar label for the settings tab"
+  }
+}
