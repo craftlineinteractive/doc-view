@@ -336,6 +336,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Share Document'**
   String get actionShareDocument;
+
+  /// Splash screen tagline
+  ///
+  /// In en, this message translates to:
+  /// **'All your documents, one place.'**
+  String get splashTagline;
+
+  /// Application version label on splash screen
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String appVersion(String version);
+
+  /// Onboarding step pill indicator
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String onboardingStep(int current, int total);
+
+  /// Skip onboarding action button
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get actionSkip;
+
+  /// Back button text
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get actionBack;
+
+  /// Next step button label
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get actionNext;
+
+  /// Get started button label on final onboarding step
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get actionGetStarted;
+
+  /// Headline for onboarding page 1
+  ///
+  /// In en, this message translates to:
+  /// **'All your documents,\none place'**
+  String get onboardingPage1Title;
+
+  /// Body description for onboarding page 1
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View automatically finds PDFs, Word, Excel, PowerPoint, text files and images on your phone and organizes them for you.'**
+  String get onboardingPage1Desc;
+
+  /// Headline for onboarding page 2
+  ///
+  /// In en, this message translates to:
+  /// **'Read anything,\nbeautifully'**
+  String get onboardingPage2Title;
+
+  /// Body description for onboarding page 2
+  ///
+  /// In en, this message translates to:
+  /// **'Open PDFs, Word, Excel and PowerPoint files with a fast, clean reader. Search, bookmark and pick up where you left off.'**
+  String get onboardingPage2Desc;
+
+  /// Headline for onboarding page 3
+  ///
+  /// In en, this message translates to:
+  /// **'Powerful PDF tools, offline'**
+  String get onboardingPage3Title;
+
+  /// Body description for onboarding page 3
+  ///
+  /// In en, this message translates to:
+  /// **'Turn photos into PDFs, scan documents, merge and split files. Everything stays on your device.'**
+  String get onboardingPage3Desc;
+
+  /// Offline and privacy badge text on onboarding page 3
+  ///
+  /// In en, this message translates to:
+  /// **'100% Offline • Private & Secure'**
+  String get onboardingOfflineGuarantee;
+
+  /// Tool title for converting images to PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Image to PDF'**
+  String get toolImageToPdf;
+
+  /// Tool subtitle for Image to PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Convert JPG & PNG'**
+  String get toolImageToPdfSub;
+
+  /// Tool title for scanning documents with camera
+  ///
+  /// In en, this message translates to:
+  /// **'Scan to PDF'**
+  String get toolScanToPdf;
+
+  /// Tool subtitle for Scan to PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Camera edge detect'**
+  String get toolScanToPdfSub;
+
+  /// Tool title for merging multiple PDFs
+  ///
+  /// In en, this message translates to:
+  /// **'Merge PDF'**
+  String get toolMergePdf;
+
+  /// Tool subtitle for Merge PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Combine into one'**
+  String get toolMergePdfSub;
+
+  /// Tool title for splitting PDF pages
+  ///
+  /// In en, this message translates to:
+  /// **'Split PDF'**
+  String get toolSplitPdf;
+
+  /// Tool subtitle for Split PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Extract any range'**
+  String get toolSplitPdfSub;
+
+  /// Header tag for storage permission screen
+  ///
+  /// In en, this message translates to:
+  /// **'Device Storage Access'**
+  String get permissionTagStorage;
+
+  /// Main headline on storage permission screen
+  ///
+  /// In en, this message translates to:
+  /// **'Let Doc View find your documents'**
+  String get permissionStorageHeadline;
+
+  /// Explanation text on Android storage permission screen
+  ///
+  /// In en, this message translates to:
+  /// **'To list PDFs, Word, Excel and other files saved by any app, Android needs your permission to access all files. Your files never leave your phone.'**
+  String get permissionStorageBody;
+
+  /// Title for offline reassurance point
+  ///
+  /// In en, this message translates to:
+  /// **'Works offline'**
+  String get permissionReassuranceOfflineTitle;
+
+  /// Description for offline reassurance point
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection required. Operates 100% locally.'**
+  String get permissionReassuranceOfflineDesc;
+
+  /// Title for no-uploads privacy reassurance point
+  ///
+  /// In en, this message translates to:
+  /// **'No uploads'**
+  String get permissionReassuranceNoUploadsTitle;
+
+  /// Description for no-uploads privacy reassurance point
+  ///
+  /// In en, this message translates to:
+  /// **'Zero cloud servers. Your files stay strictly in phone memory.'**
+  String get permissionReassuranceNoUploadsDesc;
+
+  /// Title for permission toggle reassurance point
+  ///
+  /// In en, this message translates to:
+  /// **'You can change this any time'**
+  String get permissionReassuranceChangeTitle;
+
+  /// Description for permission toggle reassurance point
+  ///
+  /// In en, this message translates to:
+  /// **'Easily toggle in your Android System App Settings.'**
+  String get permissionReassuranceChangeDesc;
+
+  /// Header tag for iOS storage guide screen
+  ///
+  /// In en, this message translates to:
+  /// **'iOS Storage Guide'**
+  String get permissionTagIOS;
+
+  /// Main headline on iOS storage guide screen
+  ///
+  /// In en, this message translates to:
+  /// **'Bring your documents to Doc View'**
+  String get permissionIOSHeadline;
+
+  /// Explanation body on iOS storage guide screen
+  ///
+  /// In en, this message translates to:
+  /// **'Due to Apple\'s privacy architecture, iOS doesn\'t allow any app to scan your entire phone automatically. Choose how you\'d like to read your files:'**
+  String get permissionIOSBody;
+
+  /// Title for iOS import files option
+  ///
+  /// In en, this message translates to:
+  /// **'Import files'**
+  String get permissionIOSOptionImportTitle;
+
+  /// Fastest badge label for iOS import option
+  ///
+  /// In en, this message translates to:
+  /// **'FASTEST'**
+  String get permissionIOSBadgeFastest;
+
+  /// Description for iOS import files option
+  ///
+  /// In en, this message translates to:
+  /// **'Pick documents directly from your iCloud Drive, Downloads, or any folder in seconds.'**
+  String get permissionIOSOptionImportDesc;
+
+  /// Title for iOS Files app folder option
+  ///
+  /// In en, this message translates to:
+  /// **'Open Doc View folder in Files app'**
+  String get permissionIOSOptionFolderTitle;
+
+  /// Description for iOS Files app folder option
+  ///
+  /// In en, this message translates to:
+  /// **'Save or AirDrop documents directly into the \"Doc View\" folder in the iOS Files app for instant sync.'**
+  String get permissionIOSOptionFolderDesc;
+
+  /// Primary action button to launch file import picker
+  ///
+  /// In en, this message translates to:
+  /// **'Import files'**
+  String get actionImportFiles;
+
+  /// Action to skip iOS import and continue to app
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to app'**
+  String get actionContinueToApp;
+
+  /// Header tag on transparency and consent screen
+  ///
+  /// In en, this message translates to:
+  /// **'Transparency & Consent'**
+  String get permissionTagConsent;
+
+  /// Free app badge label
+  ///
+  /// In en, this message translates to:
+  /// **'100% Free App'**
+  String get permissionBadgeFree;
+
+  /// Minimal ads badge label
+  ///
+  /// In en, this message translates to:
+  /// **'Minimal Ads'**
+  String get permissionBadgeMinimalAds;
+
+  /// Main headline on ad consent transparency screen
+  ///
+  /// In en, this message translates to:
+  /// **'Free with ads'**
+  String get permissionConsentHeadline;
+
+  /// Body explanation on ad consent transparency screen
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View is free thanks to ads. We\'ll ask for your choice about personalised ads next.'**
+  String get permissionConsentBody;
+
+  /// Title explaining types of ads shown
+  ///
+  /// In en, this message translates to:
+  /// **'What ads you may see'**
+  String get permissionConsentAdsTitle;
+
+  /// Description explaining types of ads shown
+  ///
+  /// In en, this message translates to:
+  /// **'Small banner ads and non-intrusive sponsor cards. No popups or video interruptions while reading.'**
+  String get permissionConsentAdsDesc;
+
+  /// Title explaining document privacy guarantee with ads
+  ///
+  /// In en, this message translates to:
+  /// **'Documents stay completely private'**
+  String get permissionConsentPrivateTitle;
+
+  /// Description explaining document privacy guarantee with ads
+  ///
+  /// In en, this message translates to:
+  /// **'Ad partners never have access to your document names, text contents, or file locations.'**
+  String get permissionConsentPrivateDesc;
+
+  /// Title explaining ad preferences settings control
+  ///
+  /// In en, this message translates to:
+  /// **'You can change your choice in Settings'**
+  String get permissionConsentSettingsTitle;
+
+  /// Description explaining ad preferences settings control
+  ///
+  /// In en, this message translates to:
+  /// **'Update personalized ad consent or privacy preferences anytime in Doc View Settings.'**
+  String get permissionConsentSettingsDesc;
+
+  /// Primary continue button
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get actionContinue;
+
+  /// Button to open privacy policy webpage
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get actionPrivacyPolicy;
 }
 
 class _AppLocalizationsDelegate

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
@@ -143,7 +144,7 @@ class _FrameAView extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Device Storage Access',
+                  context.l10n.permissionTagStorage,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -321,7 +322,7 @@ class _FrameAView extends StatelessWidget {
 
           // Headline & Body
           Text(
-            'Let Doc View find your documents',
+            context.l10n.permissionStorageHeadline,
             textAlign: TextAlign.center,
             style: DocViewTypography.headlineLg.copyWith(
               color: tokens.textPrimary,
@@ -330,7 +331,7 @@ class _FrameAView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'To list PDFs, Word, Excel and other files saved by any app, Android needs your permission to access all files. Your files never leave your phone.',
+            context.l10n.permissionStorageBody,
             textAlign: TextAlign.center,
             style: DocViewTypography.bodyMd.copyWith(
               color: tokens.textSecondary,
@@ -345,31 +346,31 @@ class _FrameAView extends StatelessWidget {
             tokens: tokens,
             icon: Icons.wifi_off_outlined,
             iconColor: tokens.primaryBlue,
-            title: 'Works offline',
-            subtitle: 'No internet connection required. Operates 100% locally.',
+            title: context.l10n.permissionReassuranceOfflineTitle,
+            subtitle: context.l10n.permissionReassuranceOfflineDesc,
           ),
           const SizedBox(height: 10),
           _reassuranceRow(
             tokens: tokens,
             icon: Icons.shield_outlined,
             iconColor: const Color(0xFF1FA971),
-            title: 'No uploads',
-            subtitle: 'Zero cloud servers. Your files stay strictly in phone memory.',
+            title: context.l10n.permissionReassuranceNoUploadsTitle,
+            subtitle: context.l10n.permissionReassuranceNoUploadsDesc,
           ),
           const SizedBox(height: 10),
           _reassuranceRow(
             tokens: tokens,
             icon: Icons.settings_outlined,
             iconColor: tokens.primaryBlue,
-            title: 'You can change this any time',
-            subtitle: 'Easily toggle in your Android System App Settings.',
+            title: context.l10n.permissionReassuranceChangeTitle,
+            subtitle: context.l10n.permissionReassuranceChangeDesc,
           ),
 
           const SizedBox(height: 28),
 
           // Action Buttons
           DocPrimaryButton(
-            label: 'Grant access',
+            label: context.l10n.actionGrantAccess,
             icon: const Icon(Icons.arrow_forward),
             onPressed: onGrantAccess,
           ),
@@ -377,7 +378,7 @@ class _FrameAView extends StatelessWidget {
           TextButton(
             onPressed: onSkip,
             child: Text(
-              'Import files instead',
+              context.l10n.actionImportFilesInstead,
               style: DocViewTypography.labelLg.copyWith(
                 color: tokens.textSecondary,
                 fontWeight: FontWeight.w600,
@@ -519,7 +520,7 @@ class _FrameBView extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'iOS Storage Guide',
+                  context.l10n.permissionTagIOS,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -587,7 +588,7 @@ class _FrameBView extends StatelessWidget {
 
           // Headline & Body
           Text(
-            'Bring your documents to Doc View',
+            context.l10n.permissionIOSHeadline,
             textAlign: TextAlign.center,
             style: DocViewTypography.headlineLg.copyWith(
               color: tokens.textPrimary,
@@ -596,7 +597,7 @@ class _FrameBView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "Due to Apple's privacy architecture, iOS doesn't allow any app to scan your entire phone automatically. Choose how you'd like to read your files:",
+            context.l10n.permissionIOSBody,
             textAlign: TextAlign.center,
             style: DocViewTypography.bodyMd.copyWith(
               color: tokens.textSecondary,
@@ -636,7 +637,7 @@ class _FrameBView extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'Import files',
+                            context.l10n.permissionIOSOptionImportTitle,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -653,9 +654,9 @@ class _FrameBView extends StatelessWidget {
                               color: DocViewColors.primaryBlue,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Text(
-                              'FASTEST',
-                              style: TextStyle(
+                            child: Text(
+                              context.l10n.permissionIOSBadgeFastest,
+                              style: const TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -666,7 +667,7 @@ class _FrameBView extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Pick documents directly from your iCloud Drive, Downloads, or any folder in seconds.',
+                        context.l10n.permissionIOSOptionImportDesc,
                         style: TextStyle(
                           fontSize: 12,
                           color: tokens.textSecondary,
@@ -716,7 +717,7 @@ class _FrameBView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Open Doc View folder in Files app',
+                        context.l10n.permissionIOSOptionFolderTitle,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -725,7 +726,7 @@ class _FrameBView extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Save or AirDrop documents directly into the "Doc View" folder in the iOS Files app for instant sync.',
+                        context.l10n.permissionIOSOptionFolderDesc,
                         style: TextStyle(
                           fontSize: 12,
                           color: tokens.textSecondary,
@@ -741,7 +742,7 @@ class _FrameBView extends StatelessWidget {
           const SizedBox(height: 28),
 
           DocPrimaryButton(
-            label: 'Import files',
+            label: context.l10n.actionImportFiles,
             icon: const Icon(Icons.file_upload_outlined),
             onPressed: onImportFiles,
           ),
@@ -749,7 +750,7 @@ class _FrameBView extends StatelessWidget {
           TextButton(
             onPressed: onSkip,
             child: Text(
-              'Continue to app',
+              context.l10n.actionContinueToApp,
               style: DocViewTypography.labelLg.copyWith(
                 color: tokens.textSecondary,
                 fontWeight: FontWeight.w600,
@@ -801,7 +802,7 @@ class _FrameCView extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Transparency & Consent',
+                  context.l10n.permissionTagConsent,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -869,9 +870,9 @@ class _FrameCView extends StatelessWidget {
                     ),
 
                     // Badge: 100% Free App
-                    Positioned(
+                    PositionedDirectional(
                       top: -6,
-                      right: -10,
+                      end: -10,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8,
@@ -889,17 +890,17 @@ class _FrameCView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            CircleAvatar(
+                            const CircleAvatar(
                               radius: 3,
                               backgroundColor: Color(0xFF1FA971),
                             ),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Text(
-                              '100% Free App',
-                              style: TextStyle(
+                              context.l10n.permissionBadgeFree,
+                              style: const TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -910,9 +911,9 @@ class _FrameCView extends StatelessWidget {
                     ),
 
                     // Badge: Minimal Ads
-                    Positioned(
+                    PositionedDirectional(
                       bottom: -6,
-                      left: -10,
+                      start: -10,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8,
@@ -952,9 +953,9 @@ class _FrameCView extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 4),
-                            const Text(
-                              'Minimal Ads',
-                              style: TextStyle(
+                            Text(
+                              context.l10n.permissionBadgeMinimalAds,
+                              style: const TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -973,7 +974,7 @@ class _FrameCView extends StatelessWidget {
 
           // Headline & Body
           Text(
-            'Free with ads',
+            context.l10n.permissionConsentHeadline,
             textAlign: TextAlign.center,
             style: DocViewTypography.headlineLg.copyWith(
               color: tokens.textPrimary,
@@ -982,7 +983,7 @@ class _FrameCView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "Doc View is free thanks to ads. We'll ask for your choice about personalised ads next.",
+            context.l10n.permissionConsentBody,
             textAlign: TextAlign.center,
             style: DocViewTypography.bodyMd.copyWith(
               color: tokens.textSecondary,
@@ -997,33 +998,30 @@ class _FrameCView extends StatelessWidget {
             tokens: tokens,
             icon: Icons.visibility_outlined,
             iconColor: tokens.primaryBlue,
-            title: 'What ads you may see',
-            subtitle:
-                'Small banner ads and non-intrusive sponsor cards. No popups or video interruptions while reading.',
+            title: context.l10n.permissionConsentAdsTitle,
+            subtitle: context.l10n.permissionConsentAdsDesc,
           ),
           const SizedBox(height: 10),
           _reassuranceRow(
             tokens: tokens,
             icon: Icons.lock_outline,
             iconColor: const Color(0xFF1FA971),
-            title: 'Documents stay completely private',
-            subtitle:
-                'Ad partners never have access to your document names, text contents, or file locations.',
+            title: context.l10n.permissionConsentPrivateTitle,
+            subtitle: context.l10n.permissionConsentPrivateDesc,
           ),
           const SizedBox(height: 10),
           _reassuranceRow(
             tokens: tokens,
             icon: Icons.tune,
             iconColor: tokens.primaryBlue,
-            title: 'You can change your choice in Settings',
-            subtitle:
-                'Update personalized ad consent or privacy preferences anytime in Doc View Settings.',
+            title: context.l10n.permissionConsentSettingsTitle,
+            subtitle: context.l10n.permissionConsentSettingsDesc,
           ),
 
           const SizedBox(height: 28),
 
           DocPrimaryButton(
-            label: 'Continue',
+            label: context.l10n.actionContinue,
             icon: const Icon(Icons.arrow_forward),
             onPressed: onContinue,
           ),
@@ -1031,7 +1029,7 @@ class _FrameCView extends StatelessWidget {
           TextButton(
             onPressed: onPrivacyPolicy,
             child: Text(
-              'Privacy policy',
+              context.l10n.actionPrivacyPolicy,
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,

@@ -142,6 +142,189 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionShareDocument => 'Share Document';
+
+  @override
+  String get splashTagline => 'All your documents, one place.';
+
+  @override
+  String appVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String onboardingStep(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get actionSkip => 'Skip';
+
+  @override
+  String get actionBack => 'Back';
+
+  @override
+  String get actionNext => 'Next';
+
+  @override
+  String get actionGetStarted => 'Get started';
+
+  @override
+  String get onboardingPage1Title => 'All your documents,\none place';
+
+  @override
+  String get onboardingPage1Desc =>
+      'Doc View automatically finds PDFs, Word, Excel, PowerPoint, text files and images on your phone and organizes them for you.';
+
+  @override
+  String get onboardingPage2Title => 'Read anything,\nbeautifully';
+
+  @override
+  String get onboardingPage2Desc =>
+      'Open PDFs, Word, Excel and PowerPoint files with a fast, clean reader. Search, bookmark and pick up where you left off.';
+
+  @override
+  String get onboardingPage3Title => 'Powerful PDF tools, offline';
+
+  @override
+  String get onboardingPage3Desc =>
+      'Turn photos into PDFs, scan documents, merge and split files. Everything stays on your device.';
+
+  @override
+  String get onboardingOfflineGuarantee => '100% Offline • Private & Secure';
+
+  @override
+  String get toolImageToPdf => 'Image to PDF';
+
+  @override
+  String get toolImageToPdfSub => 'Convert JPG & PNG';
+
+  @override
+  String get toolScanToPdf => 'Scan to PDF';
+
+  @override
+  String get toolScanToPdfSub => 'Camera edge detect';
+
+  @override
+  String get toolMergePdf => 'Merge PDF';
+
+  @override
+  String get toolMergePdfSub => 'Combine into one';
+
+  @override
+  String get toolSplitPdf => 'Split PDF';
+
+  @override
+  String get toolSplitPdfSub => 'Extract any range';
+
+  @override
+  String get permissionTagStorage => 'Device Storage Access';
+
+  @override
+  String get permissionStorageHeadline => 'Let Doc View find your documents';
+
+  @override
+  String get permissionStorageBody =>
+      'To list PDFs, Word, Excel and other files saved by any app, Android needs your permission to access all files. Your files never leave your phone.';
+
+  @override
+  String get permissionReassuranceOfflineTitle => 'Works offline';
+
+  @override
+  String get permissionReassuranceOfflineDesc =>
+      'No internet connection required. Operates 100% locally.';
+
+  @override
+  String get permissionReassuranceNoUploadsTitle => 'No uploads';
+
+  @override
+  String get permissionReassuranceNoUploadsDesc =>
+      'Zero cloud servers. Your files stay strictly in phone memory.';
+
+  @override
+  String get permissionReassuranceChangeTitle => 'You can change this any time';
+
+  @override
+  String get permissionReassuranceChangeDesc =>
+      'Easily toggle in your Android System App Settings.';
+
+  @override
+  String get permissionTagIOS => 'iOS Storage Guide';
+
+  @override
+  String get permissionIOSHeadline => 'Bring your documents to Doc View';
+
+  @override
+  String get permissionIOSBody =>
+      'Due to Apple\'s privacy architecture, iOS doesn\'t allow any app to scan your entire phone automatically. Choose how you\'d like to read your files:';
+
+  @override
+  String get permissionIOSOptionImportTitle => 'Import files';
+
+  @override
+  String get permissionIOSBadgeFastest => 'FASTEST';
+
+  @override
+  String get permissionIOSOptionImportDesc =>
+      'Pick documents directly from your iCloud Drive, Downloads, or any folder in seconds.';
+
+  @override
+  String get permissionIOSOptionFolderTitle =>
+      'Open Doc View folder in Files app';
+
+  @override
+  String get permissionIOSOptionFolderDesc =>
+      'Save or AirDrop documents directly into the \"Doc View\" folder in the iOS Files app for instant sync.';
+
+  @override
+  String get actionImportFiles => 'Import files';
+
+  @override
+  String get actionContinueToApp => 'Continue to app';
+
+  @override
+  String get permissionTagConsent => 'Transparency & Consent';
+
+  @override
+  String get permissionBadgeFree => '100% Free App';
+
+  @override
+  String get permissionBadgeMinimalAds => 'Minimal Ads';
+
+  @override
+  String get permissionConsentHeadline => 'Free with ads';
+
+  @override
+  String get permissionConsentBody =>
+      'Doc View is free thanks to ads. We\'ll ask for your choice about personalised ads next.';
+
+  @override
+  String get permissionConsentAdsTitle => 'What ads you may see';
+
+  @override
+  String get permissionConsentAdsDesc =>
+      'Small banner ads and non-intrusive sponsor cards. No popups or video interruptions while reading.';
+
+  @override
+  String get permissionConsentPrivateTitle =>
+      'Documents stay completely private';
+
+  @override
+  String get permissionConsentPrivateDesc =>
+      'Ad partners never have access to your document names, text contents, or file locations.';
+
+  @override
+  String get permissionConsentSettingsTitle =>
+      'You can change your choice in Settings';
+
+  @override
+  String get permissionConsentSettingsDesc =>
+      'Update personalized ad consent or privacy preferences anytime in Doc View Settings.';
+
+  @override
+  String get actionContinue => 'Continue';
+
+  @override
+  String get actionPrivacyPolicy => 'Privacy policy';
 }
 
 /// The translations for English (`en_XA`).
@@ -283,4 +466,194 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get actionShareDocument => '[Šĥàřé Ðôçûɱéñţ ẋẋẋẋẋẋ]';
+
+  @override
+  String get splashTagline => '[Åłł ýôûř đôçûɱéñţš, ôñé þłàçé. ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String appVersion(String version) {
+    return '[Ṽéřšîôñ $version ẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String onboardingStep(int current, int total) {
+    return '[Šţéþ $current ôƒ $total ẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get actionSkip => '[Šƙîþ ẋẋ]';
+
+  @override
+  String get actionBack => '[Ɓàçƙ ẋẋ]';
+
+  @override
+  String get actionNext => '[Ñéẋţ ẋẋ]';
+
+  @override
+  String get actionGetStarted => '[Ĝéţ šţàřţéđ ẋẋẋẋẋ]';
+
+  @override
+  String get onboardingPage1Title =>
+      '[Åłł ýôûř đôçûɱéñţš,\nôñé þłàçé ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get onboardingPage1Desc =>
+      '[Ðôç Ṽîéŵ àûţôɱàţîçàłłý ƒîñđš ÞÐƑš, Ŵôřđ, Éẋçéł, ÞôŵéřÞôîñţ, ţéẋţ ƒîłéš àñđ îɱàĝéš ôñ ýôûř þĥôñé àñđ ôřĝàñîžéš ţĥéɱ ƒôř ýôû. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get onboardingPage2Title =>
+      '[Řéàđ àñýţĥîñĝ,\nƀéàûţîƒûłłý ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get onboardingPage2Desc =>
+      '[Öþéñ ÞÐƑš, Ŵôřđ, Éẋçéł àñđ ÞôŵéřÞôîñţ ƒîłéš ŵîţĥ à ƒàšţ, çłéàñ řéàđéř. Šéàřçĥ, ƀôôƙɱàřƙ àñđ þîçƙ ûþ ŵĥéřé ýôû łéƒţ ôƒƒ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get onboardingPage3Title =>
+      '[Þôŵéřƒûł ÞÐƑ ţôôłš, ôƒƒłîñé ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get onboardingPage3Desc =>
+      '[Ťûřñ þĥôţôš îñţô ÞÐƑš, šçàñ đôçûɱéñţš, ɱéřĝé àñđ šþłîţ ƒîłéš. Éṽéřýţĥîñĝ šţàýš ôñ ýôûř đéṽîçé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get onboardingOfflineGuarantee =>
+      '[100% Öƒƒłîñé • Þřîṽàţé & Šéçûřé ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolImageToPdf => '[Îɱàĝé ţô ÞÐƑ ẋẋẋẋẋ]';
+
+  @override
+  String get toolImageToPdfSub => '[Çôñṽéřţ ĴÞĜ & ÞÑĜ ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolScanToPdf => '[Šçàñ ţô ÞÐƑ ẋẋẋẋẋ]';
+
+  @override
+  String get toolScanToPdfSub => '[Çàɱéřà éđĝé đéţéçţ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolMergePdf => '[Ṁéřĝé ÞÐƑ ẋẋẋẋ]';
+
+  @override
+  String get toolMergePdfSub => '[Çôɱƀîñé îñţô ôñé ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolSplitPdf => '[Šþłîţ ÞÐƑ ẋẋẋẋ]';
+
+  @override
+  String get toolSplitPdfSub => '[Éẋţřàçţ àñý řàñĝé ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionTagStorage => '[Ðéṽîçé Šţôřàĝé Åççéšš ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionStorageHeadline =>
+      '[Łéţ Ðôç Ṽîéŵ ƒîñđ ýôûř đôçûɱéñţš ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionStorageBody =>
+      '[Ťô łîšţ ÞÐƑš, Ŵôřđ, Éẋçéł àñđ ôţĥéř ƒîłéš šàṽéđ ƀý àñý àþþ, Åñđřôîđ ñééđš ýôûř þéřɱîššîôñ ţô àççéšš àłł ƒîłéš. Ýôûř ƒîłéš ñéṽéř łéàṽé ýôûř þĥôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionReassuranceOfflineTitle => '[Ŵôřƙš ôƒƒłîñé ẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionReassuranceOfflineDesc =>
+      '[Ñô îñţéřñéţ çôññéçţîôñ řéʠûîřéđ. Öþéřàţéš 100% łôçàłłý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionReassuranceNoUploadsTitle => '[Ñô ûþłôàđš ẋẋẋẋ]';
+
+  @override
+  String get permissionReassuranceNoUploadsDesc =>
+      '[Žéřô çłôûđ šéřṽéřš. Ýôûř ƒîłéš šţàý šţřîçţłý îñ þĥôñé ɱéɱôřý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionReassuranceChangeTitle =>
+      '[Ýôû çàñ çĥàñĝé ţĥîš àñý ţîɱé ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionReassuranceChangeDesc =>
+      '[Éàšîłý ţôĝĝłé îñ ýôûř Åñđřôîđ Šýšţéɱ Åþþ Šéţţîñĝš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionTagIOS => '[îÖŠ Šţôřàĝé Ĝûîđé ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionIOSHeadline =>
+      '[Ɓřîñĝ ýôûř đôçûɱéñţš ţô Ðôç Ṽîéŵ ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionIOSBody =>
+      '[Ðûé ţô Åþþłé\'š þřîṽàçý àřçĥîţéçţûřé, îÖŠ đôéšñ\'ţ àłłôŵ àñý àþþ ţô šçàñ ýôûř éñţîřé þĥôñé àûţôɱàţîçàłłý. Çĥôôšé ĥôŵ ýôû\'đ łîƙé ţô řéàđ ýôûř ƒîłéš: ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionIOSOptionImportTitle => '[Îɱþôřţ ƒîłéš ẋẋẋẋẋ]';
+
+  @override
+  String get permissionIOSBadgeFastest => '[ƑÅŠŤÉŠŤ ẋẋẋ]';
+
+  @override
+  String get permissionIOSOptionImportDesc =>
+      '[Þîçƙ đôçûɱéñţš đîřéçţłý ƒřôɱ ýôûř îÇłôûđ Ðřîṽé, Ðôŵñłôàđš, ôř àñý ƒôłđéř îñ šéçôñđš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionIOSOptionFolderTitle =>
+      '[Öþéñ Ðôç Ṽîéŵ ƒôłđéř îñ Ƒîłéš àþþ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionIOSOptionFolderDesc =>
+      '[Šàṽé ôř ÅîřÐřôþ đôçûɱéñţš đîřéçţłý îñţô ţĥé \"Ðôç Ṽîéŵ\" ƒôłđéř îñ ţĥé îÖŠ Ƒîłéš àþþ ƒôř îñšţàñţ šýñç. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get actionImportFiles => '[Îɱþôřţ ƒîłéš ẋẋẋẋẋ]';
+
+  @override
+  String get actionContinueToApp => '[Çôñţîñûé ţô àþþ ẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionTagConsent => '[Ťřàñšþàřéñçý & Çôñšéñţ ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionBadgeFree => '[100% Ƒřéé Åþþ ẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionBadgeMinimalAds => '[Ṁîñîɱàł Åđš ẋẋẋẋẋ]';
+
+  @override
+  String get permissionConsentHeadline => '[Ƒřéé ŵîţĥ àđš ẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionConsentBody =>
+      '[Ðôç Ṽîéŵ îš ƒřéé ţĥàñƙš ţô àđš. Ŵé\'łł àšƙ ƒôř ýôûř çĥôîçé àƀôûţ þéřšôñàłîšéđ àđš ñéẋţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionConsentAdsTitle => '[Ŵĥàţ àđš ýôû ɱàý šéé ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionConsentAdsDesc =>
+      '[Šɱàłł ƀàññéř àđš àñđ ñôñ-îñţřûšîṽé šþôñšôř çàřđš. Ñô þôþûþš ôř ṽîđéô îñţéřřûþţîôñš ŵĥîłé řéàđîñĝ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionConsentPrivateTitle =>
+      '[Ðôçûɱéñţš šţàý çôɱþłéţéłý þřîṽàţé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionConsentPrivateDesc =>
+      '[Åđ þàřţñéřš ñéṽéř ĥàṽé àççéšš ţô ýôûř đôçûɱéñţ ñàɱéš, ţéẋţ çôñţéñţš, ôř ƒîłé łôçàţîôñš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionConsentSettingsTitle =>
+      '[Ýôû çàñ çĥàñĝé ýôûř çĥôîçé îñ Šéţţîñĝš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get permissionConsentSettingsDesc =>
+      '[Ûþđàţé þéřšôñàłîžéđ àđ çôñšéñţ ôř þřîṽàçý þřéƒéřéñçéš àñýţîɱé îñ Ðôç Ṽîéŵ Šéţţîñĝš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get actionContinue => '[Çôñţîñûé ẋẋẋẋ]';
+
+  @override
+  String get actionPrivacyPolicy => '[Þřîṽàçý þôłîçý ẋẋẋẋẋẋ]';
 }

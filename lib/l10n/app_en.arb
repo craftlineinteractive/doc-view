@@ -191,5 +191,237 @@
   "actionShareDocument": "Share Document",
   "@actionShareDocument": {
     "description": "Button to share a generated document"
+  },
+  "splashTagline": "All your documents, one place.",
+  "@splashTagline": {
+    "description": "Splash screen tagline"
+  },
+  "appVersion": "Version {version}",
+  "@appVersion": {
+    "description": "Application version label on splash screen",
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "1.0.0"
+      }
+    }
+  },
+  "onboardingStep": "Step {current} of {total}",
+  "@onboardingStep": {
+    "description": "Onboarding step pill indicator",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "actionSkip": "Skip",
+  "@actionSkip": {
+    "description": "Skip onboarding action button"
+  },
+  "actionBack": "Back",
+  "@actionBack": {
+    "description": "Back button text"
+  },
+  "actionNext": "Next",
+  "@actionNext": {
+    "description": "Next step button label"
+  },
+  "actionGetStarted": "Get started",
+  "@actionGetStarted": {
+    "description": "Get started button label on final onboarding step"
+  },
+  "onboardingPage1Title": "All your documents,\none place",
+  "@onboardingPage1Title": {
+    "description": "Headline for onboarding page 1"
+  },
+  "onboardingPage1Desc": "Doc View automatically finds PDFs, Word, Excel, PowerPoint, text files and images on your phone and organizes them for you.",
+  "@onboardingPage1Desc": {
+    "description": "Body description for onboarding page 1"
+  },
+  "onboardingPage2Title": "Read anything,\nbeautifully",
+  "@onboardingPage2Title": {
+    "description": "Headline for onboarding page 2"
+  },
+  "onboardingPage2Desc": "Open PDFs, Word, Excel and PowerPoint files with a fast, clean reader. Search, bookmark and pick up where you left off.",
+  "@onboardingPage2Desc": {
+    "description": "Body description for onboarding page 2"
+  },
+  "onboardingPage3Title": "Powerful PDF tools, offline",
+  "@onboardingPage3Title": {
+    "description": "Headline for onboarding page 3"
+  },
+  "onboardingPage3Desc": "Turn photos into PDFs, scan documents, merge and split files. Everything stays on your device.",
+  "@onboardingPage3Desc": {
+    "description": "Body description for onboarding page 3"
+  },
+  "onboardingOfflineGuarantee": "100% Offline • Private & Secure",
+  "@onboardingOfflineGuarantee": {
+    "description": "Offline and privacy badge text on onboarding page 3"
+  },
+  "toolImageToPdf": "Image to PDF",
+  "@toolImageToPdf": {
+    "description": "Tool title for converting images to PDF"
+  },
+  "toolImageToPdfSub": "Convert JPG & PNG",
+  "@toolImageToPdfSub": {
+    "description": "Tool subtitle for Image to PDF"
+  },
+  "toolScanToPdf": "Scan to PDF",
+  "@toolScanToPdf": {
+    "description": "Tool title for scanning documents with camera"
+  },
+  "toolScanToPdfSub": "Camera edge detect",
+  "@toolScanToPdfSub": {
+    "description": "Tool subtitle for Scan to PDF"
+  },
+  "toolMergePdf": "Merge PDF",
+  "@toolMergePdf": {
+    "description": "Tool title for merging multiple PDFs"
+  },
+  "toolMergePdfSub": "Combine into one",
+  "@toolMergePdfSub": {
+    "description": "Tool subtitle for Merge PDF"
+  },
+  "toolSplitPdf": "Split PDF",
+  "@toolSplitPdf": {
+    "description": "Tool title for splitting PDF pages"
+  },
+  "toolSplitPdfSub": "Extract any range",
+  "@toolSplitPdfSub": {
+    "description": "Tool subtitle for Split PDF"
+  },
+  "permissionTagStorage": "Device Storage Access",
+  "@permissionTagStorage": {
+    "description": "Header tag for storage permission screen"
+  },
+  "permissionStorageHeadline": "Let Doc View find your documents",
+  "@permissionStorageHeadline": {
+    "description": "Main headline on storage permission screen"
+  },
+  "permissionStorageBody": "To list PDFs, Word, Excel and other files saved by any app, Android needs your permission to access all files. Your files never leave your phone.",
+  "@permissionStorageBody": {
+    "description": "Explanation text on Android storage permission screen"
+  },
+  "permissionReassuranceOfflineTitle": "Works offline",
+  "@permissionReassuranceOfflineTitle": {
+    "description": "Title for offline reassurance point"
+  },
+  "permissionReassuranceOfflineDesc": "No internet connection required. Operates 100% locally.",
+  "@permissionReassuranceOfflineDesc": {
+    "description": "Description for offline reassurance point"
+  },
+  "permissionReassuranceNoUploadsTitle": "No uploads",
+  "@permissionReassuranceNoUploadsTitle": {
+    "description": "Title for no-uploads privacy reassurance point"
+  },
+  "permissionReassuranceNoUploadsDesc": "Zero cloud servers. Your files stay strictly in phone memory.",
+  "@permissionReassuranceNoUploadsDesc": {
+    "description": "Description for no-uploads privacy reassurance point"
+  },
+  "permissionReassuranceChangeTitle": "You can change this any time",
+  "@permissionReassuranceChangeTitle": {
+    "description": "Title for permission toggle reassurance point"
+  },
+  "permissionReassuranceChangeDesc": "Easily toggle in your Android System App Settings.",
+  "@permissionReassuranceChangeDesc": {
+    "description": "Description for permission toggle reassurance point"
+  },
+  "permissionTagIOS": "iOS Storage Guide",
+  "@permissionTagIOS": {
+    "description": "Header tag for iOS storage guide screen"
+  },
+  "permissionIOSHeadline": "Bring your documents to Doc View",
+  "@permissionIOSHeadline": {
+    "description": "Main headline on iOS storage guide screen"
+  },
+  "permissionIOSBody": "Due to Apple's privacy architecture, iOS doesn't allow any app to scan your entire phone automatically. Choose how you'd like to read your files:",
+  "@permissionIOSBody": {
+    "description": "Explanation body on iOS storage guide screen"
+  },
+  "permissionIOSOptionImportTitle": "Import files",
+  "@permissionIOSOptionImportTitle": {
+    "description": "Title for iOS import files option"
+  },
+  "permissionIOSBadgeFastest": "FASTEST",
+  "@permissionIOSBadgeFastest": {
+    "description": "Fastest badge label for iOS import option"
+  },
+  "permissionIOSOptionImportDesc": "Pick documents directly from your iCloud Drive, Downloads, or any folder in seconds.",
+  "@permissionIOSOptionImportDesc": {
+    "description": "Description for iOS import files option"
+  },
+  "permissionIOSOptionFolderTitle": "Open Doc View folder in Files app",
+  "@permissionIOSOptionFolderTitle": {
+    "description": "Title for iOS Files app folder option"
+  },
+  "permissionIOSOptionFolderDesc": "Save or AirDrop documents directly into the \"Doc View\" folder in the iOS Files app for instant sync.",
+  "@permissionIOSOptionFolderDesc": {
+    "description": "Description for iOS Files app folder option"
+  },
+  "actionImportFiles": "Import files",
+  "@actionImportFiles": {
+    "description": "Primary action button to launch file import picker"
+  },
+  "actionContinueToApp": "Continue to app",
+  "@actionContinueToApp": {
+    "description": "Action to skip iOS import and continue to app"
+  },
+  "permissionTagConsent": "Transparency & Consent",
+  "@permissionTagConsent": {
+    "description": "Header tag on transparency and consent screen"
+  },
+  "permissionBadgeFree": "100% Free App",
+  "@permissionBadgeFree": {
+    "description": "Free app badge label"
+  },
+  "permissionBadgeMinimalAds": "Minimal Ads",
+  "@permissionBadgeMinimalAds": {
+    "description": "Minimal ads badge label"
+  },
+  "permissionConsentHeadline": "Free with ads",
+  "@permissionConsentHeadline": {
+    "description": "Main headline on ad consent transparency screen"
+  },
+  "permissionConsentBody": "Doc View is free thanks to ads. We'll ask for your choice about personalised ads next.",
+  "@permissionConsentBody": {
+    "description": "Body explanation on ad consent transparency screen"
+  },
+  "permissionConsentAdsTitle": "What ads you may see",
+  "@permissionConsentAdsTitle": {
+    "description": "Title explaining types of ads shown"
+  },
+  "permissionConsentAdsDesc": "Small banner ads and non-intrusive sponsor cards. No popups or video interruptions while reading.",
+  "@permissionConsentAdsDesc": {
+    "description": "Description explaining types of ads shown"
+  },
+  "permissionConsentPrivateTitle": "Documents stay completely private",
+  "@permissionConsentPrivateTitle": {
+    "description": "Title explaining document privacy guarantee with ads"
+  },
+  "permissionConsentPrivateDesc": "Ad partners never have access to your document names, text contents, or file locations.",
+  "@permissionConsentPrivateDesc": {
+    "description": "Description explaining document privacy guarantee with ads"
+  },
+  "permissionConsentSettingsTitle": "You can change your choice in Settings",
+  "@permissionConsentSettingsTitle": {
+    "description": "Title explaining ad preferences settings control"
+  },
+  "permissionConsentSettingsDesc": "Update personalized ad consent or privacy preferences anytime in Doc View Settings.",
+  "@permissionConsentSettingsDesc": {
+    "description": "Description explaining ad preferences settings control"
+  },
+  "actionContinue": "Continue",
+  "@actionContinue": {
+    "description": "Primary continue button"
+  },
+  "actionPrivacyPolicy": "Privacy policy",
+  "@actionPrivacyPolicy": {
+    "description": "Button to open privacy policy webpage"
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
@@ -78,7 +79,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       IconButton(
                         icon: const Icon(Icons.arrow_back_ios_new, size: 20),
                         color: tokens.textPrimary,
-                        tooltip: 'Back',
+                        tooltip: context.l10n.tooltipBack,
                         onPressed: _previousPage,
                       )
                     else
@@ -96,7 +97,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           border: Border.all(color: tokens.hairline),
                         ),
                         child: Text(
-                          'Step 3 of 3',
+                          context.l10n.onboardingStep(3, 3),
                           style: DocViewTypography.labelXs.copyWith(
                             color: tokens.textSecondary,
                             fontWeight: FontWeight.w700,
@@ -111,7 +112,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       TextButton(
                         onPressed: _completeOnboarding,
                         child: Text(
-                          'Skip',
+                          context.l10n.actionSkip,
                           style: DocViewTypography.labelLg.copyWith(
                             color: tokens.textSecondary,
                             fontWeight: FontWeight.w600,
@@ -142,7 +143,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
             // Bottom Navigation & Controls
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 24),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -154,11 +155,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       children: [
                         if (_currentPage == 1)
                           Align(
-                            alignment: Alignment.centerLeft,
+                            alignment: AlignmentDirectional.centerStart,
                             child: TextButton.icon(
                               onPressed: _previousPage,
                               icon: const Icon(Icons.chevron_left, size: 18),
-                              label: const Text('Back'),
+                              label: Text(context.l10n.actionBack),
                               style: TextButton.styleFrom(
                                 foregroundColor: tokens.textSecondary,
                                 padding: EdgeInsets.zero,
@@ -179,7 +180,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
                   // Primary CTA Button
                   DocPrimaryButton(
-                    label: _currentPage == 2 ? 'Get started' : 'Next',
+                    label: _currentPage == 2
+                        ? context.l10n.actionGetStarted
+                        : context.l10n.actionNext,
                     icon: _currentPage == 2
                         ? const Icon(Icons.arrow_forward)
                         : null,
@@ -536,7 +539,7 @@ class _OnboardingPageOne extends StatelessWidget {
 
           // Typography
           Text(
-            'All your documents,\none place',
+            context.l10n.onboardingPage1Title,
             textAlign: TextAlign.center,
             style: DocViewTypography.headlineLg.copyWith(
               color: tokens.textPrimary,
@@ -546,7 +549,7 @@ class _OnboardingPageOne extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Doc View automatically finds PDFs, Word, Excel, PowerPoint, text files and images on your phone and organizes them for you.',
+            context.l10n.onboardingPage1Desc,
             textAlign: TextAlign.center,
             style: DocViewTypography.bodyMd.copyWith(
               color: tokens.textSecondary,
@@ -838,7 +841,7 @@ class _OnboardingPageTwo extends StatelessWidget {
 
           // Typography
           Text(
-            'Read anything,\nbeautifully',
+            context.l10n.onboardingPage2Title,
             textAlign: TextAlign.center,
             style: DocViewTypography.headlineLg.copyWith(
               color: tokens.textPrimary,
@@ -848,7 +851,7 @@ class _OnboardingPageTwo extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Open PDFs, Word, Excel and PowerPoint files with a fast, clean reader. Search, bookmark and pick up where you left off.',
+            context.l10n.onboardingPage2Desc,
             textAlign: TextAlign.center,
             style: DocViewTypography.bodyMd.copyWith(
               color: tokens.textSecondary,
@@ -898,29 +901,29 @@ class _OnboardingPageThree extends StatelessWidget {
                       _ToolMicroCard(
                         isDark: isDark,
                         tokens: tokens,
-                        title: 'Image to PDF',
-                        subtitle: 'Convert JPG & PNG',
+                        title: context.l10n.toolImageToPdf,
+                        subtitle: context.l10n.toolImageToPdfSub,
                         icon: Icons.photo_library_outlined,
                       ),
                       _ToolMicroCard(
                         isDark: isDark,
                         tokens: tokens,
-                        title: 'Scan to PDF',
-                        subtitle: 'Camera edge detect',
+                        title: context.l10n.toolScanToPdf,
+                        subtitle: context.l10n.toolScanToPdfSub,
                         icon: Icons.document_scanner_outlined,
                       ),
                       _ToolMicroCard(
                         isDark: isDark,
                         tokens: tokens,
-                        title: 'Merge PDF',
-                        subtitle: 'Combine into one',
+                        title: context.l10n.toolMergePdf,
+                        subtitle: context.l10n.toolMergePdfSub,
                         icon: Icons.call_merge,
                       ),
                       _ToolMicroCard(
                         isDark: isDark,
                         tokens: tokens,
-                        title: 'Split PDF',
-                        subtitle: 'Extract any range',
+                        title: context.l10n.toolSplitPdf,
+                        subtitle: context.l10n.toolSplitPdfSub,
                         icon: Icons.call_split,
                       ),
                     ],
@@ -954,7 +957,7 @@ class _OnboardingPageThree extends StatelessWidget {
                         const SizedBox(width: 8),
                         Flexible(
                           child: Text(
-                            '100% Offline • Private & Secure',
+                            context.l10n.onboardingOfflineGuarantee,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -976,7 +979,7 @@ class _OnboardingPageThree extends StatelessWidget {
 
           // Typography
           Text(
-            'Powerful PDF tools, offline',
+            context.l10n.onboardingPage3Title,
             textAlign: TextAlign.center,
             style: DocViewTypography.headlineLg.copyWith(
               color: tokens.textPrimary,
@@ -985,7 +988,7 @@ class _OnboardingPageThree extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Turn photos into PDFs, scan documents, merge and split files. Everything stays on your device.',
+            context.l10n.onboardingPage3Desc,
             textAlign: TextAlign.center,
             style: DocViewTypography.bodyMd.copyWith(
               color: tokens.textSecondary,

@@ -191,5 +191,237 @@
   "actionShareDocument": "[Šĥàřé Ðôçûɱéñţ ẋẋẋẋẋẋ]",
   "@actionShareDocument": {
     "description": "Button to share a generated document"
+  },
+  "splashTagline": "[Åłł ýôûř đôçûɱéñţš, ôñé þłàçé. ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splashTagline": {
+    "description": "Splash screen tagline"
+  },
+  "appVersion": "[Ṽéřšîôñ {version} ẋẋẋẋẋẋẋ]",
+  "@appVersion": {
+    "description": "Application version label on splash screen",
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "1.0.0"
+      }
+    }
+  },
+  "onboardingStep": "[Šţéþ {current} ôƒ {total} ẋẋẋẋẋẋẋẋẋẋ]",
+  "@onboardingStep": {
+    "description": "Onboarding step pill indicator",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "actionSkip": "[Šƙîþ ẋẋ]",
+  "@actionSkip": {
+    "description": "Skip onboarding action button"
+  },
+  "actionBack": "[Ɓàçƙ ẋẋ]",
+  "@actionBack": {
+    "description": "Back button text"
+  },
+  "actionNext": "[Ñéẋţ ẋẋ]",
+  "@actionNext": {
+    "description": "Next step button label"
+  },
+  "actionGetStarted": "[Ĝéţ šţàřţéđ ẋẋẋẋẋ]",
+  "@actionGetStarted": {
+    "description": "Get started button label on final onboarding step"
+  },
+  "onboardingPage1Title": "[Åłł ýôûř đôçûɱéñţš,\nôñé þłàçé ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@onboardingPage1Title": {
+    "description": "Headline for onboarding page 1"
+  },
+  "onboardingPage1Desc": "[Ðôç Ṽîéŵ àûţôɱàţîçàłłý ƒîñđš ÞÐƑš, Ŵôřđ, Éẋçéł, ÞôŵéřÞôîñţ, ţéẋţ ƒîłéš àñđ îɱàĝéš ôñ ýôûř þĥôñé àñđ ôřĝàñîžéš ţĥéɱ ƒôř ýôû. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@onboardingPage1Desc": {
+    "description": "Body description for onboarding page 1"
+  },
+  "onboardingPage2Title": "[Řéàđ àñýţĥîñĝ,\nƀéàûţîƒûłłý ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@onboardingPage2Title": {
+    "description": "Headline for onboarding page 2"
+  },
+  "onboardingPage2Desc": "[Öþéñ ÞÐƑš, Ŵôřđ, Éẋçéł àñđ ÞôŵéřÞôîñţ ƒîłéš ŵîţĥ à ƒàšţ, çłéàñ řéàđéř. Šéàřçĥ, ƀôôƙɱàřƙ àñđ þîçƙ ûþ ŵĥéřé ýôû łéƒţ ôƒƒ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@onboardingPage2Desc": {
+    "description": "Body description for onboarding page 2"
+  },
+  "onboardingPage3Title": "[Þôŵéřƒûł ÞÐƑ ţôôłš, ôƒƒłîñé ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@onboardingPage3Title": {
+    "description": "Headline for onboarding page 3"
+  },
+  "onboardingPage3Desc": "[Ťûřñ þĥôţôš îñţô ÞÐƑš, šçàñ đôçûɱéñţš, ɱéřĝé àñđ šþłîţ ƒîłéš. Éṽéřýţĥîñĝ šţàýš ôñ ýôûř đéṽîçé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@onboardingPage3Desc": {
+    "description": "Body description for onboarding page 3"
+  },
+  "onboardingOfflineGuarantee": "[100% Öƒƒłîñé • Þřîṽàţé & Šéçûřé ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@onboardingOfflineGuarantee": {
+    "description": "Offline and privacy badge text on onboarding page 3"
+  },
+  "toolImageToPdf": "[Îɱàĝé ţô ÞÐƑ ẋẋẋẋẋ]",
+  "@toolImageToPdf": {
+    "description": "Tool title for converting images to PDF"
+  },
+  "toolImageToPdfSub": "[Çôñṽéřţ ĴÞĜ & ÞÑĜ ẋẋẋẋẋẋẋ]",
+  "@toolImageToPdfSub": {
+    "description": "Tool subtitle for Image to PDF"
+  },
+  "toolScanToPdf": "[Šçàñ ţô ÞÐƑ ẋẋẋẋẋ]",
+  "@toolScanToPdf": {
+    "description": "Tool title for scanning documents with camera"
+  },
+  "toolScanToPdfSub": "[Çàɱéřà éđĝé đéţéçţ ẋẋẋẋẋẋẋẋ]",
+  "@toolScanToPdfSub": {
+    "description": "Tool subtitle for Scan to PDF"
+  },
+  "toolMergePdf": "[Ṁéřĝé ÞÐƑ ẋẋẋẋ]",
+  "@toolMergePdf": {
+    "description": "Tool title for merging multiple PDFs"
+  },
+  "toolMergePdfSub": "[Çôɱƀîñé îñţô ôñé ẋẋẋẋẋẋẋ]",
+  "@toolMergePdfSub": {
+    "description": "Tool subtitle for Merge PDF"
+  },
+  "toolSplitPdf": "[Šþłîţ ÞÐƑ ẋẋẋẋ]",
+  "@toolSplitPdf": {
+    "description": "Tool title for splitting PDF pages"
+  },
+  "toolSplitPdfSub": "[Éẋţřàçţ àñý řàñĝé ẋẋẋẋẋẋẋ]",
+  "@toolSplitPdfSub": {
+    "description": "Tool subtitle for Split PDF"
+  },
+  "permissionTagStorage": "[Ðéṽîçé Šţôřàĝé Åççéšš ẋẋẋẋẋẋẋẋẋ]",
+  "@permissionTagStorage": {
+    "description": "Header tag for storage permission screen"
+  },
+  "permissionStorageHeadline": "[Łéţ Ðôç Ṽîéŵ ƒîñđ ýôûř đôçûɱéñţš ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionStorageHeadline": {
+    "description": "Main headline on storage permission screen"
+  },
+  "permissionStorageBody": "[Ťô łîšţ ÞÐƑš, Ŵôřđ, Éẋçéł àñđ ôţĥéř ƒîłéš šàṽéđ ƀý àñý àþþ, Åñđřôîđ ñééđš ýôûř þéřɱîššîôñ ţô àççéšš àłł ƒîłéš. Ýôûř ƒîłéš ñéṽéř łéàṽé ýôûř þĥôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionStorageBody": {
+    "description": "Explanation text on Android storage permission screen"
+  },
+  "permissionReassuranceOfflineTitle": "[Ŵôřƙš ôƒƒłîñé ẋẋẋẋẋẋ]",
+  "@permissionReassuranceOfflineTitle": {
+    "description": "Title for offline reassurance point"
+  },
+  "permissionReassuranceOfflineDesc": "[Ñô îñţéřñéţ çôññéçţîôñ řéʠûîřéđ. Öþéřàţéš 100% łôçàłłý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionReassuranceOfflineDesc": {
+    "description": "Description for offline reassurance point"
+  },
+  "permissionReassuranceNoUploadsTitle": "[Ñô ûþłôàđš ẋẋẋẋ]",
+  "@permissionReassuranceNoUploadsTitle": {
+    "description": "Title for no-uploads privacy reassurance point"
+  },
+  "permissionReassuranceNoUploadsDesc": "[Žéřô çłôûđ šéřṽéřš. Ýôûř ƒîłéš šţàý šţřîçţłý îñ þĥôñé ɱéɱôřý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionReassuranceNoUploadsDesc": {
+    "description": "Description for no-uploads privacy reassurance point"
+  },
+  "permissionReassuranceChangeTitle": "[Ýôû çàñ çĥàñĝé ţĥîš àñý ţîɱé ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionReassuranceChangeTitle": {
+    "description": "Title for permission toggle reassurance point"
+  },
+  "permissionReassuranceChangeDesc": "[Éàšîłý ţôĝĝłé îñ ýôûř Åñđřôîđ Šýšţéɱ Åþþ Šéţţîñĝš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionReassuranceChangeDesc": {
+    "description": "Description for permission toggle reassurance point"
+  },
+  "permissionTagIOS": "[îÖŠ Šţôřàĝé Ĝûîđé ẋẋẋẋẋẋẋ]",
+  "@permissionTagIOS": {
+    "description": "Header tag for iOS storage guide screen"
+  },
+  "permissionIOSHeadline": "[Ɓřîñĝ ýôûř đôçûɱéñţš ţô Ðôç Ṽîéŵ ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionIOSHeadline": {
+    "description": "Main headline on iOS storage guide screen"
+  },
+  "permissionIOSBody": "[Ðûé ţô Åþþłé'š þřîṽàçý àřçĥîţéçţûřé, îÖŠ đôéšñ'ţ àłłôŵ àñý àþþ ţô šçàñ ýôûř éñţîřé þĥôñé àûţôɱàţîçàłłý. Çĥôôšé ĥôŵ ýôû'đ łîƙé ţô řéàđ ýôûř ƒîłéš: ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionIOSBody": {
+    "description": "Explanation body on iOS storage guide screen"
+  },
+  "permissionIOSOptionImportTitle": "[Îɱþôřţ ƒîłéš ẋẋẋẋẋ]",
+  "@permissionIOSOptionImportTitle": {
+    "description": "Title for iOS import files option"
+  },
+  "permissionIOSBadgeFastest": "[ƑÅŠŤÉŠŤ ẋẋẋ]",
+  "@permissionIOSBadgeFastest": {
+    "description": "Fastest badge label for iOS import option"
+  },
+  "permissionIOSOptionImportDesc": "[Þîçƙ đôçûɱéñţš đîřéçţłý ƒřôɱ ýôûř îÇłôûđ Ðřîṽé, Ðôŵñłôàđš, ôř àñý ƒôłđéř îñ šéçôñđš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionIOSOptionImportDesc": {
+    "description": "Description for iOS import files option"
+  },
+  "permissionIOSOptionFolderTitle": "[Öþéñ Ðôç Ṽîéŵ ƒôłđéř îñ Ƒîłéš àþþ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionIOSOptionFolderTitle": {
+    "description": "Title for iOS Files app folder option"
+  },
+  "permissionIOSOptionFolderDesc": "[Šàṽé ôř ÅîřÐřôþ đôçûɱéñţš đîřéçţłý îñţô ţĥé \"Ðôç Ṽîéŵ\" ƒôłđéř îñ ţĥé îÖŠ Ƒîłéš àþþ ƒôř îñšţàñţ šýñç. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionIOSOptionFolderDesc": {
+    "description": "Description for iOS Files app folder option"
+  },
+  "actionImportFiles": "[Îɱþôřţ ƒîłéš ẋẋẋẋẋ]",
+  "@actionImportFiles": {
+    "description": "Primary action button to launch file import picker"
+  },
+  "actionContinueToApp": "[Çôñţîñûé ţô àþþ ẋẋẋẋẋẋ]",
+  "@actionContinueToApp": {
+    "description": "Action to skip iOS import and continue to app"
+  },
+  "permissionTagConsent": "[Ťřàñšþàřéñçý & Çôñšéñţ ẋẋẋẋẋẋẋẋẋ]",
+  "@permissionTagConsent": {
+    "description": "Header tag on transparency and consent screen"
+  },
+  "permissionBadgeFree": "[100% Ƒřéé Åþþ ẋẋẋẋẋẋ]",
+  "@permissionBadgeFree": {
+    "description": "Free app badge label"
+  },
+  "permissionBadgeMinimalAds": "[Ṁîñîɱàł Åđš ẋẋẋẋẋ]",
+  "@permissionBadgeMinimalAds": {
+    "description": "Minimal ads badge label"
+  },
+  "permissionConsentHeadline": "[Ƒřéé ŵîţĥ àđš ẋẋẋẋẋẋ]",
+  "@permissionConsentHeadline": {
+    "description": "Main headline on ad consent transparency screen"
+  },
+  "permissionConsentBody": "[Ðôç Ṽîéŵ îš ƒřéé ţĥàñƙš ţô àđš. Ŵé'łł àšƙ ƒôř ýôûř çĥôîçé àƀôûţ þéřšôñàłîšéđ àđš ñéẋţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionConsentBody": {
+    "description": "Body explanation on ad consent transparency screen"
+  },
+  "permissionConsentAdsTitle": "[Ŵĥàţ àđš ýôû ɱàý šéé ẋẋẋẋẋẋẋẋ]",
+  "@permissionConsentAdsTitle": {
+    "description": "Title explaining types of ads shown"
+  },
+  "permissionConsentAdsDesc": "[Šɱàłł ƀàññéř àđš àñđ ñôñ-îñţřûšîṽé šþôñšôř çàřđš. Ñô þôþûþš ôř ṽîđéô îñţéřřûþţîôñš ŵĥîłé řéàđîñĝ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionConsentAdsDesc": {
+    "description": "Description explaining types of ads shown"
+  },
+  "permissionConsentPrivateTitle": "[Ðôçûɱéñţš šţàý çôɱþłéţéłý þřîṽàţé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionConsentPrivateTitle": {
+    "description": "Title explaining document privacy guarantee with ads"
+  },
+  "permissionConsentPrivateDesc": "[Åđ þàřţñéřš ñéṽéř ĥàṽé àççéšš ţô ýôûř đôçûɱéñţ ñàɱéš, ţéẋţ çôñţéñţš, ôř ƒîłé łôçàţîôñš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionConsentPrivateDesc": {
+    "description": "Description explaining document privacy guarantee with ads"
+  },
+  "permissionConsentSettingsTitle": "[Ýôû çàñ çĥàñĝé ýôûř çĥôîçé îñ Šéţţîñĝš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionConsentSettingsTitle": {
+    "description": "Title explaining ad preferences settings control"
+  },
+  "permissionConsentSettingsDesc": "[Ûþđàţé þéřšôñàłîžéđ àđ çôñšéñţ ôř þřîṽàçý þřéƒéřéñçéš àñýţîɱé îñ Ðôç Ṽîéŵ Šéţţîñĝš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@permissionConsentSettingsDesc": {
+    "description": "Description explaining ad preferences settings control"
+  },
+  "actionContinue": "[Çôñţîñûé ẋẋẋẋ]",
+  "@actionContinue": {
+    "description": "Primary continue button"
+  },
+  "actionPrivacyPolicy": "[Þřîṽàçý þôłîçý ẋẋẋẋẋẋ]",
+  "@actionPrivacyPolicy": {
+    "description": "Button to open privacy policy webpage"
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
@@ -22,7 +23,7 @@ class SplashScreen extends ConsumerStatefulWidget {
 class _SplashScreenState extends ConsumerState<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _shimmerController;
-  String _versionText = 'Version 1.0.0';
+  String _versionNumber = '1.0.0';
 
   @override
   void initState() {
@@ -53,7 +54,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       final info = await PackageInfo.fromPlatform();
       if (mounted && info.version.isNotEmpty) {
         setState(() {
-          _versionText = 'Version ${info.version}';
+          _versionNumber = info.version;
         });
       }
     } catch (_) {
@@ -236,7 +237,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
                       // Tagline
                       Text(
-                        'All your documents, one place.',
+                        context.l10n.splashTagline,
                         style: DocViewTypography.bodyLg.copyWith(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -309,7 +310,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
                       // Version string
                       Text(
-                        _versionText,
+                        context.l10n.appVersion(_versionNumber),
                         style: DocViewTypography.labelXs.copyWith(
                           color: tokens.textSecondary,
                           fontSize: 12,
