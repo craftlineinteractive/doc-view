@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,8 +13,19 @@ class SettingsRepository {
   static const String keyThemeMode = 'app_settings_theme_mode';
   static const String keyAutoScanMode = 'app_settings_auto_scan_mode';
   static const String keyIncludeImages = 'app_settings_include_images';
+  static const String keyLocaleCode = 'app_settings_locale_code';
   static const String keyOnboardingCompleted = 'app_settings_onboarding_completed';
   static const String keyRecentSearches = 'app_settings_recent_searches';
+
+  /// Validates whether a [localeCode] is currently supported.
+  ///
+  /// In release builds, only 'en' is allowed; debug builds allow 'en_XA'.
+  static bool isValidLocaleCode(String? code) {
+    if (code == null) return false;
+    if (code == 'en') return true;
+    if (!kReleaseMode && code == 'en_XA') return true;
+    return false;
+  }
 
   Future<SharedPreferences> _getPrefs() async {
     preferences ??= await SharedPreferences.getInstance();
@@ -26,12 +38,34 @@ class SettingsRepository {
     final themeStr = prefs.getString(keyThemeMode);
     final scanStr = prefs.getString(keyAutoScanMode);
     final includeImages = prefs.getBool(keyIncludeImages) ?? true;
+    final locale = await getLocaleCode();
 
     return AppSettings(
       themeMode: themeModeFromString(themeStr),
       autoScanMode: AutoScanMode.fromString(scanStr),
       includeImages: includeImages,
+      localeCode: locale,
     );
+  }
+
+  /// Returns persisted locale code, or null if unset or invalid (falling back to system default).
+  Future<String?> getLocaleCode() async {
+    final prefs = await _getPrefs();
+    final code = prefs.getString(keyLocaleCode);
+    if (isValidLocaleCode(code)) {
+      return code;
+    }
+    return null;
+  }
+
+  /// Persists selected locale code (null to reset to system default).
+  Future<void> saveLocaleCode(String? localeCode) async {
+    final prefs = await _getPrefs();
+    if (localeCode == null) {
+      await prefs.remove(keyLocaleCode);
+    } else {
+      await prefs.setString(keyLocaleCode, localeCode);
+    }
   }
 
   /// Persists selected [ThemeMode].

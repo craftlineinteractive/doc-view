@@ -35,21 +35,26 @@ class AppSettings {
     this.themeMode = ThemeMode.system,
     this.autoScanMode = AutoScanMode.onOpen,
     this.includeImages = true,
+    this.localeCode,
   });
 
   final ThemeMode themeMode;
   final AutoScanMode autoScanMode;
   final bool includeImages;
+  final String? localeCode;
 
   AppSettings copyWith({
     ThemeMode? themeMode,
     AutoScanMode? autoScanMode,
     bool? includeImages,
+    String? localeCode,
+    bool clearLocaleCode = false,
   }) {
     return AppSettings(
       themeMode: themeMode ?? this.themeMode,
       autoScanMode: autoScanMode ?? this.autoScanMode,
       includeImages: includeImages ?? this.includeImages,
+      localeCode: clearLocaleCode ? null : (localeCode ?? this.localeCode),
     );
   }
 
@@ -60,9 +65,11 @@ class AppSettings {
           runtimeType == other.runtimeType &&
           themeMode == other.themeMode &&
           autoScanMode == other.autoScanMode &&
-          includeImages == other.includeImages;
+          includeImages == other.includeImages &&
+          localeCode == other.localeCode;
 
   @override
-  int get hashCode => Object.hash(themeMode, autoScanMode, includeImages);
+  int get hashCode =>
+      Object.hash(themeMode, autoScanMode, includeImages, localeCode);
 }
 

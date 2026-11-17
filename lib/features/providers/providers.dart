@@ -138,6 +138,8 @@ final settingsRepositoryProvider = Provider<SettingsRepository>((ref) {
 
 /// Notifier managing application settings state and persistence.
 class SettingsNotifier extends Notifier<AppSettings> {
+  bool _manuallyUpdated = false;
+
   @override
   AppSettings build() {
     _loadSettings();
@@ -146,25 +148,38 @@ class SettingsNotifier extends Notifier<AppSettings> {
 
   Future<void> _loadSettings() async {
     final repository = ref.read(settingsRepositoryProvider);
-    state = await repository.loadSettings();
+    final loaded = await repository.loadSettings();
+    if (!_manuallyUpdated) {
+      state = loaded;
+    }
   }
 
   Future<void> setThemeMode(ThemeMode mode) async {
+    _manuallyUpdated = true;
     state = state.copyWith(themeMode: mode);
     final repository = ref.read(settingsRepositoryProvider);
     await repository.saveThemeMode(mode);
   }
 
   Future<void> setAutoScanMode(AutoScanMode mode) async {
+    _manuallyUpdated = true;
     state = state.copyWith(autoScanMode: mode);
     final repository = ref.read(settingsRepositoryProvider);
     await repository.saveAutoScanMode(mode);
   }
 
   Future<void> setIncludeImages(bool include) async {
+    _manuallyUpdated = true;
     state = state.copyWith(includeImages: include);
     final repository = ref.read(settingsRepositoryProvider);
     await repository.saveIncludeImages(include);
+  }
+
+  Future<void> setLocaleCode(String? code) async {
+    _manuallyUpdated = true;
+    state = state.copyWith(localeCode: code, clearLocaleCode: code == null);
+    final repository = ref.read(settingsRepositoryProvider);
+    await repository.saveLocaleCode(code);
   }
 }
 
@@ -172,6 +187,16 @@ class SettingsNotifier extends Notifier<AppSettings> {
 final settingsProvider = NotifierProvider<SettingsNotifier, AppSettings>(
   SettingsNotifier.new,
 );
+
+/// Provider exposing active [Locale] or null for system default.
+final localeProvider = Provider<Locale?>((ref) {
+  final code = ref.watch(settingsProvider.select((s) => s.localeCode));
+  if (code == null) return null;
+  if (code == 'en_XA') {
+    return const Locale('en', 'XA');
+  }
+  return Locale(code);
+});
 
 /// Notifier tracking background scan state, progress counts, and completion.
 class ScanStateNotifier extends Notifier<ScanProgress> {

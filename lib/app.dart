@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,7 @@ import 'core/theme/app_theme.dart';
 import 'data/models/app_settings.dart';
 import 'features/files/open_document.dart';
 import 'features/providers/providers.dart';
+import 'l10n/app_localizations.dart';
 
 /// Root application widget configuring themes, routing, and lifecycle-driven startup scanning.
 class DocReaderApp extends ConsumerStatefulWidget {
@@ -203,6 +205,7 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
   Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
     final settings = ref.watch(settingsProvider);
+    final locale = ref.watch(localeProvider);
 
     return MaterialApp.router(
       title: AppConstants.appName,
@@ -210,6 +213,23 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: settings.themeMode,
+      locale: locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: kReleaseMode
+          ? const [Locale('en')]
+          : AppLocalizations.supportedLocales,
+      localeResolutionCallback: (deviceLocale, supportedLocales) {
+        if (deviceLocale != null) {
+          for (final supported in supportedLocales) {
+            if (supported.languageCode == deviceLocale.languageCode &&
+                (supported.countryCode == null ||
+                    supported.countryCode == deviceLocale.countryCode)) {
+              return supported;
+            }
+          }
+        }
+        return const Locale('en');
+      },
       routerConfig: router,
       builder: (context, child) {
         final isDark = Theme.of(context).brightness == Brightness.dark;
