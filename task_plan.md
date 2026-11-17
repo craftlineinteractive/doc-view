@@ -1,57 +1,74 @@
-# Task Plan: Phase 8 - Final QA, Ad Placement Audit, Accessibility, Responsive Harness & Release Polish
+# Task Plan: G1a Localization Infrastructure & String Extraction
 
 ## Scope Guard & Hard Rules
-- UI layer only. Tools tab has EXACTLY 4 tools (Image to PDF, Scan to PDF, Merge PDF, Split PDF).
-- Keep all existing behavior, providers, services and tests working.
-- Use only shared components, tokens and ad placeholders from R-B; NO new packages.
-- FORBIDDEN: premium, "Remove ads", purchases, Language row, OCR, Print, Add Password, Unlock, Signature, "Share via Secure Link", Compress, Annotate, conversions, a toolkit sheet, help or marketing modals, invented error codes, network or cloud features, hard-coded demo documents, "Engine 4.18", "2 Utilities", "Validated Catalog Buffer", JetBrains Mono.
-- GIT COMMIT RULE: Commit ONLY when a task is fully completed AND QA-verified. Stage files by explicit path. Conventional Commits format with QA and Deviations lines. Make separate commits per area. Never push, amend or force. Show hash and `git log -1 --stat` after each commit.
+- **UI layer only**: keep all behavior, providers, services and existing tests working. The Tools tab and its exactly-4-tools test remain UNTOUCHED.
+- **No new features**: English only in release + debug pseudo-locale (`en_XA`). NO translations into other languages or machine translation.
+- **Packages**: Only `flutter_localizations` (sdk: flutter) is added. `intl` is already installed.
+- **Forbidden**: OCR, network/cloud, hardcoded demo documents.
+- **Git Commit Rule**: Commit ONLY when an area is complete & QA-verified (`flutter analyze` clean, `flutter test` passing, emulator verified). Conventional Commits per area. Stage by explicit path. Never push.
 
 ## Milestones & Status
 
-- [x] **Step 0: Loose Ends from R-F1 & Evidence Collection**
-  - [x] 0a: FAQ question ordering (1: All files access, 2: iPhone scan [expanded by default], 3: Where PDFs saved, 4: Word look different, 5: Password-protected, 6: Data uploaded). Restored and verified.
-  - [x] 0b: Scan settings: replaced inline progress spinner on "Rescan now" with "Scanning... N files found" text + slim LinearProgressIndicator. Eliminated spinners from redesigned UI.
-  - [x] 0c: Storage diagnostics card (Android): granted -> "All files access granted" (success tint) + "Open settings"; not granted -> "All files access needed" (warning tint) + "Grant access" (trigger request). Verified both states on emulator.
-  - [x] 0d: Step 0 evidence:
-    - Grep `lib/` for forbidden terms, sample names, hex values, and count `Color(0x`. (0 forbidden hits).
-    - Output correctness: automated tests for merge order (C, A, B -> 9 pages) and split ranges ("1-3, 5, 8-10" & "Every 5 pages").
-    - Cold start: 3 runs in light and dark mode with screenshots confirming zero flash.
-  - [x] Commit Step 0 fixes: `fc98a20 fix(settings): restore faq order, progress bar, and storage diagnostics`
+- [x] **Step 0: Baseline Verification & Clean Tree Report**
+  - [x] Check git status (clean) and log (-5 commits).
+  - [x] Baseline analyze (0 issues) and test count (175 passing).
 
-- [x] **Step 1: Ad Placement Audit (`docs/redesign/06_ad_placement_audit.md`)**
-  - [x] 1a: Walk all 26 screens against Section 6 ad rules and owner decisions (ad-free vs allowed surfaces).
-  - [x] 1b: Verify 16pt clearance, "Ad" chip on all native rows, selection mode ad suppression, and release collapse (`AdConfig.showPlaceholders`).
-  - [x] 1c: Write `docs/redesign/06_ad_placement_audit.md` with full compliance table.
-  - [x] 1d: Add widget test asserting ad-free screens contain no ad widgets and release collapse leaves no margins.
-  - [x] Commit: `9ba1ab6 fix(ads): enforce strict ad placement rules and clearance`
+- [x] **Task 1: Localization Infrastructure (build(l10n))**
+  - [x] Add `flutter_localizations` & `generate: true` to `pubspec.yaml`.
+  - [x] Create `l10n.yaml` (arb-dir: lib/l10n, template-arb-file: app_en.arb).
+  - [x] Create `lib/core/extensions/l10n_extension.dart` (`context.l10n`).
+  - [x] Create `tool/gen_pseudo_locale.dart` for debug-only `en_XA` generation.
+  - [x] Add unit test `test/l10n/pseudo_locale_generator_test.dart`.
+  - [x] Commit: `f2ee13f build(l10n): setup flutter l10n infrastructure and pseudo-locale generator`.
 
-- [x] **Step 2: Accessibility Audit & Hardening**
-  - [x] 2a: Semantics labels for icon buttons, file rows, category tiles, tool cards, selection state, page pill, ad chips.
-  - [x] 2b: Contrast check (>= 4.5:1 normal, >= 3:1 large/icons) in light and dark.
-  - [x] 2c: Touch targets >= 48x48 hit areas across all interactive elements.
-  - [x] 2d: Automated accessibility guideline tests (`androidTapTargetGuideline`, `labeledTapTargetGuideline`, `textContrastGuideline`).
-  - [x] Commit: `971659c fix(a11y): enhance semantics, touch targets, and contrast compliance`
+- [x] **Task 2: Locale Setting & Provider (feat(settings))**
+  - [x] Add nullable `localeCode` to `SettingsRepository` with SharedPreferences persistence.
+  - [x] Add `localeProvider` watched by `MaterialApp` in `lib/app.dart`.
+  - [x] Fallback to null (system default) on invalid/unsupported stored code.
+  - [x] Unit tests for persistence round-trip and fallback.
+  - [x] Commit: `d96d7ef feat(settings): add persisted locale code setting and live app provider`.
 
-- [x] **Step 3: Responsive & Text-Scale Harness**
-  - [x] 3a: Write test harness testing screens at 360x640, 393x852, 412x915 and text scales 1.0, 1.3, 2.0.
-  - [x] 3b: Fix any RenderFlex overflows detected (CategoryTile grid, SkeletonTileGrid, FaqScreen header, SplitScreen summary, ToolsScreen AppBar).
-  - [x] 3c: Check landscape orientation on Home and document viewer.
-  - [x] Commit: `4331fc3 fix(layout): resolve responsive and high text-scale layout overflows`
+- [x] **Task 3: Conventions Documentation (docs(l10n))**
+  - [x] Write `docs/l10n/README.md` covering key naming, @description, ICU plurals, untranslatable terms, glossary, and how-tos.
+  - [x] Commit: `63fb8a7 docs(l10n): add localization guidelines, glossary, and conventions`.
 
-- [x] **Step 4: System UI & Back Behavior**
-  - [x] 4a: Verified gesture navigation and 3-button navigation on Android emulator.
-  - [x] 4b: Verified transparent system bars, nav bar clearance, selection mode back, Directories folder-up back, viewer/dialog dismissal.
+- [x] **Task 4: Formatting Utilities (refactor(core))**
+  - [x] Update `lib/core/utils/format_utils.dart` to format dates, numbers, and file sizes using active locale.
+  - [x] Unit tests with `en` and decimal-comma locale (`de`/`fr`).
+  - [x] Report intl Arabic digits behavior.
+  - [x] Commit: `4a0c365 refactor(core): make format utils locale-aware with intl`.
 
-- [x] **Step 5: Dead Code Audit & Cleanup**
-  - [x] 5a: Grep for unused files, widgets, and providers created prior to redesign.
-  - [x] 5b: Deleted unreferenced `LibraryPdfPickerScreen` and duplicate `ToolResultBottomSheet`.
-  - [x] 5c: Verified `ComponentGalleryScreen` is strictly unreachable in release builds.
-  - [x] Commit: `b5aea32 refactor(tools): remove unused pre-redesign dead code`
+- [x] **Task 5: Guardrail Test (test(l10n))**
+  - [x] Create `test/l10n/hardcoded_allowlist.txt`.
+  - [x] Create `test/l10n/no_hardcoded_strings_test.dart` for regex linting of migrated areas.
+  - [x] Commit: `3b52a3b test(l10n): add no hardcoded strings guardrail test and allowlist`.
 
-- [x] **Step 6: Release Build & Final QA Report (`docs/redesign/07_qa_report.md`)**
-  - [x] 6a: Run `flutter analyze` (0 issues) and `flutter test` (175 passed).
-  - [x] 6b: Run `flutter build apk --release` (62.4MB) and `flutter build appbundle --release` (54.1MB).
-  - [x] 6c: Install release APK on emulator and verify Light (`#FFFFFF`) and Dark (`#1A1D29`) modes.
-  - [x] 6d: Write `docs/redesign/07_qa_report.md` with mockup comparison table and deviations list.
-  - [x] Commit: `95d1d0a docs: ad placement audit and final qa report`
+- [x] **Task 6: String Extraction & RTL - Core & Shared (refactor(l10n))**
+  - [x] Extract user-facing strings in `lib/core` and `lib/shared`.
+  - [x] Convert to directional paddings/alignments and RTL chevrons.
+  - [x] Commit: `dec2502 refactor(l10n): localize core and shared widgets with RTL directionals`.
+
+- [x] **Task 7: String Extraction & RTL - Launch Flow (refactor(l10n))**
+  - [x] Extract strings in `lib/features/splash/`, `lib/features/onboarding/`, `lib/features/permissions/`.
+  - [x] Convert to directional layout.
+  - [x] Commit: `e485e77 refactor(l10n): localize launch onboarding and permission flows`.
+
+- [x] **Task 8: String Extraction & RTL - Home, Search, Lists, Image Grid, Sort Sheet (refactor(l10n))**
+  - [x] Extract strings in Home (tabs, tiles, empty states, scan progress).
+  - [x] Extract strings in Search, Category lists, Image grid, Sort sheet.
+  - [x] Convert to directional layout.
+  - [x] Enforce 0 violations in `no_hardcoded_strings_test.dart`.
+  - [x] Commit: `0688a66 refactor(l10n): localize home, search, files, and sort sheets`.
+
+- [x] **Task 9: Test Infrastructure, Dev Gallery & QA (test(l10n))**
+  - [x] Create `test/helpers/pump_app.dart`.
+  - [x] Add "Pseudo-locale (en_XA)" and "Force RTL" switches to dev gallery.
+  - [x] Add automated widget tests for `en_XA` and RTL overflow at scale 1.0 & 2.0 (`test/l10n/l10n_overflow_and_rtl_test.dart`).
+  - [x] Fix artwork scaling and responsive row layout under high text scales.
+  - [x] Commit: `e16dc17 test(l10n): add pump_app test helper, dev gallery toggles, and l10n overflow harness`.
+
+- [x] **Task 10: Final Inventory & Report**
+  - [x] Count extracted ARB keys (265 ARB entries).
+  - [x] Guardrail scan: 0 violations across all 8 target directories.
+  - [x] All 206 tests passing, 0 analyzer issues.
+  - [x] Strict separation of deferred G1b areas preserved.

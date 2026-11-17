@@ -151,3 +151,4 @@ flutter test test/l10n/pseudo_locale_generator_test.dart
 ```
 
 In release builds (`kReleaseMode`), `en_XA` is automatically stripped from `supportedLocales` and cannot be activated.
+
