@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:docview/core/constants/file_types.dart';
+import 'package:docview/core/errors/app_errors.dart';
 import 'package:docview/core/utils/file_name_utils.dart';
 import 'package:docview/core/utils/format_utils.dart';
 import 'package:docview/core/utils/page_range_parser.dart';
@@ -270,39 +271,84 @@ void main() {
     });
 
     test('rejects empty inputs or empty segments', () {
-      expect(() => parsePageRanges('', 5), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('   ', 5), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('1, , 3', 5), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('1, 2,', 5), throwsA(isA<PageRangeParseException>()));
+      expect(
+        () => parsePageRanges('', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.empty)),
+      );
+      expect(
+        () => parsePageRanges('   ', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.empty)),
+      );
+      expect(
+        () => parsePageRanges('1, , 3', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.emptySegment)),
+      );
+      expect(
+        () => parsePageRanges('1, 2,', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.emptySegment)),
+      );
     });
 
     test('rejects zero or negative page numbers', () {
-      expect(() => parsePageRanges('0', 5), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('0-3', 5), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('-1', 5), throwsA(isA<PageRangeParseException>()));
+      expect(
+        () => parsePageRanges('0', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.belowMinimum)),
+      );
+      expect(
+        () => parsePageRanges('0-3', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.belowMinimum)),
+      );
+      expect(
+        () => parsePageRanges('-1', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.incompleteRange)),
+      );
     });
 
     test('rejects reversed ranges (start > end)', () {
-      expect(() => parsePageRanges('5-2', 10), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('3-1', 5), throwsA(isA<PageRangeParseException>()));
+      expect(
+        () => parsePageRanges('5-2', 10),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.reversedRange)),
+      );
+      expect(
+        () => parsePageRanges('3-1', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.reversedRange)),
+      );
     });
 
     test('rejects out of range pages exceeding total page count', () {
-      expect(() => parsePageRanges('11', 10), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('8-12', 10), throwsA(isA<PageRangeParseException>()));
+      expect(
+        () => parsePageRanges('11', 10),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.exceedsPageCount)),
+      );
+      expect(
+        () => parsePageRanges('8-12', 10),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.exceedsPageCount)),
+      );
     });
 
     test('rejects non-numeric tokens and malformed hyphens', () {
-      expect(() => parsePageRanges('abc', 5), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('1-two', 5), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('1--3', 5), throwsA(isA<PageRangeParseException>()));
-      expect(() => parsePageRanges('1-2-3', 5), throwsA(isA<PageRangeParseException>()));
+      expect(
+        () => parsePageRanges('abc', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.invalidPageNumber)),
+      );
+      expect(
+        () => parsePageRanges('1-two', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.nonNumeric)),
+      );
+      expect(
+        () => parsePageRanges('1--3', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.invalidFormat)),
+      );
+      expect(
+        () => parsePageRanges('1-2-3', 5),
+        throwsA(predicate<PageRangeParseException>((e) => e.reason == PageRangeErrorReason.invalidFormat)),
+      );
     });
 
     test('validatePageRanges returns null for valid and error string for invalid', () {
       expect(validatePageRanges('1-3, 5', 5), isNull);
-      expect(validatePageRanges('5-2', 5), isNotNull);
-      expect(validatePageRanges('6', 5), isNotNull);
+      expect(validatePageRanges('5-2', 5)?.reason, equals(PageRangeErrorReason.reversedRange));
+      expect(validatePageRanges('6', 5)?.reason, equals(PageRangeErrorReason.exceedsPageCount));
     });
   });
 

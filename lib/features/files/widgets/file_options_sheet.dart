@@ -6,6 +6,8 @@ import 'package:open_filex/open_filex.dart';
 import 'package:path/path.dart' as p;
 
 import '../../../core/constants/file_types.dart';
+import '../../../core/errors/app_errors.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/utils/file_name_utils.dart';
 import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
@@ -106,7 +108,7 @@ class FileOptionsSheet extends ConsumerWidget {
             // Action: Open
             _ActionTile(
               icon: Icons.visibility_outlined,
-              label: 'Open',
+              label: context.l10n.actionOpen,
               onTap: () {
                 Navigator.of(context).pop();
                 openDocument(targetContext, ref, file);
@@ -116,7 +118,7 @@ class FileOptionsSheet extends ConsumerWidget {
             // Action: Share
             _ActionTile(
               icon: Icons.share_outlined,
-              label: 'Share',
+              label: context.l10n.actionShare,
               onTap: () {
                 final actionsController = ref.read(fileActionsControllerProvider);
                 Navigator.of(context).pop();
@@ -127,7 +129,7 @@ class FileOptionsSheet extends ConsumerWidget {
             // Action: Rename
             _ActionTile(
               icon: Icons.drive_file_rename_outline,
-              label: 'Rename',
+              label: context.l10n.actionRename,
               onTap: () {
                 Navigator.of(context).pop();
                 _showRenameDialog(targetContext, file);
@@ -138,7 +140,9 @@ class FileOptionsSheet extends ConsumerWidget {
             _ActionTile(
               icon: file.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
               iconColor: file.isBookmarked ? colorScheme.primary : null,
-              label: file.isBookmarked ? 'Remove bookmark' : 'Bookmark',
+              label: file.isBookmarked
+                  ? context.l10n.actionRemoveBookmark
+                  : context.l10n.actionBookmark,
               onTap: () {
                 final actionsController = ref.read(fileActionsControllerProvider);
                 Navigator.of(context).pop();
@@ -149,7 +153,7 @@ class FileOptionsSheet extends ConsumerWidget {
             // Action: Open in another app
             _ActionTile(
               icon: Icons.launch_outlined,
-              label: 'Open in another app',
+              label: context.l10n.actionOpenInAnotherApp,
               onTap: () async {
                 Navigator.of(context).pop();
                 final result = await OpenFilex.open(file.path);
@@ -159,7 +163,7 @@ class FileOptionsSheet extends ConsumerWidget {
                       content: Text(
                         result.message.isNotEmpty
                             ? result.message
-                            : 'Could not open in external application',
+                            : targetContext.l10n.errorCouldNotOpenDocument(file.name),
                       ),
                     ),
                   );
@@ -170,7 +174,7 @@ class FileOptionsSheet extends ConsumerWidget {
             // Action: Details
             _ActionTile(
               icon: Icons.info_outline,
-              label: 'Details',
+              label: context.l10n.actionDetails,
               onTap: () {
                 Navigator.of(context).pop();
                 FileDetailsSheet.show(targetContext, file);
@@ -180,7 +184,7 @@ class FileOptionsSheet extends ConsumerWidget {
             // Action: Delete
             _ActionTile(
               icon: Icons.delete_outline,
-              label: 'Delete',
+              label: context.l10n.actionDelete,
               textColor: colorScheme.error,
               iconColor: colorScheme.error,
               onTap: () {
@@ -233,65 +237,73 @@ class FileOptionsSheet extends ConsumerWidget {
     showDialog<void>(
       context: parentContext,
       builder: (dialogContext) {
-        String? errorMessage;
+        FileNameValidationError? validationError;
 
         return Consumer(
           builder: (consumerContext, ref, _) {
             return StatefulBuilder(
               builder: (stateContext, setState) {
                 final currentText = controller.text.trim();
-                final isValid = errorMessage == null &&
+                final isValid = validationError == null &&
                     currentText.isNotEmpty &&
                     currentText != baseName;
 
                 return AlertDialog(
-                  title: const Text('Rename file'),
+                  title: Text(stateContext.l10n.renameFileTitle),
                   content: TextField(
                     controller: controller,
                     autofocus: true,
                     decoration: InputDecoration(
-                      labelText: 'File name',
+                      labelText: stateContext.l10n.renameFileNameLabel,
                       suffixText: ext.isNotEmpty ? ext : null,
-                      errorText: errorMessage,
+                      errorText: validationError?.localizedMessage(stateContext),
                     ),
                     onChanged: (value) {
                       setState(() {
-                        errorMessage = validateFileName(value);
+                        validationError = validateFileName(value);
                       });
                     },
                   ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(dialogContext).pop(),
-                      child: const Text('Cancel'),
+                      child: Text(stateContext.l10n.actionCancel),
                     ),
                     FilledButton(
                       onPressed: isValid
                           ? () async {
                               final newBaseName = controller.text.trim();
                               final actionsController =
-                                  ref.read(fileActionsControllerProvider);
+                                   ref.read(fileActionsControllerProvider);
                               Navigator.of(dialogContext).pop();
                               final result = await actionsController
                                   .renameFile(file, newBaseName);
 
+                              if (!parentContext.mounted) return;
+
                               if (result is RenameSuccess) {
                                 messenger.showSnackBar(
                                   SnackBar(
-                                    content: Text('Renamed to ${result.updatedFile.name}'),
+                                    content: Text(
+                                      parentContext.l10n.renamedSuccess(
+                                        result.updatedFile.name,
+                                      ),
+                                    ),
                                   ),
                                 );
                               } else if (result is RenameFailure) {
                                 messenger.showSnackBar(
                                   SnackBar(
-                                    content: Text(result.errorMessage),
+                                    content: Text(
+                                      result.localizedMessage(parentContext),
+                                    ),
                                     backgroundColor: errorColor,
                                   ),
                                 );
                               }
                             }
                           : null,
-                      child: const Text('Rename'),
+                      child: Text(stateContext.l10n.actionRename),
                     ),
                   ],
                 );
@@ -316,12 +328,12 @@ class FileOptionsSheet extends ConsumerWidget {
         return Consumer(
           builder: (consumerContext, ref, _) {
             return AlertDialog(
-              title: const Text('Delete file?'),
-              content: Text('Delete "${file.name}"? This can\'t be undone.'),
+              title: Text(dialogContext.l10n.deleteFileTitle),
+              content: Text(dialogContext.l10n.deleteFileConfirmation(file.name)),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(dialogContext).pop(),
-                  child: const Text('Cancel'),
+                  child: Text(dialogContext.l10n.actionCancel),
                 ),
                 FilledButton(
                   style: FilledButton.styleFrom(
@@ -334,22 +346,29 @@ class FileOptionsSheet extends ConsumerWidget {
                     Navigator.of(dialogContext).pop();
                     final result = await actionsController.deleteFiles([file]);
 
+                    if (!parentContext.mounted) return;
+
                     if (result.hasDeletions) {
                       messenger.showSnackBar(
-                        SnackBar(content: Text('Deleted "${file.name}"')),
+                        SnackBar(
+                          content: Text(
+                            parentContext.l10n.deletedFileSuccess(file.name),
+                          ),
+                        ),
                       );
                     } else {
                       messenger.showSnackBar(
                         SnackBar(
                           content: Text(
-                            result.errorMessage ?? 'Failed to delete file',
+                            result.localizedMessage(parentContext) ??
+                                parentContext.l10n.filesDeleteFailed,
                           ),
                           backgroundColor: errorColor,
                         ),
                       );
                     }
                   },
-                  child: const Text('Delete'),
+                  child: Text(dialogContext.l10n.actionDelete),
                 ),
               ],
             );

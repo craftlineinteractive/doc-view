@@ -605,5 +605,837 @@
   "emptyCategoryDocsMessage": "Documents of this format will appear here after scanning",
   "@emptyCategoryDocsMessage": {
     "description": "Message when a document category has no files"
+  },
+  "actionOpen": "Open",
+  "@actionOpen": {
+    "description": "Action button label to open a document"
+  },
+  "actionShare": "Share",
+  "@actionShare": {
+    "description": "Action button label to share a document"
+  },
+  "actionRename": "Rename",
+  "@actionRename": {
+    "description": "Action button label to rename a document"
+  },
+  "actionBookmark": "Bookmark",
+  "@actionBookmark": {
+    "description": "Action button label to bookmark a document"
+  },
+  "actionRemoveBookmark": "Remove bookmark",
+  "@actionRemoveBookmark": {
+    "description": "Action button label to remove bookmark from a document"
+  },
+  "actionOpenInAnotherApp": "Open in another app",
+  "@actionOpenInAnotherApp": {
+    "description": "Action button label to open a document in an external application"
+  },
+  "actionDetails": "Details",
+  "@actionDetails": {
+    "description": "Action button label to view document details"
+  },
+  "actionOpenFile": "Open file",
+  "@actionOpenFile": {
+    "description": "Primary button label to open the active file"
+  },
+  "actionShareAll": "Share All",
+  "@actionShareAll": {
+    "description": "Action button label to share all generated files"
+  },
+  "actionDone": "Done",
+  "@actionDone": {
+    "description": "Action button label to finish flow"
+  },
+  "actionRetry": "Retry",
+  "@actionRetry": {
+    "description": "Action button label to retry a failed operation"
+  },
+  "actionSeeAll": "See All",
+  "@actionSeeAll": {
+    "description": "Action link to see all items in a section"
+  },
+  "actionAllow": "Allow",
+  "@actionAllow": {
+    "description": "Action button label to grant permission"
+  },
+  "actionNotNow": "Not now",
+  "@actionNotNow": {
+    "description": "Action button label to dismiss or postpone permission prompt"
+  },
+  "tooltipMoreActions": "More actions",
+  "@tooltipMoreActions": {
+    "description": "Tooltip for the more actions button on a file row"
+  },
+  "tooltipCopyPath": "Copy path",
+  "@tooltipCopyPath": {
+    "description": "Tooltip for copy path button"
+  },
+  "tooltipRotatePage": "Rotate page",
+  "@tooltipRotatePage": {
+    "description": "Tooltip for rotating a page"
+  },
+  "tooltipRemovePage": "Remove page",
+  "@tooltipRemovePage": {
+    "description": "Tooltip for removing a page"
+  },
+  "renameFileTitle": "Rename file",
+  "@renameFileTitle": {
+    "description": "Title of the file rename dialog"
+  },
+  "renameFileNameLabel": "File name",
+  "@renameFileNameLabel": {
+    "description": "Input field label for new file name"
+  },
+  "renamedSuccess": "Renamed to {fileName}",
+  "@renamedSuccess": {
+    "description": "Snackbar shown when a file is successfully renamed",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteFileTitle": "Delete file?",
+  "@deleteFileTitle": {
+    "description": "Title of single file deletion confirmation dialog"
+  },
+  "deleteFileConfirmation": "Delete \"{fileName}\"? This can't be undone.",
+  "@deleteFileConfirmation": {
+    "description": "Body message asking confirmation to delete a single file",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "deletedFileSuccess": "Deleted \"{fileName}\"",
+  "@deletedFileSuccess": {
+    "description": "Snackbar message when a file is deleted",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "fileDetailsTitle": "Document Details",
+  "@fileDetailsTitle": {
+    "description": "Header title of the document details sheet"
+  },
+  "fileDetailsLabelName": "Name",
+  "@fileDetailsLabelName": {
+    "description": "Label for file name metadata row"
+  },
+  "fileDetailsLabelType": "Type",
+  "@fileDetailsLabelType": {
+    "description": "Label for file type metadata row"
+  },
+  "fileDetailsLabelSize": "Size",
+  "@fileDetailsLabelSize": {
+    "description": "Label for file size metadata row"
+  },
+  "fileDetailsLabelModified": "Modified",
+  "@fileDetailsLabelModified": {
+    "description": "Label for modified date metadata row"
+  },
+  "fileDetailsLabelBookmarked": "Bookmarked",
+  "@fileDetailsLabelBookmarked": {
+    "description": "Label for bookmarked status metadata row"
+  },
+  "fileDetailsValueYes": "Yes",
+  "@fileDetailsValueYes": {
+    "description": "Affirmative value in metadata details"
+  },
+  "fileDetailsValueNo": "No",
+  "@fileDetailsValueNo": {
+    "description": "Negative value in metadata details"
+  },
+  "fileDetailsLabelLocation": "Location",
+  "@fileDetailsLabelLocation": {
+    "description": "Label for file location/path in details sheet"
+  },
+  "fileDetailsPathCopied": "Path copied to clipboard",
+  "@fileDetailsPathCopied": {
+    "description": "Snackbar message when file path is copied to clipboard"
+  },
+  "directoriesTitle": "Directories",
+  "@directoriesTitle": {
+    "description": "AppBar title for the directories browser screen"
+  },
+  "directoriesGoBack": "Go back",
+  "@directoriesGoBack": {
+    "description": "Button label to navigate up one folder in empty/error directory state"
+  },
+  "directoriesGoToRoot": "Go to Root",
+  "@directoriesGoToRoot": {
+    "description": "Button label to return to the root folder"
+  },
+  "directoriesRetry": "Retry",
+  "@directoriesRetry": {
+    "description": "Button label to retry loading directory"
+  },
+  "directoriesFileNoLongerExists": "File no longer exists",
+  "@directoriesFileNoLongerExists": {
+    "description": "Snackbar message when tapping a file that was deleted on disk"
+  },
+  "directoriesFolderNoLongerExists": "This folder no longer exists.",
+  "@directoriesFolderNoLongerExists": {
+    "description": "Empty state title when a directory is deleted"
+  },
+  "directoriesNoDocsInFolder": "No documents in this folder",
+  "@directoriesNoDocsInFolder": {
+    "description": "Headline when a directory contains no supported documents"
+  },
+  "directoriesFilesAppearHere": "Files will appear here once added",
+  "@directoriesFilesAppearHere": {
+    "description": "Subtitle when a directory contains no supported documents"
+  },
+  "directoriesFolderSubtitle": "{count, plural, =1{1 item} other{{count} items}}",
+  "@directoriesFolderSubtitle": {
+    "description": "Item count subtitle on folder list tiles",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "directoriesFolderSubtitleDefault": "Folder",
+  "@directoriesFolderSubtitleDefault": {
+    "description": "Default subtitle for folders when count is unknown"
+  },
+  "directoriesPermissionPromptTitle": "Access required to view directories",
+  "@directoriesPermissionPromptTitle": {
+    "description": "Title for directory browser permission required state"
+  },
+  "directoriesPermissionPromptBody": "Doc View needs All files access to browse your folders.",
+  "@directoriesPermissionPromptBody": {
+    "description": "Body message explaining why directory browsing needs storage access"
+  },
+  "directoriesGrantAccess": "Grant access",
+  "@directoriesGrantAccess": {
+    "description": "Button label to request All files access"
+  },
+  "directoriesImportInstead": "Import files instead",
+  "@directoriesImportInstead": {
+    "description": "Button label to import individual files via system picker"
+  },
+  "directoriesImportedCount": "{count, plural, =1{Imported 1 file} other{Imported {count} files}}",
+  "@directoriesImportedCount": {
+    "description": "Snackbar message reporting number of imported files",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "directoriesTooltipUp": "Up one level",
+  "@directoriesTooltipUp": {
+    "description": "Tooltip for navigation button that ascends one folder level"
+  },
+  "storageAccessRequiredTitle": "Storage Access Required",
+  "@storageAccessRequiredTitle": {
+    "description": "Title of the storage access prompt dialog"
+  },
+  "storageAccessRequiredBody": "Doc View needs storage access to scan and display documents (PDF, Word, Excel, PPT, TXT, Images) stored on your device.\n\nYour files remain completely private and offline on your device.",
+  "@storageAccessRequiredBody": {
+    "description": "Body text of the storage access prompt dialog"
+  },
+  "errorCouldNotOpenDocument": "Could not open document: {error}",
+  "@errorCouldNotOpenDocument": {
+    "description": "Snackbar shown when opening an external document fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "scanCompleteWithCount": "{count, plural, =1{Scan complete: 1 file} other{Scan complete: {count} files}}",
+  "@scanCompleteWithCount": {
+    "description": "Snackbar notification after filesystem scan finishes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dialogClearSearchTitle": "Clear search history?",
+  "@dialogClearSearchTitle": {
+    "description": "Title for clear search history confirmation dialog"
+  },
+  "dialogClearSearchMessage": "All recent searches will be permanently cleared.",
+  "@dialogClearSearchMessage": {
+    "description": "Body message for clear search history confirmation dialog"
+  },
+  "imageListEditorMaxLimit": "Maximum limit of {max} images reached.",
+  "@imageListEditorMaxLimit": {
+    "description": "Snackbar message when user tries to add more than maximum allowed images",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "imageListEditorScanFailed": "Scanning failed: {error}",
+  "@imageListEditorScanFailed": {
+    "description": "Snackbar message when camera/scanner operation fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "imageListEditorPageSize": "Page Size:",
+  "@imageListEditorPageSize": {
+    "description": "Label for page size selector in image to PDF editor"
+  },
+  "imageListEditorA4Mode": "A4",
+  "@imageListEditorA4Mode": {
+    "description": "A4 page mode button label"
+  },
+  "imageListEditorFitMode": "Fit to image",
+  "@imageListEditorFitMode": {
+    "description": "Fit to image page mode button label"
+  },
+  "imageListEditorRemoveImageTooltip": "Remove image",
+  "@imageListEditorRemoveImageTooltip": {
+    "description": "Tooltip for button removing an image from the PDF editor list"
+  },
+  "mergeScreenTitle": "Arrange & merge",
+  "@mergeScreenTitle": {
+    "description": "AppBar title for PDF merge screen"
+  },
+  "mergeScreenDefaultMergedName": "Merged_Document",
+  "@mergeScreenDefaultMergedName": {
+    "description": "Default base filename for merged PDF document"
+  },
+  "mergePickerSearchHint": "Search PDFs...",
+  "@mergePickerSearchHint": {
+    "description": "Search field hint text in merge PDF picker"
+  },
+  "mergePickerNext": "Next",
+  "@mergePickerNext": {
+    "description": "Next button label in merge PDF picker"
+  },
+  "mergePickerErrorLoading": "Error loading PDFs: {error}",
+  "@mergePickerErrorLoading": {
+    "description": "Error message when loading PDFs in merge picker fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "splitScreenTitle": "Split PDF",
+  "@splitScreenTitle": {
+    "description": "AppBar title for PDF split screen"
+  },
+  "splitScreenRangeHint": "e.g. 1-3, 5, 8-10",
+  "@splitScreenRangeHint": {
+    "description": "Hint text for page range input in split screen"
+  },
+  "splitScreenClearRange": "Clear range",
+  "@splitScreenClearRange": {
+    "description": "Tooltip for clearing page range text in split screen"
+  },
+  "splitPickerSearchHint": "Search PDFs...",
+  "@splitPickerSearchHint": {
+    "description": "Search field hint text in split PDF picker"
+  },
+  "splitPickerErrorLoading": "Error loading files: {error}",
+  "@splitPickerErrorLoading": {
+    "description": "Error message when loading PDFs in split picker fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createdSectionTitle": "Created by you",
+  "@createdSectionTitle": {
+    "description": "Section header for documents created by user"
+  },
+  "createdSectionEmptyTitle": "PDFs you create appear here",
+  "@createdSectionEmptyTitle": {
+    "description": "Title on empty state card for created documents section"
+  },
+  "createdSectionEmptySubtitle": "Converted, scanned, or merged documents will be saved locally.",
+  "@createdSectionEmptySubtitle": {
+    "description": "Subtitle on empty state card for created documents section"
+  },
+  "emptyCreatedDocsTitle": "No created documents yet",
+  "@emptyCreatedDocsTitle": {
+    "description": "Title when created documents listing is empty"
+  },
+  "emptyCreatedDocsMessage": "Converted, scanned, or merged documents will appear here.",
+  "@emptyCreatedDocsMessage": {
+    "description": "Message when created documents listing is empty"
+  },
+  "errorLoadingCreatedFiles": "Failed to load created files: {error}",
+  "@errorLoadingCreatedFiles": {
+    "description": "Error message when loading created files fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "toolResultPdfCreated": "{count, plural, =1{PDF Created} other{{count} PDFs Created}}",
+  "@toolResultPdfCreated": {
+    "description": "Success headline in tool result bottom sheet",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "toolResultSavedSubtitle": "Saved to your Created folder",
+  "@toolResultSavedSubtitle": {
+    "description": "Subtitle in tool result sheet confirming save location"
+  },
+  "toolErrorDefaultTitle": "Couldn't create PDF",
+  "@toolErrorDefaultTitle": {
+    "description": "Default headline in tool error bottom sheet"
+  },
+  "toolErrorSubtitle": "An unexpected error occurred during processing",
+  "@toolErrorSubtitle": {
+    "description": "Subtitle explaining unexpected processing failure in tool error sheet"
+  },
+  "themeSheetTitle": "App theme",
+  "@themeSheetTitle": {
+    "description": "Header title of the theme selection bottom sheet"
+  },
+  "themeSheetSubtitle": "Select visual appearance for Doc View",
+  "@themeSheetSubtitle": {
+    "description": "Subtitle of the theme selection bottom sheet"
+  },
+  "themeModeSystem": "System",
+  "@themeModeSystem": {
+    "description": "Label for system theme mode option"
+  },
+  "themeModeSystemSubtitle": "default",
+  "@themeModeSystemSubtitle": {
+    "description": "Subtitle for system theme mode option"
+  },
+  "themeModeLight": "Light",
+  "@themeModeLight": {
+    "description": "Label for light theme mode option"
+  },
+  "themeModeLightSubtitle": "Clean white",
+  "@themeModeLightSubtitle": {
+    "description": "Subtitle for light theme mode option"
+  },
+  "themeModeDark": "Dark",
+  "@themeModeDark": {
+    "description": "Label for dark theme mode option"
+  },
+  "themeModeDarkSubtitle": "Deep navy",
+  "@themeModeDarkSubtitle": {
+    "description": "Subtitle for dark theme mode option"
+  },
+  "themeActionApply": "Apply theme",
+  "@themeActionApply": {
+    "description": "Button label to confirm and apply selected theme mode"
+  },
+  "scanSettingsTitle": "Scan settings",
+  "@scanSettingsTitle": {
+    "description": "Header title of the scan settings sub-screen"
+  },
+  "scanSettingsFrequencyHeader": "Scan frequency",
+  "@scanSettingsFrequencyHeader": {
+    "description": "Section header for scan frequency options"
+  },
+  "scanSettingsOnOpenTitle": "Scan on app open",
+  "@scanSettingsOnOpenTitle": {
+    "description": "Title of automatic scan on open option"
+  },
+  "scanSettingsOnOpenSubtitle": "Automatically find new files when you open Doc View.",
+  "@scanSettingsOnOpenSubtitle": {
+    "description": "Description of automatic scan on open option"
+  },
+  "scanSettingsManualTitle": "Manual only",
+  "@scanSettingsManualTitle": {
+    "description": "Title of manual scan mode option"
+  },
+  "scanSettingsManualSubtitle": "Only scan when you pull to refresh or tap Rescan.",
+  "@scanSettingsManualSubtitle": {
+    "description": "Description of manual scan mode option"
+  },
+  "scanSettingsMediaFiltersHeader": "Media filters",
+  "@scanSettingsMediaFiltersHeader": {
+    "description": "Section header for media file filtering options"
+  },
+  "scanSettingsIncludeImagesTitle": "Include images in scan",
+  "@scanSettingsIncludeImagesTitle": {
+    "description": "Title of toggle for including images in file indexing"
+  },
+  "scanSettingsIncludeImagesSubtitle": "Index PNG, JPG, and WEBP image files in storage.",
+  "@scanSettingsIncludeImagesSubtitle": {
+    "description": "Description of toggle for including images in file indexing"
+  },
+  "scanSettingsDiagnosticsHeader": "Storage & diagnostics",
+  "@scanSettingsDiagnosticsHeader": {
+    "description": "Section header for storage status and diagnostics"
+  },
+  "scanSettingsPermissionStatus": "All files access",
+  "@scanSettingsPermissionStatus": {
+    "description": "Label for permission status row in diagnostics"
+  },
+  "scanSettingsPermissionGranted": "Granted",
+  "@scanSettingsPermissionGranted": {
+    "description": "Value indicating storage permission is granted"
+  },
+  "scanSettingsPermissionNotGranted": "Not granted",
+  "@scanSettingsPermissionNotGranted": {
+    "description": "Value indicating storage permission is not granted"
+  },
+  "scanSettingsTotalIndexed": "Indexed files",
+  "@scanSettingsTotalIndexed": {
+    "description": "Label for count of indexed files in diagnostics"
+  },
+  "scanSettingsLastScan": "Last scanned",
+  "@scanSettingsLastScan": {
+    "description": "Label for timestamp of last filesystem scan"
+  },
+  "scanSettingsUpdatedSnackbar": "Scan settings updated",
+  "@scanSettingsUpdatedSnackbar": {
+    "description": "Snackbar message confirming scan settings change"
+  },
+  "faqScreenTitle": "Frequently Asked Questions",
+  "@faqScreenTitle": {
+    "description": "Header title of the FAQ screen"
+  },
+  "faqHeaderTopics": "{count} Topics",
+  "@faqHeaderTopics": {
+    "description": "Chip label displaying total number of topics in FAQ",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "faqHeaderSubtitle": "Got questions? Find clear answers here.",
+  "@faqHeaderSubtitle": {
+    "description": "Subtitle under FAQ screen header"
+  },
+  "faqSendFeedback": "Send feedback",
+  "@faqSendFeedback": {
+    "description": "Button label to contact support or send feedback"
+  },
+  "faqQuestion1": "Why does Doc View need All files access?",
+  "@faqQuestion1": {
+    "description": "FAQ question 1 regarding storage permissions"
+  },
+  "faqAnswer1": "Doc View requires All files access (MANAGE_EXTERNAL_STORAGE) on Android 11+ to discover and index supported documents (PDF, Word, Excel, PowerPoint, Text, and Images) stored in shared folders such as Downloads and Documents.\n\nWithout this permission, Android restricts file access to the app's private internal folder, preventing Doc View from browsing or opening files located across your device.",
+  "@faqAnswer1": {
+    "description": "FAQ answer 1 regarding storage permissions"
+  },
+  "faqQuestion2": "Why doesn't it scan my whole iPhone?",
+  "@faqQuestion2": {
+    "description": "FAQ question 2 regarding iOS sandboxing"
+  },
+  "faqAnswer2": "iOS uses strict app sandboxing to safeguard device privacy. Apps can only access documents explicitly saved inside the Files app or shared via the system Share Sheet.\n\nTo view files on iOS, import them into the Doc View folder in the native Files app or use the Import files option in Settings.",
+  "@faqAnswer2": {
+    "description": "FAQ answer 2 regarding iOS sandboxing"
+  },
+  "faqQuestion3": "Where are the PDFs I create saved?",
+  "@faqQuestion3": {
+    "description": "FAQ question 3 regarding generated file storage location"
+  },
+  "faqAnswer3": "Files you import or generate (such as converted PDFs, merged documents, or split pages) are saved securely in your device storage under DocView/Created or private app storage. You can view them anytime in the Created by you section on the Tools tab.",
+  "@faqAnswer3": {
+    "description": "FAQ answer 3 regarding generated file storage location"
+  },
+  "faqQuestion4": "Why does my Word file look different?",
+  "@faqQuestion4": {
+    "description": "FAQ question 4 regarding offline office rendering"
+  },
+  "faqAnswer4": "Doc View renders files directly on your device using local offline parsers without sending private data to cloud converters. Complex formatting or custom shapes render with native offline approximations.",
+  "@faqAnswer4": {
+    "description": "FAQ answer 4 regarding offline office rendering"
+  },
+  "faqQuestion5": "Can I open password-protected files?",
+  "@faqQuestion5": {
+    "description": "FAQ question 5 regarding encrypted PDF support"
+  },
+  "faqAnswer5": "Yes, Doc View supports opening password-protected PDF documents. When opening an encrypted PDF, enter the password in the dialog to decrypt and view the document on your device.",
+  "@faqAnswer5": {
+    "description": "FAQ answer 5 regarding encrypted PDF support"
+  },
+  "faqQuestion6": "Is my data uploaded anywhere?",
+  "@faqQuestion6": {
+    "description": "FAQ question 6 regarding privacy and data policy"
+  },
+  "faqAnswer6": "Your documents never leave your device. Doc View opens, converts and stores files locally. The app shows ads served by Google AdMob, which can use limited device data as described in our Privacy Policy.",
+  "@faqAnswer6": {
+    "description": "FAQ answer 6 regarding privacy and data policy"
+  },
+  "pdfGotoPageTitle": "Go to page",
+  "@pdfGotoPageTitle": {
+    "description": "Title of the jump to page dialog in PDF viewer"
+  },
+  "pdfGotoPageHint": "Enter a page between 1 and {pageCount}",
+  "@pdfGotoPageHint": {
+    "description": "Input hint for page jump dialog",
+    "placeholders": {
+      "pageCount": {
+        "type": "int"
+      }
+    }
+  },
+  "pdfGotoPageAction": "Go",
+  "@pdfGotoPageAction": {
+    "description": "Action button label to jump to specified page"
+  },
+  "pdfGotoPageErrorEmpty": "Enter a page number",
+  "@pdfGotoPageErrorEmpty": {
+    "description": "Validation error when jump page input is empty"
+  },
+  "pdfGotoPageErrorOutOfRange": "Enter a page between 1 and {pageCount}",
+  "@pdfGotoPageErrorOutOfRange": {
+    "description": "Validation error when jump page input is out of range",
+    "placeholders": {
+      "pageCount": {
+        "type": "int"
+      }
+    }
+  },
+  "pdfPasswordTitle": "This PDF is password-protected",
+  "@pdfPasswordTitle": {
+    "description": "Title of the password-protected PDF unlock dialog"
+  },
+  "pdfPasswordSubtitle": "Enter password to view and decrypt the contents.",
+  "@pdfPasswordSubtitle": {
+    "description": "Subtitle of the password-protected PDF unlock dialog"
+  },
+  "pdfPasswordHint": "Enter password",
+  "@pdfPasswordHint": {
+    "description": "Hint text for PDF password input field"
+  },
+  "pdfPasswordErrorIncorrect": "Incorrect password. Try again.",
+  "@pdfPasswordErrorIncorrect": {
+    "description": "Inline error banner when submitted PDF password is wrong"
+  },
+  "pdfPasswordActionUnlock": "Unlock",
+  "@pdfPasswordActionUnlock": {
+    "description": "Action button label to unlock password-protected PDF"
+  },
+  "errorFileNameEmpty": "File name cannot be empty",
+  "@errorFileNameEmpty": {
+    "description": "Validation error when file name is blank"
+  },
+  "errorFileNameTooLong": "File name cannot exceed 120 characters",
+  "@errorFileNameTooLong": {
+    "description": "Validation error when file name exceeds length limit"
+  },
+  "errorFileNameReserved": "File name cannot be '.' or '..'",
+  "@errorFileNameReserved": {
+    "description": "Validation error when file name is reserved dot or double-dot"
+  },
+  "errorFileNameStartsWithDot": "File name cannot start with a dot",
+  "@errorFileNameStartsWithDot": {
+    "description": "Validation error when file name begins with a period"
+  },
+  "errorFileNameInvalidChars": "File name contains invalid characters",
+  "@errorFileNameInvalidChars": {
+    "description": "Validation error when file name has illegal characters"
+  },
+  "errorRenameAlreadyExists": "A file with this name already exists in this folder",
+  "@errorRenameAlreadyExists": {
+    "description": "Error message when rename target file already exists"
+  },
+  "errorRenameSourceNotFound": "Source file no longer exists on disk",
+  "@errorRenameSourceNotFound": {
+    "description": "Error message when renaming a file that was deleted on disk"
+  },
+  "errorRenameFailed": "Failed to rename file: {details}",
+  "@errorRenameFailed": {
+    "description": "Error message when file rename IO fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "errorDeleteDatabaseFailed": "Files deleted from disk but database update failed",
+  "@errorDeleteDatabaseFailed": {
+    "description": "Error message when file deletion succeeded on disk but database sync failed"
+  },
+  "errorDeleteFailed": "Failed to delete files: {details}",
+  "@errorDeleteFailed": {
+    "description": "Error message when deleting files fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPageRangeDocNoPages": "Document has no pages",
+  "@errorPageRangeDocNoPages": {
+    "description": "Validation error when splitting an empty document"
+  },
+  "errorPageRangeEmpty": "Page range cannot be empty",
+  "@errorPageRangeEmpty": {
+    "description": "Validation error when page range input is blank"
+  },
+  "errorPageRangeEmptySegment": "Empty range segment found. Remove extra commas.",
+  "@errorPageRangeEmptySegment": {
+    "description": "Validation error when page range input has trailing or consecutive commas"
+  },
+  "errorPageRangeInvalidFormat": "Invalid range format: '{token}'",
+  "@errorPageRangeInvalidFormat": {
+    "description": "Validation error when a range segment is formatted incorrectly",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPageRangeIncomplete": "Incomplete range: '{token}'",
+  "@errorPageRangeIncomplete": {
+    "description": "Validation error when a range segment is missing start or end",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPageRangeNonNumeric": "Non-numeric values in range: '{token}'",
+  "@errorPageRangeNonNumeric": {
+    "description": "Validation error when a range segment has letters or symbols",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPageRangeBelowMinimum": "Page numbers must be 1 or greater",
+  "@errorPageRangeBelowMinimum": {
+    "description": "Validation error when page number is zero or negative"
+  },
+  "errorPageRangeReversed": "Reversed range '{start}-{end}': start is greater than end",
+  "@errorPageRangeReversed": {
+    "description": "Validation error when range start exceeds range end",
+    "placeholders": {
+      "start": {
+        "type": "int"
+      },
+      "end": {
+        "type": "int"
+      }
+    }
+  },
+  "errorPageRangeExceeds": "Range '{token}' exceeds total pages ({totalPages})",
+  "@errorPageRangeExceeds": {
+    "description": "Validation error when specified range exceeds total page count",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      },
+      "totalPages": {
+        "type": "int"
+      }
+    }
+  },
+  "errorPageRangeInvalidNumber": "Invalid page number: '{token}'",
+  "@errorPageRangeInvalidNumber": {
+    "description": "Validation error when single page number is invalid",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "errorImageToPdfNoImages": "Please select at least one image",
+  "@errorImageToPdfNoImages": {
+    "description": "Error message when creating PDF with no images"
+  },
+  "errorImageToPdfMaxExceeded": "Maximum {max} images allowed at a time",
+  "@errorImageToPdfMaxExceeded": {
+    "description": "Error message when exceeding maximum image count in image-to-PDF",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "errorImageToPdfProcessingFailed": "Failed to process image: {path}",
+  "@errorImageToPdfProcessingFailed": {
+    "description": "Error message when individual image processing fails",
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
+  },
+  "errorImageToPdfGenerationFailed": "Failed to create PDF from images: {details}",
+  "@errorImageToPdfGenerationFailed": {
+    "description": "Error message when overall PDF creation fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfMergeInsufficient": "Please select at least 2 PDF files to merge",
+  "@errorPdfMergeInsufficient": {
+    "description": "Error message when fewer than two PDFs are selected for merge"
+  },
+  "errorPdfMergeDamagedOrEncrypted": "{fileName} is password-protected or damaged",
+  "@errorPdfMergeDamagedOrEncrypted": {
+    "description": "Error message when a PDF to merge cannot be read",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfMergeNoPages": "Selected documents contain no pages",
+  "@errorPdfMergeNoPages": {
+    "description": "Error message when PDFs selected for merge have no pages"
+  },
+  "errorPdfMergeFailed": "PDF merging failed: {details}",
+  "@errorPdfMergeFailed": {
+    "description": "Error message when PDF merge operation fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfSplitNoRanges": "Please specify at least one page range",
+  "@errorPdfSplitNoRanges": {
+    "description": "Error message when splitting PDF without specifying ranges"
+  },
+  "errorPdfSplitDamagedOrEncrypted": "{fileName} is password-protected or damaged",
+  "@errorPdfSplitDamagedOrEncrypted": {
+    "description": "Error message when PDF to split cannot be read",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfSplitRangeOutOfBounds": "Range {start}-{end} is out of bounds for {fileName}",
+  "@errorPdfSplitRangeOutOfBounds": {
+    "description": "Error message when split range is outside PDF page bounds",
+    "placeholders": {
+      "start": {
+        "type": "int"
+      },
+      "end": {
+        "type": "int"
+      },
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfSplitFailed": "Failed to split PDF: {details}",
+  "@errorPdfSplitFailed": {
+    "description": "Error message when PDF split operation fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
   }
 }

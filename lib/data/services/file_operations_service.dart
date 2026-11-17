@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
 import 'package:share_plus/share_plus.dart';
 
+import '../../core/errors/app_errors.dart';
 import '../../core/utils/file_name_utils.dart';
 import '../models/doc_file.dart';
 import '../repositories/file_repository.dart';
@@ -18,24 +20,45 @@ class RenameSuccess extends RenameResult {
 }
 
 class RenameFailure extends RenameResult {
-  final String errorMessage;
-  const RenameFailure(this.errorMessage);
+  final RenameFailureReason reason;
+  final FileNameValidationError? validationError;
+  final String? details;
+
+  const RenameFailure({
+    required this.reason,
+    this.validationError,
+    this.details,
+  });
+
+  /// Backward-compatible string message.
+  String get errorMessage => reason.name;
+
+  String localizedMessage(BuildContext context) =>
+      reason.localizedMessage(context, validationError: validationError, details: details);
 }
 
 /// Result of batch file deletion.
 class DeleteResult {
   final int deletedCount;
   final int failedCount;
-  final String? errorMessage;
+  final DeleteFailureReason? errorReason;
+  final String? details;
 
   const DeleteResult({
     required this.deletedCount,
     required this.failedCount,
-    this.errorMessage,
+    this.errorReason,
+    this.details,
   });
+
+  /// Backward-compatible string message.
+  String? get errorMessage => errorReason?.name;
 
   bool get isFullSuccess => failedCount == 0 && deletedCount > 0;
   bool get hasDeletions => deletedCount > 0;
+
+  String? localizedMessage(BuildContext context) =>
+      errorReason?.localizedMessage(context, details: details);
 }
 
 /// Service performing safe physical and database file operations.
@@ -52,7 +75,10 @@ class FileOperationsService {
     try {
       final validationError = validateFileName(newBaseName);
       if (validationError != null) {
-        return RenameFailure(validationError);
+        return RenameFailure(
+          reason: RenameFailureReason.validation,
+          validationError: validationError,
+        );
       }
 
       final newPath = buildRenamedPath(file.path, newBaseName);
@@ -62,12 +88,12 @@ class FileOperationsService {
 
       final targetFile = File(newPath);
       if (await targetFile.exists()) {
-        return const RenameFailure('A file with this name already exists in this folder');
+        return const RenameFailure(reason: RenameFailureReason.alreadyExists);
       }
 
       final oldFile = File(file.path);
       if (!await oldFile.exists()) {
-        return const RenameFailure('Source file no longer exists on disk');
+        return const RenameFailure(reason: RenameFailureReason.sourceNotFound);
       }
 
       try {
@@ -78,7 +104,10 @@ class FileOperationsService {
           await oldFile.copy(newPath);
           await oldFile.delete();
         } catch (copyErr) {
-          return RenameFailure('Failed to rename file: ${copyErr.toString()}');
+          return RenameFailure(
+            reason: RenameFailureReason.ioError,
+            details: copyErr.toString(),
+          );
         }
       }
 
@@ -95,7 +124,10 @@ class FileOperationsService {
 
       return RenameSuccess(updatedDoc);
     } catch (e) {
-      return RenameFailure('Failed to rename: ${e.toString()}');
+      return RenameFailure(
+        reason: RenameFailureReason.ioError,
+        details: e.toString(),
+      );
     }
   }
 
@@ -130,7 +162,8 @@ class FileOperationsService {
         return DeleteResult(
           deletedCount: successfulIds.length,
           failedCount: failedCount,
-          errorMessage: 'Files deleted from disk but database update failed',
+          errorReason: DeleteFailureReason.databaseUpdateFailed,
+          details: e.toString(),
         );
       }
     }

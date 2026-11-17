@@ -3,12 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../core/errors/app_errors.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../core/utils/file_name_utils.dart';
 import '../../core/utils/format_utils.dart';
 import '../../data/models/doc_file.dart';
+import '../../data/services/pdf/pdf_merge_service.dart';
 import '../../shared/widgets/ads/ad_placeholders.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
 import '../../shared/widgets/tiles/file_thumbnail.dart';
@@ -38,7 +41,7 @@ class MergeScreen extends ConsumerStatefulWidget {
 class _MergeScreenState extends ConsumerState<MergeScreen> {
   late final List<DocFile> _files;
   late final TextEditingController _nameController;
-  String? _nameError;
+  FileNameValidationError? _nameError;
   bool _isMerging = false;
 
   @override
@@ -207,10 +210,13 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isMerging = false);
+        final errorMessage = e is PdfMergeException
+            ? e.localizedMessage(context)
+            : e.toString();
         await ToolErrorSheet.show(
           context,
           title: "Couldn't merge PDFs",
-          errorMessage: e.toString(),
+          errorMessage: errorMessage,
           onRetry: _mergePdfs,
         );
       }
@@ -245,12 +251,12 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                   children: [
                     DocIconButton(
                       icon: AppIcons.back,
-                      tooltip: 'Back',
+                      tooltip: context.l10n.tooltipBack,
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      'Arrange & merge',
+                      context.l10n.mergeScreenTitle,
                       style: DocViewTypography.headlineSm.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -262,7 +268,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                 TextButton(
                   onPressed: _isMerging ? null : _onClear,
                   child: Text(
-                    'Clear',
+                    context.l10n.actionClear,
                     style: DocViewTypography.labelMd.copyWith(
                       color: tokens.primaryBlue,
                       fontWeight: FontWeight.w600,
@@ -363,7 +369,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Merged_fileName',
+                            hintText: context.l10n.mergeScreenDefaultMergedName,
                             hintStyle: DocViewTypography.bodyMedium.copyWith(
                               color: tokens.textSecondary,
                             ),
@@ -394,7 +400,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4, left: 4),
                     child: Text(
-                      _nameError!,
+                      _nameError!.localizedMessage(context),
                       style: DocViewTypography.captionXs.copyWith(
                         color: tokens.error,
                       ),
@@ -483,7 +489,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                                   ),
                                 ),
                                 onPressed: () => _removeFile(index),
-                                child: const Text('Remove', style: TextStyle(fontSize: 12)),
+                                child: Text(context.l10n.actionDelete, style: const TextStyle(fontSize: 12)),
                               ),
                             ],
                           ),
@@ -556,7 +562,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                         color: tokens.textSecondary,
                         size: 20,
                       ),
-                      tooltip: 'Remove',
+                      tooltip: context.l10n.tooltipRemovePage,
                       onPressed: () => _removeFile(index),
                     ),
                   ),

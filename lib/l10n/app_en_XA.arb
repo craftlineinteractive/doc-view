@@ -98,7 +98,7 @@
   },
   "actionRetry": "[Řéţřý ẋẋ]",
   "@actionRetry": {
-    "description": "Action button to retry a failed operation"
+    "description": "Action button label to retry a failed operation"
   },
   "permissionAllFilesTitle": "[Åłł Ƒîłéš Åççéšš Řéʠûîřéđ ẋẋẋẋẋẋẋẋẋẋ]",
   "@permissionAllFilesTitle": {
@@ -605,5 +605,833 @@
   "emptyCategoryDocsMessage": "[Ðôçûɱéñţš ôƒ ţĥîš ƒôřɱàţ ŵîłł àþþéàř ĥéřé àƒţéř šçàññîñĝ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
   "@emptyCategoryDocsMessage": {
     "description": "Message when a document category has no files"
+  },
+  "actionOpen": "[Öþéñ ẋẋ]",
+  "@actionOpen": {
+    "description": "Action button label to open a document"
+  },
+  "actionShare": "[Šĥàřé ẋẋ]",
+  "@actionShare": {
+    "description": "Action button label to share a document"
+  },
+  "actionRename": "[Řéñàɱé ẋẋẋ]",
+  "@actionRename": {
+    "description": "Action button label to rename a document"
+  },
+  "actionBookmark": "[Ɓôôƙɱàřƙ ẋẋẋẋ]",
+  "@actionBookmark": {
+    "description": "Action button label to bookmark a document"
+  },
+  "actionRemoveBookmark": "[Řéɱôṽé ƀôôƙɱàřƙ ẋẋẋẋẋẋ]",
+  "@actionRemoveBookmark": {
+    "description": "Action button label to remove bookmark from a document"
+  },
+  "actionOpenInAnotherApp": "[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]",
+  "@actionOpenInAnotherApp": {
+    "description": "Action button label to open a document in an external application"
+  },
+  "actionDetails": "[Ðéţàîłš ẋẋẋ]",
+  "@actionDetails": {
+    "description": "Action button label to view document details"
+  },
+  "actionOpenFile": "[Öþéñ ƒîłé ẋẋẋẋ]",
+  "@actionOpenFile": {
+    "description": "Primary button label to open the active file"
+  },
+  "actionShareAll": "[Šĥàřé Åłł ẋẋẋẋ]",
+  "@actionShareAll": {
+    "description": "Action button label to share all generated files"
+  },
+  "actionDone": "[Ðôñé ẋẋ]",
+  "@actionDone": {
+    "description": "Action button label to finish flow"
+  },
+  "actionSeeAll": "[Šéé Åłł ẋẋẋ]",
+  "@actionSeeAll": {
+    "description": "Action link to see all items in a section"
+  },
+  "actionAllow": "[Åłłôŵ ẋẋ]",
+  "@actionAllow": {
+    "description": "Action button label to grant permission"
+  },
+  "actionNotNow": "[Ñôţ ñôŵ ẋẋẋ]",
+  "@actionNotNow": {
+    "description": "Action button label to dismiss or postpone permission prompt"
+  },
+  "tooltipMoreActions": "[Ṁôřé àçţîôñš ẋẋẋẋẋ]",
+  "@tooltipMoreActions": {
+    "description": "Tooltip for the more actions button on a file row"
+  },
+  "tooltipCopyPath": "[Çôþý þàţĥ ẋẋẋẋ]",
+  "@tooltipCopyPath": {
+    "description": "Tooltip for copy path button"
+  },
+  "tooltipRotatePage": "[Řôţàţé þàĝé ẋẋẋẋẋ]",
+  "@tooltipRotatePage": {
+    "description": "Tooltip for rotating a page"
+  },
+  "tooltipRemovePage": "[Řéɱôṽé þàĝé ẋẋẋẋẋ]",
+  "@tooltipRemovePage": {
+    "description": "Tooltip for removing a page"
+  },
+  "renameFileTitle": "[Řéñàɱé ƒîłé ẋẋẋẋẋ]",
+  "@renameFileTitle": {
+    "description": "Title of the file rename dialog"
+  },
+  "renameFileNameLabel": "[Ƒîłé ñàɱé ẋẋẋẋ]",
+  "@renameFileNameLabel": {
+    "description": "Input field label for new file name"
+  },
+  "renamedSuccess": "[Řéñàɱéđ ţô {fileName} ẋẋẋẋẋẋẋẋẋ]",
+  "@renamedSuccess": {
+    "description": "Snackbar shown when a file is successfully renamed",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteFileTitle": "[Ðéłéţé ƒîłé? ẋẋẋẋẋ]",
+  "@deleteFileTitle": {
+    "description": "Title of single file deletion confirmation dialog"
+  },
+  "deleteFileConfirmation": "[Ðéłéţé \"{fileName}\"? Ťĥîš çàñ'ţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@deleteFileConfirmation": {
+    "description": "Body message asking confirmation to delete a single file",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "deletedFileSuccess": "[Ðéłéţéđ \"{fileName}\" ẋẋẋẋẋẋẋẋ]",
+  "@deletedFileSuccess": {
+    "description": "Snackbar message when a file is deleted",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "fileDetailsTitle": "[Ðôçûɱéñţ Ðéţàîłš ẋẋẋẋẋẋẋ]",
+  "@fileDetailsTitle": {
+    "description": "Header title of the document details sheet"
+  },
+  "fileDetailsLabelName": "[Ñàɱé ẋẋ]",
+  "@fileDetailsLabelName": {
+    "description": "Label for file name metadata row"
+  },
+  "fileDetailsLabelType": "[Ťýþé ẋẋ]",
+  "@fileDetailsLabelType": {
+    "description": "Label for file type metadata row"
+  },
+  "fileDetailsLabelSize": "[Šîžé ẋẋ]",
+  "@fileDetailsLabelSize": {
+    "description": "Label for file size metadata row"
+  },
+  "fileDetailsLabelModified": "[Ṁôđîƒîéđ ẋẋẋẋ]",
+  "@fileDetailsLabelModified": {
+    "description": "Label for modified date metadata row"
+  },
+  "fileDetailsLabelBookmarked": "[Ɓôôƙɱàřƙéđ ẋẋẋẋ]",
+  "@fileDetailsLabelBookmarked": {
+    "description": "Label for bookmarked status metadata row"
+  },
+  "fileDetailsValueYes": "[Ýéš ẋẋ]",
+  "@fileDetailsValueYes": {
+    "description": "Affirmative value in metadata details"
+  },
+  "fileDetailsValueNo": "[Ñô ẋẋ]",
+  "@fileDetailsValueNo": {
+    "description": "Negative value in metadata details"
+  },
+  "fileDetailsLabelLocation": "[Łôçàţîôñ ẋẋẋẋ]",
+  "@fileDetailsLabelLocation": {
+    "description": "Label for file location/path in details sheet"
+  },
+  "fileDetailsPathCopied": "[Þàţĥ çôþîéđ ţô çłîþƀôàřđ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@fileDetailsPathCopied": {
+    "description": "Snackbar message when file path is copied to clipboard"
+  },
+  "directoriesTitle": "[Ðîřéçţôřîéš ẋẋẋẋẋ]",
+  "@directoriesTitle": {
+    "description": "AppBar title for the directories browser screen"
+  },
+  "directoriesGoBack": "[Ĝô ƀàçƙ ẋẋẋ]",
+  "@directoriesGoBack": {
+    "description": "Button label to navigate up one folder in empty/error directory state"
+  },
+  "directoriesGoToRoot": "[Ĝô ţô Řôôţ ẋẋẋẋ]",
+  "@directoriesGoToRoot": {
+    "description": "Button label to return to the root folder"
+  },
+  "directoriesRetry": "[Řéţřý ẋẋ]",
+  "@directoriesRetry": {
+    "description": "Button label to retry loading directory"
+  },
+  "directoriesFileNoLongerExists": "[Ƒîłé ñô łôñĝéř éẋîšţš ẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesFileNoLongerExists": {
+    "description": "Snackbar message when tapping a file that was deleted on disk"
+  },
+  "directoriesFolderNoLongerExists": "[Ťĥîš ƒôłđéř ñô łôñĝéř éẋîšţš. ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesFolderNoLongerExists": {
+    "description": "Empty state title when a directory is deleted"
+  },
+  "directoriesNoDocsInFolder": "[Ñô đôçûɱéñţš îñ ţĥîš ƒôłđéř ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesNoDocsInFolder": {
+    "description": "Headline when a directory contains no supported documents"
+  },
+  "directoriesFilesAppearHere": "[Ƒîłéš ŵîłł àþþéàř ĥéřé ôñçé àđđéđ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesFilesAppearHere": {
+    "description": "Subtitle when a directory contains no supported documents"
+  },
+  "directoriesFolderSubtitle": "{count, plural, =1{[1 îţéɱ ẋẋẋ]} other{[{count} îţéɱš ẋẋẋẋẋẋ]}}",
+  "@directoriesFolderSubtitle": {
+    "description": "Item count subtitle on folder list tiles",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "directoriesFolderSubtitleDefault": "[Ƒôłđéř ẋẋẋ]",
+  "@directoriesFolderSubtitleDefault": {
+    "description": "Default subtitle for folders when count is unknown"
+  },
+  "directoriesPermissionPromptTitle": "[Åççéšš řéʠûîřéđ ţô ṽîéŵ đîřéçţôřîéš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesPermissionPromptTitle": {
+    "description": "Title for directory browser permission required state"
+  },
+  "directoriesPermissionPromptBody": "[Ðôç Ṽîéŵ ñééđš Åłł ƒîłéš àççéšš ţô ƀřôŵšé ýôûř ƒôłđéřš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesPermissionPromptBody": {
+    "description": "Body message explaining why directory browsing needs storage access"
+  },
+  "directoriesGrantAccess": "[Ĝřàñţ àççéšš ẋẋẋẋẋ]",
+  "@directoriesGrantAccess": {
+    "description": "Button label to request All files access"
+  },
+  "directoriesImportInstead": "[Îɱþôřţ ƒîłéš îñšţéàđ ẋẋẋẋẋẋẋẋ]",
+  "@directoriesImportInstead": {
+    "description": "Button label to import individual files via system picker"
+  },
+  "directoriesImportedCount": "{count, plural, =1{[Îɱþôřţéđ 1 ƒîłé ẋẋẋẋẋẋ]} other{[Îɱþôřţéđ {count} ƒîłéš ẋẋẋẋẋẋẋẋẋ]}}",
+  "@directoriesImportedCount": {
+    "description": "Snackbar message reporting number of imported files",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "directoriesTooltipUp": "[Ûþ ôñé łéṽéł ẋẋẋẋẋ]",
+  "@directoriesTooltipUp": {
+    "description": "Tooltip for navigation button that ascends one folder level"
+  },
+  "storageAccessRequiredTitle": "[Šţôřàĝé Åççéšš Řéʠûîřéđ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@storageAccessRequiredTitle": {
+    "description": "Title of the storage access prompt dialog"
+  },
+  "storageAccessRequiredBody": "[Ðôç Ṽîéŵ ñééđš šţôřàĝé àççéšš ţô šçàñ àñđ đîšþłàý đôçûɱéñţš (ÞÐƑ, Ŵôřđ, Éẋçéł, ÞÞŤ, ŤẊŤ, Îɱàĝéš) šţôřéđ ôñ ýôûř đéṽîçé.\n\nÝôûř ƒîłéš řéɱàîñ çôɱþłéţéłý þřîṽàţé àñđ ôƒƒłîñé ôñ ýôûř đéṽîçé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@storageAccessRequiredBody": {
+    "description": "Body text of the storage access prompt dialog"
+  },
+  "errorCouldNotOpenDocument": "[Çôûłđ ñôţ ôþéñ đôçûɱéñţ: {error} ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorCouldNotOpenDocument": {
+    "description": "Snackbar shown when opening an external document fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "scanCompleteWithCount": "{count, plural, =1{[Šçàñ çôɱþłéţé: 1 ƒîłé ẋẋẋẋẋẋẋẋẋ]} other{[Šçàñ çôɱþłéţé: {count} ƒîłéš ẋẋẋẋẋẋẋẋẋẋẋẋ]}}",
+  "@scanCompleteWithCount": {
+    "description": "Snackbar notification after filesystem scan finishes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dialogClearSearchTitle": "[Çłéàř šéàřçĥ ĥîšţôřý? ẋẋẋẋẋẋẋẋẋ]",
+  "@dialogClearSearchTitle": {
+    "description": "Title for clear search history confirmation dialog"
+  },
+  "dialogClearSearchMessage": "[Åłł řéçéñţ šéàřçĥéš ŵîłł ƀé þéřɱàñéñţłý çłéàřéđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@dialogClearSearchMessage": {
+    "description": "Body message for clear search history confirmation dialog"
+  },
+  "imageListEditorMaxLimit": "[Ṁàẋîɱûɱ łîɱîţ ôƒ {max} îɱàĝéš řéàçĥéđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@imageListEditorMaxLimit": {
+    "description": "Snackbar message when user tries to add more than maximum allowed images",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "imageListEditorScanFailed": "[Šçàññîñĝ ƒàîłéđ: {error} ẋẋẋẋẋẋẋẋẋẋ]",
+  "@imageListEditorScanFailed": {
+    "description": "Snackbar message when camera/scanner operation fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "imageListEditorPageSize": "[Þàĝé Šîžé: ẋẋẋẋ]",
+  "@imageListEditorPageSize": {
+    "description": "Label for page size selector in image to PDF editor"
+  },
+  "imageListEditorA4Mode": "[Å4 ẋẋ]",
+  "@imageListEditorA4Mode": {
+    "description": "A4 page mode button label"
+  },
+  "imageListEditorFitMode": "[Ƒîţ ţô îɱàĝé ẋẋẋẋẋ]",
+  "@imageListEditorFitMode": {
+    "description": "Fit to image page mode button label"
+  },
+  "imageListEditorRemoveImageTooltip": "[Řéɱôṽé îɱàĝé ẋẋẋẋẋ]",
+  "@imageListEditorRemoveImageTooltip": {
+    "description": "Tooltip for button removing an image from the PDF editor list"
+  },
+  "mergeScreenTitle": "[Åřřàñĝé & ɱéřĝé ẋẋẋẋẋẋ]",
+  "@mergeScreenTitle": {
+    "description": "AppBar title for PDF merge screen"
+  },
+  "mergeScreenDefaultMergedName": "[Ṁéřĝéđ_Ðôçûɱéñţ ẋẋẋẋẋẋ]",
+  "@mergeScreenDefaultMergedName": {
+    "description": "Default base filename for merged PDF document"
+  },
+  "mergePickerSearchHint": "[Šéàřçĥ ÞÐƑš... ẋẋẋẋẋẋ]",
+  "@mergePickerSearchHint": {
+    "description": "Search field hint text in merge PDF picker"
+  },
+  "mergePickerNext": "[Ñéẋţ ẋẋ]",
+  "@mergePickerNext": {
+    "description": "Next button label in merge PDF picker"
+  },
+  "mergePickerErrorLoading": "[Éřřôř łôàđîñĝ ÞÐƑš: {error} ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@mergePickerErrorLoading": {
+    "description": "Error message when loading PDFs in merge picker fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "splitScreenTitle": "[Šþłîţ ÞÐƑ ẋẋẋẋ]",
+  "@splitScreenTitle": {
+    "description": "AppBar title for PDF split screen"
+  },
+  "splitScreenRangeHint": "[é.ĝ. 1-3, 5, 8-10 ẋẋẋẋẋẋẋ]",
+  "@splitScreenRangeHint": {
+    "description": "Hint text for page range input in split screen"
+  },
+  "splitScreenClearRange": "[Çłéàř řàñĝé ẋẋẋẋẋ]",
+  "@splitScreenClearRange": {
+    "description": "Tooltip for clearing page range text in split screen"
+  },
+  "splitPickerSearchHint": "[Šéàřçĥ ÞÐƑš... ẋẋẋẋẋẋ]",
+  "@splitPickerSearchHint": {
+    "description": "Search field hint text in split PDF picker"
+  },
+  "splitPickerErrorLoading": "[Éřřôř łôàđîñĝ ƒîłéš: {error} ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitPickerErrorLoading": {
+    "description": "Error message when loading PDFs in split picker fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createdSectionTitle": "[Çřéàţéđ ƀý ýôû ẋẋẋẋẋẋ]",
+  "@createdSectionTitle": {
+    "description": "Section header for documents created by user"
+  },
+  "createdSectionEmptyTitle": "[ÞÐƑš ýôû çřéàţé àþþéàř ĥéřé ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@createdSectionEmptyTitle": {
+    "description": "Title on empty state card for created documents section"
+  },
+  "createdSectionEmptySubtitle": "[Çôñṽéřţéđ, šçàññéđ, ôř ɱéřĝéđ đôçûɱéñţš ŵîłł ƀé šàṽéđ łôçàłłý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@createdSectionEmptySubtitle": {
+    "description": "Subtitle on empty state card for created documents section"
+  },
+  "emptyCreatedDocsTitle": "[Ñô çřéàţéđ đôçûɱéñţš ýéţ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@emptyCreatedDocsTitle": {
+    "description": "Title when created documents listing is empty"
+  },
+  "emptyCreatedDocsMessage": "[Çôñṽéřţéđ, šçàññéđ, ôř ɱéřĝéđ đôçûɱéñţš ŵîłł àþþéàř ĥéřé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@emptyCreatedDocsMessage": {
+    "description": "Message when created documents listing is empty"
+  },
+  "errorLoadingCreatedFiles": "[Ƒàîłéđ ţô łôàđ çřéàţéđ ƒîłéš: {error} ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorLoadingCreatedFiles": {
+    "description": "Error message when loading created files fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "toolResultPdfCreated": "{count, plural, =1{[ÞÐƑ Çřéàţéđ ẋẋẋẋẋ]} other{[{count} ÞÐƑš Çřéàţéđ ẋẋẋẋẋẋẋẋ]}}",
+  "@toolResultPdfCreated": {
+    "description": "Success headline in tool result bottom sheet",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "toolResultSavedSubtitle": "[Šàṽéđ ţô ýôûř Çřéàţéđ ƒôłđéř ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@toolResultSavedSubtitle": {
+    "description": "Subtitle in tool result sheet confirming save location"
+  },
+  "toolErrorDefaultTitle": "[Çôûłđñ'ţ çřéàţé ÞÐƑ ẋẋẋẋẋẋẋẋ]",
+  "@toolErrorDefaultTitle": {
+    "description": "Default headline in tool error bottom sheet"
+  },
+  "toolErrorSubtitle": "[Åñ ûñéẋþéçţéđ éřřôř ôççûřřéđ đûřîñĝ þřôçéššîñĝ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@toolErrorSubtitle": {
+    "description": "Subtitle explaining unexpected processing failure in tool error sheet"
+  },
+  "themeSheetTitle": "[Åþþ ţĥéɱé ẋẋẋẋ]",
+  "@themeSheetTitle": {
+    "description": "Header title of the theme selection bottom sheet"
+  },
+  "themeSheetSubtitle": "[Šéłéçţ ṽîšûàł àþþéàřàñçé ƒôř Ðôç Ṽîéŵ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@themeSheetSubtitle": {
+    "description": "Subtitle of the theme selection bottom sheet"
+  },
+  "themeModeSystem": "[Šýšţéɱ ẋẋẋ]",
+  "@themeModeSystem": {
+    "description": "Label for system theme mode option"
+  },
+  "themeModeSystemSubtitle": "[đéƒàûłţ ẋẋẋ]",
+  "@themeModeSystemSubtitle": {
+    "description": "Subtitle for system theme mode option"
+  },
+  "themeModeLight": "[Łîĝĥţ ẋẋ]",
+  "@themeModeLight": {
+    "description": "Label for light theme mode option"
+  },
+  "themeModeLightSubtitle": "[Çłéàñ ŵĥîţé ẋẋẋẋẋ]",
+  "@themeModeLightSubtitle": {
+    "description": "Subtitle for light theme mode option"
+  },
+  "themeModeDark": "[Ðàřƙ ẋẋ]",
+  "@themeModeDark": {
+    "description": "Label for dark theme mode option"
+  },
+  "themeModeDarkSubtitle": "[Ðééþ ñàṽý ẋẋẋẋ]",
+  "@themeModeDarkSubtitle": {
+    "description": "Subtitle for dark theme mode option"
+  },
+  "themeActionApply": "[Åþþłý ţĥéɱé ẋẋẋẋẋ]",
+  "@themeActionApply": {
+    "description": "Button label to confirm and apply selected theme mode"
+  },
+  "scanSettingsTitle": "[Šçàñ šéţţîñĝš ẋẋẋẋẋẋ]",
+  "@scanSettingsTitle": {
+    "description": "Header title of the scan settings sub-screen"
+  },
+  "scanSettingsFrequencyHeader": "[Šçàñ ƒřéʠûéñçý ẋẋẋẋẋẋ]",
+  "@scanSettingsFrequencyHeader": {
+    "description": "Section header for scan frequency options"
+  },
+  "scanSettingsOnOpenTitle": "[Šçàñ ôñ àþþ ôþéñ ẋẋẋẋẋẋẋ]",
+  "@scanSettingsOnOpenTitle": {
+    "description": "Title of automatic scan on open option"
+  },
+  "scanSettingsOnOpenSubtitle": "[Åûţôɱàţîçàłłý ƒîñđ ñéŵ ƒîłéš ŵĥéñ ýôû ôþéñ Ðôç Ṽîéŵ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsOnOpenSubtitle": {
+    "description": "Description of automatic scan on open option"
+  },
+  "scanSettingsManualTitle": "[Ṁàñûàł ôñłý ẋẋẋẋẋ]",
+  "@scanSettingsManualTitle": {
+    "description": "Title of manual scan mode option"
+  },
+  "scanSettingsManualSubtitle": "[Öñłý šçàñ ŵĥéñ ýôû þûłł ţô řéƒřéšĥ ôř ţàþ Řéšçàñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsManualSubtitle": {
+    "description": "Description of manual scan mode option"
+  },
+  "scanSettingsMediaFiltersHeader": "[Ṁéđîà ƒîłţéřš ẋẋẋẋẋẋ]",
+  "@scanSettingsMediaFiltersHeader": {
+    "description": "Section header for media file filtering options"
+  },
+  "scanSettingsIncludeImagesTitle": "[Îñçłûđé îɱàĝéš îñ šçàñ ẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsIncludeImagesTitle": {
+    "description": "Title of toggle for including images in file indexing"
+  },
+  "scanSettingsIncludeImagesSubtitle": "[Îñđéẋ ÞÑĜ, ĴÞĜ, àñđ ŴÉƁÞ îɱàĝé ƒîłéš îñ šţôřàĝé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsIncludeImagesSubtitle": {
+    "description": "Description of toggle for including images in file indexing"
+  },
+  "scanSettingsDiagnosticsHeader": "[Šţôřàĝé & đîàĝñôšţîçš ẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsDiagnosticsHeader": {
+    "description": "Section header for storage status and diagnostics"
+  },
+  "scanSettingsPermissionStatus": "[Åłł ƒîłéš àççéšš ẋẋẋẋẋẋẋ]",
+  "@scanSettingsPermissionStatus": {
+    "description": "Label for permission status row in diagnostics"
+  },
+  "scanSettingsPermissionGranted": "[Ĝřàñţéđ ẋẋẋ]",
+  "@scanSettingsPermissionGranted": {
+    "description": "Value indicating storage permission is granted"
+  },
+  "scanSettingsPermissionNotGranted": "[Ñôţ ĝřàñţéđ ẋẋẋẋẋ]",
+  "@scanSettingsPermissionNotGranted": {
+    "description": "Value indicating storage permission is not granted"
+  },
+  "scanSettingsTotalIndexed": "[Îñđéẋéđ ƒîłéš ẋẋẋẋẋẋ]",
+  "@scanSettingsTotalIndexed": {
+    "description": "Label for count of indexed files in diagnostics"
+  },
+  "scanSettingsLastScan": "[Łàšţ šçàññéđ ẋẋẋẋẋ]",
+  "@scanSettingsLastScan": {
+    "description": "Label for timestamp of last filesystem scan"
+  },
+  "scanSettingsUpdatedSnackbar": "[Šçàñ šéţţîñĝš ûþđàţéđ ẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsUpdatedSnackbar": {
+    "description": "Snackbar message confirming scan settings change"
+  },
+  "faqScreenTitle": "[Ƒřéʠûéñţłý Åšƙéđ Ǫûéšţîôñš ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqScreenTitle": {
+    "description": "Header title of the FAQ screen"
+  },
+  "faqHeaderTopics": "[{count} Ťôþîçš ẋẋẋẋẋẋ]",
+  "@faqHeaderTopics": {
+    "description": "Chip label displaying total number of topics in FAQ",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "faqHeaderSubtitle": "[Ĝôţ ʠûéšţîôñš? Ƒîñđ çłéàř àñšŵéřš ĥéřé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqHeaderSubtitle": {
+    "description": "Subtitle under FAQ screen header"
+  },
+  "faqSendFeedback": "[Šéñđ ƒééđƀàçƙ ẋẋẋẋẋẋ]",
+  "@faqSendFeedback": {
+    "description": "Button label to contact support or send feedback"
+  },
+  "faqQuestion1": "[Ŵĥý đôéš Ðôç Ṽîéŵ ñééđ Åłł ƒîłéš àççéšš? ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqQuestion1": {
+    "description": "FAQ question 1 regarding storage permissions"
+  },
+  "faqAnswer1": "[Ðôç Ṽîéŵ řéʠûîřéš Åłł ƒîłéš àççéšš (ṀÅÑÅĜÉ_ÉẊŤÉŘÑÅŁ_ŠŤÖŘÅĜÉ) ôñ Åñđřôîđ 11+ ţô đîšçôṽéř àñđ îñđéẋ šûþþôřţéđ đôçûɱéñţš (ÞÐƑ, Ŵôřđ, Éẋçéł, ÞôŵéřÞôîñţ, Ťéẋţ, àñđ Îɱàĝéš) šţôřéđ îñ šĥàřéđ ƒôłđéřš šûçĥ àš Ðôŵñłôàđš àñđ Ðôçûɱéñţš.\n\nŴîţĥôûţ ţĥîš þéřɱîššîôñ, Åñđřôîđ řéšţřîçţš ƒîłé àççéšš ţô ţĥé àþþ'š þřîṽàţé îñţéřñàł ƒôłđéř, þřéṽéñţîñĝ Ðôç Ṽîéŵ ƒřôɱ ƀřôŵšîñĝ ôř ôþéñîñĝ ƒîłéš łôçàţéđ àçřôšš ýôûř đéṽîçé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer1": {
+    "description": "FAQ answer 1 regarding storage permissions"
+  },
+  "faqQuestion2": "[Ŵĥý đôéšñ'ţ îţ šçàñ ɱý ŵĥôłé îÞĥôñé? ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqQuestion2": {
+    "description": "FAQ question 2 regarding iOS sandboxing"
+  },
+  "faqAnswer2": "[îÖŠ ûšéš šţřîçţ àþþ šàñđƀôẋîñĝ ţô šàƒéĝûàřđ đéṽîçé þřîṽàçý. Åþþš çàñ ôñłý àççéšš đôçûɱéñţš éẋþłîçîţłý šàṽéđ îñšîđé ţĥé Ƒîłéš àþþ ôř šĥàřéđ ṽîà ţĥé šýšţéɱ Šĥàřé Šĥééţ.\n\nŤô ṽîéŵ ƒîłéš ôñ îÖŠ, îɱþôřţ ţĥéɱ îñţô ţĥé Ðôç Ṽîéŵ ƒôłđéř îñ ţĥé ñàţîṽé Ƒîłéš àþþ ôř ûšé ţĥé Îɱþôřţ ƒîłéš ôþţîôñ îñ Šéţţîñĝš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer2": {
+    "description": "FAQ answer 2 regarding iOS sandboxing"
+  },
+  "faqQuestion3": "[Ŵĥéřé àřé ţĥé ÞÐƑš Î çřéàţé šàṽéđ? ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqQuestion3": {
+    "description": "FAQ question 3 regarding generated file storage location"
+  },
+  "faqAnswer3": "[Ƒîłéš ýôû îɱþôřţ ôř ĝéñéřàţé (šûçĥ àš çôñṽéřţéđ ÞÐƑš, ɱéřĝéđ đôçûɱéñţš, ôř šþłîţ þàĝéš) àřé šàṽéđ šéçûřéłý îñ ýôûř đéṽîçé šţôřàĝé ûñđéř ÐôçṼîéŵ/Çřéàţéđ ôř þřîṽàţé àþþ šţôřàĝé. Ýôû çàñ ṽîéŵ ţĥéɱ àñýţîɱé îñ ţĥé Çřéàţéđ ƀý ýôû šéçţîôñ ôñ ţĥé Ťôôłš ţàƀ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer3": {
+    "description": "FAQ answer 3 regarding generated file storage location"
+  },
+  "faqQuestion4": "[Ŵĥý đôéš ɱý Ŵôřđ ƒîłé łôôƙ đîƒƒéřéñţ? ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqQuestion4": {
+    "description": "FAQ question 4 regarding offline office rendering"
+  },
+  "faqAnswer4": "[Ðôç Ṽîéŵ řéñđéřš ƒîłéš đîřéçţłý ôñ ýôûř đéṽîçé ûšîñĝ łôçàł ôƒƒłîñé þàřšéřš ŵîţĥôûţ šéñđîñĝ þřîṽàţé đàţà ţô çłôûđ çôñṽéřţéřš. Çôɱþłéẋ ƒôřɱàţţîñĝ ôř çûšţôɱ šĥàþéš řéñđéř ŵîţĥ ñàţîṽé ôƒƒłîñé àþþřôẋîɱàţîôñš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer4": {
+    "description": "FAQ answer 4 regarding offline office rendering"
+  },
+  "faqQuestion5": "[Çàñ Î ôþéñ þàššŵôřđ-þřôţéçţéđ ƒîłéš? ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqQuestion5": {
+    "description": "FAQ question 5 regarding encrypted PDF support"
+  },
+  "faqAnswer5": "[Ýéš, Ðôç Ṽîéŵ šûþþôřţš ôþéñîñĝ þàššŵôřđ-þřôţéçţéđ ÞÐƑ đôçûɱéñţš. Ŵĥéñ ôþéñîñĝ àñ éñçřýþţéđ ÞÐƑ, éñţéř ţĥé þàššŵôřđ îñ ţĥé đîàłôĝ ţô đéçřýþţ àñđ ṽîéŵ ţĥé đôçûɱéñţ ôñ ýôûř đéṽîçé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer5": {
+    "description": "FAQ answer 5 regarding encrypted PDF support"
+  },
+  "faqQuestion6": "[Îš ɱý đàţà ûþłôàđéđ àñýŵĥéřé? ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqQuestion6": {
+    "description": "FAQ question 6 regarding privacy and data policy"
+  },
+  "faqAnswer6": "[Ýôûř đôçûɱéñţš ñéṽéř łéàṽé ýôûř đéṽîçé. Ðôç Ṽîéŵ ôþéñš, çôñṽéřţš àñđ šţôřéš ƒîłéš łôçàłłý. Ťĥé àþþ šĥôŵš àđš šéřṽéđ ƀý Ĝôôĝłé ÅđṀôƀ, ŵĥîçĥ çàñ ûšé łîɱîţéđ đéṽîçé đàţà àš đéšçřîƀéđ îñ ôûř Þřîṽàçý Þôłîçý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer6": {
+    "description": "FAQ answer 6 regarding privacy and data policy"
+  },
+  "pdfGotoPageTitle": "[Ĝô ţô þàĝé ẋẋẋẋ]",
+  "@pdfGotoPageTitle": {
+    "description": "Title of the jump to page dialog in PDF viewer"
+  },
+  "pdfGotoPageHint": "[Éñţéř à þàĝé ƀéţŵééñ 1 àñđ {pageCount} ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfGotoPageHint": {
+    "description": "Input hint for page jump dialog",
+    "placeholders": {
+      "pageCount": {
+        "type": "int"
+      }
+    }
+  },
+  "pdfGotoPageAction": "[Ĝô ẋẋ]",
+  "@pdfGotoPageAction": {
+    "description": "Action button label to jump to specified page"
+  },
+  "pdfGotoPageErrorEmpty": "[Éñţéř à þàĝé ñûɱƀéř ẋẋẋẋẋẋẋẋ]",
+  "@pdfGotoPageErrorEmpty": {
+    "description": "Validation error when jump page input is empty"
+  },
+  "pdfGotoPageErrorOutOfRange": "[Éñţéř à þàĝé ƀéţŵééñ 1 àñđ {pageCount} ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfGotoPageErrorOutOfRange": {
+    "description": "Validation error when jump page input is out of range",
+    "placeholders": {
+      "pageCount": {
+        "type": "int"
+      }
+    }
+  },
+  "pdfPasswordTitle": "[Ťĥîš ÞÐƑ îš þàššŵôřđ-þřôţéçţéđ ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfPasswordTitle": {
+    "description": "Title of the password-protected PDF unlock dialog"
+  },
+  "pdfPasswordSubtitle": "[Éñţéř þàššŵôřđ ţô ṽîéŵ àñđ đéçřýþţ ţĥé çôñţéñţš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfPasswordSubtitle": {
+    "description": "Subtitle of the password-protected PDF unlock dialog"
+  },
+  "pdfPasswordHint": "[Éñţéř þàššŵôřđ ẋẋẋẋẋẋ]",
+  "@pdfPasswordHint": {
+    "description": "Hint text for PDF password input field"
+  },
+  "pdfPasswordErrorIncorrect": "[Îñçôřřéçţ þàššŵôřđ. Ťřý àĝàîñ. ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfPasswordErrorIncorrect": {
+    "description": "Inline error banner when submitted PDF password is wrong"
+  },
+  "pdfPasswordActionUnlock": "[Ûñłôçƙ ẋẋẋ]",
+  "@pdfPasswordActionUnlock": {
+    "description": "Action button label to unlock password-protected PDF"
+  },
+  "errorFileNameEmpty": "[Ƒîłé ñàɱé çàññôţ ƀé éɱþţý ẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorFileNameEmpty": {
+    "description": "Validation error when file name is blank"
+  },
+  "errorFileNameTooLong": "[Ƒîłé ñàɱé çàññôţ éẋçééđ 120 çĥàřàçţéřš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorFileNameTooLong": {
+    "description": "Validation error when file name exceeds length limit"
+  },
+  "errorFileNameReserved": "[Ƒîłé ñàɱé çàññôţ ƀé '.' ôř '..' ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorFileNameReserved": {
+    "description": "Validation error when file name is reserved dot or double-dot"
+  },
+  "errorFileNameStartsWithDot": "[Ƒîłé ñàɱé çàññôţ šţàřţ ŵîţĥ à đôţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorFileNameStartsWithDot": {
+    "description": "Validation error when file name begins with a period"
+  },
+  "errorFileNameInvalidChars": "[Ƒîłé ñàɱé çôñţàîñš îñṽàłîđ çĥàřàçţéřš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorFileNameInvalidChars": {
+    "description": "Validation error when file name has illegal characters"
+  },
+  "errorRenameAlreadyExists": "[Å ƒîłé ŵîţĥ ţĥîš ñàɱé àłřéàđý éẋîšţš îñ ţĥîš ƒôłđéř ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorRenameAlreadyExists": {
+    "description": "Error message when rename target file already exists"
+  },
+  "errorRenameSourceNotFound": "[Šôûřçé ƒîłé ñô łôñĝéř éẋîšţš ôñ đîšƙ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorRenameSourceNotFound": {
+    "description": "Error message when renaming a file that was deleted on disk"
+  },
+  "errorRenameFailed": "[Ƒàîłéđ ţô řéñàɱé ƒîłé: {details} ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorRenameFailed": {
+    "description": "Error message when file rename IO fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "errorDeleteDatabaseFailed": "[Ƒîłéš đéłéţéđ ƒřôɱ đîšƙ ƀûţ đàţàƀàšé ûþđàţé ƒàîłéđ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorDeleteDatabaseFailed": {
+    "description": "Error message when file deletion succeeded on disk but database sync failed"
+  },
+  "errorDeleteFailed": "[Ƒàîłéđ ţô đéłéţé ƒîłéš: {details} ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorDeleteFailed": {
+    "description": "Error message when deleting files fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPageRangeDocNoPages": "[Ðôçûɱéñţ ĥàš ñô þàĝéš ẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeDocNoPages": {
+    "description": "Validation error when splitting an empty document"
+  },
+  "errorPageRangeEmpty": "[Þàĝé řàñĝé çàññôţ ƀé éɱþţý ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeEmpty": {
+    "description": "Validation error when page range input is blank"
+  },
+  "errorPageRangeEmptySegment": "[Éɱþţý řàñĝé šéĝɱéñţ ƒôûñđ. Řéɱôṽé éẋţřà çôɱɱàš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeEmptySegment": {
+    "description": "Validation error when page range input has trailing or consecutive commas"
+  },
+  "errorPageRangeInvalidFormat": "[Îñṽàłîđ řàñĝé ƒôřɱàţ: '{token}' ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeInvalidFormat": {
+    "description": "Validation error when a range segment is formatted incorrectly",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPageRangeIncomplete": "[Îñçôɱþłéţé řàñĝé: '{token}' ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeIncomplete": {
+    "description": "Validation error when a range segment is missing start or end",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPageRangeNonNumeric": "[Ñôñ-ñûɱéřîç ṽàłûéš îñ řàñĝé: '{token}' ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeNonNumeric": {
+    "description": "Validation error when a range segment has letters or symbols",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPageRangeBelowMinimum": "[Þàĝé ñûɱƀéřš ɱûšţ ƀé 1 ôř ĝřéàţéř ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeBelowMinimum": {
+    "description": "Validation error when page number is zero or negative"
+  },
+  "errorPageRangeReversed": "[Řéṽéřšéđ řàñĝé '{start}-{end}': šţàřţ îš ĝřéàţéř ţĥàñ éñđ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeReversed": {
+    "description": "Validation error when range start exceeds range end",
+    "placeholders": {
+      "start": {
+        "type": "int"
+      },
+      "end": {
+        "type": "int"
+      }
+    }
+  },
+  "errorPageRangeExceeds": "[Řàñĝé '{token}' éẋçééđš ţôţàł þàĝéš ({totalPages}) ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeExceeds": {
+    "description": "Validation error when specified range exceeds total page count",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      },
+      "totalPages": {
+        "type": "int"
+      }
+    }
+  },
+  "errorPageRangeInvalidNumber": "[Îñṽàłîđ þàĝé ñûɱƀéř: '{token}' ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPageRangeInvalidNumber": {
+    "description": "Validation error when single page number is invalid",
+    "placeholders": {
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "errorImageToPdfNoImages": "[Þłéàšé šéłéçţ àţ łéàšţ ôñé îɱàĝé ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorImageToPdfNoImages": {
+    "description": "Error message when creating PDF with no images"
+  },
+  "errorImageToPdfMaxExceeded": "[Ṁàẋîɱûɱ {max} îɱàĝéš àłłôŵéđ àţ à ţîɱé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorImageToPdfMaxExceeded": {
+    "description": "Error message when exceeding maximum image count in image-to-PDF",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "errorImageToPdfProcessingFailed": "[Ƒàîłéđ ţô þřôçéšš îɱàĝé: {path} ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorImageToPdfProcessingFailed": {
+    "description": "Error message when individual image processing fails",
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
+  },
+  "errorImageToPdfGenerationFailed": "[Ƒàîłéđ ţô çřéàţé ÞÐƑ ƒřôɱ îɱàĝéš: {details} ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorImageToPdfGenerationFailed": {
+    "description": "Error message when overall PDF creation fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfMergeInsufficient": "[Þłéàšé šéłéçţ àţ łéàšţ 2 ÞÐƑ ƒîłéš ţô ɱéřĝé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPdfMergeInsufficient": {
+    "description": "Error message when fewer than two PDFs are selected for merge"
+  },
+  "errorPdfMergeDamagedOrEncrypted": "[{fileName} îš þàššŵôřđ-þřôţéçţéđ ôř đàɱàĝéđ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPdfMergeDamagedOrEncrypted": {
+    "description": "Error message when a PDF to merge cannot be read",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfMergeNoPages": "[Šéłéçţéđ đôçûɱéñţš çôñţàîñ ñô þàĝéš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPdfMergeNoPages": {
+    "description": "Error message when PDFs selected for merge have no pages"
+  },
+  "errorPdfMergeFailed": "[ÞÐƑ ɱéřĝîñĝ ƒàîłéđ: {details} ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPdfMergeFailed": {
+    "description": "Error message when PDF merge operation fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfSplitNoRanges": "[Þłéàšé šþéçîƒý àţ łéàšţ ôñé þàĝé řàñĝé ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPdfSplitNoRanges": {
+    "description": "Error message when splitting PDF without specifying ranges"
+  },
+  "errorPdfSplitDamagedOrEncrypted": "[{fileName} îš þàššŵôřđ-þřôţéçţéđ ôř đàɱàĝéđ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPdfSplitDamagedOrEncrypted": {
+    "description": "Error message when PDF to split cannot be read",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfSplitRangeOutOfBounds": "[Řàñĝé {start}-{end} îš ôûţ ôƒ ƀôûñđš ƒôř {fileName} ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPdfSplitRangeOutOfBounds": {
+    "description": "Error message when split range is outside PDF page bounds",
+    "placeholders": {
+      "start": {
+        "type": "int"
+      },
+      "end": {
+        "type": "int"
+      },
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPdfSplitFailed": "[Ƒàîłéđ ţô šþłîţ ÞÐƑ: {details} ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@errorPdfSplitFailed": {
+    "description": "Error message when PDF split operation fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
   }
 }

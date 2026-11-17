@@ -4,12 +4,14 @@ import 'package:path/path.dart' as p;
 import 'package:pdfrx/pdfrx.dart' as pdfrx;
 
 import '../../core/constants/file_types.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../core/utils/format_utils.dart';
 import '../../core/utils/page_range_parser.dart';
 import '../../data/models/doc_file.dart';
+import '../../data/services/pdf/pdf_split_service.dart';
 import '../../shared/widgets/ads/ad_placeholders.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
 import '../../shared/widgets/skeletons/shimmer.dart';
@@ -44,7 +46,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
 
   late final TextEditingController _rangeController;
   late final TextEditingController _prefixController;
-  String? _rangeError;
+  PageRangeParseException? _rangeError;
   List<PageRange> _generatedRanges = <PageRange>[];
   bool _isSplitting = false;
 
@@ -267,10 +269,13 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isSplitting = false);
+        final errorMessage = e is PdfSplitException
+            ? e.localizedMessage(context)
+            : e.toString();
         await ToolErrorSheet.show(
           context,
           title: "Couldn't split PDF",
-          errorMessage: e.toString(),
+          errorMessage: errorMessage,
           onRetry: _splitPdf,
         );
       }
@@ -311,13 +316,13 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
                     children: [
                       DocIconButton(
                         icon: AppIcons.back,
-                        tooltip: 'Back',
+                        tooltip: context.l10n.tooltipBack,
                         onPressed: () => Navigator.of(context).pop(),
                       ),
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          'Split PDF',
+                          context.l10n.splitScreenTitle,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: DocViewTypography.headlineSm.copyWith(
@@ -491,7 +496,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'e.g. 1-3, 5, 8-10',
+                    hintText: context.l10n.splitScreenRangeHint,
                     hintStyle: DocViewTypography.bodyMedium.copyWith(
                       color: tokens.textSecondary,
                     ),
@@ -503,7 +508,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
               if (_rangeController.text.isNotEmpty)
                 DocIconButton(
                   icon: AppIcons.close,
-                  tooltip: 'Clear range',
+                  tooltip: context.l10n.splitScreenClearRange,
                   onPressed: () {
                     _rangeController.clear();
                     _onRangeChanged('');
@@ -530,7 +535,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    _rangeError!,
+                    _rangeError!.localizedMessage(context),
                     style: DocViewTypography.captionXs.copyWith(
                       color: tokens.error,
                       fontWeight: FontWeight.w600,

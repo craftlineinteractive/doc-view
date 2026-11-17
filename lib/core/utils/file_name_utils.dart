@@ -1,30 +1,32 @@
 import 'package:path/path.dart' as p;
 
+import '../errors/app_errors.dart';
+
 /// Validates a candidate base file name without extension against filesystem and OS restrictions.
 ///
-/// Returns null if valid, or a user-friendly error message if invalid.
-String? validateFileName(String baseName) {
+/// Returns null if valid, or a [FileNameValidationError] if invalid.
+FileNameValidationError? validateFileName(String baseName) {
   final trimmed = baseName.trim();
   if (trimmed.isEmpty) {
-    return 'File name cannot be empty';
+    return FileNameValidationError.empty;
   }
 
   if (trimmed.length > 120) {
-    return 'File name cannot exceed 120 characters';
+    return FileNameValidationError.tooLong;
   }
 
   if (trimmed == '.' || trimmed == '..') {
-    return "File name cannot be '.' or '..'";
+    return FileNameValidationError.reservedName;
   }
 
   if (trimmed.startsWith('.')) {
-    return 'File name cannot start with a dot';
+    return FileNameValidationError.startsWithDot;
   }
 
   // Illegal filesystem characters: / \ : * ? " < > | and ASCII control characters (0-31, 127)
   final illegalCharRegex = RegExp(r'[\/\\:\*\?"<>\|\x00-\x1F\x7F]');
   if (illegalCharRegex.hasMatch(trimmed)) {
-    return 'File name contains invalid characters';
+    return FileNameValidationError.invalidCharacters;
   }
 
   return null;

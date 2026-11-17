@@ -2,10 +2,12 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:typed_data';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:pdf/pdf.dart' as pdflib;
 import 'package:pdf/widgets.dart' as pw;
 
+import '../../../core/errors/app_errors.dart';
 import '../../models/doc_file.dart';
 import 'pdf_output_service.dart';
 
@@ -20,12 +22,32 @@ enum PageMode {
 
 /// Thrown when image to PDF conversion cannot be completed.
 class ImageToPdfException implements Exception {
-  const ImageToPdfException(this.message);
+  final ImageToPdfErrorReason reason;
+  final int? maxCount;
+  final String? failedPath;
+  final String? details;
 
-  final String message;
+  const ImageToPdfException(
+    this.reason, {
+    this.maxCount,
+    this.failedPath,
+    this.details,
+  });
+
+  /// Backward-compatible string message.
+  String get message => reason.name;
+
+  String localizedMessage(BuildContext context) =>
+      reason.localizedMessage(
+        context,
+        maxCount: maxCount,
+        failedPath: failedPath,
+        details: details,
+      );
 
   @override
-  String toString() => message;
+  String toString() =>
+      'ImageToPdfException: $reason (path: $failedPath, details: $details)';
 }
 
 /// Service that compresses and converts a collection of images into a single PDF document.
@@ -50,11 +72,12 @@ class ImageToPdfService {
     void Function(int done, int total)? onProgress,
   }) async {
     if (imagePaths.isEmpty) {
-      throw const ImageToPdfException('Please select at least one image');
+      throw const ImageToPdfException(ImageToPdfErrorReason.noImages);
     }
     if (imagePaths.length > maxImageCount) {
       throw const ImageToPdfException(
-        'Maximum $maxImageCount images allowed at a time',
+        ImageToPdfErrorReason.maxImagesExceeded,
+        maxCount: maxImageCount,
       );
     }
 
@@ -85,7 +108,10 @@ class ImageToPdfService {
       }
 
       if (bytes == null || bytes.isEmpty) {
-        throw ImageToPdfException('Failed to process image: $path');
+        throw ImageToPdfException(
+          ImageToPdfErrorReason.processingFailed,
+          failedPath: path,
+        );
       }
 
       compressedImages.add(bytes);

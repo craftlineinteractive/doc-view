@@ -1,18 +1,43 @@
+import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
 import 'package:pdfrx/pdfrx.dart' as pdfrx;
 
+import '../../../core/errors/app_errors.dart';
 import '../../../core/utils/page_range_parser.dart';
 import '../../models/doc_file.dart';
 import 'pdf_output_service.dart';
 
 /// Thrown when PDF splitting cannot proceed due to invalid, damaged, or encrypted files.
 class PdfSplitException implements Exception {
-  const PdfSplitException(this.message);
+  final PdfSplitErrorReason reason;
+  final String? fileName;
+  final int? start;
+  final int? end;
+  final String? details;
 
-  final String message;
+  const PdfSplitException(
+    this.reason, {
+    this.fileName,
+    this.start,
+    this.end,
+    this.details,
+  });
+
+  /// Backward-compatible string message.
+  String get message => reason.name;
+
+  String localizedMessage(BuildContext context) =>
+      reason.localizedMessage(
+        context,
+        fileName: fileName,
+        start: start,
+        end: end,
+        details: details,
+      );
 
   @override
-  String toString() => message;
+  String toString() =>
+      'PdfSplitException: $reason ($fileName, $start-$end, $details)';
 }
 
 /// Service that extracts specified page ranges from a PDF document into distinct PDF files.
@@ -33,7 +58,7 @@ class PdfSplitService {
     void Function(int done, int total)? onProgress,
   }) async {
     if (ranges.isEmpty) {
-      throw const PdfSplitException('Please specify at least one page range');
+      throw const PdfSplitException(PdfSplitErrorReason.noRangesSpecified);
     }
 
     final fileName = p.basename(pdfPath);
@@ -42,12 +67,18 @@ class PdfSplitService {
     try {
       sourceDoc = await pdfrx.PdfDocument.openFile(pdfPath);
     } catch (_) {
-      throw PdfSplitException('$fileName is password-protected or damaged');
+      throw PdfSplitException(
+        PdfSplitErrorReason.passwordProtectedOrDamaged,
+        fileName: fileName,
+      );
     }
 
     if (sourceDoc.isEncrypted) {
       await sourceDoc.dispose();
-      throw PdfSplitException('$fileName is password-protected or damaged');
+      throw PdfSplitException(
+        PdfSplitErrorReason.passwordProtectedOrDamaged,
+        fileName: fileName,
+      );
     }
 
     final createdFiles = <DocFile>[];
@@ -59,7 +90,10 @@ class PdfSplitService {
         // Ensure range is within source page bounds (1-based index)
         if (range.start < 1 || range.end > sourceDoc.pages.length) {
           throw PdfSplitException(
-            'Range ${range.toString()} is out of bounds (1 - ${sourceDoc.pages.length})',
+            PdfSplitErrorReason.rangeOutOfBounds,
+            fileName: fileName,
+            start: range.start,
+            end: range.end,
           );
         }
 
@@ -86,6 +120,12 @@ class PdfSplitService {
       }
 
       return createdFiles;
+    } catch (e) {
+      if (e is PdfSplitException) rethrow;
+      throw PdfSplitException(
+        PdfSplitErrorReason.splitFailed,
+        details: e.toString(),
+      );
     } finally {
       await sourceDoc.dispose();
     }

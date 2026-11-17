@@ -217,7 +217,7 @@ abstract class AppLocalizations {
   /// **'Something went wrong'**
   String get errorGenericTitle;
 
-  /// Action button to retry a failed operation
+  /// Action button label to retry a failed operation
   ///
   /// In en, this message translates to:
   /// **'Retry'**
@@ -888,6 +888,990 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Documents of this format will appear here after scanning'**
   String get emptyCategoryDocsMessage;
+
+  /// Action button label to open a document
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get actionOpen;
+
+  /// Action button label to share a document
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get actionShare;
+
+  /// Action button label to rename a document
+  ///
+  /// In en, this message translates to:
+  /// **'Rename'**
+  String get actionRename;
+
+  /// Action button label to bookmark a document
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmark'**
+  String get actionBookmark;
+
+  /// Action button label to remove bookmark from a document
+  ///
+  /// In en, this message translates to:
+  /// **'Remove bookmark'**
+  String get actionRemoveBookmark;
+
+  /// Action button label to open a document in an external application
+  ///
+  /// In en, this message translates to:
+  /// **'Open in another app'**
+  String get actionOpenInAnotherApp;
+
+  /// Action button label to view document details
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get actionDetails;
+
+  /// Primary button label to open the active file
+  ///
+  /// In en, this message translates to:
+  /// **'Open file'**
+  String get actionOpenFile;
+
+  /// Action button label to share all generated files
+  ///
+  /// In en, this message translates to:
+  /// **'Share All'**
+  String get actionShareAll;
+
+  /// Action button label to finish flow
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get actionDone;
+
+  /// Action link to see all items in a section
+  ///
+  /// In en, this message translates to:
+  /// **'See All'**
+  String get actionSeeAll;
+
+  /// Action button label to grant permission
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get actionAllow;
+
+  /// Action button label to dismiss or postpone permission prompt
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get actionNotNow;
+
+  /// Tooltip for the more actions button on a file row
+  ///
+  /// In en, this message translates to:
+  /// **'More actions'**
+  String get tooltipMoreActions;
+
+  /// Tooltip for copy path button
+  ///
+  /// In en, this message translates to:
+  /// **'Copy path'**
+  String get tooltipCopyPath;
+
+  /// Tooltip for rotating a page
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate page'**
+  String get tooltipRotatePage;
+
+  /// Tooltip for removing a page
+  ///
+  /// In en, this message translates to:
+  /// **'Remove page'**
+  String get tooltipRemovePage;
+
+  /// Title of the file rename dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Rename file'**
+  String get renameFileTitle;
+
+  /// Input field label for new file name
+  ///
+  /// In en, this message translates to:
+  /// **'File name'**
+  String get renameFileNameLabel;
+
+  /// Snackbar shown when a file is successfully renamed
+  ///
+  /// In en, this message translates to:
+  /// **'Renamed to {fileName}'**
+  String renamedSuccess(String fileName);
+
+  /// Title of single file deletion confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete file?'**
+  String get deleteFileTitle;
+
+  /// Body message asking confirmation to delete a single file
+  ///
+  /// In en, this message translates to:
+  /// **'Delete \"{fileName}\"? This can\'t be undone.'**
+  String deleteFileConfirmation(String fileName);
+
+  /// Snackbar message when a file is deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted \"{fileName}\"'**
+  String deletedFileSuccess(String fileName);
+
+  /// Header title of the document details sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Document Details'**
+  String get fileDetailsTitle;
+
+  /// Label for file name metadata row
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get fileDetailsLabelName;
+
+  /// Label for file type metadata row
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get fileDetailsLabelType;
+
+  /// Label for file size metadata row
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get fileDetailsLabelSize;
+
+  /// Label for modified date metadata row
+  ///
+  /// In en, this message translates to:
+  /// **'Modified'**
+  String get fileDetailsLabelModified;
+
+  /// Label for bookmarked status metadata row
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmarked'**
+  String get fileDetailsLabelBookmarked;
+
+  /// Affirmative value in metadata details
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get fileDetailsValueYes;
+
+  /// Negative value in metadata details
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get fileDetailsValueNo;
+
+  /// Label for file location/path in details sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get fileDetailsLabelLocation;
+
+  /// Snackbar message when file path is copied to clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Path copied to clipboard'**
+  String get fileDetailsPathCopied;
+
+  /// AppBar title for the directories browser screen
+  ///
+  /// In en, this message translates to:
+  /// **'Directories'**
+  String get directoriesTitle;
+
+  /// Button label to navigate up one folder in empty/error directory state
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get directoriesGoBack;
+
+  /// Button label to return to the root folder
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Root'**
+  String get directoriesGoToRoot;
+
+  /// Button label to retry loading directory
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get directoriesRetry;
+
+  /// Snackbar message when tapping a file that was deleted on disk
+  ///
+  /// In en, this message translates to:
+  /// **'File no longer exists'**
+  String get directoriesFileNoLongerExists;
+
+  /// Empty state title when a directory is deleted
+  ///
+  /// In en, this message translates to:
+  /// **'This folder no longer exists.'**
+  String get directoriesFolderNoLongerExists;
+
+  /// Headline when a directory contains no supported documents
+  ///
+  /// In en, this message translates to:
+  /// **'No documents in this folder'**
+  String get directoriesNoDocsInFolder;
+
+  /// Subtitle when a directory contains no supported documents
+  ///
+  /// In en, this message translates to:
+  /// **'Files will appear here once added'**
+  String get directoriesFilesAppearHere;
+
+  /// Item count subtitle on folder list tiles
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 item} other{{count} items}}'**
+  String directoriesFolderSubtitle(int count);
+
+  /// Default subtitle for folders when count is unknown
+  ///
+  /// In en, this message translates to:
+  /// **'Folder'**
+  String get directoriesFolderSubtitleDefault;
+
+  /// Title for directory browser permission required state
+  ///
+  /// In en, this message translates to:
+  /// **'Access required to view directories'**
+  String get directoriesPermissionPromptTitle;
+
+  /// Body message explaining why directory browsing needs storage access
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View needs All files access to browse your folders.'**
+  String get directoriesPermissionPromptBody;
+
+  /// Button label to request All files access
+  ///
+  /// In en, this message translates to:
+  /// **'Grant access'**
+  String get directoriesGrantAccess;
+
+  /// Button label to import individual files via system picker
+  ///
+  /// In en, this message translates to:
+  /// **'Import files instead'**
+  String get directoriesImportInstead;
+
+  /// Snackbar message reporting number of imported files
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Imported 1 file} other{Imported {count} files}}'**
+  String directoriesImportedCount(int count);
+
+  /// Tooltip for navigation button that ascends one folder level
+  ///
+  /// In en, this message translates to:
+  /// **'Up one level'**
+  String get directoriesTooltipUp;
+
+  /// Title of the storage access prompt dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Storage Access Required'**
+  String get storageAccessRequiredTitle;
+
+  /// Body text of the storage access prompt dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View needs storage access to scan and display documents (PDF, Word, Excel, PPT, TXT, Images) stored on your device.\n\nYour files remain completely private and offline on your device.'**
+  String get storageAccessRequiredBody;
+
+  /// Snackbar shown when opening an external document fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open document: {error}'**
+  String errorCouldNotOpenDocument(String error);
+
+  /// Snackbar notification after filesystem scan finishes
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Scan complete: 1 file} other{Scan complete: {count} files}}'**
+  String scanCompleteWithCount(int count);
+
+  /// Title for clear search history confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search history?'**
+  String get dialogClearSearchTitle;
+
+  /// Body message for clear search history confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'All recent searches will be permanently cleared.'**
+  String get dialogClearSearchMessage;
+
+  /// Snackbar message when user tries to add more than maximum allowed images
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum limit of {max} images reached.'**
+  String imageListEditorMaxLimit(int max);
+
+  /// Snackbar message when camera/scanner operation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning failed: {error}'**
+  String imageListEditorScanFailed(String error);
+
+  /// Label for page size selector in image to PDF editor
+  ///
+  /// In en, this message translates to:
+  /// **'Page Size:'**
+  String get imageListEditorPageSize;
+
+  /// A4 page mode button label
+  ///
+  /// In en, this message translates to:
+  /// **'A4'**
+  String get imageListEditorA4Mode;
+
+  /// Fit to image page mode button label
+  ///
+  /// In en, this message translates to:
+  /// **'Fit to image'**
+  String get imageListEditorFitMode;
+
+  /// Tooltip for button removing an image from the PDF editor list
+  ///
+  /// In en, this message translates to:
+  /// **'Remove image'**
+  String get imageListEditorRemoveImageTooltip;
+
+  /// AppBar title for PDF merge screen
+  ///
+  /// In en, this message translates to:
+  /// **'Arrange & merge'**
+  String get mergeScreenTitle;
+
+  /// Default base filename for merged PDF document
+  ///
+  /// In en, this message translates to:
+  /// **'Merged_Document'**
+  String get mergeScreenDefaultMergedName;
+
+  /// Search field hint text in merge PDF picker
+  ///
+  /// In en, this message translates to:
+  /// **'Search PDFs...'**
+  String get mergePickerSearchHint;
+
+  /// Next button label in merge PDF picker
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get mergePickerNext;
+
+  /// Error message when loading PDFs in merge picker fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading PDFs: {error}'**
+  String mergePickerErrorLoading(String error);
+
+  /// AppBar title for PDF split screen
+  ///
+  /// In en, this message translates to:
+  /// **'Split PDF'**
+  String get splitScreenTitle;
+
+  /// Hint text for page range input in split screen
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 1-3, 5, 8-10'**
+  String get splitScreenRangeHint;
+
+  /// Tooltip for clearing page range text in split screen
+  ///
+  /// In en, this message translates to:
+  /// **'Clear range'**
+  String get splitScreenClearRange;
+
+  /// Search field hint text in split PDF picker
+  ///
+  /// In en, this message translates to:
+  /// **'Search PDFs...'**
+  String get splitPickerSearchHint;
+
+  /// Error message when loading PDFs in split picker fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading files: {error}'**
+  String splitPickerErrorLoading(String error);
+
+  /// Section header for documents created by user
+  ///
+  /// In en, this message translates to:
+  /// **'Created by you'**
+  String get createdSectionTitle;
+
+  /// Title on empty state card for created documents section
+  ///
+  /// In en, this message translates to:
+  /// **'PDFs you create appear here'**
+  String get createdSectionEmptyTitle;
+
+  /// Subtitle on empty state card for created documents section
+  ///
+  /// In en, this message translates to:
+  /// **'Converted, scanned, or merged documents will be saved locally.'**
+  String get createdSectionEmptySubtitle;
+
+  /// Title when created documents listing is empty
+  ///
+  /// In en, this message translates to:
+  /// **'No created documents yet'**
+  String get emptyCreatedDocsTitle;
+
+  /// Message when created documents listing is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Converted, scanned, or merged documents will appear here.'**
+  String get emptyCreatedDocsMessage;
+
+  /// Error message when loading created files fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load created files: {error}'**
+  String errorLoadingCreatedFiles(String error);
+
+  /// Success headline in tool result bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{PDF Created} other{{count} PDFs Created}}'**
+  String toolResultPdfCreated(int count);
+
+  /// Subtitle in tool result sheet confirming save location
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to your Created folder'**
+  String get toolResultSavedSubtitle;
+
+  /// Default headline in tool error bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t create PDF'**
+  String get toolErrorDefaultTitle;
+
+  /// Subtitle explaining unexpected processing failure in tool error sheet
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred during processing'**
+  String get toolErrorSubtitle;
+
+  /// Header title of the theme selection bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'App theme'**
+  String get themeSheetTitle;
+
+  /// Subtitle of the theme selection bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Select visual appearance for Doc View'**
+  String get themeSheetSubtitle;
+
+  /// Label for system theme mode option
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeModeSystem;
+
+  /// Subtitle for system theme mode option
+  ///
+  /// In en, this message translates to:
+  /// **'default'**
+  String get themeModeSystemSubtitle;
+
+  /// Label for light theme mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeModeLight;
+
+  /// Subtitle for light theme mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Clean white'**
+  String get themeModeLightSubtitle;
+
+  /// Label for dark theme mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeModeDark;
+
+  /// Subtitle for dark theme mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Deep navy'**
+  String get themeModeDarkSubtitle;
+
+  /// Button label to confirm and apply selected theme mode
+  ///
+  /// In en, this message translates to:
+  /// **'Apply theme'**
+  String get themeActionApply;
+
+  /// Header title of the scan settings sub-screen
+  ///
+  /// In en, this message translates to:
+  /// **'Scan settings'**
+  String get scanSettingsTitle;
+
+  /// Section header for scan frequency options
+  ///
+  /// In en, this message translates to:
+  /// **'Scan frequency'**
+  String get scanSettingsFrequencyHeader;
+
+  /// Title of automatic scan on open option
+  ///
+  /// In en, this message translates to:
+  /// **'Scan on app open'**
+  String get scanSettingsOnOpenTitle;
+
+  /// Description of automatic scan on open option
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically find new files when you open Doc View.'**
+  String get scanSettingsOnOpenSubtitle;
+
+  /// Title of manual scan mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Manual only'**
+  String get scanSettingsManualTitle;
+
+  /// Description of manual scan mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Only scan when you pull to refresh or tap Rescan.'**
+  String get scanSettingsManualSubtitle;
+
+  /// Section header for media file filtering options
+  ///
+  /// In en, this message translates to:
+  /// **'Media filters'**
+  String get scanSettingsMediaFiltersHeader;
+
+  /// Title of toggle for including images in file indexing
+  ///
+  /// In en, this message translates to:
+  /// **'Include images in scan'**
+  String get scanSettingsIncludeImagesTitle;
+
+  /// Description of toggle for including images in file indexing
+  ///
+  /// In en, this message translates to:
+  /// **'Index PNG, JPG, and WEBP image files in storage.'**
+  String get scanSettingsIncludeImagesSubtitle;
+
+  /// Section header for storage status and diagnostics
+  ///
+  /// In en, this message translates to:
+  /// **'Storage & diagnostics'**
+  String get scanSettingsDiagnosticsHeader;
+
+  /// Label for permission status row in diagnostics
+  ///
+  /// In en, this message translates to:
+  /// **'All files access'**
+  String get scanSettingsPermissionStatus;
+
+  /// Value indicating storage permission is granted
+  ///
+  /// In en, this message translates to:
+  /// **'Granted'**
+  String get scanSettingsPermissionGranted;
+
+  /// Value indicating storage permission is not granted
+  ///
+  /// In en, this message translates to:
+  /// **'Not granted'**
+  String get scanSettingsPermissionNotGranted;
+
+  /// Label for count of indexed files in diagnostics
+  ///
+  /// In en, this message translates to:
+  /// **'Indexed files'**
+  String get scanSettingsTotalIndexed;
+
+  /// Label for timestamp of last filesystem scan
+  ///
+  /// In en, this message translates to:
+  /// **'Last scanned'**
+  String get scanSettingsLastScan;
+
+  /// Snackbar message confirming scan settings change
+  ///
+  /// In en, this message translates to:
+  /// **'Scan settings updated'**
+  String get scanSettingsUpdatedSnackbar;
+
+  /// Header title of the FAQ screen
+  ///
+  /// In en, this message translates to:
+  /// **'Frequently Asked Questions'**
+  String get faqScreenTitle;
+
+  /// Chip label displaying total number of topics in FAQ
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Topics'**
+  String faqHeaderTopics(int count);
+
+  /// Subtitle under FAQ screen header
+  ///
+  /// In en, this message translates to:
+  /// **'Got questions? Find clear answers here.'**
+  String get faqHeaderSubtitle;
+
+  /// Button label to contact support or send feedback
+  ///
+  /// In en, this message translates to:
+  /// **'Send feedback'**
+  String get faqSendFeedback;
+
+  /// FAQ question 1 regarding storage permissions
+  ///
+  /// In en, this message translates to:
+  /// **'Why does Doc View need All files access?'**
+  String get faqQuestion1;
+
+  /// FAQ answer 1 regarding storage permissions
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View requires All files access (MANAGE_EXTERNAL_STORAGE) on Android 11+ to discover and index supported documents (PDF, Word, Excel, PowerPoint, Text, and Images) stored in shared folders such as Downloads and Documents.\n\nWithout this permission, Android restricts file access to the app\'s private internal folder, preventing Doc View from browsing or opening files located across your device.'**
+  String get faqAnswer1;
+
+  /// FAQ question 2 regarding iOS sandboxing
+  ///
+  /// In en, this message translates to:
+  /// **'Why doesn\'t it scan my whole iPhone?'**
+  String get faqQuestion2;
+
+  /// FAQ answer 2 regarding iOS sandboxing
+  ///
+  /// In en, this message translates to:
+  /// **'iOS uses strict app sandboxing to safeguard device privacy. Apps can only access documents explicitly saved inside the Files app or shared via the system Share Sheet.\n\nTo view files on iOS, import them into the Doc View folder in the native Files app or use the Import files option in Settings.'**
+  String get faqAnswer2;
+
+  /// FAQ question 3 regarding generated file storage location
+  ///
+  /// In en, this message translates to:
+  /// **'Where are the PDFs I create saved?'**
+  String get faqQuestion3;
+
+  /// FAQ answer 3 regarding generated file storage location
+  ///
+  /// In en, this message translates to:
+  /// **'Files you import or generate (such as converted PDFs, merged documents, or split pages) are saved securely in your device storage under DocView/Created or private app storage. You can view them anytime in the Created by you section on the Tools tab.'**
+  String get faqAnswer3;
+
+  /// FAQ question 4 regarding offline office rendering
+  ///
+  /// In en, this message translates to:
+  /// **'Why does my Word file look different?'**
+  String get faqQuestion4;
+
+  /// FAQ answer 4 regarding offline office rendering
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View renders files directly on your device using local offline parsers without sending private data to cloud converters. Complex formatting or custom shapes render with native offline approximations.'**
+  String get faqAnswer4;
+
+  /// FAQ question 5 regarding encrypted PDF support
+  ///
+  /// In en, this message translates to:
+  /// **'Can I open password-protected files?'**
+  String get faqQuestion5;
+
+  /// FAQ answer 5 regarding encrypted PDF support
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Doc View supports opening password-protected PDF documents. When opening an encrypted PDF, enter the password in the dialog to decrypt and view the document on your device.'**
+  String get faqAnswer5;
+
+  /// FAQ question 6 regarding privacy and data policy
+  ///
+  /// In en, this message translates to:
+  /// **'Is my data uploaded anywhere?'**
+  String get faqQuestion6;
+
+  /// FAQ answer 6 regarding privacy and data policy
+  ///
+  /// In en, this message translates to:
+  /// **'Your documents never leave your device. Doc View opens, converts and stores files locally. The app shows ads served by Google AdMob, which can use limited device data as described in our Privacy Policy.'**
+  String get faqAnswer6;
+
+  /// Title of the jump to page dialog in PDF viewer
+  ///
+  /// In en, this message translates to:
+  /// **'Go to page'**
+  String get pdfGotoPageTitle;
+
+  /// Input hint for page jump dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a page between 1 and {pageCount}'**
+  String pdfGotoPageHint(int pageCount);
+
+  /// Action button label to jump to specified page
+  ///
+  /// In en, this message translates to:
+  /// **'Go'**
+  String get pdfGotoPageAction;
+
+  /// Validation error when jump page input is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a page number'**
+  String get pdfGotoPageErrorEmpty;
+
+  /// Validation error when jump page input is out of range
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a page between 1 and {pageCount}'**
+  String pdfGotoPageErrorOutOfRange(int pageCount);
+
+  /// Title of the password-protected PDF unlock dialog
+  ///
+  /// In en, this message translates to:
+  /// **'This PDF is password-protected'**
+  String get pdfPasswordTitle;
+
+  /// Subtitle of the password-protected PDF unlock dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Enter password to view and decrypt the contents.'**
+  String get pdfPasswordSubtitle;
+
+  /// Hint text for PDF password input field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter password'**
+  String get pdfPasswordHint;
+
+  /// Inline error banner when submitted PDF password is wrong
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect password. Try again.'**
+  String get pdfPasswordErrorIncorrect;
+
+  /// Action button label to unlock password-protected PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get pdfPasswordActionUnlock;
+
+  /// Validation error when file name is blank
+  ///
+  /// In en, this message translates to:
+  /// **'File name cannot be empty'**
+  String get errorFileNameEmpty;
+
+  /// Validation error when file name exceeds length limit
+  ///
+  /// In en, this message translates to:
+  /// **'File name cannot exceed 120 characters'**
+  String get errorFileNameTooLong;
+
+  /// Validation error when file name is reserved dot or double-dot
+  ///
+  /// In en, this message translates to:
+  /// **'File name cannot be \'.\' or \'..\''**
+  String get errorFileNameReserved;
+
+  /// Validation error when file name begins with a period
+  ///
+  /// In en, this message translates to:
+  /// **'File name cannot start with a dot'**
+  String get errorFileNameStartsWithDot;
+
+  /// Validation error when file name has illegal characters
+  ///
+  /// In en, this message translates to:
+  /// **'File name contains invalid characters'**
+  String get errorFileNameInvalidChars;
+
+  /// Error message when rename target file already exists
+  ///
+  /// In en, this message translates to:
+  /// **'A file with this name already exists in this folder'**
+  String get errorRenameAlreadyExists;
+
+  /// Error message when renaming a file that was deleted on disk
+  ///
+  /// In en, this message translates to:
+  /// **'Source file no longer exists on disk'**
+  String get errorRenameSourceNotFound;
+
+  /// Error message when file rename IO fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to rename file: {details}'**
+  String errorRenameFailed(String details);
+
+  /// Error message when file deletion succeeded on disk but database sync failed
+  ///
+  /// In en, this message translates to:
+  /// **'Files deleted from disk but database update failed'**
+  String get errorDeleteDatabaseFailed;
+
+  /// Error message when deleting files fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete files: {details}'**
+  String errorDeleteFailed(String details);
+
+  /// Validation error when splitting an empty document
+  ///
+  /// In en, this message translates to:
+  /// **'Document has no pages'**
+  String get errorPageRangeDocNoPages;
+
+  /// Validation error when page range input is blank
+  ///
+  /// In en, this message translates to:
+  /// **'Page range cannot be empty'**
+  String get errorPageRangeEmpty;
+
+  /// Validation error when page range input has trailing or consecutive commas
+  ///
+  /// In en, this message translates to:
+  /// **'Empty range segment found. Remove extra commas.'**
+  String get errorPageRangeEmptySegment;
+
+  /// Validation error when a range segment is formatted incorrectly
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid range format: \'{token}\''**
+  String errorPageRangeInvalidFormat(String token);
+
+  /// Validation error when a range segment is missing start or end
+  ///
+  /// In en, this message translates to:
+  /// **'Incomplete range: \'{token}\''**
+  String errorPageRangeIncomplete(String token);
+
+  /// Validation error when a range segment has letters or symbols
+  ///
+  /// In en, this message translates to:
+  /// **'Non-numeric values in range: \'{token}\''**
+  String errorPageRangeNonNumeric(String token);
+
+  /// Validation error when page number is zero or negative
+  ///
+  /// In en, this message translates to:
+  /// **'Page numbers must be 1 or greater'**
+  String get errorPageRangeBelowMinimum;
+
+  /// Validation error when range start exceeds range end
+  ///
+  /// In en, this message translates to:
+  /// **'Reversed range \'{start}-{end}\': start is greater than end'**
+  String errorPageRangeReversed(int start, int end);
+
+  /// Validation error when specified range exceeds total page count
+  ///
+  /// In en, this message translates to:
+  /// **'Range \'{token}\' exceeds total pages ({totalPages})'**
+  String errorPageRangeExceeds(String token, int totalPages);
+
+  /// Validation error when single page number is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid page number: \'{token}\''**
+  String errorPageRangeInvalidNumber(String token);
+
+  /// Error message when creating PDF with no images
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one image'**
+  String get errorImageToPdfNoImages;
+
+  /// Error message when exceeding maximum image count in image-to-PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum {max} images allowed at a time'**
+  String errorImageToPdfMaxExceeded(int max);
+
+  /// Error message when individual image processing fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to process image: {path}'**
+  String errorImageToPdfProcessingFailed(String path);
+
+  /// Error message when overall PDF creation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create PDF from images: {details}'**
+  String errorImageToPdfGenerationFailed(String details);
+
+  /// Error message when fewer than two PDFs are selected for merge
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least 2 PDF files to merge'**
+  String get errorPdfMergeInsufficient;
+
+  /// Error message when a PDF to merge cannot be read
+  ///
+  /// In en, this message translates to:
+  /// **'{fileName} is password-protected or damaged'**
+  String errorPdfMergeDamagedOrEncrypted(String fileName);
+
+  /// Error message when PDFs selected for merge have no pages
+  ///
+  /// In en, this message translates to:
+  /// **'Selected documents contain no pages'**
+  String get errorPdfMergeNoPages;
+
+  /// Error message when PDF merge operation fails
+  ///
+  /// In en, this message translates to:
+  /// **'PDF merging failed: {details}'**
+  String errorPdfMergeFailed(String details);
+
+  /// Error message when splitting PDF without specifying ranges
+  ///
+  /// In en, this message translates to:
+  /// **'Please specify at least one page range'**
+  String get errorPdfSplitNoRanges;
+
+  /// Error message when PDF to split cannot be read
+  ///
+  /// In en, this message translates to:
+  /// **'{fileName} is password-protected or damaged'**
+  String errorPdfSplitDamagedOrEncrypted(String fileName);
+
+  /// Error message when split range is outside PDF page bounds
+  ///
+  /// In en, this message translates to:
+  /// **'Range {start}-{end} is out of bounds for {fileName}'**
+  String errorPdfSplitRangeOutOfBounds(int start, int end, String fileName);
+
+  /// Error message when PDF split operation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to split PDF: {details}'**
+  String errorPdfSplitFailed(String details);
 }
 
 class _AppLocalizationsDelegate

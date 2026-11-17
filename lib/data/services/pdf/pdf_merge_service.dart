@@ -1,17 +1,31 @@
+import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
 import 'package:pdfrx/pdfrx.dart' as pdfrx;
 
+import '../../../core/errors/app_errors.dart';
 import '../../models/doc_file.dart';
 import 'pdf_output_service.dart';
 
 /// Thrown when PDF merging cannot proceed due to invalid, damaged, or encrypted files.
 class PdfMergeException implements Exception {
-  const PdfMergeException(this.message);
+  final PdfMergeErrorReason reason;
+  final String? fileName;
+  final String? details;
 
-  final String message;
+  const PdfMergeException(
+    this.reason, {
+    this.fileName,
+    this.details,
+  });
+
+  /// Backward-compatible string message.
+  String get message => reason.name;
+
+  String localizedMessage(BuildContext context) =>
+      reason.localizedMessage(context, fileName: fileName, details: details);
 
   @override
-  String toString() => message;
+  String toString() => 'PdfMergeException: $reason ($fileName - $details)';
 }
 
 /// Service that combines multiple PDF documents in sequential order using native PDF page manipulation.
@@ -31,7 +45,7 @@ class PdfMergeService {
     void Function(int done, int total)? onProgress,
   }) async {
     if (pdfPaths.length < 2) {
-      throw const PdfMergeException('Please select at least 2 PDF files to merge');
+      throw const PdfMergeException(PdfMergeErrorReason.insufficientFiles);
     }
 
     final openDocs = <pdfrx.PdfDocument>[];
@@ -47,12 +61,18 @@ class PdfMergeService {
         try {
           doc = await pdfrx.PdfDocument.openFile(path);
         } catch (_) {
-          throw PdfMergeException('$fileName is password-protected or damaged');
+          throw PdfMergeException(
+            PdfMergeErrorReason.passwordProtectedOrDamaged,
+            fileName: fileName,
+          );
         }
 
         if (doc.isEncrypted) {
           await doc.dispose();
-          throw PdfMergeException('$fileName is password-protected or damaged');
+          throw PdfMergeException(
+            PdfMergeErrorReason.passwordProtectedOrDamaged,
+            fileName: fileName,
+          );
         }
 
         openDocs.add(doc);
@@ -61,7 +81,7 @@ class PdfMergeService {
       }
 
       if (allPages.isEmpty) {
-        throw const PdfMergeException('Selected documents contain no pages');
+        throw const PdfMergeException(PdfMergeErrorReason.noPages);
       }
 
       final mergedDoc = await pdfrx.PdfDocument.createNew(
@@ -76,6 +96,12 @@ class PdfMergeService {
       await targetFile.writeAsBytes(encodedBytes);
 
       return outputService.registerOutput(targetFile);
+    } catch (e) {
+      if (e is PdfMergeException) rethrow;
+      throw PdfMergeException(
+        PdfMergeErrorReason.mergeFailed,
+        details: e.toString(),
+      );
     } finally {
       for (final doc in openDocs) {
         try {

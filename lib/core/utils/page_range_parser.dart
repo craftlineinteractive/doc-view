@@ -1,3 +1,7 @@
+import 'package:flutter/widgets.dart';
+
+import '../errors/app_errors.dart';
+
 /// Representation of an inclusive 1-based page range.
 class PageRange {
   const PageRange(this.start, this.end)
@@ -30,12 +34,35 @@ class PageRange {
 
 /// Thrown when parsing page ranges fails validation.
 class PageRangeParseException implements Exception {
-  const PageRangeParseException(this.message);
+  final PageRangeErrorReason reason;
+  final String? token;
+  final int? start;
+  final int? end;
+  final int? totalPages;
 
-  final String message;
+  const PageRangeParseException(
+    this.reason, {
+    this.token,
+    this.start,
+    this.end,
+    this.totalPages,
+  });
+
+  /// Backward-compatible string message.
+  String get message => reason.name;
+
+  String localizedMessage(BuildContext context) =>
+      reason.localizedMessage(
+        context,
+        token: token,
+        start: start,
+        end: end,
+        totalPages: totalPages,
+      );
 
   @override
-  String toString() => message;
+  String toString() =>
+      'PageRangeParseException: $reason (token: $token, range: $start-$end, total: $totalPages)';
 }
 
 /// Parses a page range string such as "1-3, 5, 8-10" against a document's [pageCount].
@@ -49,12 +76,12 @@ class PageRangeParseException implements Exception {
 /// - Preserves user's exact order and does not merge overlapping ranges.
 List<PageRange> parsePageRanges(String input, int pageCount) {
   if (pageCount < 1) {
-    throw const PageRangeParseException('Document has no pages');
+    throw const PageRangeParseException(PageRangeErrorReason.documentHasNoPages);
   }
 
   final trimmed = input.trim();
   if (trimmed.isEmpty) {
-    throw const PageRangeParseException('Page range cannot be empty');
+    throw const PageRangeParseException(PageRangeErrorReason.empty);
   }
 
   final parts = trimmed.split(',');
@@ -63,21 +90,25 @@ List<PageRange> parsePageRanges(String input, int pageCount) {
   for (final rawPart in parts) {
     final part = rawPart.trim();
     if (part.isEmpty) {
-      throw const PageRangeParseException(
-        'Empty range segment found. Remove extra commas.',
-      );
+      throw const PageRangeParseException(PageRangeErrorReason.emptySegment);
     }
 
     if (part.contains('-')) {
       final rangeSegments = part.split('-');
       if (rangeSegments.length != 2) {
-        throw PageRangeParseException("Invalid range format: '$part'");
+        throw PageRangeParseException(
+          PageRangeErrorReason.invalidFormat,
+          token: part,
+        );
       }
       final startStr = rangeSegments[0].trim();
       final endStr = rangeSegments[1].trim();
 
       if (startStr.isEmpty || endStr.isEmpty) {
-        throw PageRangeParseException("Incomplete range: '$part'");
+        throw PageRangeParseException(
+          PageRangeErrorReason.incompleteRange,
+          token: part,
+        );
       }
 
       final start = int.tryParse(startStr);
@@ -85,25 +116,29 @@ List<PageRange> parsePageRanges(String input, int pageCount) {
 
       if (start == null || end == null) {
         throw PageRangeParseException(
-          "Non-numeric values in range: '$part'",
+          PageRangeErrorReason.nonNumeric,
+          token: part,
         );
       }
 
       if (start < 1 || end < 1) {
-        throw const PageRangeParseException(
-          'Page numbers must be 1 or greater',
-        );
+        throw const PageRangeParseException(PageRangeErrorReason.belowMinimum);
       }
 
       if (start > end) {
         throw PageRangeParseException(
-          "Reversed range '$part': start ($start) is greater than end ($end)",
+          PageRangeErrorReason.reversedRange,
+          token: part,
+          start: start,
+          end: end,
         );
       }
 
       if (start > pageCount || end > pageCount) {
         throw PageRangeParseException(
-          "Range '$part' exceeds total pages ($pageCount)",
+          PageRangeErrorReason.exceedsPageCount,
+          token: part,
+          totalPages: pageCount,
         );
       }
 
@@ -111,18 +146,21 @@ List<PageRange> parsePageRanges(String input, int pageCount) {
     } else {
       final page = int.tryParse(part);
       if (page == null) {
-        throw PageRangeParseException("Invalid page number: '$part'");
+        throw PageRangeParseException(
+          PageRangeErrorReason.invalidPageNumber,
+          token: part,
+        );
       }
 
       if (page < 1) {
-        throw const PageRangeParseException(
-          'Page numbers must be 1 or greater',
-        );
+        throw const PageRangeParseException(PageRangeErrorReason.belowMinimum);
       }
 
       if (page > pageCount) {
         throw PageRangeParseException(
-          "Page $page exceeds total pages ($pageCount)",
+          PageRangeErrorReason.exceedsPageCount,
+          token: part,
+          totalPages: pageCount,
         );
       }
 
@@ -133,15 +171,15 @@ List<PageRange> parsePageRanges(String input, int pageCount) {
   return ranges;
 }
 
-/// Helper returning an error message string if invalid, or null if valid.
-String? validatePageRanges(String input, int pageCount) {
+/// Helper returning a [PageRangeParseException] if invalid, or null if valid.
+PageRangeParseException? validatePageRanges(String input, int pageCount) {
   try {
     parsePageRanges(input, pageCount);
     return null;
   } on PageRangeParseException catch (e) {
-    return e.message;
+    return e;
   } catch (_) {
-    return 'Invalid page range format';
+    return const PageRangeParseException(PageRangeErrorReason.invalidFormat);
   }
 }
 

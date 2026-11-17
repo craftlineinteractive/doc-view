@@ -1,0 +1,195 @@
+import 'package:flutter/widgets.dart';
+
+import '../extensions/l10n_extension.dart';
+
+/// Validation failure reasons for file names.
+enum FileNameValidationError {
+  empty,
+  tooLong,
+  reservedName,
+  startsWithDot,
+  invalidCharacters;
+
+  String localizedMessage(BuildContext context) {
+    switch (this) {
+      case FileNameValidationError.empty:
+        return context.l10n.errorFileNameEmpty;
+      case FileNameValidationError.tooLong:
+        return context.l10n.errorFileNameTooLong;
+      case FileNameValidationError.reservedName:
+        return context.l10n.errorFileNameReserved;
+      case FileNameValidationError.startsWithDot:
+        return context.l10n.errorFileNameStartsWithDot;
+      case FileNameValidationError.invalidCharacters:
+        return context.l10n.errorFileNameInvalidChars;
+    }
+  }
+}
+
+/// Typed reasons for file rename operation failures.
+enum RenameFailureReason {
+  validation,
+  alreadyExists,
+  sourceNotFound,
+  ioError;
+
+  String localizedMessage(
+    BuildContext context, {
+    FileNameValidationError? validationError,
+    String? details,
+  }) {
+    switch (this) {
+      case RenameFailureReason.validation:
+        return validationError?.localizedMessage(context) ??
+            context.l10n.errorFileNameInvalidChars;
+      case RenameFailureReason.alreadyExists:
+        return context.l10n.errorRenameAlreadyExists;
+      case RenameFailureReason.sourceNotFound:
+        return context.l10n.errorRenameSourceNotFound;
+      case RenameFailureReason.ioError:
+        return context.l10n.errorRenameFailed(details ?? '');
+    }
+  }
+}
+
+/// Typed reasons for batch file deletion failures.
+enum DeleteFailureReason {
+  databaseUpdateFailed,
+  ioError;
+
+  String localizedMessage(BuildContext context, {String? details}) {
+    switch (this) {
+      case DeleteFailureReason.databaseUpdateFailed:
+        return context.l10n.errorDeleteDatabaseFailed;
+      case DeleteFailureReason.ioError:
+        return context.l10n.errorDeleteFailed(details ?? '');
+    }
+  }
+}
+
+/// Typed reasons for page range parsing failures.
+enum PageRangeErrorReason {
+  documentHasNoPages,
+  empty,
+  emptySegment,
+  invalidFormat,
+  incompleteRange,
+  nonNumeric,
+  belowMinimum,
+  reversedRange,
+  exceedsPageCount,
+  invalidPageNumber;
+
+  String localizedMessage(
+    BuildContext context, {
+    String? token,
+    int? start,
+    int? end,
+    int? totalPages,
+  }) {
+    switch (this) {
+      case PageRangeErrorReason.documentHasNoPages:
+        return context.l10n.errorPageRangeDocNoPages;
+      case PageRangeErrorReason.empty:
+        return context.l10n.errorPageRangeEmpty;
+      case PageRangeErrorReason.emptySegment:
+        return context.l10n.errorPageRangeEmptySegment;
+      case PageRangeErrorReason.invalidFormat:
+        return context.l10n.errorPageRangeInvalidFormat(token ?? '');
+      case PageRangeErrorReason.incompleteRange:
+        return context.l10n.errorPageRangeIncomplete(token ?? '');
+      case PageRangeErrorReason.nonNumeric:
+        return context.l10n.errorPageRangeNonNumeric(token ?? '');
+      case PageRangeErrorReason.belowMinimum:
+        return context.l10n.errorPageRangeBelowMinimum;
+      case PageRangeErrorReason.reversedRange:
+        return context.l10n.errorPageRangeReversed(start ?? 0, end ?? 0);
+      case PageRangeErrorReason.exceedsPageCount:
+        return context.l10n.errorPageRangeExceeds(token ?? '', totalPages ?? 0);
+      case PageRangeErrorReason.invalidPageNumber:
+        return context.l10n.errorPageRangeInvalidNumber(token ?? '');
+    }
+  }
+}
+
+/// Typed reasons for image-to-PDF conversion failures.
+enum ImageToPdfErrorReason {
+  noImages,
+  maxImagesExceeded,
+  processingFailed,
+  generationFailed;
+
+  String localizedMessage(
+    BuildContext context, {
+    int? maxCount,
+    String? failedPath,
+    String? details,
+  }) {
+    switch (this) {
+      case ImageToPdfErrorReason.noImages:
+        return context.l10n.errorImageToPdfNoImages;
+      case ImageToPdfErrorReason.maxImagesExceeded:
+        return context.l10n.errorImageToPdfMaxExceeded(maxCount ?? 100);
+      case ImageToPdfErrorReason.processingFailed:
+        return context.l10n.errorImageToPdfProcessingFailed(failedPath ?? '');
+      case ImageToPdfErrorReason.generationFailed:
+        return context.l10n.errorImageToPdfGenerationFailed(details ?? '');
+    }
+  }
+}
+
+/// Typed reasons for PDF merge failures.
+enum PdfMergeErrorReason {
+  insufficientFiles,
+  passwordProtectedOrDamaged,
+  noPages,
+  mergeFailed;
+
+  String localizedMessage(
+    BuildContext context, {
+    String? fileName,
+    String? details,
+  }) {
+    switch (this) {
+      case PdfMergeErrorReason.insufficientFiles:
+        return context.l10n.errorPdfMergeInsufficient;
+      case PdfMergeErrorReason.passwordProtectedOrDamaged:
+        return context.l10n.errorPdfMergeDamagedOrEncrypted(fileName ?? '');
+      case PdfMergeErrorReason.noPages:
+        return context.l10n.errorPdfMergeNoPages;
+      case PdfMergeErrorReason.mergeFailed:
+        return context.l10n.errorPdfMergeFailed(details ?? '');
+    }
+  }
+}
+
+/// Typed reasons for PDF split failures.
+enum PdfSplitErrorReason {
+  noRangesSpecified,
+  passwordProtectedOrDamaged,
+  rangeOutOfBounds,
+  splitFailed;
+
+  String localizedMessage(
+    BuildContext context, {
+    String? fileName,
+    int? start,
+    int? end,
+    String? details,
+  }) {
+    switch (this) {
+      case PdfSplitErrorReason.noRangesSpecified:
+        return context.l10n.errorPdfSplitNoRanges;
+      case PdfSplitErrorReason.passwordProtectedOrDamaged:
+        return context.l10n.errorPdfSplitDamagedOrEncrypted(fileName ?? '');
+      case PdfSplitErrorReason.rangeOutOfBounds:
+        return context.l10n.errorPdfSplitRangeOutOfBounds(
+          start ?? 0,
+          end ?? 0,
+          fileName ?? '',
+        );
+      case PdfSplitErrorReason.splitFailed:
+        return context.l10n.errorPdfSplitFailed(details ?? '');
+    }
+  }
+}
