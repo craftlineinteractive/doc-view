@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/constants/app_constants.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
@@ -25,38 +26,32 @@ class FaqItem {
 class FaqScreen extends StatefulWidget {
   const FaqScreen({super.key});
 
-  static const List<FaqItem> defaultQuestions = [
-    FaqItem(
-      question: 'Why does Doc View need All files access?',
-      answer:
-          'Doc View requires All files access (MANAGE_EXTERNAL_STORAGE) on Android 11+ to discover and index supported documents (PDF, Word, Excel, PowerPoint, Text, and Images) stored in shared folders such as Downloads and Documents.\n\nWithout this permission, Android restricts file access to the app\'s private internal folder, preventing Doc View from browsing or opening files located across your device.',
-    ),
-    FaqItem(
-      question: 'Why doesn\'t it scan my whole iPhone?',
-      answer:
-          'iOS uses strict app sandboxing to safeguard device privacy. Apps can only access documents explicitly saved inside the Files app or shared via the system Share Sheet.\n\nTo view files on iOS, import them into the Doc View folder in the native Files app or use the Import files option in Settings.',
-    ),
-    FaqItem(
-      question: 'Where are the PDFs I create saved?',
-      answer:
-          'Files you import or generate (such as converted PDFs, merged documents, or split pages) are saved securely in your device storage under DocView/Created or private app storage. You can view them anytime in the Created by you section on the Tools tab.',
-    ),
-    FaqItem(
-      question: 'Why does my Word file look different?',
-      answer:
-          'Doc View renders files directly on your device using local offline parsers without sending private data to cloud converters. Complex formatting or custom shapes render with native offline approximations.',
-    ),
-    FaqItem(
-      question: 'Can I open password-protected files?',
-      answer:
-          'Yes, Doc View supports opening password-protected PDF documents. When opening an encrypted PDF, enter the password in the dialog to decrypt and view the document on your device.',
-    ),
-    FaqItem(
-      question: 'Is my data uploaded anywhere?',
-      answer:
-          'Your documents never leave your device. Doc View opens, converts and stores files locally. The app shows ads served by Google AdMob, which can use limited device data as described in our Privacy Policy.',
-    ),
-  ];
+  static List<FaqItem> questions(BuildContext context) => [
+        FaqItem(
+          question: context.l10n.faqQuestion1,
+          answer: context.l10n.faqAnswer1,
+        ),
+        FaqItem(
+          question: context.l10n.faqQuestion2,
+          answer: context.l10n.faqAnswer2,
+        ),
+        FaqItem(
+          question: context.l10n.faqQuestion3,
+          answer: context.l10n.faqAnswer3,
+        ),
+        FaqItem(
+          question: context.l10n.faqQuestion4,
+          answer: context.l10n.faqAnswer4,
+        ),
+        FaqItem(
+          question: context.l10n.faqQuestion5,
+          answer: context.l10n.faqAnswer5,
+        ),
+        FaqItem(
+          question: context.l10n.faqQuestion6,
+          answer: context.l10n.faqAnswer6,
+        ),
+      ];
 
   @override
   State<FaqScreen> createState() => _FaqScreenState();
@@ -85,7 +80,7 @@ class _FaqScreenState extends State<FaqScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    final questions = FaqScreen.defaultQuestions;
+    final questions = FaqScreen.questions(context);
     final hasSupportEmail = AppConstants.supportEmail.isNotEmpty;
 
     return DocScaffold(
@@ -103,13 +98,15 @@ class _FaqScreenState extends State<FaqScreen> {
                 children: [
                   DocIconButton(
                     icon: AppIcons.back,
-                    tooltip: 'Back',
+                    tooltip: context.l10n.actionBack,
                     onPressed: () => Navigator.of(context).maybePop(),
                   ),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
-                      'FAQ',
+                      context.l10n.faqShortTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: DocViewTypography.headlineLg.copyWith(
                         color: tokens.textPrimary,
                         fontWeight: FontWeight.bold,
@@ -128,7 +125,7 @@ class _FaqScreenState extends State<FaqScreen> {
                       border: Border.all(color: tokens.hairline),
                     ),
                     child: Text(
-                      '${questions.length} Topics',
+                      context.l10n.faqHeaderTopics(questions.length),
                       style: DocViewTypography.captionXs.copyWith(
                         color: tokens.textSecondary,
                         fontWeight: FontWeight.w600,
@@ -181,12 +178,16 @@ class _FaqScreenState extends State<FaqScreen> {
                                 color: tokens.primaryBlue,
                               ),
                               const SizedBox(width: 10),
-                              Text(
-                                'Still need help? Send feedback',
-                                style: DocViewTypography.labelLg.copyWith(
-                                  color: tokens.primaryBlue,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
+                              Flexible(
+                                child: Text(
+                                  context.l10n.faqStillNeedHelp,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: DocViewTypography.labelLg.copyWith(
+                                    color: tokens.primaryBlue,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ),
                             ],

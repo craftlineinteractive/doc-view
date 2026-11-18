@@ -138,7 +138,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get operationComplete => 'Operation Complete';
 
   @override
-  String get actionOpenDocument => 'Open Document';
+  String get actionOpenDocument => 'Open document';
 
   @override
   String get actionShareDocument => 'Share Document';
@@ -1087,6 +1087,445 @@ class AppLocalizationsEn extends AppLocalizations {
   String errorPdfSplitFailed(String details) {
     return 'Failed to split PDF: $details';
   }
+
+  @override
+  String fileDetailsPageChip(int current, int total) {
+    return 'PG $current/$total';
+  }
+
+  @override
+  String fileDetailsBytes(String bytes) {
+    return '($bytes bytes)';
+  }
+
+  @override
+  String get directoriesProtectedTitle =>
+      'This folder is protected by Android.';
+
+  @override
+  String get directoriesProtectedDesc =>
+      'Android restricts access to system and app private folders.';
+
+  @override
+  String get directoriesNotFoundTitle => 'This folder no longer exists.';
+
+  @override
+  String get directoriesEmpty => 'No supported files or folders here.';
+
+  @override
+  String get directoriesErrorOpening => 'Error opening folder';
+
+  @override
+  String get directoriesRoot => 'Root';
+
+  @override
+  String get scanSettingsSectionFrequency => 'Scan frequency';
+
+  @override
+  String get scanSettingsSectionFilters => 'Document filters';
+
+  @override
+  String get scanSettingsIncludeImages => 'Include images';
+
+  @override
+  String get scanSettingsIncludeImagesDesc =>
+      'Turn off to hide thousands of photos from your document list';
+
+  @override
+  String get scanSettingsImageListUpdated => 'Image list updated';
+
+  @override
+  String get scanSettingsActionRescanNow => 'Rescan now';
+
+  @override
+  String get scanSettingsSectionDiagnostics => 'Storage diagnostics';
+
+  @override
+  String get scanSettingsAllFilesAccessGranted => 'All files access granted';
+
+  @override
+  String get scanSettingsAllFilesAccessNeeded => 'All files access needed';
+
+  @override
+  String get scanSettingsAllFilesAccessGrantedDesc =>
+      'Doc View has permission to discover files in Downloads and SD cards.';
+
+  @override
+  String get scanSettingsAllFilesAccessNeededDesc =>
+      'Permission is required to scan downloads and external storage folders.';
+
+  @override
+  String get scanSettingsActionOpenSettings => 'Open settings';
+
+  @override
+  String scanSettingsScanningFiles(int count) {
+    return 'Scanning... $count files found';
+  }
+
+  @override
+  String get faqStillNeedHelp => 'Still need help? Send feedback';
+
+  @override
+  String get toolsLabelFileName => 'File Name';
+
+  @override
+  String get toolsAddImagesToStart => 'Add images to start';
+
+  @override
+  String get toolsAddImagesDesc =>
+      'Select photos or scan paper documents to generate a PDF.';
+
+  @override
+  String get toolsChoosePhotos => 'Choose photos';
+
+  @override
+  String get toolsScanPaper => 'Scan paper';
+
+  @override
+  String toolsPageNumber(int page) {
+    return 'Page $page';
+  }
+
+  @override
+  String get toolsTooltipRotatePage => 'Rotate page';
+
+  @override
+  String get toolsTooltipRemovePage => 'Remove page';
+
+  @override
+  String get toolsAddMoreScans => 'Add more scans';
+
+  @override
+  String get toolsAddMoreImages => 'Add more images';
+
+  @override
+  String toolsImageSummary(int count, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count images · est. ~ $size',
+      one: '1 image · est. ~ $size',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String toolsSelectedCount(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String toolsSelectAtLeast(int min) {
+    return 'Select at least $min files';
+  }
+
+  @override
+  String toolsPagesTotal(int count) {
+    return '$count pages total';
+  }
+
+  @override
+  String get toolsPagesTotalLabel => 'pages total';
+
+  @override
+  String get toolsNoPdfsFound => 'No PDF documents found';
+
+  @override
+  String get semanticBookmarked => 'bookmarked';
+
+  @override
+  String get semanticSelected => 'selected';
+
+  @override
+  String get semanticNotSelected => 'not selected';
+
+  @override
+  String get actionDeselectFile => 'Deselect file';
+
+  @override
+  String get actionSelectFile => 'Select file';
+
+  @override
+  String get actionCreatePdf => 'Create PDF';
+
+  @override
+  String get hintSelectOrViewActions => 'Select or view actions';
+
+  @override
+  String get actionClose => 'Close';
+
+  @override
+  String get actionReset => 'Reset';
+
+  @override
+  String get labelPleaseWait => 'Please wait...';
+
+  @override
+  String get tooltipCloseSearch => 'Close search';
+
+  @override
+  String get semanticAdvertisement => 'Advertisement';
+
+  @override
+  String get themePreviewLight => 'Light';
+
+  @override
+  String get themePreviewNavy => 'Navy';
+
+  @override
+  String createdByYouItemSemantic(String name, String size, String date) {
+    return '$name, $size, created $date';
+  }
+
+  @override
+  String get toolsCreatingPdfFromScans => 'Creating PDF from Scans';
+
+  @override
+  String get toolsCreatingPdf => 'Creating PDF';
+
+  @override
+  String toolsProcessingImageProgress(int done, int total) {
+    return 'Processing image $done of $total...';
+  }
+
+  @override
+  String get toolsErrorCreatePdfTitle => 'Couldn\'t create PDF';
+
+  @override
+  String get toolsBadgeProtectedOrDamaged => 'Protected or damaged';
+
+  @override
+  String toolsPageCountPlural(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages',
+      one: '1 page',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get toolsPagesAbbrev => 'pgs';
+
+  @override
+  String get mergeAddMoreTitle => 'Add More PDFs';
+
+  @override
+  String get mergeProgressTitle => 'Merging PDFs';
+
+  @override
+  String mergeProgressMessage(int done, int total) {
+    return 'Merging document $done of $total...';
+  }
+
+  @override
+  String get mergeErrorTitle => 'Couldn\'t merge PDFs';
+
+  @override
+  String get mergeDragInstruction => 'Drag handles to reorder';
+
+  @override
+  String get mergeAddPdf => 'Add PDF';
+
+  @override
+  String get mergeOutputFileNameLabel => 'OUTPUT FILE NAME';
+
+  @override
+  String mergeItemPageCountAndSize(int count, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages · $size',
+      one: '1 page · $size',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String mergeItemLoadingPagesAndSize(String size) {
+    return 'Loading pages... · $size';
+  }
+
+  @override
+  String mergeInvalidFilesDetected(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count invalid files detected',
+      one: '1 invalid file detected',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mergeReadyTitle => 'Ready to merge';
+
+  @override
+  String get mergeRemoveProtectedHint =>
+      'Please remove password-protected documents';
+
+  @override
+  String mergeSummary(int files, int pages, String size) {
+    return '$files files · $pages pages · ~ $size';
+  }
+
+  @override
+  String get mergeReadyBadge => 'Ready';
+
+  @override
+  String get mergeBlockedCta => 'Merge Blocked (Resolve Errors)';
+
+  @override
+  String mergeActionCta(int files, int pages) {
+    return 'Merge $files PDFs ($pages Pages)';
+  }
+
+  @override
+  String get mergePickerDefaultTitle => 'Select PDFs';
+
+  @override
+  String mergePickerTabAllPdfs(int count) {
+    return 'All PDFs ($count)';
+  }
+
+  @override
+  String get mergePickerTabRecent => 'Recent';
+
+  @override
+  String get mergePickerTabDownloads => 'Downloads';
+
+  @override
+  String get mergePickerTabICloud => 'iCloud Drive';
+
+  @override
+  String get splitProgressTitle => 'Splitting PDF';
+
+  @override
+  String splitProgressMessage(int done, int total) {
+    return 'Generating file $done of $total...';
+  }
+
+  @override
+  String get splitErrorTitle => 'Couldn\'t split PDF';
+
+  @override
+  String get splitPageRangesLabel => 'PAGE RANGES';
+
+  @override
+  String get splitPageRangesSyntax => 'Syntax: 1-3, 5, 8-10';
+
+  @override
+  String get splitRangeHelpText => 'Each range becomes a separate PDF file.';
+
+  @override
+  String splitGeneratedFilesHeader(int count) {
+    return 'GENERATED FILES ($count)';
+  }
+
+  @override
+  String get splitChipsSuspendedTitle => 'Live Chips Suspended';
+
+  @override
+  String get splitChipsSuspendedDesc =>
+      'Resolve the syntax error above to reconstruct extraction pipeline.';
+
+  @override
+  String get splitEmptyRangesHint =>
+      'Enter page ranges above to generate PDF slices';
+
+  @override
+  String splitChipSinglePage(int page) {
+    return 'Page $page';
+  }
+
+  @override
+  String splitChipPageRange(int start, int end) {
+    return 'Pages $start–$end';
+  }
+
+  @override
+  String splitChipPageCountShort(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pgs',
+      one: '1 pg',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get splitQuickSelectLabel => 'QUICK SELECT';
+
+  @override
+  String get splitMacroAllPages => 'All pages';
+
+  @override
+  String get splitMacroEvery5Pages => 'Every 5 pages';
+
+  @override
+  String get splitMacroLimitHint =>
+      'Macros producing > 100 files are disabled to protect device memory';
+
+  @override
+  String splitOutputSummary(int files, int pages) {
+    return 'Output: $files files · $pages pages extracted';
+  }
+
+  @override
+  String splitEstSize(String size) {
+    return 'EST ~ $size';
+  }
+
+  @override
+  String splitActionCtaCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Split into $count PDFs',
+      one: 'Split into 1 PDF',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get splitActionCtaEmpty => 'Split into PDFs';
+
+  @override
+  String splitPickerAllLocalDocs(int count) {
+    return 'ALL LOCAL DOCUMENTS ($count)';
+  }
+
+  @override
+  String get splitPickerSortByDate => 'SORT BY DATE';
+
+  @override
+  String splitPickerLoadingPagesAndSize(String size) {
+    return 'pgs · $size';
+  }
+
+  @override
+  String get splitPickerTitle => 'Select PDF to split';
+
+  @override
+  String get faqShortTitle => 'FAQ';
+
+  @override
+  String splitPickerSelectedCount(int count) {
+    return '$count PDF selected';
+  }
+
+  @override
+  String get splitPickerSelectDocumentHint => 'Select a document to continue';
+
+  @override
+  String splitPickerPagesActive(int count) {
+    return '$count pages active';
+  }
+
+  @override
+  String get splitPickerPagesActiveLabel => 'pages active';
 }
 
 /// The translations for English (`en_XA`).
@@ -1224,7 +1663,7 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   String get operationComplete => '[Öþéřàţîôñ Çôɱþłéţé ẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get actionOpenDocument => '[Öþéñ Ðôçûɱéñţ ẋẋẋẋẋẋ]';
+  String get actionOpenDocument => '[Öþéñ đôçûɱéñţ ẋẋẋẋẋẋ]';
 
   @override
   String get actionShareDocument => '[Šĥàřé Ðôçûɱéñţ ẋẋẋẋẋẋ]';
@@ -2210,4 +2649,451 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   String errorPdfSplitFailed(String details) {
     return '[Ƒàîłéđ ţô šþłîţ ÞÐƑ: $details ẋẋẋẋẋẋẋẋẋẋẋẋ]';
   }
+
+  @override
+  String fileDetailsPageChip(int current, int total) {
+    return '[ÞĜ $current/$total ẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String fileDetailsBytes(String bytes) {
+    return '[($bytes ƀýţéš) ẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get directoriesProtectedTitle =>
+      '[Ťĥîš ƒôłđéř îš þřôţéçţéđ ƀý Åñđřôîđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get directoriesProtectedDesc =>
+      '[Åñđřôîđ řéšţřîçţš àççéšš ţô šýšţéɱ àñđ àþþ þřîṽàţé ƒôłđéřš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get directoriesNotFoundTitle =>
+      '[Ťĥîš ƒôłđéř ñô łôñĝéř éẋîšţš. ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get directoriesEmpty =>
+      '[Ñô šûþþôřţéđ ƒîłéš ôř ƒôłđéřš ĥéřé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get directoriesErrorOpening => '[Éřřôř ôþéñîñĝ ƒôłđéř ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get directoriesRoot => '[Řôôţ ẋẋ]';
+
+  @override
+  String get scanSettingsSectionFrequency => '[Šçàñ ƒřéʠûéñçý ẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsSectionFilters => '[Ðôçûɱéñţ ƒîłţéřš ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsIncludeImages => '[Îñçłûđé îɱàĝéš ẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsIncludeImagesDesc =>
+      '[Ťûřñ ôƒƒ ţô ĥîđé ţĥôûšàñđš ôƒ þĥôţôš ƒřôɱ ýôûř đôçûɱéñţ łîšţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsImageListUpdated => '[Îɱàĝé łîšţ ûþđàţéđ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsActionRescanNow => '[Řéšçàñ ñôŵ ẋẋẋẋ]';
+
+  @override
+  String get scanSettingsSectionDiagnostics => '[Šţôřàĝé đîàĝñôšţîçš ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsAllFilesAccessGranted =>
+      '[Åłł ƒîłéš àççéšš ĝřàñţéđ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsAllFilesAccessNeeded =>
+      '[Åłł ƒîłéš àççéšš ñééđéđ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsAllFilesAccessGrantedDesc =>
+      '[Ðôç Ṽîéŵ ĥàš þéřɱîššîôñ ţô đîšçôṽéř ƒîłéš îñ Ðôŵñłôàđš àñđ ŠÐ çàřđš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsAllFilesAccessNeededDesc =>
+      '[Þéřɱîššîôñ îš řéʠûîřéđ ţô šçàñ đôŵñłôàđš àñđ éẋţéřñàł šţôřàĝé ƒôłđéřš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsActionOpenSettings => '[Öþéñ šéţţîñĝš ẋẋẋẋẋẋ]';
+
+  @override
+  String scanSettingsScanningFiles(int count) {
+    return '[Šçàññîñĝ... $count ƒîłéš ƒôûñđ ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get faqStillNeedHelp =>
+      '[Šţîłł ñééđ ĥéłþ? Šéñđ ƒééđƀàçƙ ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolsLabelFileName => '[Ƒîłé Ñàɱé ẋẋẋẋ]';
+
+  @override
+  String get toolsAddImagesToStart => '[Åđđ îɱàĝéš ţô šţàřţ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolsAddImagesDesc =>
+      '[Šéłéçţ þĥôţôš ôř šçàñ þàþéř đôçûɱéñţš ţô ĝéñéřàţé à ÞÐƑ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolsChoosePhotos => '[Çĥôôšé þĥôţôš ẋẋẋẋẋẋ]';
+
+  @override
+  String get toolsScanPaper => '[Šçàñ þàþéř ẋẋẋẋ]';
+
+  @override
+  String toolsPageNumber(int page) {
+    return '[Þàĝé $page ẋẋẋẋẋ]';
+  }
+
+  @override
+  String get toolsTooltipRotatePage => '[Řôţàţé þàĝé ẋẋẋẋẋ]';
+
+  @override
+  String get toolsTooltipRemovePage => '[Řéɱôṽé þàĝé ẋẋẋẋẋ]';
+
+  @override
+  String get toolsAddMoreScans => '[Åđđ ɱôřé šçàñš ẋẋẋẋẋẋ]';
+
+  @override
+  String get toolsAddMoreImages => '[Åđđ ɱôřé îɱàĝéš ẋẋẋẋẋẋ]';
+
+  @override
+  String toolsImageSummary(int count, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count îɱàĝéš · éšţ. ~ $size ẋẋẋẋẋẋẋẋẋẋẋẋ]',
+      one: '[1 îɱàĝé · éšţ. ~ $size ẋẋẋẋẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String toolsSelectedCount(int count) {
+    return '[$count šéłéçţéđ ẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String toolsSelectAtLeast(int min) {
+    return '[Šéłéçţ àţ łéàšţ $min ƒîłéš ẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String toolsPagesTotal(int count) {
+    return '[$count þàĝéš ţôţàł ẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get toolsPagesTotalLabel => '[þàĝéš ţôţàł ẋẋẋẋẋ]';
+
+  @override
+  String get toolsNoPdfsFound => '[Ñô ÞÐƑ đôçûɱéñţš ƒôûñđ ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get semanticBookmarked => '[ƀôôƙɱàřƙéđ ẋẋẋẋ]';
+
+  @override
+  String get semanticSelected => '[šéłéçţéđ ẋẋẋẋ]';
+
+  @override
+  String get semanticNotSelected => '[ñôţ šéłéçţéđ ẋẋẋẋẋ]';
+
+  @override
+  String get actionDeselectFile => '[Ðéšéłéçţ ƒîłé ẋẋẋẋẋẋ]';
+
+  @override
+  String get actionSelectFile => '[Šéłéçţ ƒîłé ẋẋẋẋẋ]';
+
+  @override
+  String get actionCreatePdf => '[Çřéàţé ÞÐƑ ẋẋẋẋ]';
+
+  @override
+  String get hintSelectOrViewActions => '[Šéłéçţ ôř ṽîéŵ àçţîôñš ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get actionClose => '[Çłôšé ẋẋ]';
+
+  @override
+  String get actionReset => '[Řéšéţ ẋẋ]';
+
+  @override
+  String get labelPleaseWait => '[Þłéàšé ŵàîţ... ẋẋẋẋẋẋ]';
+
+  @override
+  String get tooltipCloseSearch => '[Çłôšé šéàřçĥ ẋẋẋẋẋ]';
+
+  @override
+  String get semanticAdvertisement => '[Åđṽéřţîšéɱéñţ ẋẋẋẋẋẋ]';
+
+  @override
+  String get themePreviewLight => '[Łîĝĥţ ẋẋ]';
+
+  @override
+  String get themePreviewNavy => '[Ñàṽý ẋẋ]';
+
+  @override
+  String createdByYouItemSemantic(String name, String size, String date) {
+    return '[$name, $size, çřéàţéđ $date ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get toolsCreatingPdfFromScans =>
+      '[Çřéàţîñĝ ÞÐƑ ƒřôɱ Šçàñš ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolsCreatingPdf => '[Çřéàţîñĝ ÞÐƑ ẋẋẋẋẋ]';
+
+  @override
+  String toolsProcessingImageProgress(int done, int total) {
+    return '[Þřôçéššîñĝ îɱàĝé $done ôƒ $total... ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get toolsErrorCreatePdfTitle => '[Çôûłđñ\'ţ çřéàţé ÞÐƑ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolsBadgeProtectedOrDamaged => '[Þřôţéçţéđ ôř đàɱàĝéđ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String toolsPageCountPlural(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count þàĝéš ẋẋẋẋẋẋ]',
+      one: '[1 þàĝé ẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get toolsPagesAbbrev => '[þĝš ẋẋ]';
+
+  @override
+  String get mergeAddMoreTitle => '[Åđđ Ṁôřé ÞÐƑš ẋẋẋẋẋẋ]';
+
+  @override
+  String get mergeProgressTitle => '[Ṁéřĝîñĝ ÞÐƑš ẋẋẋẋẋ]';
+
+  @override
+  String mergeProgressMessage(int done, int total) {
+    return '[Ṁéřĝîñĝ đôçûɱéñţ $done ôƒ $total... ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get mergeErrorTitle => '[Çôûłđñ\'ţ ɱéřĝé ÞÐƑš ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get mergeDragInstruction => '[Ðřàĝ ĥàñđłéš ţô řéôřđéř ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get mergeAddPdf => '[Åđđ ÞÐƑ ẋẋẋ]';
+
+  @override
+  String get mergeOutputFileNameLabel => '[ÖÛŤÞÛŤ ƑÎŁÉ ÑÅṀÉ ẋẋẋẋẋẋẋ]';
+
+  @override
+  String mergeItemPageCountAndSize(int count, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count þàĝéš · $size ẋẋẋẋẋẋẋẋẋ]',
+      one: '[1 þàĝé · $size ẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String mergeItemLoadingPagesAndSize(String size) {
+    return '[Łôàđîñĝ þàĝéš... · $size ẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String mergeInvalidFilesDetected(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count îñṽàłîđ ƒîłéš đéţéçţéđ ẋẋẋẋẋẋẋẋẋẋẋẋ]',
+      one: '[1 îñṽàłîđ ƒîłé đéţéçţéđ ẋẋẋẋẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get mergeReadyTitle => '[Řéàđý ţô ɱéřĝé ẋẋẋẋẋẋ]';
+
+  @override
+  String get mergeRemoveProtectedHint =>
+      '[Þłéàšé řéɱôṽé þàššŵôřđ-þřôţéçţéđ đôçûɱéñţš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String mergeSummary(int files, int pages, String size) {
+    return '[$files ƒîłéš · $pages þàĝéš · ~ $size ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get mergeReadyBadge => '[Řéàđý ẋẋ]';
+
+  @override
+  String get mergeBlockedCta => '[Ṁéřĝé Ɓłôçƙéđ (Řéšôłṽé Éřřôřš) ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String mergeActionCta(int files, int pages) {
+    return '[Ṁéřĝé $files ÞÐƑš ($pages Þàĝéš) ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get mergePickerDefaultTitle => '[Šéłéçţ ÞÐƑš ẋẋẋẋẋ]';
+
+  @override
+  String mergePickerTabAllPdfs(int count) {
+    return '[Åłł ÞÐƑš ($count) ẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get mergePickerTabRecent => '[Řéçéñţ ẋẋẋ]';
+
+  @override
+  String get mergePickerTabDownloads => '[Ðôŵñłôàđš ẋẋẋẋ]';
+
+  @override
+  String get mergePickerTabICloud => '[îÇłôûđ Ðřîṽé ẋẋẋẋẋ]';
+
+  @override
+  String get splitProgressTitle => '[Šþłîţţîñĝ ÞÐƑ ẋẋẋẋẋẋ]';
+
+  @override
+  String splitProgressMessage(int done, int total) {
+    return '[Ĝéñéřàţîñĝ ƒîłé $done ôƒ $total... ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get splitErrorTitle => '[Çôûłđñ\'ţ šþłîţ ÞÐƑ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get splitPageRangesLabel => '[ÞÅĜÉ ŘÅÑĜÉŠ ẋẋẋẋẋ]';
+
+  @override
+  String get splitPageRangesSyntax => '[Šýñţàẋ: 1-3, 5, 8-10 ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get splitRangeHelpText =>
+      '[Éàçĥ řàñĝé ƀéçôɱéš à šéþàřàţé ÞÐƑ ƒîłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String splitGeneratedFilesHeader(int count) {
+    return '[ĜÉÑÉŘÅŤÉÐ ƑÎŁÉŠ ($count) ẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get splitChipsSuspendedTitle => '[Łîṽé Çĥîþš Šûšþéñđéđ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get splitChipsSuspendedDesc =>
+      '[Řéšôłṽé ţĥé šýñţàẋ éřřôř àƀôṽé ţô řéçôñšţřûçţ éẋţřàçţîôñ þîþéłîñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get splitEmptyRangesHint =>
+      '[Éñţéř þàĝé řàñĝéš àƀôṽé ţô ĝéñéřàţé ÞÐƑ šłîçéš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String splitChipSinglePage(int page) {
+    return '[Þàĝé $page ẋẋẋẋẋ]';
+  }
+
+  @override
+  String splitChipPageRange(int start, int end) {
+    return '[Þàĝéš $start–$end ẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String splitChipPageCountShort(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count þĝš ẋẋẋẋẋ]',
+      one: '[1 þĝ ẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get splitQuickSelectLabel => '[ǪÛÎÇĶ ŠÉŁÉÇŤ ẋẋẋẋẋ]';
+
+  @override
+  String get splitMacroAllPages => '[Åłł þàĝéš ẋẋẋẋ]';
+
+  @override
+  String get splitMacroEvery5Pages => '[Éṽéřý 5 þàĝéš ẋẋẋẋẋẋ]';
+
+  @override
+  String get splitMacroLimitHint =>
+      '[Ṁàçřôš þřôđûçîñĝ > 100 ƒîłéš àřé đîšàƀłéđ ţô þřôţéçţ đéṽîçé ɱéɱôřý ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String splitOutputSummary(int files, int pages) {
+    return '[Öûţþûţ: $files ƒîłéš · $pages þàĝéš éẋţřàçţéđ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String splitEstSize(String size) {
+    return '[ÉŠŤ ~ $size ẋẋẋẋẋ]';
+  }
+
+  @override
+  String splitActionCtaCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[Šþłîţ îñţô $count ÞÐƑš ẋẋẋẋẋẋẋẋẋẋ]',
+      one: '[Šþłîţ îñţô 1 ÞÐƑ ẋẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get splitActionCtaEmpty => '[Šþłîţ îñţô ÞÐƑš ẋẋẋẋẋẋ]';
+
+  @override
+  String splitPickerAllLocalDocs(int count) {
+    return '[ÅŁŁ ŁÖÇÅŁ ÐÖÇÛṀÉÑŤŠ ($count) ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get splitPickerSortByDate => '[ŠÖŘŤ ƁÝ ÐÅŤÉ ẋẋẋẋẋ]';
+
+  @override
+  String splitPickerLoadingPagesAndSize(String size) {
+    return '[þĝš · $size ẋẋẋẋẋ]';
+  }
+
+  @override
+  String get splitPickerTitle => '[Šéłéçţ ÞÐƑ ţô šþłîţ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get faqShortTitle => '[ƑÅǪ ẋẋ]';
+
+  @override
+  String splitPickerSelectedCount(int count) {
+    return '[$count ÞÐƑ šéłéçţéđ ẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get splitPickerSelectDocumentHint =>
+      '[Šéłéçţ à đôçûɱéñţ ţô çôñţîñûé ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String splitPickerPagesActive(int count) {
+    return '[$count þàĝéš àçţîṽé ẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get splitPickerPagesActiveLabel => '[þàĝéš àçţîṽé ẋẋẋẋẋ]';
 }

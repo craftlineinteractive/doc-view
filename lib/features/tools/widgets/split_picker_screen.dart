@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/file_types.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -73,7 +74,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                     children: [
                       DocIconButton(
                         icon: AppIcons.back,
-                        tooltip: 'Close search',
+                        tooltip: context.l10n.tooltipCloseSearch,
                         onPressed: () {
                           setState(() {
                             _isSearching = false;
@@ -91,7 +92,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                             color: tokens.textPrimary,
                           ),
                           decoration: InputDecoration(
-                            hintText: 'Search PDFs...',
+                            hintText: context.l10n.splitPickerSearchHint,
                             hintStyle: DocViewTypography.bodyLg.copyWith(
                               color: tokens.textSecondary,
                             ),
@@ -106,7 +107,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                       if (_searchController.text.isNotEmpty)
                         DocIconButton(
                           icon: AppIcons.close,
-                          tooltip: 'Clear search',
+                          tooltip: context.l10n.tooltipClearSearch,
                           onPressed: () {
                             setState(() {
                               _searchController.clear();
@@ -123,12 +124,12 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                         children: [
                           DocIconButton(
                             icon: AppIcons.back,
-                            tooltip: 'Back',
+                            tooltip: context.l10n.actionBack,
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            'Select PDF to split',
+                            context.l10n.splitPickerTitle,
                             style: DocViewTypography.headlineSm.copyWith(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -139,7 +140,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                       ),
                       DocIconButton(
                         icon: AppIcons.search,
-                        tooltip: 'Search',
+                        tooltip: context.l10n.tooltipSearch,
                         onPressed: () {
                           setState(() => _isSearching = true);
                         },
@@ -186,7 +187,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'ALL LOCAL DOCUMENTS (${filteredFiles.length})',
+                      context.l10n.splitPickerAllLocalDocs(filteredFiles.length),
                       style: DocViewTypography.captionXs.copyWith(
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.1,
@@ -195,7 +196,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                       ),
                     ),
                     Text(
-                      'SORT BY DATE',
+                      context.l10n.splitPickerSortByDate,
                       style: DocViewTypography.captionXs.copyWith(
                         color: tokens.textSecondary,
                         fontSize: 11,
@@ -247,7 +248,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
           ],
         ),
         error: (err, _) => Center(
-          child: Text('Error loading files: $err'),
+          child: Text(context.l10n.splitPickerErrorLoading(err.toString())),
         ),
       ),
       bottomSheet: _buildStickyFooter(tokens),
@@ -313,7 +314,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
-                        'Protected or damaged',
+                        context.l10n.toolsBadgeProtectedOrDamaged,
                         style: DocViewTypography.captionXs.copyWith(
                           color: tokens.error,
                           fontWeight: FontWeight.bold,
@@ -326,7 +327,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                       children: [
                         if (pageCount != null)
                           Text(
-                            '$pageCount ${pageCount == 1 ? 'page' : 'pages'} · $sizeStr',
+                            context.l10n.mergeItemPageCountAndSize(pageCount, sizeStr),
                             style: DocViewTypography.bodySm.copyWith(
                               color: tokens.textSecondary,
                               fontSize: 12,
@@ -340,7 +341,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                'pgs · $sizeStr',
+                                context.l10n.splitPickerLoadingPagesAndSize(sizeStr),
                                 style: DocViewTypography.bodySm.copyWith(
                                   color: tokens.textSecondary,
                                   fontSize: 12,
@@ -421,7 +422,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '$selectedCount PDF selected',
+                  context.l10n.splitPickerSelectedCount(selectedCount),
                   style: DocViewTypography.titleMd.copyWith(
                     fontWeight: FontWeight.bold,
                     color: tokens.textPrimary,
@@ -431,14 +432,14 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                 const SizedBox(height: 2),
                 if (_selectedFile == null)
                   Text(
-                    'Select a document to continue',
+                    context.l10n.splitPickerSelectDocumentHint,
                     style: DocViewTypography.captionXs.copyWith(
                       color: tokens.textSecondary,
                     ),
                   )
                 else if (selectedPageCount != null)
                   Text(
-                    '$selectedPageCount pages active',
+                    context.l10n.splitPickerPagesActive(selectedPageCount),
                     style: DocViewTypography.captionXs.copyWith(
                       color: tokens.textSecondary,
                       fontSize: 12,
@@ -452,7 +453,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        'pages active',
+                        context.l10n.splitPickerPagesActiveLabel,
                         style: DocViewTypography.captionXs.copyWith(
                           color: tokens.textSecondary,
                           fontSize: 12,
@@ -475,7 +476,7 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            icon: const Text('Next', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            icon: Text(context.l10n.mergePickerNext, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             label: const Icon(Icons.arrow_forward_rounded, size: 18),
             onPressed: _selectedFile != null ? _onDone : null,
           ),
@@ -497,8 +498,8 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
           const SizedBox(height: 12),
           Text(
             _filterQuery.isEmpty
-                ? 'No PDF documents found'
-                : 'No matches found',
+                ? context.l10n.toolsNoPdfsFound
+                : context.l10n.searchNoResultsTitle,
             style: DocViewTypography.titleMd.copyWith(
               color: tokens.textSecondary,
             ),

@@ -58,15 +58,32 @@ class PseudoLocaleEngine {
 
   /// Recursively transforms branches in an ICU expression while preserving syntax.
   static String _transformIcu(String icuText) {
-    // Structure: {var, plural/select, branch1{content} branch2{content}}
-    final firstComma = icuText.indexOf(',');
+    // Find matching closing brace for top-level ICU block
+    int depth = 0;
+    int icuEnd = -1;
+    for (int k = 0; k < icuText.length; k++) {
+      if (icuText[k] == '{') depth++;
+      if (icuText[k] == '}') {
+        depth--;
+        if (depth == 0) {
+          icuEnd = k;
+          break;
+        }
+      }
+    }
+    if (icuEnd == -1) return _transformSimpleString(icuText);
+
+    final icuBlock = icuText.substring(0, icuEnd + 1);
+    final trailing = icuText.substring(icuEnd + 1);
+
+    final firstComma = icuBlock.indexOf(',');
     if (firstComma == -1) return _transformSimpleString(icuText);
 
-    final secondComma = icuText.indexOf(',', firstComma + 1);
+    final secondComma = icuBlock.indexOf(',', firstComma + 1);
     if (secondComma == -1) return _transformSimpleString(icuText);
 
-    final prefix = icuText.substring(0, secondComma + 1); // e.g. "{count, plural,"
-    final body = icuText.substring(secondComma + 1, icuText.length - 1); // between secondComma and final '}'
+    final prefix = icuBlock.substring(0, secondComma + 1); // e.g. "{count, plural,"
+    final body = icuBlock.substring(secondComma + 1, icuBlock.length - 1);
 
     final buffer = StringBuffer(prefix);
 
@@ -91,11 +108,11 @@ class PseudoLocaleEngine {
       buffer.write('{');
 
       // Find matching closing brace for this branch (taking nested braces into account)
-      int depth = 1;
+      int branchDepth = 1;
       int j = openBrace + 1;
-      while (j < body.length && depth > 0) {
-        if (body[j] == '{') depth++;
-        if (body[j] == '}') depth--;
+      while (j < body.length && branchDepth > 0) {
+        if (body[j] == '{') branchDepth++;
+        if (body[j] == '}') branchDepth--;
         j++;
       }
 
@@ -106,6 +123,9 @@ class PseudoLocaleEngine {
     }
 
     buffer.write('}');
+    if (trailing.isNotEmpty) {
+      buffer.write(transform(trailing));
+    }
     return buffer.toString();
   }
 }

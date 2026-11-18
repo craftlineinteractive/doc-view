@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/file_types.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -179,7 +180,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
   Widget build(BuildContext context) {
     final tokens = context.tokens;
     final pdfsAsync = ref.watch(filesProvider(FileCategory.pdf));
-    final effectiveTitle = widget.title ?? 'Select PDFs';
+    final effectiveTitle = widget.title ?? context.l10n.mergePickerDefaultTitle;
 
     return Scaffold(
       backgroundColor: tokens.surface,
@@ -200,7 +201,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                     children: [
                       DocIconButton(
                         icon: AppIcons.back,
-                        tooltip: 'Close search',
+                        tooltip: context.l10n.tooltipCloseSearch,
                         onPressed: () {
                           setState(() {
                             _isSearching = false;
@@ -218,7 +219,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                             color: tokens.textPrimary,
                           ),
                           decoration: InputDecoration(
-                            hintText: 'Search PDFs...',
+                            hintText: context.l10n.mergePickerSearchHint,
                             hintStyle: DocViewTypography.bodyLg.copyWith(
                               color: tokens.textSecondary,
                             ),
@@ -233,7 +234,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                       if (_searchController.text.isNotEmpty)
                         DocIconButton(
                           icon: AppIcons.close,
-                          tooltip: 'Clear search',
+                          tooltip: context.l10n.tooltipClearSearch,
                           onPressed: () {
                             setState(() {
                               _searchController.clear();
@@ -250,7 +251,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                         children: [
                           DocIconButton(
                             icon: AppIcons.back,
-                            tooltip: 'Back',
+                            tooltip: context.l10n.actionBack,
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                           const SizedBox(width: 4),
@@ -266,7 +267,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                       ),
                       DocIconButton(
                         icon: AppIcons.search,
-                        tooltip: 'Search',
+                        tooltip: context.l10n.tooltipSearch,
                         onPressed: () {
                           setState(() => _isSearching = true);
                         },
@@ -340,7 +341,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
           ],
         ),
         error: (err, _) => Center(
-          child: Text('Error loading PDFs: $err'),
+          child: Text(context.l10n.mergePickerErrorLoading(err.toString())),
         ),
       ),
       bottomSheet: _buildStickyFooter(tokens, pdfsAsync.value ?? []),
@@ -348,7 +349,9 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
   }
 
   Widget _buildFilterPillRow(DocViewTokens tokens, int totalCount) {
-    final platformTabLabel = _isIOS ? 'iCloud Drive' : 'Downloads';
+    final platformTabLabel = _isIOS
+        ? context.l10n.mergePickerTabICloud
+        : context.l10n.mergePickerTabDownloads;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -364,14 +367,14 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
           children: [
             _buildPill(
               tokens: tokens,
-              label: 'All PDFs ($totalCount)',
+              label: context.l10n.mergePickerTabAllPdfs(totalCount),
               isSelected: _currentTab == _PickerTab.all,
               onTap: () => setState(() => _currentTab = _PickerTab.all),
             ),
             const SizedBox(width: 8),
             _buildPill(
               tokens: tokens,
-              label: 'Recent',
+              label: context.l10n.mergePickerTabRecent,
               isSelected: _currentTab == _PickerTab.recent,
               onTap: () => setState(() => _currentTab = _PickerTab.recent),
             ),
@@ -486,7 +489,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
-                        'Protected or damaged',
+                        context.l10n.toolsBadgeProtectedOrDamaged,
                         style: DocViewTypography.captionXs.copyWith(
                           color: tokens.error,
                           fontWeight: FontWeight.bold,
@@ -509,7 +512,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                           ),
                           if (pageCount != null)
                             Text(
-                              '$pageCount ${pageCount == 1 ? 'page' : 'pages'}',
+                              context.l10n.toolsPageCountPlural(pageCount),
                               style: DocViewTypography.bodySm.copyWith(
                                 color: tokens.textSecondary,
                                 fontSize: 12,
@@ -529,7 +532,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  'pgs',
+                                  context.l10n.toolsPagesAbbrev,
                                   style: DocViewTypography.bodySm.copyWith(
                                     color: tokens.textSecondary,
                                     fontSize: 12,
@@ -614,7 +617,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${_selectedPaths.length} selected',
+                  context.l10n.toolsSelectedCount(_selectedPaths.length),
                   style: DocViewTypography.titleMd.copyWith(
                     fontWeight: FontWeight.bold,
                     color: tokens.textPrimary,
@@ -624,14 +627,14 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                 const SizedBox(height: 2),
                 if (_selectedPaths.isEmpty)
                   Text(
-                    'Select at least ${widget.minSelection} files',
+                    context.l10n.toolsSelectAtLeast(widget.minSelection),
                     style: DocViewTypography.captionXs.copyWith(
                       color: tokens.textSecondary,
                     ),
                   )
                 else if (allSelectedPagesKnown)
                   Text(
-                    '$totalPages pages total',
+                    context.l10n.toolsPagesTotal(totalPages),
                     style: DocViewTypography.captionXs.copyWith(
                       color: tokens.textSecondary,
                       fontSize: 12,
@@ -649,7 +652,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        'pages total',
+                        context.l10n.toolsPagesTotalLabel,
                         style: DocViewTypography.captionXs.copyWith(
                           color: tokens.textSecondary,
                           fontSize: 12,
@@ -672,7 +675,7 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            icon: const Text('Next', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            icon: Text(context.l10n.mergePickerNext, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             label: const Icon(Icons.arrow_forward_rounded, size: 18),
             onPressed: canProceed ? _onDone : null,
           ),
@@ -694,8 +697,8 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
           const SizedBox(height: 12),
           Text(
             _filterQuery.isEmpty
-                ? 'No PDF documents found'
-                : 'No matches found',
+                ? context.l10n.toolsNoPdfsFound
+                : context.l10n.searchNoResultsTitle,
             style: DocViewTypography.titleMd.copyWith(
               color: tokens.textSecondary,
             ),

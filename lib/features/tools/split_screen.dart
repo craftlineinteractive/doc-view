@@ -42,7 +42,7 @@ class SplitScreen extends ConsumerStatefulWidget {
 class _SplitScreenState extends ConsumerState<SplitScreen> {
   int? _pageCount;
   bool _isLoadingInfo = true;
-  String? _infoError;
+  bool _hasInfoError = false;
 
   late final TextEditingController _rangeController;
   late final TextEditingController _prefixController;
@@ -71,7 +71,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
       if (mounted) {
         setState(() {
           _isLoadingInfo = false;
-          _infoError = '${widget.file.name} is password-protected or damaged';
+          _hasInfoError = true;
         });
       }
       return;
@@ -95,7 +95,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
         if (mounted) {
           setState(() {
             _isLoadingInfo = false;
-            _infoError = '${widget.file.name} is password-protected or damaged';
+            _hasInfoError = true;
           });
         }
         return;
@@ -113,7 +113,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
       if (mounted) {
         setState(() {
           _isLoadingInfo = false;
-          _infoError = '${widget.file.name} is password-protected or damaged';
+          _hasInfoError = true;
         });
       }
     }
@@ -228,8 +228,8 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             dialogSetState = setDialogState;
             final progressValue = total > 0 ? progressDone / total : 0.0;
             return ToolProgressDialog(
-              title: 'Splitting PDF',
-              message: 'Generating file $progressDone of $total...',
+              title: context.l10n.splitProgressTitle,
+              message: context.l10n.splitProgressMessage(progressDone, total),
               progress: progressValue,
             );
           },
@@ -274,7 +274,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             : e.toString();
         await ToolErrorSheet.show(
           context,
-          title: "Couldn't split PDF",
+          title: context.l10n.splitErrorTitle,
           errorMessage: errorMessage,
           onRetry: _splitPdf,
         );
@@ -289,7 +289,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
     final isAllPagesDisabled = count < 1 || count > 100;
     final isEvery5Disabled = count < 1 || (count / 5).ceil() > 100;
     final canSplit = !_isLoadingInfo &&
-        _infoError == null &&
+        !_hasInfoError &&
         !_isSplitting &&
         _generatedRanges.isNotEmpty &&
         _rangeError == null;
@@ -338,7 +338,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
                 TextButton(
                   onPressed: _isLoadingInfo || _isSplitting ? null : _onReset,
                   child: Text(
-                    'Reset',
+                    context.l10n.actionReset,
                     style: DocViewTypography.labelMd.copyWith(
                       color: tokens.primaryBlue,
                       fontWeight: FontWeight.w600,
@@ -352,7 +352,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
       ),
       body: _isLoadingInfo
           ? _buildSkeletonState(tokens)
-          : _infoError != null
+          : _hasInfoError
               ? _buildErrorScreen(tokens)
               : SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
@@ -426,7 +426,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '$count ${count == 1 ? 'page' : 'pages'} · $sizeStr',
+                  context.l10n.mergeItemPageCountAndSize(count, sizeStr),
                   style: DocViewTypography.bodySm.copyWith(
                     color: tokens.textSecondary,
                     fontSize: 13,
@@ -449,7 +449,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
           children: [
             Expanded(
               child: Text(
-                'PAGE RANGES',
+                context.l10n.splitPageRangesLabel,
                 style: DocViewTypography.captionXs.copyWith(
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.1,
@@ -460,7 +460,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             ),
             Flexible(
               child: Text(
-                'Syntax: 1-3, 5, 8-10',
+                context.l10n.splitPageRangesSyntax,
                 style: DocViewTypography.captionXs.copyWith(
                   color: tokens.textSecondary,
                   fontSize: 11,
@@ -548,7 +548,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
           )
         else
           Text(
-            'Each range becomes a separate PDF file.',
+            context.l10n.splitRangeHelpText,
             style: DocViewTypography.captionXs.copyWith(
               color: tokens.textSecondary,
               fontSize: 12,
@@ -565,7 +565,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'GENERATED FILES ($count)',
+          context.l10n.splitGeneratedFilesHeader(count),
           style: DocViewTypography.captionXs.copyWith(
             fontWeight: FontWeight.bold,
             letterSpacing: 1.1,
@@ -595,7 +595,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Live Chips Suspended',
+                        context.l10n.splitChipsSuspendedTitle,
                         style: DocViewTypography.titleMd.copyWith(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -604,7 +604,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Resolve the syntax error above to reconstruct extraction pipeline.',
+                        context.l10n.splitChipsSuspendedDesc,
                         style: DocViewTypography.captionXs.copyWith(
                           color: tokens.textSecondary,
                           fontSize: 11,
@@ -626,7 +626,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             ),
             child: Center(
               child: Text(
-                'Enter page ranges above to generate PDF slices',
+                context.l10n.splitEmptyRangesHint,
                 style: DocViewTypography.captionXs.copyWith(
                   color: tokens.textSecondary,
                   fontSize: 12,
@@ -640,10 +640,10 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             runSpacing: 8,
             children: _generatedRanges.map((range) {
               final label = range.start == range.end
-                  ? 'Page ${range.start}'
-                  : 'Pages ${range.start}–${range.end}';
+                  ? context.l10n.splitChipSinglePage(range.start)
+                  : context.l10n.splitChipPageRange(range.start, range.end);
               final pgsLabel =
-                  '${range.pageCount} ${range.pageCount == 1 ? 'pg' : 'pgs'}';
+                  context.l10n.splitChipPageCountShort(range.pageCount);
 
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -703,7 +703,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'QUICK SELECT',
+          context.l10n.splitQuickSelectLabel,
           style: DocViewTypography.captionXs.copyWith(
             fontWeight: FontWeight.bold,
             letterSpacing: 1.1,
@@ -718,7 +718,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             Expanded(
               child: _buildMacroButton(
                 tokens: tokens,
-                label: 'All pages',
+                label: context.l10n.splitMacroAllPages,
                 isDisabled: isAllPagesDisabled,
                 onTap: _applyAllPagesMacro,
               ),
@@ -728,7 +728,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             Expanded(
               child: _buildMacroButton(
                 tokens: tokens,
-                label: 'Every 5 pages',
+                label: context.l10n.splitMacroEvery5Pages,
                 isDisabled: isEvery5Disabled,
                 onTap: _applyEvery5PagesMacro,
               ),
@@ -739,7 +739,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
           Padding(
             padding: const EdgeInsets.only(top: 6, left: 4),
             child: Text(
-              'Macros producing > 100 files are disabled to protect device memory',
+              context.l10n.splitMacroLimitHint,
               style: DocViewTypography.captionXs.copyWith(
                 color: tokens.textSecondary,
                 fontSize: 11,
@@ -813,7 +813,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    'Output: $fileCount files · $extracted pages extracted',
+                    context.l10n.splitOutputSummary(fileCount, extracted),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: DocViewTypography.labelMd.copyWith(
@@ -828,7 +828,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
           ),
           const SizedBox(width: 8),
           Text(
-            'EST ~ $estStr',
+            context.l10n.splitEstSize(estStr),
             style: DocViewTypography.captionXs.copyWith(
               color: tokens.textSecondary,
               fontWeight: FontWeight.bold,
@@ -875,7 +875,11 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
           ),
           icon: const Icon(Icons.call_split_rounded, size: 20),
           label: Text(
-            canSplit ? 'Split into $fileCount PDFs' : 'Split into PDFs',
+            canSplit
+                ? context.l10n.splitActionCtaCount(fileCount)
+                : context.l10n.splitActionCtaEmpty,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: DocViewTypography.labelLg.copyWith(
               fontWeight: FontWeight.bold,
               fontSize: 15,
@@ -923,7 +927,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              _infoError!,
+              context.l10n.errorPdfSplitDamagedOrEncrypted(widget.file.name),
               textAlign: TextAlign.center,
               style: DocViewTypography.titleMd.copyWith(
                 color: tokens.textPrimary,

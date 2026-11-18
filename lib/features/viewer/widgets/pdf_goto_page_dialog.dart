@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -53,7 +54,7 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
     final text = _controller.text.trim();
     if (text.isEmpty) {
       setState(() {
-        _errorText = 'Enter a page number';
+        _errorText = context.l10n.pdfGotoPageErrorEmpty;
       });
       return;
     }
@@ -61,7 +62,7 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
     final page = int.tryParse(text);
     if (page == null || page < 1 || page > widget.pageCount) {
       setState(() {
-        _errorText = 'Enter a page between 1 and ${widget.pageCount}';
+        _errorText = context.l10n.pdfGotoPageErrorOutOfRange(widget.pageCount);
       });
       return;
     }
@@ -89,7 +90,7 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Go to page',
+                  context.l10n.pdfGotoPageTitle,
                   style: DocViewTypography.headlineSm.copyWith(
                     color: tokens.textPrimary,
                     fontWeight: FontWeight.w700,
@@ -142,7 +143,7 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
                   fontWeight: FontWeight.w600,
                 ),
                 decoration: InputDecoration(
-                  hintText: 'Enter a page between 1 and ${widget.pageCount}',
+                  hintText: context.l10n.pdfGotoPageHint(widget.pageCount),
                   hintStyle: TextStyle(
                     color: tokens.textSecondary.withValues(alpha: 0.6),
                     fontSize: 13,
@@ -192,7 +193,7 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
                           borderRadius: BorderRadius.circular(14),
                         ),
                       ),
-                      child: const Text('Cancel'),
+                      child: Text(context.l10n.actionCancel),
                     ),
                   ),
                 ),
@@ -209,7 +210,7 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
                           borderRadius: BorderRadius.circular(14),
                         ),
                       ),
-                      child: const Text('Go'),
+                      child: Text(context.l10n.pdfGotoPageAction),
                     ),
                   ),
                 ),

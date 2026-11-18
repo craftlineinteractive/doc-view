@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -147,7 +148,7 @@ class ReorderablePageRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Page ${index + 1}',
+                  context.l10n.toolsPageNumber(index + 1),
                   style: DocViewTypography.labelMd.copyWith(color: tokens.textPrimary),
                 ),
                 Text(
@@ -162,13 +163,13 @@ class ReorderablePageRow extends StatelessWidget {
           if (onRotate != null)
             DocIconButton(
               icon: AppIcons.rotate,
-              tooltip: 'Rotate page',
+              tooltip: context.l10n.toolsTooltipRotatePage,
               size: 20,
               onPressed: onRotate,
             ),
           DocIconButton(
             icon: AppIcons.close,
-            tooltip: 'Remove page',
+            tooltip: context.l10n.toolsTooltipRemovePage,
             size: 20,
             onPressed: onRemove,
           ),

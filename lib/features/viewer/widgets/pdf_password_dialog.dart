@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -83,7 +84,7 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
 
               // Title
               Text(
-                'This PDF is password-protected',
+                context.l10n.pdfPasswordTitle,
                 textAlign: TextAlign.center,
                 style: DocViewTypography.headlineSm.copyWith(
                   color: tokens.textPrimary,
@@ -94,7 +95,7 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
 
               // Subtitle
               Text(
-                'Enter password to view and decrypt the contents.',
+                context.l10n.pdfPasswordSubtitle,
                 textAlign: TextAlign.center,
                 style: DocViewTypography.bodyMd.copyWith(
                   color: tokens.textSecondary,
@@ -126,7 +127,7 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
                           fontSize: 15,
                         ),
                         decoration: InputDecoration(
-                          hintText: 'Enter password',
+                          hintText: context.l10n.pdfPasswordHint,
                           hintStyle: TextStyle(
                             color: tokens.textSecondary.withValues(alpha: 0.6),
                             fontSize: 14,
@@ -172,7 +173,7 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      'Incorrect password. Try again.',
+                      context.l10n.pdfPasswordErrorIncorrect,
                       style: DocViewTypography.bodySm.copyWith(
                         color: const Color(0xFFE5484D),
                         fontWeight: FontWeight.w600,
@@ -199,7 +200,7 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
-                        child: const Text('Cancel'),
+                        child: Text(context.l10n.actionCancel),
                       ),
                     ),
                   ),
@@ -216,7 +217,7 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
-                        child: const Text('Unlock'),
+                        child: Text(context.l10n.pdfPasswordActionUnlock),
                       ),
                     ),
                   ),

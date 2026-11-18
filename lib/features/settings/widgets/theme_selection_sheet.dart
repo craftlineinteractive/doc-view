@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import '../../../shared/widgets/sheets/doc_bottom_sheet.dart';
@@ -43,13 +44,13 @@ class _ThemeSelectionSheetState extends ConsumerState<ThemeSelectionSheet> {
     final tokens = context.tokens;
 
     return DocBottomSheet(
-      title: 'App theme',
+      title: context.l10n.themeSheetTitle,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Select visual appearance for Doc View',
+            context.l10n.themeSheetSubtitle,
             style: DocViewTypography.bodySm.copyWith(
               color: tokens.textSecondary,
               fontWeight: FontWeight.w500,
@@ -62,8 +63,8 @@ class _ThemeSelectionSheetState extends ConsumerState<ThemeSelectionSheet> {
               Expanded(
                 child: _ThemePreviewCard(
                   key: const Key('theme_card_system'),
-                  title: 'System',
-                  subtitle: 'default',
+                  title: context.l10n.themeModeSystem,
+                  subtitle: context.l10n.themeModeSystemSubtitle,
                   isSelected: _selectedMode == ThemeMode.system,
                   onTap: () => setState(() => _selectedMode = ThemeMode.system),
                   preview: const _SystemPreview(),
@@ -73,8 +74,8 @@ class _ThemeSelectionSheetState extends ConsumerState<ThemeSelectionSheet> {
               Expanded(
                 child: _ThemePreviewCard(
                   key: const Key('theme_card_light'),
-                  title: 'Light',
-                  subtitle: 'Clean white',
+                  title: context.l10n.themeModeLight,
+                  subtitle: context.l10n.themeModeLightSubtitle,
                   isSelected: _selectedMode == ThemeMode.light,
                   onTap: () => setState(() => _selectedMode = ThemeMode.light),
                   preview: const _LightPreview(),
@@ -84,8 +85,8 @@ class _ThemeSelectionSheetState extends ConsumerState<ThemeSelectionSheet> {
               Expanded(
                 child: _ThemePreviewCard(
                   key: const Key('theme_card_dark'),
-                  title: 'Dark',
-                  subtitle: 'Deep navy',
+                  title: context.l10n.themeModeDark,
+                  subtitle: context.l10n.themeModeDarkSubtitle,
                   isSelected: _selectedMode == ThemeMode.dark,
                   onTap: () => setState(() => _selectedMode = ThemeMode.dark),
                   preview: const _DarkPreview(),
@@ -109,7 +110,7 @@ class _ThemeSelectionSheetState extends ConsumerState<ThemeSelectionSheet> {
                 ),
               ),
               child: Text(
-                'Apply theme',
+                context.l10n.themeActionApply,
                 style: DocViewTypography.labelLg.copyWith(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -148,7 +149,7 @@ class _ThemePreviewCard extends StatelessWidget {
     return Semantics(
       button: true,
       selected: isSelected,
-      label: '$title $subtitle theme, ${isSelected ? 'selected' : 'not selected'}',
+      label: '$title $subtitle, ${isSelected ? context.l10n.semanticSelected : context.l10n.semanticNotSelected}',
       child: GestureDetector(
         onTap: onTap,
         child: Stack(
@@ -399,9 +400,11 @@ class _LightPreview extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
             alignment: Alignment.center,
-            child: const Text(
-              'Light',
-              style: TextStyle(
+            child: Text(
+              context.l10n.themePreviewLight,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
                 fontSize: 8,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF1A66E8),
@@ -474,9 +477,11 @@ class _DarkPreview extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
             alignment: Alignment.center,
-            child: const Text(
-              'Navy',
-              style: TextStyle(
+            child: Text(
+              context.l10n.themePreviewNavy,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
                 fontSize: 8,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF4D8FF7),

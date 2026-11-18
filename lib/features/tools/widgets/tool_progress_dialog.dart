@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import '../../../shared/widgets/buttons/doc_buttons.dart';
@@ -86,7 +87,7 @@ class ToolProgressDialog extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      message ?? 'Please wait...',
+                      message ?? context.l10n.labelPleaseWait,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: DocViewTypography.bodySm.copyWith(
@@ -111,7 +112,7 @@ class ToolProgressDialog extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: DocSecondaryButton(
-                    label: 'Cancel',
+                    label: context.l10n.actionCancel,
                     onPressed: onCancel,
                   ),
                 ),

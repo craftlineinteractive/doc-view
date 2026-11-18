@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
@@ -122,8 +123,8 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
   Future<void> _addMoreImages() async {
     if (_imagePaths.length >= maxImageCount) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Maximum limit of 100 images reached.'),
+        SnackBar(
+          content: Text(context.l10n.imageListEditorMaxLimit(maxImageCount)),
         ),
       );
       return;
@@ -144,7 +145,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
       } catch (e) {
         if (!mounted) return;
         messenger.showSnackBar(
-          SnackBar(content: Text('Scanning failed: $e')),
+          SnackBar(content: Text(context.l10n.imageListEditorScanFailed(e.toString()))),
         );
       }
     } else {
@@ -190,8 +191,10 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
             dialogSetState = setDialogState;
             final progressValue = total > 0 ? progressDone / total : 0.0;
             return ToolProgressDialog(
-              title: widget.isScannerSource ? 'Creating PDF from Scans' : 'Creating PDF',
-              message: 'Processing image $progressDone of $total...',
+              title: widget.isScannerSource
+                  ? context.l10n.toolsCreatingPdfFromScans
+                  : context.l10n.toolsCreatingPdf,
+              message: context.l10n.toolsProcessingImageProgress(progressDone, total),
               progress: progressValue,
             );
           },
@@ -235,10 +238,13 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isCreating = false);
 
+        final errorMessage = e is ImageToPdfException
+            ? e.localizedMessage(context)
+            : e.toString();
         await ToolErrorSheet.show(
           context,
-          title: "Couldn't create PDF",
-          errorMessage: e.toString(),
+          title: context.l10n.toolsErrorCreatePdfTitle,
+          errorMessage: errorMessage,
           onRetry: _createPdf,
         );
       }
@@ -255,13 +261,13 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
       showDockedBanner: false, // No ads on editor/creator screens
       isAdLoaded: false,
       appBar: DocSubAppBar(
-        title: widget.isScannerSource ? 'Scan to PDF' : 'Image to PDF',
+        title: widget.isScannerSource ? context.l10n.toolScanToPdf : context.l10n.toolImageToPdf,
         actions: [
           if (_imagePaths.isNotEmpty)
             TextButton(
               onPressed: _isCreating ? null : _clearAll,
               child: Text(
-                'Clear',
+                context.l10n.actionClear,
                 style: DocViewTypography.labelMd.copyWith(
                   color: DocViewColors.error,
                   fontWeight: FontWeight.w600,
@@ -289,7 +295,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                   controller: _nameController,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
-                    labelText: 'File Name',
+                    labelText: context.l10n.toolsLabelFileName,
                     suffixText: '.pdf',
                     isDense: true,
                     contentPadding: const EdgeInsets.symmetric(
@@ -317,7 +323,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                 Row(
                   children: [
                     Text(
-                      'Page Size:',
+                      context.l10n.imageListEditorPageSize,
                       style: DocViewTypography.labelMd.copyWith(
                         color: tokens.textSecondary,
                         fontWeight: FontWeight.w600,
@@ -326,16 +332,16 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: SegmentedButton<PageMode>(
-                        segments: const [
+                        segments: [
                           ButtonSegment<PageMode>(
                             value: PageMode.a4,
-                            label: Text('A4'),
-                            icon: Icon(Icons.description_outlined, size: 16),
+                            label: Text(context.l10n.imageListEditorA4Mode),
+                            icon: const Icon(Icons.description_outlined, size: 16),
                           ),
                           ButtonSegment<PageMode>(
                             value: PageMode.fitImage,
-                            label: Text('Fit to image'),
-                            icon: Icon(Icons.aspect_ratio_outlined, size: 16),
+                            label: Text(context.l10n.imageListEditorFitMode),
+                            icon: const Icon(Icons.aspect_ratio_outlined, size: 16),
                           ),
                         ],
                         selected: {_pageMode},
@@ -377,7 +383,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'Add images to start',
+                            context.l10n.toolsAddImagesToStart,
                             style: DocViewTypography.headlineSm.copyWith(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -386,7 +392,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            'Select photos or scan paper documents to generate a PDF.',
+                            context.l10n.toolsAddImagesDesc,
                             textAlign: TextAlign.center,
                             style: DocViewTypography.bodySm.copyWith(
                               color: tokens.textSecondary,
@@ -398,7 +404,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                             children: [
                               Expanded(
                                 child: DocPrimaryButton(
-                                  label: 'Choose photos',
+                                  label: context.l10n.toolsChoosePhotos,
                                   icon: const Icon(Icons.photo_library_outlined, size: 18, color: Colors.white),
                                   onPressed: _addMoreImages,
                                 ),
@@ -406,10 +412,11 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: DocSecondaryButton(
-                                  label: 'Scan paper',
+                                  label: context.l10n.toolsScanPaper,
                                   icon: Icon(Icons.document_scanner_outlined, size: 18, color: tokens.textPrimary),
                                   onPressed: () async {
                                     final messenger = ScaffoldMessenger.of(context);
+                                    final l10n = context.l10n;
                                     try {
                                       final scans = await CunningDocumentScanner.getPictures();
                                       if (!mounted) return;
@@ -422,7 +429,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                                     } catch (e) {
                                       if (!mounted) return;
                                       messenger.showSnackBar(
-                                        SnackBar(content: Text('Scanning failed: $e')),
+                                        SnackBar(content: Text(l10n.imageListEditorScanFailed(e.toString()))),
                                       );
                                     }
                                   },
@@ -507,7 +514,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                                             borderRadius: BorderRadius.circular(6),
                                           ),
                                           child: Text(
-                                            'Page ${index + 1}',
+                                            context.l10n.toolsPageNumber(index + 1),
                                             style: DocViewTypography.captionXs.copyWith(
                                               color: tokens.primaryBlue,
                                               fontWeight: FontWeight.bold,
@@ -529,7 +536,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                                   ),
                                   DocIconButton(
                                     icon: AppIcons.close,
-                                    tooltip: 'Remove image',
+                                    tooltip: context.l10n.imageListEditorRemoveImageTooltip,
                                     size: 20,
                                     onPressed: _isCreating ? null : () => _removeImage(index),
                                   ),
@@ -544,7 +551,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                           padding: const EdgeInsets.only(bottom: 24),
                           child: DashedAddCard(
                             key: const Key('add_more_card'),
-                            label: widget.isScannerSource ? 'Add more scans' : 'Add more images',
+                            label: widget.isScannerSource ? context.l10n.toolsAddMoreScans : context.l10n.toolsAddMoreImages,
                             onTap: _addMoreImages,
                           ),
                         ),
@@ -574,7 +581,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${_imagePaths.length} ${_imagePaths.length == 1 ? 'image' : 'images'} · est. ~ ${FormatUtils.formatFileSize(_totalBytes)}',
+                      context.l10n.toolsImageSummary(_imagePaths.length, FormatUtils.formatFileSize(_totalBytes)),
                       style: DocViewTypography.bodySm.copyWith(
                         color: tokens.textSecondary,
                         fontWeight: FontWeight.w500,
@@ -588,7 +595,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                         border: Border.all(color: tokens.hairline, width: 1),
                       ),
                       child: Text(
-                        _pageMode == PageMode.a4 ? 'A4' : 'Fit to image',
+                        _pageMode == PageMode.a4 ? context.l10n.imageListEditorA4Mode : context.l10n.imageListEditorFitMode,
                         style: DocViewTypography.captionXs.copyWith(
                           color: tokens.textPrimary,
                           fontWeight: FontWeight.w600,
@@ -599,7 +606,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                 ),
                 const SizedBox(height: 10),
                 DocPrimaryButton(
-                  label: 'Create PDF',
+                  label: context.l10n.actionCreatePdf,
                   icon: const Icon(Icons.picture_as_pdf_rounded, size: 20, color: Colors.white),
                   onPressed: canCreate ? _createPdf : null,
                 ),

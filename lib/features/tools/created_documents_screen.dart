@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/utils/format_utils.dart';
@@ -28,11 +29,11 @@ class CreatedDocumentsScreen extends ConsumerWidget {
       showDockedBanner: true,
       isAdLoaded: true,
       appBar: DocSubAppBar(
-        title: 'Created by you',
+        title: context.l10n.createdSectionTitle,
         actions: [
           DocIconButton(
             icon: AppIcons.search,
-            tooltip: 'Search',
+            tooltip: context.l10n.tooltipSearch,
             onPressed: () => context.push('/search'),
           ),
         ],
@@ -41,17 +42,16 @@ class CreatedDocumentsScreen extends ConsumerWidget {
         loading: () => const SkeletonFileList(itemCount: 8),
         error: (err, _) => Center(
           child: Text(
-            'Failed to load created files: $err',
+            context.l10n.errorLoadingCreatedFiles(err.toString()),
             style: TextStyle(color: tokens.textSecondary),
           ),
         ),
         data: (files) {
           if (files.isEmpty) {
-            return const DocEmptyState(
+            return DocEmptyState(
               icon: Icons.note_add_outlined,
-              title: 'No created documents yet',
-              message:
-                  'Converted, scanned, or merged documents will appear here.',
+              title: context.l10n.emptyCreatedDocsTitle,
+              message: context.l10n.emptyCreatedDocsMessage,
             );
           }
 

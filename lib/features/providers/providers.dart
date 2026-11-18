@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../data/db/app_database.dart';
 import '../../data/models/app_settings.dart';
 import '../../data/models/doc_file.dart';
@@ -301,13 +302,13 @@ Future<void> handlePullToRefreshScan(BuildContext context, WidgetRef ref) async 
           await ref.read(scanStateProvider.notifier).refreshScan();
       if (context.mounted && newCount >= 0) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Scan complete: $newCount files')),
+          SnackBar(content: Text(context.l10n.scanCompleteWithCount(newCount))),
         );
       }
     }
   } else if (context.mounted && count >= 0) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Scan complete: $count files')),
+      SnackBar(content: Text(context.l10n.scanCompleteWithCount(count))),
     );
   }
 }

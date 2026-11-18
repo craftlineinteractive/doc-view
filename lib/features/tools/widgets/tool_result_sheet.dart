@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/constants/file_types.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import '../../../core/utils/format_utils.dart';
@@ -96,9 +97,7 @@ class ToolResultSheet extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      isMultiple
-                          ? '${files.length} PDFs Created'
-                          : 'PDF Created',
+                      context.l10n.toolResultPdfCreated(files.length),
                       style: DocViewTypography.headlineSm.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -107,7 +106,7 @@ class ToolResultSheet extends ConsumerWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'Saved to your Created folder',
+                      context.l10n.toolResultSavedSubtitle,
                       style: DocViewTypography.bodySm.copyWith(
                         color: tokens.textSecondary,
                         fontSize: 13,
@@ -147,7 +146,7 @@ class ToolResultSheet extends ConsumerWidget {
               children: [
                 Expanded(
                   child: DocPrimaryButton(
-                    label: 'Open',
+                    label: context.l10n.actionOpen,
                     icon: const Icon(Icons.visibility_outlined, size: 20, color: Colors.white),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -158,7 +157,7 @@ class ToolResultSheet extends ConsumerWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: DocSecondaryButton(
-                    label: 'Share',
+                    label: context.l10n.actionShare,
                     icon: Icon(Icons.share_outlined, size: 20, color: tokens.textPrimary),
                     onPressed: () {
                       final xFiles = [XFile(files.first.path)];
@@ -170,7 +169,7 @@ class ToolResultSheet extends ConsumerWidget {
             ),
             const SizedBox(height: 10),
             DocSecondaryButton(
-              label: 'Done',
+              label: context.l10n.actionDone,
               onPressed: () {
                 Navigator.of(context).pop();
                 onDone?.call();
@@ -181,7 +180,7 @@ class ToolResultSheet extends ConsumerWidget {
               children: [
                 Expanded(
                   child: DocSecondaryButton(
-                    label: 'Share All',
+                    label: context.l10n.actionShareAll,
                     icon: Icon(Icons.share_outlined, size: 20, color: tokens.textPrimary),
                     onPressed: () {
                       final xFiles = files.map((f) => XFile(f.path)).toList();
@@ -192,7 +191,7 @@ class ToolResultSheet extends ConsumerWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: DocPrimaryButton(
-                    label: 'Done',
+                    label: context.l10n.actionDone,
                     onPressed: () {
                       Navigator.of(context).pop();
                       onDone?.call();

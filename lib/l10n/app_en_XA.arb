@@ -184,9 +184,9 @@
   "@operationComplete": {
     "description": "Headline for operation complete bottom sheet"
   },
-  "actionOpenDocument": "[Öþéñ Ðôçûɱéñţ ẋẋẋẋẋẋ]",
+  "actionOpenDocument": "[Öþéñ đôçûɱéñţ ẋẋẋẋẋẋ]",
   "@actionOpenDocument": {
-    "description": "Button to open a newly generated document"
+    "description": "Accessibility action hint to open document"
   },
   "actionShareDocument": "[Šĥàřé Ðôçûɱéñţ ẋẋẋẋẋẋ]",
   "@actionShareDocument": {
@@ -652,11 +652,11 @@
   },
   "actionAllow": "[Åłłôŵ ẋẋ]",
   "@actionAllow": {
-    "description": "Action button label to grant permission"
+    "description": "Button label to grant requested permission"
   },
   "actionNotNow": "[Ñôţ ñôŵ ẋẋẋ]",
   "@actionNotNow": {
-    "description": "Action button label to dismiss or postpone permission prompt"
+    "description": "Button label to dismiss or postpone permission request"
   },
   "tooltipMoreActions": "[Ṁôřé àçţîôñš ẋẋẋẋẋ]",
   "@tooltipMoreActions": {
@@ -1433,5 +1433,639 @@
         "type": "String"
       }
     }
+  },
+  "fileDetailsPageChip": "[ÞĜ {current}/{total} ẋẋẋẋẋẋẋẋ]",
+  "@fileDetailsPageChip": {
+    "description": "Short page count badge overlay on document preview",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "fileDetailsBytes": "[({bytes} ƀýţéš) ẋẋẋẋẋẋ]",
+  "@fileDetailsBytes": {
+    "description": "Exact byte count display in document details sheet",
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "directoriesProtectedTitle": "[Ťĥîš ƒôłđéř îš þřôţéçţéđ ƀý Åñđřôîđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesProtectedTitle": {
+    "description": "Notice title when Android blocks system or private folder"
+  },
+  "directoriesProtectedDesc": "[Åñđřôîđ řéšţřîçţš àççéšš ţô šýšţéɱ àñđ àþþ þřîṽàţé ƒôłđéřš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesProtectedDesc": {
+    "description": "Description explaining Android private folder restriction"
+  },
+  "directoriesNotFoundTitle": "[Ťĥîš ƒôłđéř ñô łôñĝéř éẋîšţš. ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesNotFoundTitle": {
+    "description": "Notice title when folder is missing or deleted"
+  },
+  "directoriesEmpty": "[Ñô šûþþôřţéđ ƒîłéš ôř ƒôłđéřš ĥéřé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@directoriesEmpty": {
+    "description": "Notice message when a directory has no supported items"
+  },
+  "directoriesErrorOpening": "[Éřřôř ôþéñîñĝ ƒôłđéř ẋẋẋẋẋẋẋẋ]",
+  "@directoriesErrorOpening": {
+    "description": "Title when an error occurs trying to list a folder"
+  },
+  "directoriesRoot": "[Řôôţ ẋẋ]",
+  "@directoriesRoot": {
+    "description": "Root breadcrumb segment label"
+  },
+  "scanSettingsSectionFrequency": "[Šçàñ ƒřéʠûéñçý ẋẋẋẋẋẋ]",
+  "@scanSettingsSectionFrequency": {
+    "description": "Header for scan frequency settings section"
+  },
+  "scanSettingsSectionFilters": "[Ðôçûɱéñţ ƒîłţéřš ẋẋẋẋẋẋẋ]",
+  "@scanSettingsSectionFilters": {
+    "description": "Header for document filters settings section"
+  },
+  "scanSettingsIncludeImages": "[Îñçłûđé îɱàĝéš ẋẋẋẋẋẋ]",
+  "@scanSettingsIncludeImages": {
+    "description": "Toggle label to include image documents in library"
+  },
+  "scanSettingsIncludeImagesDesc": "[Ťûřñ ôƒƒ ţô ĥîđé ţĥôûšàñđš ôƒ þĥôţôš ƒřôɱ ýôûř đôçûɱéñţ łîšţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsIncludeImagesDesc": {
+    "description": "Explanation of the include images toggle"
+  },
+  "scanSettingsImageListUpdated": "[Îɱàĝé łîšţ ûþđàţéđ ẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsImageListUpdated": {
+    "description": "Snackbar shown after toggling image document inclusion"
+  },
+  "scanSettingsActionRescanNow": "[Řéšçàñ ñôŵ ẋẋẋẋ]",
+  "@scanSettingsActionRescanNow": {
+    "description": "Button label to trigger an immediate document rescan"
+  },
+  "scanSettingsSectionDiagnostics": "[Šţôřàĝé đîàĝñôšţîçš ẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsSectionDiagnostics": {
+    "description": "Header for storage diagnostics section on Android"
+  },
+  "scanSettingsAllFilesAccessGranted": "[Åłł ƒîłéš àççéšš ĝřàñţéđ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsAllFilesAccessGranted": {
+    "description": "Card title when All files access is active"
+  },
+  "scanSettingsAllFilesAccessNeeded": "[Åłł ƒîłéš àççéšš ñééđéđ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsAllFilesAccessNeeded": {
+    "description": "Card title when All files access is missing"
+  },
+  "scanSettingsAllFilesAccessGrantedDesc": "[Ðôç Ṽîéŵ ĥàš þéřɱîššîôñ ţô đîšçôṽéř ƒîłéš îñ Ðôŵñłôàđš àñđ ŠÐ çàřđš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsAllFilesAccessGrantedDesc": {
+    "description": "Explanation when storage permission is active"
+  },
+  "scanSettingsAllFilesAccessNeededDesc": "[Þéřɱîššîôñ îš řéʠûîřéđ ţô šçàñ đôŵñłôàđš àñđ éẋţéřñàł šţôřàĝé ƒôłđéřš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsAllFilesAccessNeededDesc": {
+    "description": "Explanation when storage permission is needed"
+  },
+  "scanSettingsActionOpenSettings": "[Öþéñ šéţţîñĝš ẋẋẋẋẋẋ]",
+  "@scanSettingsActionOpenSettings": {
+    "description": "Button label to open system app settings"
+  },
+  "scanSettingsScanningFiles": "[Šçàññîñĝ... {count} ƒîłéš ƒôûñđ ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@scanSettingsScanningFiles": {
+    "description": "Status text while document scan is in progress",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "faqStillNeedHelp": "[Šţîłł ñééđ ĥéłþ? Šéñđ ƒééđƀàçƙ ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqStillNeedHelp": {
+    "description": "CTA button label at bottom of FAQ screen"
+  },
+  "toolsLabelFileName": "[Ƒîłé Ñàɱé ẋẋẋẋ]",
+  "@toolsLabelFileName": {
+    "description": "Input field label for target file name"
+  },
+  "toolsAddImagesToStart": "[Åđđ îɱàĝéš ţô šţàřţ ẋẋẋẋẋẋẋẋ]",
+  "@toolsAddImagesToStart": {
+    "description": "Empty state title in Image to PDF editor"
+  },
+  "toolsAddImagesDesc": "[Šéłéçţ þĥôţôš ôř šçàñ þàþéř đôçûɱéñţš ţô ĝéñéřàţé à ÞÐƑ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@toolsAddImagesDesc": {
+    "description": "Empty state description in Image to PDF editor"
+  },
+  "toolsChoosePhotos": "[Çĥôôšé þĥôţôš ẋẋẋẋẋẋ]",
+  "@toolsChoosePhotos": {
+    "description": "Button label to pick photos from gallery"
+  },
+  "toolsScanPaper": "[Šçàñ þàþéř ẋẋẋẋ]",
+  "@toolsScanPaper": {
+    "description": "Button label to launch camera document scanner"
+  },
+  "toolsPageNumber": "[Þàĝé {page} ẋẋẋẋẋ]",
+  "@toolsPageNumber": {
+    "description": "Page indicator label on editor page row",
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsTooltipRotatePage": "[Řôţàţé þàĝé ẋẋẋẋẋ]",
+  "@toolsTooltipRotatePage": {
+    "description": "Tooltip for page rotation button"
+  },
+  "toolsTooltipRemovePage": "[Řéɱôṽé þàĝé ẋẋẋẋẋ]",
+  "@toolsTooltipRemovePage": {
+    "description": "Tooltip for page removal button"
+  },
+  "toolsAddMoreScans": "[Åđđ ɱôřé šçàñš ẋẋẋẋẋẋ]",
+  "@toolsAddMoreScans": {
+    "description": "Label on dashed add card in scanner editor"
+  },
+  "toolsAddMoreImages": "[Åđđ ɱôřé îɱàĝéš ẋẋẋẋẋẋ]",
+  "@toolsAddMoreImages": {
+    "description": "Label on dashed add card in image editor"
+  },
+  "toolsImageSummary": "{count, plural, =1{[1 îɱàĝé · éšţ. ~ {size} ẋẋẋẋẋẋẋẋẋẋ]} other{[{count} îɱàĝéš · éšţ. ~ {size} ẋẋẋẋẋẋẋẋẋẋẋẋ]}}",
+  "@toolsImageSummary": {
+    "description": "Footer summary of image count and estimated output size",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "toolsSelectedCount": "[{count} šéłéçţéđ ẋẋẋẋẋẋẋ]",
+  "@toolsSelectedCount": {
+    "description": "Count of selected files in tool picker footer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsSelectAtLeast": "[Šéłéçţ àţ łéàšţ {min} ƒîłéš ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@toolsSelectAtLeast": {
+    "description": "Guidance hint in tool picker when minimum files requirement is not yet met",
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsPagesTotal": "[{count} þàĝéš ţôţàł ẋẋẋẋẋẋẋẋ]",
+  "@toolsPagesTotal": {
+    "description": "Total page count summary across selected documents",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsPagesTotalLabel": "[þàĝéš ţôţàł ẋẋẋẋẋ]",
+  "@toolsPagesTotalLabel": {
+    "description": "Label suffix while calculating total page count",
+    "placeholders": {}
+  },
+  "toolsNoPdfsFound": "[Ñô ÞÐƑ đôçûɱéñţš ƒôûñđ ẋẋẋẋẋẋẋẋẋ]",
+  "@toolsNoPdfsFound": {
+    "description": "Empty state title when no PDFs are found in tool picker"
+  },
+  "semanticBookmarked": "[ƀôôƙɱàřƙéđ ẋẋẋẋ]",
+  "@semanticBookmarked": {
+    "description": "Accessibility status text for bookmarked files"
+  },
+  "semanticSelected": "[šéłéçţéđ ẋẋẋẋ]",
+  "@semanticSelected": {
+    "description": "Accessibility status text for selected items"
+  },
+  "semanticNotSelected": "[ñôţ šéłéçţéđ ẋẋẋẋẋ]",
+  "@semanticNotSelected": {
+    "description": "Accessibility status text for unselected items"
+  },
+  "actionDeselectFile": "[Ðéšéłéçţ ƒîłé ẋẋẋẋẋẋ]",
+  "@actionDeselectFile": {
+    "description": "Accessibility action hint to deselect a file"
+  },
+  "actionSelectFile": "[Šéłéçţ ƒîłé ẋẋẋẋẋ]",
+  "@actionSelectFile": {
+    "description": "Accessibility action hint to select a file"
+  },
+  "actionCreatePdf": "[Çřéàţé ÞÐƑ ẋẋẋẋ]",
+  "@actionCreatePdf": {
+    "description": "Action button label to create PDF document"
+  },
+  "hintSelectOrViewActions": "[Šéłéçţ ôř ṽîéŵ àçţîôñš ẋẋẋẋẋẋẋẋẋ]",
+  "@hintSelectOrViewActions": {
+    "description": "Accessibility long press hint on file tile"
+  },
+  "actionClose": "[Çłôšé ẋẋ]",
+  "@actionClose": {
+    "description": "Button label to close a dialog or bottom sheet"
+  },
+  "actionReset": "[Řéšéţ ẋẋ]",
+  "@actionReset": {
+    "description": "Button label to reset inputs or filters"
+  },
+  "labelPleaseWait": "[Þłéàšé ŵàîţ... ẋẋẋẋẋẋ]",
+  "@labelPleaseWait": {
+    "description": "Default progress status message while a tool operation runs"
+  },
+  "tooltipCloseSearch": "[Çłôšé šéàřçĥ ẋẋẋẋẋ]",
+  "@tooltipCloseSearch": {
+    "description": "Tooltip for button that exits inline search mode"
+  },
+  "semanticAdvertisement": "[Åđṽéřţîšéɱéñţ ẋẋẋẋẋẋ]",
+  "@semanticAdvertisement": {
+    "description": "Accessibility label for ad disclosure badge"
+  },
+  "themePreviewLight": "[Łîĝĥţ ẋẋ]",
+  "@themePreviewLight": {
+    "description": "Mini preview label for light theme in theme picker"
+  },
+  "themePreviewNavy": "[Ñàṽý ẋẋ]",
+  "@themePreviewNavy": {
+    "description": "Mini preview label for dark navy theme in theme picker"
+  },
+  "createdByYouItemSemantic": "[{name}, {size}, çřéàţéđ {date} ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@createdByYouItemSemantic": {
+    "description": "Accessibility label for a document card in the Created by you carousel",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "toolsCreatingPdfFromScans": "[Çřéàţîñĝ ÞÐƑ ƒřôɱ Šçàñš ẋẋẋẋẋẋẋẋẋẋ]",
+  "@toolsCreatingPdfFromScans": {
+    "description": "Progress dialog title when creating PDF from camera scans"
+  },
+  "toolsCreatingPdf": "[Çřéàţîñĝ ÞÐƑ ẋẋẋẋẋ]",
+  "@toolsCreatingPdf": {
+    "description": "Progress dialog title when creating PDF from images"
+  },
+  "toolsProcessingImageProgress": "[Þřôçéššîñĝ îɱàĝé {done} ôƒ {total}... ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@toolsProcessingImageProgress": {
+    "description": "Progress message while converting images into a PDF",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsErrorCreatePdfTitle": "[Çôûłđñ'ţ çřéàţé ÞÐƑ ẋẋẋẋẋẋẋẋ]",
+  "@toolsErrorCreatePdfTitle": {
+    "description": "Error sheet title when image-to-PDF creation fails"
+  },
+  "toolsBadgeProtectedOrDamaged": "[Þřôţéçţéđ ôř đàɱàĝéđ ẋẋẋẋẋẋẋẋ]",
+  "@toolsBadgeProtectedOrDamaged": {
+    "description": "Badge label for password-protected or unreadable PDF files in tool pickers"
+  },
+  "toolsPageCountPlural": "{count, plural, =1{[1 þàĝé ẋẋẋ]} other{[{count} þàĝéš ẋẋẋẋẋẋ]}}",
+  "@toolsPageCountPlural": {
+    "description": "Pluralized page count label for PDF files",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsPagesAbbrev": "[þĝš ẋẋ]",
+  "@toolsPagesAbbrev": {
+    "description": "Short abbreviated pages suffix shown alongside skeleton loader"
+  },
+  "mergeAddMoreTitle": "[Åđđ Ṁôřé ÞÐƑš ẋẋẋẋẋẋ]",
+  "@mergeAddMoreTitle": {
+    "description": "Picker screen title when adding more PDFs from the merge screen"
+  },
+  "mergeProgressTitle": "[Ṁéřĝîñĝ ÞÐƑš ẋẋẋẋẋ]",
+  "@mergeProgressTitle": {
+    "description": "Progress dialog title while merging PDFs"
+  },
+  "mergeProgressMessage": "[Ṁéřĝîñĝ đôçûɱéñţ {done} ôƒ {total}... ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@mergeProgressMessage": {
+    "description": "Progress message while merging PDFs",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "mergeErrorTitle": "[Çôûłđñ'ţ ɱéřĝé ÞÐƑš ẋẋẋẋẋẋẋẋ]",
+  "@mergeErrorTitle": {
+    "description": "Error sheet title when PDF merge fails"
+  },
+  "mergeDragInstruction": "[Ðřàĝ ĥàñđłéš ţô řéôřđéř ẋẋẋẋẋẋẋẋẋẋ]",
+  "@mergeDragInstruction": {
+    "description": "Instruction banner text in the Merge PDF arrangement screen"
+  },
+  "mergeAddPdf": "[Åđđ ÞÐƑ ẋẋẋ]",
+  "@mergeAddPdf": {
+    "description": "Button label to add another PDF to the merge list"
+  },
+  "mergeOutputFileNameLabel": "[ÖÛŤÞÛŤ ƑÎŁÉ ÑÅṀÉ ẋẋẋẋẋẋẋ]",
+  "@mergeOutputFileNameLabel": {
+    "description": "Section header label above the merged PDF file name input"
+  },
+  "mergeItemPageCountAndSize": "{count, plural, =1{[1 þàĝé · {size} ẋẋẋẋẋẋ]} other{[{count} þàĝéš · {size} ẋẋẋẋẋẋẋẋẋ]}}",
+  "@mergeItemPageCountAndSize": {
+    "description": "Subtitle showing page count and formatted file size for a PDF item",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "mergeItemLoadingPagesAndSize": "[Łôàđîñĝ þàĝéš... · {size} ẋẋẋẋẋẋẋẋẋẋ]",
+  "@mergeItemLoadingPagesAndSize": {
+    "description": "Subtitle shown while PDF page count is still loading",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "mergeInvalidFilesDetected": "{count, plural, =1{[1 îñṽàłîđ ƒîłé đéţéçţéđ ẋẋẋẋẋẋẋẋẋẋ]} other{[{count} îñṽàłîđ ƒîłéš đéţéçţéđ ẋẋẋẋẋẋẋẋẋẋẋẋ]}}",
+  "@mergeInvalidFilesDetected": {
+    "description": "Pre-flight warning title when one or more selected PDFs cannot be merged",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mergeReadyTitle": "[Řéàđý ţô ɱéřĝé ẋẋẋẋẋẋ]",
+  "@mergeReadyTitle": {
+    "description": "Pre-flight status title when selected PDFs are valid for merging"
+  },
+  "mergeRemoveProtectedHint": "[Þłéàšé řéɱôṽé þàššŵôřđ-þřôţéçţéđ đôçûɱéñţš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@mergeRemoveProtectedHint": {
+    "description": "Pre-flight warning description asking user to remove invalid PDFs"
+  },
+  "mergeSummary": "[{files} ƒîłéš · {pages} þàĝéš · ~ {size} ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@mergeSummary": {
+    "description": "Pre-flight summary showing total files, pages, and estimated output size",
+    "placeholders": {
+      "files": {
+        "type": "int"
+      },
+      "pages": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "mergeReadyBadge": "[Řéàđý ẋẋ]",
+  "@mergeReadyBadge": {
+    "description": "Short status badge on pre-flight card when merge is ready"
+  },
+  "mergeBlockedCta": "[Ṁéřĝé Ɓłôçƙéđ (Řéšôłṽé Éřřôřš) ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@mergeBlockedCta": {
+    "description": "Disabled CTA label when merge is blocked by invalid files"
+  },
+  "mergeActionCta": "[Ṁéřĝé {files} ÞÐƑš ({pages} Þàĝéš) ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@mergeActionCta": {
+    "description": "Primary CTA button label to merge selected PDFs",
+    "placeholders": {
+      "files": {
+        "type": "int"
+      },
+      "pages": {
+        "type": "int"
+      }
+    }
+  },
+  "mergePickerDefaultTitle": "[Šéłéçţ ÞÐƑš ẋẋẋẋẋ]",
+  "@mergePickerDefaultTitle": {
+    "description": "Default app bar title for the Merge PDF picker screen"
+  },
+  "mergePickerTabAllPdfs": "[Åłł ÞÐƑš ({count}) ẋẋẋẋẋẋẋẋ]",
+  "@mergePickerTabAllPdfs": {
+    "description": "Filter pill showing all PDFs with total count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mergePickerTabRecent": "[Řéçéñţ ẋẋẋ]",
+  "@mergePickerTabRecent": {
+    "description": "Filter pill for recent PDF documents in merge picker"
+  },
+  "mergePickerTabDownloads": "[Ðôŵñłôàđš ẋẋẋẋ]",
+  "@mergePickerTabDownloads": {
+    "description": "Filter pill for Android Downloads folder in merge picker"
+  },
+  "mergePickerTabICloud": "[îÇłôûđ Ðřîṽé ẋẋẋẋẋ]",
+  "@mergePickerTabICloud": {
+    "description": "Filter pill for iOS iCloud Drive in merge picker"
+  },
+  "splitProgressTitle": "[Šþłîţţîñĝ ÞÐƑ ẋẋẋẋẋẋ]",
+  "@splitProgressTitle": {
+    "description": "Progress dialog title while splitting a PDF"
+  },
+  "splitProgressMessage": "[Ĝéñéřàţîñĝ ƒîłé {done} ôƒ {total}... ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitProgressMessage": {
+    "description": "Progress message while generating split PDF files",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "splitErrorTitle": "[Çôûłđñ'ţ šþłîţ ÞÐƑ ẋẋẋẋẋẋẋẋ]",
+  "@splitErrorTitle": {
+    "description": "Error sheet title when PDF split fails"
+  },
+  "splitPageRangesLabel": "[ÞÅĜÉ ŘÅÑĜÉŠ ẋẋẋẋẋ]",
+  "@splitPageRangesLabel": {
+    "description": "Section header label above page range text input"
+  },
+  "splitPageRangesSyntax": "[Šýñţàẋ: 1-3, 5, 8-10 ẋẋẋẋẋẋẋẋ]",
+  "@splitPageRangesSyntax": {
+    "description": "Example page range syntax shown next to the PAGE RANGES label"
+  },
+  "splitRangeHelpText": "[Éàçĥ řàñĝé ƀéçôɱéš à šéþàřàţé ÞÐƑ ƒîłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitRangeHelpText": {
+    "description": "Helper text under the page ranges input field"
+  },
+  "splitGeneratedFilesHeader": "[ĜÉÑÉŘÅŤÉÐ ƑÎŁÉŠ ({count}) ẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitGeneratedFilesHeader": {
+    "description": "Header showing the count of output PDF files to be generated",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitChipsSuspendedTitle": "[Łîṽé Çĥîþš Šûšþéñđéđ ẋẋẋẋẋẋẋẋ]",
+  "@splitChipsSuspendedTitle": {
+    "description": "Title shown in output preview box when page range syntax has an error"
+  },
+  "splitChipsSuspendedDesc": "[Řéšôłṽé ţĥé šýñţàẋ éřřôř àƀôṽé ţô řéçôñšţřûçţ éẋţřàçţîôñ þîþéłîñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitChipsSuspendedDesc": {
+    "description": "Description shown in output preview box when page range syntax has an error"
+  },
+  "splitEmptyRangesHint": "[Éñţéř þàĝé řàñĝéš àƀôṽé ţô ĝéñéřàţé ÞÐƑ šłîçéš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitEmptyRangesHint": {
+    "description": "Placeholder text when no page ranges have been entered yet"
+  },
+  "splitChipSinglePage": "[Þàĝé {page} ẋẋẋẋẋ]",
+  "@splitChipSinglePage": {
+    "description": "Chip label for a single-page PDF slice",
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "splitChipPageRange": "[Þàĝéš {start}–{end} ẋẋẋẋẋẋẋẋ]",
+  "@splitChipPageRange": {
+    "description": "Chip label for a multi-page PDF slice range",
+    "placeholders": {
+      "start": {
+        "type": "int"
+      },
+      "end": {
+        "type": "int"
+      }
+    }
+  },
+  "splitChipPageCountShort": "{count, plural, =1{[1 þĝ ẋẋ]} other{[{count} þĝš ẋẋẋẋẋ]}}",
+  "@splitChipPageCountShort": {
+    "description": "Abbreviated page count badge inside a split range chip",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitQuickSelectLabel": "[ǪÛÎÇĶ ŠÉŁÉÇŤ ẋẋẋẋẋ]",
+  "@splitQuickSelectLabel": {
+    "description": "Section header for quick-select split range macros"
+  },
+  "splitMacroAllPages": "[Åłł þàĝéš ẋẋẋẋ]",
+  "@splitMacroAllPages": {
+    "description": "Quick select macro button to split every page into its own PDF"
+  },
+  "splitMacroEvery5Pages": "[Éṽéřý 5 þàĝéš ẋẋẋẋẋẋ]",
+  "@splitMacroEvery5Pages": {
+    "description": "Quick select macro button to split into 5-page batches"
+  },
+  "splitMacroLimitHint": "[Ṁàçřôš þřôđûçîñĝ > 100 ƒîłéš àřé đîšàƀłéđ ţô þřôţéçţ đéṽîçé ɱéɱôřý ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitMacroLimitHint": {
+    "description": "Helper notice explaining why a quick-select macro is disabled"
+  },
+  "splitOutputSummary": "[Öûţþûţ: {files} ƒîłéš · {pages} þàĝéš éẋţřàçţéđ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitOutputSummary": {
+    "description": "Summary of how many files and total pages will be extracted",
+    "placeholders": {
+      "files": {
+        "type": "int"
+      },
+      "pages": {
+        "type": "int"
+      }
+    }
+  },
+  "splitEstSize": "[ÉŠŤ ~ {size} ẋẋẋẋẋ]",
+  "@splitEstSize": {
+    "description": "Estimated total output file size label",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "splitActionCtaCount": "{count, plural, =1{[Šþłîţ îñţô 1 ÞÐƑ ẋẋẋẋẋẋẋ]} other{[Šþłîţ îñţô {count} ÞÐƑš ẋẋẋẋẋẋẋẋẋẋ]}}",
+  "@splitActionCtaCount": {
+    "description": "Primary CTA button label when valid split ranges are configured",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitActionCtaEmpty": "[Šþłîţ îñţô ÞÐƑš ẋẋẋẋẋẋ]",
+  "@splitActionCtaEmpty": {
+    "description": "Disabled primary CTA button label when no split ranges are configured"
+  },
+  "splitPickerAllLocalDocs": "[ÅŁŁ ŁÖÇÅŁ ÐÖÇÛṀÉÑŤŠ ({count}) ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitPickerAllLocalDocs": {
+    "description": "Subheader in split picker showing count of local PDF documents",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitPickerSortByDate": "[ŠÖŘŤ ƁÝ ÐÅŤÉ ẋẋẋẋẋ]",
+  "@splitPickerSortByDate": {
+    "description": "Sort indicator label in split picker subheader"
+  },
+  "splitPickerLoadingPagesAndSize": "[þĝš · {size} ẋẋẋẋẋ]",
+  "@splitPickerLoadingPagesAndSize": {
+    "description": "Suffix shown next to skeleton page count in split picker",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "splitPickerTitle": "[Šéłéçţ ÞÐƑ ţô šþłîţ ẋẋẋẋẋẋẋẋ]",
+  "@splitPickerTitle": {
+    "description": "App bar title on the Split PDF picker screen"
+  },
+  "faqShortTitle": "[ƑÅǪ ẋẋ]",
+  "@faqShortTitle": {
+    "description": "Short app bar title on the FAQ screen"
+  },
+  "splitPickerSelectedCount": "[{count} ÞÐƑ šéłéçţéđ ẋẋẋẋẋẋẋẋ]",
+  "@splitPickerSelectedCount": {
+    "description": "Selected PDF count in the split picker footer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitPickerSelectDocumentHint": "[Šéłéçţ à đôçûɱéñţ ţô çôñţîñûé ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@splitPickerSelectDocumentHint": {
+    "description": "Helper text in split picker footer when no document is selected"
+  },
+  "splitPickerPagesActive": "[{count} þàĝéš àçţîṽé ẋẋẋẋẋẋẋẋ]",
+  "@splitPickerPagesActive": {
+    "description": "Active page count for the selected PDF in split picker footer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitPickerPagesActiveLabel": "[þàĝéš àçţîṽé ẋẋẋẋẋ]",
+  "@splitPickerPagesActiveLabel": {
+    "description": "Suffix label shown next to page count skeleton in split picker footer"
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
 import '../../core/constants/file_types.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/utils/root_path_resolver.dart';
 import '../../data/models/doc_file.dart';
 import '../../shared/widgets/ads/ad_placeholders.dart';
@@ -190,13 +191,13 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
     });
   }
 
-  List<String> _buildBreadcrumbSegments() {
+  List<String> _buildBreadcrumbSegments(BuildContext context) {
     if (_currentPath == null || _rootPath == null) return [];
-    if (_currentPath == _rootPath) return ['Root'];
+    if (_currentPath == _rootPath) return [context.l10n.directoriesRoot];
 
     final relative = p.relative(_currentPath!, from: _rootPath);
     final parts = p.split(relative);
-    return ['Root', ...parts];
+    return [context.l10n.directoriesRoot, ...parts];
   }
 
   String _pathForBreadcrumbIndex(int index, List<String> segments) {
@@ -230,14 +231,14 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
           leading: IconButton(
             constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
             icon: const Icon(Icons.arrow_back),
-            tooltip: _isAtRoot ? 'Back' : 'Up one level',
+            tooltip: _isAtRoot ? context.l10n.actionBack : context.l10n.directoriesTooltipUp,
             onPressed: () {
               if (!_navigateUp()) {
                 Navigator.of(context).pop();
               }
             },
           ),
-          title: const Text('Directories'),
+          title: Text(context.l10n.directoriesTitle),
           centerTitle: false,
         ),
         body: _viewState is DirectoryPermissionRequiredState
@@ -257,7 +258,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
   }
 
   Widget _buildBreadcrumbs(ThemeData theme) {
-    final segments = _buildBreadcrumbSegments();
+    final segments = _buildBreadcrumbSegments(context);
 
     return Container(
       height: 48,
@@ -337,7 +338,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
               ),
               const SizedBox(height: 20),
               Text(
-                'This folder is protected by Android.',
+                context.l10n.directoriesProtectedTitle,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
@@ -345,7 +346,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Android restricts access to system and app private folders.',
+                context.l10n.directoriesProtectedDesc,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.6),
@@ -357,7 +358,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _navigateUp,
                   icon: const Icon(Icons.arrow_back),
-                  label: const Text('Go back'),
+                  label: Text(context.l10n.directoriesGoBack),
                 ),
               ),
             ],
@@ -389,7 +390,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
               ),
               const SizedBox(height: 20),
               Text(
-                'This folder no longer exists.',
+                context.l10n.directoriesNotFoundTitle,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
@@ -405,7 +406,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
                     }
                   },
                   icon: const Icon(Icons.home_outlined),
-                  label: const Text('Go to Root'),
+                  label: Text(context.l10n.directoriesGoToRoot),
                 ),
               ),
             ],
@@ -428,7 +429,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                'No supported files or folders here.',
+                context.l10n.directoriesEmpty,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.titleMedium?.copyWith(
                   color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
@@ -454,7 +455,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                'Error opening folder',
+                context.l10n.directoriesErrorOpening,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -479,7 +480,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
                     }
                   },
                   icon: const Icon(Icons.refresh),
-                  label: const Text('Retry'),
+                  label: Text(context.l10n.directoriesRetry),
                 ),
               ),
             ],
@@ -528,8 +529,8 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
               ),
               subtitle: Text(
                 entry.itemCount != null
-                    ? '${entry.itemCount} item${entry.itemCount == 1 ? '' : 's'}'
-                    : 'Folder',
+                    ? context.l10n.directoriesFolderSubtitle(entry.itemCount!)
+                    : context.l10n.directoriesFolderSubtitleDefault,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.6),
                 ),
@@ -548,7 +549,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
                 if (!fileExists) {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('File no longer exists')),
+                      SnackBar(content: Text(context.l10n.directoriesFileNoLongerExists)),
                     );
                   }
                   return;
@@ -600,14 +601,14 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
             ),
             const SizedBox(height: 20),
             Text(
-              'Storage Access Required',
+              context.l10n.storageAccessRequiredTitle,
               style: theme.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 10),
             Text(
-              'Doc View needs All files access to browse your folders.',
+              context.l10n.directoriesPermissionPromptBody,
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.7),
@@ -626,7 +627,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
                   }
                 },
                 icon: const Icon(Icons.lock_open_rounded),
-                label: const Text('Grant access'),
+                label: Text(context.l10n.directoriesGrantAccess),
               ),
             ),
             const SizedBox(height: 12),
@@ -641,14 +642,14 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          'Imported $count file${count == 1 ? '' : 's'}',
+                          context.l10n.directoriesImportedCount(count),
                         ),
                       ),
                     );
                   }
                 },
                 icon: const Icon(Icons.file_upload_outlined),
-                label: const Text('Import files instead'),
+                label: Text(context.l10n.directoriesImportInstead),
               ),
             ),
           ],

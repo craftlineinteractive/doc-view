@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import '../../../core/utils/format_utils.dart';
@@ -53,7 +54,7 @@ class CreatedByYouSection extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                'Created by you',
+                context.l10n.createdSectionTitle,
                 style: DocViewTypography.headlineSm.copyWith(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -68,7 +69,7 @@ class CreatedByYouSection extends StatelessWidget {
                 minimumSize: const Size(48, 36),
               ),
               child: Text(
-                'See All',
+                context.l10n.actionSeeAll,
                 style: DocViewTypography.labelMd.copyWith(
                   color: Theme.of(context).brightness == Brightness.dark
                       ? tokens.interactiveBlue
@@ -121,7 +122,7 @@ class _CreatedFileCard extends ConsumerWidget {
 
     return Semantics(
       button: true,
-      label: '${file.name}, $sizeStr, created $dateStr',
+      label: context.l10n.createdByYouItemSemantic(file.name, sizeStr, dateStr),
       child: Material(
         color: tokens.surfaceAlt,
         borderRadius: BorderRadius.circular(16),
@@ -221,7 +222,7 @@ class _EmptyCreatedCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'PDFs you create appear here',
+                  context.l10n.createdSectionEmptyTitle,
                   style: DocViewTypography.titleMd.copyWith(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -230,7 +231,7 @@ class _EmptyCreatedCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  'Converted, scanned, or merged documents will be saved locally.',
+                  context.l10n.createdSectionEmptySubtitle,
                   style: DocViewTypography.bodySm.copyWith(
                     fontSize: 12,
                     color: tokens.textSecondary,

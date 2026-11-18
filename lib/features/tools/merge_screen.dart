@@ -100,7 +100,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
   Future<void> _addMoreFiles() async {
     final picked = await MergePdfPickerScreen.pick(
       context,
-      title: 'Add More PDFs',
+      title: context.l10n.mergeAddMoreTitle,
       minSelection: 1,
     );
     if (picked != null && picked.isNotEmpty && mounted) {
@@ -169,8 +169,8 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
             dialogSetState = setDialogState;
             final progressValue = total > 0 ? progressDone / total : 0.0;
             return ToolProgressDialog(
-              title: 'Merging PDFs',
-              message: 'Merging document $progressDone of $total...',
+              title: context.l10n.mergeProgressTitle,
+              message: context.l10n.mergeProgressMessage(progressDone, total),
               progress: progressValue,
             );
           },
@@ -215,7 +215,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
             : e.toString();
         await ToolErrorSheet.show(
           context,
-          title: "Couldn't merge PDFs",
+          title: context.l10n.mergeErrorTitle,
           errorMessage: errorMessage,
           onRetry: _mergePdfs,
         );
@@ -301,7 +301,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'Drag handles to reorder',
+                    context.l10n.mergeDragInstruction,
                     style: DocViewTypography.captionXs.copyWith(
                       color: tokens.textSecondary,
                       fontSize: 12,
@@ -312,7 +312,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                   onPressed: _isMerging ? null : _addMoreFiles,
                   icon: Icon(Icons.add_rounded, size: 16, color: tokens.primaryBlue),
                   label: Text(
-                    'Add PDF',
+                    context.l10n.mergeAddPdf,
                     style: DocViewTypography.labelXs.copyWith(
                       color: tokens.primaryBlue,
                       fontWeight: FontWeight.w600,
@@ -330,7 +330,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'OUTPUT FILE NAME',
+                  context.l10n.mergeOutputFileNameLabel,
                   style: DocViewTypography.captionXs.copyWith(
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1.1,
@@ -466,7 +466,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
-                                      '${file.name} is password-protected or damaged',
+                                      context.l10n.errorPdfMergeDamagedOrEncrypted(file.name),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: DocViewTypography.captionXs.copyWith(
@@ -550,7 +550,9 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                       ),
                     ),
                     subtitle: Text(
-                      '${pageCount != null ? '$pageCount pages' : 'Loading pages...'} · $sizeStr',
+                      pageCount != null
+                          ? context.l10n.mergeItemPageCountAndSize(pageCount, sizeStr)
+                          : context.l10n.mergeItemLoadingPagesAndSize(sizeStr),
                       style: DocViewTypography.bodySm.copyWith(
                         color: tokens.textSecondary,
                         fontSize: 12,
@@ -626,28 +628,32 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      hasErrors ? '1 invalid file detected' : 'Ready to merge',
-                      style: DocViewTypography.captionXs.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: hasErrors ? tokens.error : tokens.textPrimary,
-                        fontSize: 12,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        hasErrors
+                            ? context.l10n.mergeInvalidFilesDetected(_flaggedCount)
+                            : context.l10n.mergeReadyTitle,
+                        style: DocViewTypography.captionXs.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: hasErrors ? tokens.error : tokens.textPrimary,
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      hasErrors
-                          ? 'Please remove password-protected documents'
-                          : '${_files.length} files · $totalPages pages · ~ $sizeFormatted',
-                      style: DocViewTypography.captionXs.copyWith(
-                        color: tokens.textSecondary,
-                        fontSize: 11,
+                      const SizedBox(height: 2),
+                      Text(
+                        hasErrors
+                            ? context.l10n.mergeRemoveProtectedHint
+                            : context.l10n.mergeSummary(_files.length, totalPages, sizeFormatted),
+                        style: DocViewTypography.captionXs.copyWith(
+                          color: tokens.textSecondary,
+                          fontSize: 11,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 if (!hasErrors)
                   Container(
@@ -657,7 +663,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      'Ready',
+                      context.l10n.mergeReadyBadge,
                       style: DocViewTypography.captionXs.copyWith(
                         color: tokens.primaryBlue,
                         fontWeight: FontWeight.bold,
@@ -690,8 +696,10 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
               ),
               label: Text(
                 hasErrors
-                    ? 'Merge Blocked (Resolve Errors)'
-                    : 'Merge ${_files.length} PDFs ($totalPages Pages)',
+                    ? context.l10n.mergeBlockedCta
+                    : context.l10n.mergeActionCta(_files.length, totalPages),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: DocViewTypography.labelLg.copyWith(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/file_types.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
@@ -37,18 +38,18 @@ class FileTile extends ConsumerWidget {
     final theme = Theme.of(context);
     final tokens = context.tokens;
 
-    final bookmarkLabel = file.isBookmarked ? ', bookmarked' : '';
+    final bookmarkLabel = file.isBookmarked ? ', ${context.l10n.semanticBookmarked}' : '';
     final selectionLabel =
-        selectionMode ? (selected ? ', selected' : ', not selected') : '';
+        selectionMode ? (selected ? ', ${context.l10n.semanticSelected}' : ', ${context.l10n.semanticNotSelected}') : '';
     final formattedSubtitle =
         FormatUtils.formatSubtitle(file.modified, file.sizeBytes);
     final semanticDescription =
         '${file.category.label}, ${file.name}, $formattedSubtitle$bookmarkLabel$selectionLabel';
     final tapHint = selectionMode
-        ? (selected ? 'Deselect file' : 'Select file')
-        : 'Open document';
+        ? (selected ? context.l10n.actionDeselectFile : context.l10n.actionSelectFile)
+        : context.l10n.actionOpenDocument;
     final longPressHint =
-        selectionMode ? null : 'Select or view actions';
+        selectionMode ? null : context.l10n.hintSelectOrViewActions;
 
     return Semantics(
       container: true,
@@ -164,7 +165,7 @@ class FileTile extends ConsumerWidget {
                           : theme.iconTheme.color?.withValues(alpha: 0.6),
                     ),
                     tooltip:
-                        file.isBookmarked ? 'Remove bookmark' : 'Bookmark',
+                        file.isBookmarked ? context.l10n.tooltipRemoveBookmark : context.l10n.tooltipAddBookmark,
                     onPressed: () {
                       ref
                           .read(fileActionsControllerProvider)
@@ -179,7 +180,7 @@ class FileTile extends ConsumerWidget {
                       size: 20,
                       color: theme.iconTheme.color?.withValues(alpha: 0.6),
                     ),
-                    tooltip: 'More actions',
+                    tooltip: context.l10n.tooltipMoreActions,
                     onPressed: () {
                       FileOptionsSheet.show(context, file);
                     },

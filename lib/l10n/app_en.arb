@@ -1437,5 +1437,651 @@
         "type": "String"
       }
     }
+  },
+  "fileDetailsPageChip": "PG {current}/{total}",
+  "@fileDetailsPageChip": {
+    "description": "Short page count badge overlay on document preview",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "fileDetailsBytes": "({bytes} bytes)",
+  "@fileDetailsBytes": {
+    "description": "Exact byte count display in document details sheet",
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "directoriesProtectedTitle": "This folder is protected by Android.",
+  "@directoriesProtectedTitle": {
+    "description": "Notice title when Android blocks system or private folder"
+  },
+  "directoriesProtectedDesc": "Android restricts access to system and app private folders.",
+  "@directoriesProtectedDesc": {
+    "description": "Description explaining Android private folder restriction"
+  },
+  "directoriesNotFoundTitle": "This folder no longer exists.",
+  "@directoriesNotFoundTitle": {
+    "description": "Notice title when folder is missing or deleted"
+  },
+  "directoriesEmpty": "No supported files or folders here.",
+  "@directoriesEmpty": {
+    "description": "Notice message when a directory has no supported items"
+  },
+  "directoriesErrorOpening": "Error opening folder",
+  "@directoriesErrorOpening": {
+    "description": "Title when an error occurs trying to list a folder"
+  },
+  "directoriesRoot": "Root",
+  "@directoriesRoot": {
+    "description": "Root breadcrumb segment label"
+  },
+  "actionNotNow": "Not now",
+  "@actionNotNow": {
+    "description": "Button label to dismiss or postpone permission request"
+  },
+  "actionAllow": "Allow",
+  "@actionAllow": {
+    "description": "Button label to grant requested permission"
+  },
+  "scanSettingsSectionFrequency": "Scan frequency",
+  "@scanSettingsSectionFrequency": {
+    "description": "Header for scan frequency settings section"
+  },
+  "scanSettingsSectionFilters": "Document filters",
+  "@scanSettingsSectionFilters": {
+    "description": "Header for document filters settings section"
+  },
+  "scanSettingsIncludeImages": "Include images",
+  "@scanSettingsIncludeImages": {
+    "description": "Toggle label to include image documents in library"
+  },
+  "scanSettingsIncludeImagesDesc": "Turn off to hide thousands of photos from your document list",
+  "@scanSettingsIncludeImagesDesc": {
+    "description": "Explanation of the include images toggle"
+  },
+  "scanSettingsImageListUpdated": "Image list updated",
+  "@scanSettingsImageListUpdated": {
+    "description": "Snackbar shown after toggling image document inclusion"
+  },
+  "scanSettingsActionRescanNow": "Rescan now",
+  "@scanSettingsActionRescanNow": {
+    "description": "Button label to trigger an immediate document rescan"
+  },
+  "scanSettingsSectionDiagnostics": "Storage diagnostics",
+  "@scanSettingsSectionDiagnostics": {
+    "description": "Header for storage diagnostics section on Android"
+  },
+  "scanSettingsAllFilesAccessGranted": "All files access granted",
+  "@scanSettingsAllFilesAccessGranted": {
+    "description": "Card title when All files access is active"
+  },
+  "scanSettingsAllFilesAccessNeeded": "All files access needed",
+  "@scanSettingsAllFilesAccessNeeded": {
+    "description": "Card title when All files access is missing"
+  },
+  "scanSettingsAllFilesAccessGrantedDesc": "Doc View has permission to discover files in Downloads and SD cards.",
+  "@scanSettingsAllFilesAccessGrantedDesc": {
+    "description": "Explanation when storage permission is active"
+  },
+  "scanSettingsAllFilesAccessNeededDesc": "Permission is required to scan downloads and external storage folders.",
+  "@scanSettingsAllFilesAccessNeededDesc": {
+    "description": "Explanation when storage permission is needed"
+  },
+  "scanSettingsActionOpenSettings": "Open settings",
+  "@scanSettingsActionOpenSettings": {
+    "description": "Button label to open system app settings"
+  },
+  "scanSettingsScanningFiles": "Scanning... {count} files found",
+  "@scanSettingsScanningFiles": {
+    "description": "Status text while document scan is in progress",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "faqStillNeedHelp": "Still need help? Send feedback",
+  "@faqStillNeedHelp": {
+    "description": "CTA button label at bottom of FAQ screen"
+  },
+  "toolsLabelFileName": "File Name",
+  "@toolsLabelFileName": {
+    "description": "Input field label for target file name"
+  },
+  "toolsAddImagesToStart": "Add images to start",
+  "@toolsAddImagesToStart": {
+    "description": "Empty state title in Image to PDF editor"
+  },
+  "toolsAddImagesDesc": "Select photos or scan paper documents to generate a PDF.",
+  "@toolsAddImagesDesc": {
+    "description": "Empty state description in Image to PDF editor"
+  },
+  "toolsChoosePhotos": "Choose photos",
+  "@toolsChoosePhotos": {
+    "description": "Button label to pick photos from gallery"
+  },
+  "toolsScanPaper": "Scan paper",
+  "@toolsScanPaper": {
+    "description": "Button label to launch camera document scanner"
+  },
+  "toolsPageNumber": "Page {page}",
+  "@toolsPageNumber": {
+    "description": "Page indicator label on editor page row",
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsTooltipRotatePage": "Rotate page",
+  "@toolsTooltipRotatePage": {
+    "description": "Tooltip for page rotation button"
+  },
+  "toolsTooltipRemovePage": "Remove page",
+  "@toolsTooltipRemovePage": {
+    "description": "Tooltip for page removal button"
+  },
+  "toolsAddMoreScans": "Add more scans",
+  "@toolsAddMoreScans": {
+    "description": "Label on dashed add card in scanner editor"
+  },
+  "toolsAddMoreImages": "Add more images",
+  "@toolsAddMoreImages": {
+    "description": "Label on dashed add card in image editor"
+  },
+  "toolsImageSummary": "{count, plural, =1{1 image · est. ~ {size}} other{{count} images · est. ~ {size}}}",
+  "@toolsImageSummary": {
+    "description": "Footer summary of image count and estimated output size",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "toolsSelectedCount": "{count} selected",
+  "@toolsSelectedCount": {
+    "description": "Count of selected files in tool picker footer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsSelectAtLeast": "Select at least {min} files",
+  "@toolsSelectAtLeast": {
+    "description": "Guidance hint in tool picker when minimum files requirement is not yet met",
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsPagesTotal": "{count} pages total",
+  "@toolsPagesTotal": {
+    "description": "Total page count summary across selected documents",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsPagesTotalLabel": "pages total",
+  "@toolsPagesTotalLabel": {
+    "description": "Label suffix while calculating total page count",
+    "placeholders": {}
+  },
+  "toolsNoPdfsFound": "No PDF documents found",
+  "@toolsNoPdfsFound": {
+    "description": "Empty state title when no PDFs are found in tool picker"
+  },
+  "semanticBookmarked": "bookmarked",
+  "@semanticBookmarked": {
+    "description": "Accessibility status text for bookmarked files"
+  },
+  "semanticSelected": "selected",
+  "@semanticSelected": {
+    "description": "Accessibility status text for selected items"
+  },
+  "semanticNotSelected": "not selected",
+  "@semanticNotSelected": {
+    "description": "Accessibility status text for unselected items"
+  },
+  "actionDeselectFile": "Deselect file",
+  "@actionDeselectFile": {
+    "description": "Accessibility action hint to deselect a file"
+  },
+  "actionSelectFile": "Select file",
+  "@actionSelectFile": {
+    "description": "Accessibility action hint to select a file"
+  },
+  "actionOpenDocument": "Open document",
+  "@actionOpenDocument": {
+    "description": "Accessibility action hint to open document"
+  },
+  "actionCreatePdf": "Create PDF",
+  "@actionCreatePdf": {
+    "description": "Action button label to create PDF document"
+  },
+  "hintSelectOrViewActions": "Select or view actions",
+  "@hintSelectOrViewActions": {
+    "description": "Accessibility long press hint on file tile"
+  },
+  "actionClose": "Close",
+  "@actionClose": {
+    "description": "Button label to close a dialog or bottom sheet"
+  },
+  "actionReset": "Reset",
+  "@actionReset": {
+    "description": "Button label to reset inputs or filters"
+  },
+  "labelPleaseWait": "Please wait...",
+  "@labelPleaseWait": {
+    "description": "Default progress status message while a tool operation runs"
+  },
+  "tooltipCloseSearch": "Close search",
+  "@tooltipCloseSearch": {
+    "description": "Tooltip for button that exits inline search mode"
+  },
+  "semanticAdvertisement": "Advertisement",
+  "@semanticAdvertisement": {
+    "description": "Accessibility label for ad disclosure badge"
+  },
+  "themePreviewLight": "Light",
+  "@themePreviewLight": {
+    "description": "Mini preview label for light theme in theme picker"
+  },
+  "themePreviewNavy": "Navy",
+  "@themePreviewNavy": {
+    "description": "Mini preview label for dark navy theme in theme picker"
+  },
+  "createdByYouItemSemantic": "{name}, {size}, created {date}",
+  "@createdByYouItemSemantic": {
+    "description": "Accessibility label for a document card in the Created by you carousel",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "toolsCreatingPdfFromScans": "Creating PDF from Scans",
+  "@toolsCreatingPdfFromScans": {
+    "description": "Progress dialog title when creating PDF from camera scans"
+  },
+  "toolsCreatingPdf": "Creating PDF",
+  "@toolsCreatingPdf": {
+    "description": "Progress dialog title when creating PDF from images"
+  },
+  "toolsProcessingImageProgress": "Processing image {done} of {total}...",
+  "@toolsProcessingImageProgress": {
+    "description": "Progress message while converting images into a PDF",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsErrorCreatePdfTitle": "Couldn't create PDF",
+  "@toolsErrorCreatePdfTitle": {
+    "description": "Error sheet title when image-to-PDF creation fails"
+  },
+  "toolsBadgeProtectedOrDamaged": "Protected or damaged",
+  "@toolsBadgeProtectedOrDamaged": {
+    "description": "Badge label for password-protected or unreadable PDF files in tool pickers"
+  },
+  "toolsPageCountPlural": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@toolsPageCountPlural": {
+    "description": "Pluralized page count label for PDF files",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "toolsPagesAbbrev": "pgs",
+  "@toolsPagesAbbrev": {
+    "description": "Short abbreviated pages suffix shown alongside skeleton loader"
+  },
+  "mergeAddMoreTitle": "Add More PDFs",
+  "@mergeAddMoreTitle": {
+    "description": "Picker screen title when adding more PDFs from the merge screen"
+  },
+  "mergeProgressTitle": "Merging PDFs",
+  "@mergeProgressTitle": {
+    "description": "Progress dialog title while merging PDFs"
+  },
+  "mergeProgressMessage": "Merging document {done} of {total}...",
+  "@mergeProgressMessage": {
+    "description": "Progress message while merging PDFs",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "mergeErrorTitle": "Couldn't merge PDFs",
+  "@mergeErrorTitle": {
+    "description": "Error sheet title when PDF merge fails"
+  },
+  "mergeDragInstruction": "Drag handles to reorder",
+  "@mergeDragInstruction": {
+    "description": "Instruction banner text in the Merge PDF arrangement screen"
+  },
+  "mergeAddPdf": "Add PDF",
+  "@mergeAddPdf": {
+    "description": "Button label to add another PDF to the merge list"
+  },
+  "mergeOutputFileNameLabel": "OUTPUT FILE NAME",
+  "@mergeOutputFileNameLabel": {
+    "description": "Section header label above the merged PDF file name input"
+  },
+  "mergeItemPageCountAndSize": "{count, plural, =1{1 page · {size}} other{{count} pages · {size}}}",
+  "@mergeItemPageCountAndSize": {
+    "description": "Subtitle showing page count and formatted file size for a PDF item",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "mergeItemLoadingPagesAndSize": "Loading pages... · {size}",
+  "@mergeItemLoadingPagesAndSize": {
+    "description": "Subtitle shown while PDF page count is still loading",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "mergeInvalidFilesDetected": "{count, plural, =1{1 invalid file detected} other{{count} invalid files detected}}",
+  "@mergeInvalidFilesDetected": {
+    "description": "Pre-flight warning title when one or more selected PDFs cannot be merged",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mergeReadyTitle": "Ready to merge",
+  "@mergeReadyTitle": {
+    "description": "Pre-flight status title when selected PDFs are valid for merging"
+  },
+  "mergeRemoveProtectedHint": "Please remove password-protected documents",
+  "@mergeRemoveProtectedHint": {
+    "description": "Pre-flight warning description asking user to remove invalid PDFs"
+  },
+  "mergeSummary": "{files} files · {pages} pages · ~ {size}",
+  "@mergeSummary": {
+    "description": "Pre-flight summary showing total files, pages, and estimated output size",
+    "placeholders": {
+      "files": {
+        "type": "int"
+      },
+      "pages": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "mergeReadyBadge": "Ready",
+  "@mergeReadyBadge": {
+    "description": "Short status badge on pre-flight card when merge is ready"
+  },
+  "mergeBlockedCta": "Merge Blocked (Resolve Errors)",
+  "@mergeBlockedCta": {
+    "description": "Disabled CTA label when merge is blocked by invalid files"
+  },
+  "mergeActionCta": "Merge {files} PDFs ({pages} Pages)",
+  "@mergeActionCta": {
+    "description": "Primary CTA button label to merge selected PDFs",
+    "placeholders": {
+      "files": {
+        "type": "int"
+      },
+      "pages": {
+        "type": "int"
+      }
+    }
+  },
+  "mergePickerDefaultTitle": "Select PDFs",
+  "@mergePickerDefaultTitle": {
+    "description": "Default app bar title for the Merge PDF picker screen"
+  },
+  "mergePickerTabAllPdfs": "All PDFs ({count})",
+  "@mergePickerTabAllPdfs": {
+    "description": "Filter pill showing all PDFs with total count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mergePickerTabRecent": "Recent",
+  "@mergePickerTabRecent": {
+    "description": "Filter pill for recent PDF documents in merge picker"
+  },
+  "mergePickerTabDownloads": "Downloads",
+  "@mergePickerTabDownloads": {
+    "description": "Filter pill for Android Downloads folder in merge picker"
+  },
+  "mergePickerTabICloud": "iCloud Drive",
+  "@mergePickerTabICloud": {
+    "description": "Filter pill for iOS iCloud Drive in merge picker"
+  },
+  "splitProgressTitle": "Splitting PDF",
+  "@splitProgressTitle": {
+    "description": "Progress dialog title while splitting a PDF"
+  },
+  "splitProgressMessage": "Generating file {done} of {total}...",
+  "@splitProgressMessage": {
+    "description": "Progress message while generating split PDF files",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "splitErrorTitle": "Couldn't split PDF",
+  "@splitErrorTitle": {
+    "description": "Error sheet title when PDF split fails"
+  },
+  "splitPageRangesLabel": "PAGE RANGES",
+  "@splitPageRangesLabel": {
+    "description": "Section header label above page range text input"
+  },
+  "splitPageRangesSyntax": "Syntax: 1-3, 5, 8-10",
+  "@splitPageRangesSyntax": {
+    "description": "Example page range syntax shown next to the PAGE RANGES label"
+  },
+  "splitRangeHelpText": "Each range becomes a separate PDF file.",
+  "@splitRangeHelpText": {
+    "description": "Helper text under the page ranges input field"
+  },
+  "splitGeneratedFilesHeader": "GENERATED FILES ({count})",
+  "@splitGeneratedFilesHeader": {
+    "description": "Header showing the count of output PDF files to be generated",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitChipsSuspendedTitle": "Live Chips Suspended",
+  "@splitChipsSuspendedTitle": {
+    "description": "Title shown in output preview box when page range syntax has an error"
+  },
+  "splitChipsSuspendedDesc": "Resolve the syntax error above to reconstruct extraction pipeline.",
+  "@splitChipsSuspendedDesc": {
+    "description": "Description shown in output preview box when page range syntax has an error"
+  },
+  "splitEmptyRangesHint": "Enter page ranges above to generate PDF slices",
+  "@splitEmptyRangesHint": {
+    "description": "Placeholder text when no page ranges have been entered yet"
+  },
+  "splitChipSinglePage": "Page {page}",
+  "@splitChipSinglePage": {
+    "description": "Chip label for a single-page PDF slice",
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "splitChipPageRange": "Pages {start}–{end}",
+  "@splitChipPageRange": {
+    "description": "Chip label for a multi-page PDF slice range",
+    "placeholders": {
+      "start": {
+        "type": "int"
+      },
+      "end": {
+        "type": "int"
+      }
+    }
+  },
+  "splitChipPageCountShort": "{count, plural, =1{1 pg} other{{count} pgs}}",
+  "@splitChipPageCountShort": {
+    "description": "Abbreviated page count badge inside a split range chip",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitQuickSelectLabel": "QUICK SELECT",
+  "@splitQuickSelectLabel": {
+    "description": "Section header for quick-select split range macros"
+  },
+  "splitMacroAllPages": "All pages",
+  "@splitMacroAllPages": {
+    "description": "Quick select macro button to split every page into its own PDF"
+  },
+  "splitMacroEvery5Pages": "Every 5 pages",
+  "@splitMacroEvery5Pages": {
+    "description": "Quick select macro button to split into 5-page batches"
+  },
+  "splitMacroLimitHint": "Macros producing > 100 files are disabled to protect device memory",
+  "@splitMacroLimitHint": {
+    "description": "Helper notice explaining why a quick-select macro is disabled"
+  },
+  "splitOutputSummary": "Output: {files} files · {pages} pages extracted",
+  "@splitOutputSummary": {
+    "description": "Summary of how many files and total pages will be extracted",
+    "placeholders": {
+      "files": {
+        "type": "int"
+      },
+      "pages": {
+        "type": "int"
+      }
+    }
+  },
+  "splitEstSize": "EST ~ {size}",
+  "@splitEstSize": {
+    "description": "Estimated total output file size label",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "splitActionCtaCount": "{count, plural, =1{Split into 1 PDF} other{Split into {count} PDFs}}",
+  "@splitActionCtaCount": {
+    "description": "Primary CTA button label when valid split ranges are configured",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitActionCtaEmpty": "Split into PDFs",
+  "@splitActionCtaEmpty": {
+    "description": "Disabled primary CTA button label when no split ranges are configured"
+  },
+  "splitPickerAllLocalDocs": "ALL LOCAL DOCUMENTS ({count})",
+  "@splitPickerAllLocalDocs": {
+    "description": "Subheader in split picker showing count of local PDF documents",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitPickerSortByDate": "SORT BY DATE",
+  "@splitPickerSortByDate": {
+    "description": "Sort indicator label in split picker subheader"
+  },
+  "splitPickerLoadingPagesAndSize": "pgs · {size}",
+  "@splitPickerLoadingPagesAndSize": {
+    "description": "Suffix shown next to skeleton page count in split picker",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "splitPickerTitle": "Select PDF to split",
+  "@splitPickerTitle": {
+    "description": "App bar title on the Split PDF picker screen"
+  },
+  "faqShortTitle": "FAQ",
+  "@faqShortTitle": {
+    "description": "Short app bar title on the FAQ screen"
+  },
+  "splitPickerSelectedCount": "{count} PDF selected",
+  "@splitPickerSelectedCount": {
+    "description": "Selected PDF count in the split picker footer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitPickerSelectDocumentHint": "Select a document to continue",
+  "@splitPickerSelectDocumentHint": {
+    "description": "Helper text in split picker footer when no document is selected"
+  },
+  "splitPickerPagesActive": "{count} pages active",
+  "@splitPickerPagesActive": {
+    "description": "Active page count for the selected PDF in split picker footer",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "splitPickerPagesActiveLabel": "pages active",
+  "@splitPickerPagesActiveLabel": {
+    "description": "Suffix label shown next to page count skeleton in split picker footer"
   }
 }

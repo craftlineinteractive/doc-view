@@ -77,7 +77,7 @@ class AdBannerSlot extends StatelessWidget {
                       children: [
                         // "AD" badge
                         Semantics(
-                          label: 'Advertisement',
+                          label: context.l10n.semanticAdvertisement,
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 4,
@@ -223,7 +223,7 @@ class NativeAdRow extends StatelessWidget {
                     Row(
                       children: [
                         Semantics(
-                          label: 'Advertisement',
+                          label: context.l10n.semanticAdvertisement,
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 4,

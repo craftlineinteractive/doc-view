@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -8,14 +9,14 @@ import '../../../shared/widgets/buttons/doc_buttons.dart';
 /// Modal bottom sheet presented upon an unrecoverable failure during a PDF operation.
 /// Displays the genuine error message from the service and provides Retry/Close CTAs.
 class ToolErrorSheet extends StatelessWidget {
-  final String title;
+  final String? title;
   final String errorMessage;
   final VoidCallback? onRetry;
   final VoidCallback? onClose;
 
   const ToolErrorSheet({
     super.key,
-    this.title = "Couldn't create PDF",
+    this.title,
     required this.errorMessage,
     this.onRetry,
     this.onClose,
@@ -24,7 +25,7 @@ class ToolErrorSheet extends StatelessWidget {
   /// Displays the modal error sheet.
   static Future<void> show(
     BuildContext context, {
-    String title = "Couldn't create PDF",
+    String? title,
     required String errorMessage,
     VoidCallback? onRetry,
     VoidCallback? onClose,
@@ -45,6 +46,7 @@ class ToolErrorSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
+    final effectiveTitle = title ?? context.l10n.toolErrorDefaultTitle;
 
     return Container(
       decoration: BoxDecoration(
@@ -97,7 +99,7 @@ class ToolErrorSheet extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      effectiveTitle,
                       style: DocViewTypography.headlineSm.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -106,7 +108,7 @@ class ToolErrorSheet extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'An unexpected error occurred during processing',
+                      context.l10n.toolErrorSubtitle,
                       style: DocViewTypography.bodySm.copyWith(
                         color: tokens.textSecondary,
                         fontSize: 13,
@@ -144,7 +146,7 @@ class ToolErrorSheet extends StatelessWidget {
               if (onRetry != null) ...[
                 Expanded(
                   child: DocPrimaryButton(
-                    label: 'Retry',
+                    label: context.l10n.actionRetry,
                     icon: const Icon(Icons.refresh_rounded, size: 20, color: Colors.white),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -156,7 +158,7 @@ class ToolErrorSheet extends StatelessWidget {
               ],
               Expanded(
                 child: DocSecondaryButton(
-                  label: 'Close',
+                  label: context.l10n.actionClose,
                   onPressed: () {
                     Navigator.of(context).pop();
                     onClose?.call();

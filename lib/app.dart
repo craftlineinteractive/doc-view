@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/constants/app_constants.dart';
+import 'core/extensions/l10n_extension.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'data/models/app_settings.dart';
@@ -76,7 +77,7 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     } catch (e) {
       if (context != null && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Could not open document: $e')),
+          SnackBar(content: Text(context.l10n.errorCouldNotOpenDocument(e.toString()))),
         );
       }
     }
@@ -166,11 +167,9 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
             size: 36,
             color: Color(0xFF1A73E8),
           ),
-          title: const Text('Storage Access Required'),
-          content: const Text(
-            'Doc View needs storage access to scan and display documents '
-            '(PDF, Word, Excel, PPT, TXT, Images) stored on your device.\n\n'
-            'Your files remain completely private and offline on your device.',
+          title: Text(dialogContext.l10n.storageAccessRequiredTitle),
+          content: Text(
+            dialogContext.l10n.storageAccessRequiredBody,
           ),
           actions: [
             TextButton(
@@ -178,7 +177,7 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
                 _dialogShowing = false;
                 Navigator.of(dialogContext).pop();
               },
-              child: const Text('Not now'),
+              child: Text(dialogContext.l10n.actionNotNow),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -191,7 +190,7 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
                   ref.read(scanStateProvider.notifier).startScan();
                 }
               },
-              child: const Text('Allow'),
+              child: Text(dialogContext.l10n.actionAllow),
             ),
           ],
         );

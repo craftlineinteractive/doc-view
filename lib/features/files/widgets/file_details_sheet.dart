@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/file_types.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -122,7 +123,7 @@ class FileDetailsSheet extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
-                      'PG 1/$pageCount',
+                      context.l10n.fileDetailsPageChip(1, pageCount!),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 10,
@@ -192,7 +193,7 @@ class FileDetailsSheet extends ConsumerWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final formattedBytes = '${FormatUtils.formatFileSize(file.sizeBytes)} '
-        '(${_formatBytesWithCommas(file.sizeBytes)} bytes)';
+        '${context.l10n.fileDetailsBytes(_formatBytesWithCommas(file.sizeBytes))}';
 
     final formattedDate =
         '${FormatUtils.formatDate(file.modified)} '
@@ -226,7 +227,7 @@ class FileDetailsSheet extends ConsumerWidget {
 
               // Title
               Text(
-                'Document Details',
+                context.l10n.fileDetailsTitle,
                 style: DocViewTypography.headlineSm.copyWith(
                   color: tokens.textPrimary,
                   fontWeight: FontWeight.w700,
@@ -239,17 +240,17 @@ class FileDetailsSheet extends ConsumerWidget {
               const SizedBox(height: 18),
 
               // Key-value metadata rows
-              _buildRow(label: 'Name', value: file.name, tokens: tokens),
+              _buildRow(label: context.l10n.fileDetailsLabelName, value: file.name, tokens: tokens),
               _buildRow(
-                label: 'Type',
+                label: context.l10n.fileDetailsLabelType,
                 value: '${file.category.label} (${file.extension.toUpperCase()})',
                 tokens: tokens,
               ),
-              _buildRow(label: 'Size', value: formattedBytes, tokens: tokens),
-              _buildRow(label: 'Modified', value: formattedDate, tokens: tokens),
+              _buildRow(label: context.l10n.fileDetailsLabelSize, value: formattedBytes, tokens: tokens),
+              _buildRow(label: context.l10n.fileDetailsLabelModified, value: formattedDate, tokens: tokens),
               _buildRow(
-                label: 'Bookmarked',
-                value: file.isBookmarked ? 'Yes' : 'No',
+                label: context.l10n.fileDetailsLabelBookmarked,
+                value: file.isBookmarked ? context.l10n.fileDetailsValueYes : context.l10n.fileDetailsValueNo,
                 tokens: tokens,
               ),
 
@@ -257,7 +258,7 @@ class FileDetailsSheet extends ConsumerWidget {
 
               // Location in selectable pill with copy button
               Text(
-                'Location',
+                context.l10n.fileDetailsLabelLocation,
                 style: DocViewTypography.bodySm.copyWith(
                   color: tokens.textSecondary,
                   fontWeight: FontWeight.w500,
@@ -290,7 +291,7 @@ class FileDetailsSheet extends ConsumerWidget {
                         size: 18,
                         color: tokens.primaryBlue,
                       ),
-                      tooltip: 'Copy path',
+                      tooltip: context.l10n.tooltipCopyPath,
                       constraints: const BoxConstraints(
                         minWidth: 40,
                         minHeight: 40,
@@ -298,9 +299,9 @@ class FileDetailsSheet extends ConsumerWidget {
                       onPressed: () {
                         Clipboard.setData(ClipboardData(text: file.path));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Path copied to clipboard'),
-                            duration: Duration(seconds: 2),
+                          SnackBar(
+                            content: Text(context.l10n.fileDetailsPathCopied),
+                            duration: const Duration(seconds: 2),
                           ),
                         );
                       },
@@ -314,7 +315,7 @@ class FileDetailsSheet extends ConsumerWidget {
               // Primary CTA "Open file" (if enabled)
               if (showOpenButton)
                 DocPrimaryButton(
-                  label: 'Open file',
+                  label: context.l10n.actionOpenFile,
                   icon: const Icon(Icons.visibility_rounded, size: 20),
                   onPressed: () {
                     Navigator.of(context).pop();

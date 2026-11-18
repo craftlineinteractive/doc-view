@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
@@ -30,14 +31,14 @@ class ScanSettingsScreen extends ConsumerWidget {
       applyHeaderGradient: true,
       showDockedBanner: true,
       isAdLoaded: true,
-      appBar: const DocSubAppBar(
-        title: 'Scan settings',
+      appBar: DocSubAppBar(
+        title: context.l10n.scanSettingsTitle,
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         children: [
           // Section 1: Scan Frequency
-          const SettingsSectionHeader(title: 'Scan frequency'),
+          SettingsSectionHeader(title: context.l10n.scanSettingsSectionFrequency),
           Container(
             decoration: BoxDecoration(
               color: tokens.surface,
@@ -49,9 +50,8 @@ class ScanSettingsScreen extends ConsumerWidget {
               children: [
                 _FrequencyRadioTile(
                   key: const Key('radio_scan_on_open'),
-                  title: 'Scan on app open',
-                  subtitle:
-                      'Automatically find new files when you open Doc View.',
+                  title: context.l10n.scanSettingsOnOpenTitle,
+                  subtitle: context.l10n.scanSettingsOnOpenSubtitle,
                   isSelected: settings.autoScanMode == AutoScanMode.onOpen,
                   onTap: () {
                     ref
@@ -67,9 +67,8 @@ class ScanSettingsScreen extends ConsumerWidget {
                 ),
                 _FrequencyRadioTile(
                   key: const Key('radio_scan_manual_only'),
-                  title: 'Manual only',
-                  subtitle:
-                      'Only scan when you pull to refresh or tap Rescan now.',
+                  title: context.l10n.scanSettingsManualTitle,
+                  subtitle: context.l10n.scanSettingsManualSubtitle,
                   isSelected: settings.autoScanMode == AutoScanMode.manualOnly,
                   onTap: () {
                     ref
@@ -83,7 +82,7 @@ class ScanSettingsScreen extends ConsumerWidget {
           const SizedBox(height: 16),
 
           // Section 2: Document Filters
-          const SettingsSectionHeader(title: 'Document filters'),
+          SettingsSectionHeader(title: context.l10n.scanSettingsSectionFilters),
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -108,7 +107,7 @@ class ScanSettingsScreen extends ConsumerWidget {
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              'Include images',
+                              context.l10n.scanSettingsIncludeImages,
                               style: DocViewTypography.titleMd.copyWith(
                                 color: tokens.textPrimary,
                                 fontWeight: FontWeight.w600,
@@ -120,7 +119,7 @@ class ScanSettingsScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Turn off to hide thousands of photos from your document list',
+                        context.l10n.scanSettingsIncludeImagesDesc,
                         style: DocViewTypography.bodySm.copyWith(
                           color: tokens.textSecondary,
                           fontWeight: FontWeight.w500,
@@ -145,9 +144,9 @@ class ScanSettingsScreen extends ConsumerWidget {
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: const Text('Image list updated'),
+                        content: Text(context.l10n.scanSettingsImageListUpdated),
                         action: SnackBarAction(
-                          label: 'Rescan now',
+                          label: context.l10n.scanSettingsActionRescanNow,
                           onPressed: () {
                             ref.read(scanStateProvider.notifier).startScan();
                           },
@@ -163,7 +162,7 @@ class ScanSettingsScreen extends ConsumerWidget {
 
           // Section 3: Storage Diagnostics (Android only)
           if (isAndroid) ...[
-            const SettingsSectionHeader(title: 'Storage diagnostics'),
+            SettingsSectionHeader(title: context.l10n.scanSettingsSectionDiagnostics),
             Container(
               key: const Key('card_storage_diagnostics'),
               padding: const EdgeInsets.all(16),
@@ -205,8 +204,8 @@ class ScanSettingsScreen extends ConsumerWidget {
                           children: [
                             Text(
                               hasAllFilesAccess
-                                  ? 'All files access granted'
-                                  : 'All files access needed',
+                                  ? context.l10n.scanSettingsAllFilesAccessGranted
+                                  : context.l10n.scanSettingsAllFilesAccessNeeded,
                               style: DocViewTypography.titleMd.copyWith(
                                 color: tokens.textPrimary,
                                 fontWeight: FontWeight.bold,
@@ -216,8 +215,8 @@ class ScanSettingsScreen extends ConsumerWidget {
                             const SizedBox(height: 2),
                             Text(
                               hasAllFilesAccess
-                                  ? 'Doc View has permission to discover files in Downloads and SD cards.'
-                                  : 'Permission is required to scan downloads and external storage folders.',
+                                  ? context.l10n.scanSettingsAllFilesAccessGrantedDesc
+                                  : context.l10n.scanSettingsAllFilesAccessNeededDesc,
                               style: DocViewTypography.bodySm.copyWith(
                                 color: tokens.textSecondary,
                                 fontWeight: FontWeight.w500,
@@ -269,7 +268,7 @@ class ScanSettingsScreen extends ConsumerWidget {
                             minimumSize: const Size(0, 36),
                           ),
                           child: Text(
-                            'Open settings',
+                            context.l10n.scanSettingsActionOpenSettings,
                             style: DocViewTypography.labelSm.copyWith(
                               color: tokens.primaryBlue,
                               fontWeight: FontWeight.w600,
@@ -304,7 +303,7 @@ class ScanSettingsScreen extends ConsumerWidget {
                             minimumSize: const Size(0, 36),
                           ),
                           child: Text(
-                            'Grant access',
+                            context.l10n.directoriesGrantAccess,
                             style: DocViewTypography.labelSm.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -356,7 +355,7 @@ class ScanSettingsScreen extends ConsumerWidget {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            'Scanning... ${scanState.filesFound} files found',
+                            context.l10n.scanSettingsScanningFiles(scanState.filesFound),
                             style: DocViewTypography.labelLg.copyWith(
                               color: tokens.primaryBlue,
                               fontWeight: FontWeight.bold,
@@ -404,7 +403,7 @@ class ScanSettingsScreen extends ConsumerWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'Rescan now',
+                        context.l10n.scanSettingsActionRescanNow,
                         style: DocViewTypography.labelLg.copyWith(
                           color: tokens.primaryBlue,
                           fontWeight: FontWeight.bold,

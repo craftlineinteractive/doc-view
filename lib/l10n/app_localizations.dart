@@ -325,10 +325,10 @@ abstract class AppLocalizations {
   /// **'Operation Complete'**
   String get operationComplete;
 
-  /// Button to open a newly generated document
+  /// Accessibility action hint to open document
   ///
   /// In en, this message translates to:
-  /// **'Open Document'**
+  /// **'Open document'**
   String get actionOpenDocument;
 
   /// Button to share a generated document
@@ -955,13 +955,13 @@ abstract class AppLocalizations {
   /// **'See All'**
   String get actionSeeAll;
 
-  /// Action button label to grant permission
+  /// Button label to grant requested permission
   ///
   /// In en, this message translates to:
   /// **'Allow'**
   String get actionAllow;
 
-  /// Action button label to dismiss or postpone permission prompt
+  /// Button label to dismiss or postpone permission request
   ///
   /// In en, this message translates to:
   /// **'Not now'**
@@ -1872,6 +1872,672 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to split PDF: {details}'**
   String errorPdfSplitFailed(String details);
+
+  /// Short page count badge overlay on document preview
+  ///
+  /// In en, this message translates to:
+  /// **'PG {current}/{total}'**
+  String fileDetailsPageChip(int current, int total);
+
+  /// Exact byte count display in document details sheet
+  ///
+  /// In en, this message translates to:
+  /// **'({bytes} bytes)'**
+  String fileDetailsBytes(String bytes);
+
+  /// Notice title when Android blocks system or private folder
+  ///
+  /// In en, this message translates to:
+  /// **'This folder is protected by Android.'**
+  String get directoriesProtectedTitle;
+
+  /// Description explaining Android private folder restriction
+  ///
+  /// In en, this message translates to:
+  /// **'Android restricts access to system and app private folders.'**
+  String get directoriesProtectedDesc;
+
+  /// Notice title when folder is missing or deleted
+  ///
+  /// In en, this message translates to:
+  /// **'This folder no longer exists.'**
+  String get directoriesNotFoundTitle;
+
+  /// Notice message when a directory has no supported items
+  ///
+  /// In en, this message translates to:
+  /// **'No supported files or folders here.'**
+  String get directoriesEmpty;
+
+  /// Title when an error occurs trying to list a folder
+  ///
+  /// In en, this message translates to:
+  /// **'Error opening folder'**
+  String get directoriesErrorOpening;
+
+  /// Root breadcrumb segment label
+  ///
+  /// In en, this message translates to:
+  /// **'Root'**
+  String get directoriesRoot;
+
+  /// Header for scan frequency settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Scan frequency'**
+  String get scanSettingsSectionFrequency;
+
+  /// Header for document filters settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Document filters'**
+  String get scanSettingsSectionFilters;
+
+  /// Toggle label to include image documents in library
+  ///
+  /// In en, this message translates to:
+  /// **'Include images'**
+  String get scanSettingsIncludeImages;
+
+  /// Explanation of the include images toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Turn off to hide thousands of photos from your document list'**
+  String get scanSettingsIncludeImagesDesc;
+
+  /// Snackbar shown after toggling image document inclusion
+  ///
+  /// In en, this message translates to:
+  /// **'Image list updated'**
+  String get scanSettingsImageListUpdated;
+
+  /// Button label to trigger an immediate document rescan
+  ///
+  /// In en, this message translates to:
+  /// **'Rescan now'**
+  String get scanSettingsActionRescanNow;
+
+  /// Header for storage diagnostics section on Android
+  ///
+  /// In en, this message translates to:
+  /// **'Storage diagnostics'**
+  String get scanSettingsSectionDiagnostics;
+
+  /// Card title when All files access is active
+  ///
+  /// In en, this message translates to:
+  /// **'All files access granted'**
+  String get scanSettingsAllFilesAccessGranted;
+
+  /// Card title when All files access is missing
+  ///
+  /// In en, this message translates to:
+  /// **'All files access needed'**
+  String get scanSettingsAllFilesAccessNeeded;
+
+  /// Explanation when storage permission is active
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View has permission to discover files in Downloads and SD cards.'**
+  String get scanSettingsAllFilesAccessGrantedDesc;
+
+  /// Explanation when storage permission is needed
+  ///
+  /// In en, this message translates to:
+  /// **'Permission is required to scan downloads and external storage folders.'**
+  String get scanSettingsAllFilesAccessNeededDesc;
+
+  /// Button label to open system app settings
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get scanSettingsActionOpenSettings;
+
+  /// Status text while document scan is in progress
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning... {count} files found'**
+  String scanSettingsScanningFiles(int count);
+
+  /// CTA button label at bottom of FAQ screen
+  ///
+  /// In en, this message translates to:
+  /// **'Still need help? Send feedback'**
+  String get faqStillNeedHelp;
+
+  /// Input field label for target file name
+  ///
+  /// In en, this message translates to:
+  /// **'File Name'**
+  String get toolsLabelFileName;
+
+  /// Empty state title in Image to PDF editor
+  ///
+  /// In en, this message translates to:
+  /// **'Add images to start'**
+  String get toolsAddImagesToStart;
+
+  /// Empty state description in Image to PDF editor
+  ///
+  /// In en, this message translates to:
+  /// **'Select photos or scan paper documents to generate a PDF.'**
+  String get toolsAddImagesDesc;
+
+  /// Button label to pick photos from gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Choose photos'**
+  String get toolsChoosePhotos;
+
+  /// Button label to launch camera document scanner
+  ///
+  /// In en, this message translates to:
+  /// **'Scan paper'**
+  String get toolsScanPaper;
+
+  /// Page indicator label on editor page row
+  ///
+  /// In en, this message translates to:
+  /// **'Page {page}'**
+  String toolsPageNumber(int page);
+
+  /// Tooltip for page rotation button
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate page'**
+  String get toolsTooltipRotatePage;
+
+  /// Tooltip for page removal button
+  ///
+  /// In en, this message translates to:
+  /// **'Remove page'**
+  String get toolsTooltipRemovePage;
+
+  /// Label on dashed add card in scanner editor
+  ///
+  /// In en, this message translates to:
+  /// **'Add more scans'**
+  String get toolsAddMoreScans;
+
+  /// Label on dashed add card in image editor
+  ///
+  /// In en, this message translates to:
+  /// **'Add more images'**
+  String get toolsAddMoreImages;
+
+  /// Footer summary of image count and estimated output size
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 image · est. ~ {size}} other{{count} images · est. ~ {size}}}'**
+  String toolsImageSummary(int count, String size);
+
+  /// Count of selected files in tool picker footer
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String toolsSelectedCount(int count);
+
+  /// Guidance hint in tool picker when minimum files requirement is not yet met
+  ///
+  /// In en, this message translates to:
+  /// **'Select at least {min} files'**
+  String toolsSelectAtLeast(int min);
+
+  /// Total page count summary across selected documents
+  ///
+  /// In en, this message translates to:
+  /// **'{count} pages total'**
+  String toolsPagesTotal(int count);
+
+  /// Label suffix while calculating total page count
+  ///
+  /// In en, this message translates to:
+  /// **'pages total'**
+  String get toolsPagesTotalLabel;
+
+  /// Empty state title when no PDFs are found in tool picker
+  ///
+  /// In en, this message translates to:
+  /// **'No PDF documents found'**
+  String get toolsNoPdfsFound;
+
+  /// Accessibility status text for bookmarked files
+  ///
+  /// In en, this message translates to:
+  /// **'bookmarked'**
+  String get semanticBookmarked;
+
+  /// Accessibility status text for selected items
+  ///
+  /// In en, this message translates to:
+  /// **'selected'**
+  String get semanticSelected;
+
+  /// Accessibility status text for unselected items
+  ///
+  /// In en, this message translates to:
+  /// **'not selected'**
+  String get semanticNotSelected;
+
+  /// Accessibility action hint to deselect a file
+  ///
+  /// In en, this message translates to:
+  /// **'Deselect file'**
+  String get actionDeselectFile;
+
+  /// Accessibility action hint to select a file
+  ///
+  /// In en, this message translates to:
+  /// **'Select file'**
+  String get actionSelectFile;
+
+  /// Action button label to create PDF document
+  ///
+  /// In en, this message translates to:
+  /// **'Create PDF'**
+  String get actionCreatePdf;
+
+  /// Accessibility long press hint on file tile
+  ///
+  /// In en, this message translates to:
+  /// **'Select or view actions'**
+  String get hintSelectOrViewActions;
+
+  /// Button label to close a dialog or bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get actionClose;
+
+  /// Button label to reset inputs or filters
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get actionReset;
+
+  /// Default progress status message while a tool operation runs
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait...'**
+  String get labelPleaseWait;
+
+  /// Tooltip for button that exits inline search mode
+  ///
+  /// In en, this message translates to:
+  /// **'Close search'**
+  String get tooltipCloseSearch;
+
+  /// Accessibility label for ad disclosure badge
+  ///
+  /// In en, this message translates to:
+  /// **'Advertisement'**
+  String get semanticAdvertisement;
+
+  /// Mini preview label for light theme in theme picker
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themePreviewLight;
+
+  /// Mini preview label for dark navy theme in theme picker
+  ///
+  /// In en, this message translates to:
+  /// **'Navy'**
+  String get themePreviewNavy;
+
+  /// Accessibility label for a document card in the Created by you carousel
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, {size}, created {date}'**
+  String createdByYouItemSemantic(String name, String size, String date);
+
+  /// Progress dialog title when creating PDF from camera scans
+  ///
+  /// In en, this message translates to:
+  /// **'Creating PDF from Scans'**
+  String get toolsCreatingPdfFromScans;
+
+  /// Progress dialog title when creating PDF from images
+  ///
+  /// In en, this message translates to:
+  /// **'Creating PDF'**
+  String get toolsCreatingPdf;
+
+  /// Progress message while converting images into a PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Processing image {done} of {total}...'**
+  String toolsProcessingImageProgress(int done, int total);
+
+  /// Error sheet title when image-to-PDF creation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t create PDF'**
+  String get toolsErrorCreatePdfTitle;
+
+  /// Badge label for password-protected or unreadable PDF files in tool pickers
+  ///
+  /// In en, this message translates to:
+  /// **'Protected or damaged'**
+  String get toolsBadgeProtectedOrDamaged;
+
+  /// Pluralized page count label for PDF files
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 page} other{{count} pages}}'**
+  String toolsPageCountPlural(int count);
+
+  /// Short abbreviated pages suffix shown alongside skeleton loader
+  ///
+  /// In en, this message translates to:
+  /// **'pgs'**
+  String get toolsPagesAbbrev;
+
+  /// Picker screen title when adding more PDFs from the merge screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add More PDFs'**
+  String get mergeAddMoreTitle;
+
+  /// Progress dialog title while merging PDFs
+  ///
+  /// In en, this message translates to:
+  /// **'Merging PDFs'**
+  String get mergeProgressTitle;
+
+  /// Progress message while merging PDFs
+  ///
+  /// In en, this message translates to:
+  /// **'Merging document {done} of {total}...'**
+  String mergeProgressMessage(int done, int total);
+
+  /// Error sheet title when PDF merge fails
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t merge PDFs'**
+  String get mergeErrorTitle;
+
+  /// Instruction banner text in the Merge PDF arrangement screen
+  ///
+  /// In en, this message translates to:
+  /// **'Drag handles to reorder'**
+  String get mergeDragInstruction;
+
+  /// Button label to add another PDF to the merge list
+  ///
+  /// In en, this message translates to:
+  /// **'Add PDF'**
+  String get mergeAddPdf;
+
+  /// Section header label above the merged PDF file name input
+  ///
+  /// In en, this message translates to:
+  /// **'OUTPUT FILE NAME'**
+  String get mergeOutputFileNameLabel;
+
+  /// Subtitle showing page count and formatted file size for a PDF item
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 page · {size}} other{{count} pages · {size}}}'**
+  String mergeItemPageCountAndSize(int count, String size);
+
+  /// Subtitle shown while PDF page count is still loading
+  ///
+  /// In en, this message translates to:
+  /// **'Loading pages... · {size}'**
+  String mergeItemLoadingPagesAndSize(String size);
+
+  /// Pre-flight warning title when one or more selected PDFs cannot be merged
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 invalid file detected} other{{count} invalid files detected}}'**
+  String mergeInvalidFilesDetected(int count);
+
+  /// Pre-flight status title when selected PDFs are valid for merging
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to merge'**
+  String get mergeReadyTitle;
+
+  /// Pre-flight warning description asking user to remove invalid PDFs
+  ///
+  /// In en, this message translates to:
+  /// **'Please remove password-protected documents'**
+  String get mergeRemoveProtectedHint;
+
+  /// Pre-flight summary showing total files, pages, and estimated output size
+  ///
+  /// In en, this message translates to:
+  /// **'{files} files · {pages} pages · ~ {size}'**
+  String mergeSummary(int files, int pages, String size);
+
+  /// Short status badge on pre-flight card when merge is ready
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get mergeReadyBadge;
+
+  /// Disabled CTA label when merge is blocked by invalid files
+  ///
+  /// In en, this message translates to:
+  /// **'Merge Blocked (Resolve Errors)'**
+  String get mergeBlockedCta;
+
+  /// Primary CTA button label to merge selected PDFs
+  ///
+  /// In en, this message translates to:
+  /// **'Merge {files} PDFs ({pages} Pages)'**
+  String mergeActionCta(int files, int pages);
+
+  /// Default app bar title for the Merge PDF picker screen
+  ///
+  /// In en, this message translates to:
+  /// **'Select PDFs'**
+  String get mergePickerDefaultTitle;
+
+  /// Filter pill showing all PDFs with total count
+  ///
+  /// In en, this message translates to:
+  /// **'All PDFs ({count})'**
+  String mergePickerTabAllPdfs(int count);
+
+  /// Filter pill for recent PDF documents in merge picker
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get mergePickerTabRecent;
+
+  /// Filter pill for Android Downloads folder in merge picker
+  ///
+  /// In en, this message translates to:
+  /// **'Downloads'**
+  String get mergePickerTabDownloads;
+
+  /// Filter pill for iOS iCloud Drive in merge picker
+  ///
+  /// In en, this message translates to:
+  /// **'iCloud Drive'**
+  String get mergePickerTabICloud;
+
+  /// Progress dialog title while splitting a PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Splitting PDF'**
+  String get splitProgressTitle;
+
+  /// Progress message while generating split PDF files
+  ///
+  /// In en, this message translates to:
+  /// **'Generating file {done} of {total}...'**
+  String splitProgressMessage(int done, int total);
+
+  /// Error sheet title when PDF split fails
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t split PDF'**
+  String get splitErrorTitle;
+
+  /// Section header label above page range text input
+  ///
+  /// In en, this message translates to:
+  /// **'PAGE RANGES'**
+  String get splitPageRangesLabel;
+
+  /// Example page range syntax shown next to the PAGE RANGES label
+  ///
+  /// In en, this message translates to:
+  /// **'Syntax: 1-3, 5, 8-10'**
+  String get splitPageRangesSyntax;
+
+  /// Helper text under the page ranges input field
+  ///
+  /// In en, this message translates to:
+  /// **'Each range becomes a separate PDF file.'**
+  String get splitRangeHelpText;
+
+  /// Header showing the count of output PDF files to be generated
+  ///
+  /// In en, this message translates to:
+  /// **'GENERATED FILES ({count})'**
+  String splitGeneratedFilesHeader(int count);
+
+  /// Title shown in output preview box when page range syntax has an error
+  ///
+  /// In en, this message translates to:
+  /// **'Live Chips Suspended'**
+  String get splitChipsSuspendedTitle;
+
+  /// Description shown in output preview box when page range syntax has an error
+  ///
+  /// In en, this message translates to:
+  /// **'Resolve the syntax error above to reconstruct extraction pipeline.'**
+  String get splitChipsSuspendedDesc;
+
+  /// Placeholder text when no page ranges have been entered yet
+  ///
+  /// In en, this message translates to:
+  /// **'Enter page ranges above to generate PDF slices'**
+  String get splitEmptyRangesHint;
+
+  /// Chip label for a single-page PDF slice
+  ///
+  /// In en, this message translates to:
+  /// **'Page {page}'**
+  String splitChipSinglePage(int page);
+
+  /// Chip label for a multi-page PDF slice range
+  ///
+  /// In en, this message translates to:
+  /// **'Pages {start}–{end}'**
+  String splitChipPageRange(int start, int end);
+
+  /// Abbreviated page count badge inside a split range chip
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 pg} other{{count} pgs}}'**
+  String splitChipPageCountShort(int count);
+
+  /// Section header for quick-select split range macros
+  ///
+  /// In en, this message translates to:
+  /// **'QUICK SELECT'**
+  String get splitQuickSelectLabel;
+
+  /// Quick select macro button to split every page into its own PDF
+  ///
+  /// In en, this message translates to:
+  /// **'All pages'**
+  String get splitMacroAllPages;
+
+  /// Quick select macro button to split into 5-page batches
+  ///
+  /// In en, this message translates to:
+  /// **'Every 5 pages'**
+  String get splitMacroEvery5Pages;
+
+  /// Helper notice explaining why a quick-select macro is disabled
+  ///
+  /// In en, this message translates to:
+  /// **'Macros producing > 100 files are disabled to protect device memory'**
+  String get splitMacroLimitHint;
+
+  /// Summary of how many files and total pages will be extracted
+  ///
+  /// In en, this message translates to:
+  /// **'Output: {files} files · {pages} pages extracted'**
+  String splitOutputSummary(int files, int pages);
+
+  /// Estimated total output file size label
+  ///
+  /// In en, this message translates to:
+  /// **'EST ~ {size}'**
+  String splitEstSize(String size);
+
+  /// Primary CTA button label when valid split ranges are configured
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Split into 1 PDF} other{Split into {count} PDFs}}'**
+  String splitActionCtaCount(int count);
+
+  /// Disabled primary CTA button label when no split ranges are configured
+  ///
+  /// In en, this message translates to:
+  /// **'Split into PDFs'**
+  String get splitActionCtaEmpty;
+
+  /// Subheader in split picker showing count of local PDF documents
+  ///
+  /// In en, this message translates to:
+  /// **'ALL LOCAL DOCUMENTS ({count})'**
+  String splitPickerAllLocalDocs(int count);
+
+  /// Sort indicator label in split picker subheader
+  ///
+  /// In en, this message translates to:
+  /// **'SORT BY DATE'**
+  String get splitPickerSortByDate;
+
+  /// Suffix shown next to skeleton page count in split picker
+  ///
+  /// In en, this message translates to:
+  /// **'pgs · {size}'**
+  String splitPickerLoadingPagesAndSize(String size);
+
+  /// App bar title on the Split PDF picker screen
+  ///
+  /// In en, this message translates to:
+  /// **'Select PDF to split'**
+  String get splitPickerTitle;
+
+  /// Short app bar title on the FAQ screen
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get faqShortTitle;
+
+  /// Selected PDF count in the split picker footer
+  ///
+  /// In en, this message translates to:
+  /// **'{count} PDF selected'**
+  String splitPickerSelectedCount(int count);
+
+  /// Helper text in split picker footer when no document is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Select a document to continue'**
+  String get splitPickerSelectDocumentHint;
+
+  /// Active page count for the selected PDF in split picker footer
+  ///
+  /// In en, this message translates to:
+  /// **'{count} pages active'**
+  String splitPickerPagesActive(int count);
+
+  /// Suffix label shown next to page count skeleton in split picker footer
+  ///
+  /// In en, this message translates to:
+  /// **'pages active'**
+  String get splitPickerPagesActiveLabel;
 }
 
 class _AppLocalizationsDelegate
