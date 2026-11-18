@@ -140,7 +140,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/faq',
         name: 'faq',
         parentNavigatorKey: rootNavigatorKey,
-        builder: (context, state) => const FaqScreen(),
+        builder: (context, state) {
+          var fromRating = false;
+          final extra = state.extra;
+          if (extra is bool) {
+            fromRating = extra;
+          } else if (extra is Map) {
+            fromRating = extra['fromRating'] == true;
+          }
+          return FaqScreen(fromRating: fromRating);
+        },
       ),
       GoRoute(
         path: '/settings/scan-settings',

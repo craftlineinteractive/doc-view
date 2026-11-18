@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/constants/app_constants.dart';
@@ -8,6 +10,7 @@ import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
 import '../../shared/widgets/navigation/doc_scaffold.dart';
+import '../../shared/widgets/status/doc_status_widgets.dart';
 
 /// Single FAQ question and answer pair.
 class FaqItem {
@@ -24,7 +27,18 @@ class FaqItem {
 /// Features a "6 Topics" header chip, 16pt radius accordion cards with single-expand
 /// behavior (second question expanded by default), and a tonal "Send feedback" button.
 class FaqScreen extends StatefulWidget {
-  const FaqScreen({super.key});
+  const FaqScreen({
+    super.key,
+    this.fromRating = false,
+    this.supportEmailOverride,
+  });
+
+  /// When true (opened from the Rate us sheet), renders a highlighted [InfoBanner]
+  /// above the FAQ topics with an optional "Contact us" button.
+  final bool fromRating;
+
+  /// Debug/test override for [AppConstants.supportEmail]. Ignored in release.
+  final String? supportEmailOverride;
 
   static List<FaqItem> questions(BuildContext context) => [
         FaqItem(
@@ -58,21 +72,46 @@ class FaqScreen extends StatefulWidget {
 }
 
 class _FaqScreenState extends State<FaqScreen> {
-  // Second question (index 1: "Is my data uploaded anywhere?") expanded by default as in the mockup
+  // Second question (index 1: "Why doesn't it scan my whole iPhone?") expanded by default as in the mockup
   int? _expandedIndex = 1;
 
+  String get _effectiveSupportEmail {
+    if (!kReleaseMode && widget.supportEmailOverride != null) {
+      return widget.supportEmailOverride!;
+    }
+    return AppConstants.supportEmail;
+  }
+
   Future<void> _handleFeedback() async {
-    if (AppConstants.supportEmail.isEmpty) return;
+    final email = _effectiveSupportEmail;
+    if (email.isEmpty) return;
+
+    var version = '1.0.0';
+    var build = '1';
+    try {
+      final info = await PackageInfo.fromPlatform();
+      if (info.version.isNotEmpty) version = info.version;
+      if (info.buildNumber.isNotEmpty) build = info.buildNumber;
+    } catch (_) {}
+
+    if (!mounted) return;
+    final l10n = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
     final uri = Uri(
       scheme: 'mailto',
-      path: AppConstants.supportEmail,
+      path: email,
       queryParameters: {
-        'subject': 'Doc View FAQ Feedback',
+        'subject': l10n.faqFeedbackEmailSubject(version, build),
+        'body': l10n.faqFeedbackEmailBody(version, build),
       },
     );
     try {
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri);
+      } else if (mounted) {
+        messenger.showSnackBar(
+          SnackBar(content: Text(l10n.faqEmailClientUnavailable)),
+        );
       }
     } catch (_) {}
   }
@@ -81,7 +120,7 @@ class _FaqScreenState extends State<FaqScreen> {
   Widget build(BuildContext context) {
     final tokens = context.tokens;
     final questions = FaqScreen.questions(context);
-    final hasSupportEmail = AppConstants.supportEmail.isNotEmpty;
+    final hasSupportEmail = _effectiveSupportEmail.isNotEmpty;
 
     return DocScaffold(
       applyHeaderGradient: true,
@@ -149,6 +188,30 @@ class _FaqScreenState extends State<FaqScreen> {
               thickness: 1,
               color: tokens.hairline,
             ),
+            if (widget.fromRating)
+              InfoBanner(
+                key: const Key('faq_rating_highlight_banner'),
+                message: context.l10n.faqFromRatingBanner,
+                icon: Icons.support_agent_rounded,
+                color: tokens.primaryBlue,
+                trailing: hasSupportEmail
+                    ? Flexible(
+                        flex: 0,
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 132),
+                          child: TextButton(
+                            key: const Key('btn_faq_contact_us'),
+                            onPressed: _handleFeedback,
+                            child: Text(
+                              context.l10n.faqActionContactUs,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                      )
+                    : null,
+              ),
             // Accordion List
             Expanded(
               child: ListView.separated(
