@@ -11,7 +11,8 @@ import java.io.File
 import java.io.FileOutputStream
 
 class MainActivity : FlutterActivity() {
-    private val channelName = "com.craftlineinteractive.docview/open_with"
+    private val openWithChannelName = "com.craftlineinteractive.docview/open_with"
+    private val fileManagerChannelName = "com.craftlineinteractive.docview/file_manager"
     private var initialFilePath: String? = null
     private var methodChannel: MethodChannel? = null
 
@@ -33,7 +34,7 @@ class MainActivity : FlutterActivity() {
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        methodChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, channelName).apply {
+        methodChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, openWithChannelName).apply {
             setMethodCallHandler { call, result ->
                 when (call.method) {
                     "getInitialFile" -> {
@@ -45,6 +46,56 @@ class MainActivity : FlutterActivity() {
                 }
             }
         }
+
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, fileManagerChannelName).setMethodCallHandler { call, result ->
+            when (call.method) {
+                "openSystemFileManager" -> result.success(openSystemFileManager())
+                else -> result.notImplemented()
+            }
+        }
+    }
+
+    private fun openSystemFileManager(): Boolean {
+        val downloadDocsUri = Uri.parse(
+            "content://com.android.externalstorage.documents/document/primary%3ADownload"
+        )
+        val primaryIntent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(downloadDocsUri, "vnd.android.document/directory")
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        try {
+            if (primaryIntent.resolveActivity(packageManager) != null) {
+                startActivity(primaryIntent)
+                return true
+            }
+        } catch (_: Exception) {
+            // Fall through to plain ACTION_VIEW without explicit MIME type
+        }
+
+        val uriOnlyIntent = Intent(Intent.ACTION_VIEW, downloadDocsUri).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        try {
+            if (uriOnlyIntent.resolveActivity(packageManager) != null) {
+                startActivity(uriOnlyIntent)
+                return true
+            }
+        } catch (_: Exception) {
+            // Fall through to ACTION_VIEW_DOWNLOADS
+        }
+
+        val downloadsIntent = Intent("android.intent.action.VIEW_DOWNLOADS").apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        try {
+            if (downloadsIntent.resolveActivity(packageManager) != null) {
+                startActivity(downloadsIntent)
+                return true
+            }
+        } catch (_: Exception) {
+            // No handler available; caller falls back to in-app Directories screen
+        }
+        return false
     }
 
     private fun handleIntent(intent: Intent, isInitial: Boolean) {

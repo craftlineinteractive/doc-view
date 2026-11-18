@@ -13,6 +13,7 @@ import '../../data/models/doc_file.dart';
 import '../../data/models/sort_option.dart';
 import '../../data/repositories/file_repository.dart';
 import '../../data/repositories/settings_repository.dart';
+import '../../data/services/file_manager_service.dart';
 import '../../data/services/file_operations_service.dart';
 import '../../data/services/import_service.dart';
 import '../../data/services/open_with_service.dart';
@@ -85,6 +86,11 @@ final scannerServiceProvider = Provider<ScannerService>((ref) {
 final importServiceProvider = Provider<ImportService>((ref) {
   final repository = ref.watch(fileRepositoryProvider);
   return ImportService(repository: repository);
+});
+
+/// System file manager service provider (Android MethodChannel / iOS Files app).
+final fileManagerServiceProvider = Provider<FileManagerService>((ref) {
+  return FileManagerService();
 });
 
 /// Open With service provider for external document opening.
