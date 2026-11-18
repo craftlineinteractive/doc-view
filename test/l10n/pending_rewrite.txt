@@ -3,7 +3,6 @@
 # because they are scheduled for full rewrite in upcoming phases.
 # Format: <relative_path> | <phase> | <reason>
 
-lib/features/settings/settings_screen.dart | Phase G2 | Settings tab screen and its private widgets rewritten in Phase G2
 lib/features/tools/tools_screen.dart | Phase G4 | Tools tab screen strictly preserved until Phase G4
 lib/features/tools/widgets/tool_card.dart | Phase G4 | Tools tab card widget strictly preserved until Phase G4
 lib/features/viewer/viewer_screen.dart | Phase G3 | Viewer dispatcher screen rewritten in Phase G3
