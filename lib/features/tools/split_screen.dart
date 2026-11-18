@@ -827,12 +827,16 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
             ),
           ),
           const SizedBox(width: 8),
-          Text(
-            context.l10n.splitEstSize(estStr),
-            style: DocViewTypography.captionXs.copyWith(
-              color: tokens.textSecondary,
-              fontWeight: FontWeight.bold,
-              fontSize: 11,
+          Flexible(
+            child: Text(
+              context.l10n.splitEstSize(estStr),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: DocViewTypography.captionXs.copyWith(
+                color: tokens.textSecondary,
+                fontWeight: FontWeight.bold,
+                fontSize: 11,
+              ),
             ),
           ),
         ],

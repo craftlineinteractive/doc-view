@@ -61,10 +61,14 @@ class DocPrimaryButton extends StatelessWidget {
                     icon!,
                     const SizedBox(width: 8),
                   ],
-                  Text(
-                    label,
-                    style: DocViewTypography.labelLg.copyWith(
-                      color: Colors.white,
+                  Flexible(
+                    child: Text(
+                      label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: DocViewTypography.labelLg.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
@@ -116,10 +120,14 @@ class DocSecondaryButton extends StatelessWidget {
               icon!,
               const SizedBox(width: 8),
             ],
-            Text(
-              label,
-              style: DocViewTypography.labelLg.copyWith(
-                color: tokens.textPrimary,
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: DocViewTypography.labelLg.copyWith(
+                  color: tokens.textPrimary,
+                ),
               ),
             ),
           ],
@@ -172,10 +180,14 @@ class DocTonalButton extends StatelessWidget {
               icon!,
               const SizedBox(width: 8),
             ],
-            Text(
-              label,
-              style: DocViewTypography.labelLg.copyWith(
-                color: tokens.textPrimary,
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: DocViewTypography.labelLg.copyWith(
+                  color: tokens.textPrimary,
+                ),
               ),
             ),
           ],
@@ -225,11 +237,15 @@ class DocDestructiveButton extends StatelessWidget {
               icon!,
               const SizedBox(width: 8),
             ],
-            Text(
-              label,
-              style: DocViewTypography.labelLg.copyWith(
-                color: isFilled ? Colors.white : DocViewColors.error,
-                fontWeight: FontWeight.w600,
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: DocViewTypography.labelLg.copyWith(
+                  color: isFilled ? Colors.white : DocViewColors.error,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],

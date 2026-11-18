@@ -247,23 +247,29 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          DocIconButton(
-                            icon: AppIcons.back,
-                            tooltip: context.l10n.actionBack,
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            effectiveTitle,
-                            style: DocViewTypography.headlineSm.copyWith(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: tokens.textPrimary,
+                      Expanded(
+                        child: Row(
+                          children: [
+                            DocIconButton(
+                              icon: AppIcons.back,
+                              tooltip: context.l10n.actionBack,
+                              onPressed: () => Navigator.of(context).pop(),
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                effectiveTitle,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: DocViewTypography.headlineSm.copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: tokens.textPrimary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       DocIconButton(
                         icon: AppIcons.search,
@@ -651,11 +657,15 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
                         ),
                       ),
                       const SizedBox(width: 4),
-                      Text(
-                        context.l10n.toolsPagesTotalLabel,
-                        style: DocViewTypography.captionXs.copyWith(
-                          color: tokens.textSecondary,
-                          fontSize: 12,
+                      Flexible(
+                        child: Text(
+                          context.l10n.toolsPagesTotalLabel,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: DocViewTypography.captionXs.copyWith(
+                            color: tokens.textSecondary,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ],
@@ -664,20 +674,33 @@ class _MergePdfPickerScreenState extends ConsumerState<MergePdfPickerScreen> {
             ),
           ),
           const SizedBox(width: 12),
-          FilledButton.icon(
-            style: FilledButton.styleFrom(
-              backgroundColor: tokens.primaryBlue,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: tokens.hairline,
-              disabledForegroundColor: tokens.textSecondary.withValues(alpha: 0.5),
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+          Flexible(
+            flex: 0,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 168),
+              child: FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  backgroundColor: tokens.primaryBlue,
+                  foregroundColor: Colors.white,
+                  disabledBackgroundColor: tokens.hairline,
+                  disabledForegroundColor: tokens.textSecondary.withValues(alpha: 0.5),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                icon: Flexible(
+                  child: Text(
+                    context.l10n.mergePickerNext,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                ),
+                label: const Icon(Icons.arrow_forward_rounded, size: 18),
+                onPressed: canProceed ? _onDone : null,
               ),
             ),
-            icon: Text(context.l10n.mergePickerNext, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-            label: const Icon(Icons.arrow_forward_rounded, size: 18),
-            onPressed: canProceed ? _onDone : null,
           ),
         ],
       ),

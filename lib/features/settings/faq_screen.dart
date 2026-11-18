@@ -114,22 +114,26 @@ class _FaqScreenState extends State<FaqScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: tokens.surface,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: tokens.hairline),
-                    ),
-                    child: Text(
-                      context.l10n.faqHeaderTopics(questions.length),
-                      style: DocViewTypography.captionXs.copyWith(
-                        color: tokens.textSecondary,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12,
+                  Flexible(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: tokens.surface,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: tokens.hairline),
+                      ),
+                      child: Text(
+                        context.l10n.faqHeaderTopics(questions.length),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: DocViewTypography.captionXs.copyWith(
+                          color: tokens.textSecondary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                   ),

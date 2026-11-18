@@ -247,28 +247,36 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    DocIconButton(
-                      icon: AppIcons.back,
-                      tooltip: context.l10n.tooltipBack,
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      context.l10n.mergeScreenTitle,
-                      style: DocViewTypography.headlineSm.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: tokens.textPrimary,
+                Expanded(
+                  child: Row(
+                    children: [
+                      DocIconButton(
+                        icon: AppIcons.back,
+                        tooltip: context.l10n.tooltipBack,
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: Text(
+                          context.l10n.mergeScreenTitle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: DocViewTypography.headlineSm.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: tokens.textPrimary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 TextButton(
                   onPressed: _isMerging ? null : _onClear,
                   child: Text(
                     context.l10n.actionClear,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: DocViewTypography.labelMd.copyWith(
                       color: tokens.primaryBlue,
                       fontWeight: FontWeight.w600,
@@ -302,20 +310,26 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                 Expanded(
                   child: Text(
                     context.l10n.mergeDragInstruction,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: DocViewTypography.captionXs.copyWith(
                       color: tokens.textSecondary,
                       fontSize: 12,
                     ),
                   ),
                 ),
-                TextButton.icon(
-                  onPressed: _isMerging ? null : _addMoreFiles,
-                  icon: Icon(Icons.add_rounded, size: 16, color: tokens.primaryBlue),
-                  label: Text(
-                    context.l10n.mergeAddPdf,
-                    style: DocViewTypography.labelXs.copyWith(
-                      color: tokens.primaryBlue,
-                      fontWeight: FontWeight.w600,
+                Flexible(
+                  child: TextButton.icon(
+                    onPressed: _isMerging ? null : _addMoreFiles,
+                    icon: Icon(Icons.add_rounded, size: 16, color: tokens.primaryBlue),
+                    label: Text(
+                      context.l10n.mergeAddPdf,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: DocViewTypography.labelXs.copyWith(
+                        color: tokens.primaryBlue,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
@@ -636,6 +650,8 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                         hasErrors
                             ? context.l10n.mergeInvalidFilesDetected(_flaggedCount)
                             : context.l10n.mergeReadyTitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: DocViewTypography.captionXs.copyWith(
                           fontWeight: FontWeight.bold,
                           color: hasErrors ? tokens.error : tokens.textPrimary,
@@ -647,6 +663,8 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                         hasErrors
                             ? context.l10n.mergeRemoveProtectedHint
                             : context.l10n.mergeSummary(_files.length, totalPages, sizeFormatted),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: DocViewTypography.captionXs.copyWith(
                           color: tokens.textSecondary,
                           fontSize: 11,
@@ -655,22 +673,32 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                     ],
                   ),
                 ),
-                if (!hasErrors)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: tokens.blueTint,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      context.l10n.mergeReadyBadge,
-                      style: DocViewTypography.captionXs.copyWith(
-                        color: tokens.primaryBlue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 11,
+                if (!hasErrors) ...[
+                  const SizedBox(width: 8),
+                  Flexible(
+                    flex: 0,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 110),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: tokens.blueTint,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          context.l10n.mergeReadyBadge,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: DocViewTypography.captionXs.copyWith(
+                            color: tokens.primaryBlue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 11,
+                          ),
+                        ),
                       ),
                     ),
                   ),
+                ],
               ],
             ),
           ),

@@ -320,37 +320,46 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                 ),
                 const SizedBox(height: 12),
                 // Page Size Segmented Control
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
                       context.l10n.imageListEditorPageSize,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: DocViewTypography.labelMd.copyWith(
                         color: tokens.textSecondary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: SegmentedButton<PageMode>(
-                        segments: [
-                          ButtonSegment<PageMode>(
-                            value: PageMode.a4,
-                            label: Text(context.l10n.imageListEditorA4Mode),
-                            icon: const Icon(Icons.description_outlined, size: 16),
+                    const SizedBox(height: 6),
+                    SegmentedButton<PageMode>(
+                      segments: [
+                        ButtonSegment<PageMode>(
+                          value: PageMode.a4,
+                          label: Text(
+                            context.l10n.imageListEditorA4Mode,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          ButtonSegment<PageMode>(
-                            value: PageMode.fitImage,
-                            label: Text(context.l10n.imageListEditorFitMode),
-                            icon: const Icon(Icons.aspect_ratio_outlined, size: 16),
+                          icon: const Icon(Icons.description_outlined, size: 16),
+                        ),
+                        ButtonSegment<PageMode>(
+                          value: PageMode.fitImage,
+                          label: Text(
+                            context.l10n.imageListEditorFitMode,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ],
-                        selected: {_pageMode},
-                        onSelectionChanged: (newSelection) {
-                          setState(() {
-                            _pageMode = newSelection.first;
-                          });
-                        },
-                      ),
+                          icon: const Icon(Icons.aspect_ratio_outlined, size: 16),
+                        ),
+                      ],
+                      selected: {_pageMode},
+                      onSelectionChanged: (newSelection) {
+                        setState(() {
+                          _pageMode = newSelection.first;
+                        });
+                      },
                     ),
                   ],
                 ),
@@ -362,9 +371,10 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
           Expanded(
             child: _imagePaths.isEmpty
                 ? Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
@@ -580,25 +590,34 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      context.l10n.toolsImageSummary(_imagePaths.length, FormatUtils.formatFileSize(_totalBytes)),
-                      style: DocViewTypography.bodySm.copyWith(
-                        color: tokens.textSecondary,
-                        fontWeight: FontWeight.w500,
+                    Expanded(
+                      child: Text(
+                        context.l10n.toolsImageSummary(_imagePaths.length, FormatUtils.formatFileSize(_totalBytes)),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: DocViewTypography.bodySm.copyWith(
+                          color: tokens.textSecondary,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: tokens.surface,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: tokens.hairline, width: 1),
-                      ),
-                      child: Text(
-                        _pageMode == PageMode.a4 ? context.l10n.imageListEditorA4Mode : context.l10n.imageListEditorFitMode,
-                        style: DocViewTypography.captionXs.copyWith(
-                          color: tokens.textPrimary,
-                          fontWeight: FontWeight.w600,
+                    const SizedBox(width: 8),
+                    Flexible(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: tokens.surface,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: tokens.hairline, width: 1),
+                        ),
+                        child: Text(
+                          _pageMode == PageMode.a4 ? context.l10n.imageListEditorA4Mode : context.l10n.imageListEditorFitMode,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: DocViewTypography.captionXs.copyWith(
+                            color: tokens.textPrimary,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),

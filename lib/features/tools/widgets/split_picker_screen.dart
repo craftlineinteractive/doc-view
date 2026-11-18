@@ -120,23 +120,29 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          DocIconButton(
-                            icon: AppIcons.back,
-                            tooltip: context.l10n.actionBack,
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            context.l10n.splitPickerTitle,
-                            style: DocViewTypography.headlineSm.copyWith(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: tokens.textPrimary,
+                      Expanded(
+                        child: Row(
+                          children: [
+                            DocIconButton(
+                              icon: AppIcons.back,
+                              tooltip: context.l10n.actionBack,
+                              onPressed: () => Navigator.of(context).pop(),
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                context.l10n.splitPickerTitle,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: DocViewTypography.headlineSm.copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: tokens.textPrimary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       DocIconButton(
                         icon: AppIcons.search,
@@ -186,20 +192,29 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      context.l10n.splitPickerAllLocalDocs(filteredFiles.length),
-                      style: DocViewTypography.captionXs.copyWith(
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.1,
-                        color: tokens.textSecondary,
-                        fontSize: 11,
+                    Expanded(
+                      child: Text(
+                        context.l10n.splitPickerAllLocalDocs(filteredFiles.length),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: DocViewTypography.captionXs.copyWith(
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.1,
+                          color: tokens.textSecondary,
+                          fontSize: 11,
+                        ),
                       ),
                     ),
-                    Text(
-                      context.l10n.splitPickerSortByDate,
-                      style: DocViewTypography.captionXs.copyWith(
-                        color: tokens.textSecondary,
-                        fontSize: 11,
+                    const SizedBox(width: 8),
+                    Flexible(
+                      child: Text(
+                        context.l10n.splitPickerSortByDate,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: DocViewTypography.captionXs.copyWith(
+                          color: tokens.textSecondary,
+                          fontSize: 11,
+                        ),
                       ),
                     ),
                   ],
@@ -326,28 +341,38 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                     Row(
                       children: [
                         if (pageCount != null)
-                          Text(
-                            context.l10n.mergeItemPageCountAndSize(pageCount, sizeStr),
-                            style: DocViewTypography.bodySm.copyWith(
-                              color: tokens.textSecondary,
-                              fontSize: 12,
+                          Expanded(
+                            child: Text(
+                              context.l10n.mergeItemPageCountAndSize(pageCount, sizeStr),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: DocViewTypography.bodySm.copyWith(
+                                color: tokens.textSecondary,
+                                fontSize: 12,
+                              ),
                             ),
                           )
                         else
-                          Row(
-                            children: [
-                              Shimmer(
-                                child: SkeletonBox(width: 24, height: 12, borderRadius: 3),
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                context.l10n.splitPickerLoadingPagesAndSize(sizeStr),
-                                style: DocViewTypography.bodySm.copyWith(
-                                  color: tokens.textSecondary,
-                                  fontSize: 12,
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Shimmer(
+                                  child: SkeletonBox(width: 24, height: 12, borderRadius: 3),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(width: 4),
+                                Flexible(
+                                  child: Text(
+                                    context.l10n.splitPickerLoadingPagesAndSize(sizeStr),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: DocViewTypography.bodySm.copyWith(
+                                      color: tokens.textSecondary,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                       ],
                     ),
@@ -452,11 +477,15 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
                         child: SkeletonBox(width: 44, height: 12, borderRadius: 3),
                       ),
                       const SizedBox(width: 4),
-                      Text(
-                        context.l10n.splitPickerPagesActiveLabel,
-                        style: DocViewTypography.captionXs.copyWith(
-                          color: tokens.textSecondary,
-                          fontSize: 12,
+                      Flexible(
+                        child: Text(
+                          context.l10n.splitPickerPagesActiveLabel,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: DocViewTypography.captionXs.copyWith(
+                            color: tokens.textSecondary,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ],
@@ -465,20 +494,33 @@ class _SplitPickerScreenState extends ConsumerState<SplitPickerScreen> {
             ),
           ),
           const SizedBox(width: 12),
-          FilledButton.icon(
-            style: FilledButton.styleFrom(
-              backgroundColor: tokens.primaryBlue,
-              foregroundColor: Colors.white,
-              disabledBackgroundColor: tokens.hairline,
-              disabledForegroundColor: tokens.textSecondary.withValues(alpha: 0.5),
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+          Flexible(
+            flex: 0,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 168),
+              child: FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  backgroundColor: tokens.primaryBlue,
+                  foregroundColor: Colors.white,
+                  disabledBackgroundColor: tokens.hairline,
+                  disabledForegroundColor: tokens.textSecondary.withValues(alpha: 0.5),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                icon: Flexible(
+                  child: Text(
+                    context.l10n.mergePickerNext,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                ),
+                label: const Icon(Icons.arrow_forward_rounded, size: 18),
+                onPressed: _selectedFile != null ? _onDone : null,
               ),
             ),
-            icon: Text(context.l10n.mergePickerNext, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-            label: const Icon(Icons.arrow_forward_rounded, size: 18),
-            onPressed: _selectedFile != null ? _onDone : null,
           ),
         ],
       ),

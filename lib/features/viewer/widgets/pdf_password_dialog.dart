@@ -61,9 +61,10 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
         backgroundColor: isDark ? DocViewColors.backgroundDark : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               // Lock Icon
@@ -172,11 +173,13 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
                       color: Color(0xFFE5484D),
                     ),
                     const SizedBox(width: 6),
-                    Text(
-                      context.l10n.pdfPasswordErrorIncorrect,
-                      style: DocViewTypography.bodySm.copyWith(
-                        color: const Color(0xFFE5484D),
-                        fontWeight: FontWeight.w600,
+                    Expanded(
+                      child: Text(
+                        context.l10n.pdfPasswordErrorIncorrect,
+                        style: DocViewTypography.bodySm.copyWith(
+                          color: const Color(0xFFE5484D),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
@@ -200,7 +203,11 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
-                        child: Text(context.l10n.actionCancel),
+                        child: Text(
+                          context.l10n.actionCancel,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
                   ),
@@ -217,7 +224,11 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
-                        child: Text(context.l10n.pdfPasswordActionUnlock),
+                        child: Text(
+                          context.l10n.pdfPasswordActionUnlock,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
                   ),
@@ -226,6 +237,7 @@ class _PdfPasswordDialogState extends State<PdfPasswordDialog> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

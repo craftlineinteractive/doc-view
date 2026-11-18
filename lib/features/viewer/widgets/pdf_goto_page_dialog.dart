@@ -79,24 +79,30 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
       backgroundColor: isDark ? DocViewColors.backgroundDark : Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Header: Title & page count pill
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  context.l10n.pdfGotoPageTitle,
-                  style: DocViewTypography.headlineSm.copyWith(
-                    color: tokens.textPrimary,
-                    fontWeight: FontWeight.w700,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Header: Title & page count pill
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      context.l10n.pdfGotoPageTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: DocViewTypography.headlineSm.copyWith(
+                        color: tokens.textPrimary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
-                ),
-                Container(
+                  const SizedBox(width: 8),
+                  Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 10,
                     vertical: 4,
@@ -193,7 +199,11 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
                           borderRadius: BorderRadius.circular(14),
                         ),
                       ),
-                      child: Text(context.l10n.actionCancel),
+                      child: Text(
+                        context.l10n.actionCancel,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                 ),
@@ -210,7 +220,11 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
                           borderRadius: BorderRadius.circular(14),
                         ),
                       ),
-                      child: Text(context.l10n.pdfGotoPageAction),
+                      child: Text(
+                        context.l10n.pdfGotoPageAction,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                 ),
@@ -218,6 +232,7 @@ class _PdfGoToPageDialogState extends State<PdfGoToPageDialog> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
