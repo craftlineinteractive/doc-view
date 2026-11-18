@@ -6,7 +6,9 @@ import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../core/utils/format_utils.dart';
 import '../../data/models/app_settings.dart';
+import '../../shared/widgets/dialogs/doc_dialog.dart';
 import '../../shared/widgets/navigation/doc_app_bar.dart';
 import '../../shared/widgets/navigation/doc_scaffold.dart';
 import '../../shared/widgets/tiles/settings_row.dart';
@@ -17,15 +19,49 @@ import '../providers/providers.dart';
 class ScanSettingsScreen extends ConsumerWidget {
   const ScanSettingsScreen({super.key});
 
+  Future<void> _confirmClearHistory(BuildContext context, WidgetRef ref) async {
+    final l10n = context.l10n;
+    final confirmed = await showDocConfirmDialog(
+      context: context,
+      title: l10n.scanSettingsClearHistoryDialogTitle,
+      body: l10n.scanSettingsClearHistoryDialogBody,
+      confirmLabel: l10n.actionClear,
+      cancelLabel: l10n.actionCancel,
+      isDestructive: true,
+    );
+
+    if (confirmed == true && context.mounted) {
+      await ref.read(fileActionsControllerProvider).clearRecentHistory();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.scanSettingsRecentHistoryCleared),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = context.tokens;
     final settings = ref.watch(settingsProvider);
     final scanState = ref.watch(scanStateProvider);
+    final lastScanTimeAsync = ref.watch(lastScanTimeProvider);
     final allFilesAccessAsync = ref.watch(allFilesAccessProvider);
     final permissionService = ref.watch(permissionServiceProvider);
     final isAndroid = Platform.isAndroid;
     final hasAllFilesAccess = allFilesAccessAsync.value ?? false;
+
+    final localeTag = Localizations.maybeLocaleOf(context)?.toLanguageTag();
+    final lastScanSubtitle = FormatUtils.formatLastScanTime(
+      lastScanTimeAsync.value,
+      locale: localeTag,
+      todayLabel: context.l10n.scanSettingsLastScanToday,
+      yesterdayLabel: context.l10n.scanSettingsLastScanYesterday,
+      neverScannedLabel: context.l10n.scanSettingsNeverScanned,
+      lastScanPrefix: context.l10n.scanSettingsLastScanPrefix,
+    );
 
     return DocScaffold(
       applyHeaderGradient: true,
@@ -354,12 +390,16 @@ class ScanSettingsScreen extends ConsumerWidget {
                             color: tokens.primaryBlue,
                           ),
                           const SizedBox(width: 8),
-                          Text(
-                            context.l10n.scanSettingsScanningFiles(scanState.filesFound),
-                            style: DocViewTypography.labelLg.copyWith(
-                              color: tokens.primaryBlue,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                          Flexible(
+                            child: Text(
+                              context.l10n.scanSettingsScanningFiles(scanState.filesFound),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: DocViewTypography.labelLg.copyWith(
+                                color: tokens.primaryBlue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
                             ),
                           ),
                         ],
@@ -402,19 +442,51 @@ class ScanSettingsScreen extends ConsumerWidget {
                         size: 20,
                       ),
                       const SizedBox(width: 8),
-                      Text(
-                        context.l10n.scanSettingsActionRescanNow,
-                        style: DocViewTypography.labelLg.copyWith(
-                          color: tokens.primaryBlue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                      Flexible(
+                        child: Text(
+                          context.l10n.scanSettingsActionRescanNow,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: DocViewTypography.labelLg.copyWith(
+                            color: tokens.primaryBlue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
+            const SizedBox(height: 8),
+            Center(
+              child: Text(
+                lastScanSubtitle,
+                key: const Key('text_scan_settings_last_scan'),
+                textAlign: TextAlign.center,
+                style: DocViewTypography.captionXs.copyWith(
+                  color: tokens.textSecondary,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                ),
+              ),
+            ),
           ],
+          const SizedBox(height: 16),
+
+          // Section 5: History (Android & iOS)
+          SettingsSectionHeader(title: context.l10n.scanSettingsSectionHistory),
+          SettingsGroupCard(
+            children: [
+              SettingsRow(
+                key: const Key('settings_clear_history'),
+                icon: Icons.delete_outline_rounded,
+                title: context.l10n.scanSettingsClearHistoryTitle,
+                subtitle: context.l10n.scanSettingsClearHistorySubtitle,
+                onTap: () => _confirmClearHistory(context, ref),
+              ),
+            ],
+          ),
           const SizedBox(height: 20),
         ],
       ),
