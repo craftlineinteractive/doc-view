@@ -150,31 +150,33 @@ void main() {
     await tester.pumpWidget(
       const ProviderScope(
         child: MaterialApp(
-          home: SettingsScreen(),
+          home: SettingsScreen(isReleaseOverride: true),
         ),
       ),
     );
     await tester.pumpAndSettle();
 
-    // Verify presence of core, non-conditional settings rows
+    // Verify presence of core, non-conditional settings rows & footer
     expect(find.byKey(const Key('settings_file_manager')), findsOneWidget);
-    expect(find.byKey(const Key('settings_app_theme')), findsOneWidget);
-    expect(find.byKey(const Key('settings_scan_settings')), findsOneWidget);
-    expect(find.byKey(const Key('settings_clear_history')), findsOneWidget);
     expect(find.byKey(const Key('settings_faq')), findsOneWidget);
+    expect(find.byKey(const Key('settings_scan_settings')), findsOneWidget);
+    expect(find.byKey(const Key('settings_app_theme')), findsOneWidget);
+    expect(find.byKey(const Key('settings_rate_us')), findsOneWidget);
     expect(find.byKey(const Key('settings_licenses')), findsOneWidget);
     expect(find.byKey(const Key('settings_version')), findsOneWidget);
 
-    // Conditional rows whose constants are empty ('') MUST NOT appear
+    // Conditional rows whose constants are empty ('') or flags are off MUST NOT appear
     expect(AppConstants.supportEmail, isEmpty);
+    expect(AppConstants.termsOfUseUrl, isEmpty);
     expect(AppConstants.storeShareUrl, isEmpty);
     expect(AppConstants.storeRateUrl, isEmpty);
     expect(AppConstants.privacyPolicyUrl, isEmpty);
 
-    expect(find.byKey(const Key('settings_send_feedback')), findsNothing);
-    expect(find.byKey(const Key('settings_feedback')), findsNothing);
     expect(find.byKey(const Key('settings_share_app')), findsNothing);
-    expect(find.byKey(const Key('settings_rate_us')), findsNothing);
+    expect(find.byKey(const Key('settings_terms_of_use')), findsNothing);
     expect(find.byKey(const Key('settings_privacy_policy')), findsNothing);
+    expect(find.byKey(const Key('settings_add_widget')), findsNothing);
+    expect(find.byKey(const Key('settings_manage_subscriptions')), findsNothing);
+    expect(find.byKey(const Key('settings_language')), findsNothing);
   });
 }

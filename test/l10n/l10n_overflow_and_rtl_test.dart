@@ -8,7 +8,10 @@ import 'package:docview/features/onboarding/onboarding_screen.dart';
 import 'package:docview/features/providers/providers.dart';
 import 'package:docview/features/search/search_screen.dart';
 import 'package:docview/features/settings/faq_screen.dart';
+import 'package:docview/features/settings/language_screen.dart';
 import 'package:docview/features/settings/scan_settings_screen.dart';
+import 'package:docview/features/settings/settings_screen.dart';
+import 'package:docview/features/settings/widgets/rate_us_sheet.dart';
 import 'package:docview/features/settings/widgets/theme_selection_sheet.dart';
 import 'package:docview/features/tools/created_documents_screen.dart';
 import 'package:docview/features/tools/image_list_editor_screen.dart';
@@ -115,9 +118,22 @@ void main() {
       'HomeScreen': () => const HomeScreen(),
       'SearchScreen': () => const SearchScreen(),
       'OnboardingScreen': () => const OnboardingScreen(),
-      // G1b surviving screens
+      // G1b & G2 surviving screens
       'DirectoriesScreen': () => const DirectoriesScreen(),
+      'SettingsScreen': () => const SettingsScreen(
+            isReleaseOverride: false,
+            premiumEnabledOverride: true,
+            widgetsEnabledOverride: true,
+            storeShareUrlOverride: 'https://example.com/share',
+            termsOfUseUrlOverride: 'https://example.com/terms',
+            privacyPolicyUrlOverride: 'https://example.com/privacy',
+          ),
+      'LanguageScreen': () => const LanguageScreen(isReleaseOverride: false),
       'FaqScreen': () => const FaqScreen(),
+      'FaqScreenFromRating': () => const FaqScreen(
+            fromRating: true,
+            supportEmailOverride: 'support@docview.app',
+          ),
       'ScanSettingsScreen': () => const ScanSettingsScreen(),
       'CreatedDocumentsScreen': () => const CreatedDocumentsScreen(),
       'ImageListEditorScreen': () => const ImageListEditorScreen(
@@ -141,6 +157,13 @@ void main() {
       'ThemeSelectionSheet': () => const Scaffold(
             body: SingleChildScrollView(
               child: ThemeSelectionSheet(),
+            ),
+          ),
+      'RateUsSheet': () => const Scaffold(
+            body: SingleChildScrollView(
+              child: RateUsSheet(
+                storeRateUrlOverride: 'https://example.com/rate',
+              ),
             ),
           ),
       'PdfGoToPageDialog': () => const Scaffold(
@@ -212,6 +235,11 @@ void main() {
             );
 
             await tester.pumpAndSettle();
+
+            if (screenName == 'RateUsSheet') {
+              await tester.tap(find.byKey(const Key('rate_star_3')));
+              await tester.pumpAndSettle();
+            }
 
             expect(
               overflowError,
