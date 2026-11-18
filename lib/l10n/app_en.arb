@@ -2083,5 +2083,299 @@
   "splitPickerPagesActiveLabel": "pages active",
   "@splitPickerPagesActiveLabel": {
     "description": "Suffix label shown next to page count skeleton in split picker footer"
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Main app bar title on the Settings tab"
+  },
+  "settingsSectionGeneral": "General",
+  "@settingsSectionGeneral": {
+    "description": "Section header for general application settings"
+  },
+  "settingsSectionOthers": "Others",
+  "@settingsSectionOthers": {
+    "description": "Section header for legal, widget, and subscription settings"
+  },
+  "settingsFileManagerTitle": "File manager",
+  "@settingsFileManagerTitle": {
+    "description": "Settings row title to open the system file manager"
+  },
+  "settingsFileManagerSubtitle": "Browse storage directories and folders",
+  "@settingsFileManagerSubtitle": {
+    "description": "Settings row subtitle for File manager"
+  },
+  "settingsFaqTitle": "FAQ",
+  "@settingsFaqTitle": {
+    "description": "Settings row title to open Frequently Asked Questions"
+  },
+  "settingsFaqSubtitle": "Frequently asked questions",
+  "@settingsFaqSubtitle": {
+    "description": "Settings row subtitle for FAQ"
+  },
+  "settingsShareTitle": "Share",
+  "@settingsShareTitle": {
+    "description": "Settings row title to share the app with others"
+  },
+  "settingsShareSubtitle": "Recommend Doc View to friends",
+  "@settingsShareSubtitle": {
+    "description": "Settings row subtitle for Share"
+  },
+  "settingsShareMessage": "Check out Doc View - Fast, private, offline document reader: {url}",
+  "@settingsShareMessage": {
+    "description": "Text shared via the system share sheet when sharing the app",
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsScanSettingsTitle": "Scan settings",
+  "@settingsScanSettingsTitle": {
+    "description": "Settings row title to open Scan settings"
+  },
+  "settingsScanModeOnOpen": "Scan on open",
+  "@settingsScanModeOnOpen": {
+    "description": "Subtitle on Scan settings row when automatic scan on app open is enabled"
+  },
+  "settingsScanModeManual": "Manual only",
+  "@settingsScanModeManual": {
+    "description": "Subtitle on Scan settings row when manual scan only is enabled"
+  },
+  "settingsAppThemeTitle": "App theme",
+  "@settingsAppThemeTitle": {
+    "description": "Settings row title to choose the app visual theme"
+  },
+  "settingsThemeSystem": "System default",
+  "@settingsThemeSystem": {
+    "description": "Label when app theme follows system appearance"
+  },
+  "settingsThemeLight": "Light",
+  "@settingsThemeLight": {
+    "description": "Label when light theme is selected"
+  },
+  "settingsThemeDark": "Dark",
+  "@settingsThemeDark": {
+    "description": "Label when dark theme is selected"
+  },
+  "settingsLanguageTitle": "Language",
+  "@settingsLanguageTitle": {
+    "description": "Settings row title to open the Language selection screen"
+  },
+  "settingsRateUsTitle": "Rate us",
+  "@settingsRateUsTitle": {
+    "description": "Settings row title to open the Rate Doc View bottom sheet"
+  },
+  "settingsRateUsSubtitle": "Share your feedback with us",
+  "@settingsRateUsSubtitle": {
+    "description": "Settings row subtitle for Rate us"
+  },
+  "settingsAddWidgetTitle": "Add Widget",
+  "@settingsAddWidgetTitle": {
+    "description": "Settings row title to add a home screen widget (behind feature flag)"
+  },
+  "settingsAddWidgetSubtitle": "Quick access from your home screen",
+  "@settingsAddWidgetSubtitle": {
+    "description": "Settings row subtitle for Add Widget"
+  },
+  "settingsTermsTitle": "Terms of use",
+  "@settingsTermsTitle": {
+    "description": "Settings row title to open Terms of use in external browser"
+  },
+  "settingsTermsSubtitle": "Read our terms of service",
+  "@settingsTermsSubtitle": {
+    "description": "Settings row subtitle for Terms of use"
+  },
+  "settingsPrivacyTitle": "Privacy policy",
+  "@settingsPrivacyTitle": {
+    "description": "Settings row title to open Privacy policy in external browser"
+  },
+  "settingsPrivacySubtitle": "Read our privacy policy",
+  "@settingsPrivacySubtitle": {
+    "description": "Settings row subtitle for Privacy policy"
+  },
+  "settingsManageSubscriptionsTitle": "Manage subscriptions",
+  "@settingsManageSubscriptionsTitle": {
+    "description": "Settings row title to open store subscription management (behind feature flag)"
+  },
+  "settingsManageSubscriptionsSubtitle": "Manage your store subscription",
+  "@settingsManageSubscriptionsSubtitle": {
+    "description": "Settings row subtitle for Manage subscriptions"
+  },
+  "settingsVersionDisplay": "Version {version} ({build})",
+  "@settingsVersionDisplay": {
+    "description": "Centered footer text showing semantic app version and build number",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "build": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsVersionSemantics": "Version {version} build {build}",
+  "@settingsVersionSemantics": {
+    "description": "Accessibility semantics label for the app version footer",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "build": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsOpenSourceLicenses": "Open-source licenses",
+  "@settingsOpenSourceLicenses": {
+    "description": "Footer link label to open Flutter third-party licenses page"
+  },
+  "rateSheetTitle": "Rate Doc View",
+  "@rateSheetTitle": {
+    "description": "Title of the Rate us bottom sheet"
+  },
+  "rateSheetSubtitle": "Your feedback helps us improve",
+  "@rateSheetSubtitle": {
+    "description": "Subtitle inside the Rate us bottom sheet"
+  },
+  "rateStarSemantics": "{count, plural, =1{1 star} other{{count} stars}}",
+  "@rateStarSemantics": {
+    "description": "Accessibility semantics label for each star button in StarRatingBar",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "rateResponseHigh": "Glad you like it!",
+  "@rateResponseHigh": {
+    "description": "Short message shown in Rate us sheet after selecting 4 or 5 stars"
+  },
+  "rateResponseMedium": "Thanks! Tell us how we can do better.",
+  "@rateResponseMedium": {
+    "description": "Short message shown in Rate us sheet after selecting 3 stars"
+  },
+  "rateResponseLow": "Sorry it fell short. Tell us what to fix.",
+  "@rateResponseLow": {
+    "description": "Short message shown in Rate us sheet after selecting 1 or 2 stars"
+  },
+  "rateActionStore": "Rate on Google Play",
+  "@rateActionStore": {
+    "description": "Action button in Rate us sheet to open the store listing"
+  },
+  "rateActionHelpFeedback": "Help & feedback",
+  "@rateActionHelpFeedback": {
+    "description": "Action button in Rate us sheet to open FAQ with rating highlight banner"
+  },
+  "faqFromRatingBanner": "Sorry to hear that. Browse the answers below or contact us; we read every message.",
+  "@faqFromRatingBanner": {
+    "description": "Highlight banner text displayed at the top of FAQ when opened from the Rate us sheet"
+  },
+  "faqActionContactUs": "Contact us",
+  "@faqActionContactUs": {
+    "description": "Button label inside the FAQ highlight banner to open feedback email"
+  },
+  "faqFeedbackEmailSubject": "Doc View Feedback ({version}+{build})",
+  "@faqFeedbackEmailSubject": {
+    "description": "Pre-filled email subject when contacting support from FAQ",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "build": {
+        "type": "String"
+      }
+    }
+  },
+  "faqFeedbackEmailBody": "\n\n---\nApp: Doc View {version} (Build {build})\n",
+  "@faqFeedbackEmailBody": {
+    "description": "Pre-filled email body containing app version and build number",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "build": {
+        "type": "String"
+      }
+    }
+  },
+  "faqEmailClientUnavailable": "Could not open email client",
+  "@faqEmailClientUnavailable": {
+    "description": "Snackbar shown when no email client can handle mailto URI"
+  },
+  "languageScreenTitle": "Language",
+  "@languageScreenTitle": {
+    "description": "App bar title on the Language selection screen"
+  },
+  "languageSearchHint": "Search languages...",
+  "@languageSearchHint": {
+    "description": "Placeholder text inside the Language screen search input"
+  },
+  "languageSystemDefault": "System default",
+  "@languageSystemDefault": {
+    "description": "Row title for selecting the device system default language"
+  },
+  "languageSystemDefaultSubtitle": "Follow device language",
+  "@languageSystemDefaultSubtitle": {
+    "description": "Row subtitle for selecting the device system default language"
+  },
+  "languageNotTranslatedBadge": "(not translated)",
+  "@languageNotTranslatedBadge": {
+    "description": "Debug-only suffix shown for planned languages not yet translated"
+  },
+  "languageNotTranslatedSnack": "This language is not translated yet",
+  "@languageNotTranslatedSnack": {
+    "description": "Debug-only snackbar when tapping an unshipped language row"
+  },
+  "languageNoResults": "No matching languages",
+  "@languageNoResults": {
+    "description": "Empty state text when no languages match the search query"
+  },
+  "languagePseudoLocaleName": "Pseudo-locale (en_XA)",
+  "@languagePseudoLocaleName": {
+    "description": "Debug-only row title for the en_XA pseudo-locale"
+  },
+  "languagePseudoLocaleSubtitle": "Debug expansion testing",
+  "@languagePseudoLocaleSubtitle": {
+    "description": "Debug-only row subtitle for the en_XA pseudo-locale"
+  },
+  "scanSettingsSectionHistory": "History",
+  "@scanSettingsSectionHistory": {
+    "description": "Section header for History inside Scan settings"
+  },
+  "scanSettingsClearHistoryTitle": "Clear recent history",
+  "@scanSettingsClearHistoryTitle": {
+    "description": "Row title inside Scan settings History section"
+  },
+  "scanSettingsClearHistorySubtitle": "Clear opened document history",
+  "@scanSettingsClearHistorySubtitle": {
+    "description": "Row subtitle inside Scan settings History section"
+  },
+  "scanSettingsClearHistoryDialogTitle": "Clear recent history?",
+  "@scanSettingsClearHistoryDialogTitle": {
+    "description": "Confirmation dialog title when clearing recent document history"
+  },
+  "scanSettingsClearHistoryDialogBody": "Files will be removed from Recent. Your files and bookmarks are not affected.",
+  "@scanSettingsClearHistoryDialogBody": {
+    "description": "Confirmation dialog body when clearing recent document history"
+  },
+  "scanSettingsRecentHistoryCleared": "Recent history cleared",
+  "@scanSettingsRecentHistoryCleared": {
+    "description": "Snackbar shown after recent document history is cleared"
+  },
+  "scanSettingsLastScanToday": "today",
+  "@scanSettingsLastScanToday": {
+    "description": "Relative day label for last scan performed today"
+  },
+  "scanSettingsLastScanYesterday": "yesterday",
+  "@scanSettingsLastScanYesterday": {
+    "description": "Relative day label for last scan performed yesterday"
+  },
+  "scanSettingsNeverScanned": "Never scanned",
+  "@scanSettingsNeverScanned": {
+    "description": "Status shown when no library scan has completed yet"
+  },
+  "scanSettingsLastScanPrefix": "Last scan:",
+  "@scanSettingsLastScanPrefix": {
+    "description": "Prefix before the formatted last scan timestamp"
   }
 }

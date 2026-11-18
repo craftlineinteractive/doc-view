@@ -1526,6 +1526,219 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get splitPickerPagesActiveLabel => 'pages active';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsSectionGeneral => 'General';
+
+  @override
+  String get settingsSectionOthers => 'Others';
+
+  @override
+  String get settingsFileManagerTitle => 'File manager';
+
+  @override
+  String get settingsFileManagerSubtitle =>
+      'Browse storage directories and folders';
+
+  @override
+  String get settingsFaqTitle => 'FAQ';
+
+  @override
+  String get settingsFaqSubtitle => 'Frequently asked questions';
+
+  @override
+  String get settingsShareTitle => 'Share';
+
+  @override
+  String get settingsShareSubtitle => 'Recommend Doc View to friends';
+
+  @override
+  String settingsShareMessage(String url) {
+    return 'Check out Doc View - Fast, private, offline document reader: $url';
+  }
+
+  @override
+  String get settingsScanSettingsTitle => 'Scan settings';
+
+  @override
+  String get settingsScanModeOnOpen => 'Scan on open';
+
+  @override
+  String get settingsScanModeManual => 'Manual only';
+
+  @override
+  String get settingsAppThemeTitle => 'App theme';
+
+  @override
+  String get settingsThemeSystem => 'System default';
+
+  @override
+  String get settingsThemeLight => 'Light';
+
+  @override
+  String get settingsThemeDark => 'Dark';
+
+  @override
+  String get settingsLanguageTitle => 'Language';
+
+  @override
+  String get settingsRateUsTitle => 'Rate us';
+
+  @override
+  String get settingsRateUsSubtitle => 'Share your feedback with us';
+
+  @override
+  String get settingsAddWidgetTitle => 'Add Widget';
+
+  @override
+  String get settingsAddWidgetSubtitle => 'Quick access from your home screen';
+
+  @override
+  String get settingsTermsTitle => 'Terms of use';
+
+  @override
+  String get settingsTermsSubtitle => 'Read our terms of service';
+
+  @override
+  String get settingsPrivacyTitle => 'Privacy policy';
+
+  @override
+  String get settingsPrivacySubtitle => 'Read our privacy policy';
+
+  @override
+  String get settingsManageSubscriptionsTitle => 'Manage subscriptions';
+
+  @override
+  String get settingsManageSubscriptionsSubtitle =>
+      'Manage your store subscription';
+
+  @override
+  String settingsVersionDisplay(String version, String build) {
+    return 'Version $version ($build)';
+  }
+
+  @override
+  String settingsVersionSemantics(String version, String build) {
+    return 'Version $version build $build';
+  }
+
+  @override
+  String get settingsOpenSourceLicenses => 'Open-source licenses';
+
+  @override
+  String get rateSheetTitle => 'Rate Doc View';
+
+  @override
+  String get rateSheetSubtitle => 'Your feedback helps us improve';
+
+  @override
+  String rateStarSemantics(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count stars',
+      one: '1 star',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get rateResponseHigh => 'Glad you like it!';
+
+  @override
+  String get rateResponseMedium => 'Thanks! Tell us how we can do better.';
+
+  @override
+  String get rateResponseLow => 'Sorry it fell short. Tell us what to fix.';
+
+  @override
+  String get rateActionStore => 'Rate on Google Play';
+
+  @override
+  String get rateActionHelpFeedback => 'Help & feedback';
+
+  @override
+  String get faqFromRatingBanner =>
+      'Sorry to hear that. Browse the answers below or contact us; we read every message.';
+
+  @override
+  String get faqActionContactUs => 'Contact us';
+
+  @override
+  String faqFeedbackEmailSubject(String version, String build) {
+    return 'Doc View Feedback ($version+$build)';
+  }
+
+  @override
+  String faqFeedbackEmailBody(String version, String build) {
+    return '\n\n---\nApp: Doc View $version (Build $build)\n';
+  }
+
+  @override
+  String get faqEmailClientUnavailable => 'Could not open email client';
+
+  @override
+  String get languageScreenTitle => 'Language';
+
+  @override
+  String get languageSearchHint => 'Search languages...';
+
+  @override
+  String get languageSystemDefault => 'System default';
+
+  @override
+  String get languageSystemDefaultSubtitle => 'Follow device language';
+
+  @override
+  String get languageNotTranslatedBadge => '(not translated)';
+
+  @override
+  String get languageNotTranslatedSnack =>
+      'This language is not translated yet';
+
+  @override
+  String get languageNoResults => 'No matching languages';
+
+  @override
+  String get languagePseudoLocaleName => 'Pseudo-locale (en_XA)';
+
+  @override
+  String get languagePseudoLocaleSubtitle => 'Debug expansion testing';
+
+  @override
+  String get scanSettingsSectionHistory => 'History';
+
+  @override
+  String get scanSettingsClearHistoryTitle => 'Clear recent history';
+
+  @override
+  String get scanSettingsClearHistorySubtitle =>
+      'Clear opened document history';
+
+  @override
+  String get scanSettingsClearHistoryDialogTitle => 'Clear recent history?';
+
+  @override
+  String get scanSettingsClearHistoryDialogBody =>
+      'Files will be removed from Recent. Your files and bookmarks are not affected.';
+
+  @override
+  String get scanSettingsRecentHistoryCleared => 'Recent history cleared';
+
+  @override
+  String get scanSettingsLastScanToday => 'today';
+
+  @override
+  String get scanSettingsLastScanYesterday => 'yesterday';
+
+  @override
+  String get scanSettingsNeverScanned => 'Never scanned';
+
+  @override
+  String get scanSettingsLastScanPrefix => 'Last scan:';
 }
 
 /// The translations for English (`en_XA`).
@@ -3096,4 +3309,229 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get splitPickerPagesActiveLabel => '[þàĝéš àçţîṽé ẋẋẋẋẋ]';
+
+  @override
+  String get settingsTitle => '[Šéţţîñĝš ẋẋẋẋ]';
+
+  @override
+  String get settingsSectionGeneral => '[Ĝéñéřàł ẋẋẋ]';
+
+  @override
+  String get settingsSectionOthers => '[Öţĥéřš ẋẋẋ]';
+
+  @override
+  String get settingsFileManagerTitle => '[Ƒîłé ɱàñàĝéř ẋẋẋẋẋ]';
+
+  @override
+  String get settingsFileManagerSubtitle =>
+      '[Ɓřôŵšé šţôřàĝé đîřéçţôřîéš àñđ ƒôłđéřš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsFaqTitle => '[ƑÅǪ ẋẋ]';
+
+  @override
+  String get settingsFaqSubtitle => '[Ƒřéʠûéñţłý àšƙéđ ʠûéšţîôñš ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsShareTitle => '[Šĥàřé ẋẋ]';
+
+  @override
+  String get settingsShareSubtitle =>
+      '[Řéçôɱɱéñđ Ðôç Ṽîéŵ ţô ƒřîéñđš ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String settingsShareMessage(String url) {
+    return '[Çĥéçƙ ôûţ Ðôç Ṽîéŵ - Ƒàšţ, þřîṽàţé, ôƒƒłîñé đôçûɱéñţ řéàđéř: $url ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get settingsScanSettingsTitle => '[Šçàñ šéţţîñĝš ẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsScanModeOnOpen => '[Šçàñ ôñ ôþéñ ẋẋẋẋẋ]';
+
+  @override
+  String get settingsScanModeManual => '[Ṁàñûàł ôñłý ẋẋẋẋẋ]';
+
+  @override
+  String get settingsAppThemeTitle => '[Åþþ ţĥéɱé ẋẋẋẋ]';
+
+  @override
+  String get settingsThemeSystem => '[Šýšţéɱ đéƒàûłţ ẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsThemeLight => '[Łîĝĥţ ẋẋ]';
+
+  @override
+  String get settingsThemeDark => '[Ðàřƙ ẋẋ]';
+
+  @override
+  String get settingsLanguageTitle => '[Łàñĝûàĝé ẋẋẋẋ]';
+
+  @override
+  String get settingsRateUsTitle => '[Řàţé ûš ẋẋẋ]';
+
+  @override
+  String get settingsRateUsSubtitle =>
+      '[Šĥàřé ýôûř ƒééđƀàçƙ ŵîţĥ ûš ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsAddWidgetTitle => '[Åđđ Ŵîđĝéţ ẋẋẋẋ]';
+
+  @override
+  String get settingsAddWidgetSubtitle =>
+      '[Ǫûîçƙ àççéšš ƒřôɱ ýôûř ĥôɱé šçřééñ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsTermsTitle => '[Ťéřɱš ôƒ ûšé ẋẋẋẋẋ]';
+
+  @override
+  String get settingsTermsSubtitle => '[Řéàđ ôûř ţéřɱš ôƒ šéřṽîçé ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsPrivacyTitle => '[Þřîṽàçý þôłîçý ẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsPrivacySubtitle => '[Řéàđ ôûř þřîṽàçý þôłîçý ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsManageSubscriptionsTitle =>
+      '[Ṁàñàĝé šûƀšçřîþţîôñš ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsManageSubscriptionsSubtitle =>
+      '[Ṁàñàĝé ýôûř šţôřé šûƀšçřîþţîôñ ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String settingsVersionDisplay(String version, String build) {
+    return '[Ṽéřšîôñ $version ($build) ẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String settingsVersionSemantics(String version, String build) {
+    return '[Ṽéřšîôñ $version ƀûîłđ $build ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get settingsOpenSourceLicenses => '[Öþéñ-šôûřçé łîçéñšéš ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get rateSheetTitle => '[Řàţé Ðôç Ṽîéŵ ẋẋẋẋẋẋ]';
+
+  @override
+  String get rateSheetSubtitle =>
+      '[Ýôûř ƒééđƀàçƙ ĥéłþš ûš îɱþřôṽé ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String rateStarSemantics(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count šţàřš ẋẋẋẋẋẋ]',
+      one: '[1 šţàř ẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get rateResponseHigh => '[Ĝłàđ ýôû łîƙé îţ! ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get rateResponseMedium =>
+      '[Ťĥàñƙš! Ťéłł ûš ĥôŵ ŵé çàñ đô ƀéţţéř. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get rateResponseLow =>
+      '[Šôřřý îţ ƒéłł šĥôřţ. Ťéłł ûš ŵĥàţ ţô ƒîẋ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get rateActionStore => '[Řàţé ôñ Ĝôôĝłé Þłàý ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get rateActionHelpFeedback => '[Ħéłþ & ƒééđƀàçƙ ẋẋẋẋẋẋ]';
+
+  @override
+  String get faqFromRatingBanner =>
+      '[Šôřřý ţô ĥéàř ţĥàţ. Ɓřôŵšé ţĥé àñšŵéřš ƀéłôŵ ôř çôñţàçţ ûš; ŵé řéàđ éṽéřý ɱéššàĝé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get faqActionContactUs => '[Çôñţàçţ ûš ẋẋẋẋ]';
+
+  @override
+  String faqFeedbackEmailSubject(String version, String build) {
+    return '[Ðôç Ṽîéŵ Ƒééđƀàçƙ ($version+$build) ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String faqFeedbackEmailBody(String version, String build) {
+    return '[\n\n---\nÅþþ: Ðôç Ṽîéŵ $version (Ɓûîłđ $build)\n ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get faqEmailClientUnavailable =>
+      '[Çôûłđ ñôţ ôþéñ éɱàîł çłîéñţ ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get languageScreenTitle => '[Łàñĝûàĝé ẋẋẋẋ]';
+
+  @override
+  String get languageSearchHint => '[Šéàřçĥ łàñĝûàĝéš... ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get languageSystemDefault => '[Šýšţéɱ đéƒàûłţ ẋẋẋẋẋẋ]';
+
+  @override
+  String get languageSystemDefaultSubtitle =>
+      '[Ƒôłłôŵ đéṽîçé łàñĝûàĝé ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get languageNotTranslatedBadge => '[(ñôţ ţřàñšłàţéđ) ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get languageNotTranslatedSnack =>
+      '[Ťĥîš łàñĝûàĝé îš ñôţ ţřàñšłàţéđ ýéţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get languageNoResults => '[Ñô ɱàţçĥîñĝ łàñĝûàĝéš ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get languagePseudoLocaleName => '[Þšéûđô-łôçàłé (éñ_ẊÅ) ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get languagePseudoLocaleSubtitle =>
+      '[Ðéƀûĝ éẋþàñšîôñ ţéšţîñĝ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsSectionHistory => '[Ħîšţôřý ẋẋẋ]';
+
+  @override
+  String get scanSettingsClearHistoryTitle => '[Çłéàř řéçéñţ ĥîšţôřý ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsClearHistorySubtitle =>
+      '[Çłéàř ôþéñéđ đôçûɱéñţ ĥîšţôřý ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsClearHistoryDialogTitle =>
+      '[Çłéàř řéçéñţ ĥîšţôřý? ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsClearHistoryDialogBody =>
+      '[Ƒîłéš ŵîłł ƀé řéɱôṽéđ ƒřôɱ Řéçéñţ. Ýôûř ƒîłéš àñđ ƀôôƙɱàřƙš àřé ñôţ àƒƒéçţéđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsRecentHistoryCleared =>
+      '[Řéçéñţ ĥîšţôřý çłéàřéđ ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsLastScanToday => '[ţôđàý ẋẋ]';
+
+  @override
+  String get scanSettingsLastScanYesterday => '[ýéšţéřđàý ẋẋẋẋ]';
+
+  @override
+  String get scanSettingsNeverScanned => '[Ñéṽéř šçàññéđ ẋẋẋẋẋẋ]';
+
+  @override
+  String get scanSettingsLastScanPrefix => '[Łàšţ šçàñ: ẋẋẋẋ]';
 }

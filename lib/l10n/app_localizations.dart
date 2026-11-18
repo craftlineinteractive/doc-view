@@ -2538,6 +2538,384 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'pages active'**
   String get splitPickerPagesActiveLabel;
+
+  /// Main app bar title on the Settings tab
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// Section header for general application settings
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsSectionGeneral;
+
+  /// Section header for legal, widget, and subscription settings
+  ///
+  /// In en, this message translates to:
+  /// **'Others'**
+  String get settingsSectionOthers;
+
+  /// Settings row title to open the system file manager
+  ///
+  /// In en, this message translates to:
+  /// **'File manager'**
+  String get settingsFileManagerTitle;
+
+  /// Settings row subtitle for File manager
+  ///
+  /// In en, this message translates to:
+  /// **'Browse storage directories and folders'**
+  String get settingsFileManagerSubtitle;
+
+  /// Settings row title to open Frequently Asked Questions
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get settingsFaqTitle;
+
+  /// Settings row subtitle for FAQ
+  ///
+  /// In en, this message translates to:
+  /// **'Frequently asked questions'**
+  String get settingsFaqSubtitle;
+
+  /// Settings row title to share the app with others
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get settingsShareTitle;
+
+  /// Settings row subtitle for Share
+  ///
+  /// In en, this message translates to:
+  /// **'Recommend Doc View to friends'**
+  String get settingsShareSubtitle;
+
+  /// Text shared via the system share sheet when sharing the app
+  ///
+  /// In en, this message translates to:
+  /// **'Check out Doc View - Fast, private, offline document reader: {url}'**
+  String settingsShareMessage(String url);
+
+  /// Settings row title to open Scan settings
+  ///
+  /// In en, this message translates to:
+  /// **'Scan settings'**
+  String get settingsScanSettingsTitle;
+
+  /// Subtitle on Scan settings row when automatic scan on app open is enabled
+  ///
+  /// In en, this message translates to:
+  /// **'Scan on open'**
+  String get settingsScanModeOnOpen;
+
+  /// Subtitle on Scan settings row when manual scan only is enabled
+  ///
+  /// In en, this message translates to:
+  /// **'Manual only'**
+  String get settingsScanModeManual;
+
+  /// Settings row title to choose the app visual theme
+  ///
+  /// In en, this message translates to:
+  /// **'App theme'**
+  String get settingsAppThemeTitle;
+
+  /// Label when app theme follows system appearance
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get settingsThemeSystem;
+
+  /// Label when light theme is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsThemeLight;
+
+  /// Label when dark theme is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsThemeDark;
+
+  /// Settings row title to open the Language selection screen
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguageTitle;
+
+  /// Settings row title to open the Rate Doc View bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Rate us'**
+  String get settingsRateUsTitle;
+
+  /// Settings row subtitle for Rate us
+  ///
+  /// In en, this message translates to:
+  /// **'Share your feedback with us'**
+  String get settingsRateUsSubtitle;
+
+  /// Settings row title to add a home screen widget (behind feature flag)
+  ///
+  /// In en, this message translates to:
+  /// **'Add Widget'**
+  String get settingsAddWidgetTitle;
+
+  /// Settings row subtitle for Add Widget
+  ///
+  /// In en, this message translates to:
+  /// **'Quick access from your home screen'**
+  String get settingsAddWidgetSubtitle;
+
+  /// Settings row title to open Terms of use in external browser
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of use'**
+  String get settingsTermsTitle;
+
+  /// Settings row subtitle for Terms of use
+  ///
+  /// In en, this message translates to:
+  /// **'Read our terms of service'**
+  String get settingsTermsSubtitle;
+
+  /// Settings row title to open Privacy policy in external browser
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get settingsPrivacyTitle;
+
+  /// Settings row subtitle for Privacy policy
+  ///
+  /// In en, this message translates to:
+  /// **'Read our privacy policy'**
+  String get settingsPrivacySubtitle;
+
+  /// Settings row title to open store subscription management (behind feature flag)
+  ///
+  /// In en, this message translates to:
+  /// **'Manage subscriptions'**
+  String get settingsManageSubscriptionsTitle;
+
+  /// Settings row subtitle for Manage subscriptions
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your store subscription'**
+  String get settingsManageSubscriptionsSubtitle;
+
+  /// Centered footer text showing semantic app version and build number
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version} ({build})'**
+  String settingsVersionDisplay(String version, String build);
+
+  /// Accessibility semantics label for the app version footer
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version} build {build}'**
+  String settingsVersionSemantics(String version, String build);
+
+  /// Footer link label to open Flutter third-party licenses page
+  ///
+  /// In en, this message translates to:
+  /// **'Open-source licenses'**
+  String get settingsOpenSourceLicenses;
+
+  /// Title of the Rate us bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Doc View'**
+  String get rateSheetTitle;
+
+  /// Subtitle inside the Rate us bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Your feedback helps us improve'**
+  String get rateSheetSubtitle;
+
+  /// Accessibility semantics label for each star button in StarRatingBar
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 star} other{{count} stars}}'**
+  String rateStarSemantics(int count);
+
+  /// Short message shown in Rate us sheet after selecting 4 or 5 stars
+  ///
+  /// In en, this message translates to:
+  /// **'Glad you like it!'**
+  String get rateResponseHigh;
+
+  /// Short message shown in Rate us sheet after selecting 3 stars
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks! Tell us how we can do better.'**
+  String get rateResponseMedium;
+
+  /// Short message shown in Rate us sheet after selecting 1 or 2 stars
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry it fell short. Tell us what to fix.'**
+  String get rateResponseLow;
+
+  /// Action button in Rate us sheet to open the store listing
+  ///
+  /// In en, this message translates to:
+  /// **'Rate on Google Play'**
+  String get rateActionStore;
+
+  /// Action button in Rate us sheet to open FAQ with rating highlight banner
+  ///
+  /// In en, this message translates to:
+  /// **'Help & feedback'**
+  String get rateActionHelpFeedback;
+
+  /// Highlight banner text displayed at the top of FAQ when opened from the Rate us sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry to hear that. Browse the answers below or contact us; we read every message.'**
+  String get faqFromRatingBanner;
+
+  /// Button label inside the FAQ highlight banner to open feedback email
+  ///
+  /// In en, this message translates to:
+  /// **'Contact us'**
+  String get faqActionContactUs;
+
+  /// Pre-filled email subject when contacting support from FAQ
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View Feedback ({version}+{build})'**
+  String faqFeedbackEmailSubject(String version, String build);
+
+  /// Pre-filled email body containing app version and build number
+  ///
+  /// In en, this message translates to:
+  /// **'\n\n---\nApp: Doc View {version} (Build {build})\n'**
+  String faqFeedbackEmailBody(String version, String build);
+
+  /// Snackbar shown when no email client can handle mailto URI
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open email client'**
+  String get faqEmailClientUnavailable;
+
+  /// App bar title on the Language selection screen
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageScreenTitle;
+
+  /// Placeholder text inside the Language screen search input
+  ///
+  /// In en, this message translates to:
+  /// **'Search languages...'**
+  String get languageSearchHint;
+
+  /// Row title for selecting the device system default language
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get languageSystemDefault;
+
+  /// Row subtitle for selecting the device system default language
+  ///
+  /// In en, this message translates to:
+  /// **'Follow device language'**
+  String get languageSystemDefaultSubtitle;
+
+  /// Debug-only suffix shown for planned languages not yet translated
+  ///
+  /// In en, this message translates to:
+  /// **'(not translated)'**
+  String get languageNotTranslatedBadge;
+
+  /// Debug-only snackbar when tapping an unshipped language row
+  ///
+  /// In en, this message translates to:
+  /// **'This language is not translated yet'**
+  String get languageNotTranslatedSnack;
+
+  /// Empty state text when no languages match the search query
+  ///
+  /// In en, this message translates to:
+  /// **'No matching languages'**
+  String get languageNoResults;
+
+  /// Debug-only row title for the en_XA pseudo-locale
+  ///
+  /// In en, this message translates to:
+  /// **'Pseudo-locale (en_XA)'**
+  String get languagePseudoLocaleName;
+
+  /// Debug-only row subtitle for the en_XA pseudo-locale
+  ///
+  /// In en, this message translates to:
+  /// **'Debug expansion testing'**
+  String get languagePseudoLocaleSubtitle;
+
+  /// Section header for History inside Scan settings
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get scanSettingsSectionHistory;
+
+  /// Row title inside Scan settings History section
+  ///
+  /// In en, this message translates to:
+  /// **'Clear recent history'**
+  String get scanSettingsClearHistoryTitle;
+
+  /// Row subtitle inside Scan settings History section
+  ///
+  /// In en, this message translates to:
+  /// **'Clear opened document history'**
+  String get scanSettingsClearHistorySubtitle;
+
+  /// Confirmation dialog title when clearing recent document history
+  ///
+  /// In en, this message translates to:
+  /// **'Clear recent history?'**
+  String get scanSettingsClearHistoryDialogTitle;
+
+  /// Confirmation dialog body when clearing recent document history
+  ///
+  /// In en, this message translates to:
+  /// **'Files will be removed from Recent. Your files and bookmarks are not affected.'**
+  String get scanSettingsClearHistoryDialogBody;
+
+  /// Snackbar shown after recent document history is cleared
+  ///
+  /// In en, this message translates to:
+  /// **'Recent history cleared'**
+  String get scanSettingsRecentHistoryCleared;
+
+  /// Relative day label for last scan performed today
+  ///
+  /// In en, this message translates to:
+  /// **'today'**
+  String get scanSettingsLastScanToday;
+
+  /// Relative day label for last scan performed yesterday
+  ///
+  /// In en, this message translates to:
+  /// **'yesterday'**
+  String get scanSettingsLastScanYesterday;
+
+  /// Status shown when no library scan has completed yet
+  ///
+  /// In en, this message translates to:
+  /// **'Never scanned'**
+  String get scanSettingsNeverScanned;
+
+  /// Prefix before the formatted last scan timestamp
+  ///
+  /// In en, this message translates to:
+  /// **'Last scan:'**
+  String get scanSettingsLastScanPrefix;
 }
 
 class _AppLocalizationsDelegate

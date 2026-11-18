@@ -13,6 +13,7 @@ import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/permissions/permissions_screen.dart';
 import '../../features/search/search_screen.dart';
 import '../../features/settings/faq_screen.dart';
+import '../../features/settings/language_screen.dart';
 import '../../features/settings/scan_settings_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/shell/main_shell.dart';
@@ -146,6 +147,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'scan-settings',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const ScanSettingsScreen(),
+      ),
+      GoRoute(
+        path: '/settings/language',
+        name: 'language',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const LanguageScreen(),
       ),
       GoRoute(
         path: '/viewer',
