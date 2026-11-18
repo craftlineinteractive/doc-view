@@ -18,6 +18,29 @@ import 'l10n/app_localizations.dart';
 class DocReaderApp extends ConsumerStatefulWidget {
   const DocReaderApp({super.key});
 
+  /// Resolves [deviceLocale] against [supportedLocales], prioritizing exact
+  /// language+country matches (e.g. `en_XA`, `pt_BR`) before language-only fallback.
+  static Locale resolveAppLocale(
+    Locale? deviceLocale,
+    Iterable<Locale> supportedLocales,
+  ) {
+    if (deviceLocale != null) {
+      for (final supported in supportedLocales) {
+        if (supported.languageCode == deviceLocale.languageCode &&
+            supported.countryCode == deviceLocale.countryCode) {
+          return supported;
+        }
+      }
+      for (final supported in supportedLocales) {
+        if (supported.languageCode == deviceLocale.languageCode &&
+            supported.countryCode == null) {
+          return supported;
+        }
+      }
+    }
+    return const Locale('en');
+  }
+
   @override
   ConsumerState<DocReaderApp> createState() => _DocReaderAppState();
 }
@@ -205,6 +228,7 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     final router = ref.watch(routerProvider);
     final settings = ref.watch(settingsProvider);
     final locale = ref.watch(localeProvider);
+    final debugForceRtl = kReleaseMode ? false : ref.watch(debugForceRtlProvider);
 
     return MaterialApp.router(
       title: AppConstants.appName,
@@ -217,23 +241,19 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
       supportedLocales: kReleaseMode
           ? const [Locale('en')]
           : AppLocalizations.supportedLocales,
-      localeResolutionCallback: (deviceLocale, supportedLocales) {
-        if (deviceLocale != null) {
-          for (final supported in supportedLocales) {
-            if (supported.languageCode == deviceLocale.languageCode &&
-                (supported.countryCode == null ||
-                    supported.countryCode == deviceLocale.countryCode)) {
-              return supported;
-            }
-          }
-        }
-        return const Locale('en');
-      },
+      localeResolutionCallback: DocReaderApp.resolveAppLocale,
       routerConfig: router,
       builder: (context, child) {
         final isDark = Theme.of(context).brightness == Brightness.dark;
         AppTheme.configureSystemUI(isDark ? Brightness.dark : Brightness.light);
-        return child ?? const SizedBox.shrink();
+        final content = child ?? const SizedBox.shrink();
+        if (!kReleaseMode && debugForceRtl) {
+          return Directionality(
+            textDirection: TextDirection.rtl,
+            child: content,
+          );
+        }
+        return content;
       },
     );
   }

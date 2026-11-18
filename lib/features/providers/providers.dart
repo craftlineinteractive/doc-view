@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -193,11 +194,51 @@ final settingsProvider = NotifierProvider<SettingsNotifier, AppSettings>(
 final localeProvider = Provider<Locale?>((ref) {
   final code = ref.watch(settingsProvider.select((s) => s.localeCode));
   if (code == null) return null;
-  if (code == 'en_XA') {
-    return const Locale('en', 'XA');
+  if (code.contains('_')) {
+    final parts = code.split('_');
+    return Locale(parts[0], parts[1]);
+  }
+  if (code.contains('-')) {
+    final parts = code.split('-');
+    return Locale(parts[0], parts[1]);
   }
   return Locale(code);
 });
+
+/// Debug-only notifier forcing RTL layout direction across the app for QA verification.
+class DebugForceRtlNotifier extends Notifier<bool> {
+  static const String prefKey = 'debug_force_rtl';
+
+  @override
+  bool build() {
+    if (kReleaseMode) return false;
+    _load();
+    return false;
+  }
+
+  Future<void> _load() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final val = prefs.getBool(prefKey) ?? false;
+      if (val != state) {
+        state = val;
+      }
+    } catch (_) {}
+  }
+
+  Future<void> setForceRtl(bool value) async {
+    if (kReleaseMode) return;
+    state = value;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(prefKey, value);
+    } catch (_) {}
+  }
+}
+
+/// Debug-only provider for app-wide Force-RTL preview. Always false in release builds.
+final debugForceRtlProvider =
+    NotifierProvider<DebugForceRtlNotifier, bool>(DebugForceRtlNotifier.new);
 
 /// Notifier tracking background scan state, progress counts, and completion.
 class ScanStateNotifier extends Notifier<ScanProgress> {

@@ -1,3 +1,4 @@
+import 'package:docview/app.dart';
 import 'package:docview/data/repositories/settings_repository.dart';
 import 'package:docview/features/providers/providers.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +74,23 @@ void main() {
       // Reset to system default
       await container.read(settingsProvider.notifier).setLocaleCode(null);
       expect(container.read(localeProvider), isNull);
+    });
+
+    test('resolveAppLocale prioritizes exact language+country matches like en_XA', () {
+      const supported = [Locale('en'), Locale('en', 'XA')];
+
+      expect(
+        DocReaderApp.resolveAppLocale(const Locale('en', 'XA'), supported),
+        equals(const Locale('en', 'XA')),
+      );
+      expect(
+        DocReaderApp.resolveAppLocale(const Locale('en', 'US'), supported),
+        equals(const Locale('en')),
+      );
+      expect(
+        DocReaderApp.resolveAppLocale(const Locale('ja'), supported),
+        equals(const Locale('en')),
+      );
     });
   });
 }

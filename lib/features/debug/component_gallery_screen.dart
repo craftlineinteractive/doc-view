@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/constants/file_types.dart';
+import '../providers/providers.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/theme/doc_view_colors.dart';
@@ -24,14 +26,15 @@ import '../../shared/widgets/tools/doc_tool_widgets.dart';
 
 /// Debug-only Component Gallery showcasing the entire Doc View component library.
 /// Only available in [kDebugMode], accessible via long-press on Settings version row.
-class ComponentGalleryScreen extends StatefulWidget {
+class ComponentGalleryScreen extends ConsumerStatefulWidget {
   const ComponentGalleryScreen({super.key});
 
   @override
-  State<ComponentGalleryScreen> createState() => _ComponentGalleryScreenState();
+  ConsumerState<ComponentGalleryScreen> createState() =>
+      _ComponentGalleryScreenState();
 }
 
-class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
+class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen> {
   bool _isDark = false;
   double _textScale = 1.0;
   bool _usePseudoLocale = false;
@@ -135,8 +138,12 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
                                     ? 'Active: [!!! Hêéllôö wôörld !!!] (+40% expansion)'
                                     : 'Standard English (en)'),
                                 value: _usePseudoLocale,
-                                onChanged: (val) =>
-                                    setState(() => _usePseudoLocale = val),
+                                onChanged: (val) {
+                                  setState(() => _usePseudoLocale = val);
+                                  ref
+                                      .read(settingsProvider.notifier)
+                                      .setLocaleCode(val ? 'en_XA' : null);
+                                },
                               ),
                               Divider(color: tokens.hairline, height: 1),
                               SwitchListTile(
@@ -145,7 +152,12 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
                                     ? 'Right-to-Left layout active'
                                     : 'Left-to-Right layout active'),
                                 value: _isRtl,
-                                onChanged: (val) => setState(() => _isRtl = val),
+                                onChanged: (val) {
+                                  setState(() => _isRtl = val);
+                                  ref
+                                      .read(debugForceRtlProvider.notifier)
+                                      .setForceRtl(val);
+                                },
                               ),
                             ],
                           ),
