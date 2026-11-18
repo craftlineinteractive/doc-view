@@ -115,24 +115,28 @@ class _FaqScreenState extends State<FaqScreen> {
                     ),
                   ),
                   Flexible(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: tokens.surface,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: tokens.hairline),
-                      ),
-                      child: Text(
-                        context.l10n.faqHeaderTopics(questions.length),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: DocViewTypography.captionXs.copyWith(
-                          color: tokens.textSecondary,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
+                    flex: 0,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 140),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: tokens.surface,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: tokens.hairline),
+                        ),
+                        child: Text(
+                          context.l10n.faqHeaderTopics(questions.length),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: DocViewTypography.captionXs.copyWith(
+                            color: tokens.textSecondary,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ),
