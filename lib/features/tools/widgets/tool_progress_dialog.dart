@@ -110,7 +110,7 @@ class ToolProgressDialog extends StatelessWidget {
               if (onCancel != null) ...[
                 const SizedBox(height: 20),
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: AlignmentDirectional.centerEnd,
                   child: DocSecondaryButton(
                     label: context.l10n.actionCancel,
                     onPressed: onCancel,

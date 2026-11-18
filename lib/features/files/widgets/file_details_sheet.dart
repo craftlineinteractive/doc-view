@@ -108,11 +108,11 @@ class FileDetailsSheet extends ConsumerWidget {
             children: [
               previewChild,
 
-              // "PG 1/N" chip overlaid at bottom-right if page count is known
+              // "PG 1/N" chip overlaid at bottom-end if page count is known
               if (pageCount != null && pageCount! > 0)
-                Positioned(
+                PositionedDirectional(
                   bottom: 6,
-                  right: 6,
+                  end: 6,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 6,
@@ -266,7 +266,7 @@ class FileDetailsSheet extends ConsumerWidget {
               ),
               const SizedBox(height: 6),
               Container(
-                padding: const EdgeInsets.fromLTRB(12, 6, 6, 6),
+                padding: const EdgeInsetsDirectional.fromSTEB(12, 6, 6, 6),
                 decoration: BoxDecoration(
                   color: tokens.surface,
                   borderRadius: BorderRadius.circular(10),

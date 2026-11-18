@@ -398,7 +398,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
                 ),
                 if (_nameError != null)
                   Padding(
-                    padding: const EdgeInsets.only(top: 4, left: 4),
+                    padding: const EdgeInsetsDirectional.only(top: 4, start: 4),
                     child: Text(
                       _nameError!.localizedMessage(context),
                       style: DocViewTypography.captionXs.copyWith(

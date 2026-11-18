@@ -737,7 +737,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
         ),
         if (isAllPagesDisabled || isEvery5Disabled)
           Padding(
-            padding: const EdgeInsets.only(top: 6, left: 4),
+            padding: const EdgeInsetsDirectional.only(top: 6, start: 4),
             child: Text(
               context.l10n.splitMacroLimitHint,
               style: DocViewTypography.captionXs.copyWith(

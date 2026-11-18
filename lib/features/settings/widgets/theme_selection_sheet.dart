@@ -189,9 +189,9 @@ class _ThemePreviewCard extends StatelessWidget {
               ),
             ),
             if (isSelected)
-              Positioned(
+              PositionedDirectional(
                 top: -6,
-                right: -4,
+                end: -4,
                 child: Container(
                   width: 20,
                   height: 20,

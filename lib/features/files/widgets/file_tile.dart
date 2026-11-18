@@ -106,8 +106,8 @@ class FileTile extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      const Positioned(
-                        left: 4,
+                      const PositionedDirectional(
+                        start: 4,
                         bottom: 4,
                         child: FileTypeBadge(
                           category: FileCategory.image,

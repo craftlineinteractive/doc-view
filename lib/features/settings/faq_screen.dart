@@ -93,7 +93,7 @@ class _FaqScreenState extends State<FaqScreen> {
           children: [
             // Header Bar
             Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 20, 8),
+              padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 20, 8),
               child: Row(
                 children: [
                   DocIconButton(

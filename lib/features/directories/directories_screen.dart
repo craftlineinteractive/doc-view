@@ -263,7 +263,7 @@ class _DirectoriesScreenState extends ConsumerState<DirectoriesScreen> {
     return Container(
       height: 48,
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      alignment: Alignment.centerLeft,
+      alignment: AlignmentDirectional.centerStart,
       child: ListView.separated(
         controller: _breadcrumbScrollController,
         scrollDirection: Axis.horizontal,
