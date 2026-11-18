@@ -1,7 +1,16 @@
 # Doc View Hardcoded Strings Allowlist
+# Legitimate non-translatable literals only (brand names, file-type labels,
+# system identifiers, ad compliance badges, debug-only gallery, decorative
+# sample text inside illustrations).
 # Format: <relative_path> | <literal_or_pattern> | <reason>
 
+# Brand name
 lib/core/constants/app_constants.dart | Doc View | Untranslatable brand name
+lib/features/splash/splash_screen.dart | Doc View | Untranslatable brand name
+lib/features/permissions/permissions_screen.dart | Doc View | Untranslatable brand name
+lib/shared/widgets/navigation/doc_app_bar.dart | Doc View | Untranslatable brand name
+
+# File-type labels and extensions
 lib/core/constants/app_constants.dart | PDF | Untranslatable file extension
 lib/core/constants/app_constants.dart | DOCX | Untranslatable file extension
 lib/core/constants/app_constants.dart | XLSX | Untranslatable file extension
@@ -10,12 +19,37 @@ lib/core/constants/app_constants.dart | TXT | Untranslatable file extension
 lib/core/constants/app_constants.dart | DOC | Untranslatable file extension
 lib/core/constants/app_constants.dart | XLS | Untranslatable file extension
 lib/core/constants/app_constants.dart | PPT | Untranslatable file extension
-lib/shared/widgets/ads/ad_placeholders.dart | Ad | Standard ad disclosure badge per ad compliance rules
+lib/features/home/home_screen.dart | PDF | Untranslatable file-type category label
+lib/features/home/home_screen.dart | Word | Untranslatable file-type category label
+lib/features/home/home_screen.dart | Excel | Untranslatable file-type category label
+lib/features/home/home_screen.dart | PPT | Untranslatable file-type category label
+lib/features/home/home_screen.dart | TXT | Untranslatable file-type category label
+lib/features/home/home_screen.dart | Image | Untranslatable file-type category label
+lib/features/tools/merge_screen.dart | .pdf | Untranslatable file extension suffix badge
 lib/shared/widgets/tiles/file_type_badge.dart | PDF | Untranslatable file badge text
 lib/shared/widgets/tiles/doc_folded_icon.dart | PDF | Untranslatable file badge text
-lib/features/files/widgets/file_options_sheet.dart | ALL | Deferred to phase G1b per scope guard
-lib/features/files/widgets/file_details_sheet.dart | ALL | Deferred to phase G1b per scope guard
-lib/features/files/open_document.dart | ALL | Deferred to phase G1b per scope guard
-lib/features/files/controllers/selection_controller.dart | ALL | Deferred to phase G1b per scope guard
-lib/features/files/widgets/file_tile.dart | ALL | Deferred to phase G1b per scope guard
-lib/shared/widgets/tools/doc_tool_widgets.dart | ALL | Deferred to phase G1b per scope guard (tools)
+
+# System / platform identifiers
+lib/features/settings/scan_settings_screen.dart | MANAGE_EXTERNAL_STORAGE | Android system permission identifier
+
+# Debug-only component gallery
+lib/features/debug/component_gallery_screen.dart | ALL | Debug-only UI component gallery screen
+
+# Ad disclosure badge and debug-only ad placeholders
+lib/shared/widgets/ads/ad_placeholders.dart | AD | Standard ad disclosure badge per ad compliance rules
+lib/shared/widgets/ads/ad_placeholders.dart | Ad | Standard ad disclosure badge per ad compliance rules
+lib/features/permissions/permissions_screen.dart | AD | Decorative ad disclosure badge inside illustration
+
+# Decorative sample text inside onboarding & permissions illustrations
+lib/features/onboarding/onboarding_screen.dart | Q3_Audit.xlsx | Decorative sample filename inside illustration
+lib/features/onboarding/onboarding_screen.dart | Pitch_Deck.pptx | Decorative sample filename inside illustration
+lib/features/onboarding/onboarding_screen.dart | Contract.docx | Decorative sample filename inside illustration
+lib/features/onboarding/onboarding_screen.dart | PDF | Decorative sample badge inside illustration
+lib/features/onboarding/onboarding_screen.dart | Financial_Plan.pdf | Decorative sample filename inside illustration
+lib/features/onboarding/onboarding_screen.dart | Page 1 of 12 | Decorative sample text inside illustration
+lib/features/onboarding/onboarding_screen.dart | All Files | Decorative sample text inside illustration
+lib/features/permissions/permissions_screen.dart | Storage | Decorative sample text inside illustration
+lib/features/permissions/permissions_screen.dart | Automatic | Decorative sample text inside illustration
+lib/features/permissions/permissions_screen.dart | Indexed Offline | Decorative sample text inside illustration
+lib/features/permissions/permissions_screen.dart | On My iPhone | Decorative sample text inside illustration
+lib/features/permissions/permissions_screen.dart | Doc View Folder | Decorative sample text inside illustration
