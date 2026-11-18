@@ -35,7 +35,7 @@ abstract final class AppIcons {
   static const IconData star = Icons.star;
   static const IconData bookmark = Icons.star;
   static const IconData bookmarkOutline = Icons.star_border;
-  static const IconData chevronRight = IconData(0xe15b, fontFamily: 'MaterialIcons', matchTextDirection: true);
+  static const IconData chevronRight = Icons.chevron_right;
   static const IconData chevronDown = Icons.keyboard_arrow_down;
   static const IconData chevronUp = Icons.keyboard_arrow_up;
   static const IconData add = Icons.add;
