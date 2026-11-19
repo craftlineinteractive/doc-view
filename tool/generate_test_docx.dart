@@ -171,7 +171,7 @@ void main() {
   addFile('word/numbering.xml', numbering);
   addFile('word/document.xml', docXml.toString());
 
-  final zipBytes = ZipEncoder().encode(archive);
+  final zipBytes = ZipEncoder().encode(archive)!;
   File('multipage_bullets.docx').writeAsBytesSync(zipBytes);
   print('Successfully created multipage_bullets.docx (${zipBytes.length} bytes)');
 }

@@ -48,6 +48,9 @@ dependencies:
   intl: ^0.20.2
   shared_preferences: ^2.5.6
   pdfrx: ^2.4.8
+  excel: ^4.0.6
+  csv: ^6.0.0
+  two_dimensional_scrollables: ^0.3.9
   open_filex: ^5.0.0
   offline_document_viewer: ^0.1.0
   flutter_inappwebview: ^6.2.0-beta.3
@@ -123,6 +126,8 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
 dependency_overrides:
+  xml: ^6.5.0
+  archive: ^3.6.1
   offline_document_viewer:
     path: packages/offline_document_viewer
 
