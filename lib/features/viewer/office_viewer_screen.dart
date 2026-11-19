@@ -425,7 +425,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
             ),
             tooltip: currentFile.isBookmarked
                 ? l10n.tooltipRemoveBookmark
-                : l10n.tooltipBookmark,
+                : l10n.tooltipAddBookmark,
             onPressed: () {
               ref
                   .read(fileActionsControllerProvider)
@@ -435,7 +435,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
           // 3-dot popup menu
           PopupMenuButton<String>(
             icon: Icon(Icons.more_vert_rounded, color: tokens.textPrimary),
-            tooltip: l10n.tooltipMoreOptions,
+            tooltip: l10n.tooltipMoreActions,
             elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),

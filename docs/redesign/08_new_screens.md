@@ -144,3 +144,67 @@ This document catalogs every screen and bottom sheet added or restructured in **
 ### 9. PDF More & Pages Bottom Sheets (`lib/features/viewer/widgets/`)
 - Fully localized with zero hardcoded strings.
 - Clamped text scaling (max 1.3x) to guarantee zero overflows even under extreme pseudo-locales (`en_XA`, RTL) at 2.0x accessibility font scaling.
+
+---
+
+## Phase G3b Office & TXT Viewers Modernization
+
+### 10. Office Viewer Screen (`lib/features/viewer/office_viewer_screen.dart`, route `/viewer/office`)
+- **Supported Formats**: Word (`docx`, `docm`, `rtf`, `doc`) and PowerPoint (`pptx`, `pptm`, `ppt`).
+- **Structure**:
+  - **Top Bar**:
+    - Back button with localized tooltip.
+    - Title column: truncated file name (`TextOverflow.ellipsis`) with subtitle `"N units • <EXT>"`.
+    - Bookmark toggle action.
+    - 3-dot overflow menu: "Outline" (conditionally displayed if document outline is available), "Details" (`FileDetailsSheet`), and "Open in another app" (`OpenFilex`).
+  - **Viewer Body**:
+    - `offline_document_viewer` `DocumentView` integration.
+    - Legacy format banner ("Legacy format: text only") preserved for `.doc` and `.rtf`.
+    - Tap on document content toggles top bar and bottom toolbar chrome auto-hide.
+  - **Bottom Row**:
+    - Shared `ReaderBottomRow` with exactly 3 items:
+      1. **Rotate**: Toggles portrait and landscape orientations via shared `ReaderOrientationController`.
+      2. **Search**: Toggles `ReaderSearchBar`.
+      3. **Share**: Invokes `fileActionsControllerProvider.shareFiles`.
+    - *(Vertical/Horizontal and Invert are hidden per capability rules due to WebView lack of paging and platform-view color filter bypass)*.
+  - **Search**:
+    - Shared `ReaderSearchBar` wired to `DocumentViewController.search(query)` and `controller.searchHits`.
+    - Chevrons hidden (`showNavigationChevrons: false`) because the web engine does not support step-through cursor navigation.
+    - Counter displays localized hit counts ("1 match", "N matches", "0 of 0").
+  - **Outline Sheet**:
+    - Extracted `OfficeOutlineSheet` (`lib/features/viewer/widgets/office_outline_sheet.dart`) with `Material` root and clamped text scaling (`maxScaleFactor: 1.3`).
+
+### 11. TXT Viewer Screen (`lib/features/viewer/txt_viewer_screen.dart`, route `/viewer/txt`)
+- **Supported Formats**: `txt`, `md`, `log`, `csv` fallback.
+- **Structure**:
+  - **Top Bar**:
+    - Back button with localized tooltip.
+    - Title column: truncated file name with subtitle `"N units • <EXT>"`.
+    - Font size adjusters (A-, A+) and monospace font toggle.
+    - Bookmark toggle action.
+    - 3-dot overflow menu: "Details" and "Open in another app".
+    - 1 MB file size cap notice preserved.
+  - **Viewer Body**:
+    - Virtualized `ListView.builder` over text lines for zero jank on large files.
+    - TextSpan highlighting over visible lines with distinct styling for the active match.
+    - `SelectionArea` compatibility preserved.
+    - Tap on text surface toggles chrome auto-hide.
+  - **Bottom Row**:
+    - Shared `ReaderBottomRow` with 4 items:
+      1. **Rotate**: Orientation toggle via `ReaderOrientationController`.
+      2. **Search**: Toggles `ReaderSearchBar`.
+      3. **Invert**: Swaps text canvas background and text colors to the theme opposite (light becomes dark, dark becomes light; session-only).
+      4. **Share**: Invokes file sharing.
+  - **Search**:
+    - Runs in background `Isolate` using top-level function `computeTxtMatches` (primitives only, no captured state).
+    - Capped at 500 matches with "500+" counter indicator.
+    - Step-through up/down navigation chevrons auto-scroll `Scrollable.ensureVisible` to the matching line.
+
+### 12. Shared Reader Infrastructure (`lib/shared/widgets/reader/`)
+- `ReaderOrientationController`: Small controller class managing `SystemChrome.setPreferredOrientations`. Restores all orientations automatically upon dispose and when the app is backgrounded.
+- `ReaderBottomRow`: Shared 64pt bottom row with 48x48 icon buttons, outlined icons, and localized labels.
+- `ReaderSearchBar`: Top-bar replacement search UI with animated appearance, debounced input, match count, up/down arrows, and clear action.
+
+### 13. Image Viewer & Dispatcher Localization
+- `ImageViewerScreen`: All strings extracted to ARB, removed from `pending_rewrite.txt`.
+- `ViewerScreen`: Format dispatcher localized, centralized file extension groupings maintained.
