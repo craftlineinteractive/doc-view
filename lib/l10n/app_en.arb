@@ -2591,5 +2591,173 @@
   "viewerErrorNoAppFound": "No app found to open this file",
   "@viewerErrorNoAppFound": {
     "description": "Snackbar shown when system has no application associated with file"
+  },
+  "readerSearchTotalMatches": "{count, plural, =1{1 match} other{{count} matches}}",
+  "@readerSearchTotalMatches": {
+    "description": "Counter display showing total search matches when navigation index is not tracked",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "viewerOfficeUnitsSubtitle": "{count, plural, =1{1 unit • {ext}} other{{count} units • {ext}}}",
+  "@viewerOfficeUnitsSubtitle": {
+    "description": "Office reader top bar subtitle showing units/slides count and file extension",
+    "placeholders": {
+      "count": { "type": "int" },
+      "ext": { "type": "String" }
+    }
+  },
+  "viewerLegacyFormatBanner": "Legacy format: text only",
+  "@viewerLegacyFormatBanner": {
+    "description": "Notice banner for legacy office formats (doc, ppt, xls, rtf)"
+  },
+  "viewerSpreadsheetTruncatedBanner": "Large spreadsheet: showing the first 3000 rows",
+  "@viewerSpreadsheetTruncatedBanner": {
+    "description": "Notice banner for truncated spreadsheets exceeding row limit"
+  },
+  "viewerSectionTitle": "Section {number}",
+  "@viewerSectionTitle": {
+    "description": "Fallback section title in document outline sheet",
+    "placeholders": {
+      "number": { "type": "int" }
+    }
+  },
+  "viewerMenuOutline": "Outline",
+  "@viewerMenuOutline": {
+    "description": "Menu action to view document outline"
+  },
+  "viewerOutlineTitle": "Document outline",
+  "@viewerOutlineTitle": {
+    "description": "Title in document outline sheet"
+  },
+  "viewerCloseOutline": "Close outline",
+  "@viewerCloseOutline": {
+    "description": "Tooltip for closing document outline sheet"
+  },
+  "viewerNoSections": "No sections found in this document",
+  "@viewerNoSections": {
+    "description": "Empty state in document outline sheet"
+  },
+  "viewerOutlineTooltip": "Table of contents",
+  "@viewerOutlineTooltip": {
+    "description": "Tooltip for document outline action"
+  },
+  "viewerActionOpenExternal": "Open in another app",
+  "@viewerActionOpenExternal": {
+    "description": "Button to open document in an external application"
+  },
+  "viewerErrorCantOpenTitle": "Can't open this document",
+  "@viewerErrorCantOpenTitle": {
+    "description": "Headline shown when document cannot be rendered offline"
+  },
+  "viewerErrorCantOpenMessage": "The document could not be rendered offline.",
+  "@viewerErrorCantOpenMessage": {
+    "description": "Explanation shown when document cannot be rendered offline"
+  },
+  "viewerOpeningDocument": "Opening document...",
+  "@viewerOpeningDocument": {
+    "description": "Text shown during document initialization skeleton"
+  },
+  "viewerErrorEncryptedTitle": "This document is encrypted",
+  "@viewerErrorEncryptedTitle": {
+    "description": "Headline shown when document is password-protected"
+  },
+  "viewerErrorEncryptedMessage": "Password-protected files cannot be viewed in the offline reader.",
+  "@viewerErrorEncryptedMessage": {
+    "description": "Explanation shown when document is password-protected"
+  },
+  "viewerErrorTooLargeTitle": "This file exceeds the view limit",
+  "@viewerErrorTooLargeTitle": {
+    "description": "Headline shown when file exceeds reader limits"
+  },
+  "viewerErrorTooLargeMessage": "Large documents should be opened using an external Office viewer.",
+  "@viewerErrorTooLargeMessage": {
+    "description": "Explanation shown when file exceeds reader limits"
+  },
+  "viewerErrorUnsupportedFormatTitle": "This format isn't supported",
+  "@viewerErrorUnsupportedFormatTitle": {
+    "description": "Headline shown when format cannot be parsed"
+  },
+  "viewerErrorUnsupportedFormatMessage": "Doc View cannot parse this file format directly.",
+  "@viewerErrorUnsupportedFormatMessage": {
+    "description": "Explanation shown when format cannot be parsed"
+  },
+  "viewerOutlineItemsCount": "{count, plural, =1{1 item} other{{count} items}}",
+  "@viewerOutlineItemsCount": {
+    "description": "Item count badge in document outline sheet",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "txtViewerTypographyTitle": "Typography",
+  "@txtViewerTypographyTitle": {
+    "description": "Title of typography sheet in text viewer"
+  },
+  "txtViewerFontSizeLabel": "{size} pt",
+  "@txtViewerFontSizeLabel": {
+    "description": "Label displaying current font size in points",
+    "placeholders": {
+      "size": { "type": "int" }
+    }
+  },
+  "txtViewerMonospaceLabel": "Monospace font",
+  "@txtViewerMonospaceLabel": {
+    "description": "Label for monospace font switch in text viewer"
+  },
+  "txtViewerTruncationBanner": "File is larger than 1 MB: showing first 1 MB",
+  "@txtViewerTruncationBanner": {
+    "description": "Notice banner when text file exceeds 1 MB cap"
+  },
+  "txtViewerLinesSubtitle": "{count, plural, =1{1 line • {size}} other{{count} lines • {size}}}",
+  "@txtViewerLinesSubtitle": {
+    "description": "Text viewer top bar subtitle showing line count and file size",
+    "placeholders": {
+      "count": { "type": "int" },
+      "size": { "type": "String" }
+    }
+  },
+  "txtViewerTooltipTypography": "Typography settings",
+  "@txtViewerTooltipTypography": {
+    "description": "Tooltip for typography sheet button"
+  },
+  "txtViewerTooltipDecreaseFont": "Decrease font size",
+  "@txtViewerTooltipDecreaseFont": {
+    "description": "Tooltip for decrease font size button"
+  },
+  "txtViewerTooltipIncreaseFont": "Increase font size",
+  "@txtViewerTooltipIncreaseFont": {
+    "description": "Tooltip for increase font size button"
+  },
+  "txtViewerTooltipToggleMonospace": "Toggle monospace font",
+  "@txtViewerTooltipToggleMonospace": {
+    "description": "Tooltip for monospace font toggle"
+  },
+  "imageViewerDimensionsSubtitle": "{width} × {height} • {size}",
+  "@imageViewerDimensionsSubtitle": {
+    "description": "Image viewer top bar subtitle showing image pixel dimensions and file size",
+    "placeholders": {
+      "width": { "type": "int" },
+      "height": { "type": "int" },
+      "size": { "type": "String" }
+    }
+  },
+  "imageViewerZoomPill": "{percent}%",
+  "@imageViewerZoomPill": {
+    "description": "Floating zoom scale indicator in image viewer",
+    "placeholders": {
+      "percent": { "type": "int" }
+    }
+  },
+  "imageViewerTooltipFitToScreen": "Fit to screen",
+  "@imageViewerTooltipFitToScreen": {
+    "description": "Tooltip for reset zoom button"
+  },
+  "imageViewerErrorCorrupt": "Unable to load image",
+  "@imageViewerErrorCorrupt": {
+    "description": "Error message when image file cannot be decoded"
+  },
+  "viewerDispatcherFileMissing": "File no longer exists",
+  "@viewerDispatcherFileMissing": {
+    "description": "Snackbar shown when opening a file that no longer exists on disk"
   }
 }

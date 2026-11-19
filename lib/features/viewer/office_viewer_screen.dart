@@ -3,14 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:offline_document_viewer/offline_document_viewer.dart';
 import 'package:open_filex/open_filex.dart';
 
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../core/utils/format_utils.dart';
 import '../../data/models/doc_file.dart';
 import '../../shared/widgets/buttons/doc_buttons.dart';
+import '../../shared/widgets/reader/reader_bottom_row.dart';
+import '../../shared/widgets/reader/reader_orientation.dart';
+import '../../shared/widgets/reader/reader_search_bar.dart';
 import '../../shared/widgets/skeletons/shimmer.dart';
+import '../files/widgets/file_details_sheet.dart';
 import '../providers/providers.dart';
-import 'widgets/pdf_more_sheet.dart';
 
 /// Full-featured, offline Office document viewer supporting Word, Excel, and PowerPoint files.
 ///
@@ -30,11 +35,12 @@ class OfficeViewerScreen extends ConsumerStatefulWidget {
 
 class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
   late final DocumentViewController _controller;
+  late final ReaderOrientationController _orientationController;
   late DocumentSource _source;
   final TextEditingController _searchController = TextEditingController();
-  final FocusNode _searchFocusNode = FocusNode();
 
   bool _isSearching = false;
+  bool _showChrome = true;
   bool _dismissedLegacyBanner = false;
   bool _dismissedTruncatedBanner = false;
   DocumentInfo? _lastInfo;
@@ -46,6 +52,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
     _source = DocumentSource.file(widget.file.path);
     _controller = DocumentViewController();
     _controller.addListener(_onControllerChanged);
+    _orientationController = ReaderOrientationController();
   }
 
   @override
@@ -61,7 +68,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
     _controller.removeListener(_onControllerChanged);
     _controller.dispose();
     _searchController.dispose();
-    _searchFocusNode.dispose();
+    _orientationController.dispose();
     super.dispose();
   }
 
@@ -78,11 +85,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
   void _startSearch() {
     setState(() {
       _isSearching = true;
-    });
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        _searchFocusNode.requestFocus();
-      }
+      _showChrome = true;
     });
   }
 
@@ -94,10 +97,6 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
     });
   }
 
-  void _onSearchSubmitted(String query) {
-    _controller.search(query.trim());
-  }
-
   void _onSearchChanged(String query) {
     if (query.isEmpty) {
       _controller.search('');
@@ -106,9 +105,17 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
     }
   }
 
+  void _toggleChrome() {
+    if (_isSearching) return;
+    setState(() {
+      _showChrome = !_showChrome;
+    });
+  }
+
   void _showOutlineBottomSheet(BuildContext context, List<String> outline) {
     final tokens = context.tokens;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = context.l10n;
 
     showModalBottomSheet<void>(
       context: context,
@@ -150,7 +157,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        'Document Outline',
+                        l10n.viewerOutlineTitle,
                         style: DocViewTypography.titleMd.copyWith(
                           color: tokens.textPrimary,
                           fontWeight: FontWeight.w700,
@@ -164,7 +171,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          '${outline.length} items',
+                          l10n.viewerOutlineItemsCount(outline.length),
                           style: DocViewTypography.captionXs.copyWith(
                             color: tokens.textSecondary,
                             fontWeight: FontWeight.w600,
@@ -175,71 +182,85 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
                   ),
                 ),
                 Divider(height: 1, color: tokens.hairline),
-                Flexible(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    itemCount: outline.length,
-                    itemBuilder: (context, index) {
-                      final title = outline[index].trim();
-                      final isCurrent = index == _controller.position;
+                if (outline.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(32),
+                    child: Text(
+                      l10n.viewerNoSections,
+                      style: DocViewTypography.bodyMd.copyWith(
+                        color: tokens.textSecondary,
+                      ),
+                    ),
+                  )
+                else
+                  Flexible(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      itemCount: outline.length,
+                      itemBuilder: (context, index) {
+                        final title = outline[index].trim();
+                        final isCurrent = index == _controller.position;
 
-                      return ConstrainedBox(
-                        constraints: const BoxConstraints(minHeight: 48),
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 2,
-                          ),
-                          leading: Container(
-                            width: 28,
-                            height: 28,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: isCurrent
-                                  ? tokens.primaryBlue
-                                  : tokens.surface,
-                              shape: BoxShape.circle,
+                        return ConstrainedBox(
+                          constraints: const BoxConstraints(minHeight: 48),
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 2,
                             ),
-                            child: Text(
-                              '${index + 1}',
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
+                            leading: Container(
+                              width: 28,
+                              height: 28,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
                                 color: isCurrent
-                                    ? Colors.white
-                                    : tokens.textSecondary,
+                                    ? tokens.primaryBlue
+                                    : tokens.surface,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                '${index + 1}',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: isCurrent
+                                      ? Colors.white
+                                      : tokens.textSecondary,
+                                ),
                               ),
                             ),
-                          ),
-                          title: Text(
-                            title.isEmpty ? 'Section ${index + 1}' : title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: DocViewTypography.bodyMd.copyWith(
-                              color: isCurrent
-                                  ? tokens.primaryBlue
-                                  : tokens.textPrimary,
-                              fontWeight:
-                                  isCurrent ? FontWeight.w700 : FontWeight.w500,
+                            title: Text(
+                              title.isEmpty
+                                  ? l10n.viewerSectionTitle(index + 1)
+                                  : title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: DocViewTypography.bodyMd.copyWith(
+                                color: isCurrent
+                                    ? tokens.primaryBlue
+                                    : tokens.textPrimary,
+                                fontWeight: isCurrent
+                                    ? FontWeight.w700
+                                    : FontWeight.w500,
+                              ),
                             ),
+                            trailing: isCurrent
+                                ? Icon(
+                                    Icons.check_circle_rounded,
+                                    size: 18,
+                                    color: tokens.primaryBlue,
+                                  )
+                                : null,
+                            onTap: () {
+                              _controller.goTo(index);
+                              Navigator.of(context).pop();
+                            },
                           ),
-                          trailing: isCurrent
-                              ? Icon(
-                                  Icons.check_circle_rounded,
-                                  size: 18,
-                                  color: tokens.primaryBlue,
-                                )
-                              : null,
-                          onTap: () {
-                            _controller.goTo(index);
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
-                ),
               ],
             ),
           ),
@@ -251,6 +272,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
+    final l10n = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     // Watch filesProvider to reflect bookmark state in real-time
@@ -266,259 +288,197 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
     final ext = widget.file.name.contains('.')
         ? widget.file.name.split('.').last.toLowerCase()
         : '';
-    final isLegacyFormat = ext == 'doc' || ext == 'ppt' || ext == 'xls' || ext == 'rtf';
+    final isLegacyFormat =
+        ext == 'doc' || ext == 'ppt' || ext == 'xls' || ext == 'rtf';
 
     // Banner color tokens
-    final legacyBg = isDark ? const Color(0xFF2A2518) : const Color(0xFFFFF8E1);
-    final legacyFg = isDark ? const Color(0xFFE8C860) : const Color(0xFF8A6D00);
+    final legacyBg =
+        isDark ? const Color(0xFF2A2518) : const Color(0xFFFFF8E1);
+    final legacyFg =
+        isDark ? const Color(0xFFE8C860) : const Color(0xFF8A6D00);
+
+    final topInset = MediaQuery.paddingOf(context).top;
+    final bottomInset = MediaQuery.paddingOf(context).bottom;
 
     return Scaffold(
       backgroundColor: tokens.readerCanvas,
-      appBar: _isSearching
-          ? AppBar(
-              backgroundColor: isDark ? DocViewColors.backgroundDark : Colors.white,
-              elevation: 0,
-              leading: IconButton(
-                constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-                icon: Icon(Icons.arrow_back_rounded, color: tokens.textPrimary),
-                tooltip: 'Exit search',
-                onPressed: _stopSearch,
-              ),
-              title: TextField(
-                controller: _searchController,
-                focusNode: _searchFocusNode,
-                textInputAction: TextInputAction.search,
-                style: DocViewTypography.bodyLg.copyWith(
-                  color: tokens.textPrimary,
-                ),
-                decoration: InputDecoration(
-                  hintText: 'Search document...',
-                  hintStyle: DocViewTypography.bodyLg.copyWith(
-                    color: tokens.textSecondary,
-                  ),
-                  border: InputBorder.none,
-                ),
-                onSubmitted: _onSearchSubmitted,
-                onChanged: _onSearchChanged,
-              ),
-              actions: [
-                if (_controller.searchHits > 0)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: Center(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: tokens.primaryBlue.withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          '${_controller.searchHits} matches',
-                          style: TextStyle(
-                            color: tokens.primaryBlue,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
+      body: Stack(
+        children: [
+          // 1. Reading Body with optional banners
+          Positioned.fill(
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: _toggleChrome,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Spacer matching top chrome height when visible
+                  SizedBox(height: topInset + 56),
+
+                  // 1. Legacy format banner (doc, ppt, xls, rtf)
+                  if (isLegacyFormat && !_dismissedLegacyBanner)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
+                      color: legacyBg,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.info_outline_rounded,
+                            size: 18,
+                            color: legacyFg,
                           ),
-                        ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              l10n.viewerLegacyFormatBanner,
+                              style: DocViewTypography.bodySm.copyWith(
+                                color: legacyFg,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _dismissedLegacyBanner = true;
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Icon(
+                                Icons.close_rounded,
+                                size: 16,
+                                color: legacyFg,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+
+                  // 2. Truncation banner (large spreadsheet)
+                  if (isTruncated && !_dismissedTruncatedBanner)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
+                      color: tokens.blueTint,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.table_rows_rounded,
+                            size: 18,
+                            color: tokens.primaryBlue,
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              l10n.viewerSpreadsheetTruncatedBanner,
+                              style: DocViewTypography.bodySm.copyWith(
+                                color: tokens.primaryBlue,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _dismissedTruncatedBanner = true;
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Icon(
+                                Icons.close_rounded,
+                                size: 16,
+                                color: tokens.primaryBlue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  // 3. Document View
+                  Expanded(
+                    child: DocumentView(
+                      source: _source,
+                      controller: _controller,
+                      placeholderBuilder: (context) {
+                        return _buildOpeningSkeleton(tokens, l10n);
+                      },
+                      errorBuilder: (context, failure) {
+                        return _buildErrorState(context, failure, tokens, l10n);
+                      },
+                    ),
                   ),
-                if (_searchController.text.isNotEmpty)
-                  IconButton(
-                    constraints:
-                        const BoxConstraints(minWidth: 48, minHeight: 48),
-                    icon: Icon(Icons.clear_rounded, color: tokens.textSecondary),
-                    tooltip: 'Clear search',
-                    onPressed: () {
+                ],
+              ),
+            ),
+          ),
+
+          // 2. Animated Top Bar / Search Bar
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+            top: (_showChrome || _isSearching) ? 0 : -(100 + topInset),
+            left: 0,
+            right: 0,
+            child: _isSearching
+                ? ReaderSearchBar(
+                    controller: _searchController,
+                    onQueryChanged: _onSearchChanged,
+                    onClose: _stopSearch,
+                    onClear: () {
                       _searchController.clear();
                       _controller.search('');
                     },
-                  ),
-              ],
-            )
-          : AppBar(
-              backgroundColor: isDark ? DocViewColors.backgroundDark : Colors.white,
-              elevation: 0,
-              leading: IconButton(
-                constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-                icon: Icon(Icons.arrow_back_rounded, color: tokens.textPrimary),
-                tooltip: 'Back',
-                onPressed: () => Navigator.of(context).maybePop(),
-              ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.file.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: DocViewTypography.titleMd.copyWith(
-                      color: tokens.textPrimary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  if (_controller.info != null)
-                    Text(
-                      '${_controller.info!.unitCount} units • ${ext.toUpperCase()}',
-                      style: DocViewTypography.captionXs.copyWith(
-                        color: tokens.textSecondary,
-                      ),
-                    ),
-                ],
-              ),
-              actions: [
-                IconButton(
-                  constraints:
-                      const BoxConstraints(minWidth: 48, minHeight: 48),
-                  icon: Icon(Icons.search_rounded, color: tokens.textPrimary),
-                  tooltip: 'Search document',
-                  onPressed: _startSearch,
+                    currentMatchIndex: null,
+                    totalMatches: _controller.searchHits,
+                    showNavigationChevrons: false,
+                  )
+                : _buildTopBar(tokens, l10n, isDark, topInset, currentFile, outline, ext),
+          ),
+
+          // 3. Animated Floating Bottom Toolbar ([ReaderBottomRow])
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+            bottom: _showChrome ? (16 + bottomInset) : -(100 + bottomInset),
+            left: 20,
+            right: 20,
+            child: ReaderBottomRow(
+              items: [
+                // 1. Rotate
+                ReaderBottomRowItem(
+                  icon: Icons.screen_rotation_outlined,
+                  label: l10n.readerActionRotate,
+                  tooltip: l10n.readerActionRotate,
+                  onTap: () => _orientationController.toggle(context),
                 ),
-                if (outline.isNotEmpty)
-                  IconButton(
-                    constraints:
-                        const BoxConstraints(minWidth: 48, minHeight: 48),
-                    icon: Icon(Icons.list_alt_rounded, color: tokens.textPrimary),
-                    tooltip: 'Outline',
-                    onPressed: () => _showOutlineBottomSheet(context, outline),
-                  ),
-                IconButton(
-                  constraints:
-                      const BoxConstraints(minWidth: 48, minHeight: 48),
-                  icon: Icon(
-                    currentFile.isBookmarked
-                        ? Icons.bookmark_rounded
-                        : Icons.bookmark_border_rounded,
-                    color: currentFile.isBookmarked
-                        ? tokens.primaryBlue
-                        : tokens.textPrimary,
-                  ),
-                  tooltip: currentFile.isBookmarked
-                      ? 'Remove bookmark'
-                      : 'Bookmark',
-                  onPressed: () {
+                // 2. Search
+                ReaderBottomRowItem(
+                  icon: Icons.search_rounded,
+                  label: l10n.readerActionSearch,
+                  tooltip: l10n.readerActionSearch,
+                  onTap: _startSearch,
+                ),
+                // 3. Share
+                ReaderBottomRowItem(
+                  icon: Icons.share_outlined,
+                  label: l10n.readerActionShare,
+                  tooltip: l10n.readerActionShare,
+                  onTap: () {
                     ref
                         .read(fileActionsControllerProvider)
-                        .toggleBookmark(currentFile);
-                  },
-                ),
-                IconButton(
-                  constraints:
-                      const BoxConstraints(minWidth: 48, minHeight: 48),
-                  icon: Icon(Icons.more_vert_rounded, color: tokens.textPrimary),
-                  tooltip: 'More options',
-                  onPressed: () {
-                    ViewerMoreSheet.show(
-                      context,
-                      file: currentFile,
-                      pageCount: _controller.info?.unitCount,
-                    );
+                        .shareFiles([currentFile]);
                   },
                 ),
               ],
-            ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // 1. Legacy format banner (doc, ppt, xls, rtf)
-          if (isLegacyFormat && !_dismissedLegacyBanner)
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              color: legacyBg,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.info_outline_rounded,
-                    size: 18,
-                    color: legacyFg,
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Legacy format: text only',
-                      style: DocViewTypography.bodySm.copyWith(
-                        color: legacyFg,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _dismissedLegacyBanner = true;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: Icon(
-                        Icons.close_rounded,
-                        size: 16,
-                        color: legacyFg,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-          // 2. Truncation banner (large spreadsheet)
-          if (isTruncated && !_dismissedTruncatedBanner)
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              color: tokens.blueTint,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.table_rows_rounded,
-                    size: 18,
-                    color: tokens.primaryBlue,
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Large spreadsheet: showing the first 3000 rows',
-                      style: DocViewTypography.bodySm.copyWith(
-                        color: tokens.primaryBlue,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _dismissedTruncatedBanner = true;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: Icon(
-                        Icons.close_rounded,
-                        size: 16,
-                        color: tokens.primaryBlue,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-          // 3. Document reading body
-          Expanded(
-            child: DocumentView(
-              source: _source,
-              controller: _controller,
-              onFailure: (failure) {
-                debugPrint('DOCUMENT_VIEW_FAILURE: $failure (${failure.runtimeType}) detail: ${failure.detail}');
-              },
-              placeholderBuilder: (context) {
-                return _buildOpeningSkeleton(tokens);
-              },
-              errorBuilder: (context, failure) {
-                return _buildErrorState(context, failure, tokens);
-              },
             ),
           ),
         ],
@@ -526,7 +486,183 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
     );
   }
 
-  Widget _buildOpeningSkeleton(DocViewTokens tokens) {
+  Widget _buildTopBar(
+    DocViewTokens tokens,
+    dynamic l10n,
+    bool isDark,
+    double topInset,
+    DocFile currentFile,
+    List<String> outline,
+    String ext,
+  ) {
+    final subtitle = _controller.info != null
+        ? l10n.viewerOfficeUnitsSubtitle(
+            _controller.info!.unitCount,
+            ext.toUpperCase(),
+          )
+        : FormatUtils.formatFileSize(widget.file.sizeBytes);
+
+    return Container(
+      padding: EdgeInsets.fromLTRB(8, topInset + 4, 8, 8),
+      decoration: BoxDecoration(
+        color: (isDark ? DocViewColors.backgroundDark : Colors.white)
+            .withValues(alpha: 0.96),
+        border: Border(
+          bottom: BorderSide(
+            color: tokens.hairline.withValues(alpha: 0.6),
+            width: 0.5,
+          ),
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 10,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          IconButton(
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: tokens.textPrimary,
+            ),
+            tooltip: l10n.tooltipBack,
+            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+            onPressed: () => Navigator.of(context).maybePop(),
+          ),
+          const SizedBox(width: 4),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  currentFile.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: DocViewTypography.titleMd.copyWith(
+                    color: tokens.textPrimary,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: DocViewTypography.captionXs.copyWith(
+                    color: tokens.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Bookmark toggle
+          IconButton(
+            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+            icon: Icon(
+              currentFile.isBookmarked
+                  ? Icons.bookmark_rounded
+                  : Icons.bookmark_border_rounded,
+              color: currentFile.isBookmarked
+                  ? tokens.primaryBlue
+                  : tokens.textPrimary,
+            ),
+            tooltip: currentFile.isBookmarked
+                ? l10n.tooltipRemoveBookmark
+                : l10n.tooltipBookmark,
+            onPressed: () {
+              ref
+                  .read(fileActionsControllerProvider)
+                  .toggleBookmark(currentFile);
+            },
+          ),
+          // 3-dot popup menu
+          PopupMenuButton<String>(
+            icon: Icon(Icons.more_vert_rounded, color: tokens.textPrimary),
+            tooltip: l10n.tooltipMoreOptions,
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            onSelected: (action) {
+              if (action == 'outline') {
+                _showOutlineBottomSheet(context, outline);
+              } else if (action == 'details') {
+                FileDetailsSheet.show(context, currentFile);
+              } else if (action == 'open_external') {
+                OpenFilex.open(widget.file.path);
+              }
+            },
+            itemBuilder: (context) => [
+              if (outline.isNotEmpty)
+                PopupMenuItem(
+                  value: 'outline',
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.list_alt_rounded,
+                        size: 20,
+                        color: tokens.textPrimary,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        l10n.viewerMenuOutline,
+                        style: DocViewTypography.bodyMd.copyWith(
+                          color: tokens.textPrimary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              PopupMenuItem(
+                value: 'details',
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.info_outline_rounded,
+                      size: 20,
+                      color: tokens.textPrimary,
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      l10n.readerMenuDetails,
+                      style: DocViewTypography.bodyMd.copyWith(
+                        color: tokens.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 'open_external',
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.open_in_new_rounded,
+                      size: 20,
+                      color: tokens.textPrimary,
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      l10n.readerMenuOpenExternal,
+                      style: DocViewTypography.bodyMd.copyWith(
+                        color: tokens.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOpeningSkeleton(DocViewTokens tokens, dynamic l10n) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -606,7 +742,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
           ),
           const SizedBox(height: 20),
           Text(
-            'Opening document...',
+            l10n.viewerOpeningDocument,
             style: DocViewTypography.bodyMd.copyWith(
               color: tokens.textSecondary,
               fontWeight: FontWeight.w500,
@@ -621,26 +757,27 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
     BuildContext context,
     DocumentFailure failure,
     DocViewTokens tokens,
+    dynamic l10n,
   ) {
-    final (title, subtitle, icon) = switch (failure) {
+    final (String title, String subtitle, IconData icon) = switch (failure) {
       EncryptedDocumentFailure() => (
-          'This document is encrypted',
-          'Password-protected files cannot be viewed in the offline reader.',
+          l10n.viewerErrorEncryptedTitle as String,
+          l10n.viewerErrorEncryptedMessage as String,
           Icons.lock_outline_rounded,
         ),
       TooLargeFailure() => (
-          'This file exceeds the view limit',
-          'Large documents should be opened using an external Office viewer.',
+          l10n.viewerErrorTooLargeTitle as String,
+          l10n.viewerErrorTooLargeMessage as String,
           Icons.data_usage_rounded,
         ),
       UnsupportedFormatFailure() => (
-          "This format isn't supported",
-          'Doc View cannot parse this file format directly.',
+          l10n.viewerErrorUnsupportedFormatTitle as String,
+          l10n.viewerErrorUnsupportedFormatMessage as String,
           Icons.help_outline_rounded,
         ),
       _ => (
-          "Can't open this document",
-          'The document could not be rendered offline.',
+          l10n.viewerErrorCantOpenTitle as String,
+          l10n.viewerErrorCantOpenMessage as String,
           Icons.error_outline_rounded,
         ),
     };
@@ -683,8 +820,12 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
             ),
             const SizedBox(height: 28),
             DocPrimaryButton(
-              label: 'Open in another app',
-              icon: const Icon(Icons.open_in_new_rounded, size: 20, color: Colors.white),
+              label: l10n.viewerActionOpenExternal,
+              icon: const Icon(
+                Icons.open_in_new_rounded,
+                size: 20,
+                color: Colors.white,
+              ),
               onPressed: () {
                 OpenFilex.open(widget.file.path);
               },
@@ -693,7 +834,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
             TextButton(
               onPressed: () => Navigator.of(context).maybePop(),
               child: Text(
-                'Back to files',
+                l10n.viewerErrorBackToFiles,
                 style: DocViewTypography.labelLg.copyWith(
                   color: tokens.textSecondary,
                 ),

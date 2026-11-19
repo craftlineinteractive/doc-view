@@ -2587,5 +2587,197 @@
   "viewerErrorNoAppFound": "[Ñô àþþ ƒôûñđ ţô ôþéñ ţĥîš ƒîłé ẋẋẋẋẋẋẋẋẋẋẋẋ]",
   "@viewerErrorNoAppFound": {
     "description": "Snackbar shown when system has no application associated with file"
+  },
+  "readerSearchTotalMatches": "{count, plural, =1{[1 ɱàţçĥ ẋẋẋ]} other{[{count} ɱàţçĥéš ẋẋẋẋẋẋ]}}",
+  "@readerSearchTotalMatches": {
+    "description": "Counter display showing total search matches when navigation index is not tracked",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "viewerOfficeUnitsSubtitle": "{count, plural, =1{[1 ûñîţ • {ext} ẋẋẋẋẋẋ]} other{[{count} ûñîţš • {ext} ẋẋẋẋẋẋẋẋẋ]}}",
+  "@viewerOfficeUnitsSubtitle": {
+    "description": "Office reader top bar subtitle showing units/slides count and file extension",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "ext": {
+        "type": "String"
+      }
+    }
+  },
+  "viewerLegacyFormatBanner": "[Łéĝàçý ƒôřɱàţ: ţéẋţ ôñłý ẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerLegacyFormatBanner": {
+    "description": "Notice banner for legacy office formats (doc, ppt, xls, rtf)"
+  },
+  "viewerSpreadsheetTruncatedBanner": "[Łàřĝé šþřéàđšĥééţ: šĥôŵîñĝ ţĥé ƒîřšţ 3000 řôŵš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetTruncatedBanner": {
+    "description": "Notice banner for truncated spreadsheets exceeding row limit"
+  },
+  "viewerSectionTitle": "[Šéçţîôñ {number} ẋẋẋẋẋẋẋ]",
+  "@viewerSectionTitle": {
+    "description": "Fallback section title in document outline sheet",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "viewerMenuOutline": "[Öûţłîñé ẋẋẋ]",
+  "@viewerMenuOutline": {
+    "description": "Menu action to view document outline"
+  },
+  "viewerOutlineTitle": "[Ðôçûɱéñţ ôûţłîñé ẋẋẋẋẋẋẋ]",
+  "@viewerOutlineTitle": {
+    "description": "Title in document outline sheet"
+  },
+  "viewerCloseOutline": "[Çłôšé ôûţłîñé ẋẋẋẋẋẋ]",
+  "@viewerCloseOutline": {
+    "description": "Tooltip for closing document outline sheet"
+  },
+  "viewerNoSections": "[Ñô šéçţîôñš ƒôûñđ îñ ţĥîš đôçûɱéñţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerNoSections": {
+    "description": "Empty state in document outline sheet"
+  },
+  "viewerOutlineTooltip": "[Ťàƀłé ôƒ çôñţéñţš ẋẋẋẋẋẋẋ]",
+  "@viewerOutlineTooltip": {
+    "description": "Tooltip for document outline action"
+  },
+  "viewerActionOpenExternal": "[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]",
+  "@viewerActionOpenExternal": {
+    "description": "Button to open document in an external application"
+  },
+  "viewerErrorCantOpenTitle": "[Çàñ'ţ ôþéñ ţĥîš đôçûɱéñţ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorCantOpenTitle": {
+    "description": "Headline shown when document cannot be rendered offline"
+  },
+  "viewerErrorCantOpenMessage": "[Ťĥé đôçûɱéñţ çôûłđ ñôţ ƀé řéñđéřéđ ôƒƒłîñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorCantOpenMessage": {
+    "description": "Explanation shown when document cannot be rendered offline"
+  },
+  "viewerOpeningDocument": "[Öþéñîñĝ đôçûɱéñţ... ẋẋẋẋẋẋẋẋ]",
+  "@viewerOpeningDocument": {
+    "description": "Text shown during document initialization skeleton"
+  },
+  "viewerErrorEncryptedTitle": "[Ťĥîš đôçûɱéñţ îš éñçřýþţéđ ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorEncryptedTitle": {
+    "description": "Headline shown when document is password-protected"
+  },
+  "viewerErrorEncryptedMessage": "[Þàššŵôřđ-þřôţéçţéđ ƒîłéš çàññôţ ƀé ṽîéŵéđ îñ ţĥé ôƒƒłîñé řéàđéř. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorEncryptedMessage": {
+    "description": "Explanation shown when document is password-protected"
+  },
+  "viewerErrorTooLargeTitle": "[Ťĥîš ƒîłé éẋçééđš ţĥé ṽîéŵ łîɱîţ ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorTooLargeTitle": {
+    "description": "Headline shown when file exceeds reader limits"
+  },
+  "viewerErrorTooLargeMessage": "[Łàřĝé đôçûɱéñţš šĥôûłđ ƀé ôþéñéđ ûšîñĝ àñ éẋţéřñàł Öƒƒîçé ṽîéŵéř. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorTooLargeMessage": {
+    "description": "Explanation shown when file exceeds reader limits"
+  },
+  "viewerErrorUnsupportedFormatTitle": "[Ťĥîš ƒôřɱàţ îšñ'ţ šûþþôřţéđ ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorUnsupportedFormatTitle": {
+    "description": "Headline shown when format cannot be parsed"
+  },
+  "viewerErrorUnsupportedFormatMessage": "[Ðôç Ṽîéŵ çàññôţ þàřšé ţĥîš ƒîłé ƒôřɱàţ đîřéçţłý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorUnsupportedFormatMessage": {
+    "description": "Explanation shown when format cannot be parsed"
+  },
+  "viewerOutlineItemsCount": "{count, plural, =1{[1 îţéɱ ẋẋẋ]} other{[{count} îţéɱš ẋẋẋẋẋẋ]}}",
+  "@viewerOutlineItemsCount": {
+    "description": "Item count badge in document outline sheet",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "txtViewerTypographyTitle": "[Ťýþôĝřàþĥý ẋẋẋẋ]",
+  "@txtViewerTypographyTitle": {
+    "description": "Title of typography sheet in text viewer"
+  },
+  "txtViewerFontSizeLabel": "[{size} þţ ẋẋẋẋ]",
+  "@txtViewerFontSizeLabel": {
+    "description": "Label displaying current font size in points",
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "txtViewerMonospaceLabel": "[Ṁôñôšþàçé ƒôñţ ẋẋẋẋẋẋ]",
+  "@txtViewerMonospaceLabel": {
+    "description": "Label for monospace font switch in text viewer"
+  },
+  "txtViewerTruncationBanner": "[Ƒîłé îš łàřĝéř ţĥàñ 1 ṀƁ: šĥôŵîñĝ ƒîřšţ 1 ṀƁ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@txtViewerTruncationBanner": {
+    "description": "Notice banner when text file exceeds 1 MB cap"
+  },
+  "txtViewerLinesSubtitle": "{count, plural, =1{[1 łîñé • {size} ẋẋẋẋẋẋ]} other{[{count} łîñéš • {size} ẋẋẋẋẋẋẋẋẋ]}}",
+  "@txtViewerLinesSubtitle": {
+    "description": "Text viewer top bar subtitle showing line count and file size",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "txtViewerTooltipTypography": "[Ťýþôĝřàþĥý šéţţîñĝš ẋẋẋẋẋẋẋẋ]",
+  "@txtViewerTooltipTypography": {
+    "description": "Tooltip for typography sheet button"
+  },
+  "txtViewerTooltipDecreaseFont": "[Ðéçřéàšé ƒôñţ šîžé ẋẋẋẋẋẋẋẋ]",
+  "@txtViewerTooltipDecreaseFont": {
+    "description": "Tooltip for decrease font size button"
+  },
+  "txtViewerTooltipIncreaseFont": "[Îñçřéàšé ƒôñţ šîžé ẋẋẋẋẋẋẋẋ]",
+  "@txtViewerTooltipIncreaseFont": {
+    "description": "Tooltip for increase font size button"
+  },
+  "txtViewerTooltipToggleMonospace": "[Ťôĝĝłé ɱôñôšþàçé ƒôñţ ẋẋẋẋẋẋẋẋẋ]",
+  "@txtViewerTooltipToggleMonospace": {
+    "description": "Tooltip for monospace font toggle"
+  },
+  "imageViewerDimensionsSubtitle": "[{width} × {height} • {size} ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@imageViewerDimensionsSubtitle": {
+    "description": "Image viewer top bar subtitle showing image pixel dimensions and file size",
+    "placeholders": {
+      "width": {
+        "type": "int"
+      },
+      "height": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "imageViewerZoomPill": "[{percent}% ẋẋẋẋ]",
+  "@imageViewerZoomPill": {
+    "description": "Floating zoom scale indicator in image viewer",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "imageViewerTooltipFitToScreen": "[Ƒîţ ţô šçřééñ ẋẋẋẋẋẋ]",
+  "@imageViewerTooltipFitToScreen": {
+    "description": "Tooltip for reset zoom button"
+  },
+  "imageViewerErrorCorrupt": "[Ûñàƀłé ţô łôàđ îɱàĝé ẋẋẋẋẋẋẋẋ]",
+  "@imageViewerErrorCorrupt": {
+    "description": "Error message when image file cannot be decoded"
+  },
+  "viewerDispatcherFileMissing": "[Ƒîłé ñô łôñĝéř éẋîšţš ẋẋẋẋẋẋẋẋẋ]",
+  "@viewerDispatcherFileMissing": {
+    "description": "Snackbar shown when opening a file that no longer exists on disk"
   }
 }

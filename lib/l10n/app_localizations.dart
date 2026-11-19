@@ -3216,6 +3216,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No app found to open this file'**
   String get viewerErrorNoAppFound;
+
+  /// Counter display showing total search matches when navigation index is not tracked
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 match} other{{count} matches}}'**
+  String readerSearchTotalMatches(int count);
+
+  /// Office reader top bar subtitle showing units/slides count and file extension
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 unit • {ext}} other{{count} units • {ext}}}'**
+  String viewerOfficeUnitsSubtitle(int count, String ext);
+
+  /// Notice banner for legacy office formats (doc, ppt, xls, rtf)
+  ///
+  /// In en, this message translates to:
+  /// **'Legacy format: text only'**
+  String get viewerLegacyFormatBanner;
+
+  /// Notice banner for truncated spreadsheets exceeding row limit
+  ///
+  /// In en, this message translates to:
+  /// **'Large spreadsheet: showing the first 3000 rows'**
+  String get viewerSpreadsheetTruncatedBanner;
+
+  /// Fallback section title in document outline sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Section {number}'**
+  String viewerSectionTitle(int number);
+
+  /// Menu action to view document outline
+  ///
+  /// In en, this message translates to:
+  /// **'Outline'**
+  String get viewerMenuOutline;
+
+  /// Title in document outline sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Document outline'**
+  String get viewerOutlineTitle;
+
+  /// Tooltip for closing document outline sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Close outline'**
+  String get viewerCloseOutline;
+
+  /// Empty state in document outline sheet
+  ///
+  /// In en, this message translates to:
+  /// **'No sections found in this document'**
+  String get viewerNoSections;
+
+  /// Tooltip for document outline action
+  ///
+  /// In en, this message translates to:
+  /// **'Table of contents'**
+  String get viewerOutlineTooltip;
+
+  /// Button to open document in an external application
+  ///
+  /// In en, this message translates to:
+  /// **'Open in another app'**
+  String get viewerActionOpenExternal;
+
+  /// Headline shown when document cannot be rendered offline
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t open this document'**
+  String get viewerErrorCantOpenTitle;
+
+  /// Explanation shown when document cannot be rendered offline
+  ///
+  /// In en, this message translates to:
+  /// **'The document could not be rendered offline.'**
+  String get viewerErrorCantOpenMessage;
+
+  /// Text shown during document initialization skeleton
+  ///
+  /// In en, this message translates to:
+  /// **'Opening document...'**
+  String get viewerOpeningDocument;
+
+  /// Headline shown when document is password-protected
+  ///
+  /// In en, this message translates to:
+  /// **'This document is encrypted'**
+  String get viewerErrorEncryptedTitle;
+
+  /// Explanation shown when document is password-protected
+  ///
+  /// In en, this message translates to:
+  /// **'Password-protected files cannot be viewed in the offline reader.'**
+  String get viewerErrorEncryptedMessage;
+
+  /// Headline shown when file exceeds reader limits
+  ///
+  /// In en, this message translates to:
+  /// **'This file exceeds the view limit'**
+  String get viewerErrorTooLargeTitle;
+
+  /// Explanation shown when file exceeds reader limits
+  ///
+  /// In en, this message translates to:
+  /// **'Large documents should be opened using an external Office viewer.'**
+  String get viewerErrorTooLargeMessage;
+
+  /// Headline shown when format cannot be parsed
+  ///
+  /// In en, this message translates to:
+  /// **'This format isn\'t supported'**
+  String get viewerErrorUnsupportedFormatTitle;
+
+  /// Explanation shown when format cannot be parsed
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View cannot parse this file format directly.'**
+  String get viewerErrorUnsupportedFormatMessage;
+
+  /// Item count badge in document outline sheet
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 item} other{{count} items}}'**
+  String viewerOutlineItemsCount(int count);
+
+  /// Title of typography sheet in text viewer
+  ///
+  /// In en, this message translates to:
+  /// **'Typography'**
+  String get txtViewerTypographyTitle;
+
+  /// Label displaying current font size in points
+  ///
+  /// In en, this message translates to:
+  /// **'{size} pt'**
+  String txtViewerFontSizeLabel(int size);
+
+  /// Label for monospace font switch in text viewer
+  ///
+  /// In en, this message translates to:
+  /// **'Monospace font'**
+  String get txtViewerMonospaceLabel;
+
+  /// Notice banner when text file exceeds 1 MB cap
+  ///
+  /// In en, this message translates to:
+  /// **'File is larger than 1 MB: showing first 1 MB'**
+  String get txtViewerTruncationBanner;
+
+  /// Text viewer top bar subtitle showing line count and file size
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 line • {size}} other{{count} lines • {size}}}'**
+  String txtViewerLinesSubtitle(int count, String size);
+
+  /// Tooltip for typography sheet button
+  ///
+  /// In en, this message translates to:
+  /// **'Typography settings'**
+  String get txtViewerTooltipTypography;
+
+  /// Tooltip for decrease font size button
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease font size'**
+  String get txtViewerTooltipDecreaseFont;
+
+  /// Tooltip for increase font size button
+  ///
+  /// In en, this message translates to:
+  /// **'Increase font size'**
+  String get txtViewerTooltipIncreaseFont;
+
+  /// Tooltip for monospace font toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle monospace font'**
+  String get txtViewerTooltipToggleMonospace;
+
+  /// Image viewer top bar subtitle showing image pixel dimensions and file size
+  ///
+  /// In en, this message translates to:
+  /// **'{width} × {height} • {size}'**
+  String imageViewerDimensionsSubtitle(int width, int height, String size);
+
+  /// Floating zoom scale indicator in image viewer
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}%'**
+  String imageViewerZoomPill(int percent);
+
+  /// Tooltip for reset zoom button
+  ///
+  /// In en, this message translates to:
+  /// **'Fit to screen'**
+  String get imageViewerTooltipFitToScreen;
+
+  /// Error message when image file cannot be decoded
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to load image'**
+  String get imageViewerErrorCorrupt;
+
+  /// Snackbar shown when opening a file that no longer exists on disk
+  ///
+  /// In en, this message translates to:
+  /// **'File no longer exists'**
+  String get viewerDispatcherFileMissing;
 }
 
 class _AppLocalizationsDelegate

@@ -29,6 +29,7 @@ class ReaderSearchBar extends StatefulWidget implements PreferredSizeWidget {
   final bool isSearching;
   final bool hasNoTextLayer;
   final bool isLoading;
+  final bool showNavigationChevrons;
 
   const ReaderSearchBar({
     super.key,
@@ -43,6 +44,7 @@ class ReaderSearchBar extends StatefulWidget implements PreferredSizeWidget {
     this.isSearching = false,
     this.hasNoTextLayer = false,
     this.isLoading = false,
+    this.showNavigationChevrons = true,
   });
 
   @override
@@ -116,9 +118,11 @@ class _ReaderSearchBarState extends State<ReaderSearchBar> {
       counterText = l10n.readerSearchMatchCap;
     } else if (widget.totalMatches == 0) {
       counterText = l10n.readerSearchNoMatches;
-    } else {
-      final current = (widget.currentMatchIndex ?? 0) + 1;
+    } else if (widget.currentMatchIndex != null) {
+      final current = widget.currentMatchIndex! + 1;
       counterText = l10n.readerSearchMatchCounter(current, widget.totalMatches);
+    } else {
+      counterText = l10n.readerSearchTotalMatches(widget.totalMatches);
     }
 
     final clampedScale = MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.3);
@@ -259,24 +263,26 @@ class _ReaderSearchBarState extends State<ReaderSearchBar> {
                 ),
 
                 // Navigation chevrons (Up / Down)
-                IconButton(
-                  key: const Key('reader_search_prev_button'),
-                  icon: const Icon(Icons.keyboard_arrow_up_rounded),
-                  color: hasMatches ? tokens.textPrimary : tokens.textSecondary.withValues(alpha: 0.3),
-                  tooltip: l10n.readerSearchPrevMatch,
-                  constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
-                  padding: EdgeInsets.zero,
-                  onPressed: hasMatches ? widget.onPrevMatch : null,
-                ),
-                IconButton(
-                  key: const Key('reader_search_next_button'),
-                  icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                  color: hasMatches ? tokens.textPrimary : tokens.textSecondary.withValues(alpha: 0.3),
-                  tooltip: l10n.readerSearchNextMatch,
-                  constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
-                  padding: EdgeInsets.zero,
-                  onPressed: hasMatches ? widget.onNextMatch : null,
-                ),
+                if (widget.showNavigationChevrons) ...[
+                  IconButton(
+                    key: const Key('reader_search_prev_button'),
+                    icon: const Icon(Icons.keyboard_arrow_up_rounded),
+                    color: hasMatches ? tokens.textPrimary : tokens.textSecondary.withValues(alpha: 0.3),
+                    tooltip: l10n.readerSearchPrevMatch,
+                    constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
+                    padding: EdgeInsets.zero,
+                    onPressed: hasMatches ? widget.onPrevMatch : null,
+                  ),
+                  IconButton(
+                    key: const Key('reader_search_next_button'),
+                    icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                    color: hasMatches ? tokens.textPrimary : tokens.textSecondary.withValues(alpha: 0.3),
+                    tooltip: l10n.readerSearchNextMatch,
+                    constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
+                    padding: EdgeInsets.zero,
+                    onPressed: hasMatches ? widget.onNextMatch : null,
+                  ),
+                ],
               ],
             ),
           ),

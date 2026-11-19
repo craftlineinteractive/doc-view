@@ -1920,6 +1920,158 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewerErrorNoAppFound => 'No app found to open this file';
+
+  @override
+  String readerSearchTotalMatches(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count matches',
+      one: '1 match',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String viewerOfficeUnitsSubtitle(int count, String ext) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count units • $ext',
+      one: '1 unit • $ext',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get viewerLegacyFormatBanner => 'Legacy format: text only';
+
+  @override
+  String get viewerSpreadsheetTruncatedBanner =>
+      'Large spreadsheet: showing the first 3000 rows';
+
+  @override
+  String viewerSectionTitle(int number) {
+    return 'Section $number';
+  }
+
+  @override
+  String get viewerMenuOutline => 'Outline';
+
+  @override
+  String get viewerOutlineTitle => 'Document outline';
+
+  @override
+  String get viewerCloseOutline => 'Close outline';
+
+  @override
+  String get viewerNoSections => 'No sections found in this document';
+
+  @override
+  String get viewerOutlineTooltip => 'Table of contents';
+
+  @override
+  String get viewerActionOpenExternal => 'Open in another app';
+
+  @override
+  String get viewerErrorCantOpenTitle => 'Can\'t open this document';
+
+  @override
+  String get viewerErrorCantOpenMessage =>
+      'The document could not be rendered offline.';
+
+  @override
+  String get viewerOpeningDocument => 'Opening document...';
+
+  @override
+  String get viewerErrorEncryptedTitle => 'This document is encrypted';
+
+  @override
+  String get viewerErrorEncryptedMessage =>
+      'Password-protected files cannot be viewed in the offline reader.';
+
+  @override
+  String get viewerErrorTooLargeTitle => 'This file exceeds the view limit';
+
+  @override
+  String get viewerErrorTooLargeMessage =>
+      'Large documents should be opened using an external Office viewer.';
+
+  @override
+  String get viewerErrorUnsupportedFormatTitle =>
+      'This format isn\'t supported';
+
+  @override
+  String get viewerErrorUnsupportedFormatMessage =>
+      'Doc View cannot parse this file format directly.';
+
+  @override
+  String viewerOutlineItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get txtViewerTypographyTitle => 'Typography';
+
+  @override
+  String txtViewerFontSizeLabel(int size) {
+    return '$size pt';
+  }
+
+  @override
+  String get txtViewerMonospaceLabel => 'Monospace font';
+
+  @override
+  String get txtViewerTruncationBanner =>
+      'File is larger than 1 MB: showing first 1 MB';
+
+  @override
+  String txtViewerLinesSubtitle(int count, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count lines • $size',
+      one: '1 line • $size',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get txtViewerTooltipTypography => 'Typography settings';
+
+  @override
+  String get txtViewerTooltipDecreaseFont => 'Decrease font size';
+
+  @override
+  String get txtViewerTooltipIncreaseFont => 'Increase font size';
+
+  @override
+  String get txtViewerTooltipToggleMonospace => 'Toggle monospace font';
+
+  @override
+  String imageViewerDimensionsSubtitle(int width, int height, String size) {
+    return '$width × $height • $size';
+  }
+
+  @override
+  String imageViewerZoomPill(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get imageViewerTooltipFitToScreen => 'Fit to screen';
+
+  @override
+  String get imageViewerErrorCorrupt => 'Unable to load image';
+
+  @override
+  String get viewerDispatcherFileMissing => 'File no longer exists';
 }
 
 /// The translations for English (`en_XA`).
@@ -3901,4 +4053,162 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   @override
   String get viewerErrorNoAppFound =>
       '[Ñô àþþ ƒôûñđ ţô ôþéñ ţĥîš ƒîłé ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String readerSearchTotalMatches(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count ɱàţçĥéš ẋẋẋẋẋẋ]',
+      one: '[1 ɱàţçĥ ẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String viewerOfficeUnitsSubtitle(int count, String ext) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count ûñîţš • $ext ẋẋẋẋẋẋẋẋẋ]',
+      one: '[1 ûñîţ • $ext ẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get viewerLegacyFormatBanner =>
+      '[Łéĝàçý ƒôřɱàţ: ţéẋţ ôñłý ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetTruncatedBanner =>
+      '[Łàřĝé šþřéàđšĥééţ: šĥôŵîñĝ ţĥé ƒîřšţ 3000 řôŵš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String viewerSectionTitle(int number) {
+    return '[Šéçţîôñ $number ẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get viewerMenuOutline => '[Öûţłîñé ẋẋẋ]';
+
+  @override
+  String get viewerOutlineTitle => '[Ðôçûɱéñţ ôûţłîñé ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerCloseOutline => '[Çłôšé ôûţłîñé ẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerNoSections =>
+      '[Ñô šéçţîôñš ƒôûñđ îñ ţĥîš đôçûɱéñţ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerOutlineTooltip => '[Ťàƀłé ôƒ çôñţéñţš ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerActionOpenExternal => '[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorCantOpenTitle =>
+      '[Çàñ\'ţ ôþéñ ţĥîš đôçûɱéñţ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorCantOpenMessage =>
+      '[Ťĥé đôçûɱéñţ çôûłđ ñôţ ƀé řéñđéřéđ ôƒƒłîñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerOpeningDocument => '[Öþéñîñĝ đôçûɱéñţ... ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorEncryptedTitle =>
+      '[Ťĥîš đôçûɱéñţ îš éñçřýþţéđ ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorEncryptedMessage =>
+      '[Þàššŵôřđ-þřôţéçţéđ ƒîłéš çàññôţ ƀé ṽîéŵéđ îñ ţĥé ôƒƒłîñé řéàđéř. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorTooLargeTitle =>
+      '[Ťĥîš ƒîłé éẋçééđš ţĥé ṽîéŵ łîɱîţ ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorTooLargeMessage =>
+      '[Łàřĝé đôçûɱéñţš šĥôûłđ ƀé ôþéñéđ ûšîñĝ àñ éẋţéřñàł Öƒƒîçé ṽîéŵéř. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorUnsupportedFormatTitle =>
+      '[Ťĥîš ƒôřɱàţ îšñ\'ţ šûþþôřţéđ ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorUnsupportedFormatMessage =>
+      '[Ðôç Ṽîéŵ çàññôţ þàřšé ţĥîš ƒîłé ƒôřɱàţ đîřéçţłý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String viewerOutlineItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count îţéɱš ẋẋẋẋẋẋ]',
+      one: '[1 îţéɱ ẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get txtViewerTypographyTitle => '[Ťýþôĝřàþĥý ẋẋẋẋ]';
+
+  @override
+  String txtViewerFontSizeLabel(int size) {
+    return '[$size þţ ẋẋẋẋ]';
+  }
+
+  @override
+  String get txtViewerMonospaceLabel => '[Ṁôñôšþàçé ƒôñţ ẋẋẋẋẋẋ]';
+
+  @override
+  String get txtViewerTruncationBanner =>
+      '[Ƒîłé îš łàřĝéř ţĥàñ 1 ṀƁ: šĥôŵîñĝ ƒîřšţ 1 ṀƁ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String txtViewerLinesSubtitle(int count, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count łîñéš • $size ẋẋẋẋẋẋẋẋẋ]',
+      one: '[1 łîñé • $size ẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get txtViewerTooltipTypography => '[Ťýþôĝřàþĥý šéţţîñĝš ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get txtViewerTooltipDecreaseFont => '[Ðéçřéàšé ƒôñţ šîžé ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get txtViewerTooltipIncreaseFont => '[Îñçřéàšé ƒôñţ šîžé ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get txtViewerTooltipToggleMonospace =>
+      '[Ťôĝĝłé ɱôñôšþàçé ƒôñţ ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String imageViewerDimensionsSubtitle(int width, int height, String size) {
+    return '[$width × $height • $size ẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String imageViewerZoomPill(int percent) {
+    return '[$percent% ẋẋẋẋ]';
+  }
+
+  @override
+  String get imageViewerTooltipFitToScreen => '[Ƒîţ ţô šçřééñ ẋẋẋẋẋẋ]';
+
+  @override
+  String get imageViewerErrorCorrupt => '[Ûñàƀłé ţô łôàđ îɱàĝé ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerDispatcherFileMissing => '[Ƒîłé ñô łôñĝéř éẋîšţš ẋẋẋẋẋẋẋẋẋ]';
 }
