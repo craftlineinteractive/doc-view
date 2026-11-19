@@ -193,3 +193,38 @@ enum PdfSplitErrorReason {
     }
   }
 }
+
+/// Typed reasons for PDF page edit operation failures.
+enum PdfPageEditErrorReason {
+  sourceFileNotFound,
+  passwordProtectedOrCorrupt,
+  allPagesDeleted,
+  saveFailed,
+  unsupportedSourcePage;
+
+  String localizedMessage(BuildContext context, {String? details}) {
+    switch (this) {
+      case PdfPageEditErrorReason.sourceFileNotFound:
+        return context.l10n.errorRenameSourceNotFound;
+      case PdfPageEditErrorReason.passwordProtectedOrCorrupt:
+        return context.l10n.pagesErrorUnreadable;
+      case PdfPageEditErrorReason.allPagesDeleted:
+        return context.l10n.pagesDeleteAllBlocked;
+      case PdfPageEditErrorReason.saveFailed:
+        return context.l10n.errorRenameFailed(details ?? '');
+      case PdfPageEditErrorReason.unsupportedSourcePage:
+        return context.l10n.pagesErrorUnreadable;
+    }
+  }
+}
+
+/// Exception thrown by PDF page editing operations.
+class PdfPageEditException implements Exception {
+  final PdfPageEditErrorReason reason;
+  final String? message;
+
+  const PdfPageEditException(this.reason, [this.message]);
+
+  @override
+  String toString() => 'PdfPageEditException($reason, $message)';
+}
