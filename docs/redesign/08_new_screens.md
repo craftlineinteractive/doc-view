@@ -86,3 +86,61 @@ This document catalogs every screen and bottom sheet added or restructured in **
   - Attempts `url_launcher` with `shareddocuments://` (`LaunchMode.externalApplication`); returns `false` if unavailable.
 - **Dart Fallback** (`SettingsScreen._openFileManager`):
   - If `FileManagerService.openSystemFileManager()` returns `false`, navigates cleanly to the in-app `/directories` screen (`DirectoriesScreen`).
+
+---
+
+## Phase G3a Reader & Pages Screen Upgrades
+
+### 7. PDF Viewer Screen (`lib/features/viewer/pdf_viewer_screen.dart`, route `/viewer/pdf`)
+- **Structure**:
+  - **Top Bar**:
+    - Back button with localized tooltip.
+    - Title column: truncated file name (`TextOverflow.ellipsis`) with subtitle `"N Pages • <size>"`.
+    - Convert-to-Word icon action: gated strictly behind `feature_flags.dart: conversionsEnabled` (defaults to `false`, enabled in Phase G6; zero dead UI).
+    - Pages management icon action: navigates to `/pdf-pages` with file and current page index.
+    - 3-dot overflow menu: "Go to page" (opens `PdfPagesSheet`), "Add/Remove bookmark", "Details" (opens `FileDetailsSheet`), and "Open in another app" (delegates via `OpenFilex`).
+  - **Viewer Body**:
+    - pdfrx `PdfViewer.file` integration with vertical and horizontal reading layout options.
+    - Live text search highlighting on canvas via `PdfTextSearcher` match callback.
+    - Inverted color filter matrix (`_isInverted` toggled via ColorFiltered matrix for night/high-contrast reading).
+    - Floating page pill indicators at bottom and right edge during scroll.
+    - Tap canvas to toggle top bar and bottom toolbar chrome.
+  - **Bottom Toolbar**:
+    - Uses shared `ReaderBottomRow` with 5 items:
+      1. Horizontal / Vertical scroll layout toggle.
+      2. Orientation lock / rotation toggle (`SystemChrome.setPreferredOrientations`).
+      3. Search toggle (reveals `ReaderSearchBar`).
+      4. Color invert toggle (visual active state when enabled).
+      5. Share document action (invokes `SharePlus`).
+
+### 8. Pages Management Screen (`lib/features/viewer/pages_screen.dart`, route `/pdf-pages`)
+- **Route**: `/pdf-pages`, accepts `extra: {'file': DocFile, 'currentPage': int}`.
+- **Layout & Responsiveness**:
+  - Top AppBar: Back button (with unsaved changes discard confirmation dialog), localized `"Pages"` title, single-level Undo action icon, and tonal FilledButton `"Save"`.
+  - Subheader row: Left-aligned localized page count (e.g. `"6 pages"`), Right-aligned `"Select all"` / `"Clear selection"` action.
+  - Thumbnail Grid:
+    - 3 columns in portrait orientation; 5 columns in landscape orientation.
+    - Child aspect ratio 0.72.
+    - Reordering via `LongPressDraggable<int>` and `DragTarget<int>` with immediate visual rearrangement.
+    - Page number badge (`1`, `2`, ...) at top-left of each tile.
+    - Selection indicator ring with primary blue border when tapped.
+  - Performance & Caching:
+    - Lazy thumbnail rendering with 60-item in-memory LRU thumbnail cache (`_thumbnailCache`).
+    - Serialized background render queue (`_renderQueue`) with max concurrency 2 to avoid memory bloat and UI jank.
+    - Thumbnail dimensions capped at 240x320 with low memory footprint.
+- **Editing Actions (Bottom Row)**:
+  - Contextual action bar appears whenever 1 or more pages are selected:
+    - **Rotate**: Rotates selected pages clockwise by +90° with instant visual feedback and persistent `PdfPageEditSpec` state.
+    - **Extract**: Extracts selected pages into a new document via `PdfPageEditService.extractPages`.
+    - **Delete**: Removes selected pages from the document with single-level undo. Hard rule: deleting all pages is blocked with an informative localized error snackbar.
+  - When no pages are selected, displays an **Insert** action (supports picking from another PDF document via `FilePicker`).
+- **Persistence & Save Flow**:
+  - Single-level undo snapshots page ordering, rotations, and deletions.
+  - Save action opens a modal dialog:
+    - Option 1: "Save as new file" with custom file name input.
+    - Option 2: "Replace original file" with atomic isolate-based replace (`PdfPageEditService.saveDocument(replaceOriginal: true)`).
+  - Handles Windows and Android file lock safety gracefully.
+
+### 9. PDF More & Pages Bottom Sheets (`lib/features/viewer/widgets/`)
+- Fully localized with zero hardcoded strings.
+- Clamped text scaling (max 1.3x) to guarantee zero overflows even under extreme pseudo-locales (`en_XA`, RTL) at 2.0x accessibility font scaling.
