@@ -105,6 +105,11 @@ List<TxtMatch> searchTxtMatchesWorker(Map<String, dynamic> args) {
   return results;
 }
 
+/// Dispatches [searchTxtMatchesWorker] in a background isolate without capturing enclosing state.
+Future<List<TxtMatch>> computeTxtMatches(List<String> lines, String query) {
+  return Isolate.run(() => searchTxtMatchesWorker({'lines': lines, 'query': query}));
+}
+
 /// Content-first text document reader with isolate-backed decoding,
 /// background isolate search with highlighting, theme inversion,
 /// and shared reader chrome.
@@ -251,9 +256,8 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
       _isSearchRunning = true;
     });
 
-    final found = await Isolate.run(
-      () => searchTxtMatchesWorker({'lines': _cachedLines, 'query': trimmed}),
-    );
+    final lines = _cachedLines;
+    final found = await computeTxtMatches(lines, trimmed);
 
     if (!mounted) return;
 
@@ -851,7 +855,7 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
             ),
             tooltip: currentFile.isBookmarked
                 ? l10n.tooltipRemoveBookmark
-                : l10n.tooltipBookmark,
+                : l10n.tooltipAddBookmark,
             onPressed: () {
               ref
                   .read(fileActionsControllerProvider)
@@ -861,7 +865,7 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
           // 3-dot popup menu
           PopupMenuButton<String>(
             icon: Icon(Icons.more_vert_rounded, color: tokens.textPrimary),
-            tooltip: l10n.tooltipMoreOptions,
+            tooltip: l10n.tooltipMoreActions,
             elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),

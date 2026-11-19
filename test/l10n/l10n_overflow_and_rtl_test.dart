@@ -24,6 +24,7 @@ import 'package:docview/features/tools/widgets/tool_error_sheet.dart';
 import 'package:docview/features/tools/widgets/tool_progress_dialog.dart';
 import 'package:docview/features/tools/widgets/tool_result_sheet.dart';
 import 'package:docview/features/viewer/pages_screen.dart';
+import 'package:docview/features/viewer/widgets/office_outline_sheet.dart';
 import 'package:docview/features/viewer/widgets/pdf_goto_page_dialog.dart';
 import 'package:docview/features/viewer/widgets/pdf_more_sheet.dart';
 import 'package:docview/features/viewer/widgets/pdf_pages_sheet.dart';
@@ -266,6 +267,14 @@ void main() {
               child: PdfMoreSheet(
                 file: sampleDoc,
                 pageCount: 12,
+              ),
+            ),
+          ),
+      'OfficeOutlineSheet': () => const Scaffold(
+            body: SingleChildScrollView(
+              child: OfficeOutlineSheet(
+                outline: ['Introduction', 'Financial Overview', 'Appendices'],
+                currentPosition: 0,
               ),
             ),
           ),

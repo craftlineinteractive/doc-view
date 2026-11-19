@@ -16,6 +16,7 @@ import '../../shared/widgets/reader/reader_search_bar.dart';
 import '../../shared/widgets/skeletons/shimmer.dart';
 import '../files/widgets/file_details_sheet.dart';
 import '../providers/providers.dart';
+import 'widgets/office_outline_sheet.dart';
 
 /// Full-featured, offline Office document viewer supporting Word, Excel, and PowerPoint files.
 ///
@@ -113,159 +114,11 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
   }
 
   void _showOutlineBottomSheet(BuildContext context, List<String> outline) {
-    final tokens = context.tokens;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final l10n = context.l10n;
-
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      builder: (context) {
-        return Container(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.sizeOf(context).height * 0.75,
-          ),
-          decoration: BoxDecoration(
-            color: isDark ? DocViewColors.backgroundDark : Colors.white,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-          ),
-          child: SafeArea(
-            top: false,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Center(
-                  child: Container(
-                    width: 36,
-                    height: 4,
-                    margin: const EdgeInsets.only(top: 12, bottom: 8),
-                    decoration: BoxDecoration(
-                      color: tokens.textSecondary.withValues(alpha: 0.3),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.list_alt_rounded,
-                        size: 22,
-                        color: tokens.primaryBlue,
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        l10n.viewerOutlineTitle,
-                        style: DocViewTypography.titleMd.copyWith(
-                          color: tokens.textPrimary,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      const Spacer(),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: tokens.surface,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          l10n.viewerOutlineItemsCount(outline.length),
-                          style: DocViewTypography.captionXs.copyWith(
-                            color: tokens.textSecondary,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(height: 1, color: tokens.hairline),
-                if (outline.isEmpty)
-                  Padding(
-                    padding: const EdgeInsets.all(32),
-                    child: Text(
-                      l10n.viewerNoSections,
-                      style: DocViewTypography.bodyMd.copyWith(
-                        color: tokens.textSecondary,
-                      ),
-                    ),
-                  )
-                else
-                  Flexible(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      itemCount: outline.length,
-                      itemBuilder: (context, index) {
-                        final title = outline[index].trim();
-                        final isCurrent = index == _controller.position;
-
-                        return ConstrainedBox(
-                          constraints: const BoxConstraints(minHeight: 48),
-                          child: ListTile(
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 2,
-                            ),
-                            leading: Container(
-                              width: 28,
-                              height: 28,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: isCurrent
-                                    ? tokens.primaryBlue
-                                    : tokens.surface,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Text(
-                                '${index + 1}',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.bold,
-                                  color: isCurrent
-                                      ? Colors.white
-                                      : tokens.textSecondary,
-                                ),
-                              ),
-                            ),
-                            title: Text(
-                              title.isEmpty
-                                  ? l10n.viewerSectionTitle(index + 1)
-                                  : title,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: DocViewTypography.bodyMd.copyWith(
-                                color: isCurrent
-                                    ? tokens.primaryBlue
-                                    : tokens.textPrimary,
-                                fontWeight: isCurrent
-                                    ? FontWeight.w700
-                                    : FontWeight.w500,
-                              ),
-                            ),
-                            trailing: isCurrent
-                                ? Icon(
-                                    Icons.check_circle_rounded,
-                                    size: 18,
-                                    color: tokens.primaryBlue,
-                                  )
-                                : null,
-                            onTap: () {
-                              _controller.goTo(index);
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        );
-      },
+    OfficeOutlineSheet.show(
+      context,
+      outline: outline,
+      currentPosition: _controller.position,
+      onSectionSelected: (index) => _controller.goTo(index),
     );
   }
 
