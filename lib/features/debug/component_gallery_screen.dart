@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/constants/file_types.dart';
+import '../../data/models/spreadsheet_data.dart';
 import '../providers/providers.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/app_theme.dart';
@@ -19,6 +20,10 @@ import '../../shared/widgets/navigation/doc_scaffold.dart';
 import '../../shared/widgets/reader/reader_bottom_row.dart';
 import '../../shared/widgets/reader/reader_search_bar.dart';
 import '../../shared/widgets/skeletons/skeleton_variants.dart';
+import '../../shared/widgets/spreadsheet/formula_bar.dart';
+import '../../shared/widgets/spreadsheet/sheet_tab_bar.dart';
+import '../../shared/widgets/spreadsheet/spreadsheet_grid.dart';
+import '../../shared/widgets/spreadsheet/zoom_pill.dart';
 import '../../shared/widgets/status/doc_status_widgets.dart';
 import '../../shared/widgets/tabs/doc_tabs_and_filters.dart';
 import '../../shared/widgets/tiles/category_tile.dart';
@@ -49,6 +54,27 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
   int _radioVal = 1;
   bool _switchVal = true;
   bool _adLoaded = true;
+  int _gallerySheetIndex = 0;
+  SpreadsheetSelection _gallerySpreadsheetSelection = const SpreadsheetSelection.cell(0, 0);
+  double _galleryGridZoom = 1.0;
+  final SheetData _gallerySheetData = SheetData(
+    name: 'Q1 Forecast',
+    rowCount: 4,
+    columnCount: 3,
+    cells: {
+      const CellCoordinate(0, 0): const SpreadsheetCell(rawValue: 'Region', style: CellStyleData(isBold: true)),
+      const CellCoordinate(0, 1): const SpreadsheetCell(rawValue: 'Revenue', style: CellStyleData(isBold: true, textAlign: TextAlign.right)),
+      const CellCoordinate(0, 2): const SpreadsheetCell(rawValue: 'Growth', style: CellStyleData(isBold: true, textAlign: TextAlign.right)),
+      const CellCoordinate(1, 0): const SpreadsheetCell(rawValue: 'North America'),
+      const CellCoordinate(1, 1): const SpreadsheetCell(rawValue: '1250000', type: CellDataType.number),
+      const CellCoordinate(1, 2): const SpreadsheetCell(rawValue: '0.12', type: CellDataType.number),
+      const CellCoordinate(2, 0): const SpreadsheetCell(rawValue: 'Europe'),
+      const CellCoordinate(2, 1): const SpreadsheetCell(rawValue: '850000', type: CellDataType.number),
+      const CellCoordinate(2, 2): const SpreadsheetCell(rawValue: '0.08', type: CellDataType.number),
+      const CellCoordinate(3, 0): const SpreadsheetCell(rawValue: 'Total', style: CellStyleData(isBold: true)),
+      const CellCoordinate(3, 1): const SpreadsheetCell(rawValue: '2100000', formula: '=SUM(B2:B3)', type: CellDataType.number, style: CellStyleData(isBold: true)),
+    },
+  );
 
   final TextEditingController _searchCtrl = TextEditingController(text: 'Quarterly Report');
   final TextEditingController _textCtrl = TextEditingController(text: 'Annual_Budget_2026');
@@ -598,6 +624,48 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                         const ReaderBottomRow(
                           isLoading: true,
                           items: [],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // --- Section 12: Spreadsheet Components ---
+                  const SectionHeader(title: '12. Spreadsheet Grid & Controls'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        FormulaBar(
+                          sheet: _gallerySheetData,
+                          selection: _gallerySpreadsheetSelection,
+                        ),
+                        const SizedBox(height: 8),
+                        SheetTabBar(
+                          sheetNames: const ['Q1 Forecast', 'Q2 Plan', 'Consolidated'],
+                          activeIndex: _gallerySheetIndex,
+                          onSheetSelected: (index) => setState(() => _gallerySheetIndex = index),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ZoomPill(
+                              scale: _galleryGridZoom,
+                              onReset: () => setState(() => _galleryGridZoom = 1.0),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        SizedBox(
+                          height: 180,
+                          child: SpreadsheetGrid(
+                            sheet: _gallerySheetData,
+                            selection: _gallerySpreadsheetSelection,
+                            zoomScale: _galleryGridZoom,
+                            onZoomChanged: (z) => setState(() => _galleryGridZoom = z),
+                            onSelectionChanged: (sel) => setState(() => _gallerySpreadsheetSelection = sel),
+                          ),
                         ),
                       ],
                     ),

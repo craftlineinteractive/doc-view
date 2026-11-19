@@ -1948,7 +1948,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewerSpreadsheetTruncatedBanner =>
-      'Large spreadsheet: showing the first 3000 rows';
+      'Large workbook: showing first 20,000 rows and 100 columns';
 
   @override
   String viewerSectionTitle(int number) {
@@ -2096,6 +2096,102 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewerDispatcherFileMissing => 'File no longer exists';
+
+  @override
+  String get viewerSpreadsheetFormulaBarEmpty => '-';
+
+  @override
+  String get viewerSpreadsheetAllCells => 'All';
+
+  @override
+  String viewerSpreadsheetColumnLabel(String col) {
+    return 'Column $col';
+  }
+
+  @override
+  String viewerSpreadsheetRowLabel(int row) {
+    return 'Row $row';
+  }
+
+  @override
+  String viewerSpreadsheetCellSemantics(String col, int row, String value) {
+    return 'Column $col, row $row, $value';
+  }
+
+  @override
+  String get viewerSpreadsheetEmptyCell => 'empty';
+
+  @override
+  String get viewerSpreadsheetEmptySheet => 'This sheet is empty';
+
+  @override
+  String get viewerSpreadsheetCopiedSingle => 'Cell copied';
+
+  @override
+  String viewerSpreadsheetCopiedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cells copied',
+      one: '1 cell copied',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get viewerSpreadsheetCopyLimitReached =>
+      'Selection truncated to 5,000 cells';
+
+  @override
+  String get viewerSpreadsheetCellContentTitle => 'Cell Content';
+
+  @override
+  String get viewerSpreadsheetCopyAction => 'Copy';
+
+  @override
+  String get viewerSpreadsheetCloseAction => 'Close';
+
+  @override
+  String viewerSpreadsheetZoomPill(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get viewerSpreadsheetResetZoomTooltip => 'Reset zoom to 100%';
+
+  @override
+  String get viewerSpreadsheetNoMatches => 'No matches in this sheet';
+
+  @override
+  String get viewerSpreadsheetSearchPlaceholder => 'Find in sheet…';
+
+  @override
+  String get viewerSpreadsheetPasswordTitle => 'Password-protected file';
+
+  @override
+  String get viewerSpreadsheetPasswordMessage =>
+      'Password-protected files can\'t be opened here.';
+
+  @override
+  String get viewerSpreadsheetErrorTitle => 'Can\'t read this spreadsheet';
+
+  @override
+  String get viewerSpreadsheetCorruptMessage =>
+      'The spreadsheet file is corrupted or could not be decoded.';
+
+  @override
+  String get viewerSpreadsheetTimeoutMessage =>
+      'Opening spreadsheet timed out after 20 seconds.';
+
+  @override
+  String get viewerSpreadsheetTooLargeMessage =>
+      'This file exceeds the 25 MB viewing limit.';
+
+  @override
+  String get viewerSpreadsheetOpenBasicViewer => 'Open in basic viewer';
+
+  @override
+  String get viewerSpreadsheetOpenAnotherApp => 'Open in another app';
 }
 
 /// The translations for English (`en_XA`).
@@ -4106,7 +4202,7 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get viewerSpreadsheetTruncatedBanner =>
-      '[Łàřĝé šþřéàđšĥééţ: šĥôŵîñĝ ţĥé ƒîřšţ 3000 řôŵš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+      '[Łàřĝé ŵôřƙƀôôƙ: šĥôŵîñĝ ƒîřšţ 20,000 řôŵš àñđ 100 çôłûɱñš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
   String viewerSectionTitle(int number) {
@@ -4259,4 +4355,106 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get viewerDispatcherFileMissing => '[Ƒîłé ñô łôñĝéř éẋîšţš ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetFormulaBarEmpty => '[- ẋẋ]';
+
+  @override
+  String get viewerSpreadsheetAllCells => '[Åłł ẋẋ]';
+
+  @override
+  String viewerSpreadsheetColumnLabel(String col) {
+    return '[Çôłûɱñ $col ẋẋẋẋẋ]';
+  }
+
+  @override
+  String viewerSpreadsheetRowLabel(int row) {
+    return '[Řôŵ $row ẋẋẋẋ]';
+  }
+
+  @override
+  String viewerSpreadsheetCellSemantics(String col, int row, String value) {
+    return '[Çôłûɱñ $col, řôŵ $row, $value ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get viewerSpreadsheetEmptyCell => '[éɱþţý ẋẋ]';
+
+  @override
+  String get viewerSpreadsheetEmptySheet => '[Ťĥîš šĥééţ îš éɱþţý ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetCopiedSingle => '[Çéłł çôþîéđ ẋẋẋẋẋ]';
+
+  @override
+  String viewerSpreadsheetCopiedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count çéłłš çôþîéđ ẋẋẋẋẋẋẋẋ]',
+      one: '[1 çéłł çôþîéđ ẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get viewerSpreadsheetCopyLimitReached =>
+      '[Šéłéçţîôñ ţřûñçàţéđ ţô 5,000 çéłłš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetCellContentTitle => '[Çéłł Çôñţéñţ ẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetCopyAction => '[Çôþý ẋẋ]';
+
+  @override
+  String get viewerSpreadsheetCloseAction => '[Çłôšé ẋẋ]';
+
+  @override
+  String viewerSpreadsheetZoomPill(int percent) {
+    return '[$percent% ẋẋẋẋ]';
+  }
+
+  @override
+  String get viewerSpreadsheetResetZoomTooltip =>
+      '[Řéšéţ žôôɱ ţô 100% ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetNoMatches =>
+      '[Ñô ɱàţçĥéš îñ ţĥîš šĥééţ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetSearchPlaceholder => '[Ƒîñđ îñ šĥééţ… ẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetPasswordTitle =>
+      '[Þàššŵôřđ-þřôţéçţéđ ƒîłé ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetPasswordMessage =>
+      '[Þàššŵôřđ-þřôţéçţéđ ƒîłéš çàñ\'ţ ƀé ôþéñéđ ĥéřé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetErrorTitle =>
+      '[Çàñ\'ţ řéàđ ţĥîš šþřéàđšĥééţ ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetCorruptMessage =>
+      '[Ťĥé šþřéàđšĥééţ ƒîłé îš çôřřûþţéđ ôř çôûłđ ñôţ ƀé đéçôđéđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetTimeoutMessage =>
+      '[Öþéñîñĝ šþřéàđšĥééţ ţîɱéđ ôûţ àƒţéř 20 šéçôñđš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetTooLargeMessage =>
+      '[Ťĥîš ƒîłé éẋçééđš ţĥé 25 ṀƁ ṽîéŵîñĝ łîɱîţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetOpenBasicViewer =>
+      '[Öþéñ îñ ƀàšîç ṽîéŵéř ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerSpreadsheetOpenAnotherApp =>
+      '[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]';
 }

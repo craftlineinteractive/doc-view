@@ -2787,5 +2787,126 @@
   "viewerDispatcherFileMissing": "File no longer exists",
   "@viewerDispatcherFileMissing": {
     "description": "Snackbar shown when opening a file that no longer exists on disk"
+  },
+  "viewerSpreadsheetFormulaBarEmpty": "-",
+  "@viewerSpreadsheetFormulaBarEmpty": {
+    "description": "Chip label in formula bar when no cell or range is selected"
+  },
+  "viewerSpreadsheetAllCells": "All",
+  "@viewerSpreadsheetAllCells": {
+    "description": "Chip label in formula bar when entire sheet is selected"
+  },
+  "viewerSpreadsheetColumnLabel": "Column {col}",
+  "@viewerSpreadsheetColumnLabel": {
+    "description": "Chip label in formula bar when an entire column is selected",
+    "placeholders": {
+      "col": { "type": "String" }
+    }
+  },
+  "viewerSpreadsheetRowLabel": "Row {row}",
+  "@viewerSpreadsheetRowLabel": {
+    "description": "Chip label in formula bar when an entire row is selected",
+    "placeholders": {
+      "row": { "type": "int" }
+    }
+  },
+  "viewerSpreadsheetCellSemantics": "Column {col}, row {row}, {value}",
+  "@viewerSpreadsheetCellSemantics": {
+    "description": "Accessibility announcement label for a selected spreadsheet cell",
+    "placeholders": {
+      "col": { "type": "String" },
+      "row": { "type": "int" },
+      "value": { "type": "String" }
+    }
+  },
+  "viewerSpreadsheetEmptyCell": "empty",
+  "@viewerSpreadsheetEmptyCell": {
+    "description": "Spoken description for an empty cell in accessibility announcements"
+  },
+  "viewerSpreadsheetEmptySheet": "This sheet is empty",
+  "@viewerSpreadsheetEmptySheet": {
+    "description": "Hint centered on the grid when the active sheet contains no cells"
+  },
+  "viewerSpreadsheetCopiedSingle": "Cell copied",
+  "@viewerSpreadsheetCopiedSingle": {
+    "description": "Snackbar message when a single cell is copied to the clipboard"
+  },
+  "viewerSpreadsheetCopiedCount": "{count, plural, =1{1 cell copied} other{{count} cells copied}}",
+  "@viewerSpreadsheetCopiedCount": {
+    "description": "Snackbar message indicating the number of cells copied to the clipboard",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "viewerSpreadsheetCopyLimitReached": "Selection truncated to 5,000 cells",
+  "@viewerSpreadsheetCopyLimitReached": {
+    "description": "Snackbar notice when copying a large row or column exceeding the 5,000 cell clipboard cap"
+  },
+  "viewerSpreadsheetCellContentTitle": "Cell Content",
+  "@viewerSpreadsheetCellContentTitle": {
+    "description": "Title of modal bottom sheet showing full un-truncated cell text and formula"
+  },
+  "viewerSpreadsheetCopyAction": "Copy",
+  "@viewerSpreadsheetCopyAction": {
+    "description": "Button label to copy content in the cell inspector bottom sheet"
+  },
+  "viewerSpreadsheetCloseAction": "Close",
+  "@viewerSpreadsheetCloseAction": {
+    "description": "Button label to close dialogs or bottom sheets"
+  },
+  "viewerSpreadsheetZoomPill": "{percent}%",
+  "@viewerSpreadsheetZoomPill": {
+    "description": "Floating pill showing current spreadsheet zoom scale percentage",
+    "placeholders": {
+      "percent": { "type": "int" }
+    }
+  },
+  "viewerSpreadsheetResetZoomTooltip": "Reset zoom to 100%",
+  "@viewerSpreadsheetResetZoomTooltip": {
+    "description": "Tooltip for floating zoom pill to reset zoom back to 100%"
+  },
+  "viewerSpreadsheetNoMatches": "No matches in this sheet",
+  "@viewerSpreadsheetNoMatches": {
+    "description": "Banner or message when in-sheet search finds zero matches in the active sheet"
+  },
+  "viewerSpreadsheetSearchPlaceholder": "Find in sheet…",
+  "@viewerSpreadsheetSearchPlaceholder": {
+    "description": "Search input placeholder in spreadsheet reader"
+  },
+  "viewerSpreadsheetTruncatedBanner": "Large workbook: showing first 20,000 rows and 100 columns",
+  "@viewerSpreadsheetTruncatedBanner": {
+    "description": "Notice banner displayed when a sheet exceeds the 20,000 row or 100 column safety limit"
+  },
+  "viewerSpreadsheetPasswordTitle": "Password-protected file",
+  "@viewerSpreadsheetPasswordTitle": {
+    "description": "Title shown when spreadsheet requires a password"
+  },
+  "viewerSpreadsheetPasswordMessage": "Password-protected files can't be opened here.",
+  "@viewerSpreadsheetPasswordMessage": {
+    "description": "Message explaining that password-protected workbooks cannot be decrypted locally"
+  },
+  "viewerSpreadsheetErrorTitle": "Can't read this spreadsheet",
+  "@viewerSpreadsheetErrorTitle": {
+    "description": "Title shown when spreadsheet cannot be opened or parsed"
+  },
+  "viewerSpreadsheetCorruptMessage": "The spreadsheet file is corrupted or could not be decoded.",
+  "@viewerSpreadsheetCorruptMessage": {
+    "description": "Error message when file decode or unzip fails"
+  },
+  "viewerSpreadsheetTimeoutMessage": "Opening spreadsheet timed out after 20 seconds.",
+  "@viewerSpreadsheetTimeoutMessage": {
+    "description": "Error message when parsing worker exceeds 20-second timeout"
+  },
+  "viewerSpreadsheetTooLargeMessage": "This file exceeds the 25 MB viewing limit.",
+  "@viewerSpreadsheetTooLargeMessage": {
+    "description": "Error message when spreadsheet exceeds 25 MB file size limit"
+  },
+  "viewerSpreadsheetOpenBasicViewer": "Open in basic viewer",
+  "@viewerSpreadsheetOpenBasicViewer": {
+    "description": "Button to fallback to the legacy WebView office viewer when grid parsing fails"
+  },
+  "viewerSpreadsheetOpenAnotherApp": "Open in another app",
+  "@viewerSpreadsheetOpenAnotherApp": {
+    "description": "Button to open the document using an external application intent"
   }
 }

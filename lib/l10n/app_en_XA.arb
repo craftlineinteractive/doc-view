@@ -2613,9 +2613,9 @@
   "@viewerLegacyFormatBanner": {
     "description": "Notice banner for legacy office formats (doc, ppt, xls, rtf)"
   },
-  "viewerSpreadsheetTruncatedBanner": "[Łàřĝé šþřéàđšĥééţ: šĥôŵîñĝ ţĥé ƒîřšţ 3000 řôŵš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "viewerSpreadsheetTruncatedBanner": "[Łàřĝé ŵôřƙƀôôƙ: šĥôŵîñĝ ƒîřšţ 20,000 řôŵš àñđ 100 çôłûɱñš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
   "@viewerSpreadsheetTruncatedBanner": {
-    "description": "Notice banner for truncated spreadsheets exceeding row limit"
+    "description": "Notice banner displayed when a sheet exceeds the 20,000 row or 100 column safety limit"
   },
   "viewerSectionTitle": "[Šéçţîôñ {number} ẋẋẋẋẋẋẋ]",
   "@viewerSectionTitle": {
@@ -2807,5 +2807,136 @@
   "viewerDispatcherFileMissing": "[Ƒîłé ñô łôñĝéř éẋîšţš ẋẋẋẋẋẋẋẋẋ]",
   "@viewerDispatcherFileMissing": {
     "description": "Snackbar shown when opening a file that no longer exists on disk"
+  },
+  "viewerSpreadsheetFormulaBarEmpty": "[- ẋẋ]",
+  "@viewerSpreadsheetFormulaBarEmpty": {
+    "description": "Chip label in formula bar when no cell or range is selected"
+  },
+  "viewerSpreadsheetAllCells": "[Åłł ẋẋ]",
+  "@viewerSpreadsheetAllCells": {
+    "description": "Chip label in formula bar when entire sheet is selected"
+  },
+  "viewerSpreadsheetColumnLabel": "[Çôłûɱñ {col} ẋẋẋẋẋ]",
+  "@viewerSpreadsheetColumnLabel": {
+    "description": "Chip label in formula bar when an entire column is selected",
+    "placeholders": {
+      "col": {
+        "type": "String"
+      }
+    }
+  },
+  "viewerSpreadsheetRowLabel": "[Řôŵ {row} ẋẋẋẋ]",
+  "@viewerSpreadsheetRowLabel": {
+    "description": "Chip label in formula bar when an entire row is selected",
+    "placeholders": {
+      "row": {
+        "type": "int"
+      }
+    }
+  },
+  "viewerSpreadsheetCellSemantics": "[Çôłûɱñ {col}, řôŵ {row}, {value} ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetCellSemantics": {
+    "description": "Accessibility announcement label for a selected spreadsheet cell",
+    "placeholders": {
+      "col": {
+        "type": "String"
+      },
+      "row": {
+        "type": "int"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "viewerSpreadsheetEmptyCell": "[éɱþţý ẋẋ]",
+  "@viewerSpreadsheetEmptyCell": {
+    "description": "Spoken description for an empty cell in accessibility announcements"
+  },
+  "viewerSpreadsheetEmptySheet": "[Ťĥîš šĥééţ îš éɱþţý ẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetEmptySheet": {
+    "description": "Hint centered on the grid when the active sheet contains no cells"
+  },
+  "viewerSpreadsheetCopiedSingle": "[Çéłł çôþîéđ ẋẋẋẋẋ]",
+  "@viewerSpreadsheetCopiedSingle": {
+    "description": "Snackbar message when a single cell is copied to the clipboard"
+  },
+  "viewerSpreadsheetCopiedCount": "{count, plural, =1{[1 çéłł çôþîéđ ẋẋẋẋẋẋ]} other{[{count} çéłłš çôþîéđ ẋẋẋẋẋẋẋẋ]}}",
+  "@viewerSpreadsheetCopiedCount": {
+    "description": "Snackbar message indicating the number of cells copied to the clipboard",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "viewerSpreadsheetCopyLimitReached": "[Šéłéçţîôñ ţřûñçàţéđ ţô 5,000 çéłłš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetCopyLimitReached": {
+    "description": "Snackbar notice when copying a large row or column exceeding the 5,000 cell clipboard cap"
+  },
+  "viewerSpreadsheetCellContentTitle": "[Çéłł Çôñţéñţ ẋẋẋẋẋ]",
+  "@viewerSpreadsheetCellContentTitle": {
+    "description": "Title of modal bottom sheet showing full un-truncated cell text and formula"
+  },
+  "viewerSpreadsheetCopyAction": "[Çôþý ẋẋ]",
+  "@viewerSpreadsheetCopyAction": {
+    "description": "Button label to copy content in the cell inspector bottom sheet"
+  },
+  "viewerSpreadsheetCloseAction": "[Çłôšé ẋẋ]",
+  "@viewerSpreadsheetCloseAction": {
+    "description": "Button label to close dialogs or bottom sheets"
+  },
+  "viewerSpreadsheetZoomPill": "[{percent}% ẋẋẋẋ]",
+  "@viewerSpreadsheetZoomPill": {
+    "description": "Floating pill showing current spreadsheet zoom scale percentage",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "viewerSpreadsheetResetZoomTooltip": "[Řéšéţ žôôɱ ţô 100% ẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetResetZoomTooltip": {
+    "description": "Tooltip for floating zoom pill to reset zoom back to 100%"
+  },
+  "viewerSpreadsheetNoMatches": "[Ñô ɱàţçĥéš îñ ţĥîš šĥééţ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetNoMatches": {
+    "description": "Banner or message when in-sheet search finds zero matches in the active sheet"
+  },
+  "viewerSpreadsheetSearchPlaceholder": "[Ƒîñđ îñ šĥééţ… ẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetSearchPlaceholder": {
+    "description": "Search input placeholder in spreadsheet reader"
+  },
+  "viewerSpreadsheetPasswordTitle": "[Þàššŵôřđ-þřôţéçţéđ ƒîłé ẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetPasswordTitle": {
+    "description": "Title shown when spreadsheet requires a password"
+  },
+  "viewerSpreadsheetPasswordMessage": "[Þàššŵôřđ-þřôţéçţéđ ƒîłéš çàñ'ţ ƀé ôþéñéđ ĥéřé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetPasswordMessage": {
+    "description": "Message explaining that password-protected workbooks cannot be decrypted locally"
+  },
+  "viewerSpreadsheetErrorTitle": "[Çàñ'ţ řéàđ ţĥîš šþřéàđšĥééţ ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetErrorTitle": {
+    "description": "Title shown when spreadsheet cannot be opened or parsed"
+  },
+  "viewerSpreadsheetCorruptMessage": "[Ťĥé šþřéàđšĥééţ ƒîłé îš çôřřûþţéđ ôř çôûłđ ñôţ ƀé đéçôđéđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetCorruptMessage": {
+    "description": "Error message when file decode or unzip fails"
+  },
+  "viewerSpreadsheetTimeoutMessage": "[Öþéñîñĝ šþřéàđšĥééţ ţîɱéđ ôûţ àƒţéř 20 šéçôñđš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetTimeoutMessage": {
+    "description": "Error message when parsing worker exceeds 20-second timeout"
+  },
+  "viewerSpreadsheetTooLargeMessage": "[Ťĥîš ƒîłé éẋçééđš ţĥé 25 ṀƁ ṽîéŵîñĝ łîɱîţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetTooLargeMessage": {
+    "description": "Error message when spreadsheet exceeds 25 MB file size limit"
+  },
+  "viewerSpreadsheetOpenBasicViewer": "[Öþéñ îñ ƀàšîç ṽîéŵéř ẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetOpenBasicViewer": {
+    "description": "Button to fallback to the legacy WebView office viewer when grid parsing fails"
+  },
+  "viewerSpreadsheetOpenAnotherApp": "[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]",
+  "@viewerSpreadsheetOpenAnotherApp": {
+    "description": "Button to open the document using an external application intent"
   }
 }

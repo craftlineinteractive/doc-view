@@ -3235,10 +3235,10 @@ abstract class AppLocalizations {
   /// **'Legacy format: text only'**
   String get viewerLegacyFormatBanner;
 
-  /// Notice banner for truncated spreadsheets exceeding row limit
+  /// Notice banner displayed when a sheet exceeds the 20,000 row or 100 column safety limit
   ///
   /// In en, this message translates to:
-  /// **'Large spreadsheet: showing the first 3000 rows'**
+  /// **'Large workbook: showing first 20,000 rows and 100 columns'**
   String get viewerSpreadsheetTruncatedBanner;
 
   /// Fallback section title in document outline sheet
@@ -3468,6 +3468,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'File no longer exists'**
   String get viewerDispatcherFileMissing;
+
+  /// Chip label in formula bar when no cell or range is selected
+  ///
+  /// In en, this message translates to:
+  /// **'-'**
+  String get viewerSpreadsheetFormulaBarEmpty;
+
+  /// Chip label in formula bar when entire sheet is selected
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get viewerSpreadsheetAllCells;
+
+  /// Chip label in formula bar when an entire column is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Column {col}'**
+  String viewerSpreadsheetColumnLabel(String col);
+
+  /// Chip label in formula bar when an entire row is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Row {row}'**
+  String viewerSpreadsheetRowLabel(int row);
+
+  /// Accessibility announcement label for a selected spreadsheet cell
+  ///
+  /// In en, this message translates to:
+  /// **'Column {col}, row {row}, {value}'**
+  String viewerSpreadsheetCellSemantics(String col, int row, String value);
+
+  /// Spoken description for an empty cell in accessibility announcements
+  ///
+  /// In en, this message translates to:
+  /// **'empty'**
+  String get viewerSpreadsheetEmptyCell;
+
+  /// Hint centered on the grid when the active sheet contains no cells
+  ///
+  /// In en, this message translates to:
+  /// **'This sheet is empty'**
+  String get viewerSpreadsheetEmptySheet;
+
+  /// Snackbar message when a single cell is copied to the clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Cell copied'**
+  String get viewerSpreadsheetCopiedSingle;
+
+  /// Snackbar message indicating the number of cells copied to the clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 cell copied} other{{count} cells copied}}'**
+  String viewerSpreadsheetCopiedCount(int count);
+
+  /// Snackbar notice when copying a large row or column exceeding the 5,000 cell clipboard cap
+  ///
+  /// In en, this message translates to:
+  /// **'Selection truncated to 5,000 cells'**
+  String get viewerSpreadsheetCopyLimitReached;
+
+  /// Title of modal bottom sheet showing full un-truncated cell text and formula
+  ///
+  /// In en, this message translates to:
+  /// **'Cell Content'**
+  String get viewerSpreadsheetCellContentTitle;
+
+  /// Button label to copy content in the cell inspector bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get viewerSpreadsheetCopyAction;
+
+  /// Button label to close dialogs or bottom sheets
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get viewerSpreadsheetCloseAction;
+
+  /// Floating pill showing current spreadsheet zoom scale percentage
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}%'**
+  String viewerSpreadsheetZoomPill(int percent);
+
+  /// Tooltip for floating zoom pill to reset zoom back to 100%
+  ///
+  /// In en, this message translates to:
+  /// **'Reset zoom to 100%'**
+  String get viewerSpreadsheetResetZoomTooltip;
+
+  /// Banner or message when in-sheet search finds zero matches in the active sheet
+  ///
+  /// In en, this message translates to:
+  /// **'No matches in this sheet'**
+  String get viewerSpreadsheetNoMatches;
+
+  /// Search input placeholder in spreadsheet reader
+  ///
+  /// In en, this message translates to:
+  /// **'Find in sheet…'**
+  String get viewerSpreadsheetSearchPlaceholder;
+
+  /// Title shown when spreadsheet requires a password
+  ///
+  /// In en, this message translates to:
+  /// **'Password-protected file'**
+  String get viewerSpreadsheetPasswordTitle;
+
+  /// Message explaining that password-protected workbooks cannot be decrypted locally
+  ///
+  /// In en, this message translates to:
+  /// **'Password-protected files can\'t be opened here.'**
+  String get viewerSpreadsheetPasswordMessage;
+
+  /// Title shown when spreadsheet cannot be opened or parsed
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t read this spreadsheet'**
+  String get viewerSpreadsheetErrorTitle;
+
+  /// Error message when file decode or unzip fails
+  ///
+  /// In en, this message translates to:
+  /// **'The spreadsheet file is corrupted or could not be decoded.'**
+  String get viewerSpreadsheetCorruptMessage;
+
+  /// Error message when parsing worker exceeds 20-second timeout
+  ///
+  /// In en, this message translates to:
+  /// **'Opening spreadsheet timed out after 20 seconds.'**
+  String get viewerSpreadsheetTimeoutMessage;
+
+  /// Error message when spreadsheet exceeds 25 MB file size limit
+  ///
+  /// In en, this message translates to:
+  /// **'This file exceeds the 25 MB viewing limit.'**
+  String get viewerSpreadsheetTooLargeMessage;
+
+  /// Button to fallback to the legacy WebView office viewer when grid parsing fails
+  ///
+  /// In en, this message translates to:
+  /// **'Open in basic viewer'**
+  String get viewerSpreadsheetOpenBasicViewer;
+
+  /// Button to open the document using an external application intent
+  ///
+  /// In en, this message translates to:
+  /// **'Open in another app'**
+  String get viewerSpreadsheetOpenAnotherApp;
 }
 
 class _AppLocalizationsDelegate
