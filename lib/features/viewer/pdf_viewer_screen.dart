@@ -169,7 +169,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
   Future<void> _openPagesScreen(DocFile liveFile) async {
     if (_hasError || _isMissing) return;
 
-    final result = await context.push<int>(
+    final result = await context.push<dynamic>(
       '/pdf-pages',
       extra: {
         'file': liveFile,
@@ -178,8 +178,12 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
     );
 
     if (result != null && mounted) {
-      _controller.goToPage(pageNumber: result);
-      _onInteractionOrScroll();
+      if (result is int) {
+        _controller.goToPage(pageNumber: result);
+        _onInteractionOrScroll();
+      } else if (result is Map && result['saved'] == true) {
+        setState(() {});
+      }
     }
   }
 

@@ -20,6 +20,7 @@ import '../../data/services/open_with_service.dart';
 import '../../data/services/pdf/image_to_pdf_service.dart';
 import '../../data/services/pdf/pdf_merge_service.dart';
 import '../../data/services/pdf/pdf_output_service.dart';
+import '../../data/services/pdf/pdf_page_edit_service.dart';
 import '../../data/services/pdf/pdf_split_service.dart';
 import '../../data/services/permission_service.dart';
 import '../../data/services/scanner_service.dart';
@@ -126,6 +127,11 @@ final pdfMergeServiceProvider = Provider<PdfMergeService>((ref) {
 final pdfSplitServiceProvider = Provider<PdfSplitService>((ref) {
   final outputService = ref.watch(pdfOutputServiceProvider);
   return PdfSplitService(outputService: outputService);
+});
+
+/// PDF page edit service provider.
+final pdfPageEditServiceProvider = Provider<PdfPageEditService>((ref) {
+  return const PdfPageEditService();
 });
 
 /// Key for persisting last completed scan timestamp in SharedPreferences.

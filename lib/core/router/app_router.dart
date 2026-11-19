@@ -20,6 +20,7 @@ import '../../features/shell/main_shell.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/tools/created_documents_screen.dart';
 import '../../features/tools/tools_screen.dart';
+import '../../features/viewer/pages_screen.dart';
 import '../../features/viewer/viewer_screen.dart';
 
 /// Root navigator key shared across the application and router.
@@ -183,6 +184,37 @@ final routerProvider = Provider<GoRouter>((ref) {
             );
           }
           return ViewerScreen(file: file);
+        },
+      ),
+      GoRoute(
+        path: '/pdf-pages',
+        name: 'pdf-pages',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+          DocFile? file;
+          int initialPage = 1;
+          final extra = state.extra;
+          if (extra is DocFile) {
+            file = extra;
+          } else if (extra is Map) {
+            file = extra['file'] as DocFile?;
+            initialPage = (extra['currentPage'] as int?) ?? 1;
+          }
+
+          if (file == null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(context.l10n.noDocumentSelected)),
+                );
+                context.pop();
+              }
+            });
+            return const Scaffold(
+              body: SizedBox.shrink(),
+            );
+          }
+          return PagesScreen(file: file, initialPage: initialPage);
         },
       ),
 
