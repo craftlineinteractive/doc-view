@@ -93,6 +93,18 @@ Each entry is explicitly tagged with a proposed resolution:
 
 ---
 
+## 8. Phase G3c Spreadsheet Viewer Capabilities & Package Limitations
+
+| # | Feature / Action | Package API Status | Technical Finding & Empirical Evidence | Resolution & UI Behavior |
+| :- | :--- | :--- | :--- | :--- |
+| 8.1 | **Sheet Visibility (Hidden Sheets)** | Not supported in `excel` v4.0.6. | `excel` does not parse sheet visibility attributes from workbook XML; all parsed sheets appear in `excel.tables`. | **Graceful degradation**: All decoded sheets appear in `SheetTabBar`. Hidden sheet filtering cannot be supported without package patching. |
+| 8.2 | **Formula Evaluation** | Not supported at runtime in pure-Dart `excel`. | Formulas return `FormulaCellValue` with formula text (e.g. `=SUM(10, 20)`). Runtime Excel calculation engine does not exist in Flutter/Dart. | **Formula Text Display**: Display formula string in `FormulaBar` and cell value text as formula string. Never build fragile client-side formula evaluators. |
+| 8.3 | **Legacy `.xls` (BIFF8 OLE2)** | Not supported in `excel` package (throws `UnsupportedError`). | Non-ZIP binary format cannot be parsed by OOXML decoders. Tested with OLE2 header: throws `Unsupported operation: Excel format unsupported. Only .xlsx files are supported`. | **Routing Fallback**: `.xls` files route directly to `OfficeViewerScreen` with "Legacy format: text only" banner using SheetJS bridge. |
+| 8.4 | **Large Spreadsheet Memory Ceilings** | Isolate benchmark showed 100k rows x 12 cols consumes **677.66 MB** peak RSS. | Full in-memory table creation for 1M+ cells causes OOM crashes on low-RAM mobile devices. | **Hard Cap**: 20,000 rows and 100 columns per sheet. Display localized `viewerSpreadsheetTruncatedBanner`. Lazy conversion of active sheet only. |
+| 8.5 | **Password-Protected / Encrypted Workbooks** | Throws `UnsupportedError` on decode. | Encrypted OOXML uses standard Microsoft Office Agile/Standard Encryption in an OLE compound container. | **Error State**: Displays localized "Password-protected files can't be opened here" message with "Open in another app" action. |
+
+---
+
 ## 4. Summary of Actions
 
 - **Total Items Categorized**: 29
