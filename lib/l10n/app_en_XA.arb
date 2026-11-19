@@ -2361,5 +2361,207 @@
   "scanSettingsLastScanPrefix": "[Łàšţ šçàñ: ẋẋẋẋ]",
   "@scanSettingsLastScanPrefix": {
     "description": "Prefix before the formatted last scan timestamp"
+  },
+  "readerActionVertical": "[Ṽéřţîçàł ẋẋẋẋ]",
+  "@readerActionVertical": {
+    "description": "Reader bottom row action to switch scroll mode to vertical"
+  },
+  "readerActionHorizontal": "[Ħôřîžôñţàł ẋẋẋẋ]",
+  "@readerActionHorizontal": {
+    "description": "Reader bottom row action to switch scroll mode to horizontal"
+  },
+  "readerActionRotate": "[Řôţàţé ẋẋẋ]",
+  "@readerActionRotate": {
+    "description": "Reader bottom row action to toggle device orientation"
+  },
+  "readerActionSearch": "[Šéàřçĥ ẋẋẋ]",
+  "@readerActionSearch": {
+    "description": "Reader bottom row action to activate document search"
+  },
+  "readerActionInvert": "[Îñṽéřţ ẋẋẋ]",
+  "@readerActionInvert": {
+    "description": "Reader bottom row action to toggle page color inversion"
+  },
+  "readerActionShare": "[Šĥàřé ẋẋ]",
+  "@readerActionShare": {
+    "description": "Reader bottom row action to share document"
+  },
+  "readerActionPages": "[Þàĝéš ẋẋ]",
+  "@readerActionPages": {
+    "description": "Reader action to open pages management screen"
+  },
+  "readerSearchHint": "[Šéàřçĥ îñ đôçûɱéñţ... ẋẋẋẋẋẋẋẋẋ]",
+  "@readerSearchHint": {
+    "description": "Hint text for document text search input"
+  },
+  "readerSearchMatchCounter": "[{current} ôƒ {total} ẋẋẋẋẋẋẋẋ]",
+  "@readerSearchMatchCounter": {
+    "description": "Counter displaying active search match position out of total matches",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "readerSearchMatchCap": "[500+ ẋẋ]",
+  "@readerSearchMatchCap": {
+    "description": "Counter display when search matches exceed 500"
+  },
+  "readerSearchNoMatches": "[0 ôƒ 0 ẋẋẋ]",
+  "@readerSearchNoMatches": {
+    "description": "Counter display when search yields no matches"
+  },
+  "readerSearchNoTextLayer": "[Ťĥîš ÞÐƑ ĥàš ñô šéàřçĥàƀłé ţéẋţ ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@readerSearchNoTextLayer": {
+    "description": "Message shown when searching a scanned PDF with no extractable text layer"
+  },
+  "readerSearchPrevMatch": "[Þřéṽîôûš ɱàţçĥ ẋẋẋẋẋẋ]",
+  "@readerSearchPrevMatch": {
+    "description": "Tooltip for jumping to previous search result"
+  },
+  "readerSearchNextMatch": "[Ñéẋţ ɱàţçĥ ẋẋẋẋ]",
+  "@readerSearchNextMatch": {
+    "description": "Tooltip for jumping to next search result"
+  },
+  "readerTopPagesSubtitle": "{count, plural, =1{[1 Þàĝé • {size} ẋẋẋẋẋẋ]} other{[{count} Þàĝéš • {size} ẋẋẋẋẋẋẋẋẋ]}}",
+  "@readerTopPagesSubtitle": {
+    "description": "Reader top bar subtitle showing page count and file size",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "readerMenuGoToPage": "[Ĝô ţô þàĝé ẋẋẋẋ]",
+  "@readerMenuGoToPage": {
+    "description": "3-dot menu item to jump to a specific page number"
+  },
+  "readerMenuAddBookmark": "[Åđđ ƀôôƙɱàřƙ ẋẋẋẋẋ]",
+  "@readerMenuAddBookmark": {
+    "description": "3-dot menu item to bookmark current document"
+  },
+  "readerMenuRemoveBookmark": "[Řéɱôṽé ƀôôƙɱàřƙ ẋẋẋẋẋẋ]",
+  "@readerMenuRemoveBookmark": {
+    "description": "3-dot menu item to unbookmark current document"
+  },
+  "readerMenuDetails": "[Ðéţàîłš ẋẋẋ]",
+  "@readerMenuDetails": {
+    "description": "3-dot menu item to show file details sheet"
+  },
+  "readerMenuOpenInAnotherApp": "[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]",
+  "@readerMenuOpenInAnotherApp": {
+    "description": "3-dot menu item to open file in external app"
+  },
+  "readerTooltipConvertToWord": "[Çôñṽéřţ ţô Ŵôřđ ẋẋẋẋẋẋ]",
+  "@readerTooltipConvertToWord": {
+    "description": "Tooltip for Convert-to-Word top bar action button"
+  },
+  "pagesScreenTitle": "[Þàĝéš ẋẋ]",
+  "@pagesScreenTitle": {
+    "description": "Title of the PDF Pages thumbnail management screen"
+  },
+  "pagesScreenPageCount": "{count, plural, =1{[1 Þàĝé ẋẋẋ]} other{[{count} Þàĝéš ẋẋẋẋẋẋ]}}",
+  "@pagesScreenPageCount": {
+    "description": "Pages screen top bar title showing total page count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pagesActionSelectAll": "[Šéłéçţ àłł ẋẋẋẋ]",
+  "@pagesActionSelectAll": {
+    "description": "Pages screen top bar action to select all pages"
+  },
+  "pagesActionClearSelection": "[Çłéàř ẋẋ]",
+  "@pagesActionClearSelection": {
+    "description": "Pages screen top bar action to deselect all pages"
+  },
+  "pagesActionSave": "[Šàṽé ẋẋ]",
+  "@pagesActionSave": {
+    "description": "Pages screen top bar action to commit page edits"
+  },
+  "pagesActionInsert": "[Îñšéřţ ẋẋẋ]",
+  "@pagesActionInsert": {
+    "description": "Pages screen bottom action to insert pages into document"
+  },
+  "pagesActionRotate": "[Řôţàţé ẋẋẋ]",
+  "@pagesActionRotate": {
+    "description": "Pages screen bottom action to rotate selected pages"
+  },
+  "pagesActionExtract": "[Éẋţřàçţ ẋẋẋ]",
+  "@pagesActionExtract": {
+    "description": "Pages screen bottom action to extract selected pages into new PDF"
+  },
+  "pagesActionDelete": "[Ðéłéţé ẋẋẋ]",
+  "@pagesActionDelete": {
+    "description": "Pages screen bottom action to delete selected pages"
+  },
+  "pagesActionUndo": "[Ûñđô ẋẋ]",
+  "@pagesActionUndo": {
+    "description": "Pages screen top bar action to revert last change"
+  },
+  "pagesInsertSheetTitle": "[Îñšéřţ þàĝéš ẋẋẋẋẋ]",
+  "@pagesInsertSheetTitle": {
+    "description": "Header for insert pages options bottom sheet"
+  },
+  "pagesInsertPagesFromPdf": "[Þàĝéš ƒřôɱ àñôţĥéř ÞÐƑ ẋẋẋẋẋẋẋẋẋ]",
+  "@pagesInsertPagesFromPdf": {
+    "description": "Option to select another PDF from device to insert pages"
+  },
+  "pagesDeleteAllBlocked": "[Çàññôţ đéłéţé àłł þàĝéš. Å đôçûɱéñţ ɱûšţ ĥàṽé àţ łéàšţ ôñé þàĝé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pagesDeleteAllBlocked": {
+    "description": "Warning message when user tries to delete all pages in the document"
+  },
+  "pagesSaveDialogTitle": "[Šàṽé çĥàñĝéš ẋẋẋẋẋ]",
+  "@pagesSaveDialogTitle": {
+    "description": "Title of dialog when saving edited PDF pages"
+  },
+  "pagesSaveAsNew": "[Šàṽé àš ñéŵ ƒîłé ẋẋẋẋẋẋẋ]",
+  "@pagesSaveAsNew": {
+    "description": "Radio option to save edited PDF as a new copy"
+  },
+  "pagesSaveReplace": "[Řéþłàçé ôřîĝîñàł ẋẋẋẋẋẋẋ]",
+  "@pagesSaveReplace": {
+    "description": "Radio option to overwrite the original PDF file"
+  },
+  "pagesSaveReplaceWarning": "[Ťĥîš ôṽéřŵřîţéš ţĥé ôřîĝîñàł ƒîłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pagesSaveReplaceWarning": {
+    "description": "Warning notice when choosing to replace original file"
+  },
+  "pagesSaveFileNameLabel": "[Ƒîłé ñàɱé ẋẋẋẋ]",
+  "@pagesSaveFileNameLabel": {
+    "description": "Input field label for the saved PDF filename"
+  },
+  "pagesDiscardDialogTitle": "[Ðîšçàřđ çĥàñĝéš? ẋẋẋẋẋẋẋ]",
+  "@pagesDiscardDialogTitle": {
+    "description": "Title of confirmation dialog when leaving with unsaved page edits"
+  },
+  "pagesDiscardDialogBody": "[Ýôû ĥàṽé ûñšàṽéđ çĥàñĝéš. Åřé ýôû šûřé ýôû ŵàñţ ţô đîšçàřđ ţĥéɱ? ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pagesDiscardDialogBody": {
+    "description": "Body of confirmation dialog when leaving with unsaved page edits"
+  },
+  "pagesDiscardButton": "[Ðîšçàřđ ẋẋẋ]",
+  "@pagesDiscardButton": {
+    "description": "Destructive button to confirm discarding changes"
+  },
+  "pagesExtractSuccess": "[Éẋţřàçţéđ  ẋẋẋẋ]{count, plural, =1{[1 þàĝé ẋẋẋ]} other{[{count} þàĝéš ẋẋẋẋẋẋ]}}",
+  "@pagesExtractSuccess": {
+    "description": "Success message when pages are extracted into new PDF",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pagesErrorUnreadable": "[Ťĥîš ÞÐƑ çàññôţ ƀé éđîţéđ ƀéçàûšé îţ îš éñçřýþţéđ ôř ûñřéàđàƀłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pagesErrorUnreadable": {
+    "description": "Error displayed when trying to open pages screen on encrypted or damaged PDF"
   }
 }

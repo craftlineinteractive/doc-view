@@ -20,9 +20,15 @@ class PseudoLocaleEngine {
   static String transform(String text) {
     if (text.isEmpty) return text;
 
-    // Check if the string is an ICU expression (e.g. "{count, plural, ...}")
-    if (text.startsWith('{') && (text.contains(', plural,') || text.contains(', select,'))) {
-      return _transformIcu(text);
+    // Check if the string contains an ICU expression (e.g. "{count, plural, ...}")
+    if (text.contains(', plural,') || text.contains(', select,')) {
+      final icuStart = text.indexOf('{');
+      if (icuStart != -1) {
+        final prefix = text.substring(0, icuStart);
+        final remainder = text.substring(icuStart);
+        final transformedPrefix = prefix.isNotEmpty ? _transformSimpleString(prefix) : '';
+        return '$transformedPrefix${_transformIcu(remainder)}';
+      }
     }
 
     return _transformSimpleString(text);

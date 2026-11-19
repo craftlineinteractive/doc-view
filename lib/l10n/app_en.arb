@@ -2377,5 +2377,195 @@
   "scanSettingsLastScanPrefix": "Last scan:",
   "@scanSettingsLastScanPrefix": {
     "description": "Prefix before the formatted last scan timestamp"
+  },
+  "readerActionVertical": "Vertical",
+  "@readerActionVertical": {
+    "description": "Reader bottom row action to switch scroll mode to vertical"
+  },
+  "readerActionHorizontal": "Horizontal",
+  "@readerActionHorizontal": {
+    "description": "Reader bottom row action to switch scroll mode to horizontal"
+  },
+  "readerActionRotate": "Rotate",
+  "@readerActionRotate": {
+    "description": "Reader bottom row action to toggle device orientation"
+  },
+  "readerActionSearch": "Search",
+  "@readerActionSearch": {
+    "description": "Reader bottom row action to activate document search"
+  },
+  "readerActionInvert": "Invert",
+  "@readerActionInvert": {
+    "description": "Reader bottom row action to toggle page color inversion"
+  },
+  "readerActionShare": "Share",
+  "@readerActionShare": {
+    "description": "Reader bottom row action to share document"
+  },
+  "readerActionPages": "Pages",
+  "@readerActionPages": {
+    "description": "Reader action to open pages management screen"
+  },
+  "readerSearchHint": "Search in document...",
+  "@readerSearchHint": {
+    "description": "Hint text for document text search input"
+  },
+  "readerSearchMatchCounter": "{current} of {total}",
+  "@readerSearchMatchCounter": {
+    "description": "Counter displaying active search match position out of total matches",
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "readerSearchMatchCap": "500+",
+  "@readerSearchMatchCap": {
+    "description": "Counter display when search matches exceed 500"
+  },
+  "readerSearchNoMatches": "0 of 0",
+  "@readerSearchNoMatches": {
+    "description": "Counter display when search yields no matches"
+  },
+  "readerSearchNoTextLayer": "This PDF has no searchable text",
+  "@readerSearchNoTextLayer": {
+    "description": "Message shown when searching a scanned PDF with no extractable text layer"
+  },
+  "readerSearchPrevMatch": "Previous match",
+  "@readerSearchPrevMatch": {
+    "description": "Tooltip for jumping to previous search result"
+  },
+  "readerSearchNextMatch": "Next match",
+  "@readerSearchNextMatch": {
+    "description": "Tooltip for jumping to next search result"
+  },
+  "readerTopPagesSubtitle": "{count, plural, =1{1 Page • {size}} other{{count} Pages • {size}}}",
+  "@readerTopPagesSubtitle": {
+    "description": "Reader top bar subtitle showing page count and file size",
+    "placeholders": {
+      "count": { "type": "int" },
+      "size": { "type": "String" }
+    }
+  },
+  "readerMenuGoToPage": "Go to page",
+  "@readerMenuGoToPage": {
+    "description": "3-dot menu item to jump to a specific page number"
+  },
+  "readerMenuAddBookmark": "Add bookmark",
+  "@readerMenuAddBookmark": {
+    "description": "3-dot menu item to bookmark current document"
+  },
+  "readerMenuRemoveBookmark": "Remove bookmark",
+  "@readerMenuRemoveBookmark": {
+    "description": "3-dot menu item to unbookmark current document"
+  },
+  "readerMenuDetails": "Details",
+  "@readerMenuDetails": {
+    "description": "3-dot menu item to show file details sheet"
+  },
+  "readerMenuOpenInAnotherApp": "Open in another app",
+  "@readerMenuOpenInAnotherApp": {
+    "description": "3-dot menu item to open file in external app"
+  },
+  "readerTooltipConvertToWord": "Convert to Word",
+  "@readerTooltipConvertToWord": {
+    "description": "Tooltip for Convert-to-Word top bar action button"
+  },
+  "pagesScreenTitle": "Pages",
+  "@pagesScreenTitle": {
+    "description": "Title of the PDF Pages thumbnail management screen"
+  },
+  "pagesScreenPageCount": "{count, plural, =1{1 Page} other{{count} Pages}}",
+  "@pagesScreenPageCount": {
+    "description": "Pages screen top bar title showing total page count",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "pagesActionSelectAll": "Select all",
+  "@pagesActionSelectAll": {
+    "description": "Pages screen top bar action to select all pages"
+  },
+  "pagesActionClearSelection": "Clear",
+  "@pagesActionClearSelection": {
+    "description": "Pages screen top bar action to deselect all pages"
+  },
+  "pagesActionSave": "Save",
+  "@pagesActionSave": {
+    "description": "Pages screen top bar action to commit page edits"
+  },
+  "pagesActionInsert": "Insert",
+  "@pagesActionInsert": {
+    "description": "Pages screen bottom action to insert pages into document"
+  },
+  "pagesActionRotate": "Rotate",
+  "@pagesActionRotate": {
+    "description": "Pages screen bottom action to rotate selected pages"
+  },
+  "pagesActionExtract": "Extract",
+  "@pagesActionExtract": {
+    "description": "Pages screen bottom action to extract selected pages into new PDF"
+  },
+  "pagesActionDelete": "Delete",
+  "@pagesActionDelete": {
+    "description": "Pages screen bottom action to delete selected pages"
+  },
+  "pagesActionUndo": "Undo",
+  "@pagesActionUndo": {
+    "description": "Pages screen top bar action to revert last change"
+  },
+  "pagesInsertSheetTitle": "Insert pages",
+  "@pagesInsertSheetTitle": {
+    "description": "Header for insert pages options bottom sheet"
+  },
+  "pagesInsertPagesFromPdf": "Pages from another PDF",
+  "@pagesInsertPagesFromPdf": {
+    "description": "Option to select another PDF from device to insert pages"
+  },
+  "pagesDeleteAllBlocked": "Cannot delete all pages. A document must have at least one page.",
+  "@pagesDeleteAllBlocked": {
+    "description": "Warning message when user tries to delete all pages in the document"
+  },
+  "pagesSaveDialogTitle": "Save changes",
+  "@pagesSaveDialogTitle": {
+    "description": "Title of dialog when saving edited PDF pages"
+  },
+  "pagesSaveAsNew": "Save as new file",
+  "@pagesSaveAsNew": {
+    "description": "Radio option to save edited PDF as a new copy"
+  },
+  "pagesSaveReplace": "Replace original",
+  "@pagesSaveReplace": {
+    "description": "Radio option to overwrite the original PDF file"
+  },
+  "pagesSaveReplaceWarning": "This overwrites the original file.",
+  "@pagesSaveReplaceWarning": {
+    "description": "Warning notice when choosing to replace original file"
+  },
+  "pagesSaveFileNameLabel": "File name",
+  "@pagesSaveFileNameLabel": {
+    "description": "Input field label for the saved PDF filename"
+  },
+  "pagesDiscardDialogTitle": "Discard changes?",
+  "@pagesDiscardDialogTitle": {
+    "description": "Title of confirmation dialog when leaving with unsaved page edits"
+  },
+  "pagesDiscardDialogBody": "You have unsaved changes. Are you sure you want to discard them?",
+  "@pagesDiscardDialogBody": {
+    "description": "Body of confirmation dialog when leaving with unsaved page edits"
+  },
+  "pagesDiscardButton": "Discard",
+  "@pagesDiscardButton": {
+    "description": "Destructive button to confirm discarding changes"
+  },
+  "pagesExtractSuccess": "Extracted {count, plural, =1{1 page} other{{count} pages}}",
+  "@pagesExtractSuccess": {
+    "description": "Success message when pages are extracted into new PDF",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "pagesErrorUnreadable": "This PDF cannot be edited because it is encrypted or unreadable.",
+  "@pagesErrorUnreadable": {
+    "description": "Error displayed when trying to open pages screen on encrypted or damaged PDF"
   }
 }

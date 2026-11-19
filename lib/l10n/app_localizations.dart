@@ -2916,6 +2916,270 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last scan:'**
   String get scanSettingsLastScanPrefix;
+
+  /// Reader bottom row action to switch scroll mode to vertical
+  ///
+  /// In en, this message translates to:
+  /// **'Vertical'**
+  String get readerActionVertical;
+
+  /// Reader bottom row action to switch scroll mode to horizontal
+  ///
+  /// In en, this message translates to:
+  /// **'Horizontal'**
+  String get readerActionHorizontal;
+
+  /// Reader bottom row action to toggle device orientation
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate'**
+  String get readerActionRotate;
+
+  /// Reader bottom row action to activate document search
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get readerActionSearch;
+
+  /// Reader bottom row action to toggle page color inversion
+  ///
+  /// In en, this message translates to:
+  /// **'Invert'**
+  String get readerActionInvert;
+
+  /// Reader bottom row action to share document
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get readerActionShare;
+
+  /// Reader action to open pages management screen
+  ///
+  /// In en, this message translates to:
+  /// **'Pages'**
+  String get readerActionPages;
+
+  /// Hint text for document text search input
+  ///
+  /// In en, this message translates to:
+  /// **'Search in document...'**
+  String get readerSearchHint;
+
+  /// Counter displaying active search match position out of total matches
+  ///
+  /// In en, this message translates to:
+  /// **'{current} of {total}'**
+  String readerSearchMatchCounter(int current, int total);
+
+  /// Counter display when search matches exceed 500
+  ///
+  /// In en, this message translates to:
+  /// **'500+'**
+  String get readerSearchMatchCap;
+
+  /// Counter display when search yields no matches
+  ///
+  /// In en, this message translates to:
+  /// **'0 of 0'**
+  String get readerSearchNoMatches;
+
+  /// Message shown when searching a scanned PDF with no extractable text layer
+  ///
+  /// In en, this message translates to:
+  /// **'This PDF has no searchable text'**
+  String get readerSearchNoTextLayer;
+
+  /// Tooltip for jumping to previous search result
+  ///
+  /// In en, this message translates to:
+  /// **'Previous match'**
+  String get readerSearchPrevMatch;
+
+  /// Tooltip for jumping to next search result
+  ///
+  /// In en, this message translates to:
+  /// **'Next match'**
+  String get readerSearchNextMatch;
+
+  /// Reader top bar subtitle showing page count and file size
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 Page • {size}} other{{count} Pages • {size}}}'**
+  String readerTopPagesSubtitle(int count, String size);
+
+  /// 3-dot menu item to jump to a specific page number
+  ///
+  /// In en, this message translates to:
+  /// **'Go to page'**
+  String get readerMenuGoToPage;
+
+  /// 3-dot menu item to bookmark current document
+  ///
+  /// In en, this message translates to:
+  /// **'Add bookmark'**
+  String get readerMenuAddBookmark;
+
+  /// 3-dot menu item to unbookmark current document
+  ///
+  /// In en, this message translates to:
+  /// **'Remove bookmark'**
+  String get readerMenuRemoveBookmark;
+
+  /// 3-dot menu item to show file details sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get readerMenuDetails;
+
+  /// 3-dot menu item to open file in external app
+  ///
+  /// In en, this message translates to:
+  /// **'Open in another app'**
+  String get readerMenuOpenInAnotherApp;
+
+  /// Tooltip for Convert-to-Word top bar action button
+  ///
+  /// In en, this message translates to:
+  /// **'Convert to Word'**
+  String get readerTooltipConvertToWord;
+
+  /// Title of the PDF Pages thumbnail management screen
+  ///
+  /// In en, this message translates to:
+  /// **'Pages'**
+  String get pagesScreenTitle;
+
+  /// Pages screen top bar title showing total page count
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 Page} other{{count} Pages}}'**
+  String pagesScreenPageCount(int count);
+
+  /// Pages screen top bar action to select all pages
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get pagesActionSelectAll;
+
+  /// Pages screen top bar action to deselect all pages
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get pagesActionClearSelection;
+
+  /// Pages screen top bar action to commit page edits
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get pagesActionSave;
+
+  /// Pages screen bottom action to insert pages into document
+  ///
+  /// In en, this message translates to:
+  /// **'Insert'**
+  String get pagesActionInsert;
+
+  /// Pages screen bottom action to rotate selected pages
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate'**
+  String get pagesActionRotate;
+
+  /// Pages screen bottom action to extract selected pages into new PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Extract'**
+  String get pagesActionExtract;
+
+  /// Pages screen bottom action to delete selected pages
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get pagesActionDelete;
+
+  /// Pages screen top bar action to revert last change
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get pagesActionUndo;
+
+  /// Header for insert pages options bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Insert pages'**
+  String get pagesInsertSheetTitle;
+
+  /// Option to select another PDF from device to insert pages
+  ///
+  /// In en, this message translates to:
+  /// **'Pages from another PDF'**
+  String get pagesInsertPagesFromPdf;
+
+  /// Warning message when user tries to delete all pages in the document
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot delete all pages. A document must have at least one page.'**
+  String get pagesDeleteAllBlocked;
+
+  /// Title of dialog when saving edited PDF pages
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get pagesSaveDialogTitle;
+
+  /// Radio option to save edited PDF as a new copy
+  ///
+  /// In en, this message translates to:
+  /// **'Save as new file'**
+  String get pagesSaveAsNew;
+
+  /// Radio option to overwrite the original PDF file
+  ///
+  /// In en, this message translates to:
+  /// **'Replace original'**
+  String get pagesSaveReplace;
+
+  /// Warning notice when choosing to replace original file
+  ///
+  /// In en, this message translates to:
+  /// **'This overwrites the original file.'**
+  String get pagesSaveReplaceWarning;
+
+  /// Input field label for the saved PDF filename
+  ///
+  /// In en, this message translates to:
+  /// **'File name'**
+  String get pagesSaveFileNameLabel;
+
+  /// Title of confirmation dialog when leaving with unsaved page edits
+  ///
+  /// In en, this message translates to:
+  /// **'Discard changes?'**
+  String get pagesDiscardDialogTitle;
+
+  /// Body of confirmation dialog when leaving with unsaved page edits
+  ///
+  /// In en, this message translates to:
+  /// **'You have unsaved changes. Are you sure you want to discard them?'**
+  String get pagesDiscardDialogBody;
+
+  /// Destructive button to confirm discarding changes
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get pagesDiscardButton;
+
+  /// Success message when pages are extracted into new PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Extracted {count, plural, =1{1 page} other{{count} pages}}'**
+  String pagesExtractSuccess(int count);
+
+  /// Error displayed when trying to open pages screen on encrypted or damaged PDF
+  ///
+  /// In en, this message translates to:
+  /// **'This PDF cannot be edited because it is encrypted or unreadable.'**
+  String get pagesErrorUnreadable;
 }
 
 class _AppLocalizationsDelegate

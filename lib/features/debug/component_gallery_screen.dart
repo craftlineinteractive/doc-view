@@ -16,6 +16,8 @@ import '../../shared/widgets/modals/doc_modals.dart';
 import '../../shared/widgets/navigation/doc_app_bar.dart';
 import '../../shared/widgets/navigation/doc_bottom_nav_bar.dart';
 import '../../shared/widgets/navigation/doc_scaffold.dart';
+import '../../shared/widgets/reader/reader_bottom_row.dart';
+import '../../shared/widgets/reader/reader_search_bar.dart';
 import '../../shared/widgets/skeletons/skeleton_variants.dart';
 import '../../shared/widgets/status/doc_status_widgets.dart';
 import '../../shared/widgets/tabs/doc_tabs_and_filters.dart';
@@ -540,6 +542,62 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                               );
                             },
                           ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // --- Section 11: Reader Components ---
+                  const SectionHeader(title: '11. Reader Components'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const ReaderSearchBar(
+                          totalMatches: 14,
+                          currentMatchIndex: 1,
+                        ),
+                        const SizedBox(height: 8),
+                        const ReaderSearchBar(
+                          totalMatches: 0,
+                          hasNoTextLayer: true,
+                        ),
+                        const SizedBox(height: 12),
+                        ReaderBottomRow(
+                          items: [
+                            ReaderBottomRowItem(
+                              icon: Icons.swap_horiz_rounded,
+                              label: 'Horizontal',
+                              onTap: () {},
+                            ),
+                            ReaderBottomRowItem(
+                              icon: Icons.screen_rotation_outlined,
+                              label: 'Rotate',
+                              onTap: () {},
+                            ),
+                            ReaderBottomRowItem(
+                              icon: Icons.search_rounded,
+                              label: 'Search',
+                              onTap: () {},
+                            ),
+                            ReaderBottomRowItem(
+                              icon: Icons.invert_colors_rounded,
+                              label: 'Invert',
+                              isSelected: true,
+                              onTap: () {},
+                            ),
+                            ReaderBottomRowItem(
+                              icon: Icons.share_outlined,
+                              label: 'Share',
+                              onTap: () {},
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        const ReaderBottomRow(
+                          isLoading: true,
+                          items: [],
                         ),
                       ],
                     ),

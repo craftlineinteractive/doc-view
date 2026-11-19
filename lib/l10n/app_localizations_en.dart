@@ -1739,6 +1739,167 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scanSettingsLastScanPrefix => 'Last scan:';
+
+  @override
+  String get readerActionVertical => 'Vertical';
+
+  @override
+  String get readerActionHorizontal => 'Horizontal';
+
+  @override
+  String get readerActionRotate => 'Rotate';
+
+  @override
+  String get readerActionSearch => 'Search';
+
+  @override
+  String get readerActionInvert => 'Invert';
+
+  @override
+  String get readerActionShare => 'Share';
+
+  @override
+  String get readerActionPages => 'Pages';
+
+  @override
+  String get readerSearchHint => 'Search in document...';
+
+  @override
+  String readerSearchMatchCounter(int current, int total) {
+    return '$current of $total';
+  }
+
+  @override
+  String get readerSearchMatchCap => '500+';
+
+  @override
+  String get readerSearchNoMatches => '0 of 0';
+
+  @override
+  String get readerSearchNoTextLayer => 'This PDF has no searchable text';
+
+  @override
+  String get readerSearchPrevMatch => 'Previous match';
+
+  @override
+  String get readerSearchNextMatch => 'Next match';
+
+  @override
+  String readerTopPagesSubtitle(int count, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Pages • $size',
+      one: '1 Page • $size',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get readerMenuGoToPage => 'Go to page';
+
+  @override
+  String get readerMenuAddBookmark => 'Add bookmark';
+
+  @override
+  String get readerMenuRemoveBookmark => 'Remove bookmark';
+
+  @override
+  String get readerMenuDetails => 'Details';
+
+  @override
+  String get readerMenuOpenInAnotherApp => 'Open in another app';
+
+  @override
+  String get readerTooltipConvertToWord => 'Convert to Word';
+
+  @override
+  String get pagesScreenTitle => 'Pages';
+
+  @override
+  String pagesScreenPageCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Pages',
+      one: '1 Page',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pagesActionSelectAll => 'Select all';
+
+  @override
+  String get pagesActionClearSelection => 'Clear';
+
+  @override
+  String get pagesActionSave => 'Save';
+
+  @override
+  String get pagesActionInsert => 'Insert';
+
+  @override
+  String get pagesActionRotate => 'Rotate';
+
+  @override
+  String get pagesActionExtract => 'Extract';
+
+  @override
+  String get pagesActionDelete => 'Delete';
+
+  @override
+  String get pagesActionUndo => 'Undo';
+
+  @override
+  String get pagesInsertSheetTitle => 'Insert pages';
+
+  @override
+  String get pagesInsertPagesFromPdf => 'Pages from another PDF';
+
+  @override
+  String get pagesDeleteAllBlocked =>
+      'Cannot delete all pages. A document must have at least one page.';
+
+  @override
+  String get pagesSaveDialogTitle => 'Save changes';
+
+  @override
+  String get pagesSaveAsNew => 'Save as new file';
+
+  @override
+  String get pagesSaveReplace => 'Replace original';
+
+  @override
+  String get pagesSaveReplaceWarning => 'This overwrites the original file.';
+
+  @override
+  String get pagesSaveFileNameLabel => 'File name';
+
+  @override
+  String get pagesDiscardDialogTitle => 'Discard changes?';
+
+  @override
+  String get pagesDiscardDialogBody =>
+      'You have unsaved changes. Are you sure you want to discard them?';
+
+  @override
+  String get pagesDiscardButton => 'Discard';
+
+  @override
+  String pagesExtractSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages',
+      one: '1 page',
+    );
+    return 'Extracted $_temp0';
+  }
+
+  @override
+  String get pagesErrorUnreadable =>
+      'This PDF cannot be edited because it is encrypted or unreadable.';
 }
 
 /// The translations for English (`en_XA`).
@@ -3534,4 +3695,167 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get scanSettingsLastScanPrefix => '[Łàšţ šçàñ: ẋẋẋẋ]';
+
+  @override
+  String get readerActionVertical => '[Ṽéřţîçàł ẋẋẋẋ]';
+
+  @override
+  String get readerActionHorizontal => '[Ħôřîžôñţàł ẋẋẋẋ]';
+
+  @override
+  String get readerActionRotate => '[Řôţàţé ẋẋẋ]';
+
+  @override
+  String get readerActionSearch => '[Šéàřçĥ ẋẋẋ]';
+
+  @override
+  String get readerActionInvert => '[Îñṽéřţ ẋẋẋ]';
+
+  @override
+  String get readerActionShare => '[Šĥàřé ẋẋ]';
+
+  @override
+  String get readerActionPages => '[Þàĝéš ẋẋ]';
+
+  @override
+  String get readerSearchHint => '[Šéàřçĥ îñ đôçûɱéñţ... ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String readerSearchMatchCounter(int current, int total) {
+    return '[$current ôƒ $total ẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get readerSearchMatchCap => '[500+ ẋẋ]';
+
+  @override
+  String get readerSearchNoMatches => '[0 ôƒ 0 ẋẋẋ]';
+
+  @override
+  String get readerSearchNoTextLayer =>
+      '[Ťĥîš ÞÐƑ ĥàš ñô šéàřçĥàƀłé ţéẋţ ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get readerSearchPrevMatch => '[Þřéṽîôûš ɱàţçĥ ẋẋẋẋẋẋ]';
+
+  @override
+  String get readerSearchNextMatch => '[Ñéẋţ ɱàţçĥ ẋẋẋẋ]';
+
+  @override
+  String readerTopPagesSubtitle(int count, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count Þàĝéš • $size ẋẋẋẋẋẋẋẋẋ]',
+      one: '[1 Þàĝé • $size ẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get readerMenuGoToPage => '[Ĝô ţô þàĝé ẋẋẋẋ]';
+
+  @override
+  String get readerMenuAddBookmark => '[Åđđ ƀôôƙɱàřƙ ẋẋẋẋẋ]';
+
+  @override
+  String get readerMenuRemoveBookmark => '[Řéɱôṽé ƀôôƙɱàřƙ ẋẋẋẋẋẋ]';
+
+  @override
+  String get readerMenuDetails => '[Ðéţàîłš ẋẋẋ]';
+
+  @override
+  String get readerMenuOpenInAnotherApp => '[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get readerTooltipConvertToWord => '[Çôñṽéřţ ţô Ŵôřđ ẋẋẋẋẋẋ]';
+
+  @override
+  String get pagesScreenTitle => '[Þàĝéš ẋẋ]';
+
+  @override
+  String pagesScreenPageCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count Þàĝéš ẋẋẋẋẋẋ]',
+      one: '[1 Þàĝé ẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pagesActionSelectAll => '[Šéłéçţ àłł ẋẋẋẋ]';
+
+  @override
+  String get pagesActionClearSelection => '[Çłéàř ẋẋ]';
+
+  @override
+  String get pagesActionSave => '[Šàṽé ẋẋ]';
+
+  @override
+  String get pagesActionInsert => '[Îñšéřţ ẋẋẋ]';
+
+  @override
+  String get pagesActionRotate => '[Řôţàţé ẋẋẋ]';
+
+  @override
+  String get pagesActionExtract => '[Éẋţřàçţ ẋẋẋ]';
+
+  @override
+  String get pagesActionDelete => '[Ðéłéţé ẋẋẋ]';
+
+  @override
+  String get pagesActionUndo => '[Ûñđô ẋẋ]';
+
+  @override
+  String get pagesInsertSheetTitle => '[Îñšéřţ þàĝéš ẋẋẋẋẋ]';
+
+  @override
+  String get pagesInsertPagesFromPdf => '[Þàĝéš ƒřôɱ àñôţĥéř ÞÐƑ ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pagesDeleteAllBlocked =>
+      '[Çàññôţ đéłéţé àłł þàĝéš. Å đôçûɱéñţ ɱûšţ ĥàṽé àţ łéàšţ ôñé þàĝé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pagesSaveDialogTitle => '[Šàṽé çĥàñĝéš ẋẋẋẋẋ]';
+
+  @override
+  String get pagesSaveAsNew => '[Šàṽé àš ñéŵ ƒîłé ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pagesSaveReplace => '[Řéþłàçé ôřîĝîñàł ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pagesSaveReplaceWarning =>
+      '[Ťĥîš ôṽéřŵřîţéš ţĥé ôřîĝîñàł ƒîłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pagesSaveFileNameLabel => '[Ƒîłé ñàɱé ẋẋẋẋ]';
+
+  @override
+  String get pagesDiscardDialogTitle => '[Ðîšçàřđ çĥàñĝéš? ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pagesDiscardDialogBody =>
+      '[Ýôû ĥàṽé ûñšàṽéđ çĥàñĝéš. Åřé ýôû šûřé ýôû ŵàñţ ţô đîšçàřđ ţĥéɱ? ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pagesDiscardButton => '[Ðîšçàřđ ẋẋẋ]';
+
+  @override
+  String pagesExtractSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count þàĝéš ẋẋẋẋẋẋ]',
+      one: '[1 þàĝé ẋẋẋ]',
+    );
+    return '[Éẋţřàçţéđ  ẋẋẋẋ]$_temp0';
+  }
+
+  @override
+  String get pagesErrorUnreadable =>
+      '[Ťĥîš ÞÐƑ çàññôţ ƀé éđîţéđ ƀéçàûšé îţ îš éñçřýþţéđ ôř ûñřéàđàƀłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
 }
