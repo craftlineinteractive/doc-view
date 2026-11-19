@@ -6,9 +6,6 @@
 lib/features/tools/tools_screen.dart | Phase G4 | Tools tab screen strictly preserved until Phase G4
 lib/features/tools/widgets/tool_card.dart | Phase G4 | Tools tab card widget strictly preserved until Phase G4
 lib/features/viewer/viewer_screen.dart | Phase G3 | Viewer dispatcher screen rewritten in Phase G3
-lib/features/viewer/pdf_viewer_screen.dart | Phase G3 | PDF reader screen chrome rewritten in Phase G3
 lib/features/viewer/office_viewer_screen.dart | Phase G3 | Office viewer screen rewritten in Phase G3
 lib/features/viewer/txt_viewer_screen.dart | Phase G3 | TXT viewer screen rewritten in Phase G3
 lib/features/viewer/image_viewer_screen.dart | Phase G3 | Image viewer screen rewritten in Phase G3
-lib/features/viewer/widgets/pdf_more_sheet.dart | Phase G3 | PDF viewer more sheet rewritten in Phase G3
-lib/features/viewer/widgets/pdf_pages_sheet.dart | Phase G3 | PDF viewer pages sheet rewritten in Phase G3

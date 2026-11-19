@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_filex/open_filex.dart';
 
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -120,7 +121,7 @@ class PdfMoreSheet extends ConsumerWidget {
               // 1. Share
               _MoreOptionTile(
                 icon: Icons.share_outlined,
-                label: 'Share',
+                label: context.l10n.readerActionShare,
                 onTap: () {
                   Navigator.of(context).pop();
                   ref.read(fileActionsControllerProvider).shareFiles([liveFile]);
@@ -130,14 +131,14 @@ class PdfMoreSheet extends ConsumerWidget {
               // 2. Open in another app
               _MoreOptionTile(
                 icon: Icons.launch_outlined,
-                label: 'Open in another app',
+                label: context.l10n.readerMenuOpenInAnotherApp,
                 onTap: () async {
                   Navigator.of(context).pop();
                   final result = await OpenFilex.open(liveFile.path);
                   if (result.type != ResultType.done && context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Could not open in external application'),
+                      SnackBar(
+                        content: Text(context.l10n.errorGenericTitle),
                       ),
                     );
                   }
@@ -147,7 +148,7 @@ class PdfMoreSheet extends ConsumerWidget {
               // 3. Details
               _MoreOptionTile(
                 icon: Icons.info_outline_rounded,
-                label: 'Details',
+                label: context.l10n.readerMenuDetails,
                 onTap: () {
                   Navigator.of(context).pop();
                   FileDetailsSheet.show(
@@ -166,8 +167,8 @@ class PdfMoreSheet extends ConsumerWidget {
                     : Icons.bookmark_border_rounded,
                 iconColor: liveFile.isBookmarked ? tokens.primaryBlue : null,
                 label: liveFile.isBookmarked
-                    ? 'Remove bookmark'
-                    : 'Add bookmark',
+                    ? context.l10n.readerMenuRemoveBookmark
+                    : context.l10n.readerMenuAddBookmark,
                 onTap: () {
                   Navigator.of(context).pop();
                   ref

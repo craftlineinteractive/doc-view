@@ -8,12 +8,15 @@ import 'package:docview/data/models/doc_file.dart';
 import 'package:docview/features/viewer/widgets/pdf_goto_page_dialog.dart';
 import 'package:docview/features/viewer/widgets/pdf_pages_sheet.dart';
 import 'package:docview/features/viewer/widgets/pdf_password_dialog.dart';
+import 'package:docview/l10n/app_localizations.dart';
 import 'package:docview/shared/widgets/tiles/doc_folded_icon.dart';
 import 'package:docview/shared/widgets/tiles/file_type_badge.dart';
 
 Widget _wrapWithTokens(Widget child) {
   return ProviderScope(
     child: MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData.light().copyWith(
         extensions: const [DocViewTokens.light],
       ),
@@ -125,7 +128,7 @@ void main() {
       );
 
       expect(find.text('Pages'), findsOneWidget);
-      expect(find.text('10 pages in document'), findsOneWidget);
+      expect(find.text('10 Pages'), findsOneWidget);
       expect(find.text('1'), findsOneWidget);
       expect(find.text('3'), findsOneWidget);
       expect(find.text('10'), findsOneWidget);

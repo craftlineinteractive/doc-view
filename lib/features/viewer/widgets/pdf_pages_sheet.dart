@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
@@ -78,14 +79,14 @@ class PdfPagesSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Pages',
+                        context.l10n.pagesScreenTitle,
                         style: DocViewTypography.headlineSm.copyWith(
                           color: tokens.textPrimary,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                       Text(
-                        '$pageCount pages in document',
+                        context.l10n.pagesScreenPageCount(pageCount),
                         style: DocViewTypography.bodySm.copyWith(
                           color: tokens.textSecondary,
                         ),
@@ -102,7 +103,7 @@ class PdfPagesSheet extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      'Page $currentPage',
+                      context.l10n.toolsPageNumber(currentPage),
                       style: DocViewTypography.labelXs.copyWith(
                         color: tokens.primaryBlue,
                         fontWeight: FontWeight.w700,

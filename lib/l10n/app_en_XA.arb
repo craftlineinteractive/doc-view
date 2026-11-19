@@ -2563,5 +2563,29 @@
   "pagesErrorUnreadable": "[Ťĥîš ÞÐƑ çàññôţ ƀé éđîţéđ ƀéçàûšé îţ îš éñçřýþţéđ ôř ûñřéàđàƀłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
   "@pagesErrorUnreadable": {
     "description": "Error displayed when trying to open pages screen on encrypted or damaged PDF"
+  },
+  "viewerErrorCorruptTitle": "[Çàñ'ţ ôþéñ ţĥîš đôçûɱéñţ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorCorruptTitle": {
+    "description": "Headline shown when document is damaged or cannot be parsed"
+  },
+  "viewerErrorCorruptMessage": "[Ťĥîš ƒîłé àþþéàřš ţô ƀé đàɱàĝéđ ôř ñôţ à ṽàłîđ đôçûɱéñţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorCorruptMessage": {
+    "description": "Explanation shown when document is damaged or cannot be parsed"
+  },
+  "viewerErrorMissingTitle": "[Ťĥîš ƒîłé ñô łôñĝéř éẋîšţš ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorMissingTitle": {
+    "description": "Headline shown when file does not exist on disk"
+  },
+  "viewerErrorMissingMessage": "[Ťĥé ƒîłé ĥàš ƀééñ đéłéţéđ ôř ɱôṽéđ ƒřôɱ đéṽîçé šţôřàĝé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorMissingMessage": {
+    "description": "Explanation shown when file does not exist on disk"
+  },
+  "viewerErrorBackToFiles": "[Ɓàçƙ ţô ƒîłéš ẋẋẋẋẋẋ]",
+  "@viewerErrorBackToFiles": {
+    "description": "Button returning to file list after file is not found"
+  },
+  "viewerErrorNoAppFound": "[Ñô àþþ ƒôûñđ ţô ôþéñ ţĥîš ƒîłé ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@viewerErrorNoAppFound": {
+    "description": "Snackbar shown when system has no application associated with file"
   }
 }

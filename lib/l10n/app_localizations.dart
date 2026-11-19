@@ -3180,6 +3180,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This PDF cannot be edited because it is encrypted or unreadable.'**
   String get pagesErrorUnreadable;
+
+  /// Headline shown when document is damaged or cannot be parsed
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t open this document'**
+  String get viewerErrorCorruptTitle;
+
+  /// Explanation shown when document is damaged or cannot be parsed
+  ///
+  /// In en, this message translates to:
+  /// **'This file appears to be damaged or not a valid document.'**
+  String get viewerErrorCorruptMessage;
+
+  /// Headline shown when file does not exist on disk
+  ///
+  /// In en, this message translates to:
+  /// **'This file no longer exists'**
+  String get viewerErrorMissingTitle;
+
+  /// Explanation shown when file does not exist on disk
+  ///
+  /// In en, this message translates to:
+  /// **'The file has been deleted or moved from device storage.'**
+  String get viewerErrorMissingMessage;
+
+  /// Button returning to file list after file is not found
+  ///
+  /// In en, this message translates to:
+  /// **'Back to files'**
+  String get viewerErrorBackToFiles;
+
+  /// Snackbar shown when system has no application associated with file
+  ///
+  /// In en, this message translates to:
+  /// **'No app found to open this file'**
+  String get viewerErrorNoAppFound;
 }
 
 class _AppLocalizationsDelegate

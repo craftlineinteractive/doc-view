@@ -2567,5 +2567,29 @@
   "pagesErrorUnreadable": "This PDF cannot be edited because it is encrypted or unreadable.",
   "@pagesErrorUnreadable": {
     "description": "Error displayed when trying to open pages screen on encrypted or damaged PDF"
+  },
+  "viewerErrorCorruptTitle": "Can't open this document",
+  "@viewerErrorCorruptTitle": {
+    "description": "Headline shown when document is damaged or cannot be parsed"
+  },
+  "viewerErrorCorruptMessage": "This file appears to be damaged or not a valid document.",
+  "@viewerErrorCorruptMessage": {
+    "description": "Explanation shown when document is damaged or cannot be parsed"
+  },
+  "viewerErrorMissingTitle": "This file no longer exists",
+  "@viewerErrorMissingTitle": {
+    "description": "Headline shown when file does not exist on disk"
+  },
+  "viewerErrorMissingMessage": "The file has been deleted or moved from device storage.",
+  "@viewerErrorMissingMessage": {
+    "description": "Explanation shown when file does not exist on disk"
+  },
+  "viewerErrorBackToFiles": "Back to files",
+  "@viewerErrorBackToFiles": {
+    "description": "Button returning to file list after file is not found"
+  },
+  "viewerErrorNoAppFound": "No app found to open this file",
+  "@viewerErrorNoAppFound": {
+    "description": "Snackbar shown when system has no application associated with file"
   }
 }

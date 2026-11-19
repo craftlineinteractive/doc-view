@@ -1900,6 +1900,26 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pagesErrorUnreadable =>
       'This PDF cannot be edited because it is encrypted or unreadable.';
+
+  @override
+  String get viewerErrorCorruptTitle => 'Can\'t open this document';
+
+  @override
+  String get viewerErrorCorruptMessage =>
+      'This file appears to be damaged or not a valid document.';
+
+  @override
+  String get viewerErrorMissingTitle => 'This file no longer exists';
+
+  @override
+  String get viewerErrorMissingMessage =>
+      'The file has been deleted or moved from device storage.';
+
+  @override
+  String get viewerErrorBackToFiles => 'Back to files';
+
+  @override
+  String get viewerErrorNoAppFound => 'No app found to open this file';
 }
 
 /// The translations for English (`en_XA`).
@@ -3858,4 +3878,27 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   @override
   String get pagesErrorUnreadable =>
       '[Ťĥîš ÞÐƑ çàññôţ ƀé éđîţéđ ƀéçàûšé îţ îš éñçřýþţéđ ôř ûñřéàđàƀłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorCorruptTitle =>
+      '[Çàñ\'ţ ôþéñ ţĥîš đôçûɱéñţ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorCorruptMessage =>
+      '[Ťĥîš ƒîłé àþþéàřš ţô ƀé đàɱàĝéđ ôř ñôţ à ṽàłîđ đôçûɱéñţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorMissingTitle =>
+      '[Ťĥîš ƒîłé ñô łôñĝéř éẋîšţš ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorMissingMessage =>
+      '[Ťĥé ƒîłé ĥàš ƀééñ đéłéţéđ ôř ɱôṽéđ ƒřôɱ đéṽîçé šţôřàĝé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorBackToFiles => '[Ɓàçƙ ţô ƒîłéš ẋẋẋẋẋẋ]';
+
+  @override
+  String get viewerErrorNoAppFound =>
+      '[Ñô àþþ ƒôûñđ ţô ôþéñ ţĥîš ƒîłé ẋẋẋẋẋẋẋẋẋẋẋẋ]';
 }
