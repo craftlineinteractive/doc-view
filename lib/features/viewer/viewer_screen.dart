@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_filex/open_filex.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../data/models/doc_file.dart';
 import '../providers/providers.dart';
@@ -51,7 +52,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
       }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('File no longer exists')),
+          SnackBar(content: Text(context.l10n.viewerDispatcherFileMissing)),
         );
         Navigator.of(context).pop();
       }
@@ -70,7 +71,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
         Navigator.of(context).pop();
         if (result.type != ResultType.done) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('No app found to open this file')),
+            SnackBar(content: Text(context.l10n.viewerErrorNoAppFound)),
           );
         }
       }

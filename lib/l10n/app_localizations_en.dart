@@ -2092,6 +2092,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get imageViewerErrorCorrupt => 'Unable to load image';
 
   @override
+  String get imageViewerLoading => 'Loading image…';
+
+  @override
   String get viewerDispatcherFileMissing => 'File no longer exists';
 }
 
@@ -4250,6 +4253,9 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get imageViewerErrorCorrupt => '[Ûñàƀłé ţô łôàđ îɱàĝé ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get imageViewerLoading => '[Łôàđîñĝ îɱàĝé… ẋẋẋẋẋẋ]';
 
   @override
   String get viewerDispatcherFileMissing => '[Ƒîłé ñô łôñĝéř éẋîšţš ẋẋẋẋẋẋẋẋẋ]';

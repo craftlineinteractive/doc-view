@@ -2800,6 +2800,10 @@
   "@imageViewerErrorCorrupt": {
     "description": "Error message when image file cannot be decoded"
   },
+  "imageViewerLoading": "[Łôàđîñĝ îɱàĝé… ẋẋẋẋẋẋ]",
+  "@imageViewerLoading": {
+    "description": "Loading label while decoding image in image viewer"
+  },
   "viewerDispatcherFileMissing": "[Ƒîłé ñô łôñĝéř éẋîšţš ẋẋẋẋẋẋẋẋẋ]",
   "@viewerDispatcherFileMissing": {
     "description": "Snackbar shown when opening a file that no longer exists on disk"

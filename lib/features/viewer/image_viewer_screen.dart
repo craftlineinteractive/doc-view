@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../core/utils/format_utils.dart';
 import '../../data/models/doc_file.dart';
@@ -167,7 +168,11 @@ class _ImageViewerScreenState extends ConsumerState<ImageViewerScreen>
 
     // Dimension string from real decoded metadata
     final infoText = (_imageWidth != null && _imageHeight != null)
-        ? '$_imageWidth × $_imageHeight • ${FormatUtils.formatFileSize(widget.file.sizeBytes)}'
+        ? context.l10n.imageViewerDimensionsSubtitle(
+            _imageWidth!,
+            _imageHeight!,
+            FormatUtils.formatFileSize(widget.file.sizeBytes),
+          )
         : FormatUtils.formatFileSize(widget.file.sizeBytes);
 
     return Scaffold(
@@ -188,14 +193,14 @@ class _ImageViewerScreenState extends ConsumerState<ImageViewerScreen>
                 child: SizedBox.expand(
                   child: Center(
                     child: _isLoading
-                        ? _buildLoadingSkeleton()
+                        ? _buildLoadingSkeleton(context)
                         : _hasError
-                            ? _buildErrorPlaceholder()
+                            ? _buildErrorPlaceholder(context)
                             : Image.file(
                                 File(widget.file.path),
                                 fit: BoxFit.contain,
                                 errorBuilder: (context, error, stackTrace) {
-                                  return _buildErrorPlaceholder();
+                                  return _buildErrorPlaceholder(context);
                                 },
                               ),
                   ),
@@ -225,7 +230,7 @@ class _ImageViewerScreenState extends ConsumerState<ImageViewerScreen>
                         Icons.arrow_back_rounded,
                         color: Colors.white,
                       ),
-                      tooltip: 'Back',
+                      tooltip: context.l10n.tooltipBack,
                       onPressed: () => Navigator.of(context).maybePop(),
                     ),
                     const SizedBox(width: 4),
@@ -264,8 +269,8 @@ class _ImageViewerScreenState extends ConsumerState<ImageViewerScreen>
                             : Colors.white,
                       ),
                       tooltip: currentFile.isBookmarked
-                          ? 'Remove bookmark'
-                          : 'Bookmark',
+                          ? context.l10n.tooltipRemoveBookmark
+                          : context.l10n.tooltipAddBookmark,
                       onPressed: () {
                         ref
                             .read(fileActionsControllerProvider)
@@ -279,9 +284,9 @@ class _ImageViewerScreenState extends ConsumerState<ImageViewerScreen>
                         Icons.more_vert_rounded,
                         color: Colors.white,
                       ),
-                      tooltip: 'More options',
+                      tooltip: context.l10n.tooltipMoreActions,
                       onPressed: () {
-                        ViewerMoreSheet.show(
+                        PdfMoreSheet.show(
                           context,
                           file: currentFile,
                         );
@@ -303,40 +308,45 @@ class _ImageViewerScreenState extends ConsumerState<ImageViewerScreen>
                 opacity: _showChrome ? 1.0 : 0.0,
                 child: Material(
                   color: Colors.transparent,
-                  child: InkWell(
-                    onTap: _resetZoom,
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.75),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.white.withValues(alpha: 0.2),
+                  child: Tooltip(
+                    message: context.l10n.imageViewerTooltipFitToScreen,
+                    child: InkWell(
+                      onTap: _resetZoom,
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
                         ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            '${_currentScale.toStringAsFixed(1)}x',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              fontFeatures: [FontFeature.tabularFigures()],
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.75),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.2),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              context.l10n.imageViewerZoomPill(
+                                (_currentScale * 100).round(),
+                              ),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                fontFeatures: [FontFeature.tabularFigures()],
+                              ),
                             ),
-                          ),
-                          const SizedBox(width: 6),
-                          const Icon(
-                            Icons.restart_alt_rounded,
-                            size: 14,
-                            color: Colors.white70,
-                          ),
-                        ],
+                            const SizedBox(width: 6),
+                            const Icon(
+                              Icons.restart_alt_rounded,
+                              size: 14,
+                              color: Colors.white70,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -380,7 +390,7 @@ class _ImageViewerScreenState extends ConsumerState<ImageViewerScreen>
     );
   }
 
-  Widget _buildLoadingSkeleton() {
+  Widget _buildLoadingSkeleton(BuildContext context) {
     return Container(
       width: 260,
       height: 260,
@@ -403,9 +413,9 @@ class _ImageViewerScreenState extends ConsumerState<ImageViewerScreen>
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Loading image...',
-              style: TextStyle(color: Colors.white54, fontSize: 13),
+            Text(
+              context.l10n.imageViewerLoading,
+              style: const TextStyle(color: Colors.white54, fontSize: 13),
             ),
           ],
         ),
@@ -413,19 +423,19 @@ class _ImageViewerScreenState extends ConsumerState<ImageViewerScreen>
     );
   }
 
-  Widget _buildErrorPlaceholder() {
-    return const Column(
+  Widget _buildErrorPlaceholder(BuildContext context) {
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
+        const Icon(
           Icons.broken_image_outlined,
           size: 64,
           color: Colors.white38,
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
-          'Failed to load image',
-          style: TextStyle(color: Colors.white70, fontSize: 14),
+          context.l10n.imageViewerErrorCorrupt,
+          style: const TextStyle(color: Colors.white70, fontSize: 14),
         ),
       ],
     );

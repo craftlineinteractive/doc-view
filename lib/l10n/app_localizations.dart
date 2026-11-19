@@ -3457,6 +3457,12 @@ abstract class AppLocalizations {
   /// **'Unable to load image'**
   String get imageViewerErrorCorrupt;
 
+  /// Loading label while decoding image in image viewer
+  ///
+  /// In en, this message translates to:
+  /// **'Loading image…'**
+  String get imageViewerLoading;
+
   /// Snackbar shown when opening a file that no longer exists on disk
   ///
   /// In en, this message translates to:
