@@ -48,3 +48,4 @@ app.*.map.json
 # Planning with files
 task_plan.md
 progress.md
+findings.md
