@@ -79,8 +79,6 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
   void initState() {
     super.initState();
     _controller = PdfViewerController();
-    _textSearcher = PdfTextSearcher(_controller);
-    _textSearcher!.addListener(_onSearchStatusChanged);
     _checkFileExistence();
     _resetPagePillTimer();
   }
@@ -215,7 +213,15 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
     }
   }
 
+  void _initSearcherIfNeeded() {
+    if (_textSearcher == null && _controller.isReady) {
+      _textSearcher = PdfTextSearcher(_controller);
+      _textSearcher!.addListener(_onSearchStatusChanged);
+    }
+  }
+
   void _openSearch() {
+    _initSearcherIfNeeded();
     setState(() {
       _isSearchActive = true;
     });
@@ -230,6 +236,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
   }
 
   void _handleSearchQuery(String query) {
+    _initSearcherIfNeeded();
     if (query.trim().isEmpty) {
       _textSearcher?.resetTextSearch();
     } else {
@@ -348,8 +355,9 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
                     backgroundColor: canvasBg,
                     layoutPages: _isHorizontal ? _horizontalPageLayout : null,
                     pagePaintCallbacks: [
-                      if (_textSearcher != null)
-                        _textSearcher!.pageTextMatchPaintCallback,
+                      (canvas, rect, page) {
+                        _textSearcher?.pageTextMatchPaintCallback(canvas, rect, page);
+                      },
                     ],
                     matchTextColor: Colors.yellow.withValues(alpha: 0.5),
                     activeMatchTextColor: Colors.orange.withValues(alpha: 0.65),
@@ -365,6 +373,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
                       return const SizedBox.shrink();
                     },
                     onViewerReady: (document, controller) {
+                      _initSearcherIfNeeded();
                       if (mounted) {
                         setState(() {
                           _pageCount = document.pages.length;
@@ -634,7 +643,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
               Icons.more_vert_rounded,
               color: tokens.textPrimary,
             ),
-            tooltip: l10n.tooltipMore,
+            tooltip: l10n.tooltipMoreActions,
             color: isDark ? const Color(0xFF232838) : Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
