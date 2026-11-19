@@ -81,6 +81,18 @@ Each entry is explicitly tagged with a proposed resolution:
 
 ---
 
+## 7. Phase G3b Office Viewer Capabilities & Package Limitations
+
+| # | Feature / Action | `offline_document_viewer` 0.1.0 API Status | Technical Finding & Emulator Evidence | Resolution & UI Behavior |
+| :- | :--- | :--- | :--- | :--- |
+| 7.1 | **Invert / Dark Styling** | Not supported in public API (`DocumentView.backgroundColor` only). | Wrapping `DocumentView` in `ColorFiltered(matrix: _kInvertColorMatrix)` does NOT invert the Android `InAppWebView` platform view (platform views bypass Flutter canvas-layer raster filters). Emulator test capture `docs/redesign/img/g3b/g3b_step0_webview_invert_test.png` confirmed document background remained white `RGB(241, 242, 245)`. | **Hidden** on `ReaderBottomRow` for Word, RTF, and PowerPoint. Never build fragile CSS injection hacks around the WebView. |
+| 7.2 | **Horizontal / One-Page Layout** | Not supported (`DocumentView` has no scroll direction or paging parameter). | Continuous vertical scrolling is baked into the bundled web engines (`docx-preview.js`, `pptxjs.js`). | **Hidden** on `ReaderBottomRow` for Word, RTF, and PowerPoint. |
+| 7.3 | **Search Step-Through Navigation (Next/Prev)** | `search(query)` and `searchHits` supported; cursor stepping unsupported. | `DocumentViewController` exposes `search(query)` which highlights matches in the WebView and reports `searchHits`, but has no `nextMatch()` or `previousMatch()` methods. | `ReaderSearchBar` displays match counter (`N matches`), but step-through chevrons are omitted/disabled for Office documents. |
+| 7.4 | **Document Outline Detection** | Supported via `controller.info?.outline`. | `DocumentInfo.outline` returns `List<String>` (headings for DOCX, slide titles for PPTX, sheets for XLSX). Empty if format lacks an outline. | **Supported**: Outline option shown in top bar 3-dot menu conditionally when `outline.isNotEmpty`. |
+| 7.5 | **Orientation Lock / Rotate** | Supported via Flutter `SystemChrome`. | Reusable `ReaderOrientationController` toggles between portrait and landscape and restores on dispose. | **Supported**: Displayed on `ReaderBottomRow` for Word, RTF, PowerPoint, and TXT. |
+
+---
+
 ## 4. Summary of Actions
 
 - **Total Items Categorized**: 29

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:open_filex/open_filex.dart';
@@ -17,6 +16,7 @@ import '../../core/theme/doc_view_typography.dart';
 import '../../core/utils/format_utils.dart';
 import '../../data/models/doc_file.dart';
 import '../../shared/widgets/reader/reader_bottom_row.dart';
+import '../../shared/widgets/reader/reader_orientation.dart';
 import '../../shared/widgets/reader/reader_search_bar.dart';
 import '../../shared/widgets/skeletons/shimmer.dart';
 import '../files/widgets/file_details_sheet.dart';
@@ -24,24 +24,6 @@ import '../providers/providers.dart';
 import 'widgets/pdf_goto_page_dialog.dart';
 import 'widgets/pdf_password_dialog.dart';
 
-/// Matrix for color inversion (White -> Black, Black -> White).
-const List<double> _kInvertColorMatrix = [
-  -1,  0,  0, 0, 255,
-   0, -1,  0, 0, 255,
-   0,  0, -1, 0, 255,
-   0,  0,  0, 1,   0,
-];
-
-/// Redesigned PDF Reader screen matching strict G3a owner decisions.
-///
-/// Features:
-/// - Custom reader chassis (#EEF0F5 light, #11131B dark) with zero ads.
-/// - Top bar: back, file name with "N Pages • size", conditional Convert-to-Word,
-///   Pages icon (navigates to /pdf-pages), and 3-dot popup menu.
-/// - Shared 5-item [ReaderBottomRow]: Vertical/Horizontal scroll toggle, Phone orientation toggle,
-///   Search bar trigger, Canvas Invert toggle, and Share.
-/// - Top bar replaced by [ReaderSearchBar] during search with highlight overlay & no-text-layer notice.
-/// - Auto-hiding chrome on page tap, with auto-fading page pill ("3 / 120").
 class PdfViewerScreen extends ConsumerStatefulWidget {
   final DocFile file;
 
@@ -74,10 +56,12 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
   bool _isSearchActive = false;
   bool _hasNoTextLayer = false;
   final TextEditingController _searchController = TextEditingController();
+  late final ReaderOrientationController _orientationController;
 
   @override
   void initState() {
     super.initState();
+    _orientationController = ReaderOrientationController();
     _controller = PdfViewerController();
     _checkFileExistence();
     _resetPagePillTimer();
@@ -89,8 +73,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
     _searchController.dispose();
     _textSearcher?.removeListener(_onSearchStatusChanged);
     _textSearcher?.dispose();
-    // Restore all device orientations when leaving the reader
-    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+    _orientationController.dispose();
     super.dispose();
   }
 
@@ -199,18 +182,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
   }
 
   void _toggleOrientation() {
-    final isPortrait = MediaQuery.orientationOf(context) == Orientation.portrait;
-    if (isPortrait) {
-      SystemChrome.setPreferredOrientations(const [
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-    } else {
-      SystemChrome.setPreferredOrientations(const [
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-    }
+    _orientationController.toggle(context);
   }
 
   void _initSearcherIfNeeded() {
@@ -345,7 +317,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
               onPointerMove: (_) => _onInteractionOrScroll(),
               child: ColorFiltered(
                 colorFilter: _isInverted
-                    ? const ColorFilter.matrix(_kInvertColorMatrix)
+                    ? const ColorFilter.matrix(kReaderInvertColorMatrix)
                     : const ColorFilter.mode(Colors.transparent, BlendMode.dst),
                 child: PdfViewer.file(
                   widget.file.path,
