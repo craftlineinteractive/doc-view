@@ -2055,6 +2055,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtViewerTooltipToggleMonospace => 'Toggle monospace font';
 
   @override
+  String get txtViewerMonospaceSubtitle =>
+      'Fixed-width characters for code and logs';
+
+  @override
+  String get txtViewerPreviewLabel => 'Preview';
+
+  @override
+  String get txtViewerPreviewText =>
+      'The quick brown fox jumps over the lazy dog.';
+
+  @override
+  String get txtViewerErrorTitle => 'Can\'t read this text file';
+
+  @override
+  String get txtViewerErrorMessage =>
+      'The file format or encoding could not be parsed.';
+
+  @override
+  String get txtViewerActionRetry => 'Retry';
+
+  @override
   String imageViewerDimensionsSubtitle(int width, int height, String size) {
     return '$width × $height • $size';
   }
@@ -4192,6 +4213,27 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   @override
   String get txtViewerTooltipToggleMonospace =>
       '[Ťôĝĝłé ɱôñôšþàçé ƒôñţ ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get txtViewerMonospaceSubtitle =>
+      '[Ƒîẋéđ-ŵîđţĥ çĥàřàçţéřš ƒôř çôđé àñđ łôĝš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get txtViewerPreviewLabel => '[Þřéṽîéŵ ẋẋẋ]';
+
+  @override
+  String get txtViewerPreviewText =>
+      '[Ťĥé ʠûîçƙ ƀřôŵñ ƒôẋ ĵûɱþš ôṽéř ţĥé łàžý đôĝ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get txtViewerErrorTitle => '[Çàñ\'ţ řéàđ ţĥîš ţéẋţ ƒîłé ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get txtViewerErrorMessage =>
+      '[Ťĥé ƒîłé ƒôřɱàţ ôř éñçôđîñĝ çôûłđ ñôţ ƀé þàřšéđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get txtViewerActionRetry => '[Řéţřý ẋẋ]';
 
   @override
   String imageViewerDimensionsSubtitle(int width, int height, String size) {

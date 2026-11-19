@@ -2744,6 +2744,30 @@
   "@txtViewerTooltipToggleMonospace": {
     "description": "Tooltip for monospace font toggle"
   },
+  "txtViewerMonospaceSubtitle": "[Ƒîẋéđ-ŵîđţĥ çĥàřàçţéřš ƒôř çôđé àñđ łôĝš ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@txtViewerMonospaceSubtitle": {
+    "description": "Explanation for monospace font option"
+  },
+  "txtViewerPreviewLabel": "[Þřéṽîéŵ ẋẋẋ]",
+  "@txtViewerPreviewLabel": {
+    "description": "Label for typography preview section"
+  },
+  "txtViewerPreviewText": "[Ťĥé ʠûîçƙ ƀřôŵñ ƒôẋ ĵûɱþš ôṽéř ţĥé łàžý đôĝ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@txtViewerPreviewText": {
+    "description": "Sample text rendered in typography preview"
+  },
+  "txtViewerErrorTitle": "[Çàñ'ţ řéàđ ţĥîš ţéẋţ ƒîłé ẋẋẋẋẋẋẋẋẋẋ]",
+  "@txtViewerErrorTitle": {
+    "description": "Headline shown when text file cannot be read"
+  },
+  "txtViewerErrorMessage": "[Ťĥé ƒîłé ƒôřɱàţ ôř éñçôđîñĝ çôûłđ ñôţ ƀé þàřšéđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@txtViewerErrorMessage": {
+    "description": "Explanation shown when text file cannot be read"
+  },
+  "txtViewerActionRetry": "[Řéţřý ẋẋ]",
+  "@txtViewerActionRetry": {
+    "description": "Button to retry reading text file"
+  },
   "imageViewerDimensionsSubtitle": "[{width} × {height} • {size} ẋẋẋẋẋẋẋẋẋẋẋ]",
   "@imageViewerDimensionsSubtitle": {
     "description": "Image viewer top bar subtitle showing image pixel dimensions and file size",

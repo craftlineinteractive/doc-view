@@ -2732,6 +2732,30 @@
   "@txtViewerTooltipToggleMonospace": {
     "description": "Tooltip for monospace font toggle"
   },
+  "txtViewerMonospaceSubtitle": "Fixed-width characters for code and logs",
+  "@txtViewerMonospaceSubtitle": {
+    "description": "Explanation for monospace font option"
+  },
+  "txtViewerPreviewLabel": "Preview",
+  "@txtViewerPreviewLabel": {
+    "description": "Label for typography preview section"
+  },
+  "txtViewerPreviewText": "The quick brown fox jumps over the lazy dog.",
+  "@txtViewerPreviewText": {
+    "description": "Sample text rendered in typography preview"
+  },
+  "txtViewerErrorTitle": "Can't read this text file",
+  "@txtViewerErrorTitle": {
+    "description": "Headline shown when text file cannot be read"
+  },
+  "txtViewerErrorMessage": "The file format or encoding could not be parsed.",
+  "@txtViewerErrorMessage": {
+    "description": "Explanation shown when text file cannot be read"
+  },
+  "txtViewerActionRetry": "Retry",
+  "@txtViewerActionRetry": {
+    "description": "Button to retry reading text file"
+  },
   "imageViewerDimensionsSubtitle": "{width} × {height} • {size}",
   "@imageViewerDimensionsSubtitle": {
     "description": "Image viewer top bar subtitle showing image pixel dimensions and file size",

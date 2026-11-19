@@ -3397,6 +3397,42 @@ abstract class AppLocalizations {
   /// **'Toggle monospace font'**
   String get txtViewerTooltipToggleMonospace;
 
+  /// Explanation for monospace font option
+  ///
+  /// In en, this message translates to:
+  /// **'Fixed-width characters for code and logs'**
+  String get txtViewerMonospaceSubtitle;
+
+  /// Label for typography preview section
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get txtViewerPreviewLabel;
+
+  /// Sample text rendered in typography preview
+  ///
+  /// In en, this message translates to:
+  /// **'The quick brown fox jumps over the lazy dog.'**
+  String get txtViewerPreviewText;
+
+  /// Headline shown when text file cannot be read
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t read this text file'**
+  String get txtViewerErrorTitle;
+
+  /// Explanation shown when text file cannot be read
+  ///
+  /// In en, this message translates to:
+  /// **'The file format or encoding could not be parsed.'**
+  String get txtViewerErrorMessage;
+
+  /// Button to retry reading text file
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get txtViewerActionRetry;
+
   /// Image viewer top bar subtitle showing image pixel dimensions and file size
   ///
   /// In en, this message translates to:
