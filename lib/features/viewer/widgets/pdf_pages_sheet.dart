@@ -50,12 +50,14 @@ class PdfPagesSheet extends StatelessWidget {
         color: isDark ? DocViewColors.backgroundDark : Colors.white,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       ),
-      child: SafeArea(
-        top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+      child: MediaQuery.withClampedTextScaling(
+        maxScaleFactor: 1.3,
+        child: SafeArea(
+          top: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
             // Drag handle
             Center(
               child: Container(
@@ -75,24 +77,31 @@ class PdfPagesSheet extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        context.l10n.pagesScreenTitle,
-                        style: DocViewTypography.headlineSm.copyWith(
-                          color: tokens.textPrimary,
-                          fontWeight: FontWeight.w700,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          context.l10n.pagesScreenTitle,
+                          style: DocViewTypography.headlineSm.copyWith(
+                            color: tokens.textPrimary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      Text(
-                        context.l10n.pagesScreenPageCount(pageCount),
-                        style: DocViewTypography.bodySm.copyWith(
-                          color: tokens.textSecondary,
+                        Text(
+                          context.l10n.pagesScreenPageCount(pageCount),
+                          style: DocViewTypography.bodySm.copyWith(
+                            color: tokens.textSecondary,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  const SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10,
@@ -162,7 +171,8 @@ class PdfPagesSheet extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
 

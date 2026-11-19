@@ -20,11 +20,13 @@ import '../providers/providers.dart';
 class PagesScreen extends ConsumerStatefulWidget {
   final DocFile file;
   final int initialPage;
+  final List<PdfPageEditSpec>? initialPages;
 
   const PagesScreen({
     super.key,
     required this.file,
     this.initialPage = 1,
+    this.initialPages,
   });
 
   @override
@@ -47,7 +49,12 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
   @override
   void initState() {
     super.initState();
-    _loadDocument();
+    if (widget.initialPages != null) {
+      _pages = List<PdfPageEditSpec>.from(widget.initialPages!);
+      _isLoading = false;
+    } else {
+      _loadDocument();
+    }
   }
 
   @override
@@ -513,79 +520,61 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
       },
       child: Scaffold(
         backgroundColor: isDark ? DocViewColors.backgroundDark : DocViewColors.backgroundLight,
-        appBar: AppBar(
-          backgroundColor: isDark ? DocViewColors.surfaceDark : Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_rounded),
-            tooltip: context.l10n.tooltipBack,
-            onPressed: () async {
-              final shouldPop = await _confirmDiscard();
-              if (shouldPop && context.mounted) {
-                context.pop();
-              }
-            },
-          ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: MediaQuery.withClampedTextScaling(
+            maxScaleFactor: 1.3,
+            child: AppBar(
+              backgroundColor: isDark ? DocViewColors.surfaceDark : Colors.white,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_rounded),
+                tooltip: context.l10n.tooltipBack,
+                onPressed: () async {
+                  final shouldPop = await _confirmDiscard();
+                  if (shouldPop && context.mounted) {
+                    context.pop();
+                  }
+                },
+              ),
+              title: Text(
                 context.l10n.pagesScreenTitle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: DocViewTypography.headlineSm.copyWith(
                   color: tokens.textPrimary,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Text(
-                context.l10n.pagesScreenPageCount(_pages.length),
-                style: DocViewTypography.bodySm.copyWith(
-                  color: tokens.textSecondary,
+              actions: [
+                // Undo button
+                IconButton(
+                  icon: const Icon(Icons.undo_rounded),
+                  tooltip: context.l10n.pagesActionUndo,
+                  onPressed: _undoSnapshot != null ? _handleUndo : null,
                 ),
-              ),
-            ],
+
+                // Save button
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: FilledButton.tonal(
+                    onPressed: _hasUnsavedChanges && !_isSaving ? _showSaveDialog : null,
+                    style: FilledButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                    ),
+                    child: _isSaving
+                        ? const SizedBox(
+                            width: 14,
+                            height: 14,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : Text(context.l10n.pagesActionSave),
+                  ),
+                ),
+              ],
+            ),
           ),
-          actions: [
-            // Undo button
-            IconButton(
-              icon: const Icon(Icons.undo_rounded),
-              tooltip: context.l10n.pagesActionUndo,
-              onPressed: _undoSnapshot != null ? _handleUndo : null,
-            ),
-
-            // Select all / Clear button
-            TextButton(
-              onPressed: _pages.isEmpty ? null : _toggleSelectAll,
-              child: Text(
-                _selectedIndices.length == _pages.length
-                    ? context.l10n.pagesActionClearSelection
-                    : context.l10n.pagesActionSelectAll,
-                style: DocViewTypography.labelMd.copyWith(
-                  color: tokens.primaryBlue,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-
-            // Save button
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: FilledButton.tonal(
-                onPressed: _hasUnsavedChanges && !_isSaving ? _showSaveDialog : null,
-                style: FilledButton.styleFrom(
-                  visualDensity: VisualDensity.compact,
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                ),
-                child: _isSaving
-                    ? const SizedBox(
-                        width: 14,
-                        height: 14,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : Text(context.l10n.pagesActionSave),
-              ),
-            ),
-          ],
         ),
         body: _buildBody(context),
         bottomNavigationBar: _buildBottomBar(context),
@@ -629,62 +618,121 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
       );
     }
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isLandscape = constraints.maxWidth > constraints.maxHeight;
-        final crossAxisCount = isLandscape ? 5 : 3;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-        return GridView.builder(
-          padding: const EdgeInsets.all(12),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount,
-            childAspectRatio: 0.72,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-          ),
-          itemCount: _pages.length,
-          itemBuilder: (context, index) {
-            final spec = _pages[index];
-            final isSelected = _selectedIndices.contains(index);
-
-            return LongPressDraggable<int>(
-              data: index,
-              feedback: Material(
-                elevation: 6,
-                borderRadius: BorderRadius.circular(12),
-                child: SizedBox(
-                  width: (constraints.maxWidth - 48) / crossAxisCount,
-                  height: ((constraints.maxWidth - 48) / crossAxisCount) / 0.72,
-                  child: _buildTileContent(index, spec, isSelected, isDragging: true),
+    return Column(
+      children: [
+        // Sub-header bar: Page count on the left, Select all / Clear on the right
+        MediaQuery.withClampedTextScaling(
+          maxScaleFactor: 1.3,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            decoration: BoxDecoration(
+              color: isDark ? DocViewColors.surfaceDark : Colors.white,
+              border: Border(
+                bottom: BorderSide(
+                  color: tokens.hairline,
+                  width: 0.5,
                 ),
               ),
-              childWhenDragging: Opacity(
-                opacity: 0.3,
-                child: _buildTileContent(index, spec, isSelected),
-              ),
-              child: DragTarget<int>(
-                onWillAcceptWithDetails: (details) => details.data != index,
-                onAcceptWithDetails: (details) => _handleReorder(details.data, index),
-                builder: (context, candidateData, rejectedData) {
-                  return InkWell(
-                    borderRadius: BorderRadius.circular(12),
-                    onTap: () {
-                      setState(() {
-                        if (isSelected) {
-                          _selectedIndices.remove(index);
-                        } else {
-                          _selectedIndices.add(index);
-                        }
-                      });
-                    },
-                    child: _buildTileContent(index, spec, isSelected),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    context.l10n.pagesScreenPageCount(_pages.length),
+                    style: DocViewTypography.bodySm.copyWith(
+                      color: tokens.textSecondary,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Flexible(
+                  child: TextButton(
+                    onPressed: _pages.isEmpty ? null : _toggleSelectAll,
+                    style: TextButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                    ),
+                    child: Text(
+                      _pages.isNotEmpty && _selectedIndices.length == _pages.length
+                          ? context.l10n.pagesActionClearSelection
+                          : context.l10n.pagesActionSelectAll,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: DocViewTypography.labelMd.copyWith(
+                        color: tokens.primaryBlue,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isLandscape = constraints.maxWidth > constraints.maxHeight;
+              final crossAxisCount = isLandscape ? 5 : 3;
+
+              return GridView.builder(
+                padding: const EdgeInsets.all(12),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  childAspectRatio: 0.72,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                ),
+                itemCount: _pages.length,
+                itemBuilder: (context, index) {
+                  final spec = _pages[index];
+                  final isSelected = _selectedIndices.contains(index);
+
+                  return LongPressDraggable<int>(
+                    data: index,
+                    feedback: Material(
+                      elevation: 6,
+                      borderRadius: BorderRadius.circular(12),
+                      child: SizedBox(
+                        width: (constraints.maxWidth - 48) / crossAxisCount,
+                        height: ((constraints.maxWidth - 48) / crossAxisCount) / 0.72,
+                        child: _buildTileContent(index, spec, isSelected, isDragging: true),
+                      ),
+                    ),
+                    childWhenDragging: Opacity(
+                      opacity: 0.3,
+                      child: _buildTileContent(index, spec, isSelected),
+                    ),
+                    child: DragTarget<int>(
+                      onWillAcceptWithDetails: (details) => details.data != index,
+                      onAcceptWithDetails: (details) => _handleReorder(details.data, index),
+                      builder: (context, candidateData, rejectedData) {
+                        return InkWell(
+                          borderRadius: BorderRadius.circular(12),
+                          onTap: () {
+                            setState(() {
+                              if (isSelected) {
+                                _selectedIndices.remove(index);
+                              } else {
+                                _selectedIndices.add(index);
+                              }
+                            });
+                          },
+                          child: _buildTileContent(index, spec, isSelected),
+                        );
+                      },
+                    ),
                   );
                 },
-              ),
-            );
-          },
-        );
-      },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -802,47 +850,55 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: SafeArea(
         top: false,
-        child: SizedBox(
-          height: 56,
-          child: _selectedIndices.isEmpty
-              ? Center(
-                  child: OutlinedButton.icon(
-                    onPressed: _handleInsert,
-                    icon: const Icon(Icons.add_circle_outline_rounded),
-                    label: Text(context.l10n.pagesActionInsert),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: tokens.primaryBlue,
-                      side: BorderSide(color: tokens.primaryBlue),
-                      minimumSize: const Size(180, 48),
+        child: MediaQuery.withClampedTextScaling(
+          maxScaleFactor: 1.3,
+          child: SizedBox(
+            height: 56,
+            child: _selectedIndices.isEmpty
+                ? Center(
+                    child: OutlinedButton.icon(
+                      onPressed: _handleInsert,
+                      icon: const Icon(Icons.add_circle_outline_rounded),
+                      label: Text(context.l10n.pagesActionInsert),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: tokens.primaryBlue,
+                        side: BorderSide(color: tokens.primaryBlue),
+                        minimumSize: const Size(180, 48),
+                      ),
                     ),
+                  )
+                : Row(
+                    children: [
+                      // Rotate
+                      Expanded(
+                        child: _BottomBarAction(
+                          icon: Icons.rotate_right_rounded,
+                          label: context.l10n.pagesActionRotate,
+                          onTap: _handleRotate,
+                        ),
+                      ),
+
+                      // Extract
+                      Expanded(
+                        child: _BottomBarAction(
+                          icon: Icons.file_download_outlined,
+                          label: context.l10n.pagesActionExtract,
+                          onTap: _handleExtract,
+                        ),
+                      ),
+
+                      // Delete
+                      Expanded(
+                        child: _BottomBarAction(
+                          icon: Icons.delete_outline_rounded,
+                          label: context.l10n.pagesActionDelete,
+                          color: DocViewColors.error,
+                          onTap: _handleDelete,
+                        ),
+                      ),
+                    ],
                   ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // Rotate
-                    _BottomBarAction(
-                      icon: Icons.rotate_right_rounded,
-                      label: context.l10n.pagesActionRotate,
-                      onTap: _handleRotate,
-                    ),
-
-                    // Extract
-                    _BottomBarAction(
-                      icon: Icons.file_download_outlined,
-                      label: context.l10n.pagesActionExtract,
-                      onTap: _handleExtract,
-                    ),
-
-                    // Delete
-                    _BottomBarAction(
-                      icon: Icons.delete_outline_rounded,
-                      label: context.l10n.pagesActionDelete,
-                      color: DocViewColors.error,
-                      onTap: _handleDelete,
-                    ),
-                  ],
-                ),
+          ),
         ),
       ),
     );
@@ -871,8 +927,8 @@ class _BottomBarAction extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        constraints: const BoxConstraints(minWidth: 64, minHeight: 48),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        constraints: const BoxConstraints(minHeight: 48),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -881,6 +937,9 @@ class _BottomBarAction extends StatelessWidget {
             const SizedBox(height: 2),
             Text(
               label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
               style: DocViewTypography.bodySm.copyWith(
                 color: actionColor,
                 fontWeight: FontWeight.w600,

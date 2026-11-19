@@ -23,8 +23,14 @@ import 'package:docview/features/tools/widgets/split_picker_screen.dart';
 import 'package:docview/features/tools/widgets/tool_error_sheet.dart';
 import 'package:docview/features/tools/widgets/tool_progress_dialog.dart';
 import 'package:docview/features/tools/widgets/tool_result_sheet.dart';
+import 'package:docview/features/viewer/pages_screen.dart';
 import 'package:docview/features/viewer/widgets/pdf_goto_page_dialog.dart';
+import 'package:docview/features/viewer/widgets/pdf_more_sheet.dart';
+import 'package:docview/features/viewer/widgets/pdf_pages_sheet.dart';
 import 'package:docview/features/viewer/widgets/pdf_password_dialog.dart';
+import 'package:docview/data/services/pdf/pdf_page_edit_service.dart';
+import 'package:docview/shared/widgets/reader/reader_bottom_row.dart';
+import 'package:docview/shared/widgets/reader/reader_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -195,6 +201,71 @@ void main() {
               child: ToolErrorSheet(
                 errorMessage: 'Sample error details',
                 onRetry: () {},
+              ),
+            ),
+          ),
+      // G3a reader & pages screens/components
+      'ReaderBottomRow': () => Scaffold(
+            bottomNavigationBar: ReaderBottomRow(
+              items: [
+                ReaderBottomRowItem(
+                  icon: Icons.swap_vert_rounded,
+                  label: 'Vertical',
+                  onTap: () {},
+                ),
+                ReaderBottomRowItem(
+                  icon: Icons.screen_rotation_rounded,
+                  label: 'Rotate',
+                  onTap: () {},
+                ),
+                ReaderBottomRowItem(
+                  icon: Icons.search_rounded,
+                  label: 'Search',
+                  onTap: () {},
+                ),
+                ReaderBottomRowItem(
+                  icon: Icons.invert_colors_rounded,
+                  label: 'Invert',
+                  onTap: () {},
+                ),
+                ReaderBottomRowItem(
+                  icon: Icons.share_rounded,
+                  label: 'Share',
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+      'ReaderSearchBar': () => Scaffold(
+            appBar: ReaderSearchBar(
+              controller: TextEditingController(text: 'Sample Query'),
+              totalMatches: 15,
+              currentMatchIndex: 2,
+              onClose: () {},
+            ),
+          ),
+      'PagesScreen': () => PagesScreen(
+            file: sampleDoc,
+            initialPages: [
+              PdfPageEditSpec(sourcePath: sampleDoc.path, sourcePageIndex: 0),
+              PdfPageEditSpec(sourcePath: sampleDoc.path, sourcePageIndex: 1),
+              PdfPageEditSpec(sourcePath: sampleDoc.path, sourcePageIndex: 2),
+            ],
+          ),
+      'PdfPagesSheet': () => Scaffold(
+            body: SingleChildScrollView(
+              child: PdfPagesSheet(
+                currentPage: 1,
+                pageCount: 12,
+                onPageSelected: (_) {},
+              ),
+            ),
+          ),
+      'PdfMoreSheet': () => Scaffold(
+            body: SingleChildScrollView(
+              child: PdfMoreSheet(
+                file: sampleDoc,
+                pageCount: 12,
               ),
             ),
           ),
