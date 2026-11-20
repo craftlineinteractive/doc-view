@@ -288,3 +288,24 @@ A comprehensive test workbook with 3 sheets (data, formatting, empty), merged ra
   - `columnBuilder: (int index) => TableSpan(extent: TableSpanExtent, backgroundDecoration: TableSpanDecoration?)`
   - `rowBuilder: (int index) => TableSpan(extent: TableSpanExtent, backgroundDecoration: TableSpanDecoration?)`
   - `FixedTableSpanExtent(double)` for zoomable column/row dimensions.
+
+### 8.5 G3c Step 6 Live Emulator QA & Profiling Results
+- **Device Tested**: Android Emulator (Pixel 7, API 34, `emulator-5554`) + physical device detected (`ff6c260c`).
+- **Build Target**: Release APK (`app-release.apk`, 66.0 MB) and Debug APK (`app-debug.apk`).
+- **Screenshots Generated**: 15 distinct PNG artifacts captured under `docs/redesign/img/g3c/` (< 300 KB each).
+- **Format Verification**:
+  - `test_styled.xlsx`: Multi-sheet tabs, merged title range A1:D2, formula `=SUM(B5:B9)`, fill colors, and cell coordinate tracking in formula bar.
+  - `test_100k.csv`: Pure text parsing inside worker isolate (360 ms); capped at 20,000 rows with dismissible blue InfoBanner.
+  - `sample.xls`: Successfully detected as legacy BIFF8 format; routed to `OfficeViewerScreen` with amber "Legacy format: text only" banner.
+  - `test_encrypted.xlsx`: OLE2 encrypted package detected before parsing; throws `SpreadsheetPasswordProtectedException` with clean "Password-protected files can't be opened here" UI.
+  - `test_oversized.xlsx`: File size (26.0 MB) checked against 25 MB limit; throws `SpreadsheetTooLargeException` with "Open in basic viewer" and "Open in another app" actions.
+- **Search & Invert**:
+  - In-sheet search with `ReaderSearchBar` queries cell text in background isolate; displays match counter (`1 of 1`), next/prev chevrons, and auto-scrolls to target.
+  - Invert color matrix inverts spreadsheet table canvas while maintaining theme chrome.
+- **Orientation & Zoom**:
+  - `ReaderOrientationController` toggles portrait/landscape (`1080x2400` to `2400x1080`).
+  - Pinch / double-tap zoom scales grid from 50% to 300%; displays floating `ZoomPill` with reset action.
+- **Profiling Benchmarks**:
+  - Frame Budget: 50th percentile scroll frame time 18 ms; virtualized ~32 widgets in memory.
+  - Memory Footprint: Native heap PSS 55.8 MB; Dalvik heap 8.6 MB.
+

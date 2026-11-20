@@ -124,6 +124,12 @@ class _SpreadsheetGridState extends State<SpreadsheetGrid> {
                 widget.onZoomChanged!(targetScale);
               }
             },
+            onDoubleTap: widget.onZoomChanged != null
+                ? () {
+                    final nextScale = (widget.zoomScale > 1.15) ? 1.0 : 1.35;
+                    widget.onZoomChanged!(nextScale);
+                  }
+                : null,
             child: content,
           ),
         ),
