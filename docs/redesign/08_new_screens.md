@@ -337,4 +337,41 @@ This document catalogs every screen and bottom sheet added or restructured in **
 | **Print PDF System Dispatch Flow** | ![Print Flow](img/g4a/print_flow.png) | 1080 × 2400 | 62 KB |
 | **Import Files System Picker Flow** | ![Import Flow](img/g4a/import_flow.png) | 648 × 1440 | 217 KB |
 
+---
+
+## Phase G4b Create PDF Tool
+
+### 20. Create PDF Screen (`lib/features/tools/create_pdf/create_pdf_screen.dart`, route `/tools/create-pdf`)
+- **Structure & Layout**:
+  - Reuses the `ImageListEditorScreen` visual patterns and design tokens (`tokens.primaryBlue`, `tokens.background`, `tokens.cardBg`, `tokens.textPrimary`).
+  - Top AppBar: Back button with unsaved change guard (if modified from default), localized title `"Create PDF"`, and primary `"Create"` action button with inline spinner when generating.
+  - Interactive Paper Preview (`PaperPreview`):
+    - Scaled live paper preview with shadow and subtle border matching selected paper dimensions and aspect ratio.
+    - Custom painter (`PaperPreviewPainter`) rendering vector rule primitives (major rules, minor grid, margins, Cornell notes sections).
+  - Horizontal Template Selector (`TemplateCard`):
+    - 7 paper templates: **Blank**, **Line 1** (wide rule ~8.7mm), **Line 2** (college rule ~7.1mm), **Notebook** (with vertical margin line), **Cornell** (cue column and summary box), **Grid** (5mm grid), and **Graph** (5mm grid with heavier 25mm major axes).
+    - Horizontal scroll row with 48dp minimum accessible touch targets and active selection border ring.
+  - Page Options & Settings:
+    - **Page Size**: Dropdown selector supporting A4 (default), A5, A3, B5 (ISO 216), B4 (ISO 216), Letter, Legal.
+    - **Page Orientation**: Segmented control toggling between **Portrait** and **Landscape** (swapping point dimensions).
+    - **Page Color**: 10 light tint swatches (`White`, `Cream`, `Light Yellow`, `Light Peach`, `Light Pink`, `Light Lavender`, `Light Blue`, `Light Mint`, `Light Green`, `Light Gray`) with accessible semantics labels and active checkmark badges.
+    - **Page Count**: Accessible stepper (`PageCountStepper`) constrained between 1 and 100 pages, with decrements/increments guarded.
+    - **File Name**: Sanitize-on-submit text input with locked `.pdf` suffix pill badge.
+- **Service & Background Worker (`CreatePdfService`)**:
+  - Offloaded entirely to background isolate (`Isolate.run` / `compute`) via top-level function `compileTemplatePdfInWorker`.
+  - Zero text or typography embedded to guarantee instantaneous rendering and small file footprint (< 50 KB).
+  - Batched path primitives: combines all strokes of a given role (minor, major, margin) into single `PdfPath` instances before stroke drawing, reducing PDF stream size.
+  - Registers output in SQLite database and scans into device file system via `PdfOutputService`.
+  - Ad-free editor layout (`showDockedBanner: false`, `isAdLoaded: false`).
+
+### 21. QA Screenshots & Visual Evidence (Phase G4b)
+
+| View Description | Screenshot Artifact | Dimensions | File Size |
+|---|---|---|---|
+| **Tools Tab with Create PDF (Convert & Create)** | ![Tools Tab Create PDF](img/g4b/tools_tab_create_pdf.png) | 1080 × 2400 | < 250 KB |
+| **Create PDF Default State (Blank / A4 / White)** | ![Create PDF Default](img/g4b/create_pdf_default.png) | 1080 × 2400 | < 250 KB |
+| **Create PDF Cornell Template in Landscape** | ![Create PDF Cornell](img/g4b/create_pdf_cornell_landscape.png) | 1080 × 2400 | < 250 KB |
+| **Create PDF Grid Template in Light Mint (3 Pages)** | ![Create PDF Grid Mint](img/g4b/create_pdf_grid_mint.png) | 1080 × 2400 | < 250 KB |
+
+
 
