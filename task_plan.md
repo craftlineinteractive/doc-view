@@ -90,3 +90,79 @@ Phase G3a upgrades the Doc View PDF reader with a redesigned top bar (with condi
 - [x] Update `docs/redesign/08_new_screens.md`.
 - [x] Commit per area following Conventional Commits with QA lines.
 - [x] Deliver final G3a report.
+
+---
+
+# Phase G3b: Office Viewers Modernization (Word, PPT, TXT)
+
+### [x] Task 1: Orientation Extraction & Shared Infrastructure
+- [x] Extracted `ReaderOrientationController` into `lib/shared/widgets/reader/reader_orientation.dart`.
+- [x] Restores portrait/landscape orientations on dispose and when app is backgrounded.
+- [x] Updated `PdfViewerScreen` to reuse `ReaderOrientationController`.
+
+### [x] Task 2: Word, RTF, and PowerPoint Reader Upgrade
+- [x] Reused `ReaderBottomRow` in `OfficeViewerScreen` with: Rotate, Search, Share (Vertical/Horizontal and Invert strictly hidden per Step 0b capability analysis).
+- [x] Reused `ReaderSearchBar` wired to `DocumentViewController.search(query)` with match counters.
+- [x] Retained legacy banners ("Legacy format: text only") for .doc, .ppt, and .rtf formats.
+- [x] Documented platform view invert limitation in `docs/redesign/04_gaps_and_conflicts.md`.
+
+### [x] Task 3: TXT Viewer Modernization & Isolate Search
+- [x] Modernized `TxtViewerScreen` with `ReaderBottomRow` (Rotate, Search, Invert, Share).
+- [x] Implemented background isolate search over loaded lines with 500-match cap and "500+" indicator.
+- [x] Added distinct highlighting for current and non-current search matches with auto-scroll jump.
+- [x] Implemented session-only canvas inversion filter.
+- [x] Retained top-bar controls (A-, A+, monospace font) and 1 MB safety cap.
+
+### [x] Task 4: String Extraction & Guardrail Verification
+- [x] Extracted all viewer strings to ARB (`app_en.arb` and `app_en_XA.arb`).
+- [x] Removed `office_viewer_screen.dart`, `txt_viewer_screen.dart`, `image_viewer_screen.dart`, and `viewer_screen.dart` from pending rewrite.
+- [x] Verified inverted string guardrail with 0 violations across 113 surviving `lib/` files.
+
+### [x] Task 5: Automated Testing & Emulator QA
+- [x] Added widget test suites `test/features/office_viewer_test.dart` and `test/features/txt_viewer_test.dart`.
+- [x] Added layout tests to `test/l10n/l10n_overflow_and_rtl_test.dart`.
+- [x] Verified full test suite passing (426 tests).
+- [x] Captured 13 emulator QA screenshots under `docs/redesign/img/g3b/` (< 300 KB each).
+
+---
+
+# Phase G3c: Native Spreadsheet Grid Viewer (XLSX, XLSM, CSV, TSV)
+
+### [x] Task 1: Package Dependencies & Step 0 Spikes
+- [x] Added `excel: ^4.0.6`, `csv: ^6.0.0`, and `two_dimensional_scrollables: ^0.3.9` with aligned transitive overrides.
+- [x] Documented package capabilities and 100k row memory benchmarks in `docs/spikes/g0_report.md` Section 8.
+- [x] Recorded formula, sheet visibility, and OLE2 encryption limits in `docs/redesign/04_gaps_and_conflicts.md`.
+
+### [x] Task 2: Models & Isolate Parser Service
+- [x] Implemented `SpreadsheetCell`, `SheetData`, `WorkbookData`, and `MergedCellRange` DTO models.
+- [x] Implemented `SpreadsheetParserService` with background isolate workers (`_parseExcelWorker`, `_parseDelimitedWorker`).
+- [x] Enforced hard cap of 20,000 rows and 100 columns per sheet with dismissible info banner.
+- [x] Implemented typed exceptions (`SpreadsheetPasswordProtectedException`, `SpreadsheetTooLargeException`, `SpreadsheetTimeoutException`).
+- [x] Verified with 11 unit tests in `test/features/spreadsheet_parsing_test.dart`.
+
+### [x] Task 3: Shared Grid & Reader Components
+- [x] Built `SpreadsheetGrid` on `TableView.builder` with pinned row/col headers, merged cell spans, selection, double-tap zoom, and canvas invert filter.
+- [x] Built `FormulaBar` with coordinate chip, formula/display text, bottom sheet inspector, and TSV clipboard copy.
+- [x] Built `SheetTabBar` scrollable tab list for multi-sheet workbooks.
+- [x] Built floating `ZoomPill` displaying active zoom percentage with tap-to-reset.
+- [x] Verified with 6 widget tests in `test/shared/widgets/spreadsheet_components_test.dart`.
+
+### [x] Task 4: SpreadsheetViewerScreen & Dispatcher Routing
+- [x] Implemented `SpreadsheetViewerScreen` in `lib/features/viewer/spreadsheet_viewer_screen.dart`.
+- [x] Updated `ViewerScreen` routing: `.xlsx`, `.xlsm`, `.csv`, `.tsv` to `SpreadsheetViewerScreen`; legacy `.xls` to `OfficeViewerScreen`.
+- [x] Integrated `ReaderBottomRow` (Rotate, Search, Invert, Share) and `ReaderSearchBar` with isolate match computation.
+- [x] Implemented error fallbacks: password lock screen, 20s timeout limit, and oversized file limit.
+- [x] Verified with 10 widget tests in `test/features/spreadsheet_viewer_test.dart`.
+
+### [x] Task 5: Localization & RTL Guardrail
+- [x] Added all spreadsheet strings to `app_en.arb` and `app_en_XA.arb`.
+- [x] Removed `spreadsheet_viewer_screen.dart` and `viewer_screen.dart` from pending rewrite.
+- [x] Verified inverted string guardrail with 0 violations across 116 surviving `lib/` files.
+- [x] Verified `l10n_overflow_and_rtl_test.dart` passes across 4 layout configs (198 tests).
+
+### [x] Task 6: Live Emulator QA & Performance Profiling
+- [x] Generated 6 test workbooks (`test_20k.xlsx`, `test_styled.xlsx`, `test_100k.csv`, `sample.xls`, `test_encrypted.xlsx`, `test_oversized.xlsx`).
+- [x] Captured 15 emulator screenshots under `docs/redesign/img/g3c/` (< 300 KB each).
+- [x] Benchmarked frame times (18 ms 50th percentile) and heap footprints (Native 55.8 MB PSS, Dalvik 8.6 MB).
+- [x] Documented screenshots and benchmarks in `docs/redesign/08_new_screens.md` and `docs/spikes/g0_report.md`.
+

@@ -45,7 +45,3 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Planning with files
-task_plan.md
-progress.md
-findings.md
