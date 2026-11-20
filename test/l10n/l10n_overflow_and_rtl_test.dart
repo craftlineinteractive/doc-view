@@ -29,9 +29,13 @@ import 'package:docview/features/viewer/widgets/pdf_goto_page_dialog.dart';
 import 'package:docview/features/viewer/widgets/pdf_more_sheet.dart';
 import 'package:docview/features/viewer/widgets/pdf_pages_sheet.dart';
 import 'package:docview/features/viewer/widgets/pdf_password_dialog.dart';
+import 'package:docview/data/models/spreadsheet_data.dart';
 import 'package:docview/data/services/pdf/pdf_page_edit_service.dart';
 import 'package:docview/shared/widgets/reader/reader_bottom_row.dart';
 import 'package:docview/shared/widgets/reader/reader_search_bar.dart';
+import 'package:docview/shared/widgets/spreadsheet/formula_bar.dart';
+import 'package:docview/shared/widgets/spreadsheet/sheet_tab_bar.dart';
+import 'package:docview/shared/widgets/spreadsheet/spreadsheet_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -276,6 +280,44 @@ void main() {
                 outline: ['Introduction', 'Financial Overview', 'Appendices'],
                 currentPosition: 0,
               ),
+            ),
+          ),
+      'FormulaBar': () => Scaffold(
+            body: FormulaBar(
+              sheet: SheetData(
+                name: 'Financials',
+                rowCount: 10,
+                columnCount: 5,
+                cells: {
+                  const CellCoordinate(0, 0): const SpreadsheetCell(
+                    rawValue: 'Revenue',
+                    formula: '=SUM(B2:B10)',
+                  ),
+                },
+              ),
+              selection: const SpreadsheetSelection.cell(0, 0),
+            ),
+          ),
+      'SheetTabBar': () => Scaffold(
+            body: SheetTabBar(
+              sheetNames: const ['Q1 Summary', 'Cash Flow', 'Balance Sheet', 'Appendix Notes'],
+              activeIndex: 0,
+              onSheetSelected: (_) {},
+            ),
+          ),
+      'SpreadsheetGrid': () => Scaffold(
+            body: SpreadsheetGrid(
+              sheet: SheetData(
+                name: 'Summary',
+                rowCount: 5,
+                columnCount: 4,
+                cells: {
+                  const CellCoordinate(0, 0): const SpreadsheetCell(rawValue: 'Total Revenue'),
+                  const CellCoordinate(0, 1): const SpreadsheetCell(rawValue: '\$1,234,567.89'),
+                },
+              ),
+              selection: const SpreadsheetSelection.cell(0, 0),
+              onSelectionChanged: (_) {},
             ),
           ),
     };

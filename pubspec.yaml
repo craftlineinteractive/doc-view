@@ -126,8 +126,9 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
 dependency_overrides:
-  xml: ^6.5.0
+  image: 4.3.0
   archive: ^3.6.1
+  xml: ^7.0.1
   offline_document_viewer:
     path: packages/offline_document_viewer
 

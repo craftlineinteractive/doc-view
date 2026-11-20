@@ -11,6 +11,8 @@ import '../models/spreadsheet_data.dart';
 class SpreadsheetParserService {
   const SpreadsheetParserService();
 
+  static const SpreadsheetParserService instance = SpreadsheetParserService();
+
   /// Maximum file size supported for parsing (25 MB).
   static const int maxFileSizeBytes = 25 * 1024 * 1024;
 

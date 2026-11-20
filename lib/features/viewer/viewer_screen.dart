@@ -12,6 +12,7 @@ import '../providers/providers.dart';
 import 'image_viewer_screen.dart';
 import 'office_viewer_screen.dart';
 import 'pdf_viewer_screen.dart';
+import 'spreadsheet_viewer_screen.dart';
 import 'txt_viewer_screen.dart';
 
 /// Central dispatcher for the `/viewer` route.
@@ -105,6 +106,16 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           ),
         ),
       );
+    }
+
+    final lastDot = widget.file.path.lastIndexOf('.');
+    final ext = (lastDot != -1 && lastDot < widget.file.path.length - 1)
+        ? widget.file.path.substring(lastDot + 1).toLowerCase()
+        : '';
+
+    // Route native spreadsheet grid viewer for modern XLSX, XLSM, CSV, and TSV
+    if (ext == 'xlsx' || ext == 'xlsm' || ext == 'csv' || ext == 'tsv') {
+      return SpreadsheetViewerScreen(file: widget.file);
     }
 
     if (isOfficeViewerSupported(widget.file.path)) {

@@ -208,3 +208,43 @@ This document catalogs every screen and bottom sheet added or restructured in **
 ### 13. Image Viewer & Dispatcher Localization
 - `ImageViewerScreen`: All strings extracted to ARB, removed from `pending_rewrite.txt`.
 - `ViewerScreen`: Format dispatcher localized, centralized file extension groupings maintained.
+
+### 14. Spreadsheet Viewer Screen (`lib/features/viewer/spreadsheet_viewer_screen.dart`, route `/viewer/spreadsheet`)
+- **Supported Formats**: `xlsx`, `xlsm`, `csv`, `tsv`.
+- **Structure**:
+  - **Top Bar**:
+    - Back button with localized tooltip.
+    - Title column: truncated file name with file size subtitle.
+    - Bookmark toggle action connected to `fileActionsControllerProvider`.
+    - 3-dot overflow menu: "Details" (opens `FileDetailsSheet`) and "Open in another app" (delegates via `OpenFilex`).
+  - **Formula Bar**:
+    - Leading chip displaying selection coordinate (`C2`, `Column B`, `Row 3`, `All`, or `-`).
+    - Single-line formula or formatted display text preview with ellipsis.
+    - Tap opens full-screen accessible `DocBottomSheet` inspector showing un-truncated text and formula.
+    - Quick-copy button copying individual cell or formatted TSV table (capped safely at 5,000 cells to prevent clipboard freezing).
+  - **Viewer Body & Grid**:
+    - Virtualized 2D grid built on `TableView.builder` from `two_dimensional_scrollables` with `pinnedRowCount: 1` and `pinnedColumnCount: 1`.
+    - Pinned column letter headers (A, B, C...) and row number headers (1, 2, 3...).
+    - Full merged cell range support using `TableViewCell(rowMergeStart, rowMergeSpan, columnMergeStart, columnMergeSpan)`.
+    - Interactive selection: cell, column, row, all-sheet, and clear.
+    - Pinch-to-zoom gesture (50% to 300%) with scroll freeze while 2 pointers are active.
+    - Floating `ZoomPill` displaying active zoom percentage with tap-to-reset to 100%.
+    - Screen-reader optimization: selected cell announces `"Column C, row 2, <value>"`; non-selected cells excluded via `ExcludeSemantics`.
+    - Text scaling clamped to 1.3x and layout strictly LTR.
+  - **Sheet Navigation**:
+    - `SheetTabBar` horizontally scrollable tab list for multi-sheet workbooks; automatically hidden when workbook contains only 1 sheet.
+    - Active sheet highlighted in solid Excel green with white text.
+  - **Bottom Row**:
+    - Shared `ReaderBottomRow` with 4 items:
+      1. **Rotate**: Orientation toggle via `ReaderOrientationController`.
+      2. **Search**: Toggles `ReaderSearchBar`.
+      3. **Invert**: Swaps spreadsheet grid canvas to the opposite theme contrast (session-only).
+      4. **Share**: Invokes file sharing via `fileActionsControllerProvider.shareFiles`.
+  - **Search**:
+    - Runs in background `Isolate` via `computeSpreadsheetMatches` (primitives only, no captured state).
+    - Capped at 500 matches with "500+" counter indicator.
+    - Step-through up/down navigation chevrons select and auto-scroll the matching cell into view.
+    - Soft yellow highlight on all matches with amber highlight on current active match.
+  - **Fallback Routes & Error Handling**:
+    - Password-protected OOXML workbooks: dedicated lock screen with "Open in another app".
+    - Corrupt files, 20-second timeout, or oversized files (> 25 MB): error screen providing two equal actions: "Open in basic viewer" (falling back to the legacy WebView office viewer) and "Open in another app".
