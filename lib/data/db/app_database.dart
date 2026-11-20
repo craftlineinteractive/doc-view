@@ -7,10 +7,14 @@ class AppDatabase {
 
   static final AppDatabase instance = AppDatabase._internal();
 
+  /// Creates an [AppDatabase] instance with an existing or mock [Database] (e.g. for testing).
+  AppDatabase.withDatabase(Database db) : _database = db;
+
   static const String databaseName = 'doc_reader.db';
-  static const int databaseVersion = 2;
+  static const int databaseVersion = 3;
 
   static const String tableFiles = 'files';
+  static const String tableTrash = 'trash';
 
   Database? _database;
 
@@ -63,6 +67,28 @@ class AppDatabase {
     await db.execute(
       'CREATE INDEX IF NOT EXISTS idx_files_last_opened ON $tableFiles (last_opened)',
     );
+
+    await db.execute('''
+      CREATE TABLE $tableTrash (
+        id TEXT PRIMARY KEY,
+        trash_path TEXT NOT NULL,
+        original_path TEXT NOT NULL,
+        original_name TEXT NOT NULL,
+        extension TEXT NOT NULL,
+        size_bytes INTEGER NOT NULL,
+        category TEXT NOT NULL,
+        original_modified_ms INTEGER NOT NULL,
+        deleted_ms INTEGER NOT NULL,
+        expires_ms INTEGER NOT NULL,
+        was_bookmarked INTEGER NOT NULL,
+        was_imported INTEGER NOT NULL,
+        last_opened_ms INTEGER
+      )
+    ''');
+
+    await db.execute(
+      'CREATE INDEX IF NOT EXISTS idx_trash_expires ON $tableTrash (expires_ms)',
+    );
   }
 
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
@@ -72,6 +98,28 @@ class AppDatabase {
       );
       await db.execute(
         'CREATE INDEX IF NOT EXISTS idx_files_last_opened ON $tableFiles (last_opened)',
+      );
+    }
+    if (oldVersion < 3) {
+      await db.execute('''
+        CREATE TABLE IF NOT EXISTS $tableTrash (
+          id TEXT PRIMARY KEY,
+          trash_path TEXT NOT NULL,
+          original_path TEXT NOT NULL,
+          original_name TEXT NOT NULL,
+          extension TEXT NOT NULL,
+          size_bytes INTEGER NOT NULL,
+          category TEXT NOT NULL,
+          original_modified_ms INTEGER NOT NULL,
+          deleted_ms INTEGER NOT NULL,
+          expires_ms INTEGER NOT NULL,
+          was_bookmarked INTEGER NOT NULL,
+          was_imported INTEGER NOT NULL,
+          last_opened_ms INTEGER
+        )
+      ''');
+      await db.execute(
+        'CREATE INDEX IF NOT EXISTS idx_trash_expires ON $tableTrash (expires_ms)',
       );
     }
   }

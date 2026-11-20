@@ -3236,5 +3236,178 @@
   "createPdfErrorGeneration": "Failed to generate PDF document. Please try again.",
   "@createPdfErrorGeneration": {
     "description": "Generic error message when PDF creation fails"
+  },
+  "trashErrorTooLarge": "File is too large for the Recycle bin (200 MB limit)",
+  "@trashErrorTooLarge": {
+    "description": "Error message when attempting to move a file larger than 200MB to Recycle bin"
+  },
+  "trashErrorNotEnoughSpace": "Not enough storage space in the Recycle bin",
+  "@trashErrorNotEnoughSpace": {
+    "description": "Error message when disk space is insufficient for Recycle bin copy"
+  },
+  "trashErrorGeneric": "Recycle bin operation failed: {details}",
+  "@trashErrorGeneric": {
+    "description": "Generic error message for Recycle bin operations",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "trashDialogMoveTitle": "Move to Recycle bin?",
+  "@trashDialogMoveTitle": {
+    "description": "Confirmation dialog title for moving file(s) to Recycle bin"
+  },
+  "trashDialogMoveBody": "{count, plural, =1{Move 1 file to the Recycle bin? You can restore it from Tools > Recycle bin for 30 days.} other{Move {count} files to the Recycle bin? You can restore them from Tools > Recycle bin for 30 days.}}",
+  "@trashDialogMoveBody": {
+    "description": "Confirmation dialog body explaining retention and restoration",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashActionMove": "Move to Recycle bin",
+  "@trashActionMove": {
+    "description": "Action button text to confirm moving to Recycle bin"
+  },
+  "trashMovedSuccess": "{count, plural, =1{Moved 1 file to Recycle bin} other{Moved {count} files to Recycle bin}}",
+  "@trashMovedSuccess": {
+    "description": "Snackbar notification when files are moved to Recycle bin",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashActionUndo": "Undo",
+  "@trashActionUndo": {
+    "description": "Action label in snackbar to undo moving to Recycle bin"
+  },
+  "trashRestoredSuccess": "{count, plural, =1{Restored 1 file} other{Restored {count} files}}",
+  "@trashRestoredSuccess": {
+    "description": "Snackbar notification when files are restored from Recycle bin",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashDialogDeleteForeverTitle": "Delete forever?",
+  "@trashDialogDeleteForeverTitle": {
+    "description": "Dialog title confirming permanent deletion of files"
+  },
+  "trashDialogDeleteForeverBody": "{count, plural, =1{Delete 1 file forever? This cannot be undone.} other{Delete {count} files forever? This cannot be undone.}}",
+  "@trashDialogDeleteForeverBody": {
+    "description": "Dialog body explaining that permanent deletion is irreversible",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashActionDeleteForever": "Delete forever",
+  "@trashActionDeleteForever": {
+    "description": "Button label to confirm permanent deletion"
+  },
+  "trashDeletedForeverSuccess": "{count, plural, =1{Deleted 1 file forever} other{Deleted {count} files forever}}",
+  "@trashDeletedForeverSuccess": {
+    "description": "Snackbar notification after permanent deletion",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashDialogEmptyTitle": "Empty Recycle bin?",
+  "@trashDialogEmptyTitle": {
+    "description": "Confirmation dialog title for emptying the entire Recycle bin"
+  },
+  "trashDialogEmptyBody": "Delete all {count, plural, =1{1 file} other{{count} files}} forever? This cannot be undone.",
+  "@trashDialogEmptyBody": {
+    "description": "Confirmation dialog body for emptying the entire Recycle bin",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashActionEmptyBin": "Empty bin",
+  "@trashActionEmptyBin": {
+    "description": "Action button to empty the Recycle bin"
+  },
+  "trashEmptyTitle": "Recycle bin is empty",
+  "@trashEmptyTitle": {
+    "description": "Empty state title when Recycle bin has no items"
+  },
+  "trashEmptySubtitle": "Files moved to Recycle bin will stay here for 30 days before being permanently deleted.",
+  "@trashEmptySubtitle": {
+    "description": "Empty state description in Recycle bin"
+  },
+  "trashDaysLeft": "{count, plural, =1{1 day left} other{{count} days left}}",
+  "@trashDaysLeft": {
+    "description": "Remaining days badge in Recycle bin file row",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashSubtitle": "Deleted {date} · {size}",
+  "@trashSubtitle": {
+    "description": "Subtitle in Recycle bin row showing deletion date and file size",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "trashDialogTooLargeTitle": "Too large for Recycle bin",
+  "@trashDialogTooLargeTitle": {
+    "description": "Title of dialog when file exceeds 200MB limit"
+  },
+  "trashDialogTooLargeBody": "\"{fileName}\" is larger than 200 MB and cannot be moved to the Recycle bin. Do you want to delete it permanently?",
+  "@trashDialogTooLargeBody": {
+    "description": "Body message offering permanent deletion when file exceeds 200MB limit",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "trashActionDeletePermanently": "Delete permanently",
+  "@trashActionDeletePermanently": {
+    "description": "Button to confirm permanent deletion for oversized file"
+  },
+  "trashInfoBanner": "Items in the Recycle bin are permanently deleted after 30 days.",
+  "@trashInfoBanner": {
+    "description": "Dismissible banner text at the top of Recycle bin screen"
+  },
+  "trashSheetRestore": "Restore",
+  "@trashSheetRestore": {
+    "description": "Action in file options sheet to restore trashed file"
+  },
+  "trashSheetDeleteForever": "Delete forever",
+  "@trashSheetDeleteForever": {
+    "description": "Action in file options sheet to delete forever"
+  },
+  "trashSheetDetails": "Details",
+  "@trashSheetDetails": {
+    "description": "Action in file options sheet to view file details"
+  },
+  "trashDetailsOriginalLocation": "Original location",
+  "@trashDetailsOriginalLocation": {
+    "description": "Label in Recycle bin details sheet for original file path"
+  },
+  "trashDetailsDateDeleted": "Date deleted",
+  "@trashDetailsDateDeleted": {
+    "description": "Label in Recycle bin details sheet for deletion date"
+  },
+  "trashDetailsExpiresIn": "Expires in",
+  "@trashDetailsExpiresIn": {
+    "description": "Label in Recycle bin details sheet for expiration timeframe"
   }
 }

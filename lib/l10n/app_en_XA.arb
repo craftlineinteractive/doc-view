@@ -3266,5 +3266,178 @@
   "createPdfErrorGeneration": "[Ƒàîłéđ ţô ĝéñéřàţé ÞÐƑ đôçûɱéñţ. Þłéàšé ţřý àĝàîñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
   "@createPdfErrorGeneration": {
     "description": "Generic error message when PDF creation fails"
+  },
+  "trashErrorTooLarge": "[Ƒîłé îš ţôô łàřĝé ƒôř ţĥé Řéçýçłé ƀîñ (200 ṀƁ łîɱîţ) ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashErrorTooLarge": {
+    "description": "Error message when attempting to move a file larger than 200MB to Recycle bin"
+  },
+  "trashErrorNotEnoughSpace": "[Ñôţ éñôûĝĥ šţôřàĝé šþàçé îñ ţĥé Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashErrorNotEnoughSpace": {
+    "description": "Error message when disk space is insufficient for Recycle bin copy"
+  },
+  "trashErrorGeneric": "[Řéçýçłé ƀîñ ôþéřàţîôñ ƒàîłéđ: {details} ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashErrorGeneric": {
+    "description": "Generic error message for Recycle bin operations",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "trashDialogMoveTitle": "[Ṁôṽé ţô Řéçýçłé ƀîñ? ẋẋẋẋẋẋẋẋ]",
+  "@trashDialogMoveTitle": {
+    "description": "Confirmation dialog title for moving file(s) to Recycle bin"
+  },
+  "trashDialogMoveBody": "{count, plural, =1{[Ṁôṽé 1 ƒîłé ţô ţĥé Řéçýçłé ƀîñ? Ýôû çàñ řéšţôřé îţ ƒřôɱ Ťôôłš > Řéçýçłé ƀîñ ƒôř 30 đàýš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]} other{[Ṁôṽé {count} ƒîłéš ţô ţĥé Řéçýçłé ƀîñ? Ýôû çàñ řéšţôřé ţĥéɱ ƒřôɱ Ťôôłš > Řéçýçłé ƀîñ ƒôř 30 đàýš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]}}",
+  "@trashDialogMoveBody": {
+    "description": "Confirmation dialog body explaining retention and restoration",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashActionMove": "[Ṁôṽé ţô Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋ]",
+  "@trashActionMove": {
+    "description": "Action button text to confirm moving to Recycle bin"
+  },
+  "trashMovedSuccess": "{count, plural, =1{[Ṁôṽéđ 1 ƒîłé ţô Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋẋ]} other{[Ṁôṽéđ {count} ƒîłéš ţô Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]}}",
+  "@trashMovedSuccess": {
+    "description": "Snackbar notification when files are moved to Recycle bin",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashActionUndo": "[Ûñđô ẋẋ]",
+  "@trashActionUndo": {
+    "description": "Action label in snackbar to undo moving to Recycle bin"
+  },
+  "trashRestoredSuccess": "{count, plural, =1{[Řéšţôřéđ 1 ƒîłé ẋẋẋẋẋẋ]} other{[Řéšţôřéđ {count} ƒîłéš ẋẋẋẋẋẋẋẋẋ]}}",
+  "@trashRestoredSuccess": {
+    "description": "Snackbar notification when files are restored from Recycle bin",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashDialogDeleteForeverTitle": "[Ðéłéţé ƒôřéṽéř? ẋẋẋẋẋẋ]",
+  "@trashDialogDeleteForeverTitle": {
+    "description": "Dialog title confirming permanent deletion of files"
+  },
+  "trashDialogDeleteForeverBody": "{count, plural, =1{[Ðéłéţé 1 ƒîłé ƒôřéṽéř? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]} other{[Ðéłéţé {count} ƒîłéš ƒôřéṽéř? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]}}",
+  "@trashDialogDeleteForeverBody": {
+    "description": "Dialog body explaining that permanent deletion is irreversible",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashActionDeleteForever": "[Ðéłéţé ƒôřéṽéř ẋẋẋẋẋẋ]",
+  "@trashActionDeleteForever": {
+    "description": "Button label to confirm permanent deletion"
+  },
+  "trashDeletedForeverSuccess": "{count, plural, =1{[Ðéłéţéđ 1 ƒîłé ƒôřéṽéř ẋẋẋẋẋẋẋẋẋ]} other{[Ðéłéţéđ {count} ƒîłéš ƒôřéṽéř ẋẋẋẋẋẋẋẋẋẋẋẋ]}}",
+  "@trashDeletedForeverSuccess": {
+    "description": "Snackbar notification after permanent deletion",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashDialogEmptyTitle": "[Éɱþţý Řéçýçłé ƀîñ? ẋẋẋẋẋẋẋẋ]",
+  "@trashDialogEmptyTitle": {
+    "description": "Confirmation dialog title for emptying the entire Recycle bin"
+  },
+  "trashDialogEmptyBody": "[Ðéłéţé àłł  ẋẋẋẋẋ]{count, plural, =1{[1 ƒîłé ẋẋẋ]} other{[{count} ƒîłéš ẋẋẋẋẋẋ]}}[ ƒôřéṽéř? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashDialogEmptyBody": {
+    "description": "Confirmation dialog body for emptying the entire Recycle bin",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashActionEmptyBin": "[Éɱþţý ƀîñ ẋẋẋẋ]",
+  "@trashActionEmptyBin": {
+    "description": "Action button to empty the Recycle bin"
+  },
+  "trashEmptyTitle": "[Řéçýçłé ƀîñ îš éɱþţý ẋẋẋẋẋẋẋẋ]",
+  "@trashEmptyTitle": {
+    "description": "Empty state title when Recycle bin has no items"
+  },
+  "trashEmptySubtitle": "[Ƒîłéš ɱôṽéđ ţô Řéçýçłé ƀîñ ŵîłł šţàý ĥéřé ƒôř 30 đàýš ƀéƒôřé ƀéîñĝ þéřɱàñéñţłý đéłéţéđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashEmptySubtitle": {
+    "description": "Empty state description in Recycle bin"
+  },
+  "trashDaysLeft": "{count, plural, =1{[1 đàý łéƒţ ẋẋẋẋ]} other{[{count} đàýš łéƒţ ẋẋẋẋẋẋẋ]}}",
+  "@trashDaysLeft": {
+    "description": "Remaining days badge in Recycle bin file row",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trashSubtitle": "[Ðéłéţéđ {date} · {size} ẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashSubtitle": {
+    "description": "Subtitle in Recycle bin row showing deletion date and file size",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "trashDialogTooLargeTitle": "[Ťôô łàřĝé ƒôř Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashDialogTooLargeTitle": {
+    "description": "Title of dialog when file exceeds 200MB limit"
+  },
+  "trashDialogTooLargeBody": "[\"{fileName}\" îš łàřĝéř ţĥàñ 200 ṀƁ àñđ çàññôţ ƀé ɱôṽéđ ţô ţĥé Řéçýçłé ƀîñ. Ðô ýôû ŵàñţ ţô đéłéţé îţ þéřɱàñéñţłý? ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashDialogTooLargeBody": {
+    "description": "Body message offering permanent deletion when file exceeds 200MB limit",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "trashActionDeletePermanently": "[Ðéłéţé þéřɱàñéñţłý ẋẋẋẋẋẋẋẋ]",
+  "@trashActionDeletePermanently": {
+    "description": "Button to confirm permanent deletion for oversized file"
+  },
+  "trashInfoBanner": "[Îţéɱš îñ ţĥé Řéçýçłé ƀîñ àřé þéřɱàñéñţłý đéłéţéđ àƒţéř 30 đàýš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashInfoBanner": {
+    "description": "Dismissible banner text at the top of Recycle bin screen"
+  },
+  "trashSheetRestore": "[Řéšţôřé ẋẋẋ]",
+  "@trashSheetRestore": {
+    "description": "Action in file options sheet to restore trashed file"
+  },
+  "trashSheetDeleteForever": "[Ðéłéţé ƒôřéṽéř ẋẋẋẋẋẋ]",
+  "@trashSheetDeleteForever": {
+    "description": "Action in file options sheet to delete forever"
+  },
+  "trashSheetDetails": "[Ðéţàîłš ẋẋẋ]",
+  "@trashSheetDetails": {
+    "description": "Action in file options sheet to view file details"
+  },
+  "trashDetailsOriginalLocation": "[Öřîĝîñàł łôçàţîôñ ẋẋẋẋẋẋẋ]",
+  "@trashDetailsOriginalLocation": {
+    "description": "Label in Recycle bin details sheet for original file path"
+  },
+  "trashDetailsDateDeleted": "[Ðàţé đéłéţéđ ẋẋẋẋẋ]",
+  "@trashDetailsDateDeleted": {
+    "description": "Label in Recycle bin details sheet for deletion date"
+  },
+  "trashDetailsExpiresIn": "[Éẋþîřéš îñ ẋẋẋẋ]",
+  "@trashDetailsExpiresIn": {
+    "description": "Label in Recycle bin details sheet for expiration timeframe"
   }
 }

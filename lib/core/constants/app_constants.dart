@@ -24,4 +24,10 @@ class AppConstants {
       'https://play.google.com/store/account/subscriptions';
   static const String iosSubscriptionsUrl =
       'https://apps.apple.com/account/subscriptions';
+
+  /// Recycle bin retention period in days (30 days).
+  static const int trashRetentionDays = 30;
+
+  /// Maximum file size allowed in Recycle bin (200 MB).
+  static const int trashMaxFileBytes = 200 * 1024 * 1024;
 }

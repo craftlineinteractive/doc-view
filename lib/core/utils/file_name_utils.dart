@@ -49,3 +49,40 @@ String buildRenamedPath(String oldPath, String newBaseName) {
   final newFileName = ext.isEmpty ? cleanBase : '$cleanBase$ext';
   return context.join(dir, newFileName);
 }
+
+/// Resolves a non-colliding destination path when restoring a file from Recycle bin.
+///
+/// If [originalPath] is free per [existsCheck], returns [originalPath].
+/// Otherwise generates `<name> (restored).<ext>`, then `<name> (restored 2).<ext>`,
+/// incrementing the counter until an available path is found.
+String buildRestorePath(
+  String originalPath,
+  bool Function(String path) existsCheck,
+) {
+  if (!existsCheck(originalPath)) {
+    return originalPath;
+  }
+  final isPosix = !originalPath.contains(r'\');
+  final context = isPosix ? p.posix : p.windows;
+  final dir = context.dirname(originalPath);
+  final ext = context.extension(originalPath);
+  final baseNameWithoutExt = context.basenameWithoutExtension(originalPath);
+
+  // Candidate 1: "<name> (restored).<ext>"
+  final candidate1 = context.join(dir, '$baseNameWithoutExt (restored)$ext');
+  if (!existsCheck(candidate1)) {
+    return candidate1;
+  }
+
+  // Candidate 2+: "<name> (restored 2).<ext>", "<name> (restored 3).<ext>", etc.
+  var counter = 2;
+  while (true) {
+    final candidate =
+        context.join(dir, '$baseNameWithoutExt (restored $counter)$ext');
+    if (!existsCheck(candidate)) {
+      return candidate;
+    }
+    counter++;
+  }
+}
+

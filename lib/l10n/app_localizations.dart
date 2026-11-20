@@ -4074,6 +4074,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to generate PDF document. Please try again.'**
   String get createPdfErrorGeneration;
+
+  /// Error message when attempting to move a file larger than 200MB to Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'File is too large for the Recycle bin (200 MB limit)'**
+  String get trashErrorTooLarge;
+
+  /// Error message when disk space is insufficient for Recycle bin copy
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough storage space in the Recycle bin'**
+  String get trashErrorNotEnoughSpace;
+
+  /// Generic error message for Recycle bin operations
+  ///
+  /// In en, this message translates to:
+  /// **'Recycle bin operation failed: {details}'**
+  String trashErrorGeneric(String details);
+
+  /// Confirmation dialog title for moving file(s) to Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Move to Recycle bin?'**
+  String get trashDialogMoveTitle;
+
+  /// Confirmation dialog body explaining retention and restoration
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Move 1 file to the Recycle bin? You can restore it from Tools > Recycle bin for 30 days.} other{Move {count} files to the Recycle bin? You can restore them from Tools > Recycle bin for 30 days.}}'**
+  String trashDialogMoveBody(int count);
+
+  /// Action button text to confirm moving to Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Move to Recycle bin'**
+  String get trashActionMove;
+
+  /// Snackbar notification when files are moved to Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Moved 1 file to Recycle bin} other{Moved {count} files to Recycle bin}}'**
+  String trashMovedSuccess(int count);
+
+  /// Action label in snackbar to undo moving to Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get trashActionUndo;
+
+  /// Snackbar notification when files are restored from Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Restored 1 file} other{Restored {count} files}}'**
+  String trashRestoredSuccess(int count);
+
+  /// Dialog title confirming permanent deletion of files
+  ///
+  /// In en, this message translates to:
+  /// **'Delete forever?'**
+  String get trashDialogDeleteForeverTitle;
+
+  /// Dialog body explaining that permanent deletion is irreversible
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Delete 1 file forever? This cannot be undone.} other{Delete {count} files forever? This cannot be undone.}}'**
+  String trashDialogDeleteForeverBody(int count);
+
+  /// Button label to confirm permanent deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Delete forever'**
+  String get trashActionDeleteForever;
+
+  /// Snackbar notification after permanent deletion
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Deleted 1 file forever} other{Deleted {count} files forever}}'**
+  String trashDeletedForeverSuccess(int count);
+
+  /// Confirmation dialog title for emptying the entire Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Empty Recycle bin?'**
+  String get trashDialogEmptyTitle;
+
+  /// Confirmation dialog body for emptying the entire Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all {count, plural, =1{1 file} other{{count} files}} forever? This cannot be undone.'**
+  String trashDialogEmptyBody(int count);
+
+  /// Action button to empty the Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Empty bin'**
+  String get trashActionEmptyBin;
+
+  /// Empty state title when Recycle bin has no items
+  ///
+  /// In en, this message translates to:
+  /// **'Recycle bin is empty'**
+  String get trashEmptyTitle;
+
+  /// Empty state description in Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Files moved to Recycle bin will stay here for 30 days before being permanently deleted.'**
+  String get trashEmptySubtitle;
+
+  /// Remaining days badge in Recycle bin file row
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day left} other{{count} days left}}'**
+  String trashDaysLeft(int count);
+
+  /// Subtitle in Recycle bin row showing deletion date and file size
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted {date} · {size}'**
+  String trashSubtitle(String date, String size);
+
+  /// Title of dialog when file exceeds 200MB limit
+  ///
+  /// In en, this message translates to:
+  /// **'Too large for Recycle bin'**
+  String get trashDialogTooLargeTitle;
+
+  /// Body message offering permanent deletion when file exceeds 200MB limit
+  ///
+  /// In en, this message translates to:
+  /// **'\"{fileName}\" is larger than 200 MB and cannot be moved to the Recycle bin. Do you want to delete it permanently?'**
+  String trashDialogTooLargeBody(String fileName);
+
+  /// Button to confirm permanent deletion for oversized file
+  ///
+  /// In en, this message translates to:
+  /// **'Delete permanently'**
+  String get trashActionDeletePermanently;
+
+  /// Dismissible banner text at the top of Recycle bin screen
+  ///
+  /// In en, this message translates to:
+  /// **'Items in the Recycle bin are permanently deleted after 30 days.'**
+  String get trashInfoBanner;
+
+  /// Action in file options sheet to restore trashed file
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get trashSheetRestore;
+
+  /// Action in file options sheet to delete forever
+  ///
+  /// In en, this message translates to:
+  /// **'Delete forever'**
+  String get trashSheetDeleteForever;
+
+  /// Action in file options sheet to view file details
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get trashSheetDetails;
+
+  /// Label in Recycle bin details sheet for original file path
+  ///
+  /// In en, this message translates to:
+  /// **'Original location'**
+  String get trashDetailsOriginalLocation;
+
+  /// Label in Recycle bin details sheet for deletion date
+  ///
+  /// In en, this message translates to:
+  /// **'Date deleted'**
+  String get trashDetailsDateDeleted;
+
+  /// Label in Recycle bin details sheet for expiration timeframe
+  ///
+  /// In en, this message translates to:
+  /// **'Expires in'**
+  String get trashDetailsExpiresIn;
 }
 
 class _AppLocalizationsDelegate

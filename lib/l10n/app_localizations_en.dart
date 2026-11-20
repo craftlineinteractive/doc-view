@@ -2434,6 +2434,164 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get createPdfErrorGeneration =>
       'Failed to generate PDF document. Please try again.';
+
+  @override
+  String get trashErrorTooLarge =>
+      'File is too large for the Recycle bin (200 MB limit)';
+
+  @override
+  String get trashErrorNotEnoughSpace =>
+      'Not enough storage space in the Recycle bin';
+
+  @override
+  String trashErrorGeneric(String details) {
+    return 'Recycle bin operation failed: $details';
+  }
+
+  @override
+  String get trashDialogMoveTitle => 'Move to Recycle bin?';
+
+  @override
+  String trashDialogMoveBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'Move $count files to the Recycle bin? You can restore them from Tools > Recycle bin for 30 days.',
+      one:
+          'Move 1 file to the Recycle bin? You can restore it from Tools > Recycle bin for 30 days.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashActionMove => 'Move to Recycle bin';
+
+  @override
+  String trashMovedSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Moved $count files to Recycle bin',
+      one: 'Moved 1 file to Recycle bin',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashActionUndo => 'Undo';
+
+  @override
+  String trashRestoredSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Restored $count files',
+      one: 'Restored 1 file',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashDialogDeleteForeverTitle => 'Delete forever?';
+
+  @override
+  String trashDialogDeleteForeverBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Delete $count files forever? This cannot be undone.',
+      one: 'Delete 1 file forever? This cannot be undone.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashActionDeleteForever => 'Delete forever';
+
+  @override
+  String trashDeletedForeverSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Deleted $count files forever',
+      one: 'Deleted 1 file forever',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashDialogEmptyTitle => 'Empty Recycle bin?';
+
+  @override
+  String trashDialogEmptyBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count files',
+      one: '1 file',
+    );
+    return 'Delete all $_temp0 forever? This cannot be undone.';
+  }
+
+  @override
+  String get trashActionEmptyBin => 'Empty bin';
+
+  @override
+  String get trashEmptyTitle => 'Recycle bin is empty';
+
+  @override
+  String get trashEmptySubtitle =>
+      'Files moved to Recycle bin will stay here for 30 days before being permanently deleted.';
+
+  @override
+  String trashDaysLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days left',
+      one: '1 day left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trashSubtitle(String date, String size) {
+    return 'Deleted $date · $size';
+  }
+
+  @override
+  String get trashDialogTooLargeTitle => 'Too large for Recycle bin';
+
+  @override
+  String trashDialogTooLargeBody(String fileName) {
+    return '\"$fileName\" is larger than 200 MB and cannot be moved to the Recycle bin. Do you want to delete it permanently?';
+  }
+
+  @override
+  String get trashActionDeletePermanently => 'Delete permanently';
+
+  @override
+  String get trashInfoBanner =>
+      'Items in the Recycle bin are permanently deleted after 30 days.';
+
+  @override
+  String get trashSheetRestore => 'Restore';
+
+  @override
+  String get trashSheetDeleteForever => 'Delete forever';
+
+  @override
+  String get trashSheetDetails => 'Details';
+
+  @override
+  String get trashDetailsOriginalLocation => 'Original location';
+
+  @override
+  String get trashDetailsDateDeleted => 'Date deleted';
+
+  @override
+  String get trashDetailsExpiresIn => 'Expires in';
 }
 
 /// The translations for English (`en_XA`).
@@ -4946,4 +5104,164 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   @override
   String get createPdfErrorGeneration =>
       '[Ƒàîłéđ ţô ĝéñéřàţé ÞÐƑ đôçûɱéñţ. Þłéàšé ţřý àĝàîñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get trashErrorTooLarge =>
+      '[Ƒîłé îš ţôô łàřĝé ƒôř ţĥé Řéçýçłé ƀîñ (200 ṀƁ łîɱîţ) ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get trashErrorNotEnoughSpace =>
+      '[Ñôţ éñôûĝĥ šţôřàĝé šþàçé îñ ţĥé Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String trashErrorGeneric(String details) {
+    return '[Řéçýçłé ƀîñ ôþéřàţîôñ ƒàîłéđ: $details ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get trashDialogMoveTitle => '[Ṁôṽé ţô Řéçýçłé ƀîñ? ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String trashDialogMoveBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '[Ṁôṽé $count ƒîłéš ţô ţĥé Řéçýçłé ƀîñ? Ýôû çàñ řéšţôřé ţĥéɱ ƒřôɱ Ťôôłš > Řéçýçłé ƀîñ ƒôř 30 đàýš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]',
+      one:
+          '[Ṁôṽé 1 ƒîłé ţô ţĥé Řéçýçłé ƀîñ? Ýôû çàñ řéšţôřé îţ ƒřôɱ Ťôôłš > Řéçýçłé ƀîñ ƒôř 30 đàýš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashActionMove => '[Ṁôṽé ţô Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String trashMovedSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[Ṁôṽéđ $count ƒîłéš ţô Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]',
+      one: '[Ṁôṽéđ 1 ƒîłé ţô Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashActionUndo => '[Ûñđô ẋẋ]';
+
+  @override
+  String trashRestoredSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[Řéšţôřéđ $count ƒîłéš ẋẋẋẋẋẋẋẋẋ]',
+      one: '[Řéšţôřéđ 1 ƒîłé ẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashDialogDeleteForeverTitle => '[Ðéłéţé ƒôřéṽéř? ẋẋẋẋẋẋ]';
+
+  @override
+  String trashDialogDeleteForeverBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '[Ðéłéţé $count ƒîłéš ƒôřéṽéř? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]',
+      one: '[Ðéłéţé 1 ƒîłé ƒôřéṽéř? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashActionDeleteForever => '[Ðéłéţé ƒôřéṽéř ẋẋẋẋẋẋ]';
+
+  @override
+  String trashDeletedForeverSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[Ðéłéţéđ $count ƒîłéš ƒôřéṽéř ẋẋẋẋẋẋẋẋẋẋẋẋ]',
+      one: '[Ðéłéţéđ 1 ƒîłé ƒôřéṽéř ẋẋẋẋẋẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trashDialogEmptyTitle => '[Éɱþţý Řéçýçłé ƀîñ? ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String trashDialogEmptyBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count ƒîłéš ẋẋẋẋẋẋ]',
+      one: '[1 ƒîłé ẋẋẋ]',
+    );
+    return '[Ðéłéţé àłł  ẋẋẋẋẋ]$_temp0[ ƒôřéṽéř? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get trashActionEmptyBin => '[Éɱþţý ƀîñ ẋẋẋẋ]';
+
+  @override
+  String get trashEmptyTitle => '[Řéçýçłé ƀîñ îš éɱþţý ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get trashEmptySubtitle =>
+      '[Ƒîłéš ɱôṽéđ ţô Řéçýçłé ƀîñ ŵîłł šţàý ĥéřé ƒôř 30 đàýš ƀéƒôřé ƀéîñĝ þéřɱàñéñţłý đéłéţéđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String trashDaysLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count đàýš łéƒţ ẋẋẋẋẋẋẋ]',
+      one: '[1 đàý łéƒţ ẋẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trashSubtitle(String date, String size) {
+    return '[Ðéłéţéđ $date · $size ẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get trashDialogTooLargeTitle =>
+      '[Ťôô łàřĝé ƒôř Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String trashDialogTooLargeBody(String fileName) {
+    return '[\"$fileName\" îš łàřĝéř ţĥàñ 200 ṀƁ àñđ çàññôţ ƀé ɱôṽéđ ţô ţĥé Řéçýçłé ƀîñ. Ðô ýôû ŵàñţ ţô đéłéţé îţ þéřɱàñéñţłý? ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get trashActionDeletePermanently => '[Ðéłéţé þéřɱàñéñţłý ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get trashInfoBanner =>
+      '[Îţéɱš îñ ţĥé Řéçýçłé ƀîñ àřé þéřɱàñéñţłý đéłéţéđ àƒţéř 30 đàýš. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get trashSheetRestore => '[Řéšţôřé ẋẋẋ]';
+
+  @override
+  String get trashSheetDeleteForever => '[Ðéłéţé ƒôřéṽéř ẋẋẋẋẋẋ]';
+
+  @override
+  String get trashSheetDetails => '[Ðéţàîłš ẋẋẋ]';
+
+  @override
+  String get trashDetailsOriginalLocation => '[Öřîĝîñàł łôçàţîôñ ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get trashDetailsDateDeleted => '[Ðàţé đéłéţéđ ẋẋẋẋẋ]';
+
+  @override
+  String get trashDetailsExpiresIn => '[Éẋþîřéš îñ ẋẋẋẋ]';
 }

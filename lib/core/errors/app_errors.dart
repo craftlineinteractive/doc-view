@@ -264,3 +264,46 @@ class PrintPdfException implements Exception {
   String toString() => 'PrintPdfException($reason, $message)';
 }
 
+/// Categorized failure reasons for Recycle bin operations.
+enum TrashErrorReason {
+  fileMissing,
+  tooLarge,
+  notEnoughSpace,
+  copyFailed,
+  verifyFailed,
+  deleteOriginalFailed,
+  restoreTargetUnavailable,
+  databaseFailed,
+  unknown;
+
+  String localizedMessage(BuildContext context, {String? details}) {
+    switch (this) {
+      case TrashErrorReason.fileMissing:
+        return context.l10n.errorRenameSourceNotFound;
+      case TrashErrorReason.tooLarge:
+        return context.l10n.trashErrorTooLarge;
+      case TrashErrorReason.notEnoughSpace:
+        return context.l10n.trashErrorNotEnoughSpace;
+      case TrashErrorReason.copyFailed:
+      case TrashErrorReason.verifyFailed:
+      case TrashErrorReason.deleteOriginalFailed:
+      case TrashErrorReason.restoreTargetUnavailable:
+      case TrashErrorReason.databaseFailed:
+      case TrashErrorReason.unknown:
+        return context.l10n.trashErrorGeneric(details ?? '');
+    }
+  }
+}
+
+/// Typed exception thrown during Recycle bin operations.
+class TrashException implements Exception {
+  final TrashErrorReason reason;
+  final String? message;
+
+  const TrashException(this.reason, [this.message]);
+
+  @override
+  String toString() => 'TrashException($reason, $message)';
+}
+
+
