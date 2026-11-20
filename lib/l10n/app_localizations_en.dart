@@ -2192,6 +2192,139 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewerSpreadsheetOpenAnotherApp => 'Open in another app';
+
+  @override
+  String get toolsWorkspaceOverline => 'WORKSPACE';
+
+  @override
+  String get toolsTitle => 'Tools';
+
+  @override
+  String get toolsSectionConvertCreate => 'CONVERT & CREATE';
+
+  @override
+  String get toolsSectionEditManage => 'EDIT & MANAGE';
+
+  @override
+  String get toolsSectionOthers => 'OTHERS';
+
+  @override
+  String get toolsCreatedByYou => 'Created by you';
+
+  @override
+  String get toolsCreatedByYouEmpty => 'PDFs you create appear here';
+
+  @override
+  String get toolsCreatedByYouSeeAll => 'See all';
+
+  @override
+  String get toolManagePages => 'Manage Pages';
+
+  @override
+  String get toolManagePagesSub => 'Reorder, rotate & delete';
+
+  @override
+  String get toolImportFiles => 'Import files';
+
+  @override
+  String get toolImportFilesSub => 'Add from other apps';
+
+  @override
+  String get toolPrintPdf => 'Print PDF';
+
+  @override
+  String get toolPrintPdfSub => 'Send to any printer';
+
+  @override
+  String get toolCreatePdf => 'Create PDF';
+
+  @override
+  String get toolCreatePdfSub => 'Blank doc or template';
+
+  @override
+  String get toolRecycleBin => 'Recycle bin';
+
+  @override
+  String get toolRecycleBinSub => 'Restore deleted files';
+
+  @override
+  String get toolAnnotate => 'Annotate';
+
+  @override
+  String get toolAnnotateSub => 'Highlight, draw & mark';
+
+  @override
+  String get toolAddText => 'Add Text';
+
+  @override
+  String get toolAddTextSub => 'Insert text & dates';
+
+  @override
+  String get toolSign => 'Sign';
+
+  @override
+  String get toolSignSub => 'Fill & sign forms';
+
+  @override
+  String get toolWordToPdf => 'Word to PDF';
+
+  @override
+  String get toolWordToPdfSub => 'Convert DOCX to PDF';
+
+  @override
+  String get toolPptToPdf => 'PPT to PDF';
+
+  @override
+  String get toolPptToPdfSub => 'Convert PPTX to PDF';
+
+  @override
+  String get printPdfErrorTooLarge => 'PDF file exceeds the 50 MB print limit.';
+
+  @override
+  String get printPdfErrorUnreadable => 'Unable to read PDF for printing.';
+
+  @override
+  String get printPdfErrorPassword =>
+      'Cannot print password-protected PDF directly.';
+
+  @override
+  String get printPdfErrorFailed => 'Printing failed.';
+
+  @override
+  String get printPdfSuccess => 'Document sent to printer.';
+
+  @override
+  String get toolPickerTitleSelectPdf => 'Select PDF';
+
+  @override
+  String get toolPickerTitleSelectPdfs => 'Select PDFs';
+
+  @override
+  String get toolPickerBrowseFiles => 'Browse files';
+
+  @override
+  String get toolPickerTabAll => 'All PDFs';
+
+  @override
+  String get toolPickerTabRecent => 'Recent';
+
+  @override
+  String get toolPickerTabDownloads => 'Downloads';
+
+  @override
+  String get toolPickerTabICloud => 'iCloud Drive';
+
+  @override
+  String get toolPickerActionPrint => 'Print';
+
+  @override
+  String get toolPickerActionManage => 'Manage';
+
+  @override
+  String get toolPickerActionSelect => 'Select';
+
+  @override
+  String get toolsImportActionView => 'View';
 }
 
 /// The translations for English (`en_XA`).
@@ -4457,4 +4590,139 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   @override
   String get viewerSpreadsheetOpenAnotherApp =>
       '[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolsWorkspaceOverline => '[ŴÔŘĶŠÞÀÇÉ ẋẋẋ]';
+
+  @override
+  String get toolsTitle => '[Ťôôłš ẋẋ]';
+
+  @override
+  String get toolsSectionConvertCreate => '[ÇÔÑṼÉŘŤ & ÇŘÉÀŤÉ ẋẋẋẋẋ]';
+
+  @override
+  String get toolsSectionEditManage => '[ÉĐÎŤ & ṀÀÑÀĜÉ ẋẋẋẋ]';
+
+  @override
+  String get toolsSectionOthers => '[ÖŤĤÉŘŠ ẋẋ]';
+
+  @override
+  String get toolsCreatedByYou => '[Çřéàţéđ ƀý ýôû ẋẋẋẋ]';
+
+  @override
+  String get toolsCreatedByYouEmpty => '[ÞĐƑš ýôû çřéàţé àþþéàř ĥéřé ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolsCreatedByYouSeeAll => '[Šéé àłł ẋẋ]';
+
+  @override
+  String get toolManagePages => '[Ṁàñàĝé Þàĝéš ẋẋẋ]';
+
+  @override
+  String get toolManagePagesSub => '[Řéôřđéř, řôţàţé & đéłéţé ẋẋẋẋẋẋ]';
+
+  @override
+  String get toolImportFiles => '[Îɱþôřţ ƒîłéš ẋẋẋ]';
+
+  @override
+  String get toolImportFilesSub => '[Àđđ ƒřôɱ ôţĥéř àþþš ẋẋẋẋ]';
+
+  @override
+  String get toolPrintPdf => '[Þřîñţ ÞĐƑ ẋẋ]';
+
+  @override
+  String get toolPrintPdfSub => '[Šéñđ ţô àñý þřîñţéř ẋẋẋẋ]';
+
+  @override
+  String get toolCreatePdf => '[Çřéàţé ÞĐƑ ẋẋ]';
+
+  @override
+  String get toolCreatePdfSub => '[Ɓłàñķ đôç ôř ţéɱþłàţé ẋẋẋẋ]';
+
+  @override
+  String get toolRecycleBin => '[Řéçýçłé ƀîñ ẋẋ]';
+
+  @override
+  String get toolRecycleBinSub => '[Řéšţôřé đéłéţéđ ƒîłéš ẋẋẋẋ]';
+
+  @override
+  String get toolAnnotate => '[Àññôţàţé ẋẋ]';
+
+  @override
+  String get toolAnnotateSub => '[Ĥîĝĥłîĝĥţ, đřàŵ & ɱàřķ ẋẋẋẋ]';
+
+  @override
+  String get toolAddText => '[Àđđ Ťéẋţ ẋẋ]';
+
+  @override
+  String get toolAddTextSub => '[Îñšéřţ ţéẋţ & đàţéš ẋẋẋ]';
+
+  @override
+  String get toolSign => '[Šîĝñ ẋ]';
+
+  @override
+  String get toolSignSub => '[Ƒîłł & šîĝñ ƒôřɱš ẋẋẋ]';
+
+  @override
+  String get toolWordToPdf => '[Ŵôřđ ţô ÞĐƑ ẋẋ]';
+
+  @override
+  String get toolWordToPdfSub => '[Çôñṽéřţ ĐÔÇẊ ţô ÞĐƑ ẋẋẋẋ]';
+
+  @override
+  String get toolPptToPdf => '[ÞÞŤ ţô ÞĐƑ ẋẋ]';
+
+  @override
+  String get toolPptToPdfSub => '[Çôñṽéřţ ÞÞŤẊ ţô ÞĐƑ ẋẋẋẋ]';
+
+  @override
+  String get printPdfErrorTooLarge =>
+      '[ÞĐƑ ƒîłé éẋçééđš ţĥé 50 ṀƁ þřîñţ łîɱîţ. ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get printPdfErrorUnreadable =>
+      '[Ûñàƀłé ţô řéàđ ÞĐƑ ƒôř þřîñţîñĝ. ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get printPdfErrorPassword =>
+      '[Çàññôţ þřîñţ þàššŵôřđ-þřôţéçţéđ ÞĐƑ đîřéçţłý. ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get printPdfErrorFailed => '[Þřîñţîñĝ ƒàîłéđ. ẋẋẋ]';
+
+  @override
+  String get printPdfSuccess => '[Đôçûɱéñţ šéñţ ţô þřîñţéř. ẋẋẋẋẋ]';
+
+  @override
+  String get toolPickerTitleSelectPdf => '[Šéłéçţ ÞĐƑ ẋẋ]';
+
+  @override
+  String get toolPickerTitleSelectPdfs => '[Šéłéçţ ÞĐƑš ẋẋ]';
+
+  @override
+  String get toolPickerBrowseFiles => '[Ɓřôŵšé ƒîłéš ẋẋ]';
+
+  @override
+  String get toolPickerTabAll => '[Àłł ÞĐƑš ẋẋ]';
+
+  @override
+  String get toolPickerTabRecent => '[Řéçéñţ ẋẋ]';
+
+  @override
+  String get toolPickerTabDownloads => '[Đôŵñłôàđš ẋẋ]';
+
+  @override
+  String get toolPickerTabICloud => '[îÇłôûđ Đřîṽé ẋẋ]';
+
+  @override
+  String get toolPickerActionPrint => '[Þřîñţ ẋ]';
+
+  @override
+  String get toolPickerActionManage => '[Ṁàñàĝé ẋ]';
+
+  @override
+  String get toolPickerActionSelect => '[Šéłéçţ ẋ]';
+
+  @override
+  String get toolsImportActionView => '[Ṽîéŵ ẋ]';
 }

@@ -49,17 +49,16 @@ class CreatedByYouSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Section Header with See All
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            Expanded(
-              child: Text(
-                context.l10n.createdSectionTitle,
-                style: DocViewTypography.headlineSm.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: tokens.textPrimary,
-                ),
+            Text(
+              context.l10n.createdSectionTitle,
+              style: DocViewTypography.headlineSm.copyWith(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: tokens.textPrimary,
               ),
             ),
             TextButton(
@@ -67,6 +66,7 @@ class CreatedByYouSection extends StatelessWidget {
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 minimumSize: const Size(48, 36),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               child: Text(
                 context.l10n.actionSeeAll,
@@ -90,8 +90,11 @@ class CreatedByYouSection extends StatelessWidget {
               return _EmptyCreatedCard(tokens: tokens);
             }
 
+            final textScale = MediaQuery.textScalerOf(context).scale(1.0);
+            final cardHeight = 196.0 + (textScale > 1.0 ? (textScale - 1.0) * 48.0 : 0.0);
+
             return SizedBox(
-              height: 196,
+              height: cardHeight,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: files.length,

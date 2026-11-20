@@ -9,6 +9,7 @@ import 'package:docview/features/settings/scan_settings_screen.dart';
 import 'package:docview/features/settings/settings_screen.dart';
 import 'package:docview/features/tools/split_screen.dart';
 import 'package:docview/features/tools/tools_screen.dart';
+import 'package:docview/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -82,6 +83,8 @@ void main() {
                 ],
                 child: MaterialApp(
                   theme: AppTheme.lightTheme,
+                  localizationsDelegates: AppLocalizations.localizationsDelegates,
+                  supportedLocales: AppLocalizations.supportedLocales,
                   builder: (context, child) {
                     return MediaQuery(
                       data: MediaQuery.of(context).copyWith(

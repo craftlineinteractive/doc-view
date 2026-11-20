@@ -2938,5 +2938,181 @@
   "viewerSpreadsheetOpenAnotherApp": "[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]",
   "@viewerSpreadsheetOpenAnotherApp": {
     "description": "Button to open the document using an external application intent"
+  },
+  "toolsWorkspaceOverline": "[ŴÔŘĶŠÞÀÇÉ ẋẋẋ]",
+  "@toolsWorkspaceOverline": {
+    "description": "Overline category title on the Tools screen"
+  },
+  "toolsTitle": "[Ťôôłš ẋẋ]",
+  "@toolsTitle": {
+    "description": "Main screen title on the Tools tab"
+  },
+  "toolsSectionConvertCreate": "[ÇÔÑṼÉŘŤ & ÇŘÉÀŤÉ ẋẋẋẋẋ]",
+  "@toolsSectionConvertCreate": {
+    "description": "Section header for document conversion and creation tools"
+  },
+  "toolsSectionEditManage": "[ÉĐÎŤ & ṀÀÑÀĜÉ ẋẋẋẋ]",
+  "@toolsSectionEditManage": {
+    "description": "Section header for document editing and management tools"
+  },
+  "toolsSectionOthers": "[ÖŤĤÉŘŠ ẋẋ]",
+  "@toolsSectionOthers": {
+    "description": "Section header for auxiliary tools"
+  },
+  "toolsCreatedByYou": "[Çřéàţéđ ƀý ýôû ẋẋẋẋ]",
+  "@toolsCreatedByYou": {
+    "description": "Header for recent created files section"
+  },
+  "toolsCreatedByYouEmpty": "[ÞĐƑš ýôû çřéàţé àþþéàř ĥéřé ẋẋẋẋẋẋẋ]",
+  "@toolsCreatedByYouEmpty": {
+    "description": "Empty state description for created files section"
+  },
+  "toolsCreatedByYouSeeAll": "[Šéé àłł ẋẋ]",
+  "@toolsCreatedByYouSeeAll": {
+    "description": "Action button to view all user-created documents"
+  },
+  "toolManagePages": "[Ṁàñàĝé Þàĝéš ẋẋẋ]",
+  "@toolManagePages": {
+    "description": "Tool title for reordering, rotating and deleting PDF pages"
+  },
+  "toolManagePagesSub": "[Řéôřđéř, řôţàţé & đéłéţé ẋẋẋẋẋẋ]",
+  "@toolManagePagesSub": {
+    "description": "Tool subtitle for Manage Pages"
+  },
+  "toolImportFiles": "[Îɱþôřţ ƒîłéš ẋẋẋ]",
+  "@toolImportFiles": {
+    "description": "Tool title for importing files from other apps or cloud storage"
+  },
+  "toolImportFilesSub": "[Àđđ ƒřôɱ ôţĥéř àþþš ẋẋẋẋ]",
+  "@toolImportFilesSub": {
+    "description": "Tool subtitle for Import files"
+  },
+  "toolPrintPdf": "[Þřîñţ ÞĐƑ ẋẋ]",
+  "@toolPrintPdf": {
+    "description": "Tool title for printing PDF documents"
+  },
+  "toolPrintPdfSub": "[Šéñđ ţô àñý þřîñţéř ẋẋẋẋ]",
+  "@toolPrintPdfSub": {
+    "description": "Tool subtitle for Print PDF"
+  },
+  "toolCreatePdf": "[Çřéàţé ÞĐƑ ẋẋ]",
+  "@toolCreatePdf": {
+    "description": "Tool title for creating new PDF documents"
+  },
+  "toolCreatePdfSub": "[Ɓłàñķ đôç ôř ţéɱþłàţé ẋẋẋẋ]",
+  "@toolCreatePdfSub": {
+    "description": "Tool subtitle for Create PDF"
+  },
+  "toolRecycleBin": "[Řéçýçłé ƀîñ ẋẋ]",
+  "@toolRecycleBin": {
+    "description": "Tool title for viewing recently deleted documents"
+  },
+  "toolRecycleBinSub": "[Řéšţôřé đéłéţéđ ƒîłéš ẋẋẋẋ]",
+  "@toolRecycleBinSub": {
+    "description": "Tool subtitle for Recycle bin"
+  },
+  "toolAnnotate": "[Àññôţàţé ẋẋ]",
+  "@toolAnnotate": {
+    "description": "Tool title for PDF annotation and drawing"
+  },
+  "toolAnnotateSub": "[Ĥîĝĥłîĝĥţ, đřàŵ & ɱàřķ ẋẋẋẋ]",
+  "@toolAnnotateSub": {
+    "description": "Tool subtitle for Annotate"
+  },
+  "toolAddText": "[Àđđ Ťéẋţ ẋẋ]",
+  "@toolAddText": {
+    "description": "Tool title for inserting text into PDF"
+  },
+  "toolAddTextSub": "[Îñšéřţ ţéẋţ & đàţéš ẋẋẋ]",
+  "@toolAddTextSub": {
+    "description": "Tool subtitle for Add Text"
+  },
+  "toolSign": "[Šîĝñ ẋ]",
+  "@toolSign": {
+    "description": "Tool title for electronic signature"
+  },
+  "toolSignSub": "[Ƒîłł & šîĝñ ƒôřɱš ẋẋẋ]",
+  "@toolSignSub": {
+    "description": "Tool subtitle for Sign"
+  },
+  "toolWordToPdf": "[Ŵôřđ ţô ÞĐƑ ẋẋ]",
+  "@toolWordToPdf": {
+    "description": "Tool title for converting Word to PDF"
+  },
+  "toolWordToPdfSub": "[Çôñṽéřţ ĐÔÇẊ ţô ÞĐƑ ẋẋẋẋ]",
+  "@toolWordToPdfSub": {
+    "description": "Tool subtitle for Word to PDF"
+  },
+  "toolPptToPdf": "[ÞÞŤ ţô ÞĐƑ ẋẋ]",
+  "@toolPptToPdf": {
+    "description": "Tool title for converting PPT to PDF"
+  },
+  "toolPptToPdfSub": "[Çôñṽéřţ ÞÞŤẊ ţô ÞĐƑ ẋẋẋẋ]",
+  "@toolPptToPdfSub": {
+    "description": "Tool subtitle for PPT to PDF"
+  },
+  "printPdfErrorTooLarge": "[ÞĐƑ ƒîłé éẋçééđš ţĥé 50 ṀƁ þřîñţ łîɱîţ. ẋẋẋẋẋẋẋẋẋ]",
+  "@printPdfErrorTooLarge": {
+    "description": "Error message when PDF exceeds 50 MB print size limit"
+  },
+  "printPdfErrorUnreadable": "[Ûñàƀłé ţô řéàđ ÞĐƑ ƒôř þřîñţîñĝ. ẋẋẋẋẋẋẋ]",
+  "@printPdfErrorUnreadable": {
+    "description": "Error message when PDF cannot be read or rendered for print"
+  },
+  "printPdfErrorPassword": "[Çàññôţ þřîñţ þàššŵôřđ-þřôţéçţéđ ÞĐƑ đîřéçţłý. ẋẋẋẋẋẋẋẋẋ]",
+  "@printPdfErrorPassword": {
+    "description": "Error message when attempting to print encrypted PDF"
+  },
+  "printPdfErrorFailed": "[Þřîñţîñĝ ƒàîłéđ. ẋẋẋ]",
+  "@printPdfErrorFailed": {
+    "description": "Generic error when print execution fails"
+  },
+  "printPdfSuccess": "[Đôçûɱéñţ šéñţ ţô þřîñţéř. ẋẋẋẋẋ]",
+  "@printPdfSuccess": {
+    "description": "Snackbar or confirmation after print dialog completes"
+  },
+  "toolPickerTitleSelectPdf": "[Šéłéçţ ÞĐƑ ẋẋ]",
+  "@toolPickerTitleSelectPdf": {
+    "description": "Title for single PDF picker screen"
+  },
+  "toolPickerTitleSelectPdfs": "[Šéłéçţ ÞĐƑš ẋẋ]",
+  "@toolPickerTitleSelectPdfs": {
+    "description": "Title for multiple PDFs picker screen"
+  },
+  "toolPickerBrowseFiles": "[Ɓřôŵšé ƒîłéš ẋẋ]",
+  "@toolPickerBrowseFiles": {
+    "description": "Button to open system file picker"
+  },
+  "toolPickerTabAll": "[Àłł ÞĐƑš ẋẋ]",
+  "@toolPickerTabAll": {
+    "description": "Tab for all PDF files in picker"
+  },
+  "toolPickerTabRecent": "[Řéçéñţ ẋẋ]",
+  "@toolPickerTabRecent": {
+    "description": "Tab for recent PDF files in picker"
+  },
+  "toolPickerTabDownloads": "[Đôŵñłôàđš ẋẋ]",
+  "@toolPickerTabDownloads": {
+    "description": "Tab for Downloads directory in picker on Android"
+  },
+  "toolPickerTabICloud": "[îÇłôûđ Đřîṽé ẋẋ]",
+  "@toolPickerTabICloud": {
+    "description": "Tab for iCloud Drive in picker on iOS"
+  },
+  "toolPickerActionPrint": "[Þřîñţ ẋ]",
+  "@toolPickerActionPrint": {
+    "description": "Primary action button in print picker"
+  },
+  "toolPickerActionManage": "[Ṁàñàĝé ẋ]",
+  "@toolPickerActionManage": {
+    "description": "Primary action button in manage pages picker"
+  },
+  "toolPickerActionSelect": "[Šéłéçţ ẋ]",
+  "@toolPickerActionSelect": {
+    "description": "Primary action button in generic tool picker"
+  },
+  "toolsImportActionView": "[Ṽîéŵ ẋ]",
+  "@toolsImportActionView": {
+    "description": "Action button in import success snackbar to view imported files"
   }
 }

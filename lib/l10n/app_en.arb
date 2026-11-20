@@ -2908,5 +2908,181 @@
   "viewerSpreadsheetOpenAnotherApp": "Open in another app",
   "@viewerSpreadsheetOpenAnotherApp": {
     "description": "Button to open the document using an external application intent"
+  },
+  "toolsWorkspaceOverline": "WORKSPACE",
+  "@toolsWorkspaceOverline": {
+    "description": "Overline category title on the Tools screen"
+  },
+  "toolsTitle": "Tools",
+  "@toolsTitle": {
+    "description": "Main screen title on the Tools tab"
+  },
+  "toolsSectionConvertCreate": "CONVERT & CREATE",
+  "@toolsSectionConvertCreate": {
+    "description": "Section header for document conversion and creation tools"
+  },
+  "toolsSectionEditManage": "EDIT & MANAGE",
+  "@toolsSectionEditManage": {
+    "description": "Section header for document editing and management tools"
+  },
+  "toolsSectionOthers": "OTHERS",
+  "@toolsSectionOthers": {
+    "description": "Section header for auxiliary tools"
+  },
+  "toolsCreatedByYou": "Created by you",
+  "@toolsCreatedByYou": {
+    "description": "Header for recent created files section"
+  },
+  "toolsCreatedByYouEmpty": "PDFs you create appear here",
+  "@toolsCreatedByYouEmpty": {
+    "description": "Empty state description for created files section"
+  },
+  "toolsCreatedByYouSeeAll": "See all",
+  "@toolsCreatedByYouSeeAll": {
+    "description": "Action button to view all user-created documents"
+  },
+  "toolManagePages": "Manage Pages",
+  "@toolManagePages": {
+    "description": "Tool title for reordering, rotating and deleting PDF pages"
+  },
+  "toolManagePagesSub": "Reorder, rotate & delete",
+  "@toolManagePagesSub": {
+    "description": "Tool subtitle for Manage Pages"
+  },
+  "toolImportFiles": "Import files",
+  "@toolImportFiles": {
+    "description": "Tool title for importing files from other apps or cloud storage"
+  },
+  "toolImportFilesSub": "Add from other apps",
+  "@toolImportFilesSub": {
+    "description": "Tool subtitle for Import files"
+  },
+  "toolPrintPdf": "Print PDF",
+  "@toolPrintPdf": {
+    "description": "Tool title for printing PDF documents"
+  },
+  "toolPrintPdfSub": "Send to any printer",
+  "@toolPrintPdfSub": {
+    "description": "Tool subtitle for Print PDF"
+  },
+  "toolCreatePdf": "Create PDF",
+  "@toolCreatePdf": {
+    "description": "Tool title for creating new PDF documents"
+  },
+  "toolCreatePdfSub": "Blank doc or template",
+  "@toolCreatePdfSub": {
+    "description": "Tool subtitle for Create PDF"
+  },
+  "toolRecycleBin": "Recycle bin",
+  "@toolRecycleBin": {
+    "description": "Tool title for viewing recently deleted documents"
+  },
+  "toolRecycleBinSub": "Restore deleted files",
+  "@toolRecycleBinSub": {
+    "description": "Tool subtitle for Recycle bin"
+  },
+  "toolAnnotate": "Annotate",
+  "@toolAnnotate": {
+    "description": "Tool title for PDF annotation and drawing"
+  },
+  "toolAnnotateSub": "Highlight, draw & mark",
+  "@toolAnnotateSub": {
+    "description": "Tool subtitle for Annotate"
+  },
+  "toolAddText": "Add Text",
+  "@toolAddText": {
+    "description": "Tool title for inserting text into PDF"
+  },
+  "toolAddTextSub": "Insert text & dates",
+  "@toolAddTextSub": {
+    "description": "Tool subtitle for Add Text"
+  },
+  "toolSign": "Sign",
+  "@toolSign": {
+    "description": "Tool title for electronic signature"
+  },
+  "toolSignSub": "Fill & sign forms",
+  "@toolSignSub": {
+    "description": "Tool subtitle for Sign"
+  },
+  "toolWordToPdf": "Word to PDF",
+  "@toolWordToPdf": {
+    "description": "Tool title for converting Word to PDF"
+  },
+  "toolWordToPdfSub": "Convert DOCX to PDF",
+  "@toolWordToPdfSub": {
+    "description": "Tool subtitle for Word to PDF"
+  },
+  "toolPptToPdf": "PPT to PDF",
+  "@toolPptToPdf": {
+    "description": "Tool title for converting PPT to PDF"
+  },
+  "toolPptToPdfSub": "Convert PPTX to PDF",
+  "@toolPptToPdfSub": {
+    "description": "Tool subtitle for PPT to PDF"
+  },
+  "printPdfErrorTooLarge": "PDF file exceeds the 50 MB print limit.",
+  "@printPdfErrorTooLarge": {
+    "description": "Error message when PDF exceeds 50 MB print size limit"
+  },
+  "printPdfErrorUnreadable": "Unable to read PDF for printing.",
+  "@printPdfErrorUnreadable": {
+    "description": "Error message when PDF cannot be read or rendered for print"
+  },
+  "printPdfErrorPassword": "Cannot print password-protected PDF directly.",
+  "@printPdfErrorPassword": {
+    "description": "Error message when attempting to print encrypted PDF"
+  },
+  "printPdfErrorFailed": "Printing failed.",
+  "@printPdfErrorFailed": {
+    "description": "Generic error when print execution fails"
+  },
+  "printPdfSuccess": "Document sent to printer.",
+  "@printPdfSuccess": {
+    "description": "Snackbar or confirmation after print dialog completes"
+  },
+  "toolPickerTitleSelectPdf": "Select PDF",
+  "@toolPickerTitleSelectPdf": {
+    "description": "Title for single PDF picker screen"
+  },
+  "toolPickerTitleSelectPdfs": "Select PDFs",
+  "@toolPickerTitleSelectPdfs": {
+    "description": "Title for multiple PDFs picker screen"
+  },
+  "toolPickerBrowseFiles": "Browse files",
+  "@toolPickerBrowseFiles": {
+    "description": "Button to open system file picker"
+  },
+  "toolPickerTabAll": "All PDFs",
+  "@toolPickerTabAll": {
+    "description": "Tab for all PDF files in picker"
+  },
+  "toolPickerTabRecent": "Recent",
+  "@toolPickerTabRecent": {
+    "description": "Tab for recent PDF files in picker"
+  },
+  "toolPickerTabDownloads": "Downloads",
+  "@toolPickerTabDownloads": {
+    "description": "Tab for Downloads directory in picker on Android"
+  },
+  "toolPickerTabICloud": "iCloud Drive",
+  "@toolPickerTabICloud": {
+    "description": "Tab for iCloud Drive in picker on iOS"
+  },
+  "toolPickerActionPrint": "Print",
+  "@toolPickerActionPrint": {
+    "description": "Primary action button in print picker"
+  },
+  "toolPickerActionManage": "Manage",
+  "@toolPickerActionManage": {
+    "description": "Primary action button in manage pages picker"
+  },
+  "toolPickerActionSelect": "Select",
+  "@toolPickerActionSelect": {
+    "description": "Primary action button in generic tool picker"
+  },
+  "toolsImportActionView": "View",
+  "@toolsImportActionView": {
+    "description": "Action button in import success snackbar to view imported files"
   }
 }

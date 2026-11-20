@@ -18,9 +18,11 @@ import 'package:docview/features/tools/image_list_editor_screen.dart';
 import 'package:docview/features/tools/merge_screen.dart';
 import 'package:docview/features/tools/services/pdf_page_count_service.dart';
 import 'package:docview/features/tools/split_screen.dart';
+import 'package:docview/features/tools/tools_screen.dart';
 import 'package:docview/features/tools/widgets/merge_pdf_picker_screen.dart';
 import 'package:docview/features/tools/widgets/split_picker_screen.dart';
 import 'package:docview/features/tools/widgets/tool_error_sheet.dart';
+import 'package:docview/features/tools/widgets/tool_file_picker_screen.dart';
 import 'package:docview/features/tools/widgets/tool_progress_dialog.dart';
 import 'package:docview/features/tools/widgets/tool_result_sheet.dart';
 import 'package:docview/features/viewer/pages_screen.dart';
@@ -149,6 +151,15 @@ void main() {
       'CreatedDocumentsScreen': () => const CreatedDocumentsScreen(),
       'ImageListEditorScreen': () => const ImageListEditorScreen(
             initialImagePaths: [],
+          ),
+      'ToolsScreen': () => const ToolsScreen(),
+      'ToolFilePickerScreen': () => const ToolFilePickerScreen(
+            title: 'Select PDF',
+            allowMultiple: false,
+          ),
+      'ToolFilePickerScreenMulti': () => const ToolFilePickerScreen(
+            title: 'Select PDF Files',
+            allowMultiple: true,
           ),
       'MergeScreen': () => MergeScreen(initialFiles: [sampleDoc, sampleDoc2]),
       'SplitScreen': () => SplitScreen(file: sampleDoc),

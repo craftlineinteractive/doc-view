@@ -3618,6 +3618,270 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open in another app'**
   String get viewerSpreadsheetOpenAnotherApp;
+
+  /// Overline category title on the Tools screen
+  ///
+  /// In en, this message translates to:
+  /// **'WORKSPACE'**
+  String get toolsWorkspaceOverline;
+
+  /// Main screen title on the Tools tab
+  ///
+  /// In en, this message translates to:
+  /// **'Tools'**
+  String get toolsTitle;
+
+  /// Section header for document conversion and creation tools
+  ///
+  /// In en, this message translates to:
+  /// **'CONVERT & CREATE'**
+  String get toolsSectionConvertCreate;
+
+  /// Section header for document editing and management tools
+  ///
+  /// In en, this message translates to:
+  /// **'EDIT & MANAGE'**
+  String get toolsSectionEditManage;
+
+  /// Section header for auxiliary tools
+  ///
+  /// In en, this message translates to:
+  /// **'OTHERS'**
+  String get toolsSectionOthers;
+
+  /// Header for recent created files section
+  ///
+  /// In en, this message translates to:
+  /// **'Created by you'**
+  String get toolsCreatedByYou;
+
+  /// Empty state description for created files section
+  ///
+  /// In en, this message translates to:
+  /// **'PDFs you create appear here'**
+  String get toolsCreatedByYouEmpty;
+
+  /// Action button to view all user-created documents
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get toolsCreatedByYouSeeAll;
+
+  /// Tool title for reordering, rotating and deleting PDF pages
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Pages'**
+  String get toolManagePages;
+
+  /// Tool subtitle for Manage Pages
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder, rotate & delete'**
+  String get toolManagePagesSub;
+
+  /// Tool title for importing files from other apps or cloud storage
+  ///
+  /// In en, this message translates to:
+  /// **'Import files'**
+  String get toolImportFiles;
+
+  /// Tool subtitle for Import files
+  ///
+  /// In en, this message translates to:
+  /// **'Add from other apps'**
+  String get toolImportFilesSub;
+
+  /// Tool title for printing PDF documents
+  ///
+  /// In en, this message translates to:
+  /// **'Print PDF'**
+  String get toolPrintPdf;
+
+  /// Tool subtitle for Print PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Send to any printer'**
+  String get toolPrintPdfSub;
+
+  /// Tool title for creating new PDF documents
+  ///
+  /// In en, this message translates to:
+  /// **'Create PDF'**
+  String get toolCreatePdf;
+
+  /// Tool subtitle for Create PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Blank doc or template'**
+  String get toolCreatePdfSub;
+
+  /// Tool title for viewing recently deleted documents
+  ///
+  /// In en, this message translates to:
+  /// **'Recycle bin'**
+  String get toolRecycleBin;
+
+  /// Tool subtitle for Recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Restore deleted files'**
+  String get toolRecycleBinSub;
+
+  /// Tool title for PDF annotation and drawing
+  ///
+  /// In en, this message translates to:
+  /// **'Annotate'**
+  String get toolAnnotate;
+
+  /// Tool subtitle for Annotate
+  ///
+  /// In en, this message translates to:
+  /// **'Highlight, draw & mark'**
+  String get toolAnnotateSub;
+
+  /// Tool title for inserting text into PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Add Text'**
+  String get toolAddText;
+
+  /// Tool subtitle for Add Text
+  ///
+  /// In en, this message translates to:
+  /// **'Insert text & dates'**
+  String get toolAddTextSub;
+
+  /// Tool title for electronic signature
+  ///
+  /// In en, this message translates to:
+  /// **'Sign'**
+  String get toolSign;
+
+  /// Tool subtitle for Sign
+  ///
+  /// In en, this message translates to:
+  /// **'Fill & sign forms'**
+  String get toolSignSub;
+
+  /// Tool title for converting Word to PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Word to PDF'**
+  String get toolWordToPdf;
+
+  /// Tool subtitle for Word to PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Convert DOCX to PDF'**
+  String get toolWordToPdfSub;
+
+  /// Tool title for converting PPT to PDF
+  ///
+  /// In en, this message translates to:
+  /// **'PPT to PDF'**
+  String get toolPptToPdf;
+
+  /// Tool subtitle for PPT to PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Convert PPTX to PDF'**
+  String get toolPptToPdfSub;
+
+  /// Error message when PDF exceeds 50 MB print size limit
+  ///
+  /// In en, this message translates to:
+  /// **'PDF file exceeds the 50 MB print limit.'**
+  String get printPdfErrorTooLarge;
+
+  /// Error message when PDF cannot be read or rendered for print
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to read PDF for printing.'**
+  String get printPdfErrorUnreadable;
+
+  /// Error message when attempting to print encrypted PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot print password-protected PDF directly.'**
+  String get printPdfErrorPassword;
+
+  /// Generic error when print execution fails
+  ///
+  /// In en, this message translates to:
+  /// **'Printing failed.'**
+  String get printPdfErrorFailed;
+
+  /// Snackbar or confirmation after print dialog completes
+  ///
+  /// In en, this message translates to:
+  /// **'Document sent to printer.'**
+  String get printPdfSuccess;
+
+  /// Title for single PDF picker screen
+  ///
+  /// In en, this message translates to:
+  /// **'Select PDF'**
+  String get toolPickerTitleSelectPdf;
+
+  /// Title for multiple PDFs picker screen
+  ///
+  /// In en, this message translates to:
+  /// **'Select PDFs'**
+  String get toolPickerTitleSelectPdfs;
+
+  /// Button to open system file picker
+  ///
+  /// In en, this message translates to:
+  /// **'Browse files'**
+  String get toolPickerBrowseFiles;
+
+  /// Tab for all PDF files in picker
+  ///
+  /// In en, this message translates to:
+  /// **'All PDFs'**
+  String get toolPickerTabAll;
+
+  /// Tab for recent PDF files in picker
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get toolPickerTabRecent;
+
+  /// Tab for Downloads directory in picker on Android
+  ///
+  /// In en, this message translates to:
+  /// **'Downloads'**
+  String get toolPickerTabDownloads;
+
+  /// Tab for iCloud Drive in picker on iOS
+  ///
+  /// In en, this message translates to:
+  /// **'iCloud Drive'**
+  String get toolPickerTabICloud;
+
+  /// Primary action button in print picker
+  ///
+  /// In en, this message translates to:
+  /// **'Print'**
+  String get toolPickerActionPrint;
+
+  /// Primary action button in manage pages picker
+  ///
+  /// In en, this message translates to:
+  /// **'Manage'**
+  String get toolPickerActionManage;
+
+  /// Primary action button in generic tool picker
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get toolPickerActionSelect;
+
+  /// Action button in import success snackbar to view imported files
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get toolsImportActionView;
 }
 
 class _AppLocalizationsDelegate

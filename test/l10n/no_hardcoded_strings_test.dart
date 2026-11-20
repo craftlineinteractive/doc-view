@@ -162,7 +162,11 @@ void main() {
     test('pending_rewrite.txt entries are valid, name a phase, and are not stale', () {
       expect(pendingFile.existsSync(), isTrue, reason: 'pending_rewrite.txt must exist');
       final pendingEntries = _parsePendingLines(pendingFile.readAsLinesSync());
-      expect(pendingEntries, isNotEmpty);
+      expect(
+        pendingEntries,
+        isEmpty,
+        reason: 'In Phase G4a all pending rewrites have been eliminated',
+      );
 
       final errors = _validatePendingEntries(pendingEntries);
       expect(errors, isEmpty, reason: errors.join('\n'));

@@ -12,6 +12,7 @@ import 'package:docview/features/tools/widgets/split_picker_screen.dart';
 import 'package:docview/features/tools/widgets/tool_error_sheet.dart';
 import 'package:docview/features/tools/widgets/tool_progress_dialog.dart';
 import 'package:docview/features/tools/widgets/tool_result_sheet.dart';
+import 'package:docview/l10n/app_localizations.dart';
 import 'package:docview/shared/widgets/ads/ad_placeholders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,7 +41,7 @@ void main() {
   });
 
   group('Tools Tab Contract & Compliance Tests', () {
-    testWidgets('Strict 4-Tool contract: contains exactly 4 cards with specified keys', (tester) async {
+    testWidgets('G4a Tool contract: contains 7 enabled tool tiles with specified keys', (tester) async {
       tester.view.physicalSize = const Size(393 * 2, 852 * 2);
       tester.view.devicePixelRatio = 2.0;
       addTearDown(tester.view.resetPhysicalSize);
@@ -53,23 +54,29 @@ void main() {
           ],
           child: MaterialApp(
             theme: AppTheme.lightTheme,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: const ToolsScreen(),
           ),
         ),
       );
       await tester.pumpAndSettle();
 
-      // Exactly 4 tools present with specified keys
+      // Exactly 7 tools present with specified keys
       expect(find.byKey(const Key('tool_image_to_pdf')), findsOneWidget);
       expect(find.byKey(const Key('tool_scan_to_pdf')), findsOneWidget);
+      expect(find.byKey(const Key('tool_manage_pages')), findsOneWidget);
       expect(find.byKey(const Key('tool_merge_pdf')), findsOneWidget);
       expect(find.byKey(const Key('tool_split_pdf')), findsOneWidget);
+      expect(find.byKey(const Key('tool_import_files')), findsOneWidget);
+      expect(find.byKey(const Key('tool_print_pdf')), findsOneWidget);
 
       // Section titles
       expect(find.text('WORKSPACE'), findsOneWidget);
       expect(find.text('Tools'), findsOneWidget);
       expect(find.text('CONVERT & CREATE'), findsOneWidget);
       expect(find.text('EDIT & MANAGE'), findsOneWidget);
+      expect(find.text('OTHERS'), findsOneWidget);
       expect(find.text('Created by you'), findsOneWidget);
 
       // Empty state card for Created by you

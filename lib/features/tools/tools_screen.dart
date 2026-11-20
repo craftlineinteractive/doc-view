@@ -4,23 +4,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/errors/app_errors.dart';
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
 import '../../shared/widgets/navigation/doc_scaffold.dart';
+import '../providers/providers.dart';
 import 'image_list_editor_screen.dart';
 import 'merge_screen.dart';
+import 'services/print_pdf_service.dart';
 import 'split_screen.dart';
+import 'tool_registry.dart';
 import 'widgets/created_by_you_section.dart';
 import 'widgets/merge_pdf_picker_screen.dart';
 import 'widgets/split_picker_screen.dart';
-import 'widgets/tool_card.dart';
+import 'widgets/tool_file_picker_screen.dart';
+import 'widgets/tool_grid_tile.dart';
 
-/// Tools hub organizing PDF creation and editing features in a clean,
-/// accessible layout with strictly 4 tools and a "Created by you" section.
+/// Tools tab organizing PDF creation, manipulation, management, and auxiliary
+/// tools in a reference-density 4-column responsive grid with localized headers.
 class ToolsScreen extends ConsumerWidget {
   const ToolsScreen({super.key});
+
+  int _calculateColumnCount(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final width = mediaQuery.size.width;
+    final textScale = mediaQuery.textScaler.scale(1.0);
+    if (textScale >= 2.0) {
+      return 2;
+    } else if (textScale > 1.3 || width < 340) {
+      return 3;
+    }
+    return 4;
+  }
 
   Future<void> _onImageToPdf(BuildContext context) async {
     final pickedFiles = await FilePicker.pickFiles(
@@ -61,19 +79,34 @@ class ToolsScreen extends ConsumerWidget {
           ),
         );
       }
-    } catch (e) {
+    } catch (_) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Document scanning cancelled or failed: $e')),
+          SnackBar(content: Text(context.l10n.importFailedError)),
         );
       }
+    }
+  }
+
+  Future<void> _onManagePages(BuildContext context) async {
+    final picked = await ToolFilePickerScreen.pickSingle(
+      context,
+      title: context.l10n.toolPickerTitleSelectPdf,
+      actionLabel: context.l10n.toolPickerActionManage,
+    );
+
+    if (picked != null && context.mounted) {
+      context.push(
+        '/pdf-pages',
+        extra: picked,
+      );
     }
   }
 
   Future<void> _onMergePdf(BuildContext context) async {
     final picked = await MergePdfPickerScreen.pick(
       context,
-      title: 'Select PDFs',
+      title: context.l10n.toolPickerTitleSelectPdfs,
       minSelection: 2,
     );
 
@@ -98,12 +131,136 @@ class ToolsScreen extends ConsumerWidget {
     }
   }
 
+  Future<void> _onImportFiles(BuildContext context, WidgetRef ref) async {
+    try {
+      final count = await ref.read(importServiceProvider).importFiles();
+      ref.invalidate(categoryCountsProvider);
+      ref.invalidate(filesProvider);
+
+      if (count > 0 && context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(context.l10n.filesImportedSuccess(count)),
+            action: SnackBarAction(
+              label: context.l10n.toolsImportActionView,
+              onPressed: () {
+                if (context.mounted) {
+                  context.go('/home');
+                }
+              },
+            ),
+          ),
+        );
+      }
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.l10n.importFailedError)),
+        );
+      }
+    }
+  }
+
+  Future<void> _onPrintPdf(BuildContext context) async {
+    final picked = await ToolFilePickerScreen.pickSingle(
+      context,
+      title: context.l10n.toolPickerTitleSelectPdf,
+      actionLabel: context.l10n.toolPickerActionPrint,
+    );
+
+    if (picked != null && context.mounted) {
+      try {
+        const printService = PrintPdfService();
+        await printService.printDocument(picked);
+      } on PrintPdfException catch (e) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(e.reason.localizedMessage(context))),
+          );
+        }
+      } catch (_) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(context.l10n.printPdfErrorFailed)),
+          );
+        }
+      }
+    }
+  }
+
+  void _handleToolTap(BuildContext context, WidgetRef ref, ToolDef tool) {
+    switch (tool.id) {
+      case 'image_to_pdf':
+        _onImageToPdf(context);
+        break;
+      case 'scan_to_pdf':
+        _onScanToPdf(context);
+        break;
+      case 'manage_pages':
+        _onManagePages(context);
+        break;
+      case 'merge_pdf':
+        _onMergePdf(context);
+        break;
+      case 'split_pdf':
+        _onSplitPdf(context);
+        break;
+      case 'import_files':
+        _onImportFiles(context, ref);
+        break;
+      case 'print_pdf':
+        _onPrintPdf(context);
+        break;
+      default:
+        if (tool.route != null) {
+          context.push(tool.route!);
+        }
+        break;
+    }
+  }
+
+  Widget _buildSectionGrid(
+    BuildContext context,
+    WidgetRef ref,
+    List<ToolDef> tools,
+    int columnCount,
+  ) {
+    if (tools.isEmpty) return const SizedBox.shrink();
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final totalSpacing = (columnCount - 1) * 8.0;
+        final itemWidth = (constraints.maxWidth - totalSpacing) / columnCount;
+
+        return Wrap(
+          spacing: 8,
+          runSpacing: 12,
+          children: tools.map((tool) {
+            return SizedBox(
+              width: itemWidth,
+              child: ToolGridTile(
+                key: Key('tool_${tool.id}'),
+                tool: tool,
+                onTap: () => _handleToolTap(context, ref, tool),
+              ),
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = context.tokens;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final overlineColor = isDark ? tokens.interactiveBlue : tokens.primaryBlue;
     final sectionColor = isDark ? tokens.sectionHeader : const Color(0xFF5A6275);
+    final columnCount = _calculateColumnCount(context);
+
+    final convertTools = getToolsForSection(ToolSection.convertAndCreate);
+    final editTools = getToolsForSection(ToolSection.editAndManage);
+    final otherTools = getToolsForSection(ToolSection.others);
 
     return DocScaffold(
       applyHeaderGradient: true,
@@ -114,12 +271,13 @@ class ToolsScreen extends ConsumerWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         titleSpacing: 20,
+        toolbarHeight: (kToolbarHeight * MediaQuery.textScalerOf(context).scale(1.0)).clamp(56.0, 96.0),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'WORKSPACE',
+              context.l10n.toolsWorkspaceOverline,
               style: DocViewTypography.captionXs.copyWith(
                 color: overlineColor,
                 fontWeight: FontWeight.bold,
@@ -129,7 +287,7 @@ class ToolsScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 2),
             Text(
-              'Tools',
+              context.l10n.toolsTitle,
               style: DocViewTypography.headlineLg.copyWith(
                 fontFamily: 'SpaceGrotesk',
                 fontWeight: FontWeight.bold,
@@ -142,7 +300,7 @@ class ToolsScreen extends ConsumerWidget {
         actions: [
           DocIconButton(
             icon: AppIcons.search,
-            tooltip: 'Search documents',
+            tooltip: context.l10n.tooltipSearch,
             onPressed: () => context.push('/search'),
           ),
           const SizedBox(width: 8),
@@ -154,96 +312,54 @@ class ToolsScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Section 1: Convert & Create
-            Text(
-              'CONVERT & CREATE',
-              style: DocViewTypography.captionXs.copyWith(
-                color: sectionColor,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 1.0,
-                fontSize: 12,
+            if (convertTools.isNotEmpty) ...[
+              Text(
+                getSectionHeaderTitle(ToolSection.convertAndCreate, context.l10n),
+                style: DocViewTypography.captionXs.copyWith(
+                  color: sectionColor,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.0,
+                  fontSize: 12,
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ToolCard(
-                    key: const Key('tool_image_to_pdf'),
-                    title: 'Image to PDF',
-                    subtitle: 'Turn photos into one PDF',
-                    icon: Icons.image_rounded,
-                    gradientColors: const [
-                      Color(0xFFFFB300),
-                      Color(0xFFE02B2B),
-                    ],
-                    onTap: () => _onImageToPdf(context),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: ToolCard(
-                    key: const Key('tool_scan_to_pdf'),
-                    title: 'Scan to PDF',
-                    subtitle: 'Scan paper with camera',
-                    icon: Icons.document_scanner_rounded,
-                    gradientColors: const [
-                      Color(0xFF00BCD4),
-                      Color(0xFF009688),
-                    ],
-                    onTap: () => _onScanToPdf(context),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
+              const SizedBox(height: 10),
+              _buildSectionGrid(context, ref, convertTools, columnCount),
+              const SizedBox(height: 24),
+            ],
 
             // Section 2: Edit & Manage
-            Text(
-              'EDIT & MANAGE',
-              style: DocViewTypography.captionXs.copyWith(
-                color: sectionColor,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 1.0,
-                fontSize: 12,
+            if (editTools.isNotEmpty) ...[
+              Text(
+                getSectionHeaderTitle(ToolSection.editAndManage, context.l10n),
+                style: DocViewTypography.captionXs.copyWith(
+                  color: sectionColor,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.0,
+                  fontSize: 12,
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ToolCard(
-                    key: const Key('tool_merge_pdf'),
-                    title: 'Merge PDF',
-                    subtitle: 'Combine PDFs into one',
-                    icon: Icons.call_merge_rounded,
-                    gradientColors: const [
-                      Color(0xFF2979FF),
-                      Color(0xFF1565C0),
-                    ],
-                    onTap: () => _onMergePdf(context),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: ToolCard(
-                    key: const Key('tool_split_pdf'),
-                    title: 'Split PDF',
-                    subtitle: 'Extract pages or ranges',
-                    icon: Icons.call_split_rounded,
-                    gradientColors: const [
-                      Color(0xFF1E9E4F),
-                      Color(0xFF0E622F),
-                    ],
-                    onTap: () => _onSplitPdf(context),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 28),
+              const SizedBox(height: 10),
+              _buildSectionGrid(context, ref, editTools, columnCount),
+              const SizedBox(height: 24),
+            ],
 
-            // Section 3: Created by you
+            // Section 3: Others
+            if (otherTools.isNotEmpty) ...[
+              Text(
+                getSectionHeaderTitle(ToolSection.others, context.l10n),
+                style: DocViewTypography.captionXs.copyWith(
+                  color: sectionColor,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.0,
+                  fontSize: 12,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _buildSectionGrid(context, ref, otherTools, columnCount),
+              const SizedBox(height: 28),
+            ],
+
+            // Section 4: Created by you
             CreatedByYouSection(
               onSeeAll: () => context.push('/tools/created'),
             ),
