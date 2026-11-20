@@ -2939,7 +2939,7 @@
   "@viewerSpreadsheetOpenAnotherApp": {
     "description": "Button to open the document using an external application intent"
   },
-  "toolsWorkspaceOverline": "[ŴÔŘĶŠÞÀÇÉ ẋẋẋ]",
+  "toolsWorkspaceOverline": "[ŴÖŘĶŠÞÅÇÉ ẋẋẋẋ]",
   "@toolsWorkspaceOverline": {
     "description": "Overline category title on the Tools screen"
   },
@@ -2947,172 +2947,324 @@
   "@toolsTitle": {
     "description": "Main screen title on the Tools tab"
   },
-  "toolsSectionConvertCreate": "[ÇÔÑṼÉŘŤ & ÇŘÉÀŤÉ ẋẋẋẋẋ]",
+  "toolsSectionConvertCreate": "[ÇÖÑṼÉŘŤ & ÇŘÉÅŤÉ ẋẋẋẋẋẋẋ]",
   "@toolsSectionConvertCreate": {
     "description": "Section header for document conversion and creation tools"
   },
-  "toolsSectionEditManage": "[ÉĐÎŤ & ṀÀÑÀĜÉ ẋẋẋẋ]",
+  "toolsSectionEditManage": "[ÉÐÎŤ & ṀÅÑÅĜÉ ẋẋẋẋẋẋ]",
   "@toolsSectionEditManage": {
     "description": "Section header for document editing and management tools"
   },
-  "toolsSectionOthers": "[ÖŤĤÉŘŠ ẋẋ]",
+  "toolsSectionOthers": "[ÖŤĦÉŘŠ ẋẋẋ]",
   "@toolsSectionOthers": {
     "description": "Section header for auxiliary tools"
   },
-  "toolsCreatedByYou": "[Çřéàţéđ ƀý ýôû ẋẋẋẋ]",
+  "toolsCreatedByYou": "[Çřéàţéđ ƀý ýôû ẋẋẋẋẋẋ]",
   "@toolsCreatedByYou": {
     "description": "Header for recent created files section"
   },
-  "toolsCreatedByYouEmpty": "[ÞĐƑš ýôû çřéàţé àþþéàř ĥéřé ẋẋẋẋẋẋẋ]",
+  "toolsCreatedByYouEmpty": "[ÞÐƑš ýôû çřéàţé àþþéàř ĥéřé ẋẋẋẋẋẋẋẋẋẋẋ]",
   "@toolsCreatedByYouEmpty": {
     "description": "Empty state description for created files section"
   },
-  "toolsCreatedByYouSeeAll": "[Šéé àłł ẋẋ]",
+  "toolsCreatedByYouSeeAll": "[Šéé àłł ẋẋẋ]",
   "@toolsCreatedByYouSeeAll": {
     "description": "Action button to view all user-created documents"
   },
-  "toolManagePages": "[Ṁàñàĝé Þàĝéš ẋẋẋ]",
+  "toolManagePages": "[Ṁàñàĝé Þàĝéš ẋẋẋẋẋ]",
   "@toolManagePages": {
     "description": "Tool title for reordering, rotating and deleting PDF pages"
   },
-  "toolManagePagesSub": "[Řéôřđéř, řôţàţé & đéłéţé ẋẋẋẋẋẋ]",
+  "toolManagePagesSub": "[Řéôřđéř, řôţàţé & đéłéţé ẋẋẋẋẋẋẋẋẋẋ]",
   "@toolManagePagesSub": {
     "description": "Tool subtitle for Manage Pages"
   },
-  "toolImportFiles": "[Îɱþôřţ ƒîłéš ẋẋẋ]",
+  "toolImportFiles": "[Îɱþôřţ ƒîłéš ẋẋẋẋẋ]",
   "@toolImportFiles": {
     "description": "Tool title for importing files from other apps or cloud storage"
   },
-  "toolImportFilesSub": "[Àđđ ƒřôɱ ôţĥéř àþþš ẋẋẋẋ]",
+  "toolImportFilesSub": "[Åđđ ƒřôɱ ôţĥéř àþþš ẋẋẋẋẋẋẋẋ]",
   "@toolImportFilesSub": {
     "description": "Tool subtitle for Import files"
   },
-  "toolPrintPdf": "[Þřîñţ ÞĐƑ ẋẋ]",
+  "toolPrintPdf": "[Þřîñţ ÞÐƑ ẋẋẋẋ]",
   "@toolPrintPdf": {
     "description": "Tool title for printing PDF documents"
   },
-  "toolPrintPdfSub": "[Šéñđ ţô àñý þřîñţéř ẋẋẋẋ]",
+  "toolPrintPdfSub": "[Šéñđ ţô àñý þřîñţéř ẋẋẋẋẋẋẋẋ]",
   "@toolPrintPdfSub": {
     "description": "Tool subtitle for Print PDF"
   },
-  "toolCreatePdf": "[Çřéàţé ÞĐƑ ẋẋ]",
+  "toolCreatePdf": "[Çřéàţé ÞÐƑ ẋẋẋẋ]",
   "@toolCreatePdf": {
     "description": "Tool title for creating new PDF documents"
   },
-  "toolCreatePdfSub": "[Ɓłàñķ đôç ôř ţéɱþłàţé ẋẋẋẋ]",
+  "toolCreatePdfSub": "[Ɓłàñƙ đôç ôř ţéɱþłàţé ẋẋẋẋẋẋẋẋẋ]",
   "@toolCreatePdfSub": {
     "description": "Tool subtitle for Create PDF"
   },
-  "toolRecycleBin": "[Řéçýçłé ƀîñ ẋẋ]",
+  "toolRecycleBin": "[Řéçýçłé ƀîñ ẋẋẋẋẋ]",
   "@toolRecycleBin": {
     "description": "Tool title for viewing recently deleted documents"
   },
-  "toolRecycleBinSub": "[Řéšţôřé đéłéţéđ ƒîłéš ẋẋẋẋ]",
+  "toolRecycleBinSub": "[Řéšţôřé đéłéţéđ ƒîłéš ẋẋẋẋẋẋẋẋẋ]",
   "@toolRecycleBinSub": {
     "description": "Tool subtitle for Recycle bin"
   },
-  "toolAnnotate": "[Àññôţàţé ẋẋ]",
+  "toolAnnotate": "[Åññôţàţé ẋẋẋẋ]",
   "@toolAnnotate": {
     "description": "Tool title for PDF annotation and drawing"
   },
-  "toolAnnotateSub": "[Ĥîĝĥłîĝĥţ, đřàŵ & ɱàřķ ẋẋẋẋ]",
+  "toolAnnotateSub": "[Ħîĝĥłîĝĥţ, đřàŵ & ɱàřƙ ẋẋẋẋẋẋẋẋẋ]",
   "@toolAnnotateSub": {
     "description": "Tool subtitle for Annotate"
   },
-  "toolAddText": "[Àđđ Ťéẋţ ẋẋ]",
+  "toolAddText": "[Åđđ Ťéẋţ ẋẋẋẋ]",
   "@toolAddText": {
     "description": "Tool title for inserting text into PDF"
   },
-  "toolAddTextSub": "[Îñšéřţ ţéẋţ & đàţéš ẋẋẋ]",
+  "toolAddTextSub": "[Îñšéřţ ţéẋţ & đàţéš ẋẋẋẋẋẋẋẋ]",
   "@toolAddTextSub": {
     "description": "Tool subtitle for Add Text"
   },
-  "toolSign": "[Šîĝñ ẋ]",
+  "toolSign": "[Šîĝñ ẋẋ]",
   "@toolSign": {
     "description": "Tool title for electronic signature"
   },
-  "toolSignSub": "[Ƒîłł & šîĝñ ƒôřɱš ẋẋẋ]",
+  "toolSignSub": "[Ƒîłł & šîĝñ ƒôřɱš ẋẋẋẋẋẋẋ]",
   "@toolSignSub": {
     "description": "Tool subtitle for Sign"
   },
-  "toolWordToPdf": "[Ŵôřđ ţô ÞĐƑ ẋẋ]",
+  "toolWordToPdf": "[Ŵôřđ ţô ÞÐƑ ẋẋẋẋẋ]",
   "@toolWordToPdf": {
     "description": "Tool title for converting Word to PDF"
   },
-  "toolWordToPdfSub": "[Çôñṽéřţ ĐÔÇẊ ţô ÞĐƑ ẋẋẋẋ]",
+  "toolWordToPdfSub": "[Çôñṽéřţ ÐÖÇẊ ţô ÞÐƑ ẋẋẋẋẋẋẋẋ]",
   "@toolWordToPdfSub": {
     "description": "Tool subtitle for Word to PDF"
   },
-  "toolPptToPdf": "[ÞÞŤ ţô ÞĐƑ ẋẋ]",
+  "toolPptToPdf": "[ÞÞŤ ţô ÞÐƑ ẋẋẋẋ]",
   "@toolPptToPdf": {
     "description": "Tool title for converting PPT to PDF"
   },
-  "toolPptToPdfSub": "[Çôñṽéřţ ÞÞŤẊ ţô ÞĐƑ ẋẋẋẋ]",
+  "toolPptToPdfSub": "[Çôñṽéřţ ÞÞŤẊ ţô ÞÐƑ ẋẋẋẋẋẋẋẋ]",
   "@toolPptToPdfSub": {
     "description": "Tool subtitle for PPT to PDF"
   },
-  "printPdfErrorTooLarge": "[ÞĐƑ ƒîłé éẋçééđš ţĥé 50 ṀƁ þřîñţ łîɱîţ. ẋẋẋẋẋẋẋẋẋ]",
+  "printPdfErrorTooLarge": "[ÞÐƑ ƒîłé éẋçééđš ţĥé 50 ṀƁ þřîñţ łîɱîţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
   "@printPdfErrorTooLarge": {
     "description": "Error message when PDF exceeds 50 MB print size limit"
   },
-  "printPdfErrorUnreadable": "[Ûñàƀłé ţô řéàđ ÞĐƑ ƒôř þřîñţîñĝ. ẋẋẋẋẋẋẋ]",
+  "printPdfErrorUnreadable": "[Ûñàƀłé ţô řéàđ ÞÐƑ ƒôř þřîñţîñĝ. ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
   "@printPdfErrorUnreadable": {
     "description": "Error message when PDF cannot be read or rendered for print"
   },
-  "printPdfErrorPassword": "[Çàññôţ þřîñţ þàššŵôřđ-þřôţéçţéđ ÞĐƑ đîřéçţłý. ẋẋẋẋẋẋẋẋẋ]",
+  "printPdfErrorPassword": "[Çàññôţ þřîñţ þàššŵôřđ-þřôţéçţéđ ÞÐƑ đîřéçţłý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
   "@printPdfErrorPassword": {
     "description": "Error message when attempting to print encrypted PDF"
   },
-  "printPdfErrorFailed": "[Þřîñţîñĝ ƒàîłéđ. ẋẋẋ]",
+  "printPdfErrorFailed": "[Þřîñţîñĝ ƒàîłéđ. ẋẋẋẋẋẋẋ]",
   "@printPdfErrorFailed": {
     "description": "Generic error when print execution fails"
   },
-  "printPdfSuccess": "[Đôçûɱéñţ šéñţ ţô þřîñţéř. ẋẋẋẋẋ]",
+  "printPdfSuccess": "[Ðôçûɱéñţ šéñţ ţô þřîñţéř. ẋẋẋẋẋẋẋẋẋẋ]",
   "@printPdfSuccess": {
     "description": "Snackbar or confirmation after print dialog completes"
   },
-  "toolPickerTitleSelectPdf": "[Šéłéçţ ÞĐƑ ẋẋ]",
+  "toolPickerTitleSelectPdf": "[Šéłéçţ ÞÐƑ ẋẋẋẋ]",
   "@toolPickerTitleSelectPdf": {
     "description": "Title for single PDF picker screen"
   },
-  "toolPickerTitleSelectPdfs": "[Šéłéçţ ÞĐƑš ẋẋ]",
+  "toolPickerTitleSelectPdfs": "[Šéłéçţ ÞÐƑš ẋẋẋẋẋ]",
   "@toolPickerTitleSelectPdfs": {
     "description": "Title for multiple PDFs picker screen"
   },
-  "toolPickerBrowseFiles": "[Ɓřôŵšé ƒîłéš ẋẋ]",
+  "toolPickerBrowseFiles": "[Ɓřôŵšé ƒîłéš ẋẋẋẋẋ]",
   "@toolPickerBrowseFiles": {
     "description": "Button to open system file picker"
   },
-  "toolPickerTabAll": "[Àłł ÞĐƑš ẋẋ]",
+  "toolPickerTabAll": "[Åłł ÞÐƑš ẋẋẋẋ]",
   "@toolPickerTabAll": {
     "description": "Tab for all PDF files in picker"
   },
-  "toolPickerTabRecent": "[Řéçéñţ ẋẋ]",
+  "toolPickerTabRecent": "[Řéçéñţ ẋẋẋ]",
   "@toolPickerTabRecent": {
     "description": "Tab for recent PDF files in picker"
   },
-  "toolPickerTabDownloads": "[Đôŵñłôàđš ẋẋ]",
+  "toolPickerTabDownloads": "[Ðôŵñłôàđš ẋẋẋẋ]",
   "@toolPickerTabDownloads": {
     "description": "Tab for Downloads directory in picker on Android"
   },
-  "toolPickerTabICloud": "[îÇłôûđ Đřîṽé ẋẋ]",
+  "toolPickerTabICloud": "[îÇłôûđ Ðřîṽé ẋẋẋẋẋ]",
   "@toolPickerTabICloud": {
     "description": "Tab for iCloud Drive in picker on iOS"
   },
-  "toolPickerActionPrint": "[Þřîñţ ẋ]",
+  "toolPickerActionPrint": "[Þřîñţ ẋẋ]",
   "@toolPickerActionPrint": {
     "description": "Primary action button in print picker"
   },
-  "toolPickerActionManage": "[Ṁàñàĝé ẋ]",
+  "toolPickerActionManage": "[Ṁàñàĝé ẋẋẋ]",
   "@toolPickerActionManage": {
     "description": "Primary action button in manage pages picker"
   },
-  "toolPickerActionSelect": "[Šéłéçţ ẋ]",
+  "toolPickerActionSelect": "[Šéłéçţ ẋẋẋ]",
   "@toolPickerActionSelect": {
     "description": "Primary action button in generic tool picker"
   },
-  "toolsImportActionView": "[Ṽîéŵ ẋ]",
+  "toolsImportActionView": "[Ṽîéŵ ẋẋ]",
   "@toolsImportActionView": {
     "description": "Action button in import success snackbar to view imported files"
+  },
+  "createPdfTemplateBlank": "[Ɓłàñƙ ẋẋ]",
+  "@createPdfTemplateBlank": {
+    "description": "Template option name for blank paper"
+  },
+  "createPdfTemplateLine1": "[Łîñé 1 ẋẋẋ]",
+  "@createPdfTemplateLine1": {
+    "description": "Template option name for narrow ruled paper"
+  },
+  "createPdfTemplateLine2": "[Łîñé 2 ẋẋẋ]",
+  "@createPdfTemplateLine2": {
+    "description": "Template option name for wide ruled paper"
+  },
+  "createPdfTemplateNotebook": "[Ñôţéƀôôƙ ẋẋẋẋ]",
+  "@createPdfTemplateNotebook": {
+    "description": "Template option name for notebook paper with margin"
+  },
+  "createPdfTemplateCornell": "[Çôřñéłł ẋẋẋ]",
+  "@createPdfTemplateCornell": {
+    "description": "Template option name for Cornell notes layout"
+  },
+  "createPdfTemplateGrid": "[Ĝřîđ ẋẋ]",
+  "@createPdfTemplateGrid": {
+    "description": "Template option name for square grid paper"
+  },
+  "createPdfTemplateGraph": "[Ĝřàþĥ ẋẋ]",
+  "@createPdfTemplateGraph": {
+    "description": "Template option name for graph paper with major and minor lines"
+  },
+  "createPdfSwatchWhite": "[Ŵĥîţé ẋẋ]",
+  "@createPdfSwatchWhite": {
+    "description": "Color swatch name for white page"
+  },
+  "createPdfSwatchCream": "[Çřéàɱ ẋẋ]",
+  "@createPdfSwatchCream": {
+    "description": "Color swatch name for cream page"
+  },
+  "createPdfSwatchLightYellow": "[Łîĝĥţ Ýéłłôŵ ẋẋẋẋẋ]",
+  "@createPdfSwatchLightYellow": {
+    "description": "Color swatch name for light yellow page"
+  },
+  "createPdfSwatchLightPeach": "[Łîĝĥţ Þéàçĥ ẋẋẋẋẋ]",
+  "@createPdfSwatchLightPeach": {
+    "description": "Color swatch name for light peach page"
+  },
+  "createPdfSwatchLightPink": "[Łîĝĥţ Þîñƙ ẋẋẋẋ]",
+  "@createPdfSwatchLightPink": {
+    "description": "Color swatch name for light pink page"
+  },
+  "createPdfSwatchLightLavender": "[Łîĝĥţ Łàṽéñđéř ẋẋẋẋẋẋ]",
+  "@createPdfSwatchLightLavender": {
+    "description": "Color swatch name for light lavender page"
+  },
+  "createPdfSwatchLightBlue": "[Łîĝĥţ Ɓłûé ẋẋẋẋ]",
+  "@createPdfSwatchLightBlue": {
+    "description": "Color swatch name for light blue page"
+  },
+  "createPdfSwatchLightMint": "[Łîĝĥţ Ṁîñţ ẋẋẋẋ]",
+  "@createPdfSwatchLightMint": {
+    "description": "Color swatch name for light mint page"
+  },
+  "createPdfSwatchLightGreen": "[Łîĝĥţ Ĝřééñ ẋẋẋẋẋ]",
+  "@createPdfSwatchLightGreen": {
+    "description": "Color swatch name for light green page"
+  },
+  "createPdfSwatchLightGray": "[Łîĝĥţ Ĝřàý ẋẋẋẋ]",
+  "@createPdfSwatchLightGray": {
+    "description": "Color swatch name for light gray page"
+  },
+  "createPdfOrientationPortrait": "[Þôřţřàîţ ẋẋẋẋ]",
+  "@createPdfOrientationPortrait": {
+    "description": "Segmented control option for portrait page orientation"
+  },
+  "createPdfOrientationLandscape": "[Łàñđšçàþé ẋẋẋẋ]",
+  "@createPdfOrientationLandscape": {
+    "description": "Segmented control option for landscape page orientation"
+  },
+  "createPdfSectionTemplate": "[ŤÉṀÞŁÅŤÉ ẋẋẋẋ]",
+  "@createPdfSectionTemplate": {
+    "description": "Section header for paper template selection"
+  },
+  "createPdfSectionPageSize": "[ÞÅĜÉ ŠÎŽÉ ẋẋẋẋ]",
+  "@createPdfSectionPageSize": {
+    "description": "Section header for paper size selection"
+  },
+  "createPdfSectionOrientation": "[ÖŘÎÉÑŤÅŤÎÖÑ ẋẋẋẋẋ]",
+  "@createPdfSectionOrientation": {
+    "description": "Section header for page orientation selection"
+  },
+  "createPdfSectionPageColor": "[ÞÅĜÉ ÇÖŁÖŘ ẋẋẋẋ]",
+  "@createPdfSectionPageColor": {
+    "description": "Section header for page color swatch selection"
+  },
+  "createPdfSectionPageCount": "[ÞÅĜÉ ÇÖÛÑŤ ẋẋẋẋ]",
+  "@createPdfSectionPageCount": {
+    "description": "Section header for page count stepper"
+  },
+  "createPdfPagesCount": "{count, plural, =1{[1 þàĝé ẋẋẋ]} other{[{count} þàĝéš ẋẋẋẋẋẋ]}}",
+  "@createPdfPagesCount": {
+    "description": "Page count formatting for stepper",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "createPdfSummary": "[{pages} • {size} • {orientation} ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@createPdfSummary": {
+    "description": "Sticky footer summary label",
+    "placeholders": {
+      "pages": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      },
+      "orientation": {
+        "type": "String"
+      }
+    }
+  },
+  "createPdfCreating": "[Ĝéñéřàţîñĝ ÞÐƑ... ẋẋẋẋẋẋẋ]",
+  "@createPdfCreating": {
+    "description": "Title in progress dialog while creating template PDF"
+  },
+  "createPdfProgress": "[Ɓûîłđîñĝ þàĝé {done} ôƒ {total}... ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@createPdfProgress": {
+    "description": "Message in progress dialog while generating pages",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "createPdfErrorTitle": "[Ûñàƀłé ţô Çřéàţé ÞÐƑ ẋẋẋẋẋẋẋẋ]",
+  "@createPdfErrorTitle": {
+    "description": "Error sheet title when Create PDF fails"
+  },
+  "createPdfErrorPageCount": "[Þàĝé çôûñţ ɱûšţ ƀé ƀéţŵééñ 1 àñđ 100. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@createPdfErrorPageCount": {
+    "description": "Error message when page count is out of range"
+  },
+  "createPdfErrorInvalidName": "[Þłéàšé éñţéř à ṽàłîđ ƒîłé ñàɱé. ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@createPdfErrorInvalidName": {
+    "description": "Error message when file name is empty or invalid"
+  },
+  "createPdfErrorGeneration": "[Ƒàîłéđ ţô ĝéñéřàţé ÞÐƑ đôçûɱéñţ. Þłéàšé ţřý àĝàîñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@createPdfErrorGeneration": {
+    "description": "Generic error message when PDF creation fails"
   }
 }

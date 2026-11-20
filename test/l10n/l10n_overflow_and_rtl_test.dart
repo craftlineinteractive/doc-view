@@ -13,6 +13,7 @@ import 'package:docview/features/settings/scan_settings_screen.dart';
 import 'package:docview/features/settings/settings_screen.dart';
 import 'package:docview/features/settings/widgets/rate_us_sheet.dart';
 import 'package:docview/features/settings/widgets/theme_selection_sheet.dart';
+import 'package:docview/features/tools/create_pdf/create_pdf_screen.dart';
 import 'package:docview/features/tools/created_documents_screen.dart';
 import 'package:docview/features/tools/image_list_editor_screen.dart';
 import 'package:docview/features/tools/merge_screen.dart';
@@ -152,6 +153,7 @@ void main() {
       'ImageListEditorScreen': () => const ImageListEditorScreen(
             initialImagePaths: [],
           ),
+      'CreatePdfScreen': () => const CreatePdfScreen(),
       'ToolsScreen': () => const ToolsScreen(),
       'ToolFilePickerScreen': () => const ToolFilePickerScreen(
             title: 'Select PDF',

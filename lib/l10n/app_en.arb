@@ -3084,5 +3084,157 @@
   "toolsImportActionView": "View",
   "@toolsImportActionView": {
     "description": "Action button in import success snackbar to view imported files"
+  },
+  "createPdfTemplateBlank": "Blank",
+  "@createPdfTemplateBlank": {
+    "description": "Template option name for blank paper"
+  },
+  "createPdfTemplateLine1": "Line 1",
+  "@createPdfTemplateLine1": {
+    "description": "Template option name for narrow ruled paper"
+  },
+  "createPdfTemplateLine2": "Line 2",
+  "@createPdfTemplateLine2": {
+    "description": "Template option name for wide ruled paper"
+  },
+  "createPdfTemplateNotebook": "Notebook",
+  "@createPdfTemplateNotebook": {
+    "description": "Template option name for notebook paper with margin"
+  },
+  "createPdfTemplateCornell": "Cornell",
+  "@createPdfTemplateCornell": {
+    "description": "Template option name for Cornell notes layout"
+  },
+  "createPdfTemplateGrid": "Grid",
+  "@createPdfTemplateGrid": {
+    "description": "Template option name for square grid paper"
+  },
+  "createPdfTemplateGraph": "Graph",
+  "@createPdfTemplateGraph": {
+    "description": "Template option name for graph paper with major and minor lines"
+  },
+  "createPdfSwatchWhite": "White",
+  "@createPdfSwatchWhite": {
+    "description": "Color swatch name for white page"
+  },
+  "createPdfSwatchCream": "Cream",
+  "@createPdfSwatchCream": {
+    "description": "Color swatch name for cream page"
+  },
+  "createPdfSwatchLightYellow": "Light Yellow",
+  "@createPdfSwatchLightYellow": {
+    "description": "Color swatch name for light yellow page"
+  },
+  "createPdfSwatchLightPeach": "Light Peach",
+  "@createPdfSwatchLightPeach": {
+    "description": "Color swatch name for light peach page"
+  },
+  "createPdfSwatchLightPink": "Light Pink",
+  "@createPdfSwatchLightPink": {
+    "description": "Color swatch name for light pink page"
+  },
+  "createPdfSwatchLightLavender": "Light Lavender",
+  "@createPdfSwatchLightLavender": {
+    "description": "Color swatch name for light lavender page"
+  },
+  "createPdfSwatchLightBlue": "Light Blue",
+  "@createPdfSwatchLightBlue": {
+    "description": "Color swatch name for light blue page"
+  },
+  "createPdfSwatchLightMint": "Light Mint",
+  "@createPdfSwatchLightMint": {
+    "description": "Color swatch name for light mint page"
+  },
+  "createPdfSwatchLightGreen": "Light Green",
+  "@createPdfSwatchLightGreen": {
+    "description": "Color swatch name for light green page"
+  },
+  "createPdfSwatchLightGray": "Light Gray",
+  "@createPdfSwatchLightGray": {
+    "description": "Color swatch name for light gray page"
+  },
+  "createPdfOrientationPortrait": "Portrait",
+  "@createPdfOrientationPortrait": {
+    "description": "Segmented control option for portrait page orientation"
+  },
+  "createPdfOrientationLandscape": "Landscape",
+  "@createPdfOrientationLandscape": {
+    "description": "Segmented control option for landscape page orientation"
+  },
+  "createPdfSectionTemplate": "TEMPLATE",
+  "@createPdfSectionTemplate": {
+    "description": "Section header for paper template selection"
+  },
+  "createPdfSectionPageSize": "PAGE SIZE",
+  "@createPdfSectionPageSize": {
+    "description": "Section header for paper size selection"
+  },
+  "createPdfSectionOrientation": "ORIENTATION",
+  "@createPdfSectionOrientation": {
+    "description": "Section header for page orientation selection"
+  },
+  "createPdfSectionPageColor": "PAGE COLOR",
+  "@createPdfSectionPageColor": {
+    "description": "Section header for page color swatch selection"
+  },
+  "createPdfSectionPageCount": "PAGE COUNT",
+  "@createPdfSectionPageCount": {
+    "description": "Section header for page count stepper"
+  },
+  "createPdfPagesCount": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@createPdfPagesCount": {
+    "description": "Page count formatting for stepper",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "createPdfSummary": "{pages} • {size} • {orientation}",
+  "@createPdfSummary": {
+    "description": "Sticky footer summary label",
+    "placeholders": {
+      "pages": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      },
+      "orientation": {
+        "type": "String"
+      }
+    }
+  },
+  "createPdfCreating": "Generating PDF...",
+  "@createPdfCreating": {
+    "description": "Title in progress dialog while creating template PDF"
+  },
+  "createPdfProgress": "Building page {done} of {total}...",
+  "@createPdfProgress": {
+    "description": "Message in progress dialog while generating pages",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "createPdfErrorTitle": "Unable to Create PDF",
+  "@createPdfErrorTitle": {
+    "description": "Error sheet title when Create PDF fails"
+  },
+  "createPdfErrorPageCount": "Page count must be between 1 and 100.",
+  "@createPdfErrorPageCount": {
+    "description": "Error message when page count is out of range"
+  },
+  "createPdfErrorInvalidName": "Please enter a valid file name.",
+  "@createPdfErrorInvalidName": {
+    "description": "Error message when file name is empty or invalid"
+  },
+  "createPdfErrorGeneration": "Failed to generate PDF document. Please try again.",
+  "@createPdfErrorGeneration": {
+    "description": "Generic error message when PDF creation fails"
   }
 }

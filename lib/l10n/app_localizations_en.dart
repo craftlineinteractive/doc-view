@@ -2325,6 +2325,115 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get toolsImportActionView => 'View';
+
+  @override
+  String get createPdfTemplateBlank => 'Blank';
+
+  @override
+  String get createPdfTemplateLine1 => 'Line 1';
+
+  @override
+  String get createPdfTemplateLine2 => 'Line 2';
+
+  @override
+  String get createPdfTemplateNotebook => 'Notebook';
+
+  @override
+  String get createPdfTemplateCornell => 'Cornell';
+
+  @override
+  String get createPdfTemplateGrid => 'Grid';
+
+  @override
+  String get createPdfTemplateGraph => 'Graph';
+
+  @override
+  String get createPdfSwatchWhite => 'White';
+
+  @override
+  String get createPdfSwatchCream => 'Cream';
+
+  @override
+  String get createPdfSwatchLightYellow => 'Light Yellow';
+
+  @override
+  String get createPdfSwatchLightPeach => 'Light Peach';
+
+  @override
+  String get createPdfSwatchLightPink => 'Light Pink';
+
+  @override
+  String get createPdfSwatchLightLavender => 'Light Lavender';
+
+  @override
+  String get createPdfSwatchLightBlue => 'Light Blue';
+
+  @override
+  String get createPdfSwatchLightMint => 'Light Mint';
+
+  @override
+  String get createPdfSwatchLightGreen => 'Light Green';
+
+  @override
+  String get createPdfSwatchLightGray => 'Light Gray';
+
+  @override
+  String get createPdfOrientationPortrait => 'Portrait';
+
+  @override
+  String get createPdfOrientationLandscape => 'Landscape';
+
+  @override
+  String get createPdfSectionTemplate => 'TEMPLATE';
+
+  @override
+  String get createPdfSectionPageSize => 'PAGE SIZE';
+
+  @override
+  String get createPdfSectionOrientation => 'ORIENTATION';
+
+  @override
+  String get createPdfSectionPageColor => 'PAGE COLOR';
+
+  @override
+  String get createPdfSectionPageCount => 'PAGE COUNT';
+
+  @override
+  String createPdfPagesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages',
+      one: '1 page',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String createPdfSummary(String pages, String size, String orientation) {
+    return '$pages • $size • $orientation';
+  }
+
+  @override
+  String get createPdfCreating => 'Generating PDF...';
+
+  @override
+  String createPdfProgress(int done, int total) {
+    return 'Building page $done of $total...';
+  }
+
+  @override
+  String get createPdfErrorTitle => 'Unable to Create PDF';
+
+  @override
+  String get createPdfErrorPageCount => 'Page count must be between 1 and 100.';
+
+  @override
+  String get createPdfErrorInvalidName => 'Please enter a valid file name.';
+
+  @override
+  String get createPdfErrorGeneration =>
+      'Failed to generate PDF document. Please try again.';
 }
 
 /// The translations for English (`en_XA`).
@@ -4592,137 +4701,249 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
       '[Öþéñ îñ àñôţĥéř àþþ ẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolsWorkspaceOverline => '[ŴÔŘĶŠÞÀÇÉ ẋẋẋ]';
+  String get toolsWorkspaceOverline => '[ŴÖŘĶŠÞÅÇÉ ẋẋẋẋ]';
 
   @override
   String get toolsTitle => '[Ťôôłš ẋẋ]';
 
   @override
-  String get toolsSectionConvertCreate => '[ÇÔÑṼÉŘŤ & ÇŘÉÀŤÉ ẋẋẋẋẋ]';
+  String get toolsSectionConvertCreate => '[ÇÖÑṼÉŘŤ & ÇŘÉÅŤÉ ẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolsSectionEditManage => '[ÉĐÎŤ & ṀÀÑÀĜÉ ẋẋẋẋ]';
+  String get toolsSectionEditManage => '[ÉÐÎŤ & ṀÅÑÅĜÉ ẋẋẋẋẋẋ]';
 
   @override
-  String get toolsSectionOthers => '[ÖŤĤÉŘŠ ẋẋ]';
+  String get toolsSectionOthers => '[ÖŤĦÉŘŠ ẋẋẋ]';
 
   @override
-  String get toolsCreatedByYou => '[Çřéàţéđ ƀý ýôû ẋẋẋẋ]';
+  String get toolsCreatedByYou => '[Çřéàţéđ ƀý ýôû ẋẋẋẋẋẋ]';
 
   @override
-  String get toolsCreatedByYouEmpty => '[ÞĐƑš ýôû çřéàţé àþþéàř ĥéřé ẋẋẋẋẋẋẋ]';
+  String get toolsCreatedByYouEmpty =>
+      '[ÞÐƑš ýôû çřéàţé àþþéàř ĥéřé ẋẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolsCreatedByYouSeeAll => '[Šéé àłł ẋẋ]';
+  String get toolsCreatedByYouSeeAll => '[Šéé àłł ẋẋẋ]';
 
   @override
-  String get toolManagePages => '[Ṁàñàĝé Þàĝéš ẋẋẋ]';
+  String get toolManagePages => '[Ṁàñàĝé Þàĝéš ẋẋẋẋẋ]';
 
   @override
-  String get toolManagePagesSub => '[Řéôřđéř, řôţàţé & đéłéţé ẋẋẋẋẋẋ]';
+  String get toolManagePagesSub => '[Řéôřđéř, řôţàţé & đéłéţé ẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolImportFiles => '[Îɱþôřţ ƒîłéš ẋẋẋ]';
+  String get toolImportFiles => '[Îɱþôřţ ƒîłéš ẋẋẋẋẋ]';
 
   @override
-  String get toolImportFilesSub => '[Àđđ ƒřôɱ ôţĥéř àþþš ẋẋẋẋ]';
+  String get toolImportFilesSub => '[Åđđ ƒřôɱ ôţĥéř àþþš ẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolPrintPdf => '[Þřîñţ ÞĐƑ ẋẋ]';
+  String get toolPrintPdf => '[Þřîñţ ÞÐƑ ẋẋẋẋ]';
 
   @override
-  String get toolPrintPdfSub => '[Šéñđ ţô àñý þřîñţéř ẋẋẋẋ]';
+  String get toolPrintPdfSub => '[Šéñđ ţô àñý þřîñţéř ẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolCreatePdf => '[Çřéàţé ÞĐƑ ẋẋ]';
+  String get toolCreatePdf => '[Çřéàţé ÞÐƑ ẋẋẋẋ]';
 
   @override
-  String get toolCreatePdfSub => '[Ɓłàñķ đôç ôř ţéɱþłàţé ẋẋẋẋ]';
+  String get toolCreatePdfSub => '[Ɓłàñƙ đôç ôř ţéɱþłàţé ẋẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolRecycleBin => '[Řéçýçłé ƀîñ ẋẋ]';
+  String get toolRecycleBin => '[Řéçýçłé ƀîñ ẋẋẋẋẋ]';
 
   @override
-  String get toolRecycleBinSub => '[Řéšţôřé đéłéţéđ ƒîłéš ẋẋẋẋ]';
+  String get toolRecycleBinSub => '[Řéšţôřé đéłéţéđ ƒîłéš ẋẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolAnnotate => '[Àññôţàţé ẋẋ]';
+  String get toolAnnotate => '[Åññôţàţé ẋẋẋẋ]';
 
   @override
-  String get toolAnnotateSub => '[Ĥîĝĥłîĝĥţ, đřàŵ & ɱàřķ ẋẋẋẋ]';
+  String get toolAnnotateSub => '[Ħîĝĥłîĝĥţ, đřàŵ & ɱàřƙ ẋẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolAddText => '[Àđđ Ťéẋţ ẋẋ]';
+  String get toolAddText => '[Åđđ Ťéẋţ ẋẋẋẋ]';
 
   @override
-  String get toolAddTextSub => '[Îñšéřţ ţéẋţ & đàţéš ẋẋẋ]';
+  String get toolAddTextSub => '[Îñšéřţ ţéẋţ & đàţéš ẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolSign => '[Šîĝñ ẋ]';
+  String get toolSign => '[Šîĝñ ẋẋ]';
 
   @override
-  String get toolSignSub => '[Ƒîłł & šîĝñ ƒôřɱš ẋẋẋ]';
+  String get toolSignSub => '[Ƒîłł & šîĝñ ƒôřɱš ẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolWordToPdf => '[Ŵôřđ ţô ÞĐƑ ẋẋ]';
+  String get toolWordToPdf => '[Ŵôřđ ţô ÞÐƑ ẋẋẋẋẋ]';
 
   @override
-  String get toolWordToPdfSub => '[Çôñṽéřţ ĐÔÇẊ ţô ÞĐƑ ẋẋẋẋ]';
+  String get toolWordToPdfSub => '[Çôñṽéřţ ÐÖÇẊ ţô ÞÐƑ ẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolPptToPdf => '[ÞÞŤ ţô ÞĐƑ ẋẋ]';
+  String get toolPptToPdf => '[ÞÞŤ ţô ÞÐƑ ẋẋẋẋ]';
 
   @override
-  String get toolPptToPdfSub => '[Çôñṽéřţ ÞÞŤẊ ţô ÞĐƑ ẋẋẋẋ]';
+  String get toolPptToPdfSub => '[Çôñṽéřţ ÞÞŤẊ ţô ÞÐƑ ẋẋẋẋẋẋẋẋ]';
 
   @override
   String get printPdfErrorTooLarge =>
-      '[ÞĐƑ ƒîłé éẋçééđš ţĥé 50 ṀƁ þřîñţ łîɱîţ. ẋẋẋẋẋẋẋẋẋ]';
+      '[ÞÐƑ ƒîłé éẋçééđš ţĥé 50 ṀƁ þřîñţ łîɱîţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
   String get printPdfErrorUnreadable =>
-      '[Ûñàƀłé ţô řéàđ ÞĐƑ ƒôř þřîñţîñĝ. ẋẋẋẋẋẋẋ]';
+      '[Ûñàƀłé ţô řéàđ ÞÐƑ ƒôř þřîñţîñĝ. ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
   String get printPdfErrorPassword =>
-      '[Çàññôţ þřîñţ þàššŵôřđ-þřôţéçţéđ ÞĐƑ đîřéçţłý. ẋẋẋẋẋẋẋẋẋ]';
+      '[Çàññôţ þřîñţ þàššŵôřđ-þřôţéçţéđ ÞÐƑ đîřéçţłý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get printPdfErrorFailed => '[Þřîñţîñĝ ƒàîłéđ. ẋẋẋ]';
+  String get printPdfErrorFailed => '[Þřîñţîñĝ ƒàîłéđ. ẋẋẋẋẋẋẋ]';
 
   @override
-  String get printPdfSuccess => '[Đôçûɱéñţ šéñţ ţô þřîñţéř. ẋẋẋẋẋ]';
+  String get printPdfSuccess => '[Ðôçûɱéñţ šéñţ ţô þřîñţéř. ẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get toolPickerTitleSelectPdf => '[Šéłéçţ ÞĐƑ ẋẋ]';
+  String get toolPickerTitleSelectPdf => '[Šéłéçţ ÞÐƑ ẋẋẋẋ]';
 
   @override
-  String get toolPickerTitleSelectPdfs => '[Šéłéçţ ÞĐƑš ẋẋ]';
+  String get toolPickerTitleSelectPdfs => '[Šéłéçţ ÞÐƑš ẋẋẋẋẋ]';
 
   @override
-  String get toolPickerBrowseFiles => '[Ɓřôŵšé ƒîłéš ẋẋ]';
+  String get toolPickerBrowseFiles => '[Ɓřôŵšé ƒîłéš ẋẋẋẋẋ]';
 
   @override
-  String get toolPickerTabAll => '[Àłł ÞĐƑš ẋẋ]';
+  String get toolPickerTabAll => '[Åłł ÞÐƑš ẋẋẋẋ]';
 
   @override
-  String get toolPickerTabRecent => '[Řéçéñţ ẋẋ]';
+  String get toolPickerTabRecent => '[Řéçéñţ ẋẋẋ]';
 
   @override
-  String get toolPickerTabDownloads => '[Đôŵñłôàđš ẋẋ]';
+  String get toolPickerTabDownloads => '[Ðôŵñłôàđš ẋẋẋẋ]';
 
   @override
-  String get toolPickerTabICloud => '[îÇłôûđ Đřîṽé ẋẋ]';
+  String get toolPickerTabICloud => '[îÇłôûđ Ðřîṽé ẋẋẋẋẋ]';
 
   @override
-  String get toolPickerActionPrint => '[Þřîñţ ẋ]';
+  String get toolPickerActionPrint => '[Þřîñţ ẋẋ]';
 
   @override
-  String get toolPickerActionManage => '[Ṁàñàĝé ẋ]';
+  String get toolPickerActionManage => '[Ṁàñàĝé ẋẋẋ]';
 
   @override
-  String get toolPickerActionSelect => '[Šéłéçţ ẋ]';
+  String get toolPickerActionSelect => '[Šéłéçţ ẋẋẋ]';
 
   @override
-  String get toolsImportActionView => '[Ṽîéŵ ẋ]';
+  String get toolsImportActionView => '[Ṽîéŵ ẋẋ]';
+
+  @override
+  String get createPdfTemplateBlank => '[Ɓłàñƙ ẋẋ]';
+
+  @override
+  String get createPdfTemplateLine1 => '[Łîñé 1 ẋẋẋ]';
+
+  @override
+  String get createPdfTemplateLine2 => '[Łîñé 2 ẋẋẋ]';
+
+  @override
+  String get createPdfTemplateNotebook => '[Ñôţéƀôôƙ ẋẋẋẋ]';
+
+  @override
+  String get createPdfTemplateCornell => '[Çôřñéłł ẋẋẋ]';
+
+  @override
+  String get createPdfTemplateGrid => '[Ĝřîđ ẋẋ]';
+
+  @override
+  String get createPdfTemplateGraph => '[Ĝřàþĥ ẋẋ]';
+
+  @override
+  String get createPdfSwatchWhite => '[Ŵĥîţé ẋẋ]';
+
+  @override
+  String get createPdfSwatchCream => '[Çřéàɱ ẋẋ]';
+
+  @override
+  String get createPdfSwatchLightYellow => '[Łîĝĥţ Ýéłłôŵ ẋẋẋẋẋ]';
+
+  @override
+  String get createPdfSwatchLightPeach => '[Łîĝĥţ Þéàçĥ ẋẋẋẋẋ]';
+
+  @override
+  String get createPdfSwatchLightPink => '[Łîĝĥţ Þîñƙ ẋẋẋẋ]';
+
+  @override
+  String get createPdfSwatchLightLavender => '[Łîĝĥţ Łàṽéñđéř ẋẋẋẋẋẋ]';
+
+  @override
+  String get createPdfSwatchLightBlue => '[Łîĝĥţ Ɓłûé ẋẋẋẋ]';
+
+  @override
+  String get createPdfSwatchLightMint => '[Łîĝĥţ Ṁîñţ ẋẋẋẋ]';
+
+  @override
+  String get createPdfSwatchLightGreen => '[Łîĝĥţ Ĝřééñ ẋẋẋẋẋ]';
+
+  @override
+  String get createPdfSwatchLightGray => '[Łîĝĥţ Ĝřàý ẋẋẋẋ]';
+
+  @override
+  String get createPdfOrientationPortrait => '[Þôřţřàîţ ẋẋẋẋ]';
+
+  @override
+  String get createPdfOrientationLandscape => '[Łàñđšçàþé ẋẋẋẋ]';
+
+  @override
+  String get createPdfSectionTemplate => '[ŤÉṀÞŁÅŤÉ ẋẋẋẋ]';
+
+  @override
+  String get createPdfSectionPageSize => '[ÞÅĜÉ ŠÎŽÉ ẋẋẋẋ]';
+
+  @override
+  String get createPdfSectionOrientation => '[ÖŘÎÉÑŤÅŤÎÖÑ ẋẋẋẋẋ]';
+
+  @override
+  String get createPdfSectionPageColor => '[ÞÅĜÉ ÇÖŁÖŘ ẋẋẋẋ]';
+
+  @override
+  String get createPdfSectionPageCount => '[ÞÅĜÉ ÇÖÛÑŤ ẋẋẋẋ]';
+
+  @override
+  String createPdfPagesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count þàĝéš ẋẋẋẋẋẋ]',
+      one: '[1 þàĝé ẋẋẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String createPdfSummary(String pages, String size, String orientation) {
+    return '[$pages • $size • $orientation ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get createPdfCreating => '[Ĝéñéřàţîñĝ ÞÐƑ... ẋẋẋẋẋẋẋ]';
+
+  @override
+  String createPdfProgress(int done, int total) {
+    return '[Ɓûîłđîñĝ þàĝé $done ôƒ $total... ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get createPdfErrorTitle => '[Ûñàƀłé ţô Çřéàţé ÞÐƑ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get createPdfErrorPageCount =>
+      '[Þàĝé çôûñţ ɱûšţ ƀé ƀéţŵééñ 1 àñđ 100. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get createPdfErrorInvalidName =>
+      '[Þłéàšé éñţéř à ṽàłîđ ƒîłé ñàɱé. ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get createPdfErrorGeneration =>
+      '[Ƒàîłéđ ţô ĝéñéřàţé ÞÐƑ đôçûɱéñţ. Þłéàšé ţřý àĝàîñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
 }

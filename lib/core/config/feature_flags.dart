@@ -10,7 +10,7 @@ const bool widgetsEnabled = false;
 const bool conversionsEnabled = false;
 
 /// Enables Create PDF blank document/template tool (Phase G4b).
-const bool createPdfEnabled = false;
+const bool createPdfEnabled = true;
 
 /// Enables Recycle bin tool (Phase G4c).
 const bool recycleBinEnabled = false;

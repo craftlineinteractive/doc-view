@@ -7,9 +7,9 @@ void main() {
   final AppLocalizations l10n = AppLocalizationsEn();
 
   group('Tool Registry Contract Tests', () {
-    test('Default G4a visible tools count is exactly 7', () {
+    test('Default G4b visible tools count is exactly 8', () {
       final visible = getVisibleTools();
-      expect(visible.length, 7);
+      expect(visible.length, 8);
 
       final visibleIds = visible.map((t) => t.id).toList();
       expect(
@@ -17,6 +17,7 @@ void main() {
         [
           'image_to_pdf',
           'scan_to_pdf',
+          'create_pdf',
           'manage_pages',
           'merge_pdf',
           'split_pdf',
@@ -26,11 +27,12 @@ void main() {
       );
     });
 
-    test('Visible tools per section match G4a specification', () {
+    test('Visible tools per section match G4b specification', () {
       final convertTools = getToolsForSection(ToolSection.convertAndCreate);
       expect(convertTools.map((t) => t.id).toList(), [
         'image_to_pdf',
         'scan_to_pdf',
+        'create_pdf',
       ]);
 
       final editTools = getToolsForSection(ToolSection.editAndManage);
@@ -49,7 +51,6 @@ void main() {
 
     test('Future gated tools exist in registry but are disabled by default', () {
       final gatedIds = [
-        'create_pdf',
         'word_to_pdf',
         'ppt_to_pdf',
         'annotate',

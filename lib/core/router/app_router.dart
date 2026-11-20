@@ -18,6 +18,7 @@ import '../../features/settings/scan_settings_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/shell/main_shell.dart';
 import '../../features/splash/splash_screen.dart';
+import '../../features/tools/create_pdf/create_pdf_screen.dart';
 import '../../features/tools/created_documents_screen.dart';
 import '../../features/tools/tools_screen.dart';
 import '../../features/tools/widgets/tool_file_picker_screen.dart';
@@ -108,6 +109,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'tools-created',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const CreatedDocumentsScreen(),
+      ),
+      GoRoute(
+        path: '/tools/create-pdf',
+        name: 'tools-create-pdf',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const CreatePdfScreen(),
       ),
       GoRoute(
         path: '/tools/pick',

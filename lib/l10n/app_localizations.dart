@@ -3882,6 +3882,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View'**
   String get toolsImportActionView;
+
+  /// Template option name for blank paper
+  ///
+  /// In en, this message translates to:
+  /// **'Blank'**
+  String get createPdfTemplateBlank;
+
+  /// Template option name for narrow ruled paper
+  ///
+  /// In en, this message translates to:
+  /// **'Line 1'**
+  String get createPdfTemplateLine1;
+
+  /// Template option name for wide ruled paper
+  ///
+  /// In en, this message translates to:
+  /// **'Line 2'**
+  String get createPdfTemplateLine2;
+
+  /// Template option name for notebook paper with margin
+  ///
+  /// In en, this message translates to:
+  /// **'Notebook'**
+  String get createPdfTemplateNotebook;
+
+  /// Template option name for Cornell notes layout
+  ///
+  /// In en, this message translates to:
+  /// **'Cornell'**
+  String get createPdfTemplateCornell;
+
+  /// Template option name for square grid paper
+  ///
+  /// In en, this message translates to:
+  /// **'Grid'**
+  String get createPdfTemplateGrid;
+
+  /// Template option name for graph paper with major and minor lines
+  ///
+  /// In en, this message translates to:
+  /// **'Graph'**
+  String get createPdfTemplateGraph;
+
+  /// Color swatch name for white page
+  ///
+  /// In en, this message translates to:
+  /// **'White'**
+  String get createPdfSwatchWhite;
+
+  /// Color swatch name for cream page
+  ///
+  /// In en, this message translates to:
+  /// **'Cream'**
+  String get createPdfSwatchCream;
+
+  /// Color swatch name for light yellow page
+  ///
+  /// In en, this message translates to:
+  /// **'Light Yellow'**
+  String get createPdfSwatchLightYellow;
+
+  /// Color swatch name for light peach page
+  ///
+  /// In en, this message translates to:
+  /// **'Light Peach'**
+  String get createPdfSwatchLightPeach;
+
+  /// Color swatch name for light pink page
+  ///
+  /// In en, this message translates to:
+  /// **'Light Pink'**
+  String get createPdfSwatchLightPink;
+
+  /// Color swatch name for light lavender page
+  ///
+  /// In en, this message translates to:
+  /// **'Light Lavender'**
+  String get createPdfSwatchLightLavender;
+
+  /// Color swatch name for light blue page
+  ///
+  /// In en, this message translates to:
+  /// **'Light Blue'**
+  String get createPdfSwatchLightBlue;
+
+  /// Color swatch name for light mint page
+  ///
+  /// In en, this message translates to:
+  /// **'Light Mint'**
+  String get createPdfSwatchLightMint;
+
+  /// Color swatch name for light green page
+  ///
+  /// In en, this message translates to:
+  /// **'Light Green'**
+  String get createPdfSwatchLightGreen;
+
+  /// Color swatch name for light gray page
+  ///
+  /// In en, this message translates to:
+  /// **'Light Gray'**
+  String get createPdfSwatchLightGray;
+
+  /// Segmented control option for portrait page orientation
+  ///
+  /// In en, this message translates to:
+  /// **'Portrait'**
+  String get createPdfOrientationPortrait;
+
+  /// Segmented control option for landscape page orientation
+  ///
+  /// In en, this message translates to:
+  /// **'Landscape'**
+  String get createPdfOrientationLandscape;
+
+  /// Section header for paper template selection
+  ///
+  /// In en, this message translates to:
+  /// **'TEMPLATE'**
+  String get createPdfSectionTemplate;
+
+  /// Section header for paper size selection
+  ///
+  /// In en, this message translates to:
+  /// **'PAGE SIZE'**
+  String get createPdfSectionPageSize;
+
+  /// Section header for page orientation selection
+  ///
+  /// In en, this message translates to:
+  /// **'ORIENTATION'**
+  String get createPdfSectionOrientation;
+
+  /// Section header for page color swatch selection
+  ///
+  /// In en, this message translates to:
+  /// **'PAGE COLOR'**
+  String get createPdfSectionPageColor;
+
+  /// Section header for page count stepper
+  ///
+  /// In en, this message translates to:
+  /// **'PAGE COUNT'**
+  String get createPdfSectionPageCount;
+
+  /// Page count formatting for stepper
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 page} other{{count} pages}}'**
+  String createPdfPagesCount(int count);
+
+  /// Sticky footer summary label
+  ///
+  /// In en, this message translates to:
+  /// **'{pages} • {size} • {orientation}'**
+  String createPdfSummary(String pages, String size, String orientation);
+
+  /// Title in progress dialog while creating template PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Generating PDF...'**
+  String get createPdfCreating;
+
+  /// Message in progress dialog while generating pages
+  ///
+  /// In en, this message translates to:
+  /// **'Building page {done} of {total}...'**
+  String createPdfProgress(int done, int total);
+
+  /// Error sheet title when Create PDF fails
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to Create PDF'**
+  String get createPdfErrorTitle;
+
+  /// Error message when page count is out of range
+  ///
+  /// In en, this message translates to:
+  /// **'Page count must be between 1 and 100.'**
+  String get createPdfErrorPageCount;
+
+  /// Error message when file name is empty or invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid file name.'**
+  String get createPdfErrorInvalidName;
+
+  /// Generic error message when PDF creation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to generate PDF document. Please try again.'**
+  String get createPdfErrorGeneration;
 }
 
 class _AppLocalizationsDelegate
