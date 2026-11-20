@@ -20,6 +20,7 @@ import '../../features/shell/main_shell.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/tools/created_documents_screen.dart';
 import '../../features/tools/tools_screen.dart';
+import '../../features/tools/widgets/tool_file_picker_screen.dart';
 import '../../features/viewer/pages_screen.dart';
 import '../../features/viewer/viewer_screen.dart';
 
@@ -107,6 +108,20 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'tools-created',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const CreatedDocumentsScreen(),
+      ),
+      GoRoute(
+        path: '/tools/pick',
+        name: 'tools-pick',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return ToolFilePickerScreen(
+            title: extra?['title'] as String?,
+            allowMultiple: (extra?['allowMultiple'] as bool?) ?? false,
+            minSelection: (extra?['minSelection'] as int?) ?? 1,
+            actionLabel: extra?['actionLabel'] as String?,
+          );
+        },
       ),
       GoRoute(
         path: '/files',

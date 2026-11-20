@@ -228,3 +228,39 @@ class PdfPageEditException implements Exception {
   @override
   String toString() => 'PdfPageEditException($reason, $message)';
 }
+
+/// Categorized failure reasons for PDF printing operations.
+enum PrintPdfErrorReason {
+  fileNotFound,
+  fileTooLarge,
+  unreadablePdf,
+  passwordProtected,
+  printFailed;
+
+  String localizedMessage(BuildContext context) {
+    switch (this) {
+      case PrintPdfErrorReason.fileNotFound:
+        return context.l10n.errorRenameSourceNotFound;
+      case PrintPdfErrorReason.fileTooLarge:
+        return context.l10n.printPdfErrorTooLarge;
+      case PrintPdfErrorReason.unreadablePdf:
+        return context.l10n.printPdfErrorUnreadable;
+      case PrintPdfErrorReason.passwordProtected:
+        return context.l10n.printPdfErrorPassword;
+      case PrintPdfErrorReason.printFailed:
+        return context.l10n.printPdfErrorFailed;
+    }
+  }
+}
+
+/// Typed exception thrown during PDF printing flow.
+class PrintPdfException implements Exception {
+  final PrintPdfErrorReason reason;
+  final String? message;
+
+  const PrintPdfException(this.reason, [this.message]);
+
+  @override
+  String toString() => 'PrintPdfException($reason, $message)';
+}
+

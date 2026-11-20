@@ -60,6 +60,7 @@ dependencies:
   flutter_image_compress: ^2.5.1
   url_launcher: ^6.3.3
   package_info_plus: ^10.2.2
+  printing: ^5.15.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
