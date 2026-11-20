@@ -373,5 +373,56 @@ This document catalogs every screen and bottom sheet added or restructured in **
 | **Create PDF Cornell Template in Landscape** | ![Create PDF Cornell](img/g4b/create_pdf_cornell_landscape.png) | 1080 × 2400 | < 250 KB |
 | **Create PDF Grid Template in Light Mint (3 Pages)** | ![Create PDF Grid Mint](img/g4b/create_pdf_grid_mint.png) | 1080 × 2400 | < 250 KB |
 
+---
+
+## Phase G4c Recycle Bin & Delete Flow Redesign
+
+### 22. Recycle Bin Screen (`lib/features/tools/recycle_bin/recycle_bin_screen.dart`, route `/tools/recycle-bin`)
+- **Structure & Layout**:
+  - Registered in centralized `toolRegistry` under `ToolSection.others` between `Import files` and `Print PDF`.
+  - Accessible via the Tools tab (`/tools`) or direct deep route `/tools/recycle-bin`.
+  - Standard ad-free `DocScaffold` (`showDockedBanner: false`, `isAdLoaded: false`).
+  - Top AppBar:
+    - Normal mode: `DocSubAppBar` with localized title `"Recycle bin"`, back button, and trailing `"Empty bin"` action styled in error color (`tokens.error`).
+    - Multi-select mode: `DocSelectionAppBar` with selected item count, Select all / Deselect all toggle, and Cancel button.
+- **Dismissible Policy Banner**:
+  - `InfoBanner` informing user that files in the Recycle bin are permanently deleted after 30 days.
+  - Close button dismisses the banner for the active view session.
+- **States & Interactivity**:
+  - **Empty state**: Illustrated `DocEmptyState` with `Icons.restore_from_trash_outlined`, localized title `"Recycle bin is empty"`, and subtitle explaining 30-day retention.
+  - **Non-empty list**: Reuses standard `FileRow` with custom trailing days-left chip:
+    - Normal retention (> 3 days): subtle background with secondary text (e.g. `"28 days left"`).
+    - Expiring soon (<= 3 days): tinted with `tokens.error` background (12% alpha) and error text (e.g. `"2 days left"`).
+    - Tapping row opens `TrashOptionsSheet`.
+    - Long-pressing row enters multi-selection mode.
+- **Contextual Bottom Sheets**:
+  - **`TrashOptionsSheet`**: Modal bottom sheet presenting file preview, thumbnail, title, deletion subtitle (`Deleted MM/dd/yyyy · 1.2 MB`), and three core actions:
+    1. **Restore**: Atomically restores file to its original directory. Recreates missing directory trees if necessary. If filename is taken, appends `" (restored)"` before extension. Shows localized SnackBar confirmation.
+    2. **Delete forever**: Prompts destructive `AlertDialog` confirmation (`"Delete forever?"`), permanently unlinks bin copy and deletes database record.
+    3. **Details**: Opens `TrashDetailsSheet`.
+  - **`TrashDetailsSheet`**: Metadata sheet displaying document thumbnail, original name, formatted file size, original absolute path, date deleted, and expiration countdown.
+- **Batch Selection Bottom Bar**:
+  - Bottom bar docked above SafeArea when 1 or more items are selected.
+  - Contains two high-contrast actions:
+    1. **Restore** (`FilledButton.tonalIcon` with `Icons.restore`): Restores all selected files in batch with collision avoidance.
+    2. **Delete forever** (`FilledButton.icon` in `tokens.error` with `Icons.delete_forever_outlined`): Destructive confirmation dialog before purging.
+- **Delete Flow Replacement**:
+  - Replaced destructive unlinking across `FileOptionsSheet`, `FilesScreen`, and `SearchScreen` with crash-safe move to trash when `recycleBinEnabled = true`.
+  - 6-second transient `SnackBar` with `"Undo"` button (`trashActionUndo`) allowing immediate one-tap restore.
+  - Oversized file protection: files exceeding 200 MB trigger warning dialog (`trashDialogTooLargeTitle`) offering Cancel or Delete permanently.
+
+### 23. QA Screenshots & Visual Evidence (Phase G4c)
+
+| View Description | Screenshot Artifact | Dimensions | File Size |
+|---|---|---|---|
+| **Tools Tab with Recycle Bin (Others section)** | ![Tools Tab Recycle Bin](img/g4c/tools_tab_recycle_bin.png) | 1080 × 2400 | 128 KB |
+| **Recycle Bin Screen: Empty State & Banner** | ![Recycle Bin Empty](img/g4c/recycle_bin_empty.png) | 1080 × 2400 | 42 KB |
+| **Recycle Bin Screen: Non-empty List & Badges** | ![Recycle Bin List](img/g4c/recycle_bin_list.png) | 1080 × 2400 | 70 KB |
+| **Trash Options Contextual Bottom Sheet** | ![Trash Options Sheet](img/g4c/trash_options_sheet.png) | 1080 × 2400 | 28 KB |
+| **Trash Details Metadata Bottom Sheet** | ![Trash Details Sheet](img/g4c/trash_details_sheet.png) | 1080 × 2400 | 37 KB |
+| **Recycle Bin Screen: Multi-selection Mode** | ![Recycle Bin Selection](img/g4c/recycle_bin_selection.png) | 1080 × 2400 | 75 KB |
+| **Empty Bin Confirmation Dialog** | ![Empty Bin Dialog](img/g4c/recycle_bin_empty_dialog.png) | 1080 × 2400 | 54 KB |
+
+
 
 
