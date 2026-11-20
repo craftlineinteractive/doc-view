@@ -66,6 +66,7 @@ class TemplateCard extends StatelessWidget {
                     colorSwatch: colorSwatch,
                     borderRadius: BorderRadius.circular(4),
                     boxShadow: const [],
+                    isThumbnail: true,
                   ),
                 ),
                 const SizedBox(height: 6),

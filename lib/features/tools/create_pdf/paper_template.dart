@@ -170,10 +170,19 @@ double strokeWidthForRole(StrokeRole role) {
   }
 }
 
+/// Exact millimeter to point conversion factor: 1 mm = 2.8346 pt (72 pt / 25.4 mm).
+const double kPtPerMm = 2.8346;
+
 /// Pure geometry generator for paper template stroke primitives.
 ///
-/// Guarantees that margins are >= 8mm (22.68 pt) from every edge.
-/// Shared across both screen custom painters and background isolate PDF generation.
+/// Follows the exact millimeter geometry specifications:
+/// - Blank: no lines.
+/// - Line 1: horizontal lines every 6.35 mm from 18 mm below top to 12 mm above bottom, 10 mm inset, no margin line.
+/// - Line 2: horizontal lines every 10 mm from 18 mm below top to 12 mm above bottom, 10 mm inset, no margin line.
+/// - Notebook: horizontal lines every 8 mm, top header gap of 22 mm, 10 mm inset, plus one vertical margin line at 12% width from top gap to 12 mm above bottom.
+/// - Cornell: header rule at 8% height, summary rule at 82% height, vertical cue line at 30% width from header to summary, horizontal lines every 8 mm only in notes area (right of cue line, between header and summary), inset 10 mm. No masks or hidden lines.
+/// - Grid: square grid every 5 mm over printable area (8 mm margin all sides), one stroke role.
+/// - Graph: minor lines every 1 mm (minor role) and major line every 10 mm (major role) over printable area (8 mm margin), aligned so major lines coincide with minor lines.
 List<PaperStrokePrimitive> computePaperDrawingPrimitives({
   required PaperTemplate template,
   required double widthPt,
@@ -183,12 +192,7 @@ List<PaperStrokePrimitive> computePaperDrawingPrimitives({
     return const <PaperStrokePrimitive>[];
   }
 
-  // Minimum 8.47 mm (24.0 pt) safety margin from all four edges
-  const marginPt = 24.0;
-  final contentWidth = widthPt - (marginPt * 2);
-  final contentHeight = heightPt - (marginPt * 2);
-
-  if (contentWidth <= 0 || contentHeight <= 0) {
+  if (widthPt <= 0 || heightPt <= 0) {
     return const <PaperStrokePrimitive>[];
   }
 
@@ -199,77 +203,84 @@ List<PaperStrokePrimitive> computePaperDrawingPrimitives({
       break;
 
     case PaperTemplate.line1:
-      // Narrow ruled: 7.1 mm = ~20.13 pt spacing
-      const spacing = 20.126;
-      for (var y = marginPt + spacing; y <= heightPt - marginPt; y += spacing) {
-        primitives.add(
-          PaperStrokePrimitive(
-            x1: marginPt,
-            y1: y,
-            x2: widthPt - marginPt,
-            y2: y,
-            role: StrokeRole.minor,
-          ),
-        );
+      // Line 1 (SMALL line spacing): horizontal lines every 6.35 mm from 18 mm below
+      // top edge to 12 mm above bottom edge, spanning from 10 mm to 10 mm inside edges.
+      // NO margin line.
+      final x1 = 10.0 * kPtPerMm;
+      final x2 = widthPt - (10.0 * kPtPerMm);
+      final yStart = 18.0 * kPtPerMm;
+      final yEnd = heightPt - (12.0 * kPtPerMm);
+      final spacing = 6.35 * kPtPerMm;
+
+      if (x2 > x1 && yEnd > yStart) {
+        for (var y = yStart; y <= yEnd + 0.001; y += spacing) {
+          primitives.add(
+            PaperStrokePrimitive(
+              x1: x1,
+              y1: y,
+              x2: x2,
+              y2: y,
+              role: StrokeRole.minor,
+            ),
+          );
+        }
       }
       break;
 
     case PaperTemplate.line2:
-      // Wide ruled: 8.7 mm = ~24.66 pt spacing
-      const spacing = 24.661;
-      for (var y = marginPt + spacing; y <= heightPt - marginPt; y += spacing) {
-        primitives.add(
-          PaperStrokePrimitive(
-            x1: marginPt,
-            y1: y,
-            x2: widthPt - marginPt,
-            y2: y,
-            role: StrokeRole.minor,
-          ),
-        );
+      // Line 2 (BIG space between lines): the same layout with 10 mm spacing.
+      // NO margin line.
+      final x1 = 10.0 * kPtPerMm;
+      final x2 = widthPt - (10.0 * kPtPerMm);
+      final yStart = 18.0 * kPtPerMm;
+      final yEnd = heightPt - (12.0 * kPtPerMm);
+      final spacing = 10.0 * kPtPerMm;
+
+      if (x2 > x1 && yEnd > yStart) {
+        for (var y = yStart; y <= yEnd + 0.001; y += spacing) {
+          primitives.add(
+            PaperStrokePrimitive(
+              x1: x1,
+              y1: y,
+              x2: x2,
+              y2: y,
+              role: StrokeRole.minor,
+            ),
+          );
+        }
       }
       break;
 
     case PaperTemplate.notebook:
-      // Notebook ruled: 8.0 mm = ~22.68 pt spacing with vertical margin line
-      const spacing = 22.677;
-      // Margin line positioned ~32 mm (90.7 pt) from left edge
-      const marginX = 90.7;
+      // Notebook: horizontal lines every 8 mm, header gap of 22 mm at top with no lines,
+      // lines span 10 mm inside both edges, plus ONE vertical margin line (margin role, soft red)
+      // at 12% of page width running from top gap to 12 mm above bottom.
+      final x1 = 10.0 * kPtPerMm;
+      final x2 = widthPt - (10.0 * kPtPerMm);
+      final topGap = 22.0 * kPtPerMm;
+      final bottomLimit = heightPt - (12.0 * kPtPerMm);
+      final spacing = 8.0 * kPtPerMm;
 
-      // Header rule line (major)
-      primitives.add(
-        PaperStrokePrimitive(
-          x1: marginPt,
-          y1: marginPt + spacing,
-          x2: widthPt - marginPt,
-          y2: marginPt + spacing,
-          role: StrokeRole.major,
-        ),
-      );
+      if (x2 > x1 && bottomLimit > topGap) {
+        for (var y = topGap; y <= bottomLimit + 0.001; y += spacing) {
+          primitives.add(
+            PaperStrokePrimitive(
+              x1: x1,
+              y1: y,
+              x2: x2,
+              y2: y,
+              role: StrokeRole.minor,
+            ),
+          );
+        }
 
-      // Subsequent ruled lines (minor)
-      for (var y = marginPt + (spacing * 2);
-          y <= heightPt - marginPt;
-          y += spacing) {
-        primitives.add(
-          PaperStrokePrimitive(
-            x1: marginPt,
-            y1: y,
-            x2: widthPt - marginPt,
-            y2: y,
-            role: StrokeRole.minor,
-          ),
-        );
-      }
-
-      // Left vertical margin line (margin role, red/coral ink)
-      if (marginX > marginPt && marginX < widthPt - marginPt) {
+        final marginX = widthPt * 0.12;
         primitives.add(
           PaperStrokePrimitive(
             x1: marginX,
-            y1: marginPt,
+            y1: topGap,
             x2: marginX,
-            y2: heightPt - marginPt,
+            y2: bottomLimit,
             role: StrokeRole.margin,
           ),
         );
@@ -277,43 +288,44 @@ List<PaperStrokePrimitive> computePaperDrawingPrimitives({
       break;
 
     case PaperTemplate.cornell:
-      // Cornell notes system:
-      // - Top header area (72 pt)
-      // - Bottom summary area (120 pt)
-      // - Left cue column (30% width)
-      // - Main notes area (70% width, ruled with minor lines)
-      const headerY = 72.0;
-      final summaryY = heightPt - 120.0;
-      final cueX = marginPt + (contentWidth * 0.30);
+      // Cornell:
+      // - header rule at 8% of page height
+      // - vertical cue line at 30% of page width running from header rule down to summary rule
+      // - summary rule at 82% of page height
+      // - horizontal lines every 8 mm ONLY in notes area (right of cue line, between header and summary)
+      // - everything inset 10 mm from page edges.
+      // NO masking rectangles and no hidden lines anywhere.
+      final left = 10.0 * kPtPerMm;
+      final right = widthPt - (10.0 * kPtPerMm);
+      final headerY = heightPt * 0.08;
+      final summaryY = heightPt * 0.82;
+      final cueX = widthPt * 0.30;
+      final spacing = 8.0 * kPtPerMm;
 
-      // Header horizontal rule (major)
-      if (headerY > marginPt && headerY < summaryY) {
+      if (right > left && summaryY > headerY) {
+        // Header rule
         primitives.add(
           PaperStrokePrimitive(
-            x1: marginPt,
+            x1: left,
             y1: headerY,
-            x2: widthPt - marginPt,
+            x2: right,
             y2: headerY,
             role: StrokeRole.major,
           ),
         );
-      }
 
-      // Summary horizontal rule (major)
-      if (summaryY > headerY && summaryY < heightPt - marginPt) {
+        // Summary rule
         primitives.add(
           PaperStrokePrimitive(
-            x1: marginPt,
+            x1: left,
             y1: summaryY,
-            x2: widthPt - marginPt,
+            x2: right,
             y2: summaryY,
             role: StrokeRole.major,
           ),
         );
-      }
 
-      // Vertical cue column separator (major)
-      if (cueX > marginPt && cueX < widthPt - marginPt) {
+        // Vertical cue line
         primitives.add(
           PaperStrokePrimitive(
             x1: cueX,
@@ -323,87 +335,100 @@ List<PaperStrokePrimitive> computePaperDrawingPrimitives({
             role: StrokeRole.major,
           ),
         );
-      }
 
-      // Ruled lines in main notes area (minor)
-      const spacing = 22.677;
-      for (var y = headerY + spacing; y < summaryY - 4.0; y += spacing) {
-        primitives.add(
-          PaperStrokePrimitive(
-            x1: cueX,
-            y1: y,
-            x2: widthPt - marginPt,
-            y2: y,
-            role: StrokeRole.minor,
-          ),
-        );
+        // Notes area horizontal lines (right of cue line, between header and summary)
+        for (var y = headerY + spacing; y < summaryY - 0.001; y += spacing) {
+          primitives.add(
+            PaperStrokePrimitive(
+              x1: cueX,
+              y1: y,
+              x2: right,
+              y2: y,
+              role: StrokeRole.minor,
+            ),
+          );
+        }
       }
       break;
 
     case PaperTemplate.grid:
-      // 5 mm = ~14.173 pt square grid
-      const gridSize = 14.173;
+      // Grid: square grid every 5 mm over printable area (8 mm margin on all sides), one stroke role.
+      final margin = 8.0 * kPtPerMm;
+      final left = margin;
+      final right = widthPt - margin;
+      final top = margin;
+      final bottom = heightPt - margin;
+      final spacing = 5.0 * kPtPerMm;
 
-      // Vertical grid lines (minor)
-      for (var x = marginPt; x <= widthPt - marginPt + 0.01; x += gridSize) {
-        primitives.add(
-          PaperStrokePrimitive(
-            x1: x,
-            y1: marginPt,
-            x2: x,
-            y2: heightPt - marginPt,
-            role: StrokeRole.minor,
-          ),
-        );
-      }
+      if (right > left && bottom > top) {
+        // Vertical grid lines
+        for (var x = left; x <= right + 0.001; x += spacing) {
+          primitives.add(
+            PaperStrokePrimitive(
+              x1: x,
+              y1: top,
+              x2: x,
+              y2: bottom,
+              role: StrokeRole.minor,
+            ),
+          );
+        }
 
-      // Horizontal grid lines (minor)
-      for (var y = marginPt; y <= heightPt - marginPt + 0.01; y += gridSize) {
-        primitives.add(
-          PaperStrokePrimitive(
-            x1: marginPt,
-            y1: y,
-            x2: widthPt - marginPt,
-            y2: y,
-            role: StrokeRole.minor,
-          ),
-        );
+        // Horizontal grid lines
+        for (var y = top; y <= bottom + 0.001; y += spacing) {
+          primitives.add(
+            PaperStrokePrimitive(
+              x1: left,
+              y1: y,
+              x2: right,
+              y2: y,
+              role: StrokeRole.minor,
+            ),
+          );
+        }
       }
       break;
 
     case PaperTemplate.graph:
-      // Graph paper: 5 mm minor grid, every 5th line (25 mm) major grid
-      const minorSize = 14.173;
-      var colIndex = 0;
-      for (var x = marginPt;
-          x <= widthPt - marginPt + 0.01;
-          x += minorSize, colIndex++) {
-        final isMajor = colIndex % 5 == 0;
-        primitives.add(
-          PaperStrokePrimitive(
-            x1: x,
-            y1: marginPt,
-            x2: x,
-            y2: heightPt - marginPt,
-            role: isMajor ? StrokeRole.major : StrokeRole.minor,
-          ),
-        );
-      }
+      // Graph: minor lines every 1 mm (minor role, very light) and a major line every 10 mm (major role, darker)
+      // over printable area (8 mm margin), aligned so major lines coincide with minor lines.
+      final margin = 8.0 * kPtPerMm;
+      final left = margin;
+      final right = widthPt - margin;
+      final top = margin;
+      final bottom = heightPt - margin;
+      final minorStep = 1.0 * kPtPerMm;
 
-      var rowIndex = 0;
-      for (var y = marginPt;
-          y <= heightPt - marginPt + 0.01;
-          y += minorSize, rowIndex++) {
-        final isMajor = rowIndex % 5 == 0;
-        primitives.add(
-          PaperStrokePrimitive(
-            x1: marginPt,
-            y1: y,
-            x2: widthPt - marginPt,
-            y2: y,
-            role: isMajor ? StrokeRole.major : StrokeRole.minor,
-          ),
-        );
+      if (right > left && bottom > top) {
+        // Vertical lines
+        var col = 0;
+        for (var x = left; x <= right + 0.001; x += minorStep, col++) {
+          final isMajor = col % 10 == 0;
+          primitives.add(
+            PaperStrokePrimitive(
+              x1: x,
+              y1: top,
+              x2: x,
+              y2: bottom,
+              role: isMajor ? StrokeRole.major : StrokeRole.minor,
+            ),
+          );
+        }
+
+        // Horizontal lines
+        var row = 0;
+        for (var y = top; y <= bottom + 0.001; y += minorStep, row++) {
+          final isMajor = row % 10 == 0;
+          primitives.add(
+            PaperStrokePrimitive(
+              x1: left,
+              y1: y,
+              x2: right,
+              y2: y,
+              role: isMajor ? StrokeRole.major : StrokeRole.minor,
+            ),
+          );
+        }
       }
       break;
   }

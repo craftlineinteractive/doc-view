@@ -15,6 +15,7 @@ class PaperPreview extends StatelessWidget {
     this.borderRadius,
     this.border,
     this.boxShadow,
+    this.isThumbnail = false,
     super.key,
   });
 
@@ -25,6 +26,7 @@ class PaperPreview extends StatelessWidget {
   final BorderRadius? borderRadius;
   final BoxBorder? border;
   final List<BoxShadow>? boxShadow;
+  final bool isThumbnail;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,7 @@ class PaperPreview extends StatelessWidget {
               pageSize: pageSize,
               orientation: orientation,
               colorSwatch: colorSwatch,
+              isThumbnail: isThumbnail,
             ),
           ),
         ),
@@ -76,12 +79,14 @@ class PaperPreviewPainter extends CustomPainter {
     required this.pageSize,
     required this.orientation,
     required this.colorSwatch,
+    this.isThumbnail = false,
   });
 
   final PaperTemplate template;
   final PaperPageSize pageSize;
   final PaperOrientation orientation;
   final PaperColorSwatch colorSwatch;
+  final bool isThumbnail;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -101,6 +106,12 @@ class PaperPreviewPainter extends CustomPainter {
 
     final scaleX = size.width / widthPt;
     final scaleY = size.height / heightPt;
+
+    // Spec: when the on-screen pixel pitch between minor lines is below 3 px (small template cards),
+    // skip the minor role in the PAINTER (not in the geometry function) so the card stays legible;
+    // the large preview must draw everything.
+    final minorPitchPx = kPtPerMm * scaleY;
+    final skipMinor = (isThumbnail || size.height < 100) && minorPitchPx < 3.0;
 
     // 2. Fetch single source of truth primitives
     final primitives = computePaperDrawingPrimitives(
@@ -130,6 +141,10 @@ class PaperPreviewPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     for (final p in primitives) {
+      if (skipMinor && p.role == StrokeRole.minor) {
+        continue;
+      }
+
       final Paint paint;
       switch (p.role) {
         case StrokeRole.minor:
@@ -156,6 +171,7 @@ class PaperPreviewPainter extends CustomPainter {
     return template != oldDelegate.template ||
         pageSize != oldDelegate.pageSize ||
         orientation != oldDelegate.orientation ||
-        colorSwatch != oldDelegate.colorSwatch;
+        colorSwatch != oldDelegate.colorSwatch ||
+        isThumbnail != oldDelegate.isThumbnail;
   }
 }

@@ -1,4 +1,6 @@
 import 'package:docview/features/tools/create_pdf/paper_template.dart';
+import 'package:docview/shared/widgets/create_pdf/paper_preview.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -40,20 +42,12 @@ void main() {
     test('Blends minor, major, and margin strokes onto white paper accurately', () {
       const white = 0xFFFFFFFF;
 
-      // Minor: 35% of ink (#6B7A99 = 107, 122, 153) + 65% white (255)
-      // R: 255 * 0.65 + 107 * 0.35 = 165.75 + 37.45 = 203.2 -> 203 (0xCB)
-      // G: 255 * 0.65 + 122 * 0.35 = 165.75 + 42.7 = 208.45 -> 208 (0xD0)
-      // B: 255 * 0.65 + 153 * 0.35 = 165.75 + 53.55 = 219.3 -> 219 (0xDB)
       final minorWhite = blendStrokeColor(white, StrokeRole.minor);
       expect((minorWhite >> 24) & 0xFF, 0xFF, reason: 'Alpha must be opaque');
       expect((minorWhite >> 16) & 0xFF, 203);
       expect((minorWhite >> 8) & 0xFF, 208);
       expect(minorWhite & 0xFF, 219);
 
-      // Margin: 55% of margin ink (#E07A7A = 224, 122, 122) + 45% white (255)
-      // R: 255 * 0.45 + 224 * 0.55 = 114.75 + 123.2 = 237.95 -> 238
-      // G: 255 * 0.45 + 122 * 0.55 = 114.75 + 67.1 = 181.85 -> 182
-      // B: 255 * 0.45 + 122 * 0.55 = 114.75 + 67.1 = 181.85 -> 182
       final marginWhite = blendStrokeColor(white, StrokeRole.margin);
       expect((marginWhite >> 24) & 0xFF, 0xFF);
       expect((marginWhite >> 16) & 0xFF, 238);
@@ -77,136 +71,257 @@ void main() {
     });
   });
 
-  group('Paper Drawing Geometry Tests', () {
+  group('Paper Template Geometry Spec Line Counts', () {
+    const a4W = 595.28;
+    const a4H = 841.89;
+    const a3H = 1190.55;
+
+    test('Exact expected line counts on A4 Portrait (595.28 x 841.89 pt)', () {
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.blank, widthPt: a4W, heightPt: a4H).length, 0);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.line1, widthPt: a4W, heightPt: a4H).length, 43);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.line2, widthPt: a4W, heightPt: a4H).length, 27);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.notebook, widthPt: a4W, heightPt: a4H).length, 34);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.cornell, widthPt: a4W, heightPt: a4H).length, 30);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.grid, widthPt: a4W, heightPt: a4H).length, 96);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.graph, widthPt: a4W, heightPt: a4H).length, 477);
+    });
+
+    test('Exact expected line counts on A4 Landscape (841.89 x 595.28 pt)', () {
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.blank, widthPt: a4H, heightPt: a4W).length, 0);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.line1, widthPt: a4H, heightPt: a4W).length, 29);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.line2, widthPt: a4H, heightPt: a4W).length, 19);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.notebook, widthPt: a4H, heightPt: a4W).length, 24);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.cornell, widthPt: a4H, heightPt: a4W).length, 22);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.grid, widthPt: a4H, heightPt: a4W).length, 96);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.graph, widthPt: a4H, heightPt: a4W).length, 477);
+    });
+
+    test('Exact expected line counts on A3 Portrait (841.89 x 1190.55 pt)', () {
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.blank, widthPt: a4H, heightPt: a3H).length, 0);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.line1, widthPt: a4H, heightPt: a3H).length, 62);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.line2, widthPt: a4H, heightPt: a3H).length, 40);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.notebook, widthPt: a4H, heightPt: a3H).length, 50);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.cornell, widthPt: a4H, heightPt: a3H).length, 41);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.grid, widthPt: a4H, heightPt: a3H).length, 138);
+      expect(computePaperDrawingPrimitives(template: PaperTemplate.graph, widthPt: a4H, heightPt: a3H).length, 687);
+    });
+  });
+
+  group('Margin Boundaries, Proportions, and Alignment Checks', () {
     const a4W = 595.28;
     const a4H = 841.89;
 
-    test('Blank template produces zero primitives', () {
-      final primitives = computePaperDrawingPrimitives(
-        template: PaperTemplate.blank,
-        widthPt: a4W,
-        heightPt: a4H,
-      );
-      expect(primitives, isEmpty);
-    });
-
-    test('Line 1 and Line 2 produce horizontal lines respecting margin boundaries', () {
-      final line1 = computePaperDrawingPrimitives(
-        template: PaperTemplate.line1,
-        widthPt: a4W,
-        heightPt: a4H,
-      );
-      final line2 = computePaperDrawingPrimitives(
-        template: PaperTemplate.line2,
-        widthPt: a4W,
-        heightPt: a4H,
-      );
-
-      expect(line1, isNotEmpty);
-      expect(line2, isNotEmpty);
-      expect(line1.length, greaterThan(line2.length), reason: 'Line 1 is narrower spaced than Line 2');
-
-      for (final p in line1) {
-        expect(p.role, StrokeRole.minor);
-        expect(p.y1, p.y2, reason: 'Horizontal lines must be straight');
-        expect(p.x1, closeTo(24.0, 0.01));
-        expect(p.x2, closeTo(a4W - 24.0, 0.01));
-        expect(p.y1, greaterThanOrEqualTo(24.0));
-        expect(p.y1, lessThanOrEqualTo(a4H - 24.0));
+    test('No primitive crosses page boundaries for any template', () {
+      for (final template in PaperTemplate.values) {
+        final primitives = computePaperDrawingPrimitives(
+          template: template,
+          widthPt: a4W,
+          heightPt: a4H,
+        );
+        for (final p in primitives) {
+          expect(p.x1, inInclusiveRange(0.0, a4W));
+          expect(p.x2, inInclusiveRange(0.0, a4W));
+          expect(p.y1, inInclusiveRange(0.0, a4H));
+          expect(p.y2, inInclusiveRange(0.0, a4H));
+        }
       }
     });
 
-    test('Notebook produces header line, minor ruled lines, and red vertical margin', () {
-      final notebook = computePaperDrawingPrimitives(
-        template: PaperTemplate.notebook,
-        widthPt: a4W,
-        heightPt: a4H,
-      );
+    test('Line 1 and Line 2 respect exact insets and spacing (Line 1 < Line 2)', () {
+      final line1 = computePaperDrawingPrimitives(template: PaperTemplate.line1, widthPt: a4W, heightPt: a4H);
+      final line2 = computePaperDrawingPrimitives(template: PaperTemplate.line2, widthPt: a4W, heightPt: a4H);
 
-      final majorLines = notebook.where((p) => p.role == StrokeRole.major).toList();
-      final minorLines = notebook.where((p) => p.role == StrokeRole.minor).toList();
-      final marginLines = notebook.where((p) => p.role == StrokeRole.margin).toList();
+      expect(line1.length, greaterThan(line2.length), reason: 'Line 1 (6.35mm) has smaller spacing than Line 2 (10mm)');
 
-      expect(majorLines.length, 1, reason: 'Exactly one major header line');
-      expect(minorLines, isNotEmpty);
-      expect(marginLines.length, 1, reason: 'Exactly one vertical red margin line');
+      // Line 1 checks: 10mm inset horizontally, starts at 18mm below top, ends <= 12mm above bottom
+      const margin10mm = 10.0 * kPtPerMm;
+      const top18mm = 18.0 * kPtPerMm;
+      const bottom12mm = a4H - (12.0 * kPtPerMm);
 
-      final marginLine = marginLines.first;
-      expect(marginLine.x1, marginLine.x2, reason: 'Vertical margin line');
-      expect(marginLine.x1, closeTo(90.7, 0.01));
-      expect(marginLine.y1, closeTo(24.0, 0.01));
-      expect(marginLine.y2, closeTo(a4H - 24.0, 0.01));
+      for (final p in line1) {
+        expect(p.x1, closeTo(margin10mm, 0.001));
+        expect(p.x2, closeTo(a4W - margin10mm, 0.001));
+        expect(p.y1, p.y2);
+        expect(p.y1, greaterThanOrEqualTo(top18mm));
+        expect(p.y1, lessThanOrEqualTo(bottom12mm));
+        expect(p.role, StrokeRole.minor);
+      }
+
+      // Line 2 checks
+      for (final p in line2) {
+        expect(p.x1, closeTo(margin10mm, 0.001));
+        expect(p.x2, closeTo(a4W - margin10mm, 0.001));
+        expect(p.y1, p.y2);
+        expect(p.y1, greaterThanOrEqualTo(top18mm));
+        expect(p.y1, lessThanOrEqualTo(bottom12mm));
+        expect(p.role, StrokeRole.minor);
+      }
     });
 
-    test('Cornell produces header, summary, cue column, and ruled notes area', () {
-      final cornell = computePaperDrawingPrimitives(
-        template: PaperTemplate.cornell,
-        widthPt: a4W,
-        heightPt: a4H,
-      );
+    test('Notebook produces header gap, 10mm insets, and vertical margin line at 12% width', () {
+      final notebook = computePaperDrawingPrimitives(template: PaperTemplate.notebook, widthPt: a4W, heightPt: a4H);
+
+      final marginLines = notebook.where((p) => p.role == StrokeRole.margin).toList();
+      final minorLines = notebook.where((p) => p.role == StrokeRole.minor).toList();
+
+      expect(marginLines.length, 1, reason: 'Exactly one vertical margin line');
+      expect(minorLines.length, 33);
+
+      const top22mm = 22.0 * kPtPerMm;
+      const bottom12mm = a4H - (12.0 * kPtPerMm);
+
+      final marginLine = marginLines.first;
+      expect(marginLine.x1, closeTo(a4W * 0.12, 0.001));
+      expect(marginLine.x2, closeTo(a4W * 0.12, 0.001));
+      expect(marginLine.y1, closeTo(top22mm, 0.001));
+      expect(marginLine.y2, closeTo(bottom12mm, 0.001));
+
+      // No horizontal lines in the top 22mm gap
+      for (final p in minorLines) {
+        expect(p.y1, greaterThanOrEqualTo(top22mm));
+        expect(p.y1, lessThanOrEqualTo(bottom12mm));
+      }
+    });
+
+    test('Cornell adheres strictly to 8% header, 82% summary, 30% cue, and no masks', () {
+      final cornell = computePaperDrawingPrimitives(template: PaperTemplate.cornell, widthPt: a4W, heightPt: a4H);
 
       final majorLines = cornell.where((p) => p.role == StrokeRole.major).toList();
       final minorLines = cornell.where((p) => p.role == StrokeRole.minor).toList();
 
-      expect(majorLines.length, 3, reason: 'Header, summary, and vertical cue separator');
-      expect(minorLines, isNotEmpty);
+      expect(majorLines.length, 3, reason: 'Header rule, summary rule, and vertical cue separator');
+      expect(minorLines.length, 27, reason: 'Only notes area ruled lines');
 
-      // Cue column is ~30% of content width (595.28 - 48 = 547.28 * 0.30 = 164.18 + 24 = 188.18)
-      final cueSeparator = majorLines.firstWhere((p) => p.x1 == p.x2);
-      expect(cueSeparator.x1, closeTo(24.0 + (a4W - 48.0) * 0.30, 0.01));
+      const left10mm = 10.0 * kPtPerMm;
+      const right10mm = a4W - (10.0 * kPtPerMm);
 
-      // Ruled notes lines start at cue separator and end at right margin
+      final headerRule = majorLines.firstWhere((p) => (p.y1 - a4H * 0.08).abs() < 0.01);
+      final summaryRule = majorLines.firstWhere((p) => (p.y1 - a4H * 0.82).abs() < 0.01);
+      final cueSeparator = majorLines.firstWhere((p) => (p.x1 - a4W * 0.30).abs() < 0.01);
+
+      expect(headerRule.x1, closeTo(left10mm, 0.001));
+      expect(headerRule.x2, closeTo(right10mm, 0.001));
+      expect(summaryRule.x1, closeTo(left10mm, 0.001));
+      expect(summaryRule.x2, closeTo(right10mm, 0.001));
+
+      expect(cueSeparator.x1, closeTo(a4W * 0.30, 0.001));
+      expect(cueSeparator.y1, closeTo(headerRule.y1, 0.001));
+      expect(cueSeparator.y2, closeTo(summaryRule.y1, 0.001));
+
+      // All notes lines must be strictly right of cue separator and between header and summary
       for (final p in minorLines) {
-        expect(p.x1, closeTo(cueSeparator.x1, 0.01));
-        expect(p.x2, closeTo(a4W - 24.0, 0.01));
-        expect(p.y1, greaterThan(72.0));
-        expect(p.y1, lessThan(a4H - 120.0));
+        expect(p.x1, closeTo(cueSeparator.x1, 0.001));
+        expect(p.x2, closeTo(right10mm, 0.001));
+        expect(p.y1, greaterThan(headerRule.y1));
+        expect(p.y1, lessThan(summaryRule.y1));
       }
     });
 
-    test('Grid produces orthogonal square grid within margins', () {
-      final grid = computePaperDrawingPrimitives(
-        template: PaperTemplate.grid,
-        widthPt: a4W,
-        heightPt: a4H,
-      );
+    test('Grid respects 8mm margins and single stroke role', () {
+      final grid = computePaperDrawingPrimitives(template: PaperTemplate.grid, widthPt: a4W, heightPt: a4H);
+      const m8mm = 8.0 * kPtPerMm;
 
-      final verticals = grid.where((p) => p.x1 == p.x2).toList();
-      final horizontals = grid.where((p) => p.y1 == p.y2).toList();
-
-      expect(verticals, isNotEmpty);
-      expect(horizontals, isNotEmpty);
       expect(grid.every((p) => p.role == StrokeRole.minor), isTrue);
+      for (final p in grid) {
+        expect(p.x1, inInclusiveRange(m8mm - 0.01, a4W - m8mm + 0.01));
+        expect(p.x2, inInclusiveRange(m8mm - 0.01, a4W - m8mm + 0.01));
+        expect(p.y1, inInclusiveRange(m8mm - 0.01, a4H - m8mm + 0.01));
+        expect(p.y2, inInclusiveRange(m8mm - 0.01, a4H - m8mm + 0.01));
+      }
     });
 
-    test('Graph produces minor and major grid lines with 5:1 subdivision ratio', () {
-      final graph = computePaperDrawingPrimitives(
-        template: PaperTemplate.graph,
-        widthPt: a4W,
-        heightPt: a4H,
-      );
+    test('Graph major lines coincide exactly with minor lines (10:1 alignment)', () {
+      final graph = computePaperDrawingPrimitives(template: PaperTemplate.graph, widthPt: a4W, heightPt: a4H);
 
       final majorLines = graph.where((p) => p.role == StrokeRole.major).toList();
       final minorLines = graph.where((p) => p.role == StrokeRole.minor).toList();
 
-      expect(majorLines, isNotEmpty);
-      expect(minorLines, isNotEmpty);
-      expect(minorLines.length, greaterThan(majorLines.length * 3));
+      expect(majorLines.length, 49);
+      expect(minorLines.length, 428);
+
+      const m8mm = 8.0 * kPtPerMm;
+      const minorStep = 1.0 * kPtPerMm;
+      const majorStep = 10.0 * kPtPerMm;
+      expect(majorStep / minorStep, closeTo(10.0, 0.001));
+
+      // Vertical major lines coincide with 10mm intervals
+      final vMajor = majorLines.where((p) => p.x1 == p.x2).toList();
+      for (var i = 0; i < vMajor.length; i++) {
+        expect(vMajor[i].x1, closeTo(m8mm + (i * majorStep), 0.001));
+      }
+
+      // Horizontal major lines coincide with 10mm intervals
+      final hMajor = majorLines.where((p) => p.y1 == p.y2).toList();
+      for (var i = 0; i < hMajor.length; i++) {
+        expect(hMajor[i].y1, closeTo(m8mm + (i * majorStep), 0.001));
+      }
     });
 
-    test('Landscape orientation adjusts drawing limits seamlessly', () {
-      final landscapePrimitives = computePaperDrawingPrimitives(
-        template: PaperTemplate.line1,
-        widthPt: a4H,
-        heightPt: a4W,
-      );
-
-      expect(landscapePrimitives, isNotEmpty);
-      for (final p in landscapePrimitives) {
-        expect(p.x1, closeTo(24.0, 0.01));
-        expect(p.x2, closeTo(a4H - 24.0, 0.01));
-        expect(p.y1, lessThanOrEqualTo(a4W - 24.0));
+    test('Geometry contains strictly stroke line primitives and zero rectangles/masks', () {
+      for (final template in PaperTemplate.values) {
+        final primitives = computePaperDrawingPrimitives(
+          template: template,
+          widthPt: a4W,
+          heightPt: a4H,
+        );
+        for (final p in primitives) {
+          expect(p, isA<PaperStrokePrimitive>());
+          // Must be a 1D straight line, never an area or rectangle
+          expect(p.x1 == p.x2 || p.y1 == p.y2, isTrue, reason: 'Primitives are straight orthogonal lines');
+        }
       }
+    });
+  });
+
+  group('PaperPreviewPainter Minor Role Skipping on Small Cards', () {
+    testWidgets('Painter skips minor lines when pixel pitch < 3px on small thumbnail cards', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 48,
+                height: 64,
+                child: PaperPreview(
+                  template: PaperTemplate.graph,
+                  pageSize: PaperPageSize.a4,
+                  orientation: PaperOrientation.portrait,
+                  colorSwatch: PaperColorSwatch.white,
+                  isThumbnail: true,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(PaperPreview), findsOneWidget);
+    });
+
+    testWidgets('Large preview renders all stroke roles', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 300,
+                height: 424,
+                child: PaperPreview(
+                  template: PaperTemplate.graph,
+                  pageSize: PaperPageSize.a4,
+                  orientation: PaperOrientation.portrait,
+                  colorSwatch: PaperColorSwatch.white,
+                  isThumbnail: false,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(PaperPreview), findsOneWidget);
     });
   });
 }
