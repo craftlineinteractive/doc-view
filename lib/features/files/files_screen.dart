@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/config/feature_flags.dart';
 import '../../core/constants/file_types.dart';
 import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
@@ -62,6 +63,67 @@ class FilesScreen extends ConsumerWidget {
     showDialog<void>(
       context: context,
       builder: (dialogContext) {
+        if (recycleBinEnabled) {
+          return AlertDialog(
+            title: Text(context.l10n.trashDialogMoveTitle),
+            content: Text(
+              context.l10n.trashDialogMoveBody(selectedFiles.length),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(dialogContext).pop(),
+                child: Text(context.l10n.actionCancel),
+              ),
+              FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: DocViewColors.error,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () async {
+                  Navigator.of(dialogContext).pop();
+                  final messenger = ScaffoldMessenger.of(context);
+                  final l10n = context.l10n;
+                  final actionsController =
+                      ref.read(fileActionsControllerProvider);
+                  final result =
+                      await actionsController.moveToTrash(selectedFiles);
+
+                  ref.read(selectionProvider.notifier).clear();
+
+                  if (!context.mounted) return;
+                  if (result.hasSuccesses) {
+                    messenger.showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          l10n.trashMovedSuccess(result.successfulItems.length),
+                        ),
+                        duration: const Duration(seconds: 6),
+                        action: SnackBarAction(
+                          label: l10n.trashActionUndo,
+                          onPressed: () async {
+                            await actionsController
+                                .restoreFromTrash(result.successfulItems);
+                          },
+                        ),
+                      ),
+                    );
+                  } else {
+                    messenger.showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          result.firstErrorDetails ?? l10n.filesDeleteFailed,
+                        ),
+                        backgroundColor: DocViewColors.error,
+                      ),
+                    );
+                  }
+                },
+                child: Text(context.l10n.trashActionMove),
+              ),
+            ],
+          );
+        }
+
         return AlertDialog(
           title: Text(context.l10n.dialogDeleteTitle),
           content: Text(

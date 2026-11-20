@@ -20,6 +20,7 @@ import '../../features/shell/main_shell.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/tools/create_pdf/create_pdf_screen.dart';
 import '../../features/tools/created_documents_screen.dart';
+import '../../features/tools/recycle_bin/recycle_bin_screen.dart';
 import '../../features/tools/tools_screen.dart';
 import '../../features/tools/widgets/tool_file_picker_screen.dart';
 import '../../features/viewer/pages_screen.dart';
@@ -115,6 +116,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'tools-create-pdf',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const CreatePdfScreen(),
+      ),
+      GoRoute(
+        path: '/tools/recycle-bin',
+        name: 'tools-recycle-bin',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const RecycleBinScreen(),
       ),
       GoRoute(
         path: '/tools/pick',

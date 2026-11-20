@@ -1,5 +1,6 @@
 import 'package:docview/core/constants/file_types.dart';
 import 'package:docview/data/models/doc_file.dart';
+import 'package:docview/data/models/trash_item.dart';
 import 'package:docview/features/directories/directories_screen.dart';
 import 'package:docview/features/files/widgets/file_details_sheet.dart';
 import 'package:docview/features/files/widgets/file_options_sheet.dart';
@@ -17,6 +18,9 @@ import 'package:docview/features/tools/create_pdf/create_pdf_screen.dart';
 import 'package:docview/features/tools/created_documents_screen.dart';
 import 'package:docview/features/tools/image_list_editor_screen.dart';
 import 'package:docview/features/tools/merge_screen.dart';
+import 'package:docview/features/tools/recycle_bin/recycle_bin_screen.dart';
+import 'package:docview/features/tools/recycle_bin/widgets/trash_details_sheet.dart';
+import 'package:docview/features/tools/recycle_bin/widgets/trash_options_sheet.dart';
 import 'package:docview/features/tools/services/pdf_page_count_service.dart';
 import 'package:docview/features/tools/split_screen.dart';
 import 'package:docview/features/tools/tools_screen.dart';
@@ -90,6 +94,22 @@ void main() {
     filesProvider(FileCategory.pdf)
         .overrideWith((ref) async => [sampleDoc, sampleDoc2]),
     createdFilesProvider.overrideWith((ref) async => [sampleDoc]),
+    trashItemsProvider.overrideWith((ref) async => [
+          TrashItem(
+            id: '1',
+            trashPath: '/mock/support/recycle_bin/sample.pdf',
+            originalPath: '/mock/storage/sample.pdf',
+            originalName: 'Sample_Contract_2026.pdf',
+            extension: 'pdf',
+            sizeBytes: 2048576,
+            category: FileCategory.pdf,
+            originalModifiedMs: 1731661800000,
+            deletedMs: 1732000000000,
+            expiresMs: 1734592000000,
+            wasBookmarked: false,
+            wasImported: false,
+          ),
+        ]),
   ];
 
   group('L10n & RTL Overflow Testing Harness', () {
@@ -150,6 +170,7 @@ void main() {
           ),
       'ScanSettingsScreen': () => const ScanSettingsScreen(),
       'CreatedDocumentsScreen': () => const CreatedDocumentsScreen(),
+      'RecycleBinScreen': () => const RecycleBinScreen(),
       'ImageListEditorScreen': () => const ImageListEditorScreen(
             initialImagePaths: [],
           ),
@@ -176,6 +197,46 @@ void main() {
       'FileOptionsSheet': () => Scaffold(
             body: SingleChildScrollView(
               child: FileOptionsSheet(file: sampleDoc),
+            ),
+          ),
+      'TrashDetailsSheet': () => Scaffold(
+            body: SingleChildScrollView(
+              child: TrashDetailsSheet(
+                item: TrashItem(
+                  id: '1',
+                  trashPath: '/mock/support/recycle_bin/sample.pdf',
+                  originalPath: '/mock/storage/sample.pdf',
+                  originalName: 'Sample_Contract_2026.pdf',
+                  extension: 'pdf',
+                  sizeBytes: 2048576,
+                  category: FileCategory.pdf,
+                  originalModifiedMs: 1731661800000,
+                  deletedMs: 1732000000000,
+                  expiresMs: 1734592000000,
+                  wasBookmarked: false,
+                  wasImported: false,
+                ),
+              ),
+            ),
+          ),
+      'TrashOptionsSheet': () => Scaffold(
+            body: SingleChildScrollView(
+              child: TrashOptionsSheet(
+                item: TrashItem(
+                  id: '1',
+                  trashPath: '/mock/support/recycle_bin/sample.pdf',
+                  originalPath: '/mock/storage/sample.pdf',
+                  originalName: 'Sample_Contract_2026.pdf',
+                  extension: 'pdf',
+                  sizeBytes: 2048576,
+                  category: FileCategory.pdf,
+                  originalModifiedMs: 1731661800000,
+                  deletedMs: 1732000000000,
+                  expiresMs: 1734592000000,
+                  wasBookmarked: false,
+                  wasImported: false,
+                ),
+              ),
             ),
           ),
       'ThemeSelectionSheet': () => const Scaffold(

@@ -88,7 +88,7 @@ void main() {
   });
 
   testWidgets(
-      'ToolsScreen shows exactly 8 G4b tool tiles with stable keys and accessibility',
+      'ToolsScreen shows exactly 9 G4c tool tiles with stable keys and accessibility',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -100,7 +100,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    // Verify presence of all 8 enabled G4b tool tiles
+    // Verify presence of all 9 enabled G4c tool tiles
     final imageTile = find.byKey(const Key('tool_image_to_pdf'));
     final scanTile = find.byKey(const Key('tool_scan_to_pdf'));
     final createTile = find.byKey(const Key('tool_create_pdf'));
@@ -108,6 +108,7 @@ void main() {
     final mergeTile = find.byKey(const Key('tool_merge_pdf'));
     final splitTile = find.byKey(const Key('tool_split_pdf'));
     final importTile = find.byKey(const Key('tool_import_files'));
+    final recycleBinTile = find.byKey(const Key('tool_recycle_bin'));
     final printTile = find.byKey(const Key('tool_print_pdf'));
 
     expect(imageTile, findsOneWidget);
@@ -117,6 +118,7 @@ void main() {
     expect(mergeTile, findsOneWidget);
     expect(splitTile, findsOneWidget);
     expect(importTile, findsOneWidget);
+    expect(recycleBinTile, findsOneWidget);
     expect(printTile, findsOneWidget);
 
     // Verify corresponding labels
@@ -127,9 +129,10 @@ void main() {
     expect(find.text('Merge PDF'), findsOneWidget);
     expect(find.text('Split PDF'), findsOneWidget);
     expect(find.text('Import files'), findsOneWidget);
+    expect(find.text('Recycle bin'), findsOneWidget);
     expect(find.text('Print PDF'), findsOneWidget);
 
-    // Assert exactly 8 tool tiles exist
+    // Assert exactly 9 tool tiles exist
     final foundToolTiles = find.byWidgetPredicate((widget) {
       if (widget.key is ValueKey<String>) {
         final keyVal = (widget.key as ValueKey<String>).value;
@@ -137,7 +140,7 @@ void main() {
       }
       return false;
     });
-    expect(foundToolTiles, findsNWidgets(8));
+    expect(foundToolTiles, findsNWidgets(9));
 
     // Verify accessibility guidelines on ToolsScreen
     final handle = tester.ensureSemantics();

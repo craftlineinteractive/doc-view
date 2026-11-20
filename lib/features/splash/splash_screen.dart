@@ -75,6 +75,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     final settingsFuture = ref.read(settingsRepositoryProvider).loadSettings();
     final onboardingFuture =
         ref.read(settingsRepositoryProvider).isOnboardingCompleted();
+    final purgeService = ref.read(trashPurgeServiceProvider);
 
     final results = await Future.wait([
       minDisplayFuture,
@@ -82,6 +83,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       settingsFuture,
       onboardingFuture,
     ]);
+
+    // Trigger background Recycle bin auto-purge if due (throttled to 6 hours)
+    unawaited(
+      purgeService
+          .runAutoPurgeIfDue()
+          .catchError((_) => false),
+    );
 
     if (!mounted) return;
 

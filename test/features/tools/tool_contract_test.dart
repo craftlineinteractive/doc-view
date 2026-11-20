@@ -7,9 +7,9 @@ void main() {
   final AppLocalizations l10n = AppLocalizationsEn();
 
   group('Tool Registry Contract Tests', () {
-    test('Default G4b visible tools count is exactly 8', () {
+    test('Default G4c visible tools count is exactly 9', () {
       final visible = getVisibleTools();
-      expect(visible.length, 8);
+      expect(visible.length, 9);
 
       final visibleIds = visible.map((t) => t.id).toList();
       expect(
@@ -22,12 +22,13 @@ void main() {
           'merge_pdf',
           'split_pdf',
           'import_files',
+          'recycle_bin',
           'print_pdf',
         ],
       );
     });
 
-    test('Visible tools per section match G4b specification', () {
+    test('Visible tools per section match G4c specification', () {
       final convertTools = getToolsForSection(ToolSection.convertAndCreate);
       expect(convertTools.map((t) => t.id).toList(), [
         'image_to_pdf',
@@ -45,6 +46,7 @@ void main() {
       final otherTools = getToolsForSection(ToolSection.others);
       expect(otherTools.map((t) => t.id).toList(), [
         'import_files',
+        'recycle_bin',
         'print_pdf',
       ]);
     });
@@ -56,7 +58,6 @@ void main() {
         'annotate',
         'add_text',
         'sign',
-        'recycle_bin',
       ];
 
       for (final id in gatedIds) {

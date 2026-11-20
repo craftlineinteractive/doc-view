@@ -21,6 +21,7 @@ class FileRow extends StatelessWidget {
   final bool isSelected;
   final bool isSelectionMode;
   final String? highlightQuery;
+  final Widget? trailing;
   final VoidCallback onTap;
   final VoidCallback? onLongPress;
   final VoidCallback? onToggleBookmark;
@@ -37,6 +38,7 @@ class FileRow extends StatelessWidget {
     this.isSelected = false,
     this.isSelectionMode = false,
     this.highlightQuery,
+    this.trailing,
     required this.onTap,
     this.onLongPress,
     this.onToggleBookmark,
@@ -191,20 +193,24 @@ class FileRow extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Trailing actions (bookmark & options) - suppressed in selection mode
+                // Trailing actions (custom trailing or bookmark & options) - suppressed in selection mode
                 if (!isSelectionMode) ...[
-                  DocIconButton(
-                    icon: isBookmarked ? AppIcons.bookmark : AppIcons.bookmarkOutline,
-                    tooltip: isBookmarked ? context.l10n.tooltipRemoveBookmark : context.l10n.tooltipAddBookmark,
-                    color: isBookmarked ? DocViewColors.warning : tokens.textSecondary,
-                    onPressed: onToggleBookmark,
-                  ),
-                  DocIconButton(
-                    icon: AppIcons.moreVert,
-                    tooltip: context.l10n.tooltipFileOptions(title),
-                    color: tokens.textSecondary,
-                    onPressed: onOptions,
-                  ),
+                  if (trailing != null)
+                    trailing!
+                  else ...[
+                    DocIconButton(
+                      icon: isBookmarked ? AppIcons.bookmark : AppIcons.bookmarkOutline,
+                      tooltip: isBookmarked ? context.l10n.tooltipRemoveBookmark : context.l10n.tooltipAddBookmark,
+                      color: isBookmarked ? DocViewColors.warning : tokens.textSecondary,
+                      onPressed: onToggleBookmark,
+                    ),
+                    DocIconButton(
+                      icon: AppIcons.moreVert,
+                      tooltip: context.l10n.tooltipFileOptions(title),
+                      color: tokens.textSecondary,
+                      onPressed: onOptions,
+                    ),
+                  ],
                 ],
               ],
             ),

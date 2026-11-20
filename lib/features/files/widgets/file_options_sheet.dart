@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path/path.dart' as p;
 
+import '../../../core/config/feature_flags.dart';
+import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/file_types.dart';
 import '../../../core/errors/app_errors.dart';
 import '../../../core/extensions/l10n_extension.dart';
@@ -327,6 +329,109 @@ class FileOptionsSheet extends ConsumerWidget {
       builder: (dialogContext) {
         return Consumer(
           builder: (consumerContext, ref, _) {
+            if (recycleBinEnabled) {
+              final isTooLarge = file.sizeBytes > AppConstants.trashMaxFileBytes;
+              if (isTooLarge) {
+                return AlertDialog(
+                  title: Text(dialogContext.l10n.trashDialogTooLargeTitle),
+                  content: Text(dialogContext.l10n.trashDialogTooLargeBody(file.name)),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(dialogContext).pop(),
+                      child: Text(dialogContext.l10n.actionCancel),
+                    ),
+                    FilledButton(
+                      style: FilledButton.styleFrom(
+                        backgroundColor: errorColor,
+                        foregroundColor: Theme.of(parentContext).colorScheme.onError,
+                      ),
+                      onPressed: () async {
+                        final actionsController =
+                            ref.read(fileActionsControllerProvider);
+                        Navigator.of(dialogContext).pop();
+                        final result = await actionsController.deleteFiles([file]);
+
+                        if (!parentContext.mounted) return;
+
+                        if (result.hasDeletions) {
+                          messenger.showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                parentContext.l10n.deletedFileSuccess(file.name),
+                              ),
+                            ),
+                          );
+                        } else {
+                          messenger.showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                result.localizedMessage(parentContext) ??
+                                    parentContext.l10n.filesDeleteFailed,
+                              ),
+                              backgroundColor: errorColor,
+                            ),
+                          );
+                        }
+                      },
+                      child: Text(dialogContext.l10n.trashActionDeletePermanently),
+                    ),
+                  ],
+                );
+              }
+
+              return AlertDialog(
+                title: Text(dialogContext.l10n.trashDialogMoveTitle),
+                content: Text(dialogContext.l10n.trashDialogMoveBody(1)),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(dialogContext).pop(),
+                    child: Text(dialogContext.l10n.actionCancel),
+                  ),
+                  FilledButton(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: errorColor,
+                      foregroundColor: Theme.of(parentContext).colorScheme.onError,
+                    ),
+                    onPressed: () async {
+                      final actionsController =
+                          ref.read(fileActionsControllerProvider);
+                      Navigator.of(dialogContext).pop();
+                      final result = await actionsController.moveToTrash([file]);
+
+                      if (!parentContext.mounted) return;
+
+                      if (result.hasSuccesses) {
+                        final trashedItem = result.successfulItems.first;
+                        messenger.showSnackBar(
+                          SnackBar(
+                            content: Text(parentContext.l10n.trashMovedSuccess(1)),
+                            duration: const Duration(seconds: 6),
+                            action: SnackBarAction(
+                              label: parentContext.l10n.trashActionUndo,
+                              onPressed: () async {
+                                await actionsController.restoreFromTrash([trashedItem]);
+                              },
+                            ),
+                          ),
+                        );
+                      } else {
+                        messenger.showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              result.firstErrorDetails ??
+                                  parentContext.l10n.filesDeleteFailed,
+                            ),
+                            backgroundColor: errorColor,
+                          ),
+                        );
+                      }
+                    },
+                    child: Text(dialogContext.l10n.trashActionMove),
+                  ),
+                ],
+              );
+            }
+
             return AlertDialog(
               title: Text(dialogContext.l10n.deleteFileTitle),
               content: Text(dialogContext.l10n.deleteFileConfirmation(file.name)),

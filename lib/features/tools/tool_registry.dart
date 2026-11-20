@@ -183,16 +183,6 @@ final List<ToolDef> toolRegistry = <ToolDef>[
     isEnabled: () => true,
   ),
   ToolDef(
-    id: 'print_pdf',
-    section: ToolSection.others,
-    title: (l10n) => l10n.toolPrintPdf,
-    subtitle: (l10n) => l10n.toolPrintPdfSub,
-    icon: AppIcons.print,
-    gradient: ToolGradients.printPdf,
-    route: null, // Handled via print flow in screen
-    isEnabled: () => true,
-  ),
-  ToolDef(
     id: 'recycle_bin',
     section: ToolSection.others,
     title: (l10n) => l10n.toolRecycleBin,
@@ -201,6 +191,16 @@ final List<ToolDef> toolRegistry = <ToolDef>[
     gradient: ToolGradients.recycleBin,
     route: '/tools/recycle-bin',
     isEnabled: () => recycleBinEnabled,
+  ),
+  ToolDef(
+    id: 'print_pdf',
+    section: ToolSection.others,
+    title: (l10n) => l10n.toolPrintPdf,
+    subtitle: (l10n) => l10n.toolPrintPdfSub,
+    icon: AppIcons.print,
+    gradient: ToolGradients.printPdf,
+    route: null, // Handled via print flow in screen
+    isEnabled: () => true,
   ),
 ];
 

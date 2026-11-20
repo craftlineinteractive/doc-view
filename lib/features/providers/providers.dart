@@ -11,6 +11,7 @@ import '../../data/db/app_database.dart';
 import '../../data/models/app_settings.dart';
 import '../../data/models/doc_file.dart';
 import '../../data/models/sort_option.dart';
+import '../../data/models/trash_item.dart';
 import '../../data/repositories/file_repository.dart';
 import '../../data/repositories/settings_repository.dart';
 import '../../data/services/file_manager_service.dart';
@@ -24,6 +25,8 @@ import '../../data/services/pdf/pdf_page_edit_service.dart';
 import '../../data/services/pdf/pdf_split_service.dart';
 import '../../data/services/permission_service.dart';
 import '../../data/services/scanner_service.dart';
+import '../../data/services/trash_purge_service.dart';
+import '../../data/services/trash_service.dart';
 import '../tools/create_pdf/create_pdf_service.dart';
 
 export '../../core/router/app_router.dart' show routerProvider;
@@ -554,6 +557,47 @@ class FileActionsController {
     return result;
   }
 
+  /// Moves [files] to the Recycle bin and refreshes all relevant providers.
+  Future<TrashBatchResult> moveToTrash(List<DocFile> files) async {
+    final trashService = _ref.read(trashServiceProvider);
+    final result = await trashService.moveToTrash(files);
+    if (result.hasSuccesses) {
+      invalidateAll();
+      _ref.invalidate(trashItemsProvider);
+      _ref.invalidate(trashCountProvider);
+    }
+    return result;
+  }
+
+  /// Restores [items] from the Recycle bin and refreshes all relevant providers.
+  Future<List<DocFile>> restoreFromTrash(List<TrashItem> items) async {
+    final trashService = _ref.read(trashServiceProvider);
+    final result = await trashService.restoreItems(items);
+    if (result.isNotEmpty) {
+      invalidateAll();
+      _ref.invalidate(trashItemsProvider);
+      _ref.invalidate(trashCountProvider);
+    }
+    return result;
+  }
+
+  /// Permanently deletes [items] from the Recycle bin and refreshes providers.
+  Future<void> deleteForeverFromTrash(List<TrashItem> items) async {
+    final trashService = _ref.read(trashServiceProvider);
+    await trashService.deleteForever(items);
+    _ref.invalidate(trashItemsProvider);
+    _ref.invalidate(trashCountProvider);
+  }
+
+  /// Empties the entire Recycle bin and refreshes providers.
+  Future<int> emptyTrash() async {
+    final trashService = _ref.read(trashServiceProvider);
+    final count = await trashService.emptyTrash();
+    _ref.invalidate(trashItemsProvider);
+    _ref.invalidate(trashCountProvider);
+    return count;
+  }
+
   /// Shares one or multiple [files] via the system share sheet.
   Future<void> shareFiles(List<DocFile> files) async {
     final service = _ref.read(fileOperationsServiceProvider);
@@ -610,5 +654,31 @@ final recentSearchesProvider =
     AsyncNotifierProvider<RecentSearchesNotifier, List<String>>(
   RecentSearchesNotifier.new,
 );
+
+/// Trash service provider.
+final trashServiceProvider = Provider<TrashService>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  return TrashService(database: db);
+});
+
+/// Trash purge service provider.
+final trashPurgeServiceProvider = Provider<TrashPurgeService>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final trashService = ref.watch(trashServiceProvider);
+  return TrashPurgeService(database: db, trashService: trashService);
+});
+
+/// Provider exposing all active items held in the Recycle bin.
+final trashItemsProvider = FutureProvider<List<TrashItem>>((ref) async {
+  final trashService = ref.watch(trashServiceProvider);
+  return trashService.getAllTrashItems();
+});
+
+/// Provider exposing total count of documents in the Recycle bin.
+final trashCountProvider = FutureProvider<int>((ref) async {
+  final trashService = ref.watch(trashServiceProvider);
+  return trashService.getTrashCount();
+});
+
 
 

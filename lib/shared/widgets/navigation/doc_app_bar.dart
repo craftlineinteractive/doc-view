@@ -99,6 +99,8 @@ class DocSubAppBar extends StatelessWidget implements PreferredSizeWidget {
               : null),
       title: Text(
         title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: DocViewTypography.headlineSm.copyWith(
           color: tokens.textPrimary,
         ),

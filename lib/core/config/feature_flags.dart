@@ -13,7 +13,7 @@ const bool conversionsEnabled = false;
 const bool createPdfEnabled = true;
 
 /// Enables Recycle bin tool (Phase G4c).
-const bool recycleBinEnabled = false;
+const bool recycleBinEnabled = true;
 
 /// Enables PDF annotation tool (Phase G5).
 const bool annotateEnabled = false;
