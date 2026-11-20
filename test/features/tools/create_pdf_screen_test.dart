@@ -33,6 +33,7 @@ class _MockCreatePdfService implements CreatePdfService {
     required int pageCount,
     required String fileName,
     void Function(int done, int total)? onProgress,
+    bool compress = true,
   }) async {
     if (shouldFail) {
       throw const CreatePdfException(

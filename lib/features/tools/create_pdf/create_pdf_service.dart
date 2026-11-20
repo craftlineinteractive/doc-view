@@ -39,6 +39,7 @@ class CreatePdfParams {
     required this.pageCount,
     required this.title,
     this.progressSendPort,
+    this.compress = true,
   });
 
   final int templateIndex;
@@ -48,6 +49,7 @@ class CreatePdfParams {
   final int pageCount;
   final String title;
   final SendPort? progressSendPort;
+  final bool compress;
 }
 
 /// Top-level worker function executing inside a background isolate.
@@ -90,6 +92,7 @@ Future<Uint8List> compileTemplatePdfInWorker(CreatePdfParams params) async {
     title: params.title,
     author: 'Doc View',
     creator: 'Doc View',
+    compress: params.compress,
   );
 
   final pageFormat = pdflib.PdfPageFormat(widthPt, heightPt, marginAll: 0);
@@ -170,6 +173,7 @@ class CreatePdfService {
     required int pageCount,
     required String fileName,
     void Function(int done, int total)? onProgress,
+    bool compress = true,
   }) async {
     if (pageCount < 1 || pageCount > 100) {
       throw const CreatePdfException(CreatePdfErrorReason.pageCountOutOfRange);
@@ -202,6 +206,7 @@ class CreatePdfService {
         pageCount: pageCount,
         title: sanitizedName,
         progressSendPort: receivePort?.sendPort,
+        compress: compress,
       );
 
       final pdfBytes = await Isolate.run(() => compileTemplatePdfInWorker(params));
