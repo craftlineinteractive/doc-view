@@ -24,6 +24,7 @@ import '../../data/services/pdf/pdf_page_edit_service.dart';
 import '../../data/services/pdf/pdf_split_service.dart';
 import '../../data/services/permission_service.dart';
 import '../../data/services/scanner_service.dart';
+import '../tools/create_pdf/create_pdf_service.dart';
 
 export '../../core/router/app_router.dart' show routerProvider;
 
@@ -115,6 +116,12 @@ final pdfOutputServiceProvider = Provider<PdfOutputService>((ref) {
 final imageToPdfServiceProvider = Provider<ImageToPdfService>((ref) {
   final outputService = ref.watch(pdfOutputServiceProvider);
   return ImageToPdfService(outputService: outputService);
+});
+
+/// Create PDF service provider.
+final createPdfServiceProvider = Provider<CreatePdfService>((ref) {
+  final outputService = ref.watch(pdfOutputServiceProvider);
+  return CreatePdfService(outputService: outputService);
 });
 
 /// PDF merge service provider.
