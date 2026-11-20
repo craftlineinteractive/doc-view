@@ -280,3 +280,61 @@ This document catalogs every screen and bottom sheet added or restructured in **
 | **Dalvik Heap Allocation** | < 30 MB | **8.6 MB** (Sparse cell store footprint) | PASS |
 | **Native Heap Allocation** | < 120 MB | **55.8 MB** PSS (Image & text caches) | PASS |
 
+---
+
+## Phase G4a Tools Tab Redesign, Tool Registry & Shared File Picker
+
+### 15. Tools Tab (`lib/features/tools/tools_screen.dart`, route `/tools`)
+- **Structure & Layout**:
+  - Top AppBar: Localized overline `"WORKSPACE"` with headline `"Tools"`, and Search action button.
+  - Section headers: Uppercase tracked headers for `"CONVERT & CREATE"`, `"EDIT & MANAGE"`, `"OTHERS"`, and `"Created by you"`.
+  - Responsive Grid Layout:
+    - 4 columns by default on standard phone and tablet widths.
+    - 3 columns on narrow widths (< 340dp) or when accessibility text scale > 1.3x.
+    - 2 columns when text scale >= 2.0x to prevent label clipping and visual overcrowding.
+  - Responsive tile geometry via `ToolGridTile`:
+    - 64dp squircle icon container with hairline border and `surfaceAlt` fill.
+    - 36dp gradient icon container with custom linear gradients (`lib/core/theme/tool_gradients.dart`).
+    - Centered 2-line title underneath with constrained min-height and accessible touch target (>= 48x48dp).
+  - Shimmer loading state via `ToolGridSkeleton` when tool categories or created documents are initializing.
+
+### 16. Tool Registry (`lib/features/tools/tool_registry.dart`)
+- **Configuration & Feature Flags**:
+  - `ToolDef` data model specifying identifier, localized title/subtitle getters, section, gradient, route, icon, and feature flag.
+  - Compile-time feature flags in `lib/core/config/feature_flags.dart`:
+    - G4a Enabled Tools (7): Image to PDF, Scan to PDF, Manage Pages, Merge PDF, Split PDF, Import files, Print PDF.
+    - Gated Future Tools (7): Create PDF, Recycle Bin, Annotate PDF, Add Text, Sign PDF, Compress PDF, Word to PDF.
+  - Contract tests in `test/features/tools/tool_contract_test.dart` asserting exact registered tools, enabled tools, section distribution, and unique routes/keys.
+
+### 17. Shared PDF File Picker (`lib/features/tools/widgets/tool_file_picker_screen.dart`, route `/tools/pick`)
+- **Multi-Source Tabs & Navigation**:
+  - "All PDFs" (Media store / device PDFs).
+  - "Recent" (PDFs opened or modified recently).
+  - "Downloads" (Android) / "iCloud Drive" (iOS).
+- **Search & System Picker**:
+  - Inline search bar filtering documents by name in real time.
+  - "Browse files" button invoking the system file picker for documents outside media store locations.
+- **Selection Modes**:
+  - Single-select mode (Manage Pages, Split, Print PDF).
+  - Multi-select mode with checkboxes and counter `"X selected"` (Merge PDF, enforcing minimum selection count).
+- **Lazy Page Count Loading & Safety**:
+  - Lazy asynchronous PDF page count retrieval via `PdfPageCountService` with in-memory cache and Shimmer placeholder.
+  - Damaged or password-protected PDF files flagged with a warning pill badge (`"Password protected or damaged"`).
+
+### 18. Print PDF Service (`lib/features/tools/services/print_pdf_service.dart`)
+- Strictly encapsulates the `printing: ^5.15.1` package (Apache-2.0 License).
+- File size guard: documents larger than 50 MB are blocked with a typed `PrintPdfException(PrintPdfErrorReason.fileTooLarge)` and user-facing localized error SnackBar.
+- Safe printer dispatch with error translation for missing or corrupt files.
+
+### 19. QA Screenshots & Visual Evidence (Phase G4a)
+
+| View Description | Screenshot Artifact | Dimensions | File Size |
+|---|---|---|---|
+| **Tools Tab Normal (4 Columns)** | ![Tools Tab Normal](img/g4a/tools_tab_normal.png) | 1080 × 2400 | 227 KB |
+| **Tools Tab Large Font (3 Columns)** | ![Tools Tab Large](img/g4a/tools_tab_large_text.png) | 1080 × 2400 | 225 KB |
+| **Shared Tool File Picker Screen** | ![Tool Picker Screen](img/g4a/tool_picker_screen.png) | 1080 × 2400 | 221 KB |
+| **Manage Pages Screen Flow** | ![Manage Pages](img/g4a/manage_pages_screen.png) | 1080 × 2400 | 106 KB |
+| **Print PDF System Dispatch Flow** | ![Print Flow](img/g4a/print_flow.png) | 1080 × 2400 | 62 KB |
+| **Import Files System Picker Flow** | ![Import Flow](img/g4a/import_flow.png) | 648 × 1440 | 217 KB |
+
+

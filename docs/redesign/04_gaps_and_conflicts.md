@@ -105,6 +105,16 @@ Each entry is explicitly tagged with a proposed resolution:
 
 ---
 
+## 9. Phase G4a Tools Registry, Shared File Picker & Printing Capabilities
+
+| # | Feature / Area | Specification & Technical Finding | Resolution & UI Behavior | Status |
+| :- | :--- | :--- | :--- | :--- |
+| 9.1 | **Shared File Picker vs Legacy Pickers** | Tools require picking PDFs for single actions (Manage Pages, Split, Print) and multi-actions (Merge). Previous implementation used fragmented one-off pickers (`MergePdfPickerScreen`, `SplitPickerScreen`). | Built unified `ToolFilePickerScreen` (route `/tools/pick`) supporting single/multi selection, source tabs ("All PDFs", "Recent", "Downloads" / "iCloud Drive"), lazy page counts via `PdfPageCountService`, inline search, and "Browse files" button. Legacy pickers preserved for backward compatibility until subsequent phases. | `[implemented & verified]` |
+| 9.2 | **Print PDF File Size Limit (50 MB)** | Passing very large files to the system printing framework risks platform OOM crashes. | `PrintPdfService` enforces a strict 50 MB file size limit before invoking `Printing.layoutPdf()`. Throws typed `PrintPdfException(PrintPdfErrorReason.fileTooLarge)` rendered via localized SnackBar. | `[implemented & verified]` |
+| 9.3 | **Compile-Time Feature Flags for Gated Tools** | Design calls for future tools (Create PDF, Recycle Bin, Annotations, Compress, etc.) which are out of scope for G4a. | Configured compile-time feature flags in `lib/core/config/feature_flags.dart`. Registry dynamically filters out gated tools; verified via 7 contract tests in `tool_contract_test.dart`. | `[implemented & verified]` |
+
+---
+
 ## 4. Summary of Actions
 
 - **Total Items Categorized**: 29
