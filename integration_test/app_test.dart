@@ -1,6 +1,7 @@
 import 'package:docview/app.dart';
 import 'package:docview/core/constants/file_types.dart';
 import 'package:docview/features/providers/providers.dart';
+import 'package:docview/features/tools/tool_registry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -41,12 +42,12 @@ void main() {
     await tester.tap(toolsTab);
     await tester.pumpAndSettle();
 
-    // Verify Tools screen header and exactly 4 tool tiles
+    // Verify Tools screen header and registry-driven tool tiles
     expect(find.text('Tools'), findsOneWidget);
-    expect(find.byKey(const Key('tool_image_to_pdf')), findsOneWidget);
-    expect(find.byKey(const Key('tool_scan_to_pdf')), findsOneWidget);
-    expect(find.byKey(const Key('tool_merge_pdf')), findsOneWidget);
-    expect(find.byKey(const Key('tool_split_pdf')), findsOneWidget);
+    final visibleTools = getVisibleTools();
+    for (final tool in visibleTools) {
+      expect(find.byKey(Key('tool_${tool.id}')), findsOneWidget);
+    }
 
     final toolsCount = find.byWidgetPredicate((widget) {
       if (widget.key is ValueKey<String>) {
@@ -55,7 +56,7 @@ void main() {
       }
       return false;
     });
-    expect(toolsCount, findsNWidgets(4));
+    expect(toolsCount, findsNWidgets(visibleTools.length));
 
     // 3. Navigate back to All files / Home
     final filesTab = find.byIcon(Icons.folder);

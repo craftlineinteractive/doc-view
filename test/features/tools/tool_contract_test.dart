@@ -65,8 +65,8 @@ void main() {
       }
     });
 
-    test('Forbidden tools are strictly absent from registry', () {
-      final forbiddenKeywords = [
+    test('Forbidden tool ids are strictly absent from visible tools or registry', () {
+      final strictlyForbiddenFromRegistry = [
         'ocr',
         'compress',
         'password',
@@ -78,13 +78,33 @@ void main() {
       ];
 
       for (final tool in toolRegistry) {
-        for (final keyword in forbiddenKeywords) {
+        for (final keyword in strictlyForbiddenFromRegistry) {
           expect(
             tool.id.toLowerCase().contains(keyword),
             isFalse,
             reason: 'Tool id "${tool.id}" contains forbidden keyword "$keyword"',
           );
         }
+      }
+
+      final forbiddenFromVisible = [
+        'ocr',
+        'compress',
+        'protect',
+        'unlock',
+        'word_to_pdf',
+        'ppt_to_pdf',
+        'edit_text',
+        'template',
+      ];
+
+      final visibleIds = getVisibleTools().map((t) => t.id).toSet();
+      for (final id in forbiddenFromVisible) {
+        expect(
+          visibleIds.contains(id),
+          isFalse,
+          reason: 'Tool id "$id" must not be enabled/visible',
+        );
       }
     });
 
