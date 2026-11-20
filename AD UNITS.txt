@@ -1,0 +1,9 @@
+App ID: ca-app-pub-9274756665778143~4177098789
+
+Doc_View_Banner_1: ca-app-pub-9274756665778143/5579690695
+
+Doc_View_Interstitial_1: ca-app-pub-9274756665778143/9407702174
+
+Doc_View_Rewarded_1: ca-app-pub-9274756665778143/8864329589
+
+Doc_View_AppOpen_1: ca-app-pub-9274756665778143/8249699025
