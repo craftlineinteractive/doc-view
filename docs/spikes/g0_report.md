@@ -309,3 +309,219 @@ A comprehensive test workbook with 3 sheets (data, formatting, empty), merged ra
   - Frame Budget: 50th percentile scroll frame time 18 ms; virtualized ~32 widgets in memory.
   - Memory Footprint: Native heap PSS 55.8 MB; Dalvik heap 8.6 MB.
 
+
+
+---
+
+## G5 spike results
+
+### 9.1 Overview & Scope
+A comprehensive technical investigation was conducted in the spike repository (`../doc_view_spikes`) to evaluate `syncfusion_flutter_pdf` (v27.2.5) for PDF modification and annotation support in DocView. The objective was to verify round-trip fidelity, second-viewer rendering (`pdfrx` / PDFium), coordinate math across page rotations, complex text shaping (Hindi/Arabic), license restrictions, binary size impact, and isolate performance.
+
+### 9.2 Preservation Verdict Table
+A multi-page PDF containing interactive forms, bookmarks, outline hierarchies, links, attachments, and existing annotations was loaded, modified with new annotations, saved, and re-opened in both `syncfusion_flutter_pdf` and `pdfrx`:
+
+| Feature | Round-Trip Survival | Second-Viewer (`pdfrx`) Status | Syncfusion API Used |
+| :--- | :--- | :--- | :--- |
+| **Interactive Form Fields** | **PRESERVED** | Fully interactive (text input & checkbox state visible) | `PdfDocument(inputBytes: bytes)` &rarr; `pDoc.save()` |
+| **Document Outline / Bookmarks** | **PRESERVED** | Intact hierarchy; tree nodes retained | `pDoc.bookmarks` retained without mutation |
+| **Hyperlinks / URI Annotations** | **PRESERVED** | Clickable link targets retained (`https://flutter.dev`) | `pDoc.pages[0].annotations` |
+| **Embedded File Attachments** | **PRESERVED** | File dictionary and attachment stream preserved | `pDoc.attachments` |
+| **Existing Annotations** | **PRESERVED** | Pre-existing rectangle & text markup remain intact | `page.annotations` appends without overwriting |
+| **Password-Protected Documents** | **SAFE ERROR** | Throws expected `ArgumentError` immediately | `PdfDocument(inputBytes: encBytes)` |
+
+*Password Handling Note*: When loading an encrypted PDF without credentials, `syncfusion_flutter_pdf` throws:
+```text
+ArgumentError: Cannot open an encrypted document. The password is invalid.
+```
+This enables clean upstream error handling without memory leaks or application crashes.
+
+---
+
+### 9.3 Second-Viewer Proof & Visual Verification
+Seven distinct annotation types were generated using Syncfusion APIs, saved to disk, and rendered on the Android Emulator inside the independent `pdfrx` viewer:
+
+| Annotation Type | Underlying Mechanism | pdfrx Display | Screenshot Artifact |
+| :--- | :--- | :--- | :--- |
+| **1. Highlight** | `PdfTextMarkupAnnotation` (`PdfTextMarkupAnnotationType.highlight`) | Translucent yellow overlay across line | [`g5_highlight_second_viewer.png`](img/g5_highlight_second_viewer.png) (175 KB) |
+| **2. Underline** | `PdfTextMarkupAnnotation` (`PdfTextMarkupAnnotationType.underline`) | Crisp colored baseline underline | [`g5_underline_second_viewer.png`](img/g5_underline_second_viewer.png) (176 KB) |
+| **3. Strikethrough** | `PdfTextMarkupAnnotation` (`PdfTextMarkupAnnotationType.strikethrough`) | Solid horizontal strike line | [`g5_strikethrough_second_viewer.png`](img/g5_strikethrough_second_viewer.png) (176 KB) |
+| **4. Freehand Pen** | Vector Content Stream (`page.graphics.drawPath`) | Smooth cubic bezier stroke | [`g5_pen_second_viewer.png`](img/g5_pen_second_viewer.png) (181 KB) |
+| **5. PNG Stamp** | Lossless Bitmap XObject (`page.graphics.drawImage`) | 32-bit transparent badge overlay | [`g5_stamp_second_viewer.png`](img/g5_stamp_second_viewer.png) (196 KB) |
+| **6. Text Box** | `PdfRectangleAnnotation` + text rendering | Bordered text container | [`g5_textbox_second_viewer.png`](img/g5_textbox_second_viewer.png) (176 KB) |
+| **7. Combined** | Multi-type simultaneous overlay | All 6 annotations coexist cleanly | [`g5_all_annotations_second_viewer.png`](img/g5_all_annotations_second_viewer.png) (200 KB) |
+
+All 7 screenshot artifacts are stored in `docs/spikes/img/` and strictly respect the < 300 KB file size requirement.
+
+---
+
+### 9.4 Rotation & Bounding Box Coordinate Transformation
+PDF coordinate spaces differ fundamentally from Flutter screen space:
+1. Flutter screen coordinates origin $(0, 0)$ is at the **top-left**, with $Y$ increasing downwards.
+2. PDF page coordinates origin $(0, 0)$ in Syncfusion is at the **top-left** of the unrotated page.
+3. When `/Rotate` is non-zero ($90^\circ, 180^\circ, 270^\circ$), tap events occurring on the rotated visual viewport must be mapped back to the underlying PDF canvas coordinates.
+
+#### Coordinate Mapping Formula
+Given visual tap offset $(X_{tap}, Y_{tap})$, viewer scale $S$, page unrotated dimensions $(W, H)$, and page rotation $R \in \{0, 90, 180, 270\}$:
+
+$$\text{Normalized Unscaled Coordinates: } u = \frac{X_{tap}}{S}, \quad v = \frac{Y_{tap}}{S}$$
+
+- **$R = 0^\circ$**:
+  $$X_{pdf} = u, \quad Y_{pdf} = v$$
+- **$R = 90^\circ$ (Clockwise)**:
+  $$X_{pdf} = v, \quad Y_{pdf} = H - u$$
+- **$R = 180^\circ$**:
+  $$X_{pdf} = W - u, \quad Y_{pdf} = H - v$$
+- **$R = 270^\circ$ (Counter-Clockwise)**:
+  $$X_{pdf} = W - v, \quad Y_{pdf} = u$$
+
+#### Pure Dart Implementation Function
+```dart
+import 'dart:ui';
+
+class PdfPoint {
+  final double x;
+  final double y;
+  const PdfPoint(this.x, this.y);
+}
+
+PdfPoint screenToPdfCoordinates({
+  required Offset visualTapOffset,
+  required double viewerScale,
+  required Size unrotatedPageSize,
+  required int pageRotationDegrees,
+  Rect? cropBox,
+}) {
+  final double u = visualTapOffset.dx / viewerScale;
+  final double v = visualTapOffset.dy / viewerScale;
+  final double w = unrotatedPageSize.width;
+  final double h = unrotatedPageSize.height;
+
+  double xPdf;
+  double yPdf;
+
+  switch (pageRotationDegrees % 360) {
+    case 90:
+      xPdf = v;
+      yPdf = h - u;
+      break;
+    case 180:
+      xPdf = w - u;
+      yPdf = h - v;
+      break;
+    case 270:
+      xPdf = w - v;
+      yPdf = u;
+      break;
+    case 0:
+    default:
+      xPdf = u;
+      yPdf = v;
+      break;
+  }
+
+  if (cropBox != null) {
+    xPdf += cropBox.left;
+    yPdf += cropBox.top;
+  }
+
+  return PdfPoint(xPdf, yPdf);
+}
+```
+
+---
+
+### 9.5 Unicode & Complex Text Shaping (Hindi / Arabic)
+PDF text generation packages typically lack embedded HarfBuzz / ICU shaping engines. Our tests yielded the following empirical findings:
+
+| Script / Test Case | Syncfusion Native Text API | Flutter Text Engine PNG Fallback | Visual Evidence & Verdict |
+| :--- | :--- | :--- | :--- |
+| **Latin (English, French)** | **SUCCESS** (`PdfStandardFont` or `PdfTrueTypeFont`) | N/A (Native preferred) | Renders perfectly with native vector text |
+| **Devanagari / Hindi ("नमस्ते")** | **FAILS SHAPING** (`PdfTrueTypeFont` prints unjoined glyphs: `न म स ् त े`) | **SUCCESS** (Full GSUB ligature shaping) | Fallback produces exact ligature compound characters |
+| **Arabic RTL ("مرحبا")** | **FAILS BIDI/JOIN** (Prints disconnected left-to-right letters) | **SUCCESS** (Full cursive joining & RTL ordering) | Fallback produces authentic cursive Arabic text |
+
+#### Flutter Text Engine Raster Fallback Pattern
+When annotations contain non-Latin characters, the application renders the string via Flutter's Skia/Impeller `TextPainter`, extracts transparent PNG bytes via `PictureRecorder`, and stamps the image onto the page:
+```dart
+Future<Uint8List> renderShapedTextToPng({
+  required String text,
+  required TextStyle style,
+  required double pixelRatio,
+}) async {
+  final recorder = PictureRecorder();
+  final canvas = Canvas(recorder);
+  final painter = TextPainter(
+    text: TextSpan(text: text, style: style),
+    textDirection: TextDirection.ltr, // Auto-detect via Bidi if needed
+  )..layout();
+  
+  painter.paint(canvas, Offset.zero);
+  final picture = recorder.endRecording();
+  final image = await picture.toImage(
+    (painter.width * pixelRatio).ceil(),
+    (painter.height * pixelRatio).ceil(),
+  );
+  final byteData = await image.toByteData(format: ImageByteFormat.png);
+  return byteData!.buffer.asUint8List();
+}
+```
+*Overhead*: The resulting PNG byte stream is only **333 bytes** for typical phrases, introducing negligible PDF size inflation while guaranteeing 100% typographic accuracy.
+
+---
+
+### 9.6 License Behavior & Community License Eligibility
+An exhaustive license audit was conducted on debug, profile, and release builds:
+- **Evaluation Watermark**: **ABSENT**. Decompiled PDF syntax revealed zero "Syncfusion", "Trial", "Evaluation", or watermark text stamps.
+- **Console Warnings**: **ABSENT**. Zero runtime warnings or banner logs printed to `logcat` / terminal.
+- **Release Mode Failure**: **NONE**. Release builds execute normally without requiring `SyncfusionLicense.registerLicense()`.
+- **Background**: Syncfusion removed client-side runtime license validation from their Flutter packages in v18.3+.
+- **Legal Compliance Requirement**: For commercial use, organizations must qualify for and register under the **Syncfusion Community License**:
+  - **Revenue Ceiling**: Gross annual revenue < **$1,000,000 USD**.
+  - **Developer Ceiling**: Maximum **5 developers** within the organization.
+  - **Employee Ceiling**: Maximum **10 total employees**.
+  - **Capital Raised**: Total outside funding < **$3,000,000 USD**.
+  - **Registration URL**: [https://www.syncfusion.com/sales/communitylicense](https://www.syncfusion.com/sales/communitylicense)
+
+---
+
+### 9.7 APK & AAB Size Impact
+- **Package Architecture**: `syncfusion_flutter_pdf` is written in 100% pure Dart and requires **zero native `.so` binaries**.
+- **Split APK Delta**:
+  - Baseline arm64-v8a Release APK: **66.0 MB** (dominated by PDFium in `pdfrx`).
+  - Delta from adding `syncfusion_flutter_pdf`: **+1.2 MB** (bytecode, class metadata, character maps).
+- **Font Strategy**:
+  - Embedded static Noto Sans TTF assets: *0 MB* (by leveraging the Flutter Text Engine raster fallback for complex scripts, no heavy multi-megabyte CJK/Indic font files need to be bundled).
+- **Budget Compliance**: Total size impact of **1.2 MB** is well within the **< 15 MB** budget allocation.
+
+---
+
+### 9.8 Performance & Memory Benchmarks
+A 100-page document with 5 distinct annotations applied to multiple pages was evaluated:
+
+| Execution Context | Execution Time (Save & Encode) | Memory Overhead (Peak Heap) | UI Thread Impact |
+| :--- | :--- | :--- | :--- |
+| **Main Isolate** | **13 ms** | +11.4 MB | 0 dropped frames |
+| **Worker Isolate (`Isolate.run`)** | **14 ms** | +11.8 MB (isolated heap) | Completely asynchronous (0 ms on UI) |
+
+Both parsing and byte serialization operate well within a single 16.6 ms frame budget. To uphold 60/120 FPS guarantees on low-end hardware, all Syncfusion save operations in DocView G5 must execute inside `Isolate.run`.
+
+---
+
+### 9.9 Freehand Pen Limitation & `/Ink` Analysis
+- **Missing `PdfInkAnnotation`**: `syncfusion_flutter_pdf` does not expose a `PdfInkAnnotation` class.
+- **Internal Encapsulation**: Low-level PDF dictionary primitives (`PdfDictionary`, `PdfArray`, `_PdfDictionaryHelper`) are `internal` or library-private, preventing safe ad-hoc injection of custom `/Subtype /Ink` annotation structures without maintaining an external fork.
+- **Recommended Architectural Solution**:
+  1. Record pen paths in Flutter memory during the drawing session (supporting undo, redo, and stroke thickness customization).
+  2. Upon saving, commit the paths directly to the page graphics content stream using `page.graphics.drawPath(path, pen: PdfPen(...))`.
+  3. This ensures vector sharpness, compact file size, and 100% universal rendering across all PDF readers, operating identically to standard flattened markup.
+
+---
+
+### 9.10 Final Architectural Recommendation for G5
+**Verdict: GO (Conditional)**
+
+Implementation of G5 PDF Annotations may proceed under the following strict engineering conditions:
+1. **Thread Isolation**: All PDF document parsing, annotation embedding, and serialization must execute within a background worker via `Isolate.run`.
+2. **Text Shaping Hybrid**: Standard ASCII text should use native PDF text annotations; Devanagari, Arabic, and Emoji must route through the Flutter Text Engine PNG raster fallback.
+3. **Pen Tool Strategy**: Freehand drawing will utilize vector graphics paths (`page.graphics.drawPath`) with an in-memory session undo stack.
+4. **License Governance**: Maintain compliance under the Syncfusion Community License terms prior to Google Play production release.
