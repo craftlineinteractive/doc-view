@@ -218,6 +218,41 @@ enum PdfPageEditErrorReason {
   }
 }
 
+/// Categorized failure reasons for PDF annotation operations (Phase G5a).
+enum PdfAnnotationErrorReason {
+  sourceFileNotFound,
+  passwordProtected,
+  corruptDocument,
+  signedDocumentReplaceBlocked,
+  saveFailed;
+
+  String localizedMessage(BuildContext context, {String? details}) {
+    switch (this) {
+      case PdfAnnotationErrorReason.sourceFileNotFound:
+        return context.l10n.errorRenameSourceNotFound;
+      case PdfAnnotationErrorReason.passwordProtected:
+        return context.l10n.annotateErrorPasswordProtected;
+      case PdfAnnotationErrorReason.corruptDocument:
+        return context.l10n.annotateErrorCorrupt;
+      case PdfAnnotationErrorReason.signedDocumentReplaceBlocked:
+        return context.l10n.annotateSignedReplaceBlocked;
+      case PdfAnnotationErrorReason.saveFailed:
+        return context.l10n.annotateErrorSaveFailed(details ?? '');
+    }
+  }
+}
+
+/// Typed exception thrown by PDF annotation operations.
+class PdfAnnotationException implements Exception {
+  final PdfAnnotationErrorReason reason;
+  final String? message;
+
+  const PdfAnnotationException(this.reason, [this.message]);
+
+  @override
+  String toString() => 'PdfAnnotationException($reason, $message)';
+}
+
 /// Exception thrown by PDF page editing operations.
 class PdfPageEditException implements Exception {
   final PdfPageEditErrorReason reason;
