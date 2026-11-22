@@ -61,6 +61,7 @@ dependencies:
   url_launcher: ^6.3.3
   package_info_plus: ^10.2.2
   printing: ^5.15.1
+  syncfusion_flutter_pdf: 28.2.12
 dev_dependencies:
   flutter_test:
     sdk: flutter
