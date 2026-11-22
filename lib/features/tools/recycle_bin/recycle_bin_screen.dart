@@ -138,9 +138,22 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
     final messenger = ScaffoldMessenger.of(context);
     final l10n = context.l10n;
 
+    final showProgress = itemsToRestore.length > 5;
+    if (showProgress && mounted) {
+      ToolProgressDialog.show(
+        context,
+        title: l10n.trashSheetRestore,
+        message: l10n.trashDialogMoveProgress,
+      );
+    }
+
     final restored = await ref
         .read(fileActionsControllerProvider)
         .restoreFromTrash(itemsToRestore);
+
+    if (showProgress && mounted) {
+      Navigator.of(context, rootNavigator: true).pop();
+    }
 
     if (!mounted) return;
     setState(() {

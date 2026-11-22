@@ -3436,6 +3436,22 @@
   "@trashDialogEmptyProgress": {
     "description": "Progress message while emptying recycle bin"
   },
+  "trashDialogMoveProgress": "Moving files to Recycle bin...",
+  "@trashDialogMoveProgress": {
+    "description": "Progress message when moving more than 5 files to trash"
+  },
+  "trashDialogNotEnoughSpaceTitle": "Not enough storage space",
+  "@trashDialogNotEnoughSpaceTitle": {
+    "description": "Dialog title when moving to trash fails due to insufficient space"
+  },
+  "trashDialogNotEnoughSpaceBody": "There is not enough storage space to move to the Recycle bin. Free up space by emptying the bin.",
+  "@trashDialogNotEnoughSpaceBody": {
+    "description": "Dialog message when moving to trash fails due to insufficient space"
+  },
+  "trashActionFreeUpSpace": "Free up space",
+  "@trashActionFreeUpSpace": {
+    "description": "Action button to navigate to Recycle bin and free up space"
+  },
   "trashDialogDeleteForeverProgress": "Deleting files forever...",
   "@trashDialogDeleteForeverProgress": {
     "description": "Progress message while deleting files forever"
@@ -3443,6 +3459,26 @@
   "galleryDebugAgeTrash": "Age all trash items by 29 days",
   "@galleryDebugAgeTrash": {
     "description": "Debug action in component gallery to age trash items"
+  },
+  "galleryDebugSlowCopy": "Slow trash copy (testing)",
+  "@galleryDebugSlowCopy": {
+    "description": "Switch label to throttle copy loop in component gallery"
+  },
+  "galleryDebugSlowCopySubtitle": "Throttles copy loop to ~20 MB/s for kill testing",
+  "@galleryDebugSlowCopySubtitle": {
+    "description": "Subtitle describing slow copy throttle testing feature"
+  },
+  "galleryDebugMove190Mb": "Move 190MB test file to trash",
+  "@galleryDebugMove190Mb": {
+    "description": "Debug button to move 190MB test file to trash"
+  },
+  "galleryDebugRestoreLastTrash": "Restore last trash item",
+  "@galleryDebugRestoreLastTrash": {
+    "description": "Debug button to restore last trash item"
+  },
+  "galleryDebugEmptyTrash": "Empty Recycle bin",
+  "@galleryDebugEmptyTrash": {
+    "description": "Debug button to empty recycle bin"
   },
   "galleryDebugAgeTrashSuccess": "Aged {count, plural, =1{1 item} other{{count} items}} by 29 days",
   "@galleryDebugAgeTrashSuccess": {

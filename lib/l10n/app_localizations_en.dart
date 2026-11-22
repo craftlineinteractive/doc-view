@@ -2610,10 +2610,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trashDialogEmptyProgress => 'Emptying Recycle bin...';
 
   @override
+  String get trashDialogMoveProgress => 'Moving files to Recycle bin...';
+
+  @override
+  String get trashDialogNotEnoughSpaceTitle => 'Not enough storage space';
+
+  @override
+  String get trashDialogNotEnoughSpaceBody =>
+      'There is not enough storage space to move to the Recycle bin. Free up space by emptying the bin.';
+
+  @override
+  String get trashActionFreeUpSpace => 'Free up space';
+
+  @override
   String get trashDialogDeleteForeverProgress => 'Deleting files forever...';
 
   @override
   String get galleryDebugAgeTrash => 'Age all trash items by 29 days';
+
+  @override
+  String get galleryDebugSlowCopy => 'Slow trash copy (testing)';
+
+  @override
+  String get galleryDebugSlowCopySubtitle =>
+      'Throttles copy loop to ~20 MB/s for kill testing';
+
+  @override
+  String get galleryDebugMove190Mb => 'Move 190MB test file to trash';
+
+  @override
+  String get galleryDebugRestoreLastTrash => 'Restore last trash item';
+
+  @override
+  String get galleryDebugEmptyTrash => 'Empty Recycle bin';
 
   @override
   String galleryDebugAgeTrashSuccess(num count) {
@@ -5410,12 +5439,43 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   String get trashDialogEmptyProgress => '[Éɱþţýîñĝ Řéçýçłé ƀîñ... ẋẋẋẋẋẋẋ]';
 
   @override
+  String get trashDialogMoveProgress =>
+      '[Môṽîñĝ ƒîłéš ţô Řéçýçłé ƀîñ... ẋẋẋẋẋ]';
+
+  @override
+  String get trashDialogNotEnoughSpaceTitle =>
+      '[Ñôţ éñôûĝĥ šţôřàĝé šþàçé ẋẋẋẋẋẋ]';
+
+  @override
+  String get trashDialogNotEnoughSpaceBody =>
+      '[Ťĥéřé îš ñôţ éñôûĝĥ šţôřàĝé šþàçé ţô ɱôṽé ţô ţĥé Řéçýçłé ƀîñ. Ƒřéé ûþ šþàçé ƀý éɱþţýîñĝ ţĥé ƀîñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get trashActionFreeUpSpace => '[Ƒřéé ûþ šþàçé ẋẋẋẋẋ]';
+
+  @override
   String get trashDialogDeleteForeverProgress =>
       '[Ðéłéţîñĝ ƒîłéš ƒôřéṽéř... ẋẋẋẋẋẋẋ]';
 
   @override
   String get galleryDebugAgeTrash =>
       '[Âĝé àłł ţřàšĥ îţéɱš ƀý 29 đàýš ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugSlowCopy => '[Şłôŵ ţřàšĥ çôþý (ţéšţîñĝ) ẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugSlowCopySubtitle =>
+      '[Ţĥřôţţłéš çôþý łôôþ ţô ~20 MƁ/š ƒôř ƙîłł ţéšţîñĝ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugMove190Mb => '[Môṽé 190MƁ ţéšţ ƒîłé ţô ţřàšĥ ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugRestoreLastTrash => '[Řéšţôřé łàšţ ţřàšĥ îţéɱ ẋẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugEmptyTrash => '[Éɱþţý Řéçýçłé ƀîñ ẋẋẋẋẋ]';
 
   @override
   String galleryDebugAgeTrashSuccess(num count) {

@@ -3466,6 +3466,22 @@
   "@trashDialogEmptyProgress": {
     "description": "Progress message while emptying recycle bin"
   },
+  "trashDialogMoveProgress": "[Môṽîñĝ ƒîłéš ţô Řéçýçłé ƀîñ... ẋẋẋẋẋ]",
+  "@trashDialogMoveProgress": {
+    "description": "Progress message when moving more than 5 files to trash"
+  },
+  "trashDialogNotEnoughSpaceTitle": "[Ñôţ éñôûĝĥ šţôřàĝé šþàçé ẋẋẋẋẋẋ]",
+  "@trashDialogNotEnoughSpaceTitle": {
+    "description": "Dialog title when moving to trash fails due to insufficient space"
+  },
+  "trashDialogNotEnoughSpaceBody": "[Ťĥéřé îš ñôţ éñôûĝĥ šţôřàĝé šþàçé ţô ɱôṽé ţô ţĥé Řéçýçłé ƀîñ. Ƒřéé ûþ šþàçé ƀý éɱþţýîñĝ ţĥé ƀîñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashDialogNotEnoughSpaceBody": {
+    "description": "Dialog message when moving to trash fails due to insufficient space"
+  },
+  "trashActionFreeUpSpace": "[Ƒřéé ûþ šþàçé ẋẋẋẋẋ]",
+  "@trashActionFreeUpSpace": {
+    "description": "Action button to navigate to Recycle bin and free up space"
+  },
   "trashDialogDeleteForeverProgress": "[Ðéłéţîñĝ ƒîłéš ƒôřéṽéř... ẋẋẋẋẋẋẋ]",
   "@trashDialogDeleteForeverProgress": {
     "description": "Progress message while deleting files forever"
@@ -3473,6 +3489,26 @@
   "galleryDebugAgeTrash": "[Âĝé àłł ţřàšĥ îţéɱš ƀý 29 đàýš ẋẋẋẋẋẋẋẋẋ]",
   "@galleryDebugAgeTrash": {
     "description": "Debug action in component gallery to age trash items"
+  },
+  "galleryDebugSlowCopy": "[Şłôŵ ţřàšĥ çôþý (ţéšţîñĝ) ẋẋẋẋẋ]",
+  "@galleryDebugSlowCopy": {
+    "description": "Switch label to throttle copy loop in component gallery"
+  },
+  "galleryDebugSlowCopySubtitle": "[Ţĥřôţţłéš çôþý łôôþ ţô ~20 MƁ/š ƒôř ƙîłł ţéšţîñĝ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@galleryDebugSlowCopySubtitle": {
+    "description": "Subtitle describing slow copy throttle testing feature"
+  },
+  "galleryDebugMove190Mb": "[Môṽé 190MƁ ţéšţ ƒîłé ţô ţřàšĥ ẋẋẋẋẋẋẋ]",
+  "@galleryDebugMove190Mb": {
+    "description": "Debug button to move 190MB test file to trash"
+  },
+  "galleryDebugRestoreLastTrash": "[Řéšţôřé łàšţ ţřàšĥ îţéɱ ẋẋẋẋẋẋ]",
+  "@galleryDebugRestoreLastTrash": {
+    "description": "Debug button to restore last trash item"
+  },
+  "galleryDebugEmptyTrash": "[Éɱþţý Řéçýçłé ƀîñ ẋẋẋẋẋ]",
+  "@galleryDebugEmptyTrash": {
+    "description": "Debug button to empty recycle bin"
   },
   "galleryDebugAgeTrashSuccess": "[Âĝéđ {count, plural, =1{1 îţéɱ} other{{count} îţéɱš}} ƀý 29 đàýš ẋẋẋẋẋẋẋẋẋ]",
   "@galleryDebugAgeTrashSuccess": {

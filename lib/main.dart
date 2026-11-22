@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pdfrx/pdfrx.dart';
 
 import 'app.dart';
+import 'data/services/trash_service.dart';
 
 void main() {
   runZonedGuarded(() async {
@@ -14,6 +15,7 @@ void main() {
       debugPrint('[FlutterError] ${details.exceptionAsString()}');
     };
     await pdfrxFlutterInitialize();
+    await TrashService.initFromPrefs();
     runApp(
       const ProviderScope(
         child: DocReaderApp(),

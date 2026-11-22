@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/errors/app_errors.dart';
@@ -54,6 +55,54 @@ class TrashService {
   final Future<Directory> Function()? binDirectoryProvider;
   final Future<Directory> Function()? fallbackRestoreDirectoryProvider;
   final int _maxFileBytes;
+
+  static bool _slowCopyThrottleEnabled = false;
+
+  /// Debug-only switch to throttle copy operations to ~20 MB/s for testing kill resilience.
+  /// Always returns false in release builds via compile-time [kDebugMode] guard.
+  static bool get slowCopyThrottleEnabled => kDebugMode && _slowCopyThrottleEnabled;
+
+  static set slowCopyThrottleEnabled(bool value) {
+    if (kDebugMode) {
+      _slowCopyThrottleEnabled = value;
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setBool('debug_slow_trash_copy', value);
+      }).catchError((_) {});
+    }
+  }
+
+  /// Restores debug throttle setting from SharedPreferences at startup.
+  static Future<void> initFromPrefs() async {
+    if (kDebugMode) {
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        _slowCopyThrottleEnabled = prefs.getBool('debug_slow_trash_copy') ?? false;
+      } catch (_) {}
+    }
+  }
+
+  /// Verifies compile-time release guard logic in tests regardless of runner compile mode.
+  static bool isThrottleAllowed({required bool isDebug}) => isDebug && _slowCopyThrottleEnabled;
+
+  /// Throttled stream copy transferring data in chunks at ~20 MB/s (1 MB per 50 ms delay).
+  static Future<void> throttledCopy(File source, File dest) async {
+    final reader = source.openRead();
+    final sink = dest.openWrite();
+    int accumulatedBytes = 0;
+    try {
+      await for (final chunk in reader) {
+        sink.add(chunk);
+        accumulatedBytes += chunk.length;
+        if (accumulatedBytes >= 1024 * 1024) {
+          accumulatedBytes = 0;
+          await Future.delayed(const Duration(milliseconds: 50));
+        }
+      }
+      await sink.flush();
+    } finally {
+      await sink.close();
+    }
+  }
 
   /// Injectable failure hooks used exclusively by unit and failure-injection tests.
   /// Null in production and release builds.
@@ -159,6 +208,8 @@ class TrashService {
     try {
       if (testCopyHook != null) {
         await testCopyHook!(originalFile.path, partPath);
+      } else if (slowCopyThrottleEnabled) {
+        await throttledCopy(originalFile, partFile);
       } else {
         await originalFile.copy(partPath);
       }
@@ -389,6 +440,8 @@ class TrashService {
     try {
       if (testRestoreCopyHook != null) {
         await testRestoreCopyHook!(trashFile, partPath);
+      } else if (slowCopyThrottleEnabled) {
+        await throttledCopy(trashFile, partFile);
       } else {
         await trashFile.copy(partPath);
       }

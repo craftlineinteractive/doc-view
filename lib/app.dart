@@ -57,6 +57,9 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _runStartupLogic();
       _initOpenWithListener();
+      unawaited(
+        ref.read(trashPurgeServiceProvider).runAutoPurgeIfDue().catchError((_) => false),
+      );
     });
   }
 

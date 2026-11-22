@@ -569,5 +569,27 @@ void main() {
       final rows = await fakeDb.query(AppDatabase.tableTrash);
       expect(rows, isEmpty);
     });
+
+    test('slowCopyThrottleEnabled can never activate in release', () {
+      TrashService.slowCopyThrottleEnabled = true;
+      // In release builds isDebug would be false:
+      expect(TrashService.isThrottleAllowed(isDebug: false), isFalse);
+      // In debug builds with throttle set to true:
+      expect(TrashService.isThrottleAllowed(isDebug: true), isTrue);
+
+      TrashService.slowCopyThrottleEnabled = false;
+      expect(TrashService.isThrottleAllowed(isDebug: true), isFalse);
+      expect(TrashService.isThrottleAllowed(isDebug: false), isFalse);
+    });
+
+    test('throttledCopy copies full content accurately', () async {
+      final src = File(p.join(tempDir.path, 'source_file.txt'))..writeAsStringSync('Hello World 12345');
+      final dst = File(p.join(tempDir.path, 'dest_file.txt'));
+
+      await TrashService.throttledCopy(src, dst);
+
+      expect(dst.existsSync(), isTrue);
+      expect(dst.readAsStringSync(), 'Hello World 12345');
+    });
   });
 }

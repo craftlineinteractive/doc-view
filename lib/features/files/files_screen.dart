@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/config/feature_flags.dart';
 import '../../core/constants/file_types.dart';
+import '../../core/errors/app_errors.dart';
 import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_colors.dart';
@@ -20,6 +21,7 @@ import '../../shared/widgets/skeletons/skeleton_variants.dart';
 import '../../shared/widgets/status/doc_status_widgets.dart';
 import '../../shared/widgets/tiles/file_and_folder_rows.dart';
 import '../providers/providers.dart';
+import '../tools/widgets/tool_progress_dialog.dart';
 import 'controllers/selection_controller.dart';
 import 'open_document.dart';
 import 'widgets/file_options_sheet.dart';
@@ -85,8 +87,22 @@ class FilesScreen extends ConsumerWidget {
                   final l10n = context.l10n;
                   final actionsController =
                       ref.read(fileActionsControllerProvider);
+
+                  final showProgress = selectedFiles.length > 5;
+                  if (showProgress && context.mounted) {
+                    ToolProgressDialog.show(
+                      context,
+                      title: l10n.trashActionMove,
+                      message: l10n.trashDialogMoveProgress,
+                    );
+                  }
+
                   final result =
                       await actionsController.moveToTrash(selectedFiles);
+
+                  if (showProgress && context.mounted) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
 
                   ref.read(selectionProvider.notifier).clear();
 
@@ -108,14 +124,37 @@ class FilesScreen extends ConsumerWidget {
                       ),
                     );
                   } else {
-                    messenger.showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          result.firstErrorDetails ?? l10n.filesDeleteFailed,
+                    if (result.firstErrorReason == TrashErrorReason.notEnoughSpace) {
+                      showDialog<void>(
+                        context: context,
+                        builder: (spaceCtx) => AlertDialog(
+                          title: Text(l10n.trashDialogNotEnoughSpaceTitle),
+                          content: Text(l10n.trashDialogNotEnoughSpaceBody),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(spaceCtx).pop(),
+                              child: Text(l10n.actionCancel),
+                            ),
+                            FilledButton(
+                              onPressed: () {
+                                Navigator.of(spaceCtx).pop();
+                                context.push('/tools/recycle-bin');
+                              },
+                              child: Text(l10n.trashActionFreeUpSpace),
+                            ),
+                          ],
                         ),
-                        backgroundColor: DocViewColors.error,
-                      ),
-                    );
+                      );
+                    } else {
+                      messenger.showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            result.firstErrorDetails ?? l10n.filesDeleteFailed,
+                          ),
+                          backgroundColor: DocViewColors.error,
+                        ),
+                      );
+                    }
                   }
                 },
                 child: Text(context.l10n.trashActionMove),

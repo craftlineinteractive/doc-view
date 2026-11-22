@@ -79,6 +79,20 @@ class TrashDetailsSheet extends StatelessWidget {
             const SizedBox(height: 12),
             _buildDetailRow(
               context,
+              label: l10n.fileDetailsLabelType,
+              value: item.extension.toUpperCase(),
+            ),
+            const SizedBox(height: 12),
+            _buildDetailRow(
+              context,
+              label: l10n.fileDetailsLabelModified,
+              value: FormatUtils.formatDate(
+                DateTime.fromMillisecondsSinceEpoch(item.originalModifiedMs),
+              ),
+            ),
+            const SizedBox(height: 12),
+            _buildDetailRow(
+              context,
               label: l10n.trashDetailsOriginalLocation,
               value: item.originalPath,
             ),

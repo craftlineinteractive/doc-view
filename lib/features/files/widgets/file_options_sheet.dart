@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path/path.dart' as p;
 
@@ -415,7 +416,28 @@ class FileOptionsSheet extends ConsumerWidget {
                           ),
                         );
                       } else {
-                        if (result.firstErrorReason == TrashErrorReason.copyFailed ||
+                        if (result.firstErrorReason == TrashErrorReason.notEnoughSpace) {
+                          showDialog<void>(
+                            context: parentContext,
+                            builder: (spaceCtx) => AlertDialog(
+                              title: Text(parentContext.l10n.trashDialogNotEnoughSpaceTitle),
+                              content: Text(parentContext.l10n.trashDialogNotEnoughSpaceBody),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(spaceCtx).pop(),
+                                  child: Text(parentContext.l10n.actionCancel),
+                                ),
+                                FilledButton(
+                                  onPressed: () {
+                                    Navigator.of(spaceCtx).pop();
+                                    parentContext.push('/tools/recycle-bin');
+                                  },
+                                  child: Text(parentContext.l10n.trashActionFreeUpSpace),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else if (result.firstErrorReason == TrashErrorReason.copyFailed ||
                             result.firstErrorReason == TrashErrorReason.verifyFailed) {
                           showDialog<void>(
                             context: parentContext,

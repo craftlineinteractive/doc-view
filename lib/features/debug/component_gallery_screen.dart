@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/extensions/l10n_extension.dart';
 import '../../core/constants/file_types.dart';
+import '../../data/models/doc_file.dart';
 import '../../data/models/spreadsheet_data.dart';
 import '../providers/providers.dart';
 import '../../core/theme/app_icons.dart';
@@ -33,6 +36,7 @@ import '../../shared/widgets/tiles/file_and_folder_rows.dart';
 import '../../shared/widgets/tiles/file_type_badge.dart';
 import '../../shared/widgets/tools/doc_tool_widgets.dart';
 import '../../data/models/pdf_markup.dart';
+import '../../data/services/trash_service.dart';
 import '../tools/annotate/annotate_session_notifier.dart';
 import '../tools/annotate/widgets/annotate_toolbar.dart';
 import '../tools/annotate/widgets/selection_menu.dart';
@@ -684,6 +688,17 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        SwitchListTile.adaptive(
+                          title: Text(themedContext.l10n.galleryDebugSlowCopy),
+                          subtitle: Text(themedContext.l10n.galleryDebugSlowCopySubtitle),
+                          value: TrashService.slowCopyThrottleEnabled,
+                          onChanged: (val) {
+                            setState(() {
+                              TrashService.slowCopyThrottleEnabled = val;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 12),
                         FilledButton.icon(
                           onPressed: () async {
                             final count = await ref
@@ -708,6 +723,114 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                           ),
                           style: FilledButton.styleFrom(
                             backgroundColor: Colors.deepOrange,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        FilledButton.icon(
+                          onPressed: () async {
+                            const testFilePath = '/sdcard/Documents/kill_test_190mb.pdf';
+                            final testFile = File(testFilePath);
+                            if (!await testFile.exists()) {
+                              if (themedContext.mounted) {
+                                ScaffoldMessenger.of(themedContext).showSnackBar(
+                                  const SnackBar(content: Text('kill_test_190mb.pdf not found on disk')),
+                                );
+                              }
+                              return;
+                            }
+                            final stat = await testFile.stat();
+                            final doc = DocFile(
+                              path: testFilePath,
+                              name: 'kill_test_190mb.pdf',
+                              extension: 'pdf',
+                              sizeBytes: stat.size,
+                              modified: stat.modified,
+                              category: FileCategory.pdf,
+                            );
+                            debugPrint('[KILL_TEST] Starting move to trash at ${DateTime.now().toIso8601String()}');
+                            try {
+                              await ref.read(trashServiceProvider).moveSingleToTrash(doc);
+                              debugPrint('[KILL_TEST] Finished move to trash at ${DateTime.now().toIso8601String()}');
+                              ref.invalidate(trashItemsProvider);
+                              ref.invalidate(trashCountProvider);
+                              if (themedContext.mounted) {
+                                ScaffoldMessenger.of(themedContext).showSnackBar(
+                                  const SnackBar(content: Text('Successfully moved 190MB to trash')),
+                                );
+                              }
+                            } catch (e) {
+                              debugPrint('[KILL_TEST] Failed move to trash: $e');
+                              if (themedContext.mounted) {
+                                ScaffoldMessenger.of(themedContext).showSnackBar(
+                                  SnackBar(content: Text('Move failed: $e')),
+                                );
+                              }
+                            }
+                          },
+                          icon: const Icon(Icons.delete_sweep),
+                          label: Text(themedContext.l10n.galleryDebugMove190Mb),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.blueGrey,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        FilledButton.icon(
+                          onPressed: () async {
+                            final items = await ref.read(trashServiceProvider).getAllTrashItems();
+                            if (items.isEmpty) {
+                              if (themedContext.mounted) {
+                                ScaffoldMessenger.of(themedContext).showSnackBar(
+                                  const SnackBar(content: Text('Trash is empty')),
+                                );
+                              }
+                              return;
+                            }
+                            final target = items.first;
+                            debugPrint('[KILL_TEST] Starting restore at ${DateTime.now().toIso8601String()}');
+                            try {
+                              await ref.read(trashServiceProvider).restoreItem(target);
+                              debugPrint('[KILL_TEST] Finished restore at ${DateTime.now().toIso8601String()}');
+                              ref.invalidate(trashItemsProvider);
+                              ref.invalidate(trashCountProvider);
+                              if (themedContext.mounted) {
+                                ScaffoldMessenger.of(themedContext).showSnackBar(
+                                  SnackBar(content: Text('Restored ${target.originalName}')),
+                                );
+                              }
+                            } catch (e) {
+                              debugPrint('[KILL_TEST] Restore failed: $e');
+                            }
+                          },
+                          icon: const Icon(Icons.restore),
+                          label: Text(themedContext.l10n.galleryDebugRestoreLastTrash),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.teal,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        FilledButton.icon(
+                          onPressed: () async {
+                            debugPrint('[KILL_TEST] Starting empty trash at ${DateTime.now().toIso8601String()}');
+                            final count = await ref.read(trashServiceProvider).emptyTrash();
+                            debugPrint('[KILL_TEST] Finished empty trash ($count items) at ${DateTime.now().toIso8601String()}');
+                            ref.invalidate(trashItemsProvider);
+                            ref.invalidate(trashCountProvider);
+                            if (themedContext.mounted) {
+                              ScaffoldMessenger.of(themedContext).showSnackBar(
+                                SnackBar(content: Text('Emptied $count items')),
+                              );
+                            }
+                          },
+                          icon: const Icon(Icons.delete_forever),
+                          label: Text(themedContext.l10n.galleryDebugEmptyTrash),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.redAccent,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 12),
                           ),

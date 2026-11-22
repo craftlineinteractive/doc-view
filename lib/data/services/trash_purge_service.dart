@@ -126,7 +126,10 @@ class TrashPurgeService {
   }
 
   /// Automatically executes purge and consistency check if at least 6 hours have passed since last run.
+  /// Consistency check always executes to clean up any abandoned .part files or ghost rows immediately.
   Future<bool> runAutoPurgeIfDue({DateTime? now}) async {
+    await checkConsistency();
+
     final prefs = await _getPrefs();
     final lastPurgeMs = prefs.getInt(keyLastTrashPurgeTime);
     final currentTime = now ?? DateTime.now();
@@ -139,7 +142,6 @@ class TrashPurgeService {
     }
 
     await purgeExpired(now: currentTime);
-    await checkConsistency();
 
     await prefs.setInt(keyLastTrashPurgeTime, currentTime.millisecondsSinceEpoch);
     return true;

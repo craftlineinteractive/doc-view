@@ -4279,6 +4279,30 @@ abstract class AppLocalizations {
   /// **'Emptying Recycle bin...'**
   String get trashDialogEmptyProgress;
 
+  /// Progress message when moving more than 5 files to trash
+  ///
+  /// In en, this message translates to:
+  /// **'Moving files to Recycle bin...'**
+  String get trashDialogMoveProgress;
+
+  /// Dialog title when moving to trash fails due to insufficient space
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough storage space'**
+  String get trashDialogNotEnoughSpaceTitle;
+
+  /// Dialog message when moving to trash fails due to insufficient space
+  ///
+  /// In en, this message translates to:
+  /// **'There is not enough storage space to move to the Recycle bin. Free up space by emptying the bin.'**
+  String get trashDialogNotEnoughSpaceBody;
+
+  /// Action button to navigate to Recycle bin and free up space
+  ///
+  /// In en, this message translates to:
+  /// **'Free up space'**
+  String get trashActionFreeUpSpace;
+
   /// Progress message while deleting files forever
   ///
   /// In en, this message translates to:
@@ -4290,6 +4314,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Age all trash items by 29 days'**
   String get galleryDebugAgeTrash;
+
+  /// Switch label to throttle copy loop in component gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Slow trash copy (testing)'**
+  String get galleryDebugSlowCopy;
+
+  /// Subtitle describing slow copy throttle testing feature
+  ///
+  /// In en, this message translates to:
+  /// **'Throttles copy loop to ~20 MB/s for kill testing'**
+  String get galleryDebugSlowCopySubtitle;
+
+  /// Debug button to move 190MB test file to trash
+  ///
+  /// In en, this message translates to:
+  /// **'Move 190MB test file to trash'**
+  String get galleryDebugMove190Mb;
+
+  /// Debug button to restore last trash item
+  ///
+  /// In en, this message translates to:
+  /// **'Restore last trash item'**
+  String get galleryDebugRestoreLastTrash;
+
+  /// Debug button to empty recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Empty Recycle bin'**
+  String get galleryDebugEmptyTrash;
 
   /// Success message after aging trash items in component gallery
   ///
