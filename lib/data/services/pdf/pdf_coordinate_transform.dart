@@ -102,6 +102,43 @@ class PdfCoordinateTransform {
     return Rect.fromLTWH(syncLeft, syncTop, syncWidth, syncHeight);
   }
 
+  /// Converts a visual [Offset] point on a rendered page (Flutter top-left coordinate space)
+  /// into the [Offset] in Syncfusion PDF page space.
+  static Offset visualToSyncfusionPoint({
+    required Offset visualPoint,
+    required double visualWidth,
+    required double visualHeight,
+    required int rotationDegrees,
+    Rect? cropBox,
+  }) {
+    final rect = visualToSyncfusionRect(
+      visualRect: Rect.fromLTWH(visualPoint.dx, visualPoint.dy, 0, 0),
+      visualWidth: visualWidth,
+      visualHeight: visualHeight,
+      rotationDegrees: rotationDegrees,
+      cropBox: cropBox,
+    );
+    return Offset(rect.left, rect.top);
+  }
+
+  /// Converts a Syncfusion [Offset] back to a visual [Offset] on the rendered page.
+  static Offset syncfusionToVisualPoint({
+    required Offset syncfusionPoint,
+    required double visualWidth,
+    required double visualHeight,
+    required int rotationDegrees,
+    Rect? cropBox,
+  }) {
+    final rect = syncfusionToVisualRect(
+      syncfusionRect: Rect.fromLTWH(syncfusionPoint.dx, syncfusionPoint.dy, 0, 0),
+      visualWidth: visualWidth,
+      visualHeight: visualHeight,
+      rotationDegrees: rotationDegrees,
+      cropBox: cropBox,
+    );
+    return Offset(rect.left, rect.top);
+  }
+
   /// Converts a Syncfusion [Rect] back to a visual [Rect] on the rendered page.
   static Rect syncfusionToVisualRect({
     required Rect syncfusionRect,

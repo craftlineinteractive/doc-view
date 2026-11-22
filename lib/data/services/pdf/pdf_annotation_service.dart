@@ -13,7 +13,9 @@ import 'package:syncfusion_flutter_pdf/src/pdf/implementation/primitives/pdf_nam
 import 'package:syncfusion_flutter_pdf/src/pdf/implementation/primitives/pdf_number.dart' as sf_prim;
 
 import '../../../core/errors/app_errors.dart';
+import '../../models/ink_stroke.dart';
 import '../../models/pdf_markup.dart';
+import '../../models/placed_signature.dart';
 import 'pdf_coordinate_transform.dart';
 
 /// Metadata inspection results for a PDF document.
@@ -59,7 +61,9 @@ class PdfAnnotationService {
   final Future<File> Function({
     required String sourcePath,
     required String outputPath,
-    required List<TextMarkup> markups,
+    List<TextMarkup> markups,
+    List<InkStroke> strokes,
+    List<PlacedSignature> signatures,
     String? password,
     bool replaceOriginal,
     String? originalPath,
@@ -95,7 +99,7 @@ class PdfAnnotationService {
     return Isolate.run(() => _runGetDocumentInfo(params));
   }
 
-  /// Applies [markups] to [sourcePath] and saves the annotated PDF to [outputPath].
+  /// Applies [markups], [strokes], and [signatures] to [sourcePath] and saves to [outputPath].
   ///
   /// If [replaceOriginal] is true, writes to a temporary file first and atomically
   /// replaces [originalPath] (or [outputPath] if [originalPath] is null).
@@ -105,7 +109,9 @@ class PdfAnnotationService {
   Future<File> saveAnnotations({
     required String sourcePath,
     required String outputPath,
-    required List<TextMarkup> markups,
+    List<TextMarkup> markups = const [],
+    List<InkStroke> strokes = const [],
+    List<PlacedSignature> signatures = const [],
     String? password,
     bool replaceOriginal = false,
     String? originalPath,
@@ -115,6 +121,8 @@ class PdfAnnotationService {
         sourcePath: sourcePath,
         outputPath: outputPath,
         markups: markups,
+        strokes: strokes,
+        signatures: signatures,
         password: password,
         replaceOriginal: replaceOriginal,
         originalPath: originalPath,
@@ -130,11 +138,15 @@ class PdfAnnotationService {
     }
 
     final rawMarkups = markups.map((m) => m.toMap()).toList(growable: false);
+    final rawStrokes = strokes.map((s) => s.toMap()).toList(growable: false);
+    final rawSignatures = signatures.map((s) => s.toMap()).toList(growable: false);
 
     final params = _SaveAnnotationsParams(
       sourcePath: sourcePath,
       outputPath: outputPath,
       markups: rawMarkups,
+      strokes: rawStrokes,
+      signatures: rawSignatures,
       password: password,
       replaceOriginal: replaceOriginal,
       originalPath: originalPath ?? (replaceOriginal ? outputPath : null),
@@ -163,6 +175,8 @@ class _SaveAnnotationsParams {
   final String sourcePath;
   final String outputPath;
   final List<Map<String, dynamic>> markups;
+  final List<Map<String, dynamic>> strokes;
+  final List<Map<String, dynamic>> signatures;
   final String? password;
   final bool replaceOriginal;
   final String? originalPath;
@@ -170,7 +184,9 @@ class _SaveAnnotationsParams {
   const _SaveAnnotationsParams({
     required this.sourcePath,
     required this.outputPath,
-    required this.markups,
+    this.markups = const [],
+    this.strokes = const [],
+    this.signatures = const [],
     this.password,
     this.replaceOriginal = false,
     this.originalPath,
@@ -317,8 +333,10 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
   }
 
   final parsedMarkups = params.markups.map((m) => TextMarkup.fromMap(m)).toList();
+  final parsedStrokes = params.strokes.map((s) => InkStroke.fromMap(s)).toList();
+  final parsedSignatures = params.signatures.map((s) => PlacedSignature.fromMap(s)).toList();
 
-  // Group markups by page index
+  // Group items by page index
   final markupsByPage = <int, List<TextMarkup>>{};
   for (final m in parsedMarkups) {
     if (m.pageIndex >= 0 && m.pageIndex < pageCount) {
@@ -326,8 +344,29 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
     }
   }
 
-  for (final entry in markupsByPage.entries) {
-    final pageIndex = entry.key;
+  final strokesByPage = <int, List<InkStroke>>{};
+  for (final s in parsedStrokes) {
+    if (s.pageIndex >= 0 && s.pageIndex < pageCount) {
+      strokesByPage.putIfAbsent(s.pageIndex, () => []).add(s);
+    }
+  }
+
+  final signaturesByPage = <int, List<PlacedSignature>>{};
+  for (final sig in parsedSignatures) {
+    if (sig.pageIndex >= 0 && sig.pageIndex < pageCount) {
+      signaturesByPage.putIfAbsent(sig.pageIndex, () => []).add(sig);
+    }
+  }
+
+  for (var pageIndex = 0; pageIndex < pageCount; pageIndex++) {
+    final pageMarkups = markupsByPage[pageIndex] ?? const [];
+    final pageStrokes = strokesByPage[pageIndex] ?? const [];
+    final pageSigs = signaturesByPage[pageIndex] ?? const [];
+
+    if (pageMarkups.isEmpty && pageStrokes.isEmpty && pageSigs.isEmpty) {
+      continue;
+    }
+
     final page = doc.pages[pageIndex];
     final rotDegrees = _getRotationDegrees(page.rotation);
     final cropBox = _getPageCropBox(page);
@@ -339,7 +378,8 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
         ? page.size.width
         : page.size.height;
 
-    for (final markup in entry.value) {
+    // 1. Text Markups
+    for (final markup in pageMarkups) {
       final syncLines = markup.lineRects.map((visualRect) {
         return PdfCoordinateTransform.visualToSyncfusionRect(
           visualRect: visualRect,
@@ -383,6 +423,80 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
       );
 
       page.annotations.add(sfAnnotation);
+    }
+
+    // 2. Ink Strokes
+    for (final stroke in pageStrokes) {
+      final color = Color(stroke.colorValue);
+      final sfColor = sf.PdfColor(
+        (color.r * 255.0).round(),
+        (color.g * 255.0).round(),
+        (color.b * 255.0).round(),
+      );
+
+      if (stroke.isDot || stroke.points.length <= 1) {
+        if (stroke.points.isNotEmpty) {
+          final syncPt = PdfCoordinateTransform.visualToSyncfusionPoint(
+            visualPoint: stroke.points.first,
+            visualWidth: visualWidth,
+            visualHeight: visualHeight,
+            rotationDegrees: rotDegrees,
+            cropBox: cropBox,
+          );
+          final r = math.max(stroke.strokeWidth / 2, 1.0);
+          page.graphics.drawEllipse(
+            Rect.fromCircle(center: syncPt, radius: r),
+            brush: sf.PdfSolidBrush(sfColor),
+          );
+        }
+      } else {
+        final syncPts = stroke.points.map((pt) {
+          return PdfCoordinateTransform.visualToSyncfusionPoint(
+            visualPoint: pt,
+            visualWidth: visualWidth,
+            visualHeight: visualHeight,
+            rotationDegrees: rotDegrees,
+            cropBox: cropBox,
+          );
+        }).toList();
+
+        final path = sf.PdfPath();
+        for (var i = 0; i < syncPts.length - 1; i++) {
+          path.addLine(syncPts[i], syncPts[i + 1]);
+        }
+        final pen = sf.PdfPen(sfColor, width: stroke.strokeWidth)
+          ..lineCap = sf.PdfLineCap.round
+          ..lineJoin = sf.PdfLineJoin.round;
+        page.graphics.drawPath(path, pen: pen);
+      }
+    }
+
+    // 3. Placed Signatures
+    for (final sig in pageSigs) {
+      final syncBounds = PdfCoordinateTransform.visualToSyncfusionRect(
+        visualRect: sig.bounds,
+        visualWidth: visualWidth,
+        visualHeight: visualHeight,
+        rotationDegrees: rotDegrees,
+        cropBox: cropBox,
+      );
+
+      if (sig.isDate && sig.dateText != null) {
+        final font = sf.PdfStandardFont(sf.PdfFontFamily.helvetica, 14);
+        page.graphics.drawString(
+          sig.dateText!,
+          font,
+          bounds: syncBounds,
+          brush: sf.PdfSolidBrush(sf.PdfColor(0, 0, 0)),
+          format: sf.PdfStringFormat(
+            alignment: sf.PdfTextAlignment.center,
+            lineAlignment: sf.PdfVerticalAlignment.middle,
+          ),
+        );
+      } else if (sig.pngBytes != null && sig.pngBytes!.isNotEmpty) {
+        final bitmap = sf.PdfBitmap(sig.pngBytes!);
+        page.graphics.drawImage(bitmap, syncBounds);
+      }
     }
   }
 
