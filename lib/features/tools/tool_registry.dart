@@ -114,6 +114,16 @@ final List<ToolDef> toolRegistry = <ToolDef>[
 
   // --- Section 2: Edit & Manage ---
   ToolDef(
+    id: 'annotate',
+    section: ToolSection.editAndManage,
+    title: (l10n) => l10n.toolAnnotate,
+    subtitle: (l10n) => l10n.toolAnnotateSub,
+    icon: Icons.edit_note_outlined,
+    gradient: ToolGradients.annotate,
+    route: '/tools/annotate',
+    isEnabled: () => annotateEnabled,
+  ),
+  ToolDef(
     id: 'manage_pages',
     section: ToolSection.editAndManage,
     title: (l10n) => l10n.toolManagePages,
@@ -142,15 +152,6 @@ final List<ToolDef> toolRegistry = <ToolDef>[
     gradient: ToolGradients.splitPdf,
     route: null, // Handled via picker in screen
     isEnabled: () => true,
-  ),
-  ToolDef(
-    id: 'annotate',
-    section: ToolSection.editAndManage,
-    title: (l10n) => l10n.toolAnnotate,
-    subtitle: (l10n) => l10n.toolAnnotateSub,
-    icon: Icons.edit_note_outlined,
-    gradient: ToolGradients.annotate,
-    isEnabled: () => annotateEnabled,
   ),
   ToolDef(
     id: 'add_text',

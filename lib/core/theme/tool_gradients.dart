@@ -65,11 +65,11 @@ abstract final class ToolGradients {
     colors: [Color(0xFF94A3B8), Color(0xFF64748B)],
   );
 
-  /// Pink to deep rose gradient for Annotate tool (Phase G5).
+  /// Amber gradient for Annotate tool (Phase G5a).
   static const LinearGradient annotate = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFFEC4899), Color(0xFFBE185D)],
+    colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
   );
 
   /// Purple to violet gradient for Add Text tool (Phase G5).

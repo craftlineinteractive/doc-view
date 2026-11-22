@@ -4296,6 +4296,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Aged {count, plural, =1{1 item} other{{count} items}} by 29 days'**
   String galleryDebugAgeTrashSuccess(num count);
+
+  /// Error message when attempting to annotate a password-protected PDF
+  ///
+  /// In en, this message translates to:
+  /// **'This PDF is password-protected.'**
+  String get annotateErrorPasswordProtected;
+
+  /// Error message when a PDF file is invalid or corrupt
+  ///
+  /// In en, this message translates to:
+  /// **'This PDF is corrupted or cannot be read.'**
+  String get annotateErrorCorrupt;
+
+  /// Warning message when trying to overwrite a digitally signed PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Replacing the original signed PDF is not permitted. Please save as a new file.'**
+  String get annotateSignedReplaceBlocked;
+
+  /// Error message when saving annotations fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save annotations: {details}'**
+  String annotateErrorSaveFailed(String details);
+
+  /// Notice when no selectable text is found on the current page
+  ///
+  /// In en, this message translates to:
+  /// **'This document appears to be scanned or contains no selectable text.'**
+  String get annotateErrorScannedPdf;
+
+  /// Warning banner displayed when editing a digitally signed PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Digitally signed PDF: Saving will create a new copy to preserve the signature.'**
+  String get annotateSignedBanner;
+
+  /// Action button in save dialog to save annotated PDF as a copy
+  ///
+  /// In en, this message translates to:
+  /// **'Save as new file'**
+  String get annotateActionSaveNew;
+
+  /// Action button in save dialog to overwrite original PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Replace original'**
+  String get annotateActionReplace;
+
+  /// Title of confirmation dialog when exiting with unsaved annotations
+  ///
+  /// In en, this message translates to:
+  /// **'Discard unsaved annotations?'**
+  String get annotateDiscardDialogTitle;
+
+  /// Body of confirmation dialog when exiting with unsaved annotations
+  ///
+  /// In en, this message translates to:
+  /// **'You have unsaved markups. If you exit now, your changes will be lost.'**
+  String get annotateDiscardDialogBody;
+
+  /// Action button to discard unsaved annotations
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get annotateDiscardDialogActionDiscard;
+
+  /// Action button to stay on annotate screen and keep editing
+  ///
+  /// In en, this message translates to:
+  /// **'Keep editing'**
+  String get annotateDiscardDialogActionKeep;
+
+  /// Snackbar message shown after saving annotations
+  ///
+  /// In en, this message translates to:
+  /// **'Annotations saved successfully'**
+  String get annotateSaveSuccess;
+
+  /// Toolbar label and action for highlight markup
+  ///
+  /// In en, this message translates to:
+  /// **'Highlight'**
+  String get annotateToolbarHighlight;
+
+  /// Toolbar label and action for underline markup
+  ///
+  /// In en, this message translates to:
+  /// **'Underline'**
+  String get annotateToolbarUnderline;
+
+  /// Toolbar label and action for strikethrough markup
+  ///
+  /// In en, this message translates to:
+  /// **'Strikethrough'**
+  String get annotateToolbarStrikethrough;
+
+  /// Context menu action to copy selected text
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get annotateToolbarCopy;
+
+  /// Semantic name for yellow markup color
+  ///
+  /// In en, this message translates to:
+  /// **'Yellow'**
+  String get annotateColorYellow;
+
+  /// Semantic name for green markup color
+  ///
+  /// In en, this message translates to:
+  /// **'Green'**
+  String get annotateColorGreen;
+
+  /// Semantic name for cyan markup color
+  ///
+  /// In en, this message translates to:
+  /// **'Cyan'**
+  String get annotateColorCyan;
+
+  /// Semantic name for pink markup color
+  ///
+  /// In en, this message translates to:
+  /// **'Pink'**
+  String get annotateColorPink;
+
+  /// Semantic name for orange markup color
+  ///
+  /// In en, this message translates to:
+  /// **'Orange'**
+  String get annotateColorOrange;
+
+  /// Title of save options dialog or progress dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Save annotations'**
+  String get annotateSaveTitle;
+
+  /// Progress message while saving annotations
+  ///
+  /// In en, this message translates to:
+  /// **'Saving annotations...'**
+  String get annotateSaveProgress;
+
+  /// Notice when save is triggered with no markup changes
+  ///
+  /// In en, this message translates to:
+  /// **'No annotations to save'**
+  String get annotateNoChanges;
+
+  /// Tooltip for undo annotation action
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get annotateTooltipUndo;
+
+  /// Tooltip for redo annotation action
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get annotateTooltipRedo;
+
+  /// Tooltip for save annotations button
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get annotateTooltipSave;
+
+  /// Message displayed when text is copied to clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get annotateCopiedToClipboard;
 }
 
 class _AppLocalizationsDelegate

@@ -19,6 +19,7 @@ import '../../features/settings/settings_screen.dart';
 import '../../features/shell/main_shell.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/tools/create_pdf/create_pdf_screen.dart';
+import '../../features/tools/annotate/annotate_screen.dart';
 import '../../features/tools/created_documents_screen.dart';
 import '../../features/tools/recycle_bin/recycle_bin_screen.dart';
 import '../../features/tools/tools_screen.dart';
@@ -116,6 +117,17 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'tools-create-pdf',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const CreatePdfScreen(),
+      ),
+      GoRoute(
+        path: '/tools/annotate',
+        name: 'tools-annotate',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return AnnotateScreen(
+            initialFilePath: extra?['filePath'] as String?,
+          );
+        },
       ),
       GoRoute(
         path: '/tools/recycle-bin',

@@ -88,6 +88,20 @@ class ToolsScreen extends ConsumerWidget {
     }
   }
 
+  Future<void> _onAnnotate(BuildContext context) async {
+    final picked = await ToolFilePickerScreen.pickSingle(
+      context,
+      title: context.l10n.toolAnnotate,
+    );
+
+    if (picked != null && context.mounted) {
+      context.push(
+        '/tools/annotate',
+        extra: {'filePath': picked.path},
+      );
+    }
+  }
+
   Future<void> _onManagePages(BuildContext context) async {
     final picked = await ToolFilePickerScreen.pickSingle(
       context,
@@ -195,6 +209,9 @@ class ToolsScreen extends ConsumerWidget {
         break;
       case 'scan_to_pdf':
         _onScanToPdf(context);
+        break;
+      case 'annotate':
+        _onAnnotate(context);
         break;
       case 'manage_pages':
         _onManagePages(context);

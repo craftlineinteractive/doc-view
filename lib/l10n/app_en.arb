@@ -3452,5 +3452,126 @@
         "type": "num"
       }
     }
+  },
+  "annotateErrorPasswordProtected": "This PDF is password-protected.",
+  "@annotateErrorPasswordProtected": {
+    "description": "Error message when attempting to annotate a password-protected PDF"
+  },
+  "annotateErrorCorrupt": "This PDF is corrupted or cannot be read.",
+  "@annotateErrorCorrupt": {
+    "description": "Error message when a PDF file is invalid or corrupt"
+  },
+  "annotateSignedReplaceBlocked": "Replacing the original signed PDF is not permitted. Please save as a new file.",
+  "@annotateSignedReplaceBlocked": {
+    "description": "Warning message when trying to overwrite a digitally signed PDF"
+  },
+  "annotateErrorSaveFailed": "Failed to save annotations: {details}",
+  "@annotateErrorSaveFailed": {
+    "description": "Error message when saving annotations fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "annotateErrorScannedPdf": "This document appears to be scanned or contains no selectable text.",
+  "@annotateErrorScannedPdf": {
+    "description": "Notice when no selectable text is found on the current page"
+  },
+  "annotateSignedBanner": "Digitally signed PDF: Saving will create a new copy to preserve the signature.",
+  "@annotateSignedBanner": {
+    "description": "Warning banner displayed when editing a digitally signed PDF"
+  },
+  "annotateActionSaveNew": "Save as new file",
+  "@annotateActionSaveNew": {
+    "description": "Action button in save dialog to save annotated PDF as a copy"
+  },
+  "annotateActionReplace": "Replace original",
+  "@annotateActionReplace": {
+    "description": "Action button in save dialog to overwrite original PDF"
+  },
+  "annotateDiscardDialogTitle": "Discard unsaved annotations?",
+  "@annotateDiscardDialogTitle": {
+    "description": "Title of confirmation dialog when exiting with unsaved annotations"
+  },
+  "annotateDiscardDialogBody": "You have unsaved markups. If you exit now, your changes will be lost.",
+  "@annotateDiscardDialogBody": {
+    "description": "Body of confirmation dialog when exiting with unsaved annotations"
+  },
+  "annotateDiscardDialogActionDiscard": "Discard",
+  "@annotateDiscardDialogActionDiscard": {
+    "description": "Action button to discard unsaved annotations"
+  },
+  "annotateDiscardDialogActionKeep": "Keep editing",
+  "@annotateDiscardDialogActionKeep": {
+    "description": "Action button to stay on annotate screen and keep editing"
+  },
+  "annotateSaveSuccess": "Annotations saved successfully",
+  "@annotateSaveSuccess": {
+    "description": "Snackbar message shown after saving annotations"
+  },
+  "annotateToolbarHighlight": "Highlight",
+  "@annotateToolbarHighlight": {
+    "description": "Toolbar label and action for highlight markup"
+  },
+  "annotateToolbarUnderline": "Underline",
+  "@annotateToolbarUnderline": {
+    "description": "Toolbar label and action for underline markup"
+  },
+  "annotateToolbarStrikethrough": "Strikethrough",
+  "@annotateToolbarStrikethrough": {
+    "description": "Toolbar label and action for strikethrough markup"
+  },
+  "annotateToolbarCopy": "Copy",
+  "@annotateToolbarCopy": {
+    "description": "Context menu action to copy selected text"
+  },
+  "annotateColorYellow": "Yellow",
+  "@annotateColorYellow": {
+    "description": "Semantic name for yellow markup color"
+  },
+  "annotateColorGreen": "Green",
+  "@annotateColorGreen": {
+    "description": "Semantic name for green markup color"
+  },
+  "annotateColorCyan": "Cyan",
+  "@annotateColorCyan": {
+    "description": "Semantic name for cyan markup color"
+  },
+  "annotateColorPink": "Pink",
+  "@annotateColorPink": {
+    "description": "Semantic name for pink markup color"
+  },
+  "annotateColorOrange": "Orange",
+  "@annotateColorOrange": {
+    "description": "Semantic name for orange markup color"
+  },
+  "annotateSaveTitle": "Save annotations",
+  "@annotateSaveTitle": {
+    "description": "Title of save options dialog or progress dialog"
+  },
+  "annotateSaveProgress": "Saving annotations...",
+  "@annotateSaveProgress": {
+    "description": "Progress message while saving annotations"
+  },
+  "annotateNoChanges": "No annotations to save",
+  "@annotateNoChanges": {
+    "description": "Notice when save is triggered with no markup changes"
+  },
+  "annotateTooltipUndo": "Undo",
+  "@annotateTooltipUndo": {
+    "description": "Tooltip for undo annotation action"
+  },
+  "annotateTooltipRedo": "Redo",
+  "@annotateTooltipRedo": {
+    "description": "Tooltip for redo annotation action"
+  },
+  "annotateTooltipSave": "Save",
+  "@annotateTooltipSave": {
+    "description": "Tooltip for save annotations button"
+  },
+  "annotateCopiedToClipboard": "Copied to clipboard",
+  "@annotateCopiedToClipboard": {
+    "description": "Message displayed when text is copied to clipboard"
   }
 }

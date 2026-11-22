@@ -2625,6 +2625,100 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return 'Aged $_temp0 by 29 days';
   }
+
+  @override
+  String get annotateErrorPasswordProtected =>
+      'This PDF is password-protected.';
+
+  @override
+  String get annotateErrorCorrupt => 'This PDF is corrupted or cannot be read.';
+
+  @override
+  String get annotateSignedReplaceBlocked =>
+      'Replacing the original signed PDF is not permitted. Please save as a new file.';
+
+  @override
+  String annotateErrorSaveFailed(String details) {
+    return 'Failed to save annotations: $details';
+  }
+
+  @override
+  String get annotateErrorScannedPdf =>
+      'This document appears to be scanned or contains no selectable text.';
+
+  @override
+  String get annotateSignedBanner =>
+      'Digitally signed PDF: Saving will create a new copy to preserve the signature.';
+
+  @override
+  String get annotateActionSaveNew => 'Save as new file';
+
+  @override
+  String get annotateActionReplace => 'Replace original';
+
+  @override
+  String get annotateDiscardDialogTitle => 'Discard unsaved annotations?';
+
+  @override
+  String get annotateDiscardDialogBody =>
+      'You have unsaved markups. If you exit now, your changes will be lost.';
+
+  @override
+  String get annotateDiscardDialogActionDiscard => 'Discard';
+
+  @override
+  String get annotateDiscardDialogActionKeep => 'Keep editing';
+
+  @override
+  String get annotateSaveSuccess => 'Annotations saved successfully';
+
+  @override
+  String get annotateToolbarHighlight => 'Highlight';
+
+  @override
+  String get annotateToolbarUnderline => 'Underline';
+
+  @override
+  String get annotateToolbarStrikethrough => 'Strikethrough';
+
+  @override
+  String get annotateToolbarCopy => 'Copy';
+
+  @override
+  String get annotateColorYellow => 'Yellow';
+
+  @override
+  String get annotateColorGreen => 'Green';
+
+  @override
+  String get annotateColorCyan => 'Cyan';
+
+  @override
+  String get annotateColorPink => 'Pink';
+
+  @override
+  String get annotateColorOrange => 'Orange';
+
+  @override
+  String get annotateSaveTitle => 'Save annotations';
+
+  @override
+  String get annotateSaveProgress => 'Saving annotations...';
+
+  @override
+  String get annotateNoChanges => 'No annotations to save';
+
+  @override
+  String get annotateTooltipUndo => 'Undo';
+
+  @override
+  String get annotateTooltipRedo => 'Redo';
+
+  @override
+  String get annotateTooltipSave => 'Save';
+
+  @override
+  String get annotateCopiedToClipboard => 'Copied to clipboard';
 }
 
 /// The translations for English (`en_XA`).
@@ -5333,4 +5427,100 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
     );
     return '[Âĝéđ $_temp0 ƀý 29 đàýš ẋẋẋẋẋẋẋẋẋ]';
   }
+
+  @override
+  String get annotateErrorPasswordProtected =>
+      '[Ťĥîš PÐF îš þàššŵôřđ-þřôţéçţéđ. ẋẋẋẋẋẋ]';
+
+  @override
+  String get annotateErrorCorrupt =>
+      '[Ťĥîš PÐF îš çôřřûþţéđ ôř çàññôţ ƀé řéàđ. ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get annotateSignedReplaceBlocked =>
+      '[Řéþłàçîñĝ ţĥé ôřîĝîñàł šîĝñéđ PÐF îš ñôţ þéřɱîţţéđ. Płéàšé šàṽé àš à ñéŵ ƒîłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String annotateErrorSaveFailed(String details) {
+    return '[Fàîłéđ ţô šàṽé àññôţàţîôñš: $details ẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get annotateErrorScannedPdf =>
+      '[Ťĥîš đôçûɱéñţ àþþéàřš ţô ƀé šçàññéđ ôř çôñţàîñš ñô šéłéçţàƀłé ţéẋţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get annotateSignedBanner =>
+      '[Ðîĝîţàłłý šîĝñéđ PÐF: Šàṽîñĝ ŵîłł çřéàţé à ñéŵ çôþý ţô þřéšéřṽé ţĥé šîĝñàţûřé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get annotateActionSaveNew => '[Šàṽé àš ñéŵ ƒîłé ẋẋẋẋẋ]';
+
+  @override
+  String get annotateActionReplace => '[Řéþłàçé ôřîĝîñàł ẋẋẋẋẋ]';
+
+  @override
+  String get annotateDiscardDialogTitle =>
+      '[Ðîšçàřđ ûñšàṽéđ àññôţàţîôñš? ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get annotateDiscardDialogBody =>
+      '[Ýôû ĥàṽé ûñšàṽéđ ɱàřķûþš. Iƒ ýôû éẋîţ ñôŵ, ýôûř çĥàñĝéš ŵîłł ƀé łôšţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get annotateDiscardDialogActionDiscard => '[Ðîšçàřđ ẋẋẋ]';
+
+  @override
+  String get annotateDiscardDialogActionKeep => '[Ķééþ éđîţîñĝ ẋẋẋẋ]';
+
+  @override
+  String get annotateSaveSuccess => '[Âññôţàţîôñš šàṽéđ šûççéššƒûłłý ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get annotateToolbarHighlight => '[Ĥîĝĥłîĝĥţ ẋẋẋ]';
+
+  @override
+  String get annotateToolbarUnderline => '[Ûñđéřłîñé ẋẋẋ]';
+
+  @override
+  String get annotateToolbarStrikethrough => '[Šţřîķéţĥřôûĝĥ ẋẋẋẋ]';
+
+  @override
+  String get annotateToolbarCopy => '[Çôþý ẋẋ]';
+
+  @override
+  String get annotateColorYellow => '[Ýéłłôŵ ẋẋ]';
+
+  @override
+  String get annotateColorGreen => '[Ĝřééñ ẋẋ]';
+
+  @override
+  String get annotateColorCyan => '[Çýàñ ẋ]';
+
+  @override
+  String get annotateColorPink => '[Pîñķ ẋ]';
+
+  @override
+  String get annotateColorOrange => '[Ôřàñĝé ẋẋ]';
+
+  @override
+  String get annotateSaveTitle => '[Šàṽé àññôţàţîôñš ẋẋẋẋẋ]';
+
+  @override
+  String get annotateSaveProgress => '[Šàṽîñĝ àññôţàţîôñš... ẋẋẋẋẋẋ]';
+
+  @override
+  String get annotateNoChanges => '[Ñô àññôţàţîôñš ţô šàṽé ẋẋẋẋẋ]';
+
+  @override
+  String get annotateTooltipUndo => '[Ûñđô ẋ]';
+
+  @override
+  String get annotateTooltipRedo => '[Řéđô ẋ]';
+
+  @override
+  String get annotateTooltipSave => '[Šàṽé ẋ]';
+
+  @override
+  String get annotateCopiedToClipboard => '[Çôþîéđ ţô çłîþƀôàřđ ẋẋẋẋẋ]';
 }

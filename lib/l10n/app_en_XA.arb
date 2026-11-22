@@ -3482,5 +3482,126 @@
         "type": "num"
       }
     }
+  },
+  "annotateErrorPasswordProtected": "[Ťĥîš PÐF îš þàššŵôřđ-þřôţéçţéđ. ẋẋẋẋẋẋ]",
+  "@annotateErrorPasswordProtected": {
+    "description": "Error message when attempting to annotate a password-protected PDF"
+  },
+  "annotateErrorCorrupt": "[Ťĥîš PÐF îš çôřřûþţéđ ôř çàññôţ ƀé řéàđ. ẋẋẋẋẋẋẋ]",
+  "@annotateErrorCorrupt": {
+    "description": "Error message when a PDF file is invalid or corrupt"
+  },
+  "annotateSignedReplaceBlocked": "[Řéþłàçîñĝ ţĥé ôřîĝîñàł šîĝñéđ PÐF îš ñôţ þéřɱîţţéđ. Płéàšé šàṽé àš à ñéŵ ƒîłé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@annotateSignedReplaceBlocked": {
+    "description": "Warning message when trying to overwrite a digitally signed PDF"
+  },
+  "annotateErrorSaveFailed": "[Fàîłéđ ţô šàṽé àññôţàţîôñš: {details} ẋẋẋẋẋẋẋẋẋ]",
+  "@annotateErrorSaveFailed": {
+    "description": "Error message when saving annotations fails",
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "annotateErrorScannedPdf": "[Ťĥîš đôçûɱéñţ àþþéàřš ţô ƀé šçàññéđ ôř çôñţàîñš ñô šéłéçţàƀłé ţéẋţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@annotateErrorScannedPdf": {
+    "description": "Notice when no selectable text is found on the current page"
+  },
+  "annotateSignedBanner": "[Ðîĝîţàłłý šîĝñéđ PÐF: Šàṽîñĝ ŵîłł çřéàţé à ñéŵ çôþý ţô þřéšéřṽé ţĥé šîĝñàţûřé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@annotateSignedBanner": {
+    "description": "Warning banner displayed when editing a digitally signed PDF"
+  },
+  "annotateActionSaveNew": "[Šàṽé àš ñéŵ ƒîłé ẋẋẋẋẋ]",
+  "@annotateActionSaveNew": {
+    "description": "Action button in save dialog to save annotated PDF as a copy"
+  },
+  "annotateActionReplace": "[Řéþłàçé ôřîĝîñàł ẋẋẋẋẋ]",
+  "@annotateActionReplace": {
+    "description": "Action button in save dialog to overwrite original PDF"
+  },
+  "annotateDiscardDialogTitle": "[Ðîšçàřđ ûñšàṽéđ àññôţàţîôñš? ẋẋẋẋẋẋẋ]",
+  "@annotateDiscardDialogTitle": {
+    "description": "Title of confirmation dialog when exiting with unsaved annotations"
+  },
+  "annotateDiscardDialogBody": "[Ýôû ĥàṽé ûñšàṽéđ ɱàřķûþš. Iƒ ýôû éẋîţ ñôŵ, ýôûř çĥàñĝéš ŵîłł ƀé łôšţ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@annotateDiscardDialogBody": {
+    "description": "Body of confirmation dialog when exiting with unsaved annotations"
+  },
+  "annotateDiscardDialogActionDiscard": "[Ðîšçàřđ ẋẋẋ]",
+  "@annotateDiscardDialogActionDiscard": {
+    "description": "Action button to discard unsaved annotations"
+  },
+  "annotateDiscardDialogActionKeep": "[Ķééþ éđîţîñĝ ẋẋẋẋ]",
+  "@annotateDiscardDialogActionKeep": {
+    "description": "Action button to stay on annotate screen and keep editing"
+  },
+  "annotateSaveSuccess": "[Âññôţàţîôñš šàṽéđ šûççéššƒûłłý ẋẋẋẋẋẋẋẋ]",
+  "@annotateSaveSuccess": {
+    "description": "Snackbar message shown after saving annotations"
+  },
+  "annotateToolbarHighlight": "[Ĥîĝĥłîĝĥţ ẋẋẋ]",
+  "@annotateToolbarHighlight": {
+    "description": "Toolbar label and action for highlight markup"
+  },
+  "annotateToolbarUnderline": "[Ûñđéřłîñé ẋẋẋ]",
+  "@annotateToolbarUnderline": {
+    "description": "Toolbar label and action for underline markup"
+  },
+  "annotateToolbarStrikethrough": "[Šţřîķéţĥřôûĝĥ ẋẋẋẋ]",
+  "@annotateToolbarStrikethrough": {
+    "description": "Toolbar label and action for strikethrough markup"
+  },
+  "annotateToolbarCopy": "[Çôþý ẋẋ]",
+  "@annotateToolbarCopy": {
+    "description": "Context menu action to copy selected text"
+  },
+  "annotateColorYellow": "[Ýéłłôŵ ẋẋ]",
+  "@annotateColorYellow": {
+    "description": "Semantic name for yellow markup color"
+  },
+  "annotateColorGreen": "[Ĝřééñ ẋẋ]",
+  "@annotateColorGreen": {
+    "description": "Semantic name for green markup color"
+  },
+  "annotateColorCyan": "[Çýàñ ẋ]",
+  "@annotateColorCyan": {
+    "description": "Semantic name for cyan markup color"
+  },
+  "annotateColorPink": "[Pîñķ ẋ]",
+  "@annotateColorPink": {
+    "description": "Semantic name for pink markup color"
+  },
+  "annotateColorOrange": "[Ôřàñĝé ẋẋ]",
+  "@annotateColorOrange": {
+    "description": "Semantic name for orange markup color"
+  },
+  "annotateSaveTitle": "[Šàṽé àññôţàţîôñš ẋẋẋẋẋ]",
+  "@annotateSaveTitle": {
+    "description": "Title of save options dialog or progress dialog"
+  },
+  "annotateSaveProgress": "[Šàṽîñĝ àññôţàţîôñš... ẋẋẋẋẋẋ]",
+  "@annotateSaveProgress": {
+    "description": "Progress message while saving annotations"
+  },
+  "annotateNoChanges": "[Ñô àññôţàţîôñš ţô šàṽé ẋẋẋẋẋ]",
+  "@annotateNoChanges": {
+    "description": "Notice when save is triggered with no markup changes"
+  },
+  "annotateTooltipUndo": "[Ûñđô ẋ]",
+  "@annotateTooltipUndo": {
+    "description": "Tooltip for undo annotation action"
+  },
+  "annotateTooltipRedo": "[Řéđô ẋ]",
+  "@annotateTooltipRedo": {
+    "description": "Tooltip for redo annotation action"
+  },
+  "annotateTooltipSave": "[Šàṽé ẋ]",
+  "@annotateTooltipSave": {
+    "description": "Tooltip for save annotations button"
+  },
+  "annotateCopiedToClipboard": "[Çôþîéđ ţô çłîþƀôàřđ ẋẋẋẋẋ]",
+  "@annotateCopiedToClipboard": {
+    "description": "Message displayed when text is copied to clipboard"
   }
 }

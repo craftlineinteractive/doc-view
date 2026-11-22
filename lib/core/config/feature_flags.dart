@@ -16,7 +16,7 @@ const bool createPdfEnabled = true;
 const bool recycleBinEnabled = true;
 
 /// Enables PDF annotation tool (Phase G5).
-const bool annotateEnabled = false;
+const bool annotateEnabled = true;
 
 /// Enables PDF Add Text tool (Phase G5).
 const bool addTextEnabled = false;
