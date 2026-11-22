@@ -132,7 +132,7 @@ void main() {
     expect(find.text('Recycle bin'), findsOneWidget);
     expect(find.text('Print PDF'), findsOneWidget);
 
-    // Assert exactly 9 tool tiles exist
+    // Assert exactly 10 tool tiles exist in G5a
     final foundToolTiles = find.byWidgetPredicate((widget) {
       if (widget.key is ValueKey<String>) {
         final keyVal = (widget.key as ValueKey<String>).value;
@@ -140,7 +140,7 @@ void main() {
       }
       return false;
     });
-    expect(foundToolTiles, findsNWidgets(9));
+    expect(foundToolTiles, findsNWidgets(10));
 
     // Verify accessibility guidelines on ToolsScreen
     final handle = tester.ensureSemantics();

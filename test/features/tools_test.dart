@@ -62,14 +62,16 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Exactly 8 tools present with specified keys
+      // Exactly 10 tools present with specified keys
       expect(find.byKey(const Key('tool_image_to_pdf')), findsOneWidget);
       expect(find.byKey(const Key('tool_scan_to_pdf')), findsOneWidget);
       expect(find.byKey(const Key('tool_create_pdf')), findsOneWidget);
+      expect(find.byKey(const Key('tool_annotate')), findsOneWidget);
       expect(find.byKey(const Key('tool_manage_pages')), findsOneWidget);
       expect(find.byKey(const Key('tool_merge_pdf')), findsOneWidget);
       expect(find.byKey(const Key('tool_split_pdf')), findsOneWidget);
       expect(find.byKey(const Key('tool_import_files')), findsOneWidget);
+      expect(find.byKey(const Key('tool_recycle_bin')), findsOneWidget);
       expect(find.byKey(const Key('tool_print_pdf')), findsOneWidget);
 
       // Section titles

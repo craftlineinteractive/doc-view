@@ -36,6 +36,10 @@ import 'package:docview/features/viewer/widgets/pdf_goto_page_dialog.dart';
 import 'package:docview/features/viewer/widgets/pdf_more_sheet.dart';
 import 'package:docview/features/viewer/widgets/pdf_pages_sheet.dart';
 import 'package:docview/features/viewer/widgets/pdf_password_dialog.dart';
+import 'package:docview/features/tools/annotate/annotate_session_notifier.dart';
+import 'package:docview/features/tools/annotate/widgets/annotate_toolbar.dart';
+import 'package:docview/features/tools/annotate/widgets/selection_menu.dart';
+import 'package:docview/data/models/pdf_markup.dart';
 import 'package:docview/data/models/spreadsheet_data.dart';
 import 'package:docview/data/services/pdf/pdf_page_edit_service.dart';
 import 'package:docview/shared/widgets/reader/reader_bottom_row.dart';
@@ -392,6 +396,26 @@ void main() {
               ),
               selection: const SpreadsheetSelection.cell(0, 0),
               onSelectionChanged: (_) {},
+            ),
+          ),
+      'AnnotateToolbar': () => Scaffold(
+            body: Center(
+              child: AnnotateToolbar(
+                selectedTool: TextMarkupType.highlight,
+                selectedColor: AnnotateColors.yellow,
+                onToolSelected: (_) {},
+                onColorSelected: (_) {},
+              ),
+            ),
+          ),
+      'SelectionMenu': () => Scaffold(
+            body: Center(
+              child: SelectionMenu(
+                onCopy: () {},
+                onHighlight: () {},
+                onUnderline: () {},
+                onStrikethrough: () {},
+              ),
             ),
           ),
     };
