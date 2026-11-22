@@ -32,6 +32,10 @@ import '../../shared/widgets/tiles/category_tile.dart';
 import '../../shared/widgets/tiles/file_and_folder_rows.dart';
 import '../../shared/widgets/tiles/file_type_badge.dart';
 import '../../shared/widgets/tools/doc_tool_widgets.dart';
+import '../../data/models/pdf_markup.dart';
+import '../tools/annotate/annotate_session_notifier.dart';
+import '../tools/annotate/widgets/annotate_toolbar.dart';
+import '../tools/annotate/widgets/selection_menu.dart';
 
 /// Debug-only Component Gallery showcasing the entire Doc View component library.
 /// Only available in [kDebugMode], accessible via long-press on Settings version row.
@@ -707,6 +711,30 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 12),
                           ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+                  ),
+
+                  // --- Section 14: PDF Annotation (G5a) ---
+                  const SectionHeader(title: '14. PDF Annotation Components (G5a)'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        SelectionMenu(
+                          onCopy: () {},
+                          onHighlight: () {},
+                          onUnderline: () {},
+                          onStrikethrough: () {},
+                        ),
+                        const SizedBox(height: 12),
+                        AnnotateToolbar(
+                          selectedTool: TextMarkupType.highlight,
+                          selectedColor: AnnotateColors.yellow,
+                          onToolSelected: (_) {},
+                          onColorSelected: (_) {},
                         ),
                         const SizedBox(height: 16),
                       ],
