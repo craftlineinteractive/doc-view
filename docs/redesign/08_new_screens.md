@@ -423,6 +423,64 @@ This document catalogs every screen and bottom sheet added or restructured in **
 | **Recycle Bin Screen: Multi-selection Mode** | ![Recycle Bin Selection](img/g4c/recycle_bin_selection.png) | 1080 × 2400 | 75 KB |
 | **Empty Bin Confirmation Dialog** | ![Empty Bin Dialog](img/g4c/recycle_bin_empty_dialog.png) | 1080 × 2400 | 54 KB |
 
+### 24. Annotate PDF Screen (`lib/features/tools/annotate/annotate_screen.dart`, route `/tools/annotate`)
+- **Structure & Layout**:
+  - Registered in centralized `toolRegistry` under `ToolSection.editAndManage` (`tool_annotate`).
+  - Accessible via the Tools tab (`/tools`) or direct deep route `/tools/annotate`.
+  - Built on reusable `PdfEditorShell` (`showDockedBanner: false`, `isAdLoaded: false`, custom App Bar with Undo, Redo, Save actions, and discard confirmation).
+  - Integrates `pdfrx` viewer with per-page markup overlay (`PageMarkupOverlay`) and interactive stroke drawing overlay (`InkOverlay`).
+- **Text Markup Tools**:
+  - Four text markup modes: **Copy**, **Highlight**, **Underline**, and **Strikethrough**.
+  - Dynamic color palette selector (`AnnotateColors.palette`: Yellow, Green, Cyan, Pink, Orange).
+  - Floating contextual selection menu (`SelectionMenu`) supporting quick copy or one-tap markup application.
+- **Freehand Pen & Eraser (G5b)**:
+  - Fifth tool on toolbar: **Pen** (`annotate_tool_pen`).
+  - Tapping Pen when inactive activates drawing mode; tapping active Pen opens `PenSheet` modal bottom sheet.
+  - `PenSheet` features:
+    - 6-color palette (`PenColors.palette`: Black, Blue, Red, Green, Purple, Orange).
+    - Stroke width slider from 1.0 to 12.0 pt with discrete steps.
+    - Eraser mode toggle (`SwitchListTile.adaptive`).
+  - Single-finger draw vs two-finger pan/zoom handled cleanly via `SinglePointerDrawRecognizer`.
+  - Eraser stroke hit-testing (point-to-segment distance within radius).
+- **Undo / Redo & Save**:
+  - Unified snapshot-based `EditorSession` capping undo history at 100 snapshots.
+  - Top AppBar Save button triggers `PdfEditorShell.showSaveOptionsSheet` with "Save as new file" or "Replace original".
+  - Annotations and strokes serialized via background isolate using `syncfusion_flutter_pdf` (`PdfAnnotationService`).
+
+### 25. Sign PDF Screen (`lib/features/tools/sign/sign_screen.dart`, route `/tools/sign`)
+- **Structure & Layout**:
+  - Registered in centralized `toolRegistry` under `ToolSection.editAndManage` immediately following Annotate (`tool_sign`).
+  - Route `/tools/sign` with `ToolFilePickerScreen` single-document picker.
+  - Built on `PdfEditorShell` with ad-free styling and digital signature warning banner (`annotate_signed_banner`) if PDF has AcroForm signature fields.
+- **Toolbar Actions**:
+  - **+ Sign**: Opens `SignaturesSheet` modal bottom sheet. Shows saved signatures with counter (`0/5` up to max 5). If empty, displays illustrated empty state with "+ Create new signature" action.
+  - **+ Date**: Places formatted ISO date stamp (`yyyy-MM-dd`) onto current page center with bounding box.
+  - **Clear all**: Destructive confirmation dialog before wiping all placed signatures on document.
+- **Signature Creation (`SignaturePad`)**:
+  - Modal full-screen dialog with smooth stroke drawing canvas using Catmull-Rom spline interpolation.
+  - Controls: Clear, Discard, and Save signature.
+  - Saves high-resolution transparent PNG locally in `app_flutter/signatures/` with Android backup exclusion rules applied.
+- **Interactive Placement (`PlacedSignatureBox`)**:
+  - Bounded dragging within active PDF page.
+  - Four corner resize handles enforcing minimum dimensions (60 × 20 pt) and max width (90% page width).
+  - Floating action pill with red Trash icon (delete placed signature) and blue Checkmark icon (commit placement).
+  - Maximum 20 placed signatures/dates per document.
+- **Isolate-Safe Save**:
+  - Renders PNG signature image and date text into PDF pages via `PdfAnnotationService` using Syncfusion (`graphics.drawImage` and `graphics.drawString`) inside a background worker isolate.
+
+### 26. QA Screenshots & Visual Evidence (Phase G5b)
+
+| View Description | Screenshot Artifact | Dimensions | File Size |
+|---|---|---|---|
+| **Tools Tab with 11 Tools (Edit & Manage: Annotate & Sign)** | ![Tools Tab 11 Tools](img/g5b/07_tools_tab_11_tools.png) | 1080 × 2400 | 264 KB |
+| **Annotate Screen: Pen Tool Active & Ink Stroke** | ![Annotate Pen Active](img/g5b/01_annotate_pen_active.png) | 1080 × 2400 | 117 KB |
+| **Annotate Screen: Pen Settings Sheet & Palette** | ![Annotate Pen Sheet](img/g5b/02_annotate_pen_sheet.png) | 1080 × 2400 | 104 KB |
+| **Sign Screen: Empty Saved Signatures Sheet** | ![Sign Sheet Empty](img/g5b/03_sign_sheet_empty.png) | 1080 × 2400 | 65 KB |
+| **Signature Pad: Smooth Cursive Drawing** | ![Signature Pad Drawing](img/g5b/04_signature_pad_drawing.png) | 1080 × 2400 | 85 KB |
+| **Sign Screen: Placed Signature with Resize Handles** | ![Placed Signature Handles](img/g5b/05_sign_placed_signature_handles.png) | 1080 × 2400 | 72 KB |
+| **Sign Screen: Placed Date Stamp on Contract** | ![Placed Date Stamp](img/g5b/06_sign_date_stamp_placed.png) | 1080 × 2400 | 75 KB |
+
+
 
 
 
