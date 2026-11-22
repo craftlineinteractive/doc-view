@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -53,6 +54,26 @@ class TrashService {
   final Future<Directory> Function()? binDirectoryProvider;
   final Future<Directory> Function()? fallbackRestoreDirectoryProvider;
   final int _maxFileBytes;
+
+  /// Injectable failure hooks used exclusively by unit and failure-injection tests.
+  /// Null in production and release builds.
+  @visibleForTesting
+  Future<void> Function(String sourcePath, String destPath)? testCopyHook;
+
+  @visibleForTesting
+  Future<void> Function(File partFile)? testVerifyHook;
+
+  @visibleForTesting
+  Future<void> Function(String partPath, String finalTrashPath)? testRenameHook;
+
+  @visibleForTesting
+  Future<void> Function()? testDbTransactionHook;
+
+  @visibleForTesting
+  Future<void> Function(File originalFile)? testOriginalDeleteHook;
+
+  @visibleForTesting
+  Future<void> Function(File trashFile, String resolvedRestorePath)? testRestoreCopyHook;
 
   /// Returns the private application directory where trashed files are safely held.
   Future<Directory> getTrashDirectory() async {
@@ -136,7 +157,11 @@ class TrashService {
 
     // Step 1: Copy original to .part file in recycle bin
     try {
-      await originalFile.copy(partPath);
+      if (testCopyHook != null) {
+        await testCopyHook!(originalFile.path, partPath);
+      } else {
+        await originalFile.copy(partPath);
+      }
     } catch (e) {
       if (await partFile.exists()) {
         try {
@@ -161,6 +186,20 @@ class TrashService {
       );
     }
 
+    if (testVerifyHook != null) {
+      try {
+        await testVerifyHook!(partFile);
+      } catch (e) {
+        if (await partFile.exists()) {
+          try {
+            await partFile.delete();
+          } catch (_) {}
+        }
+        if (e is TrashException) rethrow;
+        throw TrashException(TrashErrorReason.verifyFailed, e.toString());
+      }
+    }
+
     // Preserve original file modified timestamp on the bin copy
     try {
       await partFile.setLastModified(originalStat.modified);
@@ -168,10 +207,16 @@ class TrashService {
 
     // Step 3: Atomic rename from .part to final trash path
     try {
-      await partFile.rename(finalTrashPath);
+      if (testRenameHook != null) {
+        await testRenameHook!(partPath, finalTrashPath);
+      } else {
+        await partFile.rename(finalTrashPath);
+      }
     } catch (e) {
       try {
-        await partFile.delete();
+        if (await partFile.exists()) {
+          await partFile.delete();
+        }
       } catch (_) {}
       throw TrashException(TrashErrorReason.copyFailed, e.toString());
     }
@@ -200,27 +245,44 @@ class TrashService {
 
     // Step 4: DB transaction to insert into trash table and delete from files table
     Map<String, dynamic>? deletedFileRow;
-    await db.transaction((txn) async {
-      final existingRows = await txn.query(
-        AppDatabase.tableFiles,
-        where: 'path = ?',
-        whereArgs: [file.path],
-        limit: 1,
-      );
-      if (existingRows.isNotEmpty) {
-        deletedFileRow = existingRows.first;
-        await txn.delete(
+    try {
+      await db.transaction((txn) async {
+        final existingRows = await txn.query(
           AppDatabase.tableFiles,
-          where: 'id = ?',
-          whereArgs: [existingRows.first['id']],
+          where: 'path = ?',
+          whereArgs: [file.path],
+          limit: 1,
         );
+        if (existingRows.isNotEmpty) {
+          deletedFileRow = existingRows.first;
+          await txn.delete(
+            AppDatabase.tableFiles,
+            where: 'id = ?',
+            whereArgs: [existingRows.first['id']],
+          );
+        }
+        await txn.insert(AppDatabase.tableTrash, trashItem.toMap());
+        if (testDbTransactionHook != null) {
+          await testDbTransactionHook!();
+        }
+      });
+    } catch (e) {
+      final trashFile = File(finalTrashPath);
+      if (await trashFile.exists()) {
+        try {
+          await trashFile.delete();
+        } catch (_) {}
       }
-      await txn.insert(AppDatabase.tableTrash, trashItem.toMap());
-    });
+      throw TrashException(TrashErrorReason.unknown, e.toString());
+    }
 
     // Step 5: Delete original file on disk
     try {
-      await originalFile.delete();
+      if (testOriginalDeleteHook != null) {
+        await testOriginalDeleteHook!(originalFile);
+      } else {
+        await originalFile.delete();
+      }
     } catch (e) {
       // Step 6: ROLLBACK if original deletion fails
       try {
@@ -325,7 +387,11 @@ class TrashService {
 
     // Copy from bin to destination .part
     try {
-      await trashFile.copy(partPath);
+      if (testRestoreCopyHook != null) {
+        await testRestoreCopyHook!(trashFile, partPath);
+      } else {
+        await trashFile.copy(partPath);
+      }
     } catch (e) {
       if (await partFile.exists()) {
         try {

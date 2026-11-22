@@ -3409,5 +3409,48 @@
   "trashDetailsExpiresIn": "Expires in",
   "@trashDetailsExpiresIn": {
     "description": "Label in Recycle bin details sheet for expiration timeframe"
+  },
+  "trashRestoredToFallbackSuccess": "Restored to {location} (original folder not found)",
+  "@trashRestoredToFallbackSuccess": {
+    "description": "Snackbar message when a file is restored to imported/ fallback folder",
+    "placeholders": {
+      "location": {
+        "type": "String"
+      }
+    }
+  },
+  "trashDialogCopyFailedTitle": "Could not move to Recycle bin",
+  "@trashDialogCopyFailedTitle": {
+    "description": "Title when moving to trash fails due to copy or space error"
+  },
+  "trashDialogCopyFailedBody": "Could not move \"{fileName}\" to the Recycle bin. Do you want to delete it permanently? This cannot be undone.",
+  "@trashDialogCopyFailedBody": {
+    "description": "Body asking whether to delete permanently when move to trash fails",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "trashDialogEmptyProgress": "Emptying Recycle bin...",
+  "@trashDialogEmptyProgress": {
+    "description": "Progress message while emptying recycle bin"
+  },
+  "trashDialogDeleteForeverProgress": "Deleting files forever...",
+  "@trashDialogDeleteForeverProgress": {
+    "description": "Progress message while deleting files forever"
+  },
+  "galleryDebugAgeTrash": "Age all trash items by 29 days",
+  "@galleryDebugAgeTrash": {
+    "description": "Debug action in component gallery to age trash items"
+  },
+  "galleryDebugAgeTrashSuccess": "Aged {count, plural, =1{1 item} other{{count} items}} by 29 days",
+  "@galleryDebugAgeTrashSuccess": {
+    "description": "Success message after aging trash items in component gallery",
+    "placeholders": {
+      "count": {
+        "type": "num"
+      }
+    }
   }
 }

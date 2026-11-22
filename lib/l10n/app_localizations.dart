@@ -4254,6 +4254,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Expires in'**
   String get trashDetailsExpiresIn;
+
+  /// Snackbar message when a file is restored to imported/ fallback folder
+  ///
+  /// In en, this message translates to:
+  /// **'Restored to {location} (original folder not found)'**
+  String trashRestoredToFallbackSuccess(String location);
+
+  /// Title when moving to trash fails due to copy or space error
+  ///
+  /// In en, this message translates to:
+  /// **'Could not move to Recycle bin'**
+  String get trashDialogCopyFailedTitle;
+
+  /// Body asking whether to delete permanently when move to trash fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not move \"{fileName}\" to the Recycle bin. Do you want to delete it permanently? This cannot be undone.'**
+  String trashDialogCopyFailedBody(String fileName);
+
+  /// Progress message while emptying recycle bin
+  ///
+  /// In en, this message translates to:
+  /// **'Emptying Recycle bin...'**
+  String get trashDialogEmptyProgress;
+
+  /// Progress message while deleting files forever
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting files forever...'**
+  String get trashDialogDeleteForeverProgress;
+
+  /// Debug action in component gallery to age trash items
+  ///
+  /// In en, this message translates to:
+  /// **'Age all trash items by 29 days'**
+  String get galleryDebugAgeTrash;
+
+  /// Success message after aging trash items in component gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Aged {count, plural, =1{1 item} other{{count} items}} by 29 days'**
+  String galleryDebugAgeTrashSuccess(num count);
 }
 
 class _AppLocalizationsDelegate

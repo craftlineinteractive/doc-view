@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path/path.dart' as p;
 
 import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
@@ -12,6 +15,7 @@ import '../../../shared/widgets/skeletons/skeleton_variants.dart';
 import '../../../shared/widgets/status/doc_status_widgets.dart';
 import '../../../shared/widgets/tiles/file_and_folder_rows.dart';
 import '../../providers/providers.dart';
+import '../widgets/tool_progress_dialog.dart';
 import 'widgets/trash_options_sheet.dart';
 
 /// Screen displaying files moved to the Recycle bin with restore and delete-forever actions.
@@ -66,7 +70,7 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
     );
   }
 
-  void _showEmptyBinDialog(BuildContext context, int itemCount) {
+  void _showEmptyBinDialog(int itemCount) {
     final tokens = context.tokens;
     final l10n = context.l10n;
     final messenger = ScaffoldMessenger.of(context);
@@ -89,19 +93,36 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
               ),
               onPressed: () async {
                 Navigator.of(dialogContext).pop();
-                final count = await ref
-                    .read(fileActionsControllerProvider)
-                    .emptyTrash();
+                final showProgress = itemCount > 5;
+                if (showProgress && mounted) {
+                  ToolProgressDialog.show(
+                    context,
+                    title: l10n.trashActionEmptyBin,
+                    message: l10n.trashDialogEmptyProgress,
+                  );
+                }
+                try {
+                  final count = await ref
+                      .read(fileActionsControllerProvider)
+                      .emptyTrash();
 
-                if (!mounted) return;
-                setState(() {
-                  _isSelectionMode = false;
-                  _selectedIds.clear();
-                });
+                  if (!mounted) return;
+                  if (showProgress) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
+                  setState(() {
+                    _isSelectionMode = false;
+                    _selectedIds.clear();
+                  });
 
-                messenger.showSnackBar(
-                  SnackBar(content: Text(l10n.trashDeletedForeverSuccess(count))),
-                );
+                  messenger.showSnackBar(
+                    SnackBar(content: Text(l10n.trashDeletedForeverSuccess(count))),
+                  );
+                } catch (e) {
+                  if (mounted && showProgress) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
+                }
               },
               child: Text(l10n.trashActionEmptyBin),
             ),
@@ -112,7 +133,6 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
   }
 
   Future<void> _restoreSelected(
-    BuildContext context,
     List<TrashItem> itemsToRestore,
   ) async {
     final messenger = ScaffoldMessenger.of(context);
@@ -129,6 +149,20 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
     });
 
     if (restored.isNotEmpty) {
+      if (restored.length == 1 && itemsToRestore.isNotEmpty) {
+        final originalParent = Directory(p.dirname(itemsToRestore.first.originalPath));
+        final restoredParent = Directory(p.dirname(restored.first.path));
+        if (originalParent.path != restoredParent.path) {
+          messenger.showSnackBar(
+            SnackBar(
+              content: Text(
+                l10n.trashRestoredToFallbackSuccess(restoredParent.path),
+              ),
+            ),
+          );
+          return;
+        }
+      }
       messenger.showSnackBar(
         SnackBar(content: Text(l10n.trashRestoredSuccess(restored.length))),
       );
@@ -136,7 +170,6 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
   }
 
   void _confirmDeleteForeverSelected(
-    BuildContext context,
     List<TrashItem> itemsToDelete,
   ) {
     final tokens = context.tokens;
@@ -161,19 +194,36 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
               ),
               onPressed: () async {
                 Navigator.of(dialogContext).pop();
-                await ref
-                    .read(fileActionsControllerProvider)
-                    .deleteForeverFromTrash(itemsToDelete);
+                final showProgress = itemsToDelete.length > 5;
+                if (showProgress && mounted) {
+                  ToolProgressDialog.show(
+                    context,
+                    title: l10n.trashActionDeleteForever,
+                    message: l10n.trashDialogDeleteForeverProgress,
+                  );
+                }
+                try {
+                  await ref
+                      .read(fileActionsControllerProvider)
+                      .deleteForeverFromTrash(itemsToDelete);
 
-                if (!mounted) return;
-                setState(() {
-                  _isSelectionMode = false;
-                  _selectedIds.clear();
-                });
+                  if (!mounted) return;
+                  if (showProgress) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
+                  setState(() {
+                    _isSelectionMode = false;
+                    _selectedIds.clear();
+                  });
 
-                messenger.showSnackBar(
-                  SnackBar(content: Text(l10n.trashDeletedForeverSuccess(itemsToDelete.length))),
-                );
+                  messenger.showSnackBar(
+                    SnackBar(content: Text(l10n.trashDeletedForeverSuccess(itemsToDelete.length))),
+                  );
+                } catch (e) {
+                  if (mounted && showProgress) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
+                }
               },
               child: Text(l10n.trashActionDeleteForever),
             ),
@@ -211,7 +261,7 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
           children: [
             Expanded(
               child: FilledButton.tonalIcon(
-                onPressed: () => _restoreSelected(context, selectedItems),
+                onPressed: () => _restoreSelected(selectedItems),
                 icon: const Icon(Icons.restore, size: 20),
                 label: Text(l10n.trashSheetRestore),
                 style: FilledButton.styleFrom(
@@ -222,7 +272,7 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
             const SizedBox(width: 12),
             Expanded(
               child: FilledButton.icon(
-                onPressed: () => _confirmDeleteForeverSelected(context, selectedItems),
+                onPressed: () => _confirmDeleteForeverSelected(selectedItems),
                 icon: const Icon(Icons.delete_forever_outlined, size: 20),
                 label: Text(l10n.trashActionDeleteForever),
                 style: FilledButton.styleFrom(
@@ -312,7 +362,7 @@ class _RecycleBinScreenState extends ConsumerState<RecycleBinScreen> {
                             minimumSize: Size.zero,
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
-                          onPressed: () => _showEmptyBinDialog(context, items.length),
+                          onPressed: () => _showEmptyBinDialog(items.length),
                           child: Text(
                             l10n.trashActionEmptyBin,
                             style: DocViewTypography.labelMd.copyWith(

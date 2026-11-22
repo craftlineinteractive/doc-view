@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path/path.dart' as p;
 
 import '../../../../core/extensions/l10n_extension.dart';
 import '../../../../core/theme/doc_view_tokens.dart';
@@ -50,9 +53,22 @@ class TrashOptionsSheet extends ConsumerWidget {
 
     if (!targetContext.mounted) return;
     if (restored.isNotEmpty) {
-      messenger.showSnackBar(
-        SnackBar(content: Text(l10n.trashRestoredSuccess(1))),
-      );
+      final doc = restored.first;
+      final originalParent = Directory(p.dirname(item.originalPath));
+      final restoredParent = Directory(p.dirname(doc.path));
+      if (originalParent.path != restoredParent.path) {
+        messenger.showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.trashRestoredToFallbackSuccess(restoredParent.path),
+            ),
+          ),
+        );
+      } else {
+        messenger.showSnackBar(
+          SnackBar(content: Text(l10n.trashRestoredSuccess(1))),
+        );
+      }
     }
   }
 

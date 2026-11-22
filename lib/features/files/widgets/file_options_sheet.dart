@@ -415,15 +415,65 @@ class FileOptionsSheet extends ConsumerWidget {
                           ),
                         );
                       } else {
-                        messenger.showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              result.firstErrorDetails ??
-                                  parentContext.l10n.filesDeleteFailed,
+                        if (result.firstErrorReason == TrashErrorReason.copyFailed ||
+                            result.firstErrorReason == TrashErrorReason.verifyFailed) {
+                          showDialog<void>(
+                            context: parentContext,
+                            builder: (copyFailContext) => AlertDialog(
+                              title: Text(parentContext.l10n.trashDialogCopyFailedTitle),
+                              content: Text(
+                                parentContext.l10n.trashDialogCopyFailedBody(file.name),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(copyFailContext).pop(),
+                                  child: Text(parentContext.l10n.actionCancel),
+                                ),
+                                FilledButton(
+                                  style: FilledButton.styleFrom(
+                                    backgroundColor: errorColor,
+                                    foregroundColor: Theme.of(parentContext).colorScheme.onError,
+                                  ),
+                                  onPressed: () async {
+                                    Navigator.of(copyFailContext).pop();
+                                    final delResult = await actionsController.deleteFiles([file]);
+                                    if (!parentContext.mounted) return;
+                                    if (delResult.hasDeletions) {
+                                      messenger.showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            parentContext.l10n.deletedFileSuccess(file.name),
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      messenger.showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            delResult.localizedMessage(parentContext) ??
+                                                parentContext.l10n.filesDeleteFailed,
+                                          ),
+                                          backgroundColor: errorColor,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Text(parentContext.l10n.trashActionDeletePermanently),
+                                ),
+                              ],
                             ),
-                            backgroundColor: errorColor,
-                          ),
-                        );
+                          );
+                        } else {
+                          messenger.showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                result.firstErrorDetails ??
+                                    parentContext.l10n.filesDeleteFailed,
+                              ),
+                              backgroundColor: errorColor,
+                            ),
+                          );
+                        }
                       }
                     },
                     child: Text(dialogContext.l10n.trashActionMove),

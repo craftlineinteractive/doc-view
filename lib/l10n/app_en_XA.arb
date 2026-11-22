@@ -3439,5 +3439,48 @@
   "trashDetailsExpiresIn": "[Éẋþîřéš îñ ẋẋẋẋ]",
   "@trashDetailsExpiresIn": {
     "description": "Label in Recycle bin details sheet for expiration timeframe"
+  },
+  "trashRestoredToFallbackSuccess": "[Řéšţôřéđ ţô {location} (ôřîĝîñàł ƒôłđéř ñôţ ƒôûñđ) ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashRestoredToFallbackSuccess": {
+    "description": "Snackbar message when a file is restored to imported/ fallback folder",
+    "placeholders": {
+      "location": {
+        "type": "String"
+      }
+    }
+  },
+  "trashDialogCopyFailedTitle": "[Çôûłđ ñôţ ɱôṽé ţô Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashDialogCopyFailedTitle": {
+    "description": "Title when moving to trash fails due to copy or space error"
+  },
+  "trashDialogCopyFailedBody": "[Çôûłđ ñôţ ɱôṽé \"{fileName}\" ţô ţĥé Řéçýçłé ƀîñ. Ðô ýôû ŵàñţ ţô đéłéţé îţ þéřɱàñéñţłý? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@trashDialogCopyFailedBody": {
+    "description": "Body asking whether to delete permanently when move to trash fails",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "trashDialogEmptyProgress": "[Éɱþţýîñĝ Řéçýçłé ƀîñ... ẋẋẋẋẋẋẋ]",
+  "@trashDialogEmptyProgress": {
+    "description": "Progress message while emptying recycle bin"
+  },
+  "trashDialogDeleteForeverProgress": "[Ðéłéţîñĝ ƒîłéš ƒôřéṽéř... ẋẋẋẋẋẋẋ]",
+  "@trashDialogDeleteForeverProgress": {
+    "description": "Progress message while deleting files forever"
+  },
+  "galleryDebugAgeTrash": "[Âĝé àłł ţřàšĥ îţéɱš ƀý 29 đàýš ẋẋẋẋẋẋẋẋẋ]",
+  "@galleryDebugAgeTrash": {
+    "description": "Debug action in component gallery to age trash items"
+  },
+  "galleryDebugAgeTrashSuccess": "[Âĝéđ {count, plural, =1{1 îţéɱ} other{{count} îţéɱš}} ƀý 29 đàýš ẋẋẋẋẋẋẋẋẋ]",
+  "@galleryDebugAgeTrashSuccess": {
+    "description": "Success message after aging trash items in component gallery",
+    "placeholders": {
+      "count": {
+        "type": "num"
+      }
+    }
   }
 }

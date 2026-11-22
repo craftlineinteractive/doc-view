@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../core/extensions/l10n_extension.dart';
 import '../../core/constants/file_types.dart';
 import '../../data/models/spreadsheet_data.dart';
 import '../providers/providers.dart';
@@ -667,6 +669,46 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                             onSelectionChanged: (sel) => setState(() => _gallerySpreadsheetSelection = sel),
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+
+                  // --- Section 13: Recycle Bin Debug Controls ---
+                  const SectionHeader(title: '13. Recycle Bin Debug Controls'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        FilledButton.icon(
+                          onPressed: () async {
+                            final count = await ref
+                                .read(trashPurgeServiceProvider)
+                                .ageAllTrashItems(days: 29);
+                            ref.invalidate(trashItemsProvider);
+                            ref.invalidate(trashCountProvider);
+                            if (themedContext.mounted) {
+                              ScaffoldMessenger.of(themedContext).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    themedContext.l10n
+                                        .galleryDebugAgeTrashSuccess(count),
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          icon: const Icon(Icons.history_toggle_off),
+                          label: Text(
+                            themedContext.l10n.galleryDebugAgeTrash,
+                          ),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.deepOrange,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
                       ],
                     ),
                   ),

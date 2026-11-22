@@ -110,6 +110,9 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       _checkAndStartScanOnResume();
+      unawaited(
+        ref.read(trashPurgeServiceProvider).runAutoPurgeIfDue().catchError((_) => false),
+      );
     }
   }
 

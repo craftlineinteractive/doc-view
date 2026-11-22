@@ -2592,6 +2592,39 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get trashDetailsExpiresIn => 'Expires in';
+
+  @override
+  String trashRestoredToFallbackSuccess(String location) {
+    return 'Restored to $location (original folder not found)';
+  }
+
+  @override
+  String get trashDialogCopyFailedTitle => 'Could not move to Recycle bin';
+
+  @override
+  String trashDialogCopyFailedBody(String fileName) {
+    return 'Could not move \"$fileName\" to the Recycle bin. Do you want to delete it permanently? This cannot be undone.';
+  }
+
+  @override
+  String get trashDialogEmptyProgress => 'Emptying Recycle bin...';
+
+  @override
+  String get trashDialogDeleteForeverProgress => 'Deleting files forever...';
+
+  @override
+  String get galleryDebugAgeTrash => 'Age all trash items by 29 days';
+
+  @override
+  String galleryDebugAgeTrashSuccess(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+    );
+    return 'Aged $_temp0 by 29 days';
+  }
 }
 
 /// The translations for English (`en_XA`).
@@ -5264,4 +5297,40 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get trashDetailsExpiresIn => '[Éẋþîřéš îñ ẋẋẋẋ]';
+
+  @override
+  String trashRestoredToFallbackSuccess(String location) {
+    return '[Řéšţôřéđ ţô $location (ôřîĝîñàł ƒôłđéř ñôţ ƒôûñđ) ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get trashDialogCopyFailedTitle =>
+      '[Çôûłđ ñôţ ɱôṽé ţô Řéçýçłé ƀîñ ẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String trashDialogCopyFailedBody(String fileName) {
+    return '[Çôûłđ ñôţ ɱôṽé \"$fileName\" ţô ţĥé Řéçýçłé ƀîñ. Ðô ýôû ŵàñţ ţô đéłéţé îţ þéřɱàñéñţłý? Ťĥîš çàññôţ ƀé ûñđôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get trashDialogEmptyProgress => '[Éɱþţýîñĝ Řéçýçłé ƀîñ... ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get trashDialogDeleteForeverProgress =>
+      '[Ðéłéţîñĝ ƒîłéš ƒôřéṽéř... ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugAgeTrash =>
+      '[Âĝé àłł ţřàšĥ îţéɱš ƀý 29 đàýš ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String galleryDebugAgeTrashSuccess(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count îţéɱš',
+      one: '1 îţéɱ',
+    );
+    return '[Âĝéđ $_temp0 ƀý 29 đàýš ẋẋẋẋẋẋẋẋẋ]';
+  }
 }
