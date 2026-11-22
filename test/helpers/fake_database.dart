@@ -170,8 +170,18 @@ class FakeDatabase implements Database {
     Future<T> Function(Transaction txn) action, {
     bool? exclusive,
   }) async {
+    final snapshot = {
+      for (final entry in tables.entries)
+        entry.key: entry.value.map((m) => Map<String, dynamic>.from(m)).toList(),
+    };
     final fakeTxn = FakeTransaction(this);
-    return await action(fakeTxn);
+    try {
+      return await action(fakeTxn);
+    } catch (e) {
+      tables.clear();
+      tables.addAll(snapshot);
+      rethrow;
+    }
   }
 
   @override

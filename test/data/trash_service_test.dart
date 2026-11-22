@@ -187,6 +187,231 @@ void main() {
     });
   });
 
+  group('TrashService Failure-Injection Proof Tests', () {
+    late String testFilePath;
+    late DocFile testDoc;
+    const String fileContent = 'CRITICAL USER DATA TO PRESERVE';
+
+    setUp(() async {
+      testFilePath = p.join(docsDir.path, 'vital.pdf');
+      final f = File(testFilePath)..writeAsStringSync(fileContent);
+
+      await fakeDb.insert(AppDatabase.tableFiles, {
+        'id': 555,
+        'path': testFilePath,
+        'name': 'vital.pdf',
+        'extension': 'pdf',
+        'size_bytes': f.lengthSync(),
+        'modified': f.lastModifiedSync().millisecondsSinceEpoch,
+        'category': 'pdf',
+        'is_bookmarked': 1,
+      });
+
+      testDoc = DocFile(
+        id: 555,
+        path: testFilePath,
+        name: 'vital.pdf',
+        extension: 'pdf',
+        sizeBytes: f.lengthSync(),
+        modified: f.lastModifiedSync(),
+        category: FileCategory.pdf,
+        isBookmarked: true,
+      );
+    });
+
+    test('failure at copy step: original intact, no trash row, no bin/part file, files row intact', () async {
+      trashService.testCopyHook = (src, dst) async {
+        throw const FileSystemException('Injected copy disk full / IO error');
+      };
+
+      await expectLater(
+        () => trashService.moveSingleToTrash(testDoc),
+        throwsA(isA<TrashException>().having(
+          (e) => e.reason,
+          'reason',
+          TrashErrorReason.copyFailed,
+        )),
+      );
+
+      // (1) Original exists with unchanged content
+      expect(File(testFilePath).existsSync(), isTrue);
+      expect(File(testFilePath).readAsStringSync(), fileContent);
+
+      // (2) No trash row in DB
+      final trashRows = await fakeDb.query(AppDatabase.tableTrash);
+      expect(trashRows, isEmpty);
+
+      // (3) No leftover .part or bin file
+      final binFiles = binDir.listSync();
+      expect(binFiles, isEmpty);
+
+      // (4) Files row is intact in DB
+      final fileRows = await fakeDb.query(AppDatabase.tableFiles);
+      expect(fileRows.length, 1);
+      expect(fileRows.first['path'], testFilePath);
+    });
+
+    test('failure at verify step (size mismatch): original intact, no trash row, no bin/part file, files row intact', () async {
+      trashService.testVerifyHook = (partFile) async {
+        // Corrupt size by appending extra bytes
+        partFile.writeAsStringSync('CORRUPTED_EXTRA_BYTES', mode: FileMode.append);
+        throw const TrashException(
+          TrashErrorReason.verifyFailed,
+          'Size mismatch between original and copy',
+        );
+      };
+
+      await expectLater(
+        () => trashService.moveSingleToTrash(testDoc),
+        throwsA(isA<TrashException>().having(
+          (e) => e.reason,
+          'reason',
+          TrashErrorReason.verifyFailed,
+        )),
+      );
+
+      expect(File(testFilePath).existsSync(), isTrue);
+      expect(File(testFilePath).readAsStringSync(), fileContent);
+      expect(await fakeDb.query(AppDatabase.tableTrash), isEmpty);
+      expect(binDir.listSync(), isEmpty);
+      final fileRows = await fakeDb.query(AppDatabase.tableFiles);
+      expect(fileRows.length, 1);
+      expect(fileRows.first['path'], testFilePath);
+    });
+
+    test('failure at verify step (hash mismatch): original intact, no trash row, no bin/part file, files row intact', () async {
+      trashService.testVerifyHook = (partFile) async {
+        throw const TrashException(
+          TrashErrorReason.verifyFailed,
+          'SHA-256 hash mismatch: integrity verification failed',
+        );
+      };
+
+      await expectLater(
+        () => trashService.moveSingleToTrash(testDoc),
+        throwsA(isA<TrashException>().having(
+          (e) => e.reason,
+          'reason',
+          TrashErrorReason.verifyFailed,
+        )),
+      );
+
+      expect(File(testFilePath).existsSync(), isTrue);
+      expect(File(testFilePath).readAsStringSync(), fileContent);
+      expect(await fakeDb.query(AppDatabase.tableTrash), isEmpty);
+      expect(binDir.listSync(), isEmpty);
+      final fileRows = await fakeDb.query(AppDatabase.tableFiles);
+      expect(fileRows.length, 1);
+      expect(fileRows.first['path'], testFilePath);
+    });
+
+    test('failure at rename step: original intact, no trash row, no bin/part file, files row intact', () async {
+      trashService.testRenameHook = (partPath, finalPath) async {
+        throw const FileSystemException('Injected atomic rename failure');
+      };
+
+      await expectLater(
+        () => trashService.moveSingleToTrash(testDoc),
+        throwsA(isA<TrashException>().having(
+          (e) => e.reason,
+          'reason',
+          TrashErrorReason.copyFailed,
+        )),
+      );
+
+      expect(File(testFilePath).existsSync(), isTrue);
+      expect(File(testFilePath).readAsStringSync(), fileContent);
+      expect(await fakeDb.query(AppDatabase.tableTrash), isEmpty);
+      expect(binDir.listSync(), isEmpty);
+      final fileRows = await fakeDb.query(AppDatabase.tableFiles);
+      expect(fileRows.length, 1);
+      expect(fileRows.first['path'], testFilePath);
+    });
+
+    test('failure at DB transaction step: original intact, no trash row, no bin/part file, files row intact', () async {
+      trashService.testDbTransactionHook = () async {
+        throw Exception('Injected SQLite write failure / disk full');
+      };
+
+      await expectLater(
+        () => trashService.moveSingleToTrash(testDoc),
+        throwsA(isA<TrashException>().having(
+          (e) => e.reason,
+          'reason',
+          TrashErrorReason.unknown,
+        )),
+      );
+
+      expect(File(testFilePath).existsSync(), isTrue);
+      expect(File(testFilePath).readAsStringSync(), fileContent);
+      expect(await fakeDb.query(AppDatabase.tableTrash), isEmpty);
+      expect(binDir.listSync(), isEmpty);
+      final fileRows = await fakeDb.query(AppDatabase.tableFiles);
+      expect(fileRows.length, 1);
+      expect(fileRows.first['path'], testFilePath);
+    });
+
+    test('failure at original delete step: original intact, no trash row, no bin/part file, files row restored', () async {
+      trashService.testOriginalDeleteHook = (origFile) async {
+        throw const FileSystemException('Injected permission denied deleting original');
+      };
+
+      await expectLater(
+        () => trashService.moveSingleToTrash(testDoc),
+        throwsA(isA<TrashException>().having(
+          (e) => e.reason,
+          'reason',
+          TrashErrorReason.deleteOriginalFailed,
+        )),
+      );
+
+      // Rollback must restore everything
+      expect(File(testFilePath).existsSync(), isTrue);
+      expect(File(testFilePath).readAsStringSync(), fileContent);
+      expect(await fakeDb.query(AppDatabase.tableTrash), isEmpty);
+      expect(binDir.listSync(), isEmpty);
+      final fileRows = await fakeDb.query(AppDatabase.tableFiles);
+      expect(fileRows.length, 1);
+      expect(fileRows.first['path'], testFilePath);
+      expect(fileRows.first['is_bookmarked'], 1);
+    });
+
+    test('restore failure when destination is unavailable: trash file intact, DB trash row intact', () async {
+      // First move to trash successfully
+      final trashItem = await trashService.moveSingleToTrash(testDoc);
+      expect(File(testFilePath).existsSync(), isFalse);
+      expect(File(trashItem.trashPath).existsSync(), isTrue);
+      expect((await fakeDb.query(AppDatabase.tableTrash)).length, 1);
+
+      // Now inject restore copy failure
+      trashService.testRestoreCopyHook = (trashFile, partPath) async {
+        throw const FileSystemException('Injected destination read-only / unavailable');
+      };
+
+      await expectLater(
+        () => trashService.restoreItem(trashItem),
+        throwsA(isA<TrashException>().having(
+          (e) => e.reason,
+          'reason',
+          TrashErrorReason.copyFailed,
+        )),
+      );
+
+      // Verify trash copy was NOT deleted
+      expect(File(trashItem.trashPath).existsSync(), isTrue);
+      expect(File(trashItem.trashPath).readAsStringSync(), fileContent);
+
+      // Verify DB trash row is preserved
+      final trashRows = await fakeDb.query(AppDatabase.tableTrash);
+      expect(trashRows.length, 1);
+      expect(trashRows.first['id'], trashItem.id);
+
+      // Verify no temporary .part file left at destination
+      final docDirParts = docsDir.listSync().where((e) => e.path.endsWith('.part'));
+      expect(docDirParts, isEmpty);
+    });
+  });
+
   group('TrashService Restore Tests', () {
     test('restores file back to original location and removes from trash', () async {
       final originalFilePath = p.join(docsDir.path, 'sheet.xlsx');
