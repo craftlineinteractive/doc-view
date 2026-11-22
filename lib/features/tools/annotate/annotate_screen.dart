@@ -13,15 +13,18 @@ import '../../../core/theme/doc_view_typography.dart';
 import '../../../data/models/pdf_markup.dart';
 import '../../../data/services/pdf/pdf_annotation_service.dart';
 import '../../providers/providers.dart';
+import '../widgets/pdf_editor_shell.dart';
 import '../widgets/tool_file_picker_screen.dart';
 import '../widgets/tool_progress_dialog.dart';
 import 'annotate_session_notifier.dart';
 import 'widgets/annotate_toolbar.dart';
+import 'widgets/ink_overlay.dart';
 import 'widgets/page_markup_overlay.dart';
+import 'widgets/pen_sheet.dart';
 import 'widgets/selection_menu.dart';
 
-/// Full-featured PDF Annotation Screen supporting text markups (Highlight, Underline, Strikethrough)
-/// and text copy, with undo/redo, ad-free layout, and atomic file saving.
+/// Full-featured PDF Annotation Screen supporting text markups (Highlight, Underline, Strikethrough),
+/// freehand Pen drawing, and text copy, with undo/redo, ad-free layout, and atomic file saving.
 class AnnotateScreen extends ConsumerStatefulWidget {
   const AnnotateScreen({
     this.initialFilePath,
@@ -97,36 +100,6 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
     }
   }
 
-  Future<bool> _onWillPop() async {
-    final session = ref.read(annotateSessionProvider);
-    if (!session.isDirty) {
-      return true;
-    }
-
-    final discard = await showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(context.l10n.annotateDiscardDialogTitle),
-        content: Text(context.l10n.annotateDiscardDialogBody),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(false),
-            child: Text(context.l10n.annotateDiscardDialogActionKeep),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(ctx).pop(true),
-            style: FilledButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.error,
-            ),
-            child: Text(context.l10n.annotateDiscardDialogActionDiscard),
-          ),
-        ],
-      ),
-    );
-
-    return discard ?? false;
-  }
-
   List<Rect> _extractVisualLineRects({
     required PdfPageText pageText,
     required int startIndex,
@@ -179,7 +152,6 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
     final pageNumber = startPoint.text.pageNumber;
     final pageIndex = pageNumber - 1;
 
-    // Get current pdfrx page
     final doc = _viewerController?.document;
     if (doc == null || pageIndex < 0 || pageIndex >= doc.pages.length) return;
     final page = doc.pages[pageIndex];
@@ -226,7 +198,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
 
   Future<void> _showSaveOptions() async {
     final session = ref.read(annotateSessionProvider);
-    if (!session.isDirty || session.markups.isEmpty) {
+    if (!session.isDirty || !session.hasChanges) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.l10n.annotateNoChanges)),
       );
@@ -234,48 +206,9 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
     }
 
     final isSigned = session.documentInfo?.hasDigitalSignature ?? false;
-
-    final choice = await showModalBottomSheet<String>(
-      context: context,
-      backgroundColor: context.tokens.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                context.l10n.annotateSaveTitle,
-                style: DocViewTypography.headlineSm.copyWith(
-                  color: context.tokens.textPrimary,
-                ),
-              ),
-              const SizedBox(height: 16),
-              ListTile(
-                leading: const Icon(Icons.copy_outlined),
-                title: Text(context.l10n.annotateActionSaveNew),
-                onTap: () => Navigator.of(ctx).pop('new'),
-              ),
-              ListTile(
-                leading: const Icon(Icons.save_outlined),
-                title: Text(context.l10n.annotateActionReplace),
-                enabled: !isSigned,
-                subtitle: isSigned
-                    ? Text(
-                        context.l10n.annotateSignedReplaceBlocked,
-                        style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
-                      )
-                    : null,
-                onTap: isSigned ? null : () => Navigator.of(ctx).pop('replace'),
-              ),
-            ],
-          ),
-        ),
-      ),
+    final choice = await PdfEditorShell.showSaveOptionsSheet(
+      context,
+      isSigned: isSigned,
     );
 
     if (choice != null && mounted) {
@@ -311,6 +244,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
         sourcePath: sourcePath,
         outputPath: targetOutputPath,
         markups: session.markups,
+        strokes: session.strokes,
         replaceOriginal: replaceOriginal,
         originalPath: sourcePath,
       );
@@ -347,77 +281,66 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final tokens = context.tokens;
     final session = ref.watch(annotateSessionProvider);
     final notifier = ref.read(annotateSessionProvider.notifier);
 
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, _) async {
-        if (didPop) return;
-        final shouldPop = await _onWillPop();
-        if (shouldPop && context.mounted) {
-          context.pop();
-        }
-      },
-      child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: AppBar(
-          backgroundColor: tokens.surface,
-          elevation: 0,
-          leading: IconButton(
-            key: const Key('annotate_back_button'),
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () async {
-              final shouldPop = await _onWillPop();
-              if (shouldPop && context.mounted) {
-                context.pop();
-              }
-            },
-          ),
-          title: Text(
-            _filePath != null ? p.basename(_filePath!) : context.l10n.toolAnnotate,
-            style: DocViewTypography.headlineSm.copyWith(
-              color: tokens.textPrimary,
-              fontSize: 18,
+    return PdfEditorShell(
+      filePath: _filePath ?? '',
+      isDirty: session.isDirty,
+      canUndo: session.canUndo,
+      canRedo: session.canRedo,
+      canSave: session.isDirty && session.hasChanges,
+      onUndo: () => notifier.undo(),
+      onRedo: () => notifier.redo(),
+      onSave: _showSaveOptions,
+      documentInfo: session.documentInfo,
+      onBack: () => context.pop(),
+      bottomBar: AnnotateToolbar(
+        activeTool: session.activeTool,
+        selectedMarkupColor: session.selectedColor,
+        penColor: session.penColor,
+        onToolSelected: (tool) {
+          if (tool is AnnotateActiveTool) {
+            notifier.selectActiveTool(tool);
+          }
+        },
+        onColorSelected: (color) {
+          if (session.activeTool == AnnotateActiveTool.pen) {
+            notifier.setPenColor(color);
+          } else {
+            notifier.selectColor(color);
+          }
+        },
+        onPenSettingsTapped: () {
+          PenSheet.show(
+            context,
+            selectedColor: session.penColor,
+            strokeWidth: session.penStrokeWidth,
+            isEraserMode: session.isEraserMode,
+            onColorChanged: notifier.setPenColor,
+            onStrokeWidthChanged: notifier.setPenStrokeWidth,
+            onEraserModeChanged: notifier.setEraserMode,
+          );
+        },
+        onCopyTapped: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(context.l10n.annotateToolbarCopy),
+              duration: const Duration(seconds: 1),
             ),
-            overflow: TextOverflow.ellipsis,
-          ),
-          actions: [
-            IconButton(
-              key: const Key('annotate_action_undo'),
-              icon: const Icon(Icons.undo),
-              tooltip: context.l10n.annotateTooltipUndo,
-              onPressed: session.canUndo ? () => notifier.undo() : null,
-            ),
-            IconButton(
-              key: const Key('annotate_action_redo'),
-              icon: const Icon(Icons.redo),
-              tooltip: context.l10n.annotateTooltipRedo,
-              onPressed: session.canRedo ? () => notifier.redo() : null,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: FilledButton(
-                key: const Key('annotate_action_save'),
-                onPressed: (session.isDirty && session.markups.isNotEmpty)
-                    ? _showSaveOptions
-                    : null,
-                child: Text(context.l10n.annotateTooltipSave),
-              ),
-            ),
-          ],
-        ),
-        body: _buildBody(tokens, session, notifier),
+          );
+        },
       ),
+      body: _buildBody(session, notifier),
     );
   }
 
   Widget _buildBody(
-    DocViewTokens tokens,
     AnnotateSessionState session,
     AnnotateSessionNotifier notifier,
   ) {
+    final tokens = context.tokens;
+
     if (_filePath == null || _isLoadingInfo) {
       return Center(
         child: CircularProgressIndicator(color: tokens.primaryBlue),
@@ -437,90 +360,86 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
       );
     }
 
-    final isSigned = session.documentInfo?.hasDigitalSignature ?? false;
+    final isPenActive = session.activeTool == AnnotateActiveTool.pen;
 
-    return Stack(
+    return Column(
       children: [
-        Column(
-          children: [
-            // Digitally signed notice banner
-            if (isSigned)
-              Container(
-                key: const Key('annotate_signed_banner'),
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                color: Colors.amber.shade100,
-                child: Row(
-                  children: [
-                    Icon(Icons.verified_outlined, size: 20, color: Colors.amber.shade900),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        context.l10n.annotateSignedBanner,
-                        style: TextStyle(
-                          color: Colors.amber.shade900,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+        // One-time / pen-active hint banner
+        if (isPenActive)
+          Container(
+            key: const Key('annotate_pen_tip_banner'),
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            color: tokens.surfaceAlt.withValues(alpha: 0.6),
+            child: Row(
+              children: [
+                Icon(Icons.touch_app_outlined, size: 18, color: tokens.textSecondary),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    context.l10n.annotatePenTipBanner,
+                    style: DocViewTypography.bodySm.copyWith(
+                      color: tokens.textSecondary,
                     ),
-                  ],
+                  ),
                 ),
-              ),
-
-            // Ad-Free PDF Viewer
-            Expanded(
-              child: PdfViewer.file(
-                _filePath!,
-                params: PdfViewerParams(
-                  onViewerReady: (document, controller) {
-                    _viewerController = controller;
-                  },
-                  pageOverlaysBuilder: (context, pageRect, page) {
-                    return [
-                      Positioned.fill(
-                        child: PageMarkupOverlay(
-                          pageIndex: page.pageNumber - 1,
-                          markups: session.markups,
-                        ),
-                      ),
-                    ];
-                  },
-                  buildContextMenu: (context, params) {
-                    return Center(
-                      child: SelectionMenu(
-                        onCopy: () => _copySelectedText(params),
-                        onHighlight: () => _applyMarkupFromSelection(
-                          params: params,
-                          type: TextMarkupType.highlight,
-                        ),
-                        onUnderline: () => _applyMarkupFromSelection(
-                          params: params,
-                          type: TextMarkupType.underline,
-                        ),
-                        onStrikethrough: () => _applyMarkupFromSelection(
-                          params: params,
-                          type: TextMarkupType.strikethrough,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
 
-        // Floating bottom markup toolbar
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: AnnotateToolbar(
-            selectedTool: session.selectedTool,
-            selectedColor: session.selectedColor,
-            onToolSelected: notifier.selectTool,
-            onColorSelected: notifier.selectColor,
+        // Ad-Free PDF Viewer with markups and ink overlays
+        Expanded(
+          child: PdfViewer.file(
+            _filePath!,
+            params: PdfViewerParams(
+              onViewerReady: (document, controller) {
+                _viewerController = controller;
+              },
+              pageOverlaysBuilder: (context, pageRect, page) {
+                final pageIdx = page.pageNumber - 1;
+                return [
+                  Positioned.fill(
+                    child: PageMarkupOverlay(
+                      pageIndex: pageIdx,
+                      markups: session.markups,
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: InkOverlay(
+                      pageIndex: pageIdx,
+                      strokes: session.strokes,
+                      isPenActive: isPenActive,
+                      isEraserMode: session.isEraserMode,
+                      penColor: session.penColor,
+                      strokeWidth: session.penStrokeWidth,
+                      onStrokeAdded: notifier.addStroke,
+                      onStrokeErased: notifier.removeStroke,
+                    ),
+                  ),
+                ];
+              },
+              buildContextMenu: isPenActive
+                  ? null
+                  : (context, params) {
+                      return Center(
+                        child: SelectionMenu(
+                          onCopy: () => _copySelectedText(params),
+                          onHighlight: () => _applyMarkupFromSelection(
+                            params: params,
+                            type: TextMarkupType.highlight,
+                          ),
+                          onUnderline: () => _applyMarkupFromSelection(
+                            params: params,
+                            type: TextMarkupType.underline,
+                          ),
+                          onStrikethrough: () => _applyMarkupFromSelection(
+                            params: params,
+                            type: TextMarkupType.strikethrough,
+                          ),
+                        ),
+                      );
+                    },
+            ),
           ),
         ),
       ],

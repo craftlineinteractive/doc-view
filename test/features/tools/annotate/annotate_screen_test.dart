@@ -197,5 +197,36 @@ void main() {
       );
       expect(replaceTile.enabled, isFalse);
     });
+
+    testWidgets('Pen tool activates pen mode, displays tip banner, and opens PenSheet on second tap', (tester) async {
+      await tester.pumpWidget(createTestWidget());
+      await pumpUntilLoaded(tester);
+
+      // Verify 5 tools present in bottom toolbar
+      expect(find.byKey(const Key('annotate_tool_copy')), findsOneWidget);
+      expect(find.byKey(const Key('annotate_tool_highlight')), findsOneWidget);
+      expect(find.byKey(const Key('annotate_tool_underline')), findsOneWidget);
+      expect(find.byKey(const Key('annotate_tool_strikethrough')), findsOneWidget);
+      expect(find.byKey(const Key('annotate_tool_pen')), findsOneWidget);
+
+      // Initially highlight is active, no pen banner
+      expect(find.byKey(const Key('annotate_pen_tip_banner')), findsNothing);
+
+      // Tap Pen tool
+      await tester.tap(find.byKey(const Key('annotate_tool_pen')));
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Pen tip banner appears
+      expect(find.byKey(const Key('annotate_pen_tip_banner')), findsOneWidget);
+
+      // Tap Pen tool again to open PenSheet
+      await tester.tap(find.byKey(const Key('annotate_tool_pen')));
+      await tester.pump(const Duration(milliseconds: 300));
+
+      // Pen settings sheet is displayed
+      expect(find.byKey(const Key('pen_color_swatches')), findsOneWidget);
+      expect(find.byKey(const Key('pen_stroke_width_slider')), findsOneWidget);
+      expect(find.byKey(const Key('pen_eraser_toggle')), findsOneWidget);
+    });
   });
 }

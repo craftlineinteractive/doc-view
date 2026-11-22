@@ -22,7 +22,7 @@ void main() {
 
   group('AnnotateToolbar Tests', () {
     testWidgets('renders tools and colors, triggers callbacks on tap', (tester) async {
-      TextMarkupType selectedTool = TextMarkupType.highlight;
+      AnnotateActiveTool selectedTool = AnnotateActiveTool.highlight;
       Color selectedColor = AnnotateColors.yellow;
 
       await tester.pumpWidget(
@@ -30,9 +30,9 @@ void main() {
           StatefulBuilder(
             builder: (context, setState) {
               return AnnotateToolbar(
-                selectedTool: selectedTool,
-                selectedColor: selectedColor,
-                onToolSelected: (t) => setState(() => selectedTool = t),
+                activeTool: selectedTool,
+                selectedMarkupColor: selectedColor,
+                onToolSelected: (t) => setState(() => selectedTool = t as AnnotateActiveTool),
                 onColorSelected: (c) => setState(() => selectedColor = c),
               );
             },
@@ -45,6 +45,7 @@ void main() {
       expect(find.byKey(const Key('annotate_tool_highlight')), findsOneWidget);
       expect(find.byKey(const Key('annotate_tool_underline')), findsOneWidget);
       expect(find.byKey(const Key('annotate_tool_strikethrough')), findsOneWidget);
+      expect(find.byKey(const Key('annotate_tool_pen')), findsOneWidget);
 
       // Verify color swatches
       expect(find.byKey(const Key('annotate_color_swatches')), findsOneWidget);
@@ -52,7 +53,7 @@ void main() {
       // Tap Underline tool
       await tester.tap(find.byKey(const Key('annotate_tool_underline')));
       await tester.pumpAndSettle();
-      expect(selectedTool, TextMarkupType.underline);
+      expect(selectedTool, AnnotateActiveTool.underline);
 
       // Tap Pink color
       final pinkSwatch = find.bySemanticsLabel('Pink');

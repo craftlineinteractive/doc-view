@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:docview/data/models/ink_stroke.dart';
 import 'package:docview/data/models/pdf_markup.dart';
 import 'package:docview/data/services/pdf/pdf_annotation_service.dart';
 import 'package:docview/features/tools/annotate/annotate_session_notifier.dart';
@@ -177,6 +178,75 @@ void main() {
       expect(getState().canUndo, isFalse);
       expect(getState().canRedo, isFalse);
       expect(getState().markups.length, 1);
+    });
+
+    test('addStroke, removeStroke, and undo/redo across mixed markups and strokes', () {
+      final markup = TextMarkup(
+        id: 'm1',
+        pageIndex: 0,
+        type: TextMarkupType.highlight,
+        colorValue: 0xFFFFEB3B,
+        lineRects: const [Rect.fromLTWH(0, 0, 50, 10)],
+        text: 'Markup',
+        createdAtMs: 100,
+      );
+      final stroke = InkStroke(
+        id: 's1',
+        pageIndex: 0,
+        points: const [Offset(10, 10), Offset(20, 20)],
+        colorValue: 0xFF000000,
+        strokeWidth: 2.0,
+        timestampMs: 200,
+      );
+
+      notifier.addMarkup(markup);
+      expect(getState().markups.length, 1);
+      expect(getState().strokes.length, 0);
+
+      notifier.addStroke(stroke);
+      expect(getState().markups.length, 1);
+      expect(getState().strokes.length, 1);
+      expect(getState().canUndo, isTrue);
+
+      // Undo stroke
+      notifier.undo();
+      expect(getState().strokes.length, 0);
+      expect(getState().markups.length, 1);
+
+      // Undo markup
+      notifier.undo();
+      expect(getState().markups.length, 0);
+      expect(getState().canUndo, isFalse);
+
+      // Redo both
+      notifier.redo();
+      expect(getState().markups.length, 1);
+      expect(getState().strokes.length, 0);
+
+      notifier.redo();
+      expect(getState().markups.length, 1);
+      expect(getState().strokes.length, 1);
+    });
+
+    test('pen settings (color, strokeWidth, eraserMode, activeTool) update state correctly', () {
+      notifier.setPenColor(PenColors.blue);
+      expect(getState().penColor, PenColors.blue);
+
+      notifier.setPenStrokeWidth(5.0);
+      expect(getState().penStrokeWidth, 5.0);
+
+      // Clamped to 1-12
+      notifier.setPenStrokeWidth(25.0);
+      expect(getState().penStrokeWidth, 12.0);
+      notifier.setPenStrokeWidth(0.2);
+      expect(getState().penStrokeWidth, 1.0);
+
+      notifier.setEraserMode(true);
+      expect(getState().isEraserMode, isTrue);
+
+      notifier.selectActiveTool(AnnotateActiveTool.pen);
+      expect(getState().activeTool, AnnotateActiveTool.pen);
+      expect(getState().isEraserMode, isFalse); // Selecting tool resets eraser
     });
   });
 }
