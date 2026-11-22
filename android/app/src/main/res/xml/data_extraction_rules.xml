@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Exclude user signature files from cloud backup -->
+        <exclude domain="file" path="signatures" />
+    </cloud-backup>
+    <device-transfer>
+        <!-- Exclude user signature files from unencrypted device transfer -->
+        <exclude domain="file" path="signatures" />
+    </device-transfer>
+</data-extraction-rules>

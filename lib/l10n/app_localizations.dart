@@ -4524,6 +4524,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copied to clipboard'**
   String get annotateCopiedToClipboard;
+
+  /// Toolbar label and action for freehand pen drawing tool
+  ///
+  /// In en, this message translates to:
+  /// **'Pen'**
+  String get annotateToolbarPen;
+
+  /// Instruction banner for using the pen drawing tool
+  ///
+  /// In en, this message translates to:
+  /// **'Draw with one finger. Pan and zoom with two fingers.'**
+  String get annotatePenTipBanner;
+
+  /// Title for the pen settings bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Pen settings'**
+  String get annotatePenSheetTitle;
+
+  /// Label for pen stroke width slider
+  ///
+  /// In en, this message translates to:
+  /// **'Stroke width'**
+  String get annotatePenStrokeWidth;
+
+  /// Label for eraser mode in pen sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Eraser'**
+  String get annotatePenEraserMode;
+
+  /// Semantic name for black pen color
+  ///
+  /// In en, this message translates to:
+  /// **'Black'**
+  String get annotateColorBlack;
+
+  /// Semantic name for red pen color
+  ///
+  /// In en, this message translates to:
+  /// **'Red'**
+  String get annotateColorRed;
+
+  /// Semantic name for purple pen color
+  ///
+  /// In en, this message translates to:
+  /// **'Purple'**
+  String get annotateColorPurple;
+
+  /// Semantic name for blue pen color
+  ///
+  /// In en, this message translates to:
+  /// **'Blue'**
+  String get annotateColorBlue;
+
+  /// Tool title for PDF signing
+  ///
+  /// In en, this message translates to:
+  /// **'Sign PDF'**
+  String get toolSignPdf;
+
+  /// Tool subtitle for PDF signing
+  ///
+  /// In en, this message translates to:
+  /// **'Add signature and date to documents'**
+  String get toolSignPdfSubtitle;
+
+  /// Toolbar action to open signature picker sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Sign'**
+  String get signToolbarSign;
+
+  /// Toolbar action to insert current date onto document
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get signToolbarDate;
+
+  /// Toolbar action to clear all placed signatures and dates
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get signToolbarClearAll;
+
+  /// Title of signature drawing pad screen
+  ///
+  /// In en, this message translates to:
+  /// **'Draw your signature'**
+  String get signPadTitle;
+
+  /// Action to clear the current signature stroke in the drawing pad
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get signPadClear;
+
+  /// Action to save the drawn signature
+  ///
+  /// In en, this message translates to:
+  /// **'Save signature'**
+  String get signPadSave;
+
+  /// Title of the saved signatures selection bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Saved signatures'**
+  String get signSheetTitle;
+
+  /// Button to create a new signature
+  ///
+  /// In en, this message translates to:
+  /// **'Create new signature'**
+  String get signSheetCreateNew;
+
+  /// Warning message when 5 saved signatures limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum of 5 saved signatures reached'**
+  String get signMaxSignaturesReached;
+
+  /// Warning message when 20 placed signatures limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum of 20 signatures per document reached'**
+  String get signMaxPlacedReached;
+
+  /// Title of dialog confirming deletion of a saved signature
+  ///
+  /// In en, this message translates to:
+  /// **'Delete signature?'**
+  String get signDeleteSignatureTitle;
+
+  /// Body of dialog confirming deletion of a saved signature
+  ///
+  /// In en, this message translates to:
+  /// **'This signature will be removed from your saved signatures.'**
+  String get signDeleteSignatureBody;
+
+  /// Title of confirmation dialog when clearing all placed signatures
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all signatures?'**
+  String get signConfirmClearAllTitle;
+
+  /// Body of confirmation dialog when clearing all placed signatures
+  ///
+  /// In en, this message translates to:
+  /// **'All placed signatures and dates on this document will be removed.'**
+  String get signConfirmClearAllBody;
+
+  /// Snackbar message shown after successfully saving a signed PDF
+  ///
+  /// In en, this message translates to:
+  /// **'Document signed successfully'**
+  String get signSaveSuccess;
+
+  /// Notice when save is triggered without any placed signatures
+  ///
+  /// In en, this message translates to:
+  /// **'No signatures placed on document'**
+  String get signNoSignaturesToSave;
+
+  /// Action to delete a placed signature
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get signPlacedSignatureDelete;
+
+  /// Action to commit placement of signature
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get signPlacedSignatureApply;
+
+  /// Tooltip for undo signature action
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get signTooltipUndo;
+
+  /// Tooltip for redo signature action
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get signTooltipRedo;
+
+  /// Tooltip for save signed PDF action
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get signTooltipSave;
+
+  /// Stroke width value with unit in points
+  ///
+  /// In en, this message translates to:
+  /// **'{width} pt'**
+  String annotatePenStrokeWidthValue(String width);
 }
 
 class _AppLocalizationsDelegate

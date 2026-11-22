@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Exclude user signature files from cloud backup to protect biometric/signature privacy -->
+    <exclude domain="file" path="signatures" />
+</full-backup-content>

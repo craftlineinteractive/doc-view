@@ -20,6 +20,7 @@ import '../../features/shell/main_shell.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/tools/create_pdf/create_pdf_screen.dart';
 import '../../features/tools/annotate/annotate_screen.dart';
+import '../../features/tools/sign/sign_screen.dart';
 import '../../features/tools/created_documents_screen.dart';
 import '../../features/tools/recycle_bin/recycle_bin_screen.dart';
 import '../../features/tools/tools_screen.dart';
@@ -125,6 +126,17 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>?;
           return AnnotateScreen(
+            initialFilePath: extra?['filePath'] as String?,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/tools/sign',
+        name: 'tools-sign',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return SignScreen(
             initialFilePath: extra?['filePath'] as String?,
           );
         },

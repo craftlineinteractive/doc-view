@@ -2748,6 +2748,112 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get annotateCopiedToClipboard => 'Copied to clipboard';
+
+  @override
+  String get annotateToolbarPen => 'Pen';
+
+  @override
+  String get annotatePenTipBanner =>
+      'Draw with one finger. Pan and zoom with two fingers.';
+
+  @override
+  String get annotatePenSheetTitle => 'Pen settings';
+
+  @override
+  String get annotatePenStrokeWidth => 'Stroke width';
+
+  @override
+  String get annotatePenEraserMode => 'Eraser';
+
+  @override
+  String get annotateColorBlack => 'Black';
+
+  @override
+  String get annotateColorRed => 'Red';
+
+  @override
+  String get annotateColorPurple => 'Purple';
+
+  @override
+  String get annotateColorBlue => 'Blue';
+
+  @override
+  String get toolSignPdf => 'Sign PDF';
+
+  @override
+  String get toolSignPdfSubtitle => 'Add signature and date to documents';
+
+  @override
+  String get signToolbarSign => 'Sign';
+
+  @override
+  String get signToolbarDate => 'Date';
+
+  @override
+  String get signToolbarClearAll => 'Clear all';
+
+  @override
+  String get signPadTitle => 'Draw your signature';
+
+  @override
+  String get signPadClear => 'Clear';
+
+  @override
+  String get signPadSave => 'Save signature';
+
+  @override
+  String get signSheetTitle => 'Saved signatures';
+
+  @override
+  String get signSheetCreateNew => 'Create new signature';
+
+  @override
+  String get signMaxSignaturesReached =>
+      'Maximum of 5 saved signatures reached';
+
+  @override
+  String get signMaxPlacedReached =>
+      'Maximum of 20 signatures per document reached';
+
+  @override
+  String get signDeleteSignatureTitle => 'Delete signature?';
+
+  @override
+  String get signDeleteSignatureBody =>
+      'This signature will be removed from your saved signatures.';
+
+  @override
+  String get signConfirmClearAllTitle => 'Clear all signatures?';
+
+  @override
+  String get signConfirmClearAllBody =>
+      'All placed signatures and dates on this document will be removed.';
+
+  @override
+  String get signSaveSuccess => 'Document signed successfully';
+
+  @override
+  String get signNoSignaturesToSave => 'No signatures placed on document';
+
+  @override
+  String get signPlacedSignatureDelete => 'Delete';
+
+  @override
+  String get signPlacedSignatureApply => 'Apply';
+
+  @override
+  String get signTooltipUndo => 'Undo';
+
+  @override
+  String get signTooltipRedo => 'Redo';
+
+  @override
+  String get signTooltipSave => 'Save';
+
+  @override
+  String annotatePenStrokeWidthValue(String width) {
+    return '$width pt';
+  }
 }
 
 /// The translations for English (`en_XA`).
@@ -5583,4 +5689,112 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get annotateCopiedToClipboard => '[Çôþîéđ ţô çłîþƀôàřđ ẋẋẋẋẋ]';
+
+  @override
+  String get annotateToolbarPen => '[Péñ ẋ]';
+
+  @override
+  String get annotatePenTipBanner =>
+      '[Dřàŵ ŵîţĥ ôñé fîñĝéř. Pàñ àñđ źôôm ŵîţĥ ţŵô fîñĝéřš. ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get annotatePenSheetTitle => '[Péñ šéţţîñĝš ẋẋẋ]';
+
+  @override
+  String get annotatePenStrokeWidth => '[Šţřôķé ŵîđţĥ ẋẋẋ]';
+
+  @override
+  String get annotatePenEraserMode => '[Éřàšéř ẋẋ]';
+
+  @override
+  String get annotateColorBlack => '[Błàçķ ẋ]';
+
+  @override
+  String get annotateColorRed => '[Řéđ ẋ]';
+
+  @override
+  String get annotateColorPurple => '[Pûřþłé ẋẋ]';
+
+  @override
+  String get annotateColorBlue => '[Błûé ẋ]';
+
+  @override
+  String get toolSignPdf => '[Šîĝñ PDF ẋẋ]';
+
+  @override
+  String get toolSignPdfSubtitle =>
+      '[Àđđ šîĝñàţûřé àñđ đàţé ţô đôçûméñţš ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get signToolbarSign => '[Šîĝñ ẋ]';
+
+  @override
+  String get signToolbarDate => '[Dàţé ẋ]';
+
+  @override
+  String get signToolbarClearAll => '[Çłéàř àłł ẋẋẋ]';
+
+  @override
+  String get signPadTitle => '[Dřàŵ ýôûř šîĝñàţûřé ẋẋẋẋẋ]';
+
+  @override
+  String get signPadClear => '[Çłéàř ẋ]';
+
+  @override
+  String get signPadSave => '[Šàṽé šîĝñàţûřé ẋẋẋẋ]';
+
+  @override
+  String get signSheetTitle => '[Šàṽéđ šîĝñàţûřéš ẋẋẋẋ]';
+
+  @override
+  String get signSheetCreateNew => '[Çřéàţé ñéŵ šîĝñàţûřé ẋẋẋẋẋ]';
+
+  @override
+  String get signMaxSignaturesReached =>
+      '[Màxîmûm ôf 5 šàṽéđ šîĝñàţûřéš řéàçĥéđ ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get signMaxPlacedReached =>
+      '[Màxîmûm ôf 20 šîĝñàţûřéš þéř đôçûméñţ řéàçĥéđ ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get signDeleteSignatureTitle => '[Déłéţé šîĝñàţûřé? ẋẋẋẋ]';
+
+  @override
+  String get signDeleteSignatureBody =>
+      '[Ţĥîš šîĝñàţûřé ŵîłł ƀé řémôṽéđ fřôm ýôûř šàṽéđ šîĝñàţûřéš. ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get signConfirmClearAllTitle => '[Çłéàř àłł šîĝñàţûřéš? ẋẋẋẋẋ]';
+
+  @override
+  String get signConfirmClearAllBody =>
+      '[Àłł þłàçéđ šîĝñàţûřéš àñđ đàţéš ôñ ţĥîš đôçûméñţ ŵîłł ƀé řémôṽéđ. ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get signSaveSuccess => '[Dôçûméñţ šîĝñéđ šûççéššfûłłý ẋẋẋẋẋ]';
+
+  @override
+  String get signNoSignaturesToSave =>
+      '[Ñô šîĝñàţûřéš þłàçéđ ôñ đôçûméñţ ẋẋẋẋẋẋ]';
+
+  @override
+  String get signPlacedSignatureDelete => '[Déłéţé ẋ]';
+
+  @override
+  String get signPlacedSignatureApply => '[Àþþłý ẋ]';
+
+  @override
+  String get signTooltipUndo => '[Ûñđô ẋ]';
+
+  @override
+  String get signTooltipRedo => '[Řéđô ẋ]';
+
+  @override
+  String get signTooltipSave => '[Šàṽé ẋ]';
+
+  @override
+  String annotatePenStrokeWidthValue(String width) {
+    return '[$width pt ẋẋ]';
+  }
 }

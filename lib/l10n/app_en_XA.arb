@@ -3639,5 +3639,142 @@
   "annotateCopiedToClipboard": "[Çôþîéđ ţô çłîþƀôàřđ ẋẋẋẋẋ]",
   "@annotateCopiedToClipboard": {
     "description": "Message displayed when text is copied to clipboard"
+  },
+  "annotateToolbarPen": "[Péñ ẋ]",
+  "@annotateToolbarPen": {
+    "description": "Toolbar label and action for freehand pen drawing tool"
+  },
+  "annotatePenTipBanner": "[Dřàŵ ŵîţĥ ôñé fîñĝéř. Pàñ àñđ źôôm ŵîţĥ ţŵô fîñĝéřš. ẋẋẋẋẋẋẋẋẋẋ]",
+  "@annotatePenTipBanner": {
+    "description": "Instruction banner for using the pen drawing tool"
+  },
+  "annotatePenSheetTitle": "[Péñ šéţţîñĝš ẋẋẋ]",
+  "@annotatePenSheetTitle": {
+    "description": "Title for the pen settings bottom sheet"
+  },
+  "annotatePenStrokeWidth": "[Šţřôķé ŵîđţĥ ẋẋẋ]",
+  "@annotatePenStrokeWidth": {
+    "description": "Label for pen stroke width slider"
+  },
+  "annotatePenEraserMode": "[Éřàšéř ẋẋ]",
+  "@annotatePenEraserMode": {
+    "description": "Label for eraser mode in pen sheet"
+  },
+  "annotateColorBlack": "[Błàçķ ẋ]",
+  "@annotateColorBlack": {
+    "description": "Semantic name for black pen color"
+  },
+  "annotateColorRed": "[Řéđ ẋ]",
+  "@annotateColorRed": {
+    "description": "Semantic name for red pen color"
+  },
+  "annotateColorPurple": "[Pûřþłé ẋẋ]",
+  "@annotateColorPurple": {
+    "description": "Semantic name for purple pen color"
+  },
+  "annotateColorBlue": "[Błûé ẋ]",
+  "@annotateColorBlue": {
+    "description": "Semantic name for blue pen color"
+  },
+  "toolSignPdf": "[Šîĝñ PDF ẋẋ]",
+  "@toolSignPdf": {
+    "description": "Tool title for PDF signing"
+  },
+  "toolSignPdfSubtitle": "[Àđđ šîĝñàţûřé àñđ đàţé ţô đôçûméñţš ẋẋẋẋẋẋẋ]",
+  "@toolSignPdfSubtitle": {
+    "description": "Tool subtitle for PDF signing"
+  },
+  "signToolbarSign": "[Šîĝñ ẋ]",
+  "@signToolbarSign": {
+    "description": "Toolbar action to open signature picker sheet"
+  },
+  "signToolbarDate": "[Dàţé ẋ]",
+  "@signToolbarDate": {
+    "description": "Toolbar action to insert current date onto document"
+  },
+  "signToolbarClearAll": "[Çłéàř àłł ẋẋẋ]",
+  "@signToolbarClearAll": {
+    "description": "Toolbar action to clear all placed signatures and dates"
+  },
+  "signPadTitle": "[Dřàŵ ýôûř šîĝñàţûřé ẋẋẋẋẋ]",
+  "@signPadTitle": {
+    "description": "Title of signature drawing pad screen"
+  },
+  "signPadClear": "[Çłéàř ẋ]",
+  "@signPadClear": {
+    "description": "Action to clear the current signature stroke in the drawing pad"
+  },
+  "signPadSave": "[Šàṽé šîĝñàţûřé ẋẋẋẋ]",
+  "@signPadSave": {
+    "description": "Action to save the drawn signature"
+  },
+  "signSheetTitle": "[Šàṽéđ šîĝñàţûřéš ẋẋẋẋ]",
+  "@signSheetTitle": {
+    "description": "Title of the saved signatures selection bottom sheet"
+  },
+  "signSheetCreateNew": "[Çřéàţé ñéŵ šîĝñàţûřé ẋẋẋẋẋ]",
+  "@signSheetCreateNew": {
+    "description": "Button to create a new signature"
+  },
+  "signMaxSignaturesReached": "[Màxîmûm ôf 5 šàṽéđ šîĝñàţûřéš řéàçĥéđ ẋẋẋẋẋẋẋ]",
+  "@signMaxSignaturesReached": {
+    "description": "Warning message when 5 saved signatures limit is reached"
+  },
+  "signMaxPlacedReached": "[Màxîmûm ôf 20 šîĝñàţûřéš þéř đôçûméñţ řéàçĥéđ ẋẋẋẋẋẋẋẋ]",
+  "@signMaxPlacedReached": {
+    "description": "Warning message when 20 placed signatures limit is reached"
+  },
+  "signDeleteSignatureTitle": "[Déłéţé šîĝñàţûřé? ẋẋẋẋ]",
+  "@signDeleteSignatureTitle": {
+    "description": "Title of dialog confirming deletion of a saved signature"
+  },
+  "signDeleteSignatureBody": "[Ţĥîš šîĝñàţûřé ŵîłł ƀé řémôṽéđ fřôm ýôûř šàṽéđ šîĝñàţûřéš. ẋẋẋẋẋẋẋẋẋẋ]",
+  "@signDeleteSignatureBody": {
+    "description": "Body of dialog confirming deletion of a saved signature"
+  },
+  "signConfirmClearAllTitle": "[Çłéàř àłł šîĝñàţûřéš? ẋẋẋẋẋ]",
+  "@signConfirmClearAllTitle": {
+    "description": "Title of confirmation dialog when clearing all placed signatures"
+  },
+  "signConfirmClearAllBody": "[Àłł þłàçéđ šîĝñàţûřéš àñđ đàţéš ôñ ţĥîš đôçûméñţ ŵîłł ƀé řémôṽéđ. ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@signConfirmClearAllBody": {
+    "description": "Body of confirmation dialog when clearing all placed signatures"
+  },
+  "signSaveSuccess": "[Dôçûméñţ šîĝñéđ šûççéššfûłłý ẋẋẋẋẋ]",
+  "@signSaveSuccess": {
+    "description": "Snackbar message shown after successfully saving a signed PDF"
+  },
+  "signNoSignaturesToSave": "[Ñô šîĝñàţûřéš þłàçéđ ôñ đôçûméñţ ẋẋẋẋẋẋ]",
+  "@signNoSignaturesToSave": {
+    "description": "Notice when save is triggered without any placed signatures"
+  },
+  "signPlacedSignatureDelete": "[Déłéţé ẋ]",
+  "@signPlacedSignatureDelete": {
+    "description": "Action to delete a placed signature"
+  },
+  "signPlacedSignatureApply": "[Àþþłý ẋ]",
+  "@signPlacedSignatureApply": {
+    "description": "Action to commit placement of signature"
+  },
+  "signTooltipUndo": "[Ûñđô ẋ]",
+  "@signTooltipUndo": {
+    "description": "Tooltip for undo signature action"
+  },
+  "signTooltipRedo": "[Řéđô ẋ]",
+  "@signTooltipRedo": {
+    "description": "Tooltip for redo signature action"
+  },
+  "signTooltipSave": "[Šàṽé ẋ]",
+  "@signTooltipSave": {
+    "description": "Tooltip for save signed PDF action"
+  },
+  "annotatePenStrokeWidthValue": "[{width} pt ẋẋ]",
+  "@annotatePenStrokeWidthValue": {
+    "description": "Stroke width value with unit in points",
+    "placeholders": {
+      "width": {
+        "type": "String"
+      }
+    }
   }
 }

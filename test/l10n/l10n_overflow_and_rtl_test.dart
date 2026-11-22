@@ -38,7 +38,13 @@ import 'package:docview/features/viewer/widgets/pdf_pages_sheet.dart';
 import 'package:docview/features/viewer/widgets/pdf_password_dialog.dart';
 import 'package:docview/features/tools/annotate/annotate_session_notifier.dart';
 import 'package:docview/features/tools/annotate/widgets/annotate_toolbar.dart';
+import 'package:docview/features/tools/annotate/widgets/pen_sheet.dart';
 import 'package:docview/features/tools/annotate/widgets/selection_menu.dart';
+import 'package:docview/features/tools/sign/widgets/placed_signature_box.dart';
+import 'package:docview/features/tools/sign/widgets/signature_pad.dart';
+import 'package:docview/features/tools/sign/widgets/signatures_sheet.dart';
+import 'package:docview/data/models/placed_signature.dart';
+import 'package:docview/data/repositories/signature_repository.dart';
 import 'package:docview/data/models/pdf_markup.dart';
 import 'package:docview/data/models/spreadsheet_data.dart';
 import 'package:docview/data/services/pdf/pdf_page_edit_service.dart';
@@ -416,6 +422,49 @@ void main() {
                 onUnderline: () {},
                 onStrikethrough: () {},
               ),
+            ),
+          ),
+      'PenSheet': () => Scaffold(
+            body: PenSheet(
+              selectedColor: PenColors.black,
+              strokeWidth: 3.0,
+              isEraserMode: false,
+              onColorChanged: (_) {},
+              onStrokeWidthChanged: (_) {},
+              onEraserModeChanged: (_) {},
+            ),
+          ),
+      'SignaturePad': () => const Scaffold(
+            body: Center(child: SignaturePad()),
+          ),
+      'SignaturesSheet': () => Scaffold(
+            body: SignaturesSheet(
+              repository: SignatureRepository(),
+              initialSignatures: const [],
+              onSignatureSelected: (_) {},
+            ),
+          ),
+      'PlacedSignatureBox': () => Scaffold(
+            body: Stack(
+              children: [
+                PlacedSignatureBox(
+                  signature: const PlacedSignature(
+                    id: '1',
+                    pageIndex: 0,
+                    bounds: Rect.fromLTWH(50, 100, 180, 60),
+                    isDate: true,
+                    dateText: '2026-11-22',
+                    timestampMs: 100,
+                  ),
+                  isSelected: true,
+                  pageSize: const Size(612, 792),
+                  onTap: () {},
+                  onMoved: (_) {},
+                  onResized: (_) {},
+                  onDeleted: () {},
+                  onApplied: () {},
+                ),
+              ],
             ),
           ),
     };

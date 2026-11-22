@@ -22,4 +22,5 @@ const bool annotateEnabled = true;
 const bool addTextEnabled = false;
 
 /// Enables PDF Signature tool (Phase G5).
-const bool signEnabled = false;
+const bool signEnabled = true;
+const bool signPdfEnabled = true;

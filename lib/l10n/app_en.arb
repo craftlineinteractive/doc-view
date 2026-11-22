@@ -3609,5 +3609,142 @@
   "annotateCopiedToClipboard": "Copied to clipboard",
   "@annotateCopiedToClipboard": {
     "description": "Message displayed when text is copied to clipboard"
+  },
+  "annotateToolbarPen": "Pen",
+  "@annotateToolbarPen": {
+    "description": "Toolbar label and action for freehand pen drawing tool"
+  },
+  "annotatePenTipBanner": "Draw with one finger. Pan and zoom with two fingers.",
+  "@annotatePenTipBanner": {
+    "description": "Instruction banner for using the pen drawing tool"
+  },
+  "annotatePenSheetTitle": "Pen settings",
+  "@annotatePenSheetTitle": {
+    "description": "Title for the pen settings bottom sheet"
+  },
+  "annotatePenStrokeWidth": "Stroke width",
+  "@annotatePenStrokeWidth": {
+    "description": "Label for pen stroke width slider"
+  },
+  "annotatePenEraserMode": "Eraser",
+  "@annotatePenEraserMode": {
+    "description": "Label for eraser mode in pen sheet"
+  },
+  "annotateColorBlack": "Black",
+  "@annotateColorBlack": {
+    "description": "Semantic name for black pen color"
+  },
+  "annotateColorRed": "Red",
+  "@annotateColorRed": {
+    "description": "Semantic name for red pen color"
+  },
+  "annotateColorPurple": "Purple",
+  "@annotateColorPurple": {
+    "description": "Semantic name for purple pen color"
+  },
+  "annotateColorBlue": "Blue",
+  "@annotateColorBlue": {
+    "description": "Semantic name for blue pen color"
+  },
+  "toolSignPdf": "Sign PDF",
+  "@toolSignPdf": {
+    "description": "Tool title for PDF signing"
+  },
+  "toolSignPdfSubtitle": "Add signature and date to documents",
+  "@toolSignPdfSubtitle": {
+    "description": "Tool subtitle for PDF signing"
+  },
+  "signToolbarSign": "Sign",
+  "@signToolbarSign": {
+    "description": "Toolbar action to open signature picker sheet"
+  },
+  "signToolbarDate": "Date",
+  "@signToolbarDate": {
+    "description": "Toolbar action to insert current date onto document"
+  },
+  "signToolbarClearAll": "Clear all",
+  "@signToolbarClearAll": {
+    "description": "Toolbar action to clear all placed signatures and dates"
+  },
+  "signPadTitle": "Draw your signature",
+  "@signPadTitle": {
+    "description": "Title of signature drawing pad screen"
+  },
+  "signPadClear": "Clear",
+  "@signPadClear": {
+    "description": "Action to clear the current signature stroke in the drawing pad"
+  },
+  "signPadSave": "Save signature",
+  "@signPadSave": {
+    "description": "Action to save the drawn signature"
+  },
+  "signSheetTitle": "Saved signatures",
+  "@signSheetTitle": {
+    "description": "Title of the saved signatures selection bottom sheet"
+  },
+  "signSheetCreateNew": "Create new signature",
+  "@signSheetCreateNew": {
+    "description": "Button to create a new signature"
+  },
+  "signMaxSignaturesReached": "Maximum of 5 saved signatures reached",
+  "@signMaxSignaturesReached": {
+    "description": "Warning message when 5 saved signatures limit is reached"
+  },
+  "signMaxPlacedReached": "Maximum of 20 signatures per document reached",
+  "@signMaxPlacedReached": {
+    "description": "Warning message when 20 placed signatures limit is reached"
+  },
+  "signDeleteSignatureTitle": "Delete signature?",
+  "@signDeleteSignatureTitle": {
+    "description": "Title of dialog confirming deletion of a saved signature"
+  },
+  "signDeleteSignatureBody": "This signature will be removed from your saved signatures.",
+  "@signDeleteSignatureBody": {
+    "description": "Body of dialog confirming deletion of a saved signature"
+  },
+  "signConfirmClearAllTitle": "Clear all signatures?",
+  "@signConfirmClearAllTitle": {
+    "description": "Title of confirmation dialog when clearing all placed signatures"
+  },
+  "signConfirmClearAllBody": "All placed signatures and dates on this document will be removed.",
+  "@signConfirmClearAllBody": {
+    "description": "Body of confirmation dialog when clearing all placed signatures"
+  },
+  "signSaveSuccess": "Document signed successfully",
+  "@signSaveSuccess": {
+    "description": "Snackbar message shown after successfully saving a signed PDF"
+  },
+  "signNoSignaturesToSave": "No signatures placed on document",
+  "@signNoSignaturesToSave": {
+    "description": "Notice when save is triggered without any placed signatures"
+  },
+  "signPlacedSignatureDelete": "Delete",
+  "@signPlacedSignatureDelete": {
+    "description": "Action to delete a placed signature"
+  },
+  "signPlacedSignatureApply": "Apply",
+  "@signPlacedSignatureApply": {
+    "description": "Action to commit placement of signature"
+  },
+  "signTooltipUndo": "Undo",
+  "@signTooltipUndo": {
+    "description": "Tooltip for undo signature action"
+  },
+  "signTooltipRedo": "Redo",
+  "@signTooltipRedo": {
+    "description": "Tooltip for redo signature action"
+  },
+  "signTooltipSave": "Save",
+  "@signTooltipSave": {
+    "description": "Tooltip for save signed PDF action"
+  },
+  "annotatePenStrokeWidthValue": "{width} pt",
+  "@annotatePenStrokeWidthValue": {
+    "description": "Stroke width value with unit in points",
+    "placeholders": {
+      "width": {
+        "type": "String"
+      }
+    }
   }
 }
