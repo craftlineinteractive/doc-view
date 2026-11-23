@@ -123,6 +123,17 @@ flutter:
           weight: 600
         - asset: assets/fonts/SpaceGrotesk-Bold.ttf
           weight: 700
+    - family: Arimo
+      fonts:
+        - asset: assets/fonts/Arimo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Arimo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Arimo-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Arimo-BoldItalic.ttf
+          weight: 700
+          style: italic
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
