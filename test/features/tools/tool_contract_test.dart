@@ -7,9 +7,9 @@ void main() {
   final AppLocalizations l10n = AppLocalizationsEn();
 
   group('Tool Registry Contract Tests', () {
-    test('Default G5b visible tools count is exactly 11', () {
+    test('Default G5c visible tools count is exactly 12', () {
       final visible = getVisibleTools();
-      expect(visible.length, 11);
+      expect(visible.length, 12);
 
       final visibleIds = visible.map((t) => t.id).toList();
       expect(
@@ -19,6 +19,7 @@ void main() {
           'scan_to_pdf',
           'create_pdf',
           'annotate',
+          'add_text',
           'sign',
           'manage_pages',
           'merge_pdf',
@@ -30,7 +31,7 @@ void main() {
       );
     });
 
-    test('Visible tools per section match G5b specification', () {
+    test('Visible tools per section match G5c specification', () {
       final convertTools = getToolsForSection(ToolSection.convertAndCreate);
       expect(convertTools.map((t) => t.id).toList(), [
         'image_to_pdf',
@@ -41,6 +42,7 @@ void main() {
       final editTools = getToolsForSection(ToolSection.editAndManage);
       expect(editTools.map((t) => t.id).toList(), [
         'annotate',
+        'add_text',
         'sign',
         'manage_pages',
         'merge_pdf',
@@ -59,7 +61,6 @@ void main() {
       final gatedIds = [
         'word_to_pdf',
         'ppt_to_pdf',
-        'add_text',
       ];
 
       for (final id in gatedIds) {

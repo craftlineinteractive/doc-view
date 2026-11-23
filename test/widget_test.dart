@@ -130,6 +130,7 @@ void main() {
     expect(find.text('Scan to PDF'), findsOneWidget);
     expect(find.text('Create PDF'), findsOneWidget);
     expect(find.text('Annotate'), findsOneWidget);
+    expect(find.text('Add Text'), findsOneWidget);
     expect(find.text('Sign'), findsOneWidget);
     expect(find.text('Manage Pages'), findsOneWidget);
     expect(find.text('Merge PDF'), findsOneWidget);
@@ -138,7 +139,7 @@ void main() {
     expect(find.text('Recycle bin'), findsOneWidget);
     expect(find.text('Print PDF'), findsOneWidget);
 
-    // Assert exactly 11 tool tiles exist in G5b
+    // Assert exactly 12 tool tiles exist in G5c
     final foundToolTiles = find.byWidgetPredicate((widget) {
       if (widget.key is ValueKey<String>) {
         final keyVal = (widget.key as ValueKey<String>).value;
@@ -146,7 +147,7 @@ void main() {
       }
       return false;
     });
-    expect(foundToolTiles, findsNWidgets(11));
+    expect(foundToolTiles, findsNWidgets(12));
 
     // Verify accessibility guidelines on ToolsScreen
     final handle = tester.ensureSemantics();
