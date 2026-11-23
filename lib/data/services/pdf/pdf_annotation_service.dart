@@ -15,6 +15,7 @@ import 'package:syncfusion_flutter_pdf/src/pdf/implementation/primitives/pdf_num
 import '../../../core/errors/app_errors.dart';
 import '../../models/ink_stroke.dart';
 import '../../models/pdf_markup.dart';
+import '../../models/pdf_text_box.dart';
 import '../../models/placed_signature.dart';
 import 'pdf_coordinate_transform.dart';
 
@@ -64,6 +65,7 @@ class PdfAnnotationService {
     List<TextMarkup> markups,
     List<InkStroke> strokes,
     List<PlacedSignature> signatures,
+    List<PdfTextBox> textBoxes,
     String? password,
     bool replaceOriginal,
     String? originalPath,
@@ -112,6 +114,7 @@ class PdfAnnotationService {
     List<TextMarkup> markups = const [],
     List<InkStroke> strokes = const [],
     List<PlacedSignature> signatures = const [],
+    List<PdfTextBox> textBoxes = const [],
     String? password,
     bool replaceOriginal = false,
     String? originalPath,
@@ -123,6 +126,7 @@ class PdfAnnotationService {
         markups: markups,
         strokes: strokes,
         signatures: signatures,
+        textBoxes: textBoxes,
         password: password,
         replaceOriginal: replaceOriginal,
         originalPath: originalPath,
@@ -140,6 +144,7 @@ class PdfAnnotationService {
     final rawMarkups = markups.map((m) => m.toMap()).toList(growable: false);
     final rawStrokes = strokes.map((s) => s.toMap()).toList(growable: false);
     final rawSignatures = signatures.map((s) => s.toMap()).toList(growable: false);
+    final rawTextBoxes = textBoxes.map((t) => t.toMap()).toList(growable: false);
 
     final params = _SaveAnnotationsParams(
       sourcePath: sourcePath,
@@ -147,6 +152,7 @@ class PdfAnnotationService {
       markups: rawMarkups,
       strokes: rawStrokes,
       signatures: rawSignatures,
+      textBoxes: rawTextBoxes,
       password: password,
       replaceOriginal: replaceOriginal,
       originalPath: originalPath ?? (replaceOriginal ? outputPath : null),
@@ -177,6 +183,7 @@ class _SaveAnnotationsParams {
   final List<Map<String, dynamic>> markups;
   final List<Map<String, dynamic>> strokes;
   final List<Map<String, dynamic>> signatures;
+  final List<Map<String, dynamic>> textBoxes;
   final String? password;
   final bool replaceOriginal;
   final String? originalPath;
@@ -187,6 +194,7 @@ class _SaveAnnotationsParams {
     this.markups = const [],
     this.strokes = const [],
     this.signatures = const [],
+    this.textBoxes = const [],
     this.password,
     this.replaceOriginal = false,
     this.originalPath,
@@ -335,6 +343,7 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
   final parsedMarkups = params.markups.map((m) => TextMarkup.fromMap(m)).toList();
   final parsedStrokes = params.strokes.map((s) => InkStroke.fromMap(s)).toList();
   final parsedSignatures = params.signatures.map((s) => PlacedSignature.fromMap(s)).toList();
+  final parsedTextBoxes = params.textBoxes.map((t) => PdfTextBox.fromMap(t)).toList();
 
   // Enforce stroke caps per file: max 5,000 strokes and max 300,000 points
   if (parsedStrokes.length > InkStrokeMath.maxStrokesPerDocument) {
@@ -347,6 +356,24 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
     if (totalPoints > InkStrokeMath.maxPointsPerDocument) {
       doc.dispose();
       throw const PdfAnnotationException(PdfAnnotationErrorReason.tooManyStrokes);
+    }
+  }
+
+  // Enforce text box caps: max 30 boxes per file, max 2000 chars per box
+  if (parsedTextBoxes.length > PdfTextBox.maxBoxesPerDocument) {
+    doc.dispose();
+    throw const PdfAnnotationException(
+      PdfAnnotationErrorReason.saveFailed,
+      'Maximum 30 text boxes exceeded',
+    );
+  }
+  for (final b in parsedTextBoxes) {
+    if (b.text.length > PdfTextBox.maxCharactersPerBox) {
+      doc.dispose();
+      throw const PdfAnnotationException(
+        PdfAnnotationErrorReason.saveFailed,
+        'Text box exceeds 2,000 characters limit',
+      );
     }
   }
 
@@ -372,12 +399,20 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
     }
   }
 
+  final textBoxesByPage = <int, List<PdfTextBox>>{};
+  for (final box in parsedTextBoxes) {
+    if (box.pageIndex >= 0 && box.pageIndex < pageCount) {
+      textBoxesByPage.putIfAbsent(box.pageIndex, () => []).add(box);
+    }
+  }
+
   for (var pageIndex = 0; pageIndex < pageCount; pageIndex++) {
     final pageMarkups = markupsByPage[pageIndex] ?? const [];
     final pageStrokes = strokesByPage[pageIndex] ?? const [];
     final pageSigs = signaturesByPage[pageIndex] ?? const [];
+    final pageTextBoxes = textBoxesByPage[pageIndex] ?? const [];
 
-    if (pageMarkups.isEmpty && pageStrokes.isEmpty && pageSigs.isEmpty) {
+    if (pageMarkups.isEmpty && pageStrokes.isEmpty && pageSigs.isEmpty && pageTextBoxes.isEmpty) {
       continue;
     }
 
@@ -467,6 +502,57 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
             strokeWidth: sig.strokeWidth,
             color: Color(sig.colorValue),
           );
+        }
+
+        // Draw Text Boxes (Latin vector or Raster image)
+        for (final box in pageTextBoxes) {
+          if (box.isRaster && box.pngBytes != null) {
+            space.drawImage(
+              pngBytes: box.pngBytes!,
+              visualBounds: box.bounds,
+            );
+          } else {
+            // Latin vector text
+            final fontStyle = (box.isBold && box.isItalic)
+                ? [sf.PdfFontStyle.bold, sf.PdfFontStyle.italic]
+                : box.isBold
+                    ? [sf.PdfFontStyle.bold]
+                    : box.isItalic
+                        ? [sf.PdfFontStyle.italic]
+                        : <sf.PdfFontStyle>[];
+
+            final standardFont = fontStyle.isEmpty
+                ? sf.PdfStandardFont(sf.PdfFontFamily.helvetica, box.fontSize)
+                : sf.PdfStandardFont(
+                    sf.PdfFontFamily.helvetica,
+                    box.fontSize,
+                    multiStyle: fontStyle,
+                  );
+
+            final color = Color(box.colorValue);
+            final brush = sf.PdfSolidBrush(
+              sf.PdfColor(
+                (color.r * 255.0).round(),
+                (color.g * 255.0).round(),
+                (color.b * 255.0).round(),
+              ),
+            );
+
+            // Draw line by line using computed layout
+            double currentY = box.bounds.top;
+            final lineHeight = box.fontSize * 1.25;
+
+            for (final line in box.lines) {
+              final lineDx = box.bounds.left + line.dx;
+              space.drawTextLine(
+                text: line.text,
+                font: standardFont,
+                brush: brush,
+                visualPosition: Offset(lineDx, currentY),
+              );
+              currentY += lineHeight;
+            }
+          }
         }
       },
     );
