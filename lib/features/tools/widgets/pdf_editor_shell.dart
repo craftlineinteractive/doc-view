@@ -23,6 +23,7 @@ class PdfEditorShell extends StatelessWidget {
     required this.onSave,
     required this.documentInfo,
     required this.body,
+    this.changesCount,
     this.bottomBar,
     this.onBack,
     super.key,
@@ -38,6 +39,7 @@ class PdfEditorShell extends StatelessWidget {
   final VoidCallback onSave;
   final PdfDocumentInfo? documentInfo;
   final Widget body;
+  final int? changesCount;
   final Widget? bottomBar;
   final VoidCallback? onBack;
 
@@ -170,14 +172,28 @@ class PdfEditorShell extends StatelessWidget {
                 }
               },
             ),
-            title: Text(
-              fileName,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: DocViewTypography.headlineSm.copyWith(
-                color: tokens.textPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            title: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  fileName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: DocViewTypography.headlineSm.copyWith(
+                    color: tokens.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                if (changesCount != null && changesCount! > 0)
+                  Text(
+                    context.l10n.annotateChangesCount(changesCount!),
+                    style: TextStyle(
+                      color: tokens.textSecondary,
+                      fontSize: 12,
+                    ),
+                  ),
+              ],
             ),
             actions: [
               IconButton(

@@ -452,8 +452,9 @@ void main() {
                     id: '1',
                     pageIndex: 0,
                     bounds: Rect.fromLTWH(50, 100, 180, 60),
-                    isDate: true,
-                    dateText: '2026-11-22',
+                    normalizedStrokes: [
+                      [Offset(0.1, 0.5), Offset(0.9, 0.5)],
+                    ],
                     timestampMs: 100,
                   ),
                   isSelected: true,

@@ -1,10 +1,9 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/doc_view_tokens.dart';
 import '../../../../data/models/placed_signature.dart';
 
-/// Draggable and resizable bounding box representing a placed signature or date stamp on a PDF page.
+/// Draggable and resizable bounding box representing a placed vector signature on a PDF page.
 class PlacedSignatureBox extends StatelessWidget {
   const PlacedSignatureBox({
     required this.signature,
@@ -29,7 +28,7 @@ class PlacedSignatureBox extends StatelessWidget {
 
   static const double minWidth = 60.0;
   static const double minHeight = 20.0;
-  static const double handleSize = 18.0;
+  static const double handleSize = 22.0;
 
   void _handlePanUpdate(DragUpdateDetails details) {
     var newLeft = signature.bounds.left + details.delta.dx;
@@ -98,29 +97,13 @@ class PlacedSignatureBox extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: Center(
-                child: signature.isDateStamp
-                    ? FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          child: Text(
-                            signature.dateText ?? '',
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Inter',
-                            ),
-                          ),
-                        ),
-                      )
-                    : Image.file(
-                        File(signature.signatureFilePath),
-                        fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const Icon(Icons.broken_image, size: 24),
-                      ),
+              child: CustomPaint(
+                size: Size(bounds.width, bounds.height),
+                painter: _VectorSignatureWidgetPainter(
+                  strokes: signature.normalizedStrokes,
+                  color: Color(signature.colorValue),
+                  strokeWidth: signature.strokeWidth,
+                ),
               ),
             ),
           ),
@@ -129,7 +112,7 @@ class PlacedSignatureBox extends StatelessWidget {
           if (isSelected) ...[
             // Top action bar
             Positioned(
-              top: -36,
+              top: -38,
               left: 0,
               right: 0,
               child: Row(
@@ -147,18 +130,18 @@ class PlacedSignatureBox extends StatelessWidget {
                           borderRadius: const BorderRadius.horizontal(left: Radius.circular(16)),
                           onTap: onDeleted,
                           child: Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: Icon(Icons.delete_outline, size: 18, color: tokens.error),
+                            padding: const EdgeInsets.all(8),
+                            child: Icon(Icons.delete_outline, size: 20, color: tokens.error),
                           ),
                         ),
-                        Container(width: 1, height: 16, color: tokens.hairline),
+                        Container(width: 1, height: 18, color: tokens.hairline),
                         InkWell(
                           key: const Key('placed_sig_apply'),
                           borderRadius: const BorderRadius.horizontal(right: Radius.circular(16)),
                           onTap: onApplied,
                           child: Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: Icon(Icons.check, size: 18, color: tokens.primaryBlue),
+                            padding: const EdgeInsets.all(8),
+                            child: Icon(Icons.check, size: 20, color: tokens.primaryBlue),
                           ),
                         ),
                       ],
@@ -168,7 +151,7 @@ class PlacedSignatureBox extends StatelessWidget {
               ),
             ),
 
-            // 4 Corner resize handles
+            // 4 Corner resize handles (min 48dp touch target)
             // Top-Left
             Positioned(
               left: -handleSize / 2,
@@ -208,6 +191,54 @@ class PlacedSignatureBox extends StatelessWidget {
   }
 }
 
+class _VectorSignatureWidgetPainter extends CustomPainter {
+  final List<List<Offset>> strokes;
+  final Color color;
+  final double strokeWidth;
+
+  const _VectorSignatureWidgetPainter({
+    required this.strokes,
+    required this.color,
+    required this.strokeWidth,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..style = PaintingStyle.stroke;
+
+    final dotPaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    for (final s in strokes) {
+      if (s.isEmpty) continue;
+      if (s.length == 1) {
+        canvas.drawCircle(
+          Offset(s.first.dx * size.width, s.first.dy * size.height),
+          strokeWidth / 2,
+          dotPaint,
+        );
+      } else {
+        final path = Path()
+          ..moveTo(s.first.dx * size.width, s.first.dy * size.height);
+        for (var i = 1; i < s.length; i++) {
+          path.lineTo(s[i].dx * size.width, s[i].dy * size.height);
+        }
+        canvas.drawPath(path, paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _VectorSignatureWidgetPainter oldDelegate) =>
+      oldDelegate.strokes != strokes || oldDelegate.color != color || oldDelegate.strokeWidth != strokeWidth;
+}
+
 class _ResizeHandle extends StatelessWidget {
   const _ResizeHandle({required this.onPanUpdate});
 
@@ -226,6 +257,13 @@ class _ResizeHandle extends StatelessWidget {
           color: tokens.surface,
           shape: BoxShape.circle,
           border: Border.all(color: tokens.primaryBlue, width: 2),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.15),
+              blurRadius: 4,
+              offset: const Offset(0, 1),
+            ),
+          ],
         ),
       ),
     );

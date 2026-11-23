@@ -4722,6 +4722,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{width} pt'**
   String annotatePenStrokeWidthValue(String width);
+
+  /// Error message when document stroke or point limit is exceeded
+  ///
+  /// In en, this message translates to:
+  /// **'Document has reached the maximum of 5,000 strokes or 300,000 points.'**
+  String get annotateErrorTooManyStrokes;
+
+  /// Count of unsaved changes in editor
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 change} other{{count} changes}}'**
+  String annotateChangesCount(int count);
+
+  /// One-time notice explaining that pen strokes are permanently flattened on save
+  ///
+  /// In en, this message translates to:
+  /// **'Pen strokes become part of the page when saved and cannot be edited later.'**
+  String get annotatePenNotice;
+
+  /// Action to dismiss the pen stroke notice
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get annotatePenNoticeDismiss;
+
+  /// Hint text above the baseline in signature pad
+  ///
+  /// In en, this message translates to:
+  /// **'Sign here'**
+  String get signPadBaselineHint;
+
+  /// Action to undo the last drawn stroke in signature pad
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get signPadUndo;
+
+  /// Action to use the drawn signature without saving
+  ///
+  /// In en, this message translates to:
+  /// **'Use once'**
+  String get signPadUseOnce;
+
+  /// Action to save the drawn signature and use it
+  ///
+  /// In en, this message translates to:
+  /// **'Save and use'**
+  String get signPadSaveAndUse;
+
+  /// Display name of the Add Text tool
+  ///
+  /// In en, this message translates to:
+  /// **'Add Text'**
+  String get tool_add_text;
+
+  /// Description of the Add Text tool
+  ///
+  /// In en, this message translates to:
+  /// **'Insert text boxes and notes onto pages'**
+  String get tool_add_text_desc;
+
+  /// One-time notice explaining that added text cannot be edited after saving
+  ///
+  /// In en, this message translates to:
+  /// **'Added text becomes part of the page and can\'t be edited after saving.'**
+  String get addTextNoticePermanent;
+
+  /// InfoBanner warning that non-Latin text is rendered as raster image
+  ///
+  /// In en, this message translates to:
+  /// **'Text in this language is added as an image and can\'t be selected.'**
+  String get addTextNoticeRaster;
+
+  /// Action to dismiss Add Text notice
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get addTextNoticeGotIt;
+
+  /// Bottom bar action to enter text placement mode
+  ///
+  /// In en, this message translates to:
+  /// **'Add text'**
+  String get addTextActionAdd;
+
+  /// Bottom bar action to open style sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Style'**
+  String get addTextActionStyle;
+
+  /// Bottom bar action to delete selected text box
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get addTextActionDelete;
+
+  /// Title of text styling bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Text style'**
+  String get addTextStyleSheetTitle;
+
+  /// Label for font size slider
+  ///
+  /// In en, this message translates to:
+  /// **'Font size'**
+  String get addTextFontSize;
+
+  /// Label for color palette swatches
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get addTextColor;
+
+  /// Label for font style toggles
+  ///
+  /// In en, this message translates to:
+  /// **'Style'**
+  String get addTextStyle;
+
+  /// Label for text alignment toggles
+  ///
+  /// In en, this message translates to:
+  /// **'Alignment'**
+  String get addTextAlign;
+
+  /// Toggle button for bold text
+  ///
+  /// In en, this message translates to:
+  /// **'Bold'**
+  String get addTextBold;
+
+  /// Toggle button for italic text
+  ///
+  /// In en, this message translates to:
+  /// **'Italic'**
+  String get addTextItalic;
+
+  /// Text alignment start
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get addTextAlignStart;
+
+  /// Text alignment center
+  ///
+  /// In en, this message translates to:
+  /// **'Center'**
+  String get addTextAlignCenter;
+
+  /// Text alignment end
+  ///
+  /// In en, this message translates to:
+  /// **'End'**
+  String get addTextAlignEnd;
+
+  /// Error message when 30 text box limit is reached
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum of 30 text boxes reached'**
+  String get addTextErrorTooManyBoxes;
+
+  /// Error message when text box length exceeds 2000 chars
+  ///
+  /// In en, this message translates to:
+  /// **'Text box cannot exceed 2,000 characters'**
+  String get addTextErrorBoxTooLong;
+
+  /// Placeholder text inside new text box
+  ///
+  /// In en, this message translates to:
+  /// **'Type text here'**
+  String get addTextPlaceholder;
 }
 
 class _AppLocalizationsDelegate

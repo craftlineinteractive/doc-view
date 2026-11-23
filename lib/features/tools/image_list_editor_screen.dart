@@ -133,6 +133,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
     if (widget.isScannerSource) {
       final messenger = ScaffoldMessenger.of(context);
       try {
+        // ignore: deprecated_member_use
         final scans = await CunningDocumentScanner.getPictures();
         if (!mounted) return;
         if (scans != null && scans.isNotEmpty) {
@@ -428,6 +429,7 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                                     final messenger = ScaffoldMessenger.of(context);
                                     final l10n = context.l10n;
                                     try {
+                                      // ignore: deprecated_member_use
                                       final scans = await CunningDocumentScanner.getPictures();
                                       if (!mounted) return;
                                       if (scans != null && scans.isNotEmpty) {

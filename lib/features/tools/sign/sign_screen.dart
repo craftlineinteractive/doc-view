@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:path/path.dart' as p;
 import 'package:pdfrx/pdfrx.dart';
 
@@ -149,8 +148,8 @@ class _SignScreenState extends ConsumerState<SignScreen> {
     }
 
     final pageSize = _getPageSize(_currentPageIndex);
-    const sigWidth = 180.0;
-    const sigHeight = 60.0;
+    final sigWidth = (180.0).clamp(60.0, pageSize.width * 0.9);
+    final sigHeight = (sigWidth / saved.aspectRatio).clamp(20.0, pageSize.height * 0.8);
     final left = ((pageSize.width - sigWidth) / 2).clamp(20.0, double.infinity);
     final top = ((pageSize.height - sigHeight) / 2).clamp(20.0, double.infinity);
 
@@ -159,36 +158,9 @@ class _SignScreenState extends ConsumerState<SignScreen> {
       pageIndex: _currentPageIndex,
       bounds: Rect.fromLTWH(left, top, sigWidth, sigHeight),
       signatureId: saved.id,
-      signatureFilePath: saved.filePath,
-      timestampMs: DateTime.now().millisecondsSinceEpoch,
-    );
-
-    _selectedSignatureId = placed.id;
-    _recordSnapshot([..._signatures, placed]);
-  }
-
-  void _insertDateStamp() {
-    if (_signatures.length >= PlacedSignature.maxSignaturesPerDocument) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.signMaxPlacedReached)),
-      );
-      return;
-    }
-
-    final now = DateTime.now();
-    final dateFormatted = DateFormat('yyyy-MM-dd').format(now);
-    final pageSize = _getPageSize(_currentPageIndex);
-    const stampWidth = 140.0;
-    const stampHeight = 32.0;
-    final left = ((pageSize.width - stampWidth) / 2).clamp(20.0, double.infinity);
-    final top = ((pageSize.height - stampHeight) / 2).clamp(20.0, double.infinity);
-
-    final placed = PlacedSignature(
-      id: 'date_${DateTime.now().millisecondsSinceEpoch}',
-      pageIndex: _currentPageIndex,
-      bounds: Rect.fromLTWH(left, top, stampWidth, stampHeight),
-      isDate: true,
-      dateText: dateFormatted,
+      normalizedStrokes: saved.strokes,
+      colorValue: saved.colorValue,
+      strokeWidth: 2.0,
       timestampMs: DateTime.now().millisecondsSinceEpoch,
     );
 
@@ -332,6 +304,7 @@ class _SignScreenState extends ConsumerState<SignScreen> {
       onRedo: _redo,
       onSave: _showSaveOptions,
       documentInfo: _documentInfo,
+      changesCount: _signatures.length,
       onBack: () => context.pop(),
       bottomBar: SafeArea(
         top: false,
@@ -346,14 +319,6 @@ class _SignScreenState extends ConsumerState<SignScreen> {
                 isSelected: false,
                 onTap: _openSignaturesSheet,
                 tooltip: l10n.signToolbarSign,
-              ),
-              ReaderBottomRowItem(
-                key: const Key('sign_action_date'),
-                icon: Icons.calendar_today_outlined,
-                label: l10n.signToolbarDate,
-                isSelected: false,
-                onTap: _insertDateStamp,
-                tooltip: l10n.signToolbarDate,
               ),
               ReaderBottomRowItem(
                 key: const Key('sign_action_clear_all'),

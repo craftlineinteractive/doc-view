@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../../../../core/extensions/l10n_extension.dart';
@@ -70,17 +69,30 @@ class _SignaturesSheetState extends State<SignaturesSheet> {
   }
 
   Future<void> _createNew() async {
-    if (_signatures.length >= SignatureRepository.maxSavedSignatures) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.signMaxSignaturesReached)),
-      );
-      return;
-    }
-
-    final bytes = await SignaturePad.show(context);
-    if (bytes != null && mounted) {
-      final saved = await widget.repository.saveSignature(bytes);
-      widget.onSignatureSelected(saved);
+    final result = await SignaturePad.show(context);
+    if (result != null && mounted) {
+      if (result.saveForFutureUse) {
+        if (_signatures.length >= SignatureRepository.maxSavedSignatures) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(context.l10n.signMaxSignaturesReached)),
+          );
+          return;
+        }
+        final saved = await widget.repository.saveSignature(
+          strokes: result.normalizedStrokes,
+          aspectRatio: result.aspectRatio,
+        );
+        widget.onSignatureSelected(saved);
+      } else {
+        final temp = SavedSignature(
+          id: 'temp_${DateTime.now().millisecondsSinceEpoch}',
+          name: 'Temporary',
+          strokes: result.normalizedStrokes,
+          aspectRatio: result.aspectRatio,
+          createdAtMs: DateTime.now().millisecondsSinceEpoch,
+        );
+        widget.onSignatureSelected(temp);
+      }
     }
   }
 
@@ -154,10 +166,12 @@ class _SignaturesSheetState extends State<SignaturesSheet> {
 
             // Signatures List
             if (_isLoading)
-              const Center(child: Padding(
-                padding: EdgeInsets.all(24),
-                child: CircularProgressIndicator(),
-              ))
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(24),
+                  child: CircularProgressIndicator(),
+                ),
+              )
             else if (_signatures.isEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24),
@@ -194,11 +208,11 @@ class _SignaturesSheetState extends State<SignaturesSheet> {
                         child: Row(
                           children: [
                             Expanded(
-                              child: Image.file(
-                                File(sig.filePath),
-                                fit: BoxFit.contain,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    const Icon(Icons.broken_image),
+                              child: CustomPaint(
+                                painter: _VectorThumbPainter(
+                                  strokes: sig.strokes,
+                                  color: Color(sig.colorValue),
+                                ),
                               ),
                             ),
                             IconButton(
@@ -224,21 +238,52 @@ class _SignaturesSheetState extends State<SignaturesSheet> {
               label: Text(l10n.signSheetCreateNew),
               onPressed: isMaxReached ? null : _createNew,
             ),
-            if (isMaxReached)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(
-                  l10n.signMaxSignaturesReached,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: tokens.error,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
           ],
         ),
       ),
     );
   }
+}
+
+class _VectorThumbPainter extends CustomPainter {
+  final List<List<Offset>> strokes;
+  final Color color;
+
+  const _VectorThumbPainter({required this.strokes, required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 2.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..style = PaintingStyle.stroke;
+
+    final dotPaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    for (final s in strokes) {
+      if (s.isEmpty) continue;
+      if (s.length == 1) {
+        canvas.drawCircle(
+          Offset(s.first.dx * size.width, s.first.dy * size.height),
+          1.5,
+          dotPaint,
+        );
+      } else {
+        final path = Path()
+          ..moveTo(s.first.dx * size.width, s.first.dy * size.height);
+        for (var i = 1; i < s.length; i++) {
+          path.lineTo(s[i].dx * size.width, s[i].dy * size.height);
+        }
+        canvas.drawPath(path, paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _VectorThumbPainter oldDelegate) =>
+      oldDelegate.strokes != strokes || oldDelegate.color != color;
 }

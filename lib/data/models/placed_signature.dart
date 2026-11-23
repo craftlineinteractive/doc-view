@@ -1,21 +1,19 @@
-import 'dart:typed_data';
 import 'dart:ui';
 
-/// Represents a signature or date stamp placed onto a PDF page.
+/// Represents a vector signature placed onto a PDF page.
 class PlacedSignature {
   const PlacedSignature({
     required this.id,
     required this.pageIndex,
     required this.bounds,
     this.signatureId,
-    this.signatureFilePath = '',
-    this.pngBytes,
-    this.isDate = false,
-    this.dateText,
+    this.normalizedStrokes = const [],
+    this.colorValue = 0xFF000000,
+    this.strokeWidth = 2.0,
     required this.timestampMs,
   });
 
-  /// Maximum allowed placed signatures or dates per document.
+  /// Maximum allowed placed signatures per document.
   static const int maxSignaturesPerDocument = 20;
 
   /// Unique identifier for this placed signature on the document.
@@ -30,19 +28,14 @@ class PlacedSignature {
   /// ID of the saved signature from SignatureRepository (if sourced from saved).
   final String? signatureId;
 
-  /// Local file path of the signature image (if loaded from disk).
-  final String signatureFilePath;
+  /// Normalized vector stroke polylines in [0..1] x [0..1] bounding coordinates.
+  final List<List<Offset>> normalizedStrokes;
 
-  /// Raw PNG image bytes of the signature.
-  final Uint8List? pngBytes;
+  /// ARGB color of the signature ink.
+  final int colorValue;
 
-  /// Whether this placed item is a localized date stamp instead of a handwritten signature.
-  final bool isDate;
-
-  bool get isDateStamp => isDate;
-
-  /// Formatted date string if [isDate] is true.
-  final String? dateText;
+  /// Stroke width in points.
+  final double strokeWidth;
 
   /// Creation timestamp in milliseconds since epoch.
   final int timestampMs;
@@ -52,10 +45,9 @@ class PlacedSignature {
     int? pageIndex,
     Rect? bounds,
     String? signatureId,
-    String? signatureFilePath,
-    Uint8List? pngBytes,
-    bool? isDate,
-    String? dateText,
+    List<List<Offset>>? normalizedStrokes,
+    int? colorValue,
+    double? strokeWidth,
     int? timestampMs,
   }) {
     return PlacedSignature(
@@ -63,10 +55,9 @@ class PlacedSignature {
       pageIndex: pageIndex ?? this.pageIndex,
       bounds: bounds ?? this.bounds,
       signatureId: signatureId ?? this.signatureId,
-      signatureFilePath: signatureFilePath ?? this.signatureFilePath,
-      pngBytes: pngBytes ?? this.pngBytes,
-      isDate: isDate ?? this.isDate,
-      dateText: dateText ?? this.dateText,
+      normalizedStrokes: normalizedStrokes ?? this.normalizedStrokes,
+      colorValue: colorValue ?? this.colorValue,
+      strokeWidth: strokeWidth ?? this.strokeWidth,
       timestampMs: timestampMs ?? this.timestampMs,
     );
   }
@@ -77,10 +68,11 @@ class PlacedSignature {
       'page_index': pageIndex,
       'bounds': [bounds.left, bounds.top, bounds.width, bounds.height],
       'signature_id': signatureId,
-      'signature_file_path': signatureFilePath,
-      'png_bytes': pngBytes,
-      'is_date': isDate ? 1 : 0,
-      'date_text': dateText,
+      'normalized_strokes': normalizedStrokes
+          .map((stroke) => stroke.map((p) => [p.dx, p.dy]).toList())
+          .toList(),
+      'color_value': colorValue,
+      'stroke_width': strokeWidth,
       'timestamp_ms': timestampMs,
     };
   }
@@ -94,17 +86,30 @@ class PlacedSignature {
       (rawBounds[3] as num).toDouble(),
     );
 
+    final rawStrokes = map['normalized_strokes'] as List<dynamic>?;
+    final strokes = <List<Offset>>[];
+    if (rawStrokes != null) {
+      for (final s in rawStrokes) {
+        final strokePoints = <Offset>[];
+        for (final p in s as List<dynamic>) {
+          final pt = p as List<dynamic>;
+          strokePoints.add(Offset(
+            (pt[0] as num).toDouble(),
+            (pt[1] as num).toDouble(),
+          ));
+        }
+        strokes.add(strokePoints);
+      }
+    }
+
     return PlacedSignature(
       id: map['id'] as String,
       pageIndex: (map['page_index'] as num).toInt(),
       bounds: b,
       signatureId: map['signature_id'] as String?,
-      signatureFilePath: (map['signature_file_path'] as String?) ?? '',
-      pngBytes: map['png_bytes'] != null
-          ? Uint8List.fromList(List<int>.from(map['png_bytes'] as List))
-          : null,
-      isDate: (map['is_date'] as num?) == 1,
-      dateText: map['date_text'] as String?,
+      normalizedStrokes: strokes,
+      colorValue: (map['color_value'] as num?)?.toInt() ?? 0xFF000000,
+      strokeWidth: (map['stroke_width'] as num?)?.toDouble() ?? 2.0,
       timestampMs: (map['timestamp_ms'] as num).toInt(),
     );
   }

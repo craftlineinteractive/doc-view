@@ -84,17 +84,25 @@ void main() {
       }
     });
 
-    test('processPoints enforces maxPointsPerStroke hard cap of 5000', () {
-      final hugeStroke = List.generate(
-        8000,
-        (i) => Offset(i.toDouble(), (i % 5).toDouble() * 3),
+    test('processPoints applies resampling (minDistance 0.5) and RDP (epsilon 0.25)', () {
+      final denseStroke = List.generate(
+        1000,
+        (i) => Offset(i * 0.1, 0), // points spaced by 0.1 pt (< 0.5 pt)
       );
 
-      final processed = InkStrokeMath.processPoints(hugeStroke, maxPoints: 5000);
+      final processed = InkStrokeMath.processPoints(denseStroke);
 
-      expect(processed.length, lessThanOrEqualTo(5000));
-      expect(processed.first, hugeStroke.first);
-      expect(processed.last, hugeStroke.last);
+      // Should eliminate points closer than 0.5pt and collinear points
+      expect(processed.length, lessThan(denseStroke.length));
+      expect(processed.first, denseStroke.first);
+      expect(processed.last, denseStroke.last);
+      // Since all points lie on a straight line, RDP simplifies to just 2 points!
+      expect(processed.length, 2);
+    });
+
+    test('stroke and point document caps match requirements', () {
+      expect(InkStrokeMath.maxStrokesPerDocument, 5000);
+      expect(InkStrokeMath.maxPointsPerDocument, 300000);
     });
 
     test('maxPointsPerDocument cap validation logic', () {

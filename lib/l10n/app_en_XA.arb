@@ -3776,5 +3776,126 @@
         "type": "String"
       }
     }
+  },
+  "annotateErrorTooManyStrokes": "[!!! Ðöçûmêñţ håş réåçhêð ţhé mâxîmûm öf 5,000 şţrökêş ör 300,000 pöîñţş. !!!]",
+  "@annotateErrorTooManyStrokes": {
+    "description": "Error message when document stroke or point limit is exceeded"
+  },
+  "annotateChangesCount": "{count, plural, =1{[1 çhåñĝé ẋ]} other{[{count} çhåñĝéş ẋ]}}",
+  "@annotateChangesCount": {
+    "description": "Count of unsaved changes in editor",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "annotatePenNotice": "[!!! Pêñ şţrökêş bêçömê pårţ öf ţhé påĝê whêñ şåvêð åñð çåññöţ bê êðîţêð låţêr. !!!]",
+  "@annotatePenNotice": {
+    "description": "One-time notice explaining that pen strokes are permanently flattened on save"
+  },
+  "annotatePenNoticeDismiss": "[Ĝöţ îţ ẋ]",
+  "@annotatePenNoticeDismiss": {
+    "description": "Action to dismiss the pen stroke notice"
+  },
+  "signPadBaselineHint": "[Šîĝñ hèré ẋ]",
+  "@signPadBaselineHint": {
+    "description": "Hint text above the baseline in signature pad"
+  },
+  "signPadUndo": "[Ûñđô ẋ]",
+  "@signPadUndo": {
+    "description": "Action to undo the last drawn stroke in signature pad"
+  },
+  "signPadUseOnce": "[Ûsé ôñçé ẋ]",
+  "@signPadUseOnce": {
+    "description": "Action to use the drawn signature without saving"
+  },
+  "signPadSaveAndUse": "[Šàṽé àñđ ûsé ẋ]",
+  "@signPadSaveAndUse": {
+    "description": "Action to save the drawn signature and use it"
+  },
+  "tool_add_text": "[Àđđ Ţéxţ ẋ]",
+  "@tool_add_text": {
+    "description": "Display name of the Add Text tool"
+  },
+  "tool_add_text_desc": "[Îñsérţ ţéxţ böxés àñđ ñöţés öñţö pàĝés ẋ]",
+  "@tool_add_text_desc": {
+    "description": "Description of the Add Text tool"
+  },
+  "addTextNoticePermanent": "[!!! Àđđéđ ţéxţ béçömés pàrţ öf ţhé pàĝé àñđ çàñ'ţ bé éđîţéđ àfţér sàṽîñĝ. !!!]",
+  "@addTextNoticePermanent": {
+    "description": "One-time notice explaining that added text cannot be edited after saving"
+  },
+  "addTextNoticeRaster": "[!!! Ţéxţ îñ ţhîs làñĝûàĝé îs àđđéđ às àñ îmàĝé àñđ çàñ'ţ bé séléçţéđ. !!!]",
+  "@addTextNoticeRaster": {
+    "description": "InfoBanner warning that non-Latin text is rendered as raster image"
+  },
+  "addTextNoticeGotIt": "[Ĝöţ îţ ẋ]",
+  "@addTextNoticeGotIt": {
+    "description": "Action to dismiss Add Text notice"
+  },
+  "addTextActionAdd": "[Àđđ ţéxţ ẋ]",
+  "@addTextActionAdd": {
+    "description": "Bottom bar action to enter text placement mode"
+  },
+  "addTextActionStyle": "[Šţýłé ẋ]",
+  "@addTextActionStyle": {
+    "description": "Bottom bar action to open style sheet"
+  },
+  "addTextActionDelete": "[Déłéţé ẋ]",
+  "@addTextActionDelete": {
+    "description": "Bottom bar action to delete selected text box"
+  },
+  "addTextStyleSheetTitle": "[Ţéxţ sţýłé ẋ]",
+  "@addTextStyleSheetTitle": {
+    "description": "Title of text styling bottom sheet"
+  },
+  "addTextFontSize": "[Föñţ sîzé ẋ]",
+  "@addTextFontSize": {
+    "description": "Label for font size slider"
+  },
+  "addTextColor": "[Çöłör ẋ]",
+  "@addTextColor": {
+    "description": "Label for color palette swatches"
+  },
+  "addTextStyle": "[Šţýłé ẋ]",
+  "@addTextStyle": {
+    "description": "Label for font style toggles"
+  },
+  "addTextAlign": "[Àłîĝñméñţ ẋ]",
+  "@addTextAlign": {
+    "description": "Label for text alignment toggles"
+  },
+  "addTextBold": "[Böłđ ẋ]",
+  "@addTextBold": {
+    "description": "Toggle button for bold text"
+  },
+  "addTextItalic": "[Îţàłîç ẋ]",
+  "@addTextItalic": {
+    "description": "Toggle button for italic text"
+  },
+  "addTextAlignStart": "[Šţàrţ ẋ]",
+  "@addTextAlignStart": {
+    "description": "Text alignment start"
+  },
+  "addTextAlignCenter": "[Çéñţér ẋ]",
+  "@addTextAlignCenter": {
+    "description": "Text alignment center"
+  },
+  "addTextAlignEnd": "[Éñđ ẋ]",
+  "@addTextAlignEnd": {
+    "description": "Text alignment end"
+  },
+  "addTextErrorTooManyBoxes": "[!!! Màxîmûm öf 30 ţéxţ böxés réàçhéđ !!!]",
+  "@addTextErrorTooManyBoxes": {
+    "description": "Error message when 30 text box limit is reached"
+  },
+  "addTextErrorBoxTooLong": "[!!! Ţéxţ böx çàññöţ éxçééđ 2,000 çhàràçţérs !!!]",
+  "@addTextErrorBoxTooLong": {
+    "description": "Error message when text box length exceeds 2000 chars"
+  },
+  "addTextPlaceholder": "[Ţýpé ţéxţ héré ẋ]",
+  "@addTextPlaceholder": {
+    "description": "Placeholder text inside new text box"
   }
 }

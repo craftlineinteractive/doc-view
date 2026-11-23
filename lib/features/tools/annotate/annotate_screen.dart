@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path/path.dart' as p;
 import 'package:pdfrx/pdfrx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
@@ -42,11 +43,19 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
   PdfViewerController? _viewerController;
   bool _isLoadingInfo = true;
   String? _loadError;
+  bool _penNoticeDismissed = false;
 
   @override
   void initState() {
     super.initState();
     _filePath = widget.initialFilePath;
+    SharedPreferences.getInstance().then((prefs) {
+      if (mounted) {
+        setState(() {
+          _penNoticeDismissed = prefs.getBool('annotate_pen_notice_dismissed') ?? false;
+        });
+      }
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_filePath == null) {
@@ -294,6 +303,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
       onRedo: () => notifier.redo(),
       onSave: _showSaveOptions,
       documentInfo: session.documentInfo,
+      changesCount: session.markups.length + session.strokes.length,
       onBack: () => context.pop(),
       bottomBar: AnnotateToolbar(
         activeTool: session.activeTool,
@@ -364,8 +374,40 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
 
     return Column(
       children: [
-        // One-time / pen-active hint banner
-        if (isPenActive)
+        // One-time first-use pen notice banner
+        if (isPenActive && !_penNoticeDismissed)
+          Container(
+            key: const Key('annotate_pen_notice_banner'),
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            color: tokens.surfaceAlt,
+            child: Row(
+              children: [
+                Icon(Icons.info_outline, size: 20, color: tokens.textSecondary),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    context.l10n.annotatePenNotice,
+                    style: DocViewTypography.bodySm.copyWith(
+                      color: tokens.textPrimary,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  key: const Key('annotate_pen_notice_got_it'),
+                  onPressed: () {
+                    setState(() {
+                      _penNoticeDismissed = true;
+                    });
+                    SharedPreferences.getInstance().then((p) => p.setBool('annotate_pen_notice_dismissed', true));
+                  },
+                  child: Text(context.l10n.annotatePenNoticeDismiss),
+                ),
+              ],
+            ),
+          ),
+        // Active hint banner
+        if (isPenActive && _penNoticeDismissed)
           Container(
             key: const Key('annotate_pen_tip_banner'),
             width: double.infinity,

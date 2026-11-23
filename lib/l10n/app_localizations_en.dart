@@ -2854,6 +2854,106 @@ class AppLocalizationsEn extends AppLocalizations {
   String annotatePenStrokeWidthValue(String width) {
     return '$width pt';
   }
+
+  @override
+  String get annotateErrorTooManyStrokes =>
+      'Document has reached the maximum of 5,000 strokes or 300,000 points.';
+
+  @override
+  String annotateChangesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count changes',
+      one: '1 change',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get annotatePenNotice =>
+      'Pen strokes become part of the page when saved and cannot be edited later.';
+
+  @override
+  String get annotatePenNoticeDismiss => 'Got it';
+
+  @override
+  String get signPadBaselineHint => 'Sign here';
+
+  @override
+  String get signPadUndo => 'Undo';
+
+  @override
+  String get signPadUseOnce => 'Use once';
+
+  @override
+  String get signPadSaveAndUse => 'Save and use';
+
+  @override
+  String get tool_add_text => 'Add Text';
+
+  @override
+  String get tool_add_text_desc => 'Insert text boxes and notes onto pages';
+
+  @override
+  String get addTextNoticePermanent =>
+      'Added text becomes part of the page and can\'t be edited after saving.';
+
+  @override
+  String get addTextNoticeRaster =>
+      'Text in this language is added as an image and can\'t be selected.';
+
+  @override
+  String get addTextNoticeGotIt => 'Got it';
+
+  @override
+  String get addTextActionAdd => 'Add text';
+
+  @override
+  String get addTextActionStyle => 'Style';
+
+  @override
+  String get addTextActionDelete => 'Delete';
+
+  @override
+  String get addTextStyleSheetTitle => 'Text style';
+
+  @override
+  String get addTextFontSize => 'Font size';
+
+  @override
+  String get addTextColor => 'Color';
+
+  @override
+  String get addTextStyle => 'Style';
+
+  @override
+  String get addTextAlign => 'Alignment';
+
+  @override
+  String get addTextBold => 'Bold';
+
+  @override
+  String get addTextItalic => 'Italic';
+
+  @override
+  String get addTextAlignStart => 'Start';
+
+  @override
+  String get addTextAlignCenter => 'Center';
+
+  @override
+  String get addTextAlignEnd => 'End';
+
+  @override
+  String get addTextErrorTooManyBoxes => 'Maximum of 30 text boxes reached';
+
+  @override
+  String get addTextErrorBoxTooLong =>
+      'Text box cannot exceed 2,000 characters';
+
+  @override
+  String get addTextPlaceholder => 'Type text here';
 }
 
 /// The translations for English (`en_XA`).
@@ -5797,4 +5897,105 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   String annotatePenStrokeWidthValue(String width) {
     return '[$width pt ẋẋ]';
   }
+
+  @override
+  String get annotateErrorTooManyStrokes =>
+      '[!!! Ðöçûmêñţ håş réåçhêð ţhé mâxîmûm öf 5,000 şţrökêş ör 300,000 pöîñţş. !!!]';
+
+  @override
+  String annotateChangesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '[$count çhåñĝéş ẋ]',
+      one: '[1 çhåñĝé ẋ]',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get annotatePenNotice =>
+      '[!!! Pêñ şţrökêş bêçömê pårţ öf ţhé påĝê whêñ şåvêð åñð çåññöţ bê êðîţêð låţêr. !!!]';
+
+  @override
+  String get annotatePenNoticeDismiss => '[Ĝöţ îţ ẋ]';
+
+  @override
+  String get signPadBaselineHint => '[Šîĝñ hèré ẋ]';
+
+  @override
+  String get signPadUndo => '[Ûñđô ẋ]';
+
+  @override
+  String get signPadUseOnce => '[Ûsé ôñçé ẋ]';
+
+  @override
+  String get signPadSaveAndUse => '[Šàṽé àñđ ûsé ẋ]';
+
+  @override
+  String get tool_add_text => '[Àđđ Ţéxţ ẋ]';
+
+  @override
+  String get tool_add_text_desc => '[Îñsérţ ţéxţ böxés àñđ ñöţés öñţö pàĝés ẋ]';
+
+  @override
+  String get addTextNoticePermanent =>
+      '[!!! Àđđéđ ţéxţ béçömés pàrţ öf ţhé pàĝé àñđ çàñ\'ţ bé éđîţéđ àfţér sàṽîñĝ. !!!]';
+
+  @override
+  String get addTextNoticeRaster =>
+      '[!!! Ţéxţ îñ ţhîs làñĝûàĝé îs àđđéđ às àñ îmàĝé àñđ çàñ\'ţ bé séléçţéđ. !!!]';
+
+  @override
+  String get addTextNoticeGotIt => '[Ĝöţ îţ ẋ]';
+
+  @override
+  String get addTextActionAdd => '[Àđđ ţéxţ ẋ]';
+
+  @override
+  String get addTextActionStyle => '[Šţýłé ẋ]';
+
+  @override
+  String get addTextActionDelete => '[Déłéţé ẋ]';
+
+  @override
+  String get addTextStyleSheetTitle => '[Ţéxţ sţýłé ẋ]';
+
+  @override
+  String get addTextFontSize => '[Föñţ sîzé ẋ]';
+
+  @override
+  String get addTextColor => '[Çöłör ẋ]';
+
+  @override
+  String get addTextStyle => '[Šţýłé ẋ]';
+
+  @override
+  String get addTextAlign => '[Àłîĝñméñţ ẋ]';
+
+  @override
+  String get addTextBold => '[Böłđ ẋ]';
+
+  @override
+  String get addTextItalic => '[Îţàłîç ẋ]';
+
+  @override
+  String get addTextAlignStart => '[Šţàrţ ẋ]';
+
+  @override
+  String get addTextAlignCenter => '[Çéñţér ẋ]';
+
+  @override
+  String get addTextAlignEnd => '[Éñđ ẋ]';
+
+  @override
+  String get addTextErrorTooManyBoxes =>
+      '[!!! Màxîmûm öf 30 ţéxţ böxés réàçhéđ !!!]';
+
+  @override
+  String get addTextErrorBoxTooLong =>
+      '[!!! Ţéxţ böx çàññöţ éxçééđ 2,000 çhàràçţérs !!!]';
+
+  @override
+  String get addTextPlaceholder => '[Ţýpé ţéxţ héré ẋ]';
 }

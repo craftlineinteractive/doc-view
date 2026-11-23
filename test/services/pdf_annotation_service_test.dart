@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:docview/core/errors/app_errors.dart';
+import 'package:docview/data/models/ink_stroke.dart';
 import 'package:docview/data/models/pdf_markup.dart';
 import 'package:docview/data/services/pdf/pdf_annotation_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -296,6 +297,62 @@ void main() {
           (e) => e.reason,
           'reason',
           PdfAnnotationErrorReason.signedDocumentReplaceBlocked,
+        )),
+      );
+    });
+    test('throws tooManyStrokes if stroke count exceeds 5000', () async {
+      final file = await createSamplePdf(pageCount: 1);
+      final strokes = List.generate(
+        5001,
+        (i) => InkStroke(
+          id: 's_$i',
+          pageIndex: 0,
+          points: const [Offset(10, 10), Offset(20, 20)],
+          timestampMs: 100,
+        ),
+      );
+
+      expect(
+        () => service.saveAnnotations(
+          sourcePath: file.path,
+          outputPath: '${tempDir.path}/out_stroke_cap.pdf',
+          strokes: strokes,
+        ),
+        throwsA(isA<PdfAnnotationException>().having(
+          (e) => e.reason,
+          'reason',
+          PdfAnnotationErrorReason.tooManyStrokes,
+        )),
+      );
+    });
+
+    test('throws tooManyStrokes if total points exceed 300000', () async {
+      final file = await createSamplePdf(pageCount: 1);
+      final strokes = [
+        InkStroke(
+          id: 'huge_1',
+          pageIndex: 0,
+          points: List.generate(200000, (i) => Offset(i.toDouble(), 0)),
+          timestampMs: 100,
+        ),
+        InkStroke(
+          id: 'huge_2',
+          pageIndex: 0,
+          points: List.generate(150000, (i) => Offset(i.toDouble(), 0)),
+          timestampMs: 200,
+        ),
+      ];
+
+      expect(
+        () => service.saveAnnotations(
+          sourcePath: file.path,
+          outputPath: '${tempDir.path}/out_point_cap.pdf',
+          strokes: strokes,
+        ),
+        throwsA(isA<PdfAnnotationException>().having(
+          (e) => e.reason,
+          'reason',
+          PdfAnnotationErrorReason.tooManyStrokes,
         )),
       );
     });

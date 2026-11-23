@@ -67,6 +67,7 @@ class ToolsScreen extends ConsumerWidget {
 
   Future<void> _onScanToPdf(BuildContext context) async {
     try {
+      // ignore: deprecated_member_use
       final scans = await CunningDocumentScanner.getPictures();
       if (scans != null && scans.isNotEmpty && context.mounted) {
         Navigator.of(context).push(

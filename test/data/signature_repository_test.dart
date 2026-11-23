@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:docview/data/repositories/signature_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,26 +23,40 @@ void main() {
       } catch (_) {}
     });
 
-    test('saves signature to disk and loads it correctly', () async {
-      final fakePng = Uint8List.fromList([1, 2, 3, 4, 5]);
+    test('saves vector signature to disk and loads it correctly', () async {
+      final sampleStrokes = [
+        [const Offset(0.1, 0.2), const Offset(0.5, 0.5), const Offset(0.9, 0.8)],
+      ];
 
-      final saved = await repository.saveSignature(fakePng, width: 220, height: 80);
+      final saved = await repository.saveSignature(
+        strokes: sampleStrokes,
+        aspectRatio: 2.5,
+        width: 250,
+        height: 100,
+      );
 
       expect(saved.id, startsWith('sig_'));
-      expect(File(saved.filePath).existsSync(), isTrue);
+      expect(saved.strokes.length, 1);
+      expect(saved.strokes.first.length, 3);
+      expect(saved.aspectRatio, 2.5);
 
       final list = await repository.getSignatures();
       expect(list.length, 1);
       expect(list.first.id, saved.id);
-      expect(list.first.width, 220);
-      expect(list.first.height, 80);
+      expect(list.first.strokes.first.first, const Offset(0.1, 0.2));
+      expect(list.first.aspectRatio, 2.5);
     });
 
     test('enforces max 5 saved signatures limit', () async {
-      final fakePng = Uint8List.fromList([1, 2, 3]);
+      final sampleStrokes = [
+        [const Offset(0.1, 0.1), const Offset(0.9, 0.9)],
+      ];
 
       for (var i = 0; i < 5; i++) {
-        await repository.saveSignature(fakePng);
+        await repository.saveSignature(
+          strokes: sampleStrokes,
+          aspectRatio: 2.0,
+        );
       }
 
       final list = await repository.getSignatures();
@@ -51,7 +64,10 @@ void main() {
 
       // 6th attempt must throw
       expect(
-        () => repository.saveSignature(fakePng),
+        () => repository.saveSignature(
+          strokes: sampleStrokes,
+          aspectRatio: 2.0,
+        ),
         throwsA(isA<StateError>().having(
           (e) => e.message,
           'message',
@@ -60,10 +76,12 @@ void main() {
       );
     });
 
-    test('deleteSignature removes file and updates index', () async {
-      final fakePng = Uint8List.fromList([1, 2, 3]);
-      final sig1 = await repository.saveSignature(fakePng);
-      final sig2 = await repository.saveSignature(fakePng);
+    test('deleteSignature removes signature and updates index', () async {
+      final sampleStrokes = [
+        [const Offset(0, 0), const Offset(1, 1)],
+      ];
+      final sig1 = await repository.saveSignature(strokes: sampleStrokes, aspectRatio: 2.0);
+      final sig2 = await repository.saveSignature(strokes: sampleStrokes, aspectRatio: 2.0);
 
       expect((await repository.getSignatures()).length, 2);
 
@@ -72,7 +90,6 @@ void main() {
       final remaining = await repository.getSignatures();
       expect(remaining.length, 1);
       expect(remaining.first.id, sig2.id);
-      expect(File(sig1.filePath).existsSync(), isFalse);
     });
 
     test('backup_rules.xml explicitly excludes signatures directory', () {

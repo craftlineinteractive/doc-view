@@ -224,6 +224,9 @@ enum PdfAnnotationErrorReason {
   passwordProtected,
   corruptDocument,
   signedDocumentReplaceBlocked,
+  tooManyStrokes,
+  tooManyTextBoxes,
+  textBoxTooLong,
   saveFailed;
 
   String localizedMessage(BuildContext context, {String? details}) {
@@ -236,6 +239,12 @@ enum PdfAnnotationErrorReason {
         return context.l10n.annotateErrorCorrupt;
       case PdfAnnotationErrorReason.signedDocumentReplaceBlocked:
         return context.l10n.annotateSignedReplaceBlocked;
+      case PdfAnnotationErrorReason.tooManyStrokes:
+        return context.l10n.annotateErrorTooManyStrokes;
+      case PdfAnnotationErrorReason.tooManyTextBoxes:
+        return context.l10n.addTextErrorTooManyBoxes;
+      case PdfAnnotationErrorReason.textBoxTooLong:
+        return context.l10n.addTextErrorBoxTooLong;
       case PdfAnnotationErrorReason.saveFailed:
         return context.l10n.annotateErrorSaveFailed(details ?? '');
     }

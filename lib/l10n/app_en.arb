@@ -3746,5 +3746,126 @@
         "type": "String"
       }
     }
+  },
+  "annotateErrorTooManyStrokes": "Document has reached the maximum of 5,000 strokes or 300,000 points.",
+  "@annotateErrorTooManyStrokes": {
+    "description": "Error message when document stroke or point limit is exceeded"
+  },
+  "annotateChangesCount": "{count, plural, =1{1 change} other{{count} changes}}",
+  "@annotateChangesCount": {
+    "description": "Count of unsaved changes in editor",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "annotatePenNotice": "Pen strokes become part of the page when saved and cannot be edited later.",
+  "@annotatePenNotice": {
+    "description": "One-time notice explaining that pen strokes are permanently flattened on save"
+  },
+  "annotatePenNoticeDismiss": "Got it",
+  "@annotatePenNoticeDismiss": {
+    "description": "Action to dismiss the pen stroke notice"
+  },
+  "signPadBaselineHint": "Sign here",
+  "@signPadBaselineHint": {
+    "description": "Hint text above the baseline in signature pad"
+  },
+  "signPadUndo": "Undo",
+  "@signPadUndo": {
+    "description": "Action to undo the last drawn stroke in signature pad"
+  },
+  "signPadUseOnce": "Use once",
+  "@signPadUseOnce": {
+    "description": "Action to use the drawn signature without saving"
+  },
+  "signPadSaveAndUse": "Save and use",
+  "@signPadSaveAndUse": {
+    "description": "Action to save the drawn signature and use it"
+  },
+  "tool_add_text": "Add Text",
+  "@tool_add_text": {
+    "description": "Display name of the Add Text tool"
+  },
+  "tool_add_text_desc": "Insert text boxes and notes onto pages",
+  "@tool_add_text_desc": {
+    "description": "Description of the Add Text tool"
+  },
+  "addTextNoticePermanent": "Added text becomes part of the page and can't be edited after saving.",
+  "@addTextNoticePermanent": {
+    "description": "One-time notice explaining that added text cannot be edited after saving"
+  },
+  "addTextNoticeRaster": "Text in this language is added as an image and can't be selected.",
+  "@addTextNoticeRaster": {
+    "description": "InfoBanner warning that non-Latin text is rendered as raster image"
+  },
+  "addTextNoticeGotIt": "Got it",
+  "@addTextNoticeGotIt": {
+    "description": "Action to dismiss Add Text notice"
+  },
+  "addTextActionAdd": "Add text",
+  "@addTextActionAdd": {
+    "description": "Bottom bar action to enter text placement mode"
+  },
+  "addTextActionStyle": "Style",
+  "@addTextActionStyle": {
+    "description": "Bottom bar action to open style sheet"
+  },
+  "addTextActionDelete": "Delete",
+  "@addTextActionDelete": {
+    "description": "Bottom bar action to delete selected text box"
+  },
+  "addTextStyleSheetTitle": "Text style",
+  "@addTextStyleSheetTitle": {
+    "description": "Title of text styling bottom sheet"
+  },
+  "addTextFontSize": "Font size",
+  "@addTextFontSize": {
+    "description": "Label for font size slider"
+  },
+  "addTextColor": "Color",
+  "@addTextColor": {
+    "description": "Label for color palette swatches"
+  },
+  "addTextStyle": "Style",
+  "@addTextStyle": {
+    "description": "Label for font style toggles"
+  },
+  "addTextAlign": "Alignment",
+  "@addTextAlign": {
+    "description": "Label for text alignment toggles"
+  },
+  "addTextBold": "Bold",
+  "@addTextBold": {
+    "description": "Toggle button for bold text"
+  },
+  "addTextItalic": "Italic",
+  "@addTextItalic": {
+    "description": "Toggle button for italic text"
+  },
+  "addTextAlignStart": "Start",
+  "@addTextAlignStart": {
+    "description": "Text alignment start"
+  },
+  "addTextAlignCenter": "Center",
+  "@addTextAlignCenter": {
+    "description": "Text alignment center"
+  },
+  "addTextAlignEnd": "End",
+  "@addTextAlignEnd": {
+    "description": "Text alignment end"
+  },
+  "addTextErrorTooManyBoxes": "Maximum of 30 text boxes reached",
+  "@addTextErrorTooManyBoxes": {
+    "description": "Error message when 30 text box limit is reached"
+  },
+  "addTextErrorBoxTooLong": "Text box cannot exceed 2,000 characters",
+  "@addTextErrorBoxTooLong": {
+    "description": "Error message when text box length exceeds 2000 chars"
+  },
+  "addTextPlaceholder": "Type text here",
+  "@addTextPlaceholder": {
+    "description": "Placeholder text inside new text box"
   }
 }

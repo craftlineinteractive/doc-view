@@ -1,4 +1,8 @@
+import 'dart:math' as math;
+import 'dart:typed_data';
 import 'dart:ui';
+
+import 'package:syncfusion_flutter_pdf/pdf.dart' as sf;
 
 /// Pure coordinate transformation utility for mapping between pdfrx visual viewport
 /// coordinates and Syncfusion PDF document coordinates.
@@ -204,5 +208,204 @@ class PdfCoordinateTransform {
     final vHeight = vPdfTop - vPdfBottom;
 
     return Rect.fromLTWH(vLeft, vTop, vWidth, vHeight);
+  }
+
+  /// Applies visual-to-PDF transform for all drawing operations (strokes, signatures, text)
+  /// so callers draw in visual page coordinates (top-left origin, unrotated view).
+  static void withVisualSpace({
+    required sf.PdfPage page,
+    required double visualWidth,
+    required double visualHeight,
+    required int rotationDegrees,
+    Rect? cropBox,
+    required void Function(VisualSpace space) drawCallback,
+  }) {
+    final space = VisualSpace(
+      page: page,
+      visualWidth: visualWidth,
+      visualHeight: visualHeight,
+      rotationDegrees: rotationDegrees,
+      cropBox: cropBox,
+    );
+    drawCallback(space);
+  }
+}
+
+/// Represents a visual drawing context where coordinates match the rendered page view
+/// (origin top-left, X right, Y down, unrotated and CropBox-clipped).
+class VisualSpace {
+  final sf.PdfPage page;
+  final double visualWidth;
+  final double visualHeight;
+  final int rotationDegrees;
+  final Rect? cropBox;
+
+  const VisualSpace({
+    required this.page,
+    required this.visualWidth,
+    required this.visualHeight,
+    required this.rotationDegrees,
+    this.cropBox,
+  });
+
+  /// Maps visual point (Flutter top-left coordinates) to Syncfusion PDF coordinates.
+  Offset toSyncPoint(Offset visualPoint) {
+    return PdfCoordinateTransform.visualToSyncfusionPoint(
+      visualPoint: visualPoint,
+      visualWidth: visualWidth,
+      visualHeight: visualHeight,
+      rotationDegrees: rotationDegrees,
+      cropBox: cropBox,
+    );
+  }
+
+  /// Maps visual rect (Flutter top-left coordinates) to Syncfusion PDF coordinates.
+  Rect toSyncRect(Rect visualRect) {
+    return PdfCoordinateTransform.visualToSyncfusionRect(
+      visualRect: visualRect,
+      visualWidth: visualWidth,
+      visualHeight: visualHeight,
+      rotationDegrees: rotationDegrees,
+      cropBox: cropBox,
+    );
+  }
+
+  /// Draws a freehand pen stroke or tap dot given visual coordinates.
+  void drawStroke({
+    required List<Offset> points,
+    required double strokeWidth,
+    required Color color,
+    bool isDot = false,
+  }) {
+    if (points.isEmpty) return;
+    final sfColor = sf.PdfColor(
+      (color.r * 255.0).round(),
+      (color.g * 255.0).round(),
+      (color.b * 255.0).round(),
+    );
+
+    if (isDot || points.length <= 1) {
+      final syncPt = toSyncPoint(points.first);
+      final r = math.max(strokeWidth / 2, 1.0);
+      page.graphics.drawEllipse(
+        Rect.fromCircle(center: syncPt, radius: r),
+        brush: sf.PdfSolidBrush(sfColor),
+      );
+      return;
+    }
+
+    final syncPts = points.map(toSyncPoint).toList();
+    final path = sf.PdfPath();
+    for (var i = 0; i < syncPts.length - 1; i++) {
+      path.addLine(syncPts[i], syncPts[i + 1]);
+    }
+    final pen = sf.PdfPen(sfColor, width: strokeWidth)
+      ..lineCap = sf.PdfLineCap.round
+      ..lineJoin = sf.PdfLineJoin.round;
+    page.graphics.drawPath(path, pen: pen);
+  }
+
+  /// Draws a vector signature placed at [visualBounds].
+  ///
+  /// [normalizedStrokes] are polylines with coordinates normalized to [0..1] x [0..1].
+  void drawVectorSignature({
+    required List<List<Offset>> normalizedStrokes,
+    required Rect visualBounds,
+    required double strokeWidth,
+    required Color color,
+  }) {
+    for (final stroke in normalizedStrokes) {
+      if (stroke.isEmpty) continue;
+      final visualStrokePoints = stroke.map((p) {
+        return Offset(
+          visualBounds.left + p.dx * visualBounds.width,
+          visualBounds.top + p.dy * visualBounds.height,
+        );
+      }).toList();
+
+      drawStroke(
+        points: visualStrokePoints,
+        strokeWidth: strokeWidth,
+        color: color,
+        isDot: stroke.length == 1,
+      );
+    }
+  }
+
+  /// Draws an image (PNG raster) placed at [visualBounds].
+  void drawImage({
+    required Uint8List pngBytes,
+    required Rect visualBounds,
+  }) {
+    final syncTopLeft = toSyncPoint(visualBounds.topLeft);
+    final bitmap = sf.PdfBitmap(pngBytes);
+    final rot = (rotationDegrees ~/ 90) % 4;
+
+    if (rot == 0) {
+      final syncRect = toSyncRect(visualBounds);
+      page.graphics.drawImage(bitmap, syncRect);
+      return;
+    }
+
+    page.graphics.save();
+    page.graphics.translateTransform(syncTopLeft.dx, syncTopLeft.dy);
+    switch (rot) {
+      case 1:
+        page.graphics.rotateTransform(270);
+        break;
+      case 2:
+        page.graphics.rotateTransform(180);
+        break;
+      case 3:
+        page.graphics.rotateTransform(90);
+        break;
+    }
+    page.graphics.drawImage(
+      bitmap,
+      Rect.fromLTWH(0, 0, visualBounds.width, visualBounds.height),
+    );
+    page.graphics.restore();
+  }
+
+  /// Draws a single line of text at visual position [visualPosition] with [font].
+  void drawTextLine({
+    required String text,
+    required sf.PdfFont font,
+    required Offset visualPosition,
+    required sf.PdfBrush brush,
+  }) {
+    final syncPt = toSyncPoint(visualPosition);
+    final rot = (rotationDegrees ~/ 90) % 4;
+
+    if (rot == 0) {
+      page.graphics.drawString(
+        text,
+        font,
+        bounds: Rect.fromLTWH(syncPt.dx, syncPt.dy, 0, 0),
+        brush: brush,
+      );
+      return;
+    }
+
+    page.graphics.save();
+    page.graphics.translateTransform(syncPt.dx, syncPt.dy);
+    switch (rot) {
+      case 1:
+        page.graphics.rotateTransform(270);
+        break;
+      case 2:
+        page.graphics.rotateTransform(180);
+        break;
+      case 3:
+        page.graphics.rotateTransform(90);
+        break;
+    }
+    page.graphics.drawString(
+      text,
+      font,
+      bounds: const Rect.fromLTWH(0, 0, 0, 0),
+      brush: brush,
+    );
+    page.graphics.restore();
   }
 }

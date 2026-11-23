@@ -100,14 +100,15 @@ void main() {
         ),
       );
 
-      // Add a date signature stamp on each page
+      // Add a vector signature on each page
       signatures.add(
         PlacedSignature(
-          id: 'date_$i',
+          id: 'sig_$i',
           pageIndex: i,
-          bounds: const Rect.fromLTWH(220, 250, 120, 30),
-          isDate: true,
-          dateText: '2026-11-22',
+          bounds: const Rect.fromLTWH(220, 250, 120, 40),
+          normalizedStrokes: const [
+            [Offset(0.1, 0.5), Offset(0.9, 0.5)],
+          ],
           timestampMs: 3000 + i,
         ),
       );
@@ -174,8 +175,9 @@ void main() {
           id: 'sig1',
           pageIndex: 0,
           bounds: const Rect.fromLTWH(60, 240, 100, 40),
-          isDate: true,
-          dateText: 'Verified',
+          normalizedStrokes: const [
+            [Offset(0.1, 0.5), Offset(0.9, 0.5)],
+          ],
           timestampMs: 200,
         ),
       ],

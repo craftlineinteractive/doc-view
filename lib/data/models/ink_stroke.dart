@@ -9,8 +9,8 @@ import 'dart:ui';
 class InkStrokeMath {
   const InkStrokeMath._();
 
-  /// Maximum points permitted within a single stroke to guarantee smooth 60fps rendering.
-  static const int maxPointsPerStroke = 5000;
+  /// Maximum strokes permitted in a document.
+  static const int maxStrokesPerDocument = 5000;
 
   /// Maximum aggregated points permitted across all strokes in a document.
   static const int maxPointsPerDocument = 300000;
@@ -34,10 +34,10 @@ class InkStrokeMath {
     return true;
   }
 
-  /// Filters points closer than [minDistance] to eliminate touch digitizer jitter.
+  /// Filters points closer than [minDistance] (0.5 pt) to eliminate touch digitizer jitter.
   ///
   /// Always preserves the first and last points.
-  static List<Offset> resample(List<Offset> points, {double minDistance = 2.0}) {
+  static List<Offset> resample(List<Offset> points, {double minDistance = 0.5}) {
     if (points.length <= 2) return List<Offset>.from(points);
 
     final resampled = <Offset>[points.first];
@@ -69,8 +69,8 @@ class InkStrokeMath {
 
   /// Simplifies polyline using the Ramer-Douglas-Peucker algorithm.
   ///
-  /// Reduces vertex count while keeping perpendicular error below [epsilon].
-  static List<Offset> simplify(List<Offset> points, {double epsilon = 1.0}) {
+  /// Reduces vertex count while keeping perpendicular error below [epsilon] (0.25 pt).
+  static List<Offset> simplify(List<Offset> points, {double epsilon = 0.25}) {
     if (points.length <= 2) return List<Offset>.from(points);
     return _rdpRecursive(points, 0, points.length - 1, epsilon);
   }
@@ -170,9 +170,8 @@ class InkStrokeMath {
   /// 4. Hard cap enforcement ([maxPointsPerStroke])
   static List<Offset> processPoints(
     List<Offset> points, {
-    double minDistance = 2.0,
-    double epsilon = 1.0,
-    int maxPoints = maxPointsPerStroke,
+    double minDistance = 0.5,
+    double epsilon = 0.25,
   }) {
     if (points.isEmpty) return const [];
     if (isTapDot(points)) {
@@ -181,17 +180,6 @@ class InkStrokeMath {
 
     var result = resample(points, minDistance: minDistance);
     result = simplify(result, epsilon: epsilon);
-
-    if (result.length > maxPoints) {
-      // Downsample uniformly if still exceeding cap
-      final stride = result.length / maxPoints;
-      final capped = <Offset>[];
-      for (var i = 0; i < maxPoints - 1; i++) {
-        capped.add(result[(i * stride).floor()]);
-      }
-      capped.add(result.last);
-      result = capped;
-    }
 
     return result;
   }

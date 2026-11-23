@@ -336,6 +336,20 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
   final parsedStrokes = params.strokes.map((s) => InkStroke.fromMap(s)).toList();
   final parsedSignatures = params.signatures.map((s) => PlacedSignature.fromMap(s)).toList();
 
+  // Enforce stroke caps per file: max 5,000 strokes and max 300,000 points
+  if (parsedStrokes.length > InkStrokeMath.maxStrokesPerDocument) {
+    doc.dispose();
+    throw const PdfAnnotationException(PdfAnnotationErrorReason.tooManyStrokes);
+  }
+  var totalPoints = 0;
+  for (final s in parsedStrokes) {
+    totalPoints += s.points.length;
+    if (totalPoints > InkStrokeMath.maxPointsPerDocument) {
+      doc.dispose();
+      throw const PdfAnnotationException(PdfAnnotationErrorReason.tooManyStrokes);
+    }
+  }
+
   // Group items by page index
   final markupsByPage = <int, List<TextMarkup>>{};
   for (final m in parsedMarkups) {
@@ -425,79 +439,37 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
       page.annotations.add(sfAnnotation);
     }
 
-    // 2. Ink Strokes
-    for (final stroke in pageStrokes) {
-      final color = Color(stroke.colorValue);
-      final sfColor = sf.PdfColor(
-        (color.r * 255.0).round(),
-        (color.g * 255.0).round(),
-        (color.b * 255.0).round(),
-      );
-
-      if (stroke.isDot || stroke.points.length <= 1) {
-        if (stroke.points.isNotEmpty) {
-          final syncPt = PdfCoordinateTransform.visualToSyncfusionPoint(
-            visualPoint: stroke.points.first,
-            visualWidth: visualWidth,
-            visualHeight: visualHeight,
-            rotationDegrees: rotDegrees,
-            cropBox: cropBox,
-          );
-          final r = math.max(stroke.strokeWidth / 2, 1.0);
-          page.graphics.drawEllipse(
-            Rect.fromCircle(center: syncPt, radius: r),
-            brush: sf.PdfSolidBrush(sfColor),
+    // 2. Ink Strokes & 3. Vector Signatures via shared withVisualSpace
+    // Note: page.graphics in Syncfusion operates directly in visible page space,
+    // so cropBox origin shift applies only to /Annots (PDF annotations), not page.graphics.
+    PdfCoordinateTransform.withVisualSpace(
+      page: page,
+      visualWidth: visualWidth,
+      visualHeight: visualHeight,
+      rotationDegrees: rotDegrees,
+      cropBox: null,
+      drawCallback: (space) {
+        // Draw Ink Strokes
+        for (final stroke in pageStrokes) {
+          space.drawStroke(
+            points: stroke.points,
+            strokeWidth: stroke.strokeWidth,
+            color: Color(stroke.colorValue),
+            isDot: stroke.isDot,
           );
         }
-      } else {
-        final syncPts = stroke.points.map((pt) {
-          return PdfCoordinateTransform.visualToSyncfusionPoint(
-            visualPoint: pt,
-            visualWidth: visualWidth,
-            visualHeight: visualHeight,
-            rotationDegrees: rotDegrees,
-            cropBox: cropBox,
+
+        // Draw Placed Vector Signatures
+        for (final sig in pageSigs) {
+          space.drawVectorSignature(
+            normalizedStrokes: sig.normalizedStrokes,
+            visualBounds: sig.bounds,
+            strokeWidth: sig.strokeWidth,
+            color: Color(sig.colorValue),
           );
-        }).toList();
-
-        final path = sf.PdfPath();
-        for (var i = 0; i < syncPts.length - 1; i++) {
-          path.addLine(syncPts[i], syncPts[i + 1]);
         }
-        final pen = sf.PdfPen(sfColor, width: stroke.strokeWidth)
-          ..lineCap = sf.PdfLineCap.round
-          ..lineJoin = sf.PdfLineJoin.round;
-        page.graphics.drawPath(path, pen: pen);
-      }
-    }
-
-    // 3. Placed Signatures
-    for (final sig in pageSigs) {
-      final syncBounds = PdfCoordinateTransform.visualToSyncfusionRect(
-        visualRect: sig.bounds,
-        visualWidth: visualWidth,
-        visualHeight: visualHeight,
-        rotationDegrees: rotDegrees,
-        cropBox: cropBox,
-      );
-
-      if (sig.isDate && sig.dateText != null) {
-        final font = sf.PdfStandardFont(sf.PdfFontFamily.helvetica, 14);
-        page.graphics.drawString(
-          sig.dateText!,
-          font,
-          bounds: syncBounds,
-          brush: sf.PdfSolidBrush(sf.PdfColor(0, 0, 0)),
-          format: sf.PdfStringFormat(
-            alignment: sf.PdfTextAlignment.center,
-            lineAlignment: sf.PdfVerticalAlignment.middle,
-          ),
-        );
-      } else if (sig.pngBytes != null && sig.pngBytes!.isNotEmpty) {
-        final bitmap = sf.PdfBitmap(sig.pngBytes!);
-        page.graphics.drawImage(bitmap, syncBounds);
-      }
-    }
+      },
+    );
   }
 
   final savedBytes = doc.saveSync();

@@ -216,6 +216,13 @@ void main() {
       await tester.tap(find.byKey(const Key('annotate_tool_pen')));
       await tester.pump(const Duration(milliseconds: 100));
 
+      // One-time first-use pen notice appears
+      expect(find.byKey(const Key('annotate_pen_notice_banner')), findsOneWidget);
+
+      // Dismiss one-time notice
+      await tester.tap(find.byKey(const Key('annotate_pen_notice_got_it')));
+      await tester.pump(const Duration(milliseconds: 100));
+
       // Pen tip banner appears
       expect(find.byKey(const Key('annotate_pen_tip_banner')), findsOneWidget);
 
