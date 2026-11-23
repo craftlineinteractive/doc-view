@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:docview/core/errors/app_errors.dart';
+import 'package:docview/data/services/pdf/pdf_annotation_service.dart';
 import 'package:docview/data/services/pdf/pdf_page_edit_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -238,6 +239,14 @@ void main() {
       expect(outDoc.pages.length, 2);
       expect(outDoc.pages[0].rotation, PdfPageRotation.clockwise90);
       outDoc.dispose();
+    });
+
+    test('slowSaveThrottleEnabled can never activate in release', () {
+      PdfAnnotationService.slowSaveThrottleEnabled = true;
+      expect(PdfAnnotationService.isThrottleAllowed(isDebug: false), isFalse);
+      expect(PdfAnnotationService.isThrottleAllowed(isDebug: true), isTrue);
+      PdfAnnotationService.slowSaveThrottleEnabled = false;
+      expect(PdfAnnotationService.isThrottleAllowed(isDebug: true), isFalse);
     });
   });
 }

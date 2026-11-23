@@ -273,6 +273,7 @@ class TextLayoutEngine {
     required TextAlign alignment,
     required double width,
     required double height,
+    Color? backgroundColor,
     TextDirection textDirection = TextDirection.ltr,
     double targetScale = 4.0,
   }) async {
@@ -298,6 +299,13 @@ class TextLayoutEngine {
       Rect.fromLTWH(0, 0, pxWidth.toDouble(), pxHeight.toDouble()),
     );
     canvas.scale(scale);
+
+    if (backgroundColor != null) {
+      canvas.drawRect(
+        Rect.fromLTWH(0, 0, width, height),
+        Paint()..color = backgroundColor,
+      );
+    }
 
     final textPainter = TextPainter(
       text: TextSpan(
