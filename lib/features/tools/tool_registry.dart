@@ -124,6 +124,16 @@ final List<ToolDef> toolRegistry = <ToolDef>[
     isEnabled: () => annotateEnabled,
   ),
   ToolDef(
+    id: 'add_text',
+    section: ToolSection.editAndManage,
+    title: (l10n) => l10n.toolAddText,
+    subtitle: (l10n) => l10n.toolAddTextSub,
+    icon: Icons.text_fields_outlined,
+    gradient: ToolGradients.addText,
+    route: '/tools/add-text',
+    isEnabled: () => addTextEnabled,
+  ),
+  ToolDef(
     id: 'sign',
     section: ToolSection.editAndManage,
     title: (l10n) => l10n.toolSign,
@@ -162,15 +172,6 @@ final List<ToolDef> toolRegistry = <ToolDef>[
     gradient: ToolGradients.splitPdf,
     route: null, // Handled via picker in screen
     isEnabled: () => true,
-  ),
-  ToolDef(
-    id: 'add_text',
-    section: ToolSection.editAndManage,
-    title: (l10n) => l10n.toolAddText,
-    subtitle: (l10n) => l10n.toolAddTextSub,
-    icon: Icons.text_fields_outlined,
-    gradient: ToolGradients.addText,
-    isEnabled: () => addTextEnabled,
   ),
 
   // --- Section 3: Others ---

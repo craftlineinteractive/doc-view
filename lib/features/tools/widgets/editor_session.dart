@@ -17,6 +17,15 @@ class EditorSession<T> {
   bool get canRedo => redoStack.isNotEmpty;
   bool get isDirty => undoStack.isNotEmpty;
 
+  /// Updates [current] in place without modifying undo/redo stacks.
+  EditorSession<T> updateCurrent(T next) {
+    return EditorSession(
+      current: next,
+      undoStack: undoStack,
+      redoStack: redoStack,
+    );
+  }
+
   /// Pushes a new snapshot [next], pushing [current] onto the undo stack and clearing redo.
   EditorSession<T> push(T next) {
     final newUndo = [...undoStack, current];

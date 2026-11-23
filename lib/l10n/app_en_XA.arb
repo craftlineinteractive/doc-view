@@ -3897,5 +3897,18 @@
   "addTextPlaceholder": "[Ţýpé ţéxţ héré ẋ]",
   "@addTextPlaceholder": {
     "description": "Placeholder text inside new text box"
+  },
+  "addTextSamplePreview": "[Šàmþłé Þréṽîéŵ ẋ]",
+  "@addTextSamplePreview": {
+    "description": "Sample preview text shown in style sheet"
+  },
+  "addTextFontSizePt": "[{size} þţ ẋ]",
+  "@addTextFontSizePt": {
+    "description": "Font size formatted in points",
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
   }
 }

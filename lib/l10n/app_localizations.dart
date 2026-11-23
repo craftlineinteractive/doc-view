@@ -4896,6 +4896,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Type text here'**
   String get addTextPlaceholder;
+
+  /// Sample preview text shown in style sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Sample Preview'**
+  String get addTextSamplePreview;
+
+  /// Font size formatted in points
+  ///
+  /// In en, this message translates to:
+  /// **'{size} pt'**
+  String addTextFontSizePt(int size);
 }
 
 class _AppLocalizationsDelegate

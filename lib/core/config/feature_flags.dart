@@ -19,7 +19,7 @@ const bool recycleBinEnabled = true;
 const bool annotateEnabled = true;
 
 /// Enables PDF Add Text tool (Phase G5).
-const bool addTextEnabled = false;
+const bool addTextEnabled = true;
 
 /// Enables PDF Signature tool (Phase G5).
 const bool signEnabled = true;

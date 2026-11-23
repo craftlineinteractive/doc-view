@@ -2954,6 +2954,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addTextPlaceholder => 'Type text here';
+
+  @override
+  String get addTextSamplePreview => 'Sample Preview';
+
+  @override
+  String addTextFontSizePt(int size) {
+    return '$size pt';
+  }
 }
 
 /// The translations for English (`en_XA`).
@@ -5998,4 +6006,12 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get addTextPlaceholder => '[Ţýpé ţéxţ héré ẋ]';
+
+  @override
+  String get addTextSamplePreview => '[Šàmþłé Þréṽîéŵ ẋ]';
+
+  @override
+  String addTextFontSizePt(int size) {
+    return '[$size þţ ẋ]';
+  }
 }
