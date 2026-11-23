@@ -14,6 +14,7 @@ import '../../data/models/sort_option.dart';
 import '../../data/models/trash_item.dart';
 import '../../data/repositories/file_repository.dart';
 import '../../data/repositories/settings_repository.dart';
+import '../../data/services/convert/pdf_to_word_service.dart';
 import '../../data/services/file_manager_service.dart';
 import '../../data/services/file_operations_service.dart';
 import '../../data/services/import_service.dart';
@@ -678,6 +679,11 @@ final trashItemsProvider = FutureProvider<List<TrashItem>>((ref) async {
 final trashCountProvider = FutureProvider<int>((ref) async {
   final trashService = ref.watch(trashServiceProvider);
   return trashService.getTrashCount();
+});
+
+/// PDF to Word conversion service provider.
+final pdfToWordServiceProvider = Provider<PdfToWordService>((ref) {
+  return const PdfToWordService();
 });
 
 
