@@ -24,6 +24,7 @@ import '../../features/tools/create_pdf/create_pdf_screen.dart';
 import '../../features/tools/annotate/annotate_screen.dart';
 import '../../features/tools/add_text/add_text_screen.dart';
 import '../../features/tools/sign/sign_screen.dart';
+import '../../features/tools/convert/pdf_to_word_screen.dart';
 import '../../features/tools/created_documents_screen.dart';
 import '../../features/tools/recycle_bin/recycle_bin_screen.dart';
 import '../../features/tools/tools_screen.dart';
@@ -161,6 +162,26 @@ final routerProvider = Provider<GoRouter>((ref) {
           final extra = state.extra as Map<String, dynamic>?;
           return SignScreen(
             initialFilePath: extra?['filePath'] as String?,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/tools/pdf-to-word',
+        name: 'tools-pdf-to-word',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+          DocFile? initialFile;
+          String? initialPassword;
+          final extra = state.extra;
+          if (extra is DocFile) {
+            initialFile = extra;
+          } else if (extra is Map) {
+            initialFile = extra['file'] as DocFile? ?? extra['initialFile'] as DocFile?;
+            initialPassword = extra['password'] as String? ?? extra['initialPassword'] as String?;
+          }
+          return PdfToWordScreen(
+            initialFile: initialFile,
+            initialPassword: initialPassword,
           );
         },
       ),

@@ -46,6 +46,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
   bool _hasError = false;
   bool _isMissing = false;
   bool _hasPromptedPasswordOnce = false;
+  String? _cachedPassword;
 
   bool _showChrome = true;
   bool _showPagePill = true;
@@ -131,6 +132,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
     if (password == null && mounted) {
       Navigator.of(context).pop();
     }
+    _cachedPassword = password;
     return password;
   }
 
@@ -593,7 +595,15 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
               ),
               tooltip: l10n.readerTooltipConvertToWord,
               constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-              onPressed: () {},
+              onPressed: () {
+                context.push(
+                  '/tools/pdf-to-word',
+                  extra: {
+                    'file': liveFile,
+                    'password': _cachedPassword,
+                  },
+                );
+              },
             ),
 
           // Pages screen button

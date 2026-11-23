@@ -7,7 +7,7 @@ const bool premiumEnabled = false;
 const bool widgetsEnabled = false;
 
 /// Enables Convert-to-Word action in PDF reader (Phase G6).
-const bool conversionsEnabled = false;
+const bool conversionsEnabled = true;
 
 /// Enables Create PDF blank document/template tool (Phase G4b).
 const bool createPdfEnabled = true;

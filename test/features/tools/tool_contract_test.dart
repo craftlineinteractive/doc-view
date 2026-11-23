@@ -7,9 +7,9 @@ void main() {
   final AppLocalizations l10n = AppLocalizationsEn();
 
   group('Tool Registry Contract Tests', () {
-    test('Default G5c visible tools count is exactly 12', () {
+    test('Default G6 visible tools count is exactly 13', () {
       final visible = getVisibleTools();
-      expect(visible.length, 12);
+      expect(visible.length, 13);
 
       final visibleIds = visible.map((t) => t.id).toList();
       expect(
@@ -18,6 +18,7 @@ void main() {
           'image_to_pdf',
           'scan_to_pdf',
           'create_pdf',
+          'pdf_to_word',
           'annotate',
           'add_text',
           'sign',
@@ -31,12 +32,13 @@ void main() {
       );
     });
 
-    test('Visible tools per section match G5c specification', () {
+    test('Visible tools per section match G6 specification', () {
       final convertTools = getToolsForSection(ToolSection.convertAndCreate);
       expect(convertTools.map((t) => t.id).toList(), [
         'image_to_pdf',
         'scan_to_pdf',
         'create_pdf',
+        'pdf_to_word',
       ]);
 
       final editTools = getToolsForSection(ToolSection.editAndManage);
@@ -55,19 +57,6 @@ void main() {
         'recycle_bin',
         'print_pdf',
       ]);
-    });
-
-    test('Future gated tools exist in registry but are disabled by default', () {
-      final gatedIds = [
-        'word_to_pdf',
-        'ppt_to_pdf',
-      ];
-
-      for (final id in gatedIds) {
-        final tool = getToolById(id);
-        expect(tool, isNotNull, reason: 'Tool $id should exist in registry');
-        expect(tool!.isEnabled(), isFalse, reason: 'Tool $id should be flagged off by default');
-      }
     });
 
     test('Forbidden tool ids are strictly absent from visible tools or registry', () {

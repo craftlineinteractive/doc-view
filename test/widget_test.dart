@@ -100,10 +100,11 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    // Verify presence of all 11 enabled G5b tool tiles
+    // Verify presence of all 13 enabled G6 tool tiles
     final imageTile = find.byKey(const Key('tool_image_to_pdf'));
     final scanTile = find.byKey(const Key('tool_scan_to_pdf'));
     final createTile = find.byKey(const Key('tool_create_pdf'));
+    final pdfToWordTile = find.byKey(const Key('tool_pdf_to_word'));
     final annotateTile = find.byKey(const Key('tool_annotate'));
     final signTile = find.byKey(const Key('tool_sign'));
     final manageTile = find.byKey(const Key('tool_manage_pages'));
@@ -116,6 +117,7 @@ void main() {
     expect(imageTile, findsOneWidget);
     expect(scanTile, findsOneWidget);
     expect(createTile, findsOneWidget);
+    expect(pdfToWordTile, findsOneWidget);
     expect(annotateTile, findsOneWidget);
     expect(signTile, findsOneWidget);
     expect(manageTile, findsOneWidget);
@@ -129,6 +131,7 @@ void main() {
     expect(find.text('Image to PDF'), findsOneWidget);
     expect(find.text('Scan to PDF'), findsOneWidget);
     expect(find.text('Create PDF'), findsOneWidget);
+    expect(find.text('PDF to Word'), findsOneWidget);
     expect(find.text('Annotate'), findsOneWidget);
     expect(find.text('Add Text'), findsOneWidget);
     expect(find.text('Sign'), findsOneWidget);
@@ -139,7 +142,7 @@ void main() {
     expect(find.text('Recycle bin'), findsOneWidget);
     expect(find.text('Print PDF'), findsOneWidget);
 
-    // Assert exactly 12 tool tiles exist in G5c
+    // Assert exactly 13 tool tiles exist in G6
     final foundToolTiles = find.byWidgetPredicate((widget) {
       if (widget.key is ValueKey<String>) {
         final keyVal = (widget.key as ValueKey<String>).value;
@@ -147,7 +150,7 @@ void main() {
       }
       return false;
     });
-    expect(foundToolTiles, findsNWidgets(12));
+    expect(foundToolTiles, findsNWidgets(13));
 
     // Verify accessibility guidelines on ToolsScreen
     final handle = tester.ensureSemantics();

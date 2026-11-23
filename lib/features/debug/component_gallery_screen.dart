@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/extensions/l10n_extension.dart';
 import '../../core/constants/file_types.dart';
@@ -89,6 +90,124 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
           await _executeSaveSign();
         } else if (action == 'save_text') {
           await _executeSaveText();
+        } else if (action == 'open_pdf_to_word_20p') {
+          final f = File('/sdcard/Documents/sample_20p.pdf');
+          final stat = await f.stat();
+          final doc = DocFile(
+            path: f.path,
+            name: 'sample_20p.pdf',
+            extension: 'pdf',
+            sizeBytes: stat.size,
+            modified: stat.modified,
+            category: FileCategory.pdf,
+          );
+          if (mounted) context.push('/tools/pdf-to-word', extra: doc);
+        } else if (action == 'open_pdf_to_word_scanned') {
+          final f = File('/sdcard/Documents/sample_scanned.pdf');
+          final stat = await f.stat();
+          final doc = DocFile(
+            path: f.path,
+            name: 'sample_scanned.pdf',
+            extension: 'pdf',
+            sizeBytes: stat.size,
+            modified: stat.modified,
+            category: FileCategory.pdf,
+          );
+          if (mounted) context.push('/tools/pdf-to-word', extra: doc);
+        } else if (action == 'open_viewer_20p') {
+          final f = File('/sdcard/Documents/sample_20p.pdf');
+          final stat = await f.stat();
+          final doc = DocFile(
+            path: f.path,
+            name: 'sample_20p.pdf',
+            extension: 'pdf',
+            sizeBytes: stat.size,
+            modified: stat.modified,
+            category: FileCategory.pdf,
+          );
+          if (mounted) context.push('/viewer', extra: doc);
+        } else if (action == 'open_converted_docx') {
+          final outputDir = await ref.read(pdfOutputServiceProvider).getOutputDir();
+          final f = File('${outputDir.path}/sample_20p.docx');
+          final fallback = File('/sdcard/Documents/sample_20p.docx');
+          final target = await f.exists() ? f : fallback;
+          final stat = await target.stat();
+          final doc = DocFile(
+            path: target.path,
+            name: 'sample_20p.docx',
+            extension: 'docx',
+            sizeBytes: stat.size,
+            modified: stat.modified,
+            category: FileCategory.word,
+          );
+          if (mounted) context.push('/viewer', extra: doc);
+        } else if (action == 'show_converting_progress') {
+          if (mounted) {
+            showModalBottomSheet(
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (ctx) => Container(
+                decoration: BoxDecoration(
+                  color: ctx.tokens.surface,
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                ),
+                child: SafeArea(
+                  child: ProgressSheet(
+                    title: context.l10n.pdfToWordConverting,
+                    statusText: context.l10n.pdfToWordConvertingProgress(9, 20),
+                    progress: 0.45,
+                  ),
+                ),
+              ),
+            );
+          }
+        } else if (action == 'show_conversion_result') {
+          if (mounted) {
+            showModalBottomSheet(
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (ctx) => Container(
+                decoration: BoxDecoration(
+                  color: ctx.tokens.surface,
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                ),
+                child: SafeArea(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ResultSheet(
+                        title: context.l10n.pdfToWordSuccess,
+                        fileName: 'sample_20p.docx',
+                        metadata: '5.3 KB',
+                        onOpen: () => Navigator.pop(ctx),
+                        onShare: () => Navigator.pop(ctx),
+                        onClose: () => Navigator.pop(ctx),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton.icon(
+                            key: const Key('btn_open_with'),
+                            icon: const Icon(Icons.open_in_new_rounded, size: 20),
+                            label: Text(context.l10n.pdfToWordOpenWith),
+                            style: OutlinedButton.styleFrom(
+                              minimumSize: const Size.fromHeight(48),
+                              shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                          ),
+                          onPressed: () => Navigator.pop(ctx),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
         }
       }
     } catch (e) {
