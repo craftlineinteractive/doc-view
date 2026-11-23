@@ -40,10 +40,8 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-.kotlin/
-android/.kotlin/
+# Scratch and planning files
+task_plan.md
+progress.md
+findings.md
 
