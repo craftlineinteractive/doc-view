@@ -4327,6 +4327,36 @@ abstract class AppLocalizations {
   /// **'Throttles copy loop to ~20 MB/s for kill testing'**
   String get galleryDebugSlowCopySubtitle;
 
+  /// Switch label to throttle PDF save in component gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Slow editor save (testing)'**
+  String get galleryDebugSlowSave;
+
+  /// Subtitle describing slow save throttle testing feature
+  ///
+  /// In en, this message translates to:
+  /// **'Throttles save loop to ~8s for kill testing'**
+  String get galleryDebugSlowSaveSubtitle;
+
+  /// Debug button to test annotate save kill resilience
+  ///
+  /// In en, this message translates to:
+  /// **'Save sample 100p (Annotate test)'**
+  String get galleryDebugSaveAnnotate;
+
+  /// Debug button to test sign save kill resilience
+  ///
+  /// In en, this message translates to:
+  /// **'Save sample 100p (Sign test)'**
+  String get galleryDebugSaveSign;
+
+  /// Debug button to test add text save kill resilience
+  ///
+  /// In en, this message translates to:
+  /// **'Save sample 100p (Add text test)'**
+  String get galleryDebugSaveText;
+
   /// Debug button to move 190MB test file to trash
   ///
   /// In en, this message translates to:

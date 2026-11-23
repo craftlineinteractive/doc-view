@@ -2636,6 +2636,22 @@ class AppLocalizationsEn extends AppLocalizations {
       'Throttles copy loop to ~20 MB/s for kill testing';
 
   @override
+  String get galleryDebugSlowSave => 'Slow editor save (testing)';
+
+  @override
+  String get galleryDebugSlowSaveSubtitle =>
+      'Throttles save loop to ~8s for kill testing';
+
+  @override
+  String get galleryDebugSaveAnnotate => 'Save sample 100p (Annotate test)';
+
+  @override
+  String get galleryDebugSaveSign => 'Save sample 100p (Sign test)';
+
+  @override
+  String get galleryDebugSaveText => 'Save sample 100p (Add text test)';
+
+  @override
   String get galleryDebugMove190Mb => 'Move 190MB test file to trash';
 
   @override
@@ -5681,6 +5697,23 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   @override
   String get galleryDebugSlowCopySubtitle =>
       '[Ţĥřôţţłéš çôþý łôôþ ţô ~20 MƁ/š ƒôř ƙîłł ţéšţîñĝ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugSlowSave => '[Şłôŵ édîţôř šàṽé (ţéšţîñĝ) ẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugSlowSaveSubtitle =>
+      '[Ţĥřôţţłéš šàṽé łôôþ ţô ~8š ƒôř ƙîłł ţéšţîñĝ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugSaveAnnotate =>
+      '[Šávé šámplé 100p (Áññótáté téšt) !!! !]';
+
+  @override
+  String get galleryDebugSaveSign => '[Šávé šámplé 100p (Šígñ téšt) !!! ]';
+
+  @override
+  String get galleryDebugSaveText => '[Šávé šámplé 100p (Ádd téxt téšt) !!! !]';
 
   @override
   String get galleryDebugMove190Mb => '[Môṽé 190MƁ ţéšţ ƒîłé ţô ţřàšĥ ẋẋẋẋẋẋẋ]';

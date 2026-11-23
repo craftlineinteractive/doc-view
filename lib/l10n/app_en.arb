@@ -3468,6 +3468,26 @@
   "@galleryDebugSlowCopySubtitle": {
     "description": "Subtitle describing slow copy throttle testing feature"
   },
+  "galleryDebugSlowSave": "Slow editor save (testing)",
+  "@galleryDebugSlowSave": {
+    "description": "Switch label to throttle PDF save in component gallery"
+  },
+  "galleryDebugSlowSaveSubtitle": "Throttles save loop to ~8s for kill testing",
+  "@galleryDebugSlowSaveSubtitle": {
+    "description": "Subtitle describing slow save throttle testing feature"
+  },
+  "galleryDebugSaveAnnotate": "Save sample 100p (Annotate test)",
+  "@galleryDebugSaveAnnotate": {
+    "description": "Debug button to test annotate save kill resilience"
+  },
+  "galleryDebugSaveSign": "Save sample 100p (Sign test)",
+  "@galleryDebugSaveSign": {
+    "description": "Debug button to test sign save kill resilience"
+  },
+  "galleryDebugSaveText": "Save sample 100p (Add text test)",
+  "@galleryDebugSaveText": {
+    "description": "Debug button to test add text save kill resilience"
+  },
   "galleryDebugMove190Mb": "Move 190MB test file to trash",
   "@galleryDebugMove190Mb": {
     "description": "Debug button to move 190MB test file to trash"

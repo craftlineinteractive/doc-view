@@ -36,6 +36,9 @@ import '../../shared/widgets/tiles/file_and_folder_rows.dart';
 import '../../shared/widgets/tiles/file_type_badge.dart';
 import '../../shared/widgets/tools/doc_tool_widgets.dart';
 import '../../data/models/pdf_markup.dart';
+import '../../data/models/pdf_text_box.dart';
+import '../../data/models/placed_signature.dart';
+import '../../data/services/pdf/pdf_annotation_service.dart';
 import '../../data/services/trash_service.dart';
 import '../tools/annotate/annotate_session_notifier.dart';
 import '../tools/annotate/widgets/annotate_toolbar.dart';
@@ -52,6 +55,203 @@ class ComponentGalleryScreen extends ConsumerStatefulWidget {
 }
 
 class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen> {
+  @override
+  void initState() {
+    super.initState();
+    if (kDebugMode) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _checkAutoAction());
+    }
+  }
+
+  Future<void> _checkAutoAction() async {
+    try {
+      final file = File('/data/user/0/com.craftlineinteractive.docview/files/debug_action.txt');
+      if (await file.exists()) {
+        final action = (await file.readAsString()).trim();
+        await file.delete();
+        debugPrint('[AUTO_ACTION] Executing: $action');
+        if (action == 'move_190mb') {
+          TrashService.slowCopyThrottleEnabled = true;
+          await _executeMove190Mb();
+        } else if (action == 'restore_190mb') {
+          TrashService.slowCopyThrottleEnabled = true;
+          await _executeRestore190Mb();
+        } else if (action == 'empty_trash') {
+          TrashService.slowCopyThrottleEnabled = true;
+          await _executeEmptyTrash();
+        } else if (action == 'prep_empty_trash') {
+          await _executePrepEmptyTrash();
+        } else if (action == 'check_consistency') {
+          await ref.read(trashPurgeServiceProvider).checkConsistency();
+        } else if (action == 'save_annotate') {
+          await _executeSaveAnnotate();
+        } else if (action == 'save_sign') {
+          await _executeSaveSign();
+        } else if (action == 'save_text') {
+          await _executeSaveText();
+        }
+      }
+    } catch (e) {
+      debugPrint('[AUTO_ACTION] Error: $e');
+    }
+  }
+
+  Future<void> _executeMove190Mb() async {
+    const testFilePath = '/sdcard/Documents/kill_test_190mb.pdf';
+    final testFile = File(testFilePath);
+    if (!await testFile.exists()) return;
+    final stat = await testFile.stat();
+    final doc = DocFile(
+      path: testFilePath,
+      name: 'kill_test_190mb.pdf',
+      extension: 'pdf',
+      sizeBytes: stat.size,
+      modified: stat.modified,
+      category: FileCategory.pdf,
+    );
+    debugPrint('[KILL_TEST] Starting move to trash at ${DateTime.now().toIso8601String()}');
+    try {
+      await ref.read(trashServiceProvider).moveSingleToTrash(doc);
+      debugPrint('[KILL_TEST] Finished move to trash at ${DateTime.now().toIso8601String()}');
+    } catch (e) {
+      debugPrint('[KILL_TEST] Failed move to trash: $e');
+    }
+  }
+
+  Future<void> _executeRestore190Mb() async {
+    final items = await ref.read(trashServiceProvider).getAllTrashItems();
+    if (items.isEmpty) return;
+    final target = items.first;
+    debugPrint('[KILL_TEST] Starting restore at ${DateTime.now().toIso8601String()}');
+    try {
+      await ref.read(trashServiceProvider).restoreItem(target);
+      debugPrint('[KILL_TEST] Finished restore at ${DateTime.now().toIso8601String()}');
+    } catch (e) {
+      debugPrint('[KILL_TEST] Restore failed: $e');
+    }
+  }
+
+  Future<void> _executeEmptyTrash() async {
+    debugPrint('[KILL_TEST] Starting empty trash at ${DateTime.now().toIso8601String()}');
+    try {
+      final count = await ref.read(trashServiceProvider).emptyTrash();
+      debugPrint('[KILL_TEST] Finished empty trash ($count items) at ${DateTime.now().toIso8601String()}');
+    } catch (e) {
+      debugPrint('[KILL_TEST] Empty trash failed: $e');
+    }
+  }
+
+  Future<void> _executePrepEmptyTrash() async {
+    TrashService.slowCopyThrottleEnabled = false;
+    final f1 = File('/sdcard/Documents/trash_test_1.pdf');
+    final f2 = File('/sdcard/Documents/trash_test_2.pdf');
+    if (!await f1.exists()) await f1.writeAsBytes(List.filled(1024 * 50, 65));
+    if (!await f2.exists()) await f2.writeAsBytes(List.filled(1024 * 50, 66));
+    
+    final doc1 = DocFile(
+      path: f1.path,
+      name: 'trash_test_1.pdf',
+      extension: 'pdf',
+      sizeBytes: await f1.length(),
+      modified: DateTime.now(),
+      category: FileCategory.pdf,
+    );
+    final doc2 = DocFile(
+      path: f2.path,
+      name: 'trash_test_2.pdf',
+      extension: 'pdf',
+      sizeBytes: await f2.length(),
+      modified: DateTime.now(),
+      category: FileCategory.pdf,
+    );
+    await ref.read(trashServiceProvider).moveSingleToTrash(doc1);
+    await ref.read(trashServiceProvider).moveSingleToTrash(doc2);
+    debugPrint('[KILL_TEST] Prep empty trash completed: 2 items in trash');
+  }
+
+  Future<void> _executeSaveAnnotate() async {
+    const filePath = '/sdcard/Documents/sample_100p.pdf';
+    debugPrint('[KILL_TEST] Starting save annotate at ${DateTime.now().toIso8601String()}');
+    try {
+      await const PdfAnnotationService().saveAnnotations(
+        sourcePath: filePath,
+        outputPath: filePath,
+        replaceOriginal: true,
+        markups: [
+          TextMarkup(
+            id: 'm1',
+            pageIndex: 0,
+            type: TextMarkupType.highlight,
+            colorValue: AnnotateColors.yellow.toARGB32(),
+            lineRects: [const Rect.fromLTWH(50, 100, 200, 20)],
+            text: 'Sample Marked Text',
+            createdAtMs: DateTime.now().millisecondsSinceEpoch,
+          ),
+        ],
+      );
+      debugPrint('[KILL_TEST] Finished save annotate at ${DateTime.now().toIso8601String()}');
+    } catch (e) {
+      debugPrint('[KILL_TEST] Save annotate error: $e');
+    }
+  }
+
+  Future<void> _executeSaveSign() async {
+    const filePath = '/sdcard/Documents/sample_100p.pdf';
+    debugPrint('[KILL_TEST] Starting save sign at ${DateTime.now().toIso8601String()}');
+    try {
+      await const PdfAnnotationService().saveAnnotations(
+        sourcePath: filePath,
+        outputPath: filePath,
+        replaceOriginal: true,
+        signatures: [
+          PlacedSignature(
+            id: 's1',
+            pageIndex: 0,
+            bounds: const Rect.fromLTWH(100, 200, 150, 50),
+            timestampMs: DateTime.now().millisecondsSinceEpoch,
+          ),
+        ],
+      );
+      debugPrint('[KILL_TEST] Finished save sign at ${DateTime.now().toIso8601String()}');
+    } catch (e) {
+      debugPrint('[KILL_TEST] Save sign error: $e');
+    }
+  }
+
+  Future<void> _executeSaveText() async {
+    const filePath = '/sdcard/Documents/sample_100p.pdf';
+    debugPrint('[KILL_TEST] Starting save text at ${DateTime.now().toIso8601String()}');
+    try {
+      await const PdfAnnotationService().saveAnnotations(
+        sourcePath: filePath,
+        outputPath: filePath,
+        replaceOriginal: true,
+        textBoxes: [
+          PdfTextBox(
+            id: 't1',
+            pageIndex: 0,
+            bounds: const Rect.fromLTWH(100, 300, 200, 40),
+            text: 'Sample Add Text Annotation',
+            fontSize: 14,
+            lines: [
+              PdfTextLine(
+                text: 'Sample Add Text Annotation',
+                dx: 0,
+                dy: 0,
+                width: 200,
+                height: 18,
+                baseline: 14,
+              ),
+            ],
+          ),
+        ],
+      );
+      debugPrint('[KILL_TEST] Finished save text at ${DateTime.now().toIso8601String()}');
+    } catch (e) {
+      debugPrint('[KILL_TEST] Save text error: $e');
+    }
+  }
+
   bool _isDark = false;
   double _textScale = 1.0;
   bool _usePseudoLocale = false;
@@ -698,6 +898,16 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                             });
                           },
                         ),
+                        SwitchListTile.adaptive(
+                          title: Text(themedContext.l10n.galleryDebugSlowSave),
+                          subtitle: Text(themedContext.l10n.galleryDebugSlowSaveSubtitle),
+                          value: PdfAnnotationService.slowSaveThrottleEnabled,
+                          onChanged: (val) {
+                            setState(() {
+                              PdfAnnotationService.slowSaveThrottleEnabled = val;
+                            });
+                          },
+                        ),
                         const SizedBox(height: 12),
                         FilledButton.icon(
                           onPressed: () async {
@@ -729,6 +939,7 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                         ),
                         const SizedBox(height: 8),
                         FilledButton.icon(
+                          key: const Key('btn_test_move_190mb'),
                           onPressed: () async {
                             const testFilePath = '/sdcard/Documents/kill_test_190mb.pdf';
                             final testFile = File(testFilePath);
@@ -779,6 +990,7 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                         ),
                         const SizedBox(height: 8),
                         FilledButton.icon(
+                          key: const Key('btn_test_restore_last'),
                           onPressed: () async {
                             final items = await ref.read(trashServiceProvider).getAllTrashItems();
                             if (items.isEmpty) {
@@ -815,6 +1027,7 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                         ),
                         const SizedBox(height: 8),
                         FilledButton.icon(
+                          key: const Key('btn_test_empty_trash'),
                           onPressed: () async {
                             debugPrint('[KILL_TEST] Starting empty trash at ${DateTime.now().toIso8601String()}');
                             final count = await ref.read(trashServiceProvider).emptyTrash();
@@ -831,6 +1044,119 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                           label: Text(themedContext.l10n.galleryDebugEmptyTrash),
                           style: FilledButton.styleFrom(
                             backgroundColor: Colors.redAccent,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        FilledButton.icon(
+                          key: const Key('btn_test_save_annotate'),
+                          onPressed: () async {
+                            const filePath = '/sdcard/Documents/sample_100p.pdf';
+                            debugPrint('[KILL_TEST] Starting save annotate at ${DateTime.now().toIso8601String()}');
+                            try {
+                              await const PdfAnnotationService().saveAnnotations(
+                                sourcePath: filePath,
+                                outputPath: filePath,
+                                replaceOriginal: true,
+                                markups: [
+                                  TextMarkup(
+                                    id: 'm1',
+                                    pageIndex: 0,
+                                    type: TextMarkupType.highlight,
+                                    colorValue: AnnotateColors.yellow.toARGB32(),
+                                    lineRects: [const Rect.fromLTWH(50, 100, 200, 20)],
+                                    text: 'Sample Marked Text',
+                                    createdAtMs: DateTime.now().millisecondsSinceEpoch,
+                                  ),
+                                ],
+                              );
+                              debugPrint('[KILL_TEST] Finished save annotate at ${DateTime.now().toIso8601String()}');
+                            } catch (e) {
+                              debugPrint('[KILL_TEST] Save annotate error: $e');
+                            }
+                          },
+                          icon: const Icon(Icons.highlight),
+                          label: Text(themedContext.l10n.galleryDebugSaveAnnotate),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.amber.shade800,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        FilledButton.icon(
+                          key: const Key('btn_test_save_sign'),
+                          onPressed: () async {
+                            const filePath = '/sdcard/Documents/sample_100p.pdf';
+                            debugPrint('[KILL_TEST] Starting save sign at ${DateTime.now().toIso8601String()}');
+                            try {
+                              await const PdfAnnotationService().saveAnnotations(
+                                sourcePath: filePath,
+                                outputPath: filePath,
+                                replaceOriginal: true,
+                                signatures: [
+                                  PlacedSignature(
+                                    id: 's1',
+                                    pageIndex: 0,
+                                    bounds: const Rect.fromLTWH(100, 200, 150, 50),
+                                    timestampMs: DateTime.now().millisecondsSinceEpoch,
+                                  ),
+                                ],
+                              );
+                              debugPrint('[KILL_TEST] Finished save sign at ${DateTime.now().toIso8601String()}');
+                            } catch (e) {
+                              debugPrint('[KILL_TEST] Save sign error: $e');
+                            }
+                          },
+                          icon: const Icon(Icons.draw),
+                          label: Text(themedContext.l10n.galleryDebugSaveSign),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.purple,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        FilledButton.icon(
+                          key: const Key('btn_test_save_text'),
+                          onPressed: () async {
+                            const filePath = '/sdcard/Documents/sample_100p.pdf';
+                            debugPrint('[KILL_TEST] Starting save text at ${DateTime.now().toIso8601String()}');
+                            try {
+                              await const PdfAnnotationService().saveAnnotations(
+                                sourcePath: filePath,
+                                outputPath: filePath,
+                                replaceOriginal: true,
+                                textBoxes: [
+                                  PdfTextBox(
+                                    id: 't1',
+                                    pageIndex: 0,
+                                    bounds: const Rect.fromLTWH(100, 300, 200, 40),
+                                    text: 'Sample Add Text Annotation',
+                                    fontSize: 14,
+                                    lines: [
+                                      PdfTextLine(
+                                        text: 'Sample Add Text Annotation',
+                                        dx: 0,
+                                        dy: 0,
+                                        width: 200,
+                                        height: 18,
+                                        baseline: 14,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              );
+                              debugPrint('[KILL_TEST] Finished save text at ${DateTime.now().toIso8601String()}');
+                            } catch (e) {
+                              debugPrint('[KILL_TEST] Save text error: $e');
+                            }
+                          },
+                          icon: const Icon(Icons.text_fields),
+                          label: Text(themedContext.l10n.galleryDebugSaveText),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.indigo,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 12),
                           ),

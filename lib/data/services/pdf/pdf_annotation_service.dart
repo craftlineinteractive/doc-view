@@ -4,7 +4,9 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:math' as math;
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sf;
 import 'package:syncfusion_flutter_pdf/src/pdf/implementation/forms/pdf_signature_field.dart' as sf_sig;
 import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pages/pdf_page.dart' as sf_page;
@@ -70,6 +72,35 @@ class PdfAnnotationService {
     bool replaceOriginal,
     String? originalPath,
   })? saveAnnotationsHook;
+
+  static bool _slowSaveThrottleEnabled = false;
+
+  /// Debug-only throttle to simulate slow saving for kill tests.
+  static bool get slowSaveThrottleEnabled =>
+      kDebugMode && _slowSaveThrottleEnabled;
+
+  static set slowSaveThrottleEnabled(bool value) {
+    if (kDebugMode) {
+      _slowSaveThrottleEnabled = value;
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setBool('debug_slow_save', value);
+      }).catchError((_) {});
+    }
+  }
+
+  /// Restores debug throttle setting from SharedPreferences at startup.
+  static Future<void> initFromPrefs() async {
+    if (kDebugMode) {
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        _slowSaveThrottleEnabled = prefs.getBool('debug_slow_save') ?? false;
+      } catch (_) {}
+    }
+  }
+
+  /// Verification hook for release mode guard tests.
+  static bool isThrottleAllowed({required bool isDebug}) =>
+      isDebug && _slowSaveThrottleEnabled;
 
   const PdfAnnotationService({
     this.getDocumentInfoHook,
@@ -156,6 +187,7 @@ class PdfAnnotationService {
       password: password,
       replaceOriginal: replaceOriginal,
       originalPath: originalPath ?? (replaceOriginal ? outputPath : null),
+      slowSaveThrottleEnabled: slowSaveThrottleEnabled,
     );
 
     final finalPath = await Isolate.run(() => _runSaveAnnotations(params));
@@ -187,6 +219,7 @@ class _SaveAnnotationsParams {
   final String? password;
   final bool replaceOriginal;
   final String? originalPath;
+  final bool slowSaveThrottleEnabled;
 
   const _SaveAnnotationsParams({
     required this.sourcePath,
@@ -198,6 +231,7 @@ class _SaveAnnotationsParams {
     this.password,
     this.replaceOriginal = false,
     this.originalPath,
+    this.slowSaveThrottleEnabled = false,
   });
 }
 
@@ -591,7 +625,23 @@ Future<String> _runSaveAnnotations(_SaveAnnotationsParams params) async {
   }
 
   try {
-    tempFile.writeAsBytesSync(savedBytes, flush: true);
+    if (params.slowSaveThrottleEnabled) {
+      final totalBytes = savedBytes.length;
+      final chunkSize = 2048;
+      final chunkCount = (totalBytes / chunkSize).ceil().clamp(1, 1000);
+      final delayPerChunk = Duration(
+        milliseconds: (8000 / chunkCount).round().clamp(10, 1000),
+      );
+      final sink = tempFile.openSync(mode: FileMode.write);
+      for (var offset = 0; offset < totalBytes; offset += chunkSize) {
+        final end = (offset + chunkSize).clamp(0, totalBytes);
+        sink.writeFromSync(savedBytes, offset, end);
+        sleep(delayPerChunk);
+      }
+      sink.closeSync();
+    } else {
+      tempFile.writeAsBytesSync(savedBytes, flush: true);
+    }
     try {
       if (File(finalDestination).existsSync()) {
         File(finalDestination).deleteSync();

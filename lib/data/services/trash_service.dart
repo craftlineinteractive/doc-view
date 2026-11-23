@@ -203,6 +203,7 @@ class TrashService {
     final finalTrashPath = p.join(trashDir.path, '$id$extWithDot');
 
     final partFile = File(partPath);
+    debugPrint('[KILL_TEST_MOVE] partPath: $partPath, origLength: $originalLength');
 
     // Step 1: Copy original to .part file in recycle bin
     try {
@@ -214,6 +215,7 @@ class TrashService {
         await originalFile.copy(partPath);
       }
     } catch (e) {
+      debugPrint('[KILL_TEST_MOVE] copy catch: $e');
       if (await partFile.exists()) {
         try {
           await partFile.delete();
@@ -221,6 +223,8 @@ class TrashService {
       }
       throw TrashException(TrashErrorReason.copyFailed, e.toString());
     }
+
+    debugPrint('[KILL_TEST_MOVE] copy done. exists=${await partFile.exists()}');
 
     // Step 2: Verify copy integrity
     if (!await partFile.exists()) {
@@ -582,6 +586,9 @@ class TrashService {
           await f.delete();
         }
       } catch (_) {}
+      if (slowCopyThrottleEnabled) {
+        await Future.delayed(const Duration(milliseconds: 2000));
+      }
     }
 
     final db = await _database.database;

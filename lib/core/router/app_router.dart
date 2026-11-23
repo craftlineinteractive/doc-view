@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +17,7 @@ import '../../features/settings/faq_screen.dart';
 import '../../features/settings/language_screen.dart';
 import '../../features/settings/scan_settings_screen.dart';
 import '../../features/settings/settings_screen.dart';
+import '../../features/debug/component_gallery_screen.dart';
 import '../../features/shell/main_shell.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/tools/create_pdf/create_pdf_screen.dart';
@@ -43,6 +45,15 @@ final routerInitialLocationProvider = Provider<String>((ref) {
     }
   } catch (_) {
     // Ignore on unsupported platforms
+  }
+  if (kDebugMode) {
+    try {
+      final debugRouteFile = File('/data/user/0/com.craftlineinteractive.docview/files/debug_route.txt');
+      if (debugRouteFile.existsSync()) {
+        final route = debugRouteFile.readAsStringSync().trim();
+        if (route.isNotEmpty) return route;
+      }
+    } catch (_) {}
   }
   return '/splash';
 });
@@ -282,7 +293,12 @@ final routerProvider = Provider<GoRouter>((ref) {
           return PagesScreen(file: file, initialPage: initialPage);
         },
       ),
-
+      GoRoute(
+        path: '/debug/gallery',
+        name: 'debug-gallery',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const ComponentGalleryScreen(),
+      ),
     ],
   );
 });

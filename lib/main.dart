@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pdfrx/pdfrx.dart';
 
 import 'app.dart';
+import 'data/services/pdf/pdf_annotation_service.dart';
 import 'data/services/trash_service.dart';
 
 void main() {
@@ -16,6 +17,7 @@ void main() {
     };
     await pdfrxFlutterInitialize();
     await TrashService.initFromPrefs();
+    await PdfAnnotationService.initFromPrefs();
     runApp(
       const ProviderScope(
         child: DocReaderApp(),
