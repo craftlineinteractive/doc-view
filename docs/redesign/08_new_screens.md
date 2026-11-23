@@ -480,7 +480,47 @@ This document catalogs every screen and bottom sheet added or restructured in **
 | **Sign Screen: Placed Signature with Resize Handles** | ![Placed Signature Handles](img/g5b/05_sign_placed_signature_handles.png) | 1080 × 2400 | 72 KB |
 | **Sign Screen: Placed Date Stamp on Contract** | ![Placed Date Stamp](img/g5b/06_sign_date_stamp_placed.png) | 1080 × 2400 | 75 KB |
 
+---
 
+### 27. Add Text PDF Screen (`lib/features/tools/add_text/add_text_screen.dart`, route `/tools/add-text`)
+- **Structure & Layout**:
+  - Registered in centralized `toolRegistry` under `ToolSection.editAndManage` positioned 2nd between Annotate and Sign (`tool_add_text`).
+  - Route `/tools/add-text` with `ToolFilePickerScreen` single-document picker.
+  - Built on reusable `PdfEditorShell` (`showDockedBanner: false`, `isAdLoaded: false`, custom App Bar with Undo, Redo, Save actions, and discard confirmation).
+  - Integrates `pdfrx` viewer with per-page text box overlay (`TextBoxOverlay`).
+- **Interactive Text Box Manipulation (`TextBoxOverlay`)**:
+  - Draggable within active PDF page.
+  - Left and right side resize handles with minimum touch target $\ge 48\times 48\text{ dp}$.
+  - Enforces minimum width (60 pt) and maximum width (page width). Auto-expands height based on content.
+  - Inline `TextField` editing with automatic focus and cursor placement.
+  - Submits on outside tap or `onSubmitted`.
+- **Typography & Style Bottom Sheet (`TextStyleSheet`)**:
+  - Built on `DocBottomSheet`.
+  - Live preview card styled in Arimo font.
+  - Font size slider from 8 pt to 72 pt with discrete ticks and localized label (`"{size} pt"`).
+  - 8 curated high-contrast swatches: Black (`#000000`), Dark Gray (`#424242`), Red (`#E53935`), Blue (`#1E88E5`), Green (`#43A047`), Purple (`#8E24AA`), Orange (`#FB8C00`), White (`#FFFFFF`). Touch targets $\ge 48\times 48\text{ dp}$.
+  - Bold and Italic toggles (`FilterChip`).
+  - Text alignment segmented control (Left, Center, Right).
+- **Dual Serialization Strategy (WinAnsi vs Raster Fallback)**:
+  - **Latin Vector Text**: Serialized directly into the PDF using `sf.PdfStandardFont(PdfFontFamily.helvetica)` and `sf.PdfSolidBrush` with exact typographic positioning.
+  - **Non-Latin / Unicode Raster Fallback**: Characters outside WinAnsi are rendered off-screen at $4\times$ supersampling via `TextPainter` and encoded to a lossless transparent PNG, then embedded into the page via `space.drawImage`.
+  - Non-Latin raster warning InfoBanner displayed to user: *"Non-Latin text will be saved as an image."* with *"Got it"* persistence.
+- **Document Caps & Safety Boundaries**:
+  - Maximum **30 text boxes** per document (`maxTextBoxesPerDocument = 30`).
+  - Maximum **2,000 characters** per text box (`maxCharsPerTextBox = 2000`).
+  - Typed error: `PdfAnnotationErrorReason.tooManyTextBoxes`.
+- **Isolate-Safe Save**:
+  - All Syncfusion document loading, text rendering, and saving run in background isolates via `compute()` using plain DTOs.
 
+---
 
+### 28. QA Screenshots & Visual Evidence (Phase G5c)
+
+| View Description | Screenshot Artifact | Dimensions | File Size |
+|---|---|---|---|
+| **Tools Tab with 12 Tools (Edit & Manage: Annotate, Add Text, Sign)** | ![Tools Tab 12 Tools](img/g5c/01_tools_tab_12_tools.png) | 1080 × 2400 | 273 KB |
+| **Add Text Screen: Initial View & Empty Document** | ![Add Text Initial](img/g5c/02_add_text_screen_initial.png) | 1080 × 2400 | 56 KB |
+| **Typography Style Bottom Sheet with Swatches & Slider** | ![Add Text Style Sheet](img/g5c/03_add_text_style_sheet.png) | 1080 × 2400 | 125 KB |
+| **Placed Text Box with Side Handles ("Project Approved")** | ![Placed Text Box Handles](img/g5c/04_add_text_placed_box_handles.png) | 1080 × 2400 | 95 KB |
+| **Save Confirmation & Real Edited PDF Created** | ![Add Text Saved Result](img/g5c/05_add_text_saved_result.png) | 1080 × 2400 | 102 KB |
 
