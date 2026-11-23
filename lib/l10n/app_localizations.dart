@@ -1621,6 +1621,144 @@ abstract class AppLocalizations {
   /// **'Your documents never leave your device. Doc View opens, converts and stores files locally. The app shows ads served by Google AdMob, which can use limited device data as described in our Privacy Policy.'**
   String get faqAnswer6;
 
+  /// FAQ question 7 regarding client-side PDF to Word conversion
+  ///
+  /// In en, this message translates to:
+  /// **'How does PDF to Word conversion work?'**
+  String get faqQuestion7;
+
+  /// FAQ answer 7 regarding client-side PDF to Word conversion
+  ///
+  /// In en, this message translates to:
+  /// **'PDF to Word extracts text, headings, and paragraph structure directly on your device. Images, tables, and complex vector art are omitted to produce clean, editable Word (.docx) files without uploading your data to the cloud.'**
+  String get faqAnswer7;
+
+  /// Title of the PDF to Word tool in Tools tab
+  ///
+  /// In en, this message translates to:
+  /// **'PDF to Word'**
+  String get toolPdfToWord;
+
+  /// Subtitle of the PDF to Word tool in Tools tab
+  ///
+  /// In en, this message translates to:
+  /// **'Convert PDF to editable Word document'**
+  String get toolPdfToWordSub;
+
+  /// Header title of the PDF to Word screen
+  ///
+  /// In en, this message translates to:
+  /// **'PDF to Word'**
+  String get pdfToWordScreenTitle;
+
+  /// Non-dismissible information banner in PDF to Word screen
+  ///
+  /// In en, this message translates to:
+  /// **'Converts text and layout. Images and complex formatting will be omitted in this version.'**
+  String get pdfToWordBannerText;
+
+  /// Switch tile title in PDF to Word screen
+  ///
+  /// In en, this message translates to:
+  /// **'Insert page breaks between PDF pages'**
+  String get pdfToWordPageBreaks;
+
+  /// Switch tile subtitle in PDF to Word screen
+  ///
+  /// In en, this message translates to:
+  /// **'Preserves document structure across pages'**
+  String get pdfToWordPageBreaksSubtitle;
+
+  /// Button to select a PDF file for conversion
+  ///
+  /// In en, this message translates to:
+  /// **'Select PDF'**
+  String get pdfToWordSelectPdf;
+
+  /// Action to change the selected PDF file
+  ///
+  /// In en, this message translates to:
+  /// **'Change file'**
+  String get pdfToWordChangeFile;
+
+  /// Primary action button to begin conversion
+  ///
+  /// In en, this message translates to:
+  /// **'Convert to Word'**
+  String get pdfToWordConvertAction;
+
+  /// Title shown on progress dialog during conversion
+  ///
+  /// In en, this message translates to:
+  /// **'Converting to Word...'**
+  String get pdfToWordConverting;
+
+  /// Detailed progress subtitle showing current page
+  ///
+  /// In en, this message translates to:
+  /// **'Converting page {current} of {total}...'**
+  String pdfToWordConvertingProgress(int current, int total);
+
+  /// Success message on completion result sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Converted to Word successfully'**
+  String get pdfToWordSuccess;
+
+  /// Action button in result sheet to open in Doc View Office viewer
+  ///
+  /// In en, this message translates to:
+  /// **'Open in Doc View'**
+  String get pdfToWordOpenInViewer;
+
+  /// Action button in result sheet to open with external app
+  ///
+  /// In en, this message translates to:
+  /// **'Open with...'**
+  String get pdfToWordOpenWith;
+
+  /// Action button in result sheet to share converted file
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get pdfToWordShare;
+
+  /// Empty state title when PDF has no text layer
+  ///
+  /// In en, this message translates to:
+  /// **'No text found'**
+  String get pdfToWordNoTextTitle;
+
+  /// Empty state message explaining scanned PDF limitation
+  ///
+  /// In en, this message translates to:
+  /// **'This PDF appears to be a scanned image or contains no extractable text. PDF to Word currently supports text-based PDFs only.'**
+  String get pdfToWordNoTextMessage;
+
+  /// Error message when PDF is encrypted
+  ///
+  /// In en, this message translates to:
+  /// **'The selected PDF is password-protected. Please unlock it to convert.'**
+  String get pdfToWordEncryptedError;
+
+  /// Error message when PDF exceeds 1,000 pages limit
+  ///
+  /// In en, this message translates to:
+  /// **'Document exceeds the 1,000 pages limit.'**
+  String get pdfToWordPageLimitError;
+
+  /// Error message when extracted text exceeds 20 MB
+  ///
+  /// In en, this message translates to:
+  /// **'Document exceeds the 20 MB text limit.'**
+  String get pdfToWordTextLimitError;
+
+  /// Generic error message when conversion fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to convert PDF to Word. Please try another file.'**
+  String get pdfToWordGeneralError;
+
   /// Title of the jump to page dialog in PDF viewer
   ///
   /// In en, this message translates to:

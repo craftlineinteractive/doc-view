@@ -405,7 +405,7 @@ void main() {
 
   group('FAQ Screen & Rating Highlight Banner Tests', () {
     testWidgets(
-      'FaqScreen without fromRating hides highlight banner and renders 6 Topics with exact privacy text',
+      'FaqScreen without fromRating hides highlight banner and renders 7 Topics with exact privacy text',
       (tester) async {
         tester.view.physicalSize = const Size(1080, 2400);
         tester.view.devicePixelRatio = 2.0;
@@ -418,15 +418,18 @@ void main() {
         // Highlight banner MUST NOT appear on normal FAQ
         expect(find.byKey(const Key('faq_rating_highlight_banner')), findsNothing);
 
-        // 6 Topics header count & accordion cards
-        expect(find.text('6 Topics'), findsOneWidget);
-        for (var i = 0; i < 6; i++) {
+        // 7 Topics header count & accordion cards
+        expect(find.text('7 Topics'), findsOneWidget);
+        for (var i = 0; i < 7; i++) {
           expect(find.byKey(Key('faq_card_$i')), findsOneWidget);
         }
 
         // Second question expanded by default
         expect(find.text('Why doesn\'t it scan my whole iPhone?'), findsOneWidget);
         expect(find.textContaining('iOS uses strict app sandboxing'), findsOneWidget);
+
+        // Verify 7th question exists
+        expect(find.text('How does PDF to Word conversion work?'), findsOneWidget);
 
         // Tap 6th question to verify exact privacy text
         await tester.tap(find.text('Is my data uploaded anywhere?'));

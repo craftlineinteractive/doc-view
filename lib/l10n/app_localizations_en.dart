@@ -920,6 +920,85 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your documents never leave your device. Doc View opens, converts and stores files locally. The app shows ads served by Google AdMob, which can use limited device data as described in our Privacy Policy.';
 
   @override
+  String get faqQuestion7 => 'How does PDF to Word conversion work?';
+
+  @override
+  String get faqAnswer7 =>
+      'PDF to Word extracts text, headings, and paragraph structure directly on your device. Images, tables, and complex vector art are omitted to produce clean, editable Word (.docx) files without uploading your data to the cloud.';
+
+  @override
+  String get toolPdfToWord => 'PDF to Word';
+
+  @override
+  String get toolPdfToWordSub => 'Convert PDF to editable Word document';
+
+  @override
+  String get pdfToWordScreenTitle => 'PDF to Word';
+
+  @override
+  String get pdfToWordBannerText =>
+      'Converts text and layout. Images and complex formatting will be omitted in this version.';
+
+  @override
+  String get pdfToWordPageBreaks => 'Insert page breaks between PDF pages';
+
+  @override
+  String get pdfToWordPageBreaksSubtitle =>
+      'Preserves document structure across pages';
+
+  @override
+  String get pdfToWordSelectPdf => 'Select PDF';
+
+  @override
+  String get pdfToWordChangeFile => 'Change file';
+
+  @override
+  String get pdfToWordConvertAction => 'Convert to Word';
+
+  @override
+  String get pdfToWordConverting => 'Converting to Word...';
+
+  @override
+  String pdfToWordConvertingProgress(int current, int total) {
+    return 'Converting page $current of $total...';
+  }
+
+  @override
+  String get pdfToWordSuccess => 'Converted to Word successfully';
+
+  @override
+  String get pdfToWordOpenInViewer => 'Open in Doc View';
+
+  @override
+  String get pdfToWordOpenWith => 'Open with...';
+
+  @override
+  String get pdfToWordShare => 'Share';
+
+  @override
+  String get pdfToWordNoTextTitle => 'No text found';
+
+  @override
+  String get pdfToWordNoTextMessage =>
+      'This PDF appears to be a scanned image or contains no extractable text. PDF to Word currently supports text-based PDFs only.';
+
+  @override
+  String get pdfToWordEncryptedError =>
+      'The selected PDF is password-protected. Please unlock it to convert.';
+
+  @override
+  String get pdfToWordPageLimitError =>
+      'Document exceeds the 1,000 pages limit.';
+
+  @override
+  String get pdfToWordTextLimitError =>
+      'Document exceeds the 20 MB text limit.';
+
+  @override
+  String get pdfToWordGeneralError =>
+      'Failed to convert PDF to Word. Please try another file.';
+
+  @override
   String get pdfGotoPageTitle => 'Go to page';
 
   @override
@@ -3923,6 +4002,87 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   @override
   String get faqAnswer6 =>
       '[Ýôûř đôçûɱéñţš ñéṽéř łéàṽé ýôûř đéṽîçé. Ðôç Ṽîéŵ ôþéñš, çôñṽéřţš àñđ šţôřéš ƒîłéš łôçàłłý. Ťĥé àþþ šĥôŵš àđš šéřṽéđ ƀý Ĝôôĝłé ÅđṀôƀ, ŵĥîçĥ çàñ ûšé łîɱîţéđ đéṽîçé đàţà àš đéšçřîƀéđ îñ ôûř Þřîṽàçý Þôłîçý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get faqQuestion7 => '[Ĥôŵ đôéš ÞÐƑ ţô Ŵôřđ çôñṽéřšîôñ ŵôřķ? ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get faqAnswer7 =>
+      '[ÞÐƑ ţô Ŵôřđ éẋţřàçţš ţéẋţ, ĥéàđîñĝš, àñđ þàřàĝřàþĥ šţřûçţûřé đîřéçţłý ôñ ýôûř đéṽîçé. Îɱàĝéš, ţàƀłéš, àñđ çôɱþłéẋ ṽéçţôř àřţ àřé ôɱîţţéđ ţô þřôđûçé çłéàñ, éđîţàƀłé Ŵôřđ (.đôçẋ) ƒîłéš ŵîţĥôûţ ûþłôàđîñĝ ýôûř đàţà ţô ţĥé çłôûđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get toolPdfToWord => '[ÞÐƑ ţô Ŵôřđ ẋẋẋẋ]';
+
+  @override
+  String get toolPdfToWordSub =>
+      '[Çôñṽéřţ ÞÐƑ ţô éđîţàƀłé Ŵôřđ đôçûɱéñţ ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordScreenTitle => '[ÞÐƑ ţô Ŵôřđ ẋẋẋẋ]';
+
+  @override
+  String get pdfToWordBannerText =>
+      '[Çôñṽéřţš ţéẋţ àñđ łàýôûţ. Îɱàĝéš àñđ çôɱþłéẋ ƒôřɱàţţîñĝ ŵîłł ƀé ôɱîţţéđ îñ ţĥîš ṽéřšîôñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordPageBreaks =>
+      '[Îñšéřţ þàĝé ƀřéàķš ƀéţŵééñ ÞÐƑ þàĝéš ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordPageBreaksSubtitle =>
+      '[Þřéšéřṽéš đôçûɱéñţ šţřûçţûřé àçřôšš þàĝéš ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordSelectPdf => '[Šéłéçţ ÞÐƑ ẋẋẋẋ]';
+
+  @override
+  String get pdfToWordChangeFile => '[Çĥàñĝé ƒîłé ẋẋẋẋ]';
+
+  @override
+  String get pdfToWordConvertAction => '[Çôñṽéřţ ţô Ŵôřđ ẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordConverting => '[Çôñṽéřţîñĝ ţô Ŵôřđ... ẋẋẋẋẋẋ]';
+
+  @override
+  String pdfToWordConvertingProgress(int current, int total) {
+    return '[Çôñṽéřţîñĝ þàĝé $current ôƒ $total... ẋẋẋẋẋẋ]';
+  }
+
+  @override
+  String get pdfToWordSuccess => '[Çôñṽéřţéđ ţô Ŵôřđ šûççéššƒûłłý ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordOpenInViewer => '[Ôþéñ îñ Ðôç Ṽîéŵ ẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordOpenWith => '[Ôþéñ ŵîţĥ... ẋẋẋẋ]';
+
+  @override
+  String get pdfToWordShare => '[Šĥàřé ẋẋẋ]';
+
+  @override
+  String get pdfToWordNoTextTitle => '[Ñô ţéẋţ ƒôûñđ ẋẋẋẋ]';
+
+  @override
+  String get pdfToWordNoTextMessage =>
+      '[Ťĥîš ÞÐƑ àþþéàřš ţô ƀé à šçàññéđ îɱàĝé ôř çôñţàîñš ñô éẋţřàçţàƀłé ţéẋţ. ÞÐƑ ţô Ŵôřđ çûřřéñţłý šûþþôřţš ţéẋţ-ƀàšéđ ÞÐƑš ôñłý. ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordEncryptedError =>
+      '[Ťĥé šéłéçţéđ ÞÐƑ îš þàššŵôřđ-þřôţéçţéđ. Þłéàšé ûñłôçķ îţ ţô çôñṽéřţ. ẋẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordPageLimitError =>
+      '[Ðôçûɱéñţ éẋçééđš ţĥé 1,000 þàĝéš łîɱîţ. ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordTextLimitError =>
+      '[Ðôçûɱéñţ éẋçééđš ţĥé 20 ṀƁ ţéẋţ łîɱîţ. ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordGeneralError =>
+      '[Ƒàîłéđ ţô çôñṽéřţ ÞÐƑ ţô Ŵôřđ. Þłéàšé ţřý àñôţĥéř ƒîłé. ẋẋẋẋẋẋẋẋ]';
 
   @override
   String get pdfGotoPageTitle => '[Ĝô ţô þàĝé ẋẋẋẋ]';

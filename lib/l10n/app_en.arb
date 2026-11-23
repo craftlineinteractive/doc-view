@@ -1168,6 +1168,106 @@
   "@faqAnswer6": {
     "description": "FAQ answer 6 regarding privacy and data policy"
   },
+  "faqQuestion7": "How does PDF to Word conversion work?",
+  "@faqQuestion7": {
+    "description": "FAQ question 7 regarding client-side PDF to Word conversion"
+  },
+  "faqAnswer7": "PDF to Word extracts text, headings, and paragraph structure directly on your device. Images, tables, and complex vector art are omitted to produce clean, editable Word (.docx) files without uploading your data to the cloud.",
+  "@faqAnswer7": {
+    "description": "FAQ answer 7 regarding client-side PDF to Word conversion"
+  },
+  "toolPdfToWord": "PDF to Word",
+  "@toolPdfToWord": {
+    "description": "Title of the PDF to Word tool in Tools tab"
+  },
+  "toolPdfToWordSub": "Convert PDF to editable Word document",
+  "@toolPdfToWordSub": {
+    "description": "Subtitle of the PDF to Word tool in Tools tab"
+  },
+  "pdfToWordScreenTitle": "PDF to Word",
+  "@pdfToWordScreenTitle": {
+    "description": "Header title of the PDF to Word screen"
+  },
+  "pdfToWordBannerText": "Converts text and layout. Images and complex formatting will be omitted in this version.",
+  "@pdfToWordBannerText": {
+    "description": "Non-dismissible information banner in PDF to Word screen"
+  },
+  "pdfToWordPageBreaks": "Insert page breaks between PDF pages",
+  "@pdfToWordPageBreaks": {
+    "description": "Switch tile title in PDF to Word screen"
+  },
+  "pdfToWordPageBreaksSubtitle": "Preserves document structure across pages",
+  "@pdfToWordPageBreaksSubtitle": {
+    "description": "Switch tile subtitle in PDF to Word screen"
+  },
+  "pdfToWordSelectPdf": "Select PDF",
+  "@pdfToWordSelectPdf": {
+    "description": "Button to select a PDF file for conversion"
+  },
+  "pdfToWordChangeFile": "Change file",
+  "@pdfToWordChangeFile": {
+    "description": "Action to change the selected PDF file"
+  },
+  "pdfToWordConvertAction": "Convert to Word",
+  "@pdfToWordConvertAction": {
+    "description": "Primary action button to begin conversion"
+  },
+  "pdfToWordConverting": "Converting to Word...",
+  "@pdfToWordConverting": {
+    "description": "Title shown on progress dialog during conversion"
+  },
+  "pdfToWordConvertingProgress": "Converting page {current} of {total}...",
+  "@pdfToWordConvertingProgress": {
+    "description": "Detailed progress subtitle showing current page",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "pdfToWordSuccess": "Converted to Word successfully",
+  "@pdfToWordSuccess": {
+    "description": "Success message on completion result sheet"
+  },
+  "pdfToWordOpenInViewer": "Open in Doc View",
+  "@pdfToWordOpenInViewer": {
+    "description": "Action button in result sheet to open in Doc View Office viewer"
+  },
+  "pdfToWordOpenWith": "Open with...",
+  "@pdfToWordOpenWith": {
+    "description": "Action button in result sheet to open with external app"
+  },
+  "pdfToWordShare": "Share",
+  "@pdfToWordShare": {
+    "description": "Action button in result sheet to share converted file"
+  },
+  "pdfToWordNoTextTitle": "No text found",
+  "@pdfToWordNoTextTitle": {
+    "description": "Empty state title when PDF has no text layer"
+  },
+  "pdfToWordNoTextMessage": "This PDF appears to be a scanned image or contains no extractable text. PDF to Word currently supports text-based PDFs only.",
+  "@pdfToWordNoTextMessage": {
+    "description": "Empty state message explaining scanned PDF limitation"
+  },
+  "pdfToWordEncryptedError": "The selected PDF is password-protected. Please unlock it to convert.",
+  "@pdfToWordEncryptedError": {
+    "description": "Error message when PDF is encrypted"
+  },
+  "pdfToWordPageLimitError": "Document exceeds the 1,000 pages limit.",
+  "@pdfToWordPageLimitError": {
+    "description": "Error message when PDF exceeds 1,000 pages limit"
+  },
+  "pdfToWordTextLimitError": "Document exceeds the 20 MB text limit.",
+  "@pdfToWordTextLimitError": {
+    "description": "Error message when extracted text exceeds 20 MB"
+  },
+  "pdfToWordGeneralError": "Failed to convert PDF to Word. Please try another file.",
+  "@pdfToWordGeneralError": {
+    "description": "Generic error message when conversion fails"
+  },
   "pdfGotoPageTitle": "Go to page",
   "@pdfGotoPageTitle": {
     "description": "Title of the jump to page dialog in PDF viewer"

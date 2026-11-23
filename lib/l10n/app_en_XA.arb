@@ -1164,6 +1164,106 @@
   "@faqAnswer6": {
     "description": "FAQ answer 6 regarding privacy and data policy"
   },
+  "faqQuestion7": "[Ĥôŵ đôéš ÞÐƑ ţô Ŵôřđ çôñṽéřšîôñ ŵôřķ? ẋẋẋẋẋẋẋẋ]",
+  "@faqQuestion7": {
+    "description": "FAQ question 7 regarding client-side PDF to Word conversion"
+  },
+  "faqAnswer7": "[ÞÐƑ ţô Ŵôřđ éẋţřàçţš ţéẋţ, ĥéàđîñĝš, àñđ þàřàĝřàþĥ šţřûçţûřé đîřéçţłý ôñ ýôûř đéṽîçé. Îɱàĝéš, ţàƀłéš, àñđ çôɱþłéẋ ṽéçţôř àřţ àřé ôɱîţţéđ ţô þřôđûçé çłéàñ, éđîţàƀłé Ŵôřđ (.đôçẋ) ƒîłéš ŵîţĥôûţ ûþłôàđîñĝ ýôûř đàţà ţô ţĥé çłôûđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer7": {
+    "description": "FAQ answer 7 regarding client-side PDF to Word conversion"
+  },
+  "toolPdfToWord": "[ÞÐƑ ţô Ŵôřđ ẋẋẋẋ]",
+  "@toolPdfToWord": {
+    "description": "Title of the PDF to Word tool in Tools tab"
+  },
+  "toolPdfToWordSub": "[Çôñṽéřţ ÞÐƑ ţô éđîţàƀłé Ŵôřđ đôçûɱéñţ ẋẋẋẋẋẋẋẋẋẋ]",
+  "@toolPdfToWordSub": {
+    "description": "Subtitle of the PDF to Word tool in Tools tab"
+  },
+  "pdfToWordScreenTitle": "[ÞÐƑ ţô Ŵôřđ ẋẋẋẋ]",
+  "@pdfToWordScreenTitle": {
+    "description": "Header title of the PDF to Word screen"
+  },
+  "pdfToWordBannerText": "[Çôñṽéřţš ţéẋţ àñđ łàýôûţ. Îɱàĝéš àñđ çôɱþłéẋ ƒôřɱàţţîñĝ ŵîłł ƀé ôɱîţţéđ îñ ţĥîš ṽéřšîôñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfToWordBannerText": {
+    "description": "Non-dismissible information banner in PDF to Word screen"
+  },
+  "pdfToWordPageBreaks": "[Îñšéřţ þàĝé ƀřéàķš ƀéţŵééñ ÞÐƑ þàĝéš ẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfToWordPageBreaks": {
+    "description": "Switch tile title in PDF to Word screen"
+  },
+  "pdfToWordPageBreaksSubtitle": "[Þřéšéřṽéš đôçûɱéñţ šţřûçţûřé àçřôšš þàĝéš ẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfToWordPageBreaksSubtitle": {
+    "description": "Switch tile subtitle in PDF to Word screen"
+  },
+  "pdfToWordSelectPdf": "[Šéłéçţ ÞÐƑ ẋẋẋẋ]",
+  "@pdfToWordSelectPdf": {
+    "description": "Button to select a PDF file for conversion"
+  },
+  "pdfToWordChangeFile": "[Çĥàñĝé ƒîłé ẋẋẋẋ]",
+  "@pdfToWordChangeFile": {
+    "description": "Action to change the selected PDF file"
+  },
+  "pdfToWordConvertAction": "[Çôñṽéřţ ţô Ŵôřđ ẋẋẋẋẋ]",
+  "@pdfToWordConvertAction": {
+    "description": "Primary action button to begin conversion"
+  },
+  "pdfToWordConverting": "[Çôñṽéřţîñĝ ţô Ŵôřđ... ẋẋẋẋẋẋ]",
+  "@pdfToWordConverting": {
+    "description": "Title shown on progress dialog during conversion"
+  },
+  "pdfToWordConvertingProgress": "[Çôñṽéřţîñĝ þàĝé {current} ôƒ {total}... ẋẋẋẋẋẋ]",
+  "@pdfToWordConvertingProgress": {
+    "description": "Detailed progress subtitle showing current page",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "pdfToWordSuccess": "[Çôñṽéřţéđ ţô Ŵôřđ šûççéššƒûłłý ẋẋẋẋẋẋẋẋ]",
+  "@pdfToWordSuccess": {
+    "description": "Success message on completion result sheet"
+  },
+  "pdfToWordOpenInViewer": "[Ôþéñ îñ Ðôç Ṽîéŵ ẋẋẋẋẋ]",
+  "@pdfToWordOpenInViewer": {
+    "description": "Action button in result sheet to open in Doc View Office viewer"
+  },
+  "pdfToWordOpenWith": "[Ôþéñ ŵîţĥ... ẋẋẋẋ]",
+  "@pdfToWordOpenWith": {
+    "description": "Action button in result sheet to open with external app"
+  },
+  "pdfToWordShare": "[Šĥàřé ẋẋẋ]",
+  "@pdfToWordShare": {
+    "description": "Action button in result sheet to share converted file"
+  },
+  "pdfToWordNoTextTitle": "[Ñô ţéẋţ ƒôûñđ ẋẋẋẋ]",
+  "@pdfToWordNoTextTitle": {
+    "description": "Empty state title when PDF has no text layer"
+  },
+  "pdfToWordNoTextMessage": "[Ťĥîš ÞÐƑ àþþéàřš ţô ƀé à šçàññéđ îɱàĝé ôř çôñţàîñš ñô éẋţřàçţàƀłé ţéẋţ. ÞÐƑ ţô Ŵôřđ çûřřéñţłý šûþþôřţš ţéẋţ-ƀàšéđ ÞÐƑš ôñłý. ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfToWordNoTextMessage": {
+    "description": "Empty state message explaining scanned PDF limitation"
+  },
+  "pdfToWordEncryptedError": "[Ťĥé šéłéçţéđ ÞÐƑ îš þàššŵôřđ-þřôţéçţéđ. Þłéàšé ûñłôçķ îţ ţô çôñṽéřţ. ẋẋẋẋẋẋẋẋẋẋ]",
+  "@pdfToWordEncryptedError": {
+    "description": "Error message when PDF is encrypted"
+  },
+  "pdfToWordPageLimitError": "[Ðôçûɱéñţ éẋçééđš ţĥé 1,000 þàĝéš łîɱîţ. ẋẋẋẋẋẋẋẋ]",
+  "@pdfToWordPageLimitError": {
+    "description": "Error message when PDF exceeds 1,000 pages limit"
+  },
+  "pdfToWordTextLimitError": "[Ðôçûɱéñţ éẋçééđš ţĥé 20 ṀƁ ţéẋţ łîɱîţ. ẋẋẋẋẋẋẋ]",
+  "@pdfToWordTextLimitError": {
+    "description": "Error message when extracted text exceeds 20 MB"
+  },
+  "pdfToWordGeneralError": "[Ƒàîłéđ ţô çôñṽéřţ ÞÐƑ ţô Ŵôřđ. Þłéàšé ţřý àñôţĥéř ƒîłé. ẋẋẋẋẋẋẋẋ]",
+  "@pdfToWordGeneralError": {
+    "description": "Generic error message when conversion fails"
+  },
   "pdfGotoPageTitle": "[Ĝô ţô þàĝé ẋẋẋẋ]",
   "@pdfGotoPageTitle": {
     "description": "Title of the jump to page dialog in PDF viewer"
