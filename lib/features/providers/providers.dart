@@ -28,6 +28,7 @@ import '../../data/services/permission_service.dart';
 import '../../data/services/scanner_service.dart';
 import '../../data/services/trash_purge_service.dart';
 import '../../data/services/trash_service.dart';
+import '../../data/services/widgets/widget_data_store.dart';
 import '../tools/create_pdf/create_pdf_service.dart';
 
 export '../../core/router/app_router.dart' show routerProvider;
@@ -529,6 +530,16 @@ class FileActionsController {
     final repository = _ref.read(fileRepositoryProvider);
     await repository.markOpened(file.id!);
     invalidateAll();
+    _updateWidgetRecents();
+  }
+
+  Future<void> _updateWidgetRecents() async {
+    try {
+      final repository = _ref.read(fileRepositoryProvider);
+      final recents = await repository.getRecents(limit: 5);
+      final widgetStore = _ref.read(widgetDataStoreProvider);
+      await widgetStore.updateRecentFiles(recents);
+    } catch (_) {}
   }
 
   /// Deletes [file] from the database and refreshes all relevant providers.
@@ -536,6 +547,9 @@ class FileActionsController {
     final repository = _ref.read(fileRepositoryProvider);
     await repository.deleteFile(id);
     invalidateAll();
+    try {
+      await _ref.read(widgetDataStoreProvider).removeFile(id.toString());
+    } catch (_) {}
   }
 
   /// Renames [file] with [newBaseName], updates disk and database, and invalidates providers.
@@ -544,6 +558,7 @@ class FileActionsController {
     final result = await service.rename(file, newBaseName);
     if (result is RenameSuccess) {
       invalidateAll();
+      _updateWidgetRecents();
     }
     return result;
   }
@@ -554,6 +569,14 @@ class FileActionsController {
     final result = await service.delete(files);
     if (result.hasDeletions) {
       invalidateAll();
+      try {
+        final store = _ref.read(widgetDataStoreProvider);
+        for (final f in files) {
+          if (f.id != null) {
+            await store.removeFile(f.id.toString());
+          }
+        }
+      } catch (_) {}
     }
     return result;
   }
@@ -566,6 +589,14 @@ class FileActionsController {
       invalidateAll();
       _ref.invalidate(trashItemsProvider);
       _ref.invalidate(trashCountProvider);
+      try {
+        final store = _ref.read(widgetDataStoreProvider);
+        for (final f in files) {
+          if (f.id != null) {
+            await store.removeFile(f.id.toString());
+          }
+        }
+      } catch (_) {}
     }
     return result;
   }
@@ -578,6 +609,7 @@ class FileActionsController {
       invalidateAll();
       _ref.invalidate(trashItemsProvider);
       _ref.invalidate(trashCountProvider);
+      _updateWidgetRecents();
     }
     return result;
   }
@@ -610,6 +642,9 @@ class FileActionsController {
     final repository = _ref.read(fileRepositoryProvider);
     final count = await repository.clearRecentHistory();
     _ref.invalidate(recentsProvider);
+    try {
+      await _ref.read(widgetDataStoreProvider).clearRecentHistory();
+    } catch (_) {}
     return count;
   }
 

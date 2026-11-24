@@ -4260,5 +4260,85 @@
   "galleryDebugIapProductSeenFalse": "Set Product Seen: False",
   "@galleryDebugIapProductSeenFalse": {
     "description": "Button to simulate IAP product not seen"
+  },
+  "addWidgetSheetTitle": "Add to home screen",
+  "@addWidgetSheetTitle": {
+    "description": "Title of the add widget bottom sheet"
+  },
+  "addWidgetSheetSubtitle": "Choose a widget to add to your home screen",
+  "@addWidgetSheetSubtitle": {
+    "description": "Subtitle of the add widget bottom sheet"
+  },
+  "widgetRecentFilesTitle": "Recent files",
+  "@widgetRecentFilesTitle": {
+    "description": "Title of recent files widget"
+  },
+  "widgetRecentFilesBadge": "4 × 2",
+  "@widgetRecentFilesBadge": {
+    "description": "Grid size badge for recent files widget"
+  },
+  "widgetRecentFilesDesc": "View and open your recently used files directly from your home screen",
+  "@widgetRecentFilesDesc": {
+    "description": "Description of recent files widget"
+  },
+  "widgetQuickToolsTitle": "Quick tools",
+  "@widgetQuickToolsTitle": {
+    "description": "Title of quick tools widget"
+  },
+  "widgetQuickToolsBadge": "4 × 1",
+  "@widgetQuickToolsBadge": {
+    "description": "Grid size badge for quick tools widget"
+  },
+  "widgetQuickToolsDesc": "Jump directly to Scan, Image to PDF, Search, or Import",
+  "@widgetQuickToolsDesc": {
+    "description": "Description of quick tools widget"
+  },
+  "addWidgetButton": "Add widget",
+  "@addWidgetButton": {
+    "description": "Button to pin selected widget to home screen"
+  },
+  "addWidgetManualTitle": "Add widget manually",
+  "@addWidgetManualTitle": {
+    "description": "Title of manual widget addition guide dialog"
+  },
+  "addWidgetManualMessage": "Touch and hold an empty space on your home screen, tap Widgets, find Doc View, and drag it to your screen.",
+  "@addWidgetManualMessage": {
+    "description": "Instructions for adding a widget manually"
+  },
+  "settingsQuickAccessNotificationTitle": "Quick access notification",
+  "@settingsQuickAccessNotificationTitle": {
+    "description": "Title of quick access notification setting row"
+  },
+  "settingsQuickAccessNotificationSubtitle": "Show quick tools in notification bar",
+  "@settingsQuickAccessNotificationSubtitle": {
+    "description": "Subtitle of quick access notification setting row"
+  },
+  "notificationPermissionDialogTitle": "Allow notifications",
+  "@notificationPermissionDialogTitle": {
+    "description": "Title of notification permission pre-prompt dialog"
+  },
+  "notificationPermissionDialogDesc": "Doc View needs notification permission to show the quick access bar in your notification tray.",
+  "@notificationPermissionDialogDesc": {
+    "description": "Description of notification permission pre-prompt dialog"
+  },
+  "notificationTitle": "Doc View Quick Tools",
+  "@notificationTitle": {
+    "description": "Title of quick access notification"
+  },
+  "notificationBody": "Scan, convert, or search documents",
+  "@notificationBody": {
+    "description": "Body of quick access notification"
+  },
+  "notificationActionScan": "Scan",
+  "@notificationActionScan": {
+    "description": "Action label for scan in quick access notification"
+  },
+  "notificationActionImageToPdf": "Image to PDF",
+  "@notificationActionImageToPdf": {
+    "description": "Action label for image to PDF in quick access notification"
+  },
+  "notificationActionSearch": "Search",
+  "@notificationActionSearch": {
+    "description": "Action label for search in quick access notification"
   }
 }

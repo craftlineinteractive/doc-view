@@ -1,15 +1,20 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/config/feature_flags.dart';
+
 import 'core/constants/app_constants.dart';
 import 'core/extensions/l10n_extension.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'data/models/app_settings.dart';
+import 'data/services/notifications/quick_access_notification_service.dart';
+import 'data/services/widgets/deep_link_service.dart';
 import 'features/files/open_document.dart';
 import 'features/providers/providers.dart';
 import 'l10n/app_localizations.dart';
@@ -57,6 +62,7 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _runStartupLogic();
       _initOpenWithListener();
+      _initWidgetAndNotificationServices();
       unawaited(
         ref.read(trashPurgeServiceProvider).runAutoPurgeIfDue().catchError((_) => false),
       );
@@ -87,6 +93,25 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
         _handleOpenedFile(path);
       }
     });
+  }
+
+  void _initWidgetAndNotificationServices() {
+    try {
+      if (Platform.environment.containsKey('FLUTTER_TEST')) return;
+    } catch (_) {}
+    if (!widgetsEnabled) return;
+    try {
+      final router = ref.read(routerProvider);
+      final deepLinkService = DeepLinkService(widgetRef: ref, router: router);
+      deepLinkService.init();
+
+      final notifService = ref.read(quickAccessNotificationServiceProvider);
+      notifService.init(onNavigate: (route) {
+        if (mounted) {
+          router.push(route);
+        }
+      });
+    } catch (_) {}
   }
 
   Future<void> _handleOpenedFile(String filePath) async {

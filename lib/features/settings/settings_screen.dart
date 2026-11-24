@@ -15,12 +15,15 @@ import '../../core/l10n/language_catalog.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../data/models/app_settings.dart';
+import '../../data/services/notifications/quick_access_notification_service.dart';
+import '../../shared/widgets/dialogs/doc_dialog.dart';
 import '../../shared/widgets/navigation/doc_scaffold.dart';
 import '../../shared/widgets/settings/settings_footer.dart';
 import '../../shared/widgets/skeletons/shimmer.dart';
 import '../../shared/widgets/tiles/settings_row.dart';
 import '../debug/component_gallery_screen.dart';
 import '../providers/providers.dart';
+import 'widgets/add_widget_bottom_sheet.dart';
 import 'widgets/rate_us_sheet.dart';
 import 'widgets/theme_selection_sheet.dart';
 
@@ -65,11 +68,56 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   PackageInfo? _packageInfo;
+  bool _isQuickAccessNotificationEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _loadPackageInfo();
+    _loadNotificationPref();
+  }
+
+  Future<void> _loadNotificationPref() async {
+    try {
+      final enabled =
+          await ref.read(quickAccessNotificationServiceProvider).isEnabled();
+      if (mounted) {
+        setState(() => _isQuickAccessNotificationEnabled = enabled);
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _toggleQuickAccessNotification(bool enabled) async {
+    final service = ref.read(quickAccessNotificationServiceProvider);
+    if (enabled && Platform.isAndroid) {
+      final granted = await service.requestPermission();
+      if (!granted && mounted) {
+        final proceed = await showDialog<bool>(
+          context: context,
+          builder: (dCtx) => DocDialog(
+            title: context.l10n.notificationPermissionDialogTitle,
+            body: context.l10n.notificationPermissionDialogDesc,
+            confirmLabel: context.l10n.actionConfirm,
+            onConfirm: () => Navigator.of(dCtx).pop(true),
+            onCancel: () => Navigator.of(dCtx).pop(false),
+          ),
+        );
+        if (proceed != true) return;
+        await service.requestPermission();
+      }
+    }
+    if (!mounted) return;
+    await service.setEnabled(
+      enabled,
+      title: context.l10n.notificationTitle,
+      body: context.l10n.notificationBody,
+      scanLabel: context.l10n.notificationActionScan,
+      imageToPdfLabel: context.l10n.notificationActionImageToPdf,
+      searchLabel: context.l10n.notificationActionSearch,
+    );
+    if (mounted) {
+      setState(() => _isQuickAccessNotificationEnabled = enabled);
+    }
   }
 
   Future<void> _loadPackageInfo() async {
@@ -225,7 +273,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           icon: Icons.widgets_outlined,
           title: context.l10n.settingsAddWidgetTitle,
           subtitle: context.l10n.settingsAddWidgetSubtitle,
-          onTap: () {},
+          onTap: () => AddWidgetBottomSheet.show(context),
         ),
       if (hasTerms)
         SettingsRow(
@@ -353,6 +401,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                   settings.localeCode,
                                 ),
                                 onTap: () => context.push('/settings/language'),
+                              ),
+                            if (_effectiveWidgetsEnabled)
+                              SettingsRow(
+                                key: const Key('settings_quick_access_notification'),
+                                icon: Icons.notifications_active_outlined,
+                                title: context.l10n.settingsQuickAccessNotificationTitle,
+                                subtitle: context.l10n.settingsQuickAccessNotificationSubtitle,
+                                trailing: Semantics(
+                                  label: context.l10n.settingsQuickAccessNotificationTitle,
+                                  child: Switch.adaptive(
+                                    key: const Key('settings_quick_access_notification_switch'),
+                                    value: _isQuickAccessNotificationEnabled,
+                                    onChanged: _toggleQuickAccessNotification,
+                                  ),
+                                ),
+                                onTap: () => _toggleQuickAccessNotification(!_isQuickAccessNotificationEnabled),
                               ),
                             SettingsRow(
                               key: const Key('settings_rate_us'),

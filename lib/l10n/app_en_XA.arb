@@ -4290,5 +4290,85 @@
   "galleryDebugIapProductSeenFalse": "[Şéţ Ƥřôđûçţ Şééñ: Ƒàłšé ẋẋẋ]",
   "@galleryDebugIapProductSeenFalse": {
     "description": "Button to simulate IAP product not seen"
+  },
+  "addWidgetSheetTitle": "[Âđđ ţô ĥôɱé šçřééñ ẋẋẋ]",
+  "@addWidgetSheetTitle": {
+    "description": "Title of the add widget bottom sheet"
+  },
+  "addWidgetSheetSubtitle": "[Çĥôôšé à ŵîđĝéţ ţô àđđ ţô ýôûř ĥôɱé šçřééñ ẋẋẋẋẋ]",
+  "@addWidgetSheetSubtitle": {
+    "description": "Subtitle of the add widget bottom sheet"
+  },
+  "widgetRecentFilesTitle": "[Řéçéñţ ƒîłéš ẋ]",
+  "@widgetRecentFilesTitle": {
+    "description": "Title of recent files widget"
+  },
+  "widgetRecentFilesBadge": "[4 × 2 ẋ]",
+  "@widgetRecentFilesBadge": {
+    "description": "Grid size badge for recent files widget"
+  },
+  "widgetRecentFilesDesc": "[Ṽîéŵ àñđ ôþéñ ýôûř řéçéñţłý ûšéđ ƒîłéš đîřéçţłý ƒřôɱ ýôûř ĥôɱé šçřééñ ẋẋẋẋẋẋẋ]",
+  "@widgetRecentFilesDesc": {
+    "description": "Description of recent files widget"
+  },
+  "widgetQuickToolsTitle": "[Qûîçķ ţôôłš ẋ]",
+  "@widgetQuickToolsTitle": {
+    "description": "Title of quick tools widget"
+  },
+  "widgetQuickToolsBadge": "[4 × 1 ẋ]",
+  "@widgetQuickToolsBadge": {
+    "description": "Grid size badge for quick tools widget"
+  },
+  "widgetQuickToolsDesc": "[Ĵûɱþ đîřéçţłý ţô Şçàñ, Îɱàĝé ţô ÞĐƑ, Şéàřçĥ, ôř Îɱþôřţ ẋẋẋẋẋẋ]",
+  "@widgetQuickToolsDesc": {
+    "description": "Description of quick tools widget"
+  },
+  "addWidgetButton": "[Âđđ ŵîđĝéţ ẋ]",
+  "@addWidgetButton": {
+    "description": "Button to pin selected widget to home screen"
+  },
+  "addWidgetManualTitle": "[Âđđ ŵîđĝéţ ɱàñûàłłý ẋẋẋ]",
+  "@addWidgetManualTitle": {
+    "description": "Title of manual widget addition guide dialog"
+  },
+  "addWidgetManualMessage": "[Ţôûçĥ àñđ ĥôłđ àñ éɱþţý šþàçé ôñ ýôûř ĥôɱé šçřééñ, ţàþ Ŵîđĝéţš, ƒîñđ Đôç Ṽîéŵ, àñđ đřàĝ îţ ţô ýôûř šçřééñ. ẋẋẋẋẋẋẋẋ]",
+  "@addWidgetManualMessage": {
+    "description": "Instructions for adding a widget manually"
+  },
+  "settingsQuickAccessNotificationTitle": "[Qûîçķ àççéšš ñôţîƒîçàţîôñ ẋẋẋẋ]",
+  "@settingsQuickAccessNotificationTitle": {
+    "description": "Title of quick access notification setting row"
+  },
+  "settingsQuickAccessNotificationSubtitle": "[Şĥôŵ âûîçķ ţôôłš îñ ñôţîƒîçàţîôñ ƀàř ẋẋẋẋ]",
+  "@settingsQuickAccessNotificationSubtitle": {
+    "description": "Subtitle of quick access notification setting row"
+  },
+  "notificationPermissionDialogTitle": "[Âłłôŵ ñôţîƒîçàţîôñš ẋẋẋ]",
+  "@notificationPermissionDialogTitle": {
+    "description": "Title of notification permission pre-prompt dialog"
+  },
+  "notificationPermissionDialogDesc": "[Đôç Ṽîéŵ ñééđš ñôţîƒîçàţîôñ þéřɱîššîôñ ţô šĥôŵ ţĥé âûîçķ àççéšš ƀàř îñ ýôûř ñôţîƒîçàţîôñ ţřàý. ẋẋẋẋẋẋẋ]",
+  "@notificationPermissionDialogDesc": {
+    "description": "Description of notification permission pre-prompt dialog"
+  },
+  "notificationTitle": "[Đôç Ṽîéŵ Qûîçķ Ţôôłš ẋẋẋ]",
+  "@notificationTitle": {
+    "description": "Title of quick access notification"
+  },
+  "notificationBody": "[Şçàñ, çôñṽéřţ, ôř šéàřçĥ đôçûɱéñţš ẋẋẋẋ]",
+  "@notificationBody": {
+    "description": "Body of quick access notification"
+  },
+  "notificationActionScan": "[Şçàñ ẋ]",
+  "@notificationActionScan": {
+    "description": "Action label for scan in quick access notification"
+  },
+  "notificationActionImageToPdf": "[Îɱàĝé ţô ÞĐƑ ẋẋ]",
+  "@notificationActionImageToPdf": {
+    "description": "Action label for image to PDF in quick access notification"
+  },
+  "notificationActionSearch": "[Şéàřçĥ ẋ]",
+  "@notificationActionSearch": {
+    "description": "Action label for search in quick access notification"
   }
 }

@@ -27,11 +27,15 @@ import '../../features/tools/add_text/add_text_screen.dart';
 import '../../features/tools/sign/sign_screen.dart';
 import '../../features/tools/convert/pdf_to_word_screen.dart';
 import '../../features/tools/created_documents_screen.dart';
+import '../../features/tools/image_list_editor_screen.dart';
 import '../../features/tools/recycle_bin/recycle_bin_screen.dart';
 import '../../features/tools/tools_screen.dart';
 import '../../features/tools/widgets/tool_file_picker_screen.dart';
 import '../../features/viewer/pages_screen.dart';
 import '../../features/viewer/viewer_screen.dart';
+import '../../features/providers/providers.dart';
+import 'package:cunning_document_scanner/cunning_document_scanner.dart';
+import 'package:file_picker/file_picker.dart';
 
 /// Root navigator key shared across the application and router.
 final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -207,6 +211,35 @@ final routerProvider = Provider<GoRouter>((ref) {
         },
       ),
       GoRoute(
+        path: '/tools/scan',
+        name: 'tools-scan',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const ToolScanLauncher(),
+      ),
+      GoRoute(
+        path: '/tools/image-to-pdf',
+        name: 'tools-image-to-pdf',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const ToolImageToPdfLauncher(),
+      ),
+      GoRoute(
+        path: '/tools/import',
+        name: 'tools-import',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const ToolFilePickerScreen(
+          title: 'Import files',
+        ),
+      ),
+      GoRoute(
+        path: '/open',
+        name: 'open',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+          final fileId = state.uri.queryParameters['id'];
+          return FileOpenScreen(fileId: fileId);
+        },
+      ),
+      GoRoute(
         path: '/files',
         name: 'files',
         parentNavigatorKey: rootNavigatorKey,
@@ -330,4 +363,152 @@ final routerProvider = Provider<GoRouter>((ref) {
     ],
   );
 });
+
+class FileOpenScreen extends ConsumerStatefulWidget {
+  const FileOpenScreen({super.key, required this.fileId});
+  final String? fileId;
+
+  @override
+  ConsumerState<FileOpenScreen> createState() => _FileOpenScreenState();
+}
+
+class _FileOpenScreenState extends ConsumerState<FileOpenScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _resolveAndOpen());
+  }
+
+  Future<void> _resolveAndOpen() async {
+    final idStr = widget.fileId;
+    if (idStr == null || !RegExp(r'^[a-zA-Z0-9_\-]+$').hasMatch(idStr)) {
+      if (mounted) context.go('/home');
+      return;
+    }
+
+    final id = int.tryParse(idStr);
+    if (id == null) {
+      if (mounted) context.go('/home');
+      return;
+    }
+
+    final repo = ref.read(fileRepositoryProvider);
+    final file = await repo.getFileById(id);
+    if (!mounted) return;
+
+    if (file != null) {
+      ref.read(fileActionsControllerProvider).markOpened(file);
+      context.go('/viewer', extra: file);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(context.l10n.noDocumentSelected)),
+      );
+      context.go('/home');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+}
+
+class ToolScanLauncher extends StatefulWidget {
+  const ToolScanLauncher({super.key});
+
+  @override
+  State<ToolScanLauncher> createState() => _ToolScanLauncherState();
+}
+
+class _ToolScanLauncherState extends State<ToolScanLauncher> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _launch());
+  }
+
+  Future<void> _launch() async {
+    try {
+      // ignore: deprecated_member_use
+      final scans = await CunningDocumentScanner.getPictures();
+      if (scans != null && scans.isNotEmpty && mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => ImageListEditorScreen(
+              initialImagePaths: scans,
+              defaultNamePrefix: 'Scan',
+              isScannerSource: true,
+            ),
+          ),
+        );
+        return;
+      }
+    } catch (_) {}
+    if (mounted) {
+      context.go('/tools');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
+    );
+  }
+}
+
+class ToolImageToPdfLauncher extends StatefulWidget {
+  const ToolImageToPdfLauncher({super.key});
+
+  @override
+  State<ToolImageToPdfLauncher> createState() => _ToolImageToPdfLauncherState();
+}
+
+class _ToolImageToPdfLauncherState extends State<ToolImageToPdfLauncher> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _launch());
+  }
+
+  Future<void> _launch() async {
+    try {
+      final pickedFiles = await FilePicker.pickFiles(type: FileType.image);
+      if (pickedFiles.isNotEmpty && mounted) {
+        final paths = pickedFiles
+            .map((f) => f.path)
+            .whereType<String>()
+            .where((p) => p.isNotEmpty)
+            .toList();
+        if (paths.isNotEmpty) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ImageListEditorScreen(
+                initialImagePaths: paths,
+                defaultNamePrefix: 'Images',
+                isScannerSource: false,
+              ),
+            ),
+          );
+          return;
+        }
+      }
+    } catch (_) {}
+    if (mounted) {
+      context.go('/tools');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
+    );
+  }
+}
+
 

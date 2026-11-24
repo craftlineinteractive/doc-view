@@ -3253,6 +3253,73 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get galleryDebugIapProductSeenFalse => 'Set Product Seen: False';
+
+  @override
+  String get addWidgetSheetTitle => 'Add to home screen';
+
+  @override
+  String get addWidgetSheetSubtitle =>
+      'Choose a widget to add to your home screen';
+
+  @override
+  String get widgetRecentFilesTitle => 'Recent files';
+
+  @override
+  String get widgetRecentFilesBadge => '4 × 2';
+
+  @override
+  String get widgetRecentFilesDesc =>
+      'View and open your recently used files directly from your home screen';
+
+  @override
+  String get widgetQuickToolsTitle => 'Quick tools';
+
+  @override
+  String get widgetQuickToolsBadge => '4 × 1';
+
+  @override
+  String get widgetQuickToolsDesc =>
+      'Jump directly to Scan, Image to PDF, Search, or Import';
+
+  @override
+  String get addWidgetButton => 'Add widget';
+
+  @override
+  String get addWidgetManualTitle => 'Add widget manually';
+
+  @override
+  String get addWidgetManualMessage =>
+      'Touch and hold an empty space on your home screen, tap Widgets, find Doc View, and drag it to your screen.';
+
+  @override
+  String get settingsQuickAccessNotificationTitle =>
+      'Quick access notification';
+
+  @override
+  String get settingsQuickAccessNotificationSubtitle =>
+      'Show quick tools in notification bar';
+
+  @override
+  String get notificationPermissionDialogTitle => 'Allow notifications';
+
+  @override
+  String get notificationPermissionDialogDesc =>
+      'Doc View needs notification permission to show the quick access bar in your notification tray.';
+
+  @override
+  String get notificationTitle => 'Doc View Quick Tools';
+
+  @override
+  String get notificationBody => 'Scan, convert, or search documents';
+
+  @override
+  String get notificationActionScan => 'Scan';
+
+  @override
+  String get notificationActionImageToPdf => 'Image to PDF';
+
+  @override
+  String get notificationActionSearch => 'Search';
 }
 
 /// The translations for English (`en_XA`).
@@ -6602,4 +6669,71 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get galleryDebugIapProductSeenFalse => '[Şéţ Ƥřôđûçţ Şééñ: Ƒàłšé ẋẋẋ]';
+
+  @override
+  String get addWidgetSheetTitle => '[Âđđ ţô ĥôɱé šçřééñ ẋẋẋ]';
+
+  @override
+  String get addWidgetSheetSubtitle =>
+      '[Çĥôôšé à ŵîđĝéţ ţô àđđ ţô ýôûř ĥôɱé šçřééñ ẋẋẋẋẋ]';
+
+  @override
+  String get widgetRecentFilesTitle => '[Řéçéñţ ƒîłéš ẋ]';
+
+  @override
+  String get widgetRecentFilesBadge => '[4 × 2 ẋ]';
+
+  @override
+  String get widgetRecentFilesDesc =>
+      '[Ṽîéŵ àñđ ôþéñ ýôûř řéçéñţłý ûšéđ ƒîłéš đîřéçţłý ƒřôɱ ýôûř ĥôɱé šçřééñ ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get widgetQuickToolsTitle => '[Qûîçķ ţôôłš ẋ]';
+
+  @override
+  String get widgetQuickToolsBadge => '[4 × 1 ẋ]';
+
+  @override
+  String get widgetQuickToolsDesc =>
+      '[Ĵûɱþ đîřéçţłý ţô Şçàñ, Îɱàĝé ţô ÞĐƑ, Şéàřçĥ, ôř Îɱþôřţ ẋẋẋẋẋẋ]';
+
+  @override
+  String get addWidgetButton => '[Âđđ ŵîđĝéţ ẋ]';
+
+  @override
+  String get addWidgetManualTitle => '[Âđđ ŵîđĝéţ ɱàñûàłłý ẋẋẋ]';
+
+  @override
+  String get addWidgetManualMessage =>
+      '[Ţôûçĥ àñđ ĥôłđ àñ éɱþţý šþàçé ôñ ýôûř ĥôɱé šçřééñ, ţàþ Ŵîđĝéţš, ƒîñđ Đôç Ṽîéŵ, àñđ đřàĝ îţ ţô ýôûř šçřééñ. ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get settingsQuickAccessNotificationTitle =>
+      '[Qûîçķ àççéšš ñôţîƒîçàţîôñ ẋẋẋẋ]';
+
+  @override
+  String get settingsQuickAccessNotificationSubtitle =>
+      '[Şĥôŵ âûîçķ ţôôłš îñ ñôţîƒîçàţîôñ ƀàř ẋẋẋẋ]';
+
+  @override
+  String get notificationPermissionDialogTitle => '[Âłłôŵ ñôţîƒîçàţîôñš ẋẋẋ]';
+
+  @override
+  String get notificationPermissionDialogDesc =>
+      '[Đôç Ṽîéŵ ñééđš ñôţîƒîçàţîôñ þéřɱîššîôñ ţô šĥôŵ ţĥé âûîçķ àççéšš ƀàř îñ ýôûř ñôţîƒîçàţîôñ ţřàý. ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get notificationTitle => '[Đôç Ṽîéŵ Qûîçķ Ţôôłš ẋẋẋ]';
+
+  @override
+  String get notificationBody => '[Şçàñ, çôñṽéřţ, ôř šéàřçĥ đôçûɱéñţš ẋẋẋẋ]';
+
+  @override
+  String get notificationActionScan => '[Şçàñ ẋ]';
+
+  @override
+  String get notificationActionImageToPdf => '[Îɱàĝé ţô ÞĐƑ ẋẋ]';
+
+  @override
+  String get notificationActionSearch => '[Şéàřçĥ ẋ]';
 }

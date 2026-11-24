@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_recent_files_title">Recent files</string>
+    <string name="widget_recent_files_empty">Open a file to see it here</string>
+    <string name="widget_recent_files_description">Quickly open your recent files</string>
+    <string name="widget_quick_tools_title">Quick tools</string>
+    <string name="widget_quick_tools_description">Quick shortcuts to scan, convert, and search</string>
+    <string name="widget_tool_scan">Scan</string>
+    <string name="widget_tool_image_to_pdf">Image to PDF</string>
+    <string name="widget_tool_search">Search</string>
+    <string name="widget_tool_import">Import</string>
+</resources>

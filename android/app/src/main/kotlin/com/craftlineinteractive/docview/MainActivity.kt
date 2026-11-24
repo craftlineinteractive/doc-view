@@ -1,7 +1,10 @@
 package com.craftlineinteractive.docview
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.OpenableColumns
 import io.flutter.embedding.android.FlutterActivity
@@ -13,6 +16,7 @@ import java.io.FileOutputStream
 class MainActivity : FlutterActivity() {
     private val openWithChannelName = "com.craftlineinteractive.docview/open_with"
     private val fileManagerChannelName = "com.craftlineinteractive.docview/file_manager"
+    private val widgetChannelName = "com.craftlineinteractive.docview/widgets"
     private var initialFilePath: String? = null
     private var methodChannel: MethodChannel? = null
 
@@ -50,6 +54,43 @@ class MainActivity : FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, fileManagerChannelName).setMethodCallHandler { call, result ->
             when (call.method) {
                 "openSystemFileManager" -> result.success(openSystemFileManager())
+                else -> result.notImplemented()
+            }
+        }
+
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, widgetChannelName).setMethodCallHandler { call, result ->
+            when (call.method) {
+                "isPinSupported" -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        val appWidgetManager = getSystemService(AppWidgetManager::class.java)
+                        result.success(appWidgetManager?.isRequestPinAppWidgetSupported == true)
+                    } else {
+                        result.success(false)
+                    }
+                }
+                "requestPinWidget" -> {
+                    val widgetName = call.argument<String>("widget")
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        val appWidgetManager = getSystemService(AppWidgetManager::class.java)
+                        if (appWidgetManager?.isRequestPinAppWidgetSupported == true) {
+                            val provider = when (widgetName) {
+                                "recent_files" -> ComponentName(this, RecentFilesWidgetReceiver::class.java)
+                                "quick_tools" -> ComponentName(this, QuickToolsWidgetReceiver::class.java)
+                                else -> null
+                            }
+                            if (provider != null) {
+                                val success = appWidgetManager.requestPinAppWidget(provider, null, null)
+                                result.success(success)
+                            } else {
+                                result.error("INVALID_WIDGET", "Unknown widget name: $widgetName", null)
+                            }
+                        } else {
+                            result.success(false)
+                        }
+                    } else {
+                        result.success(false)
+                    }
+                }
                 else -> result.notImplemented()
             }
         }
@@ -102,6 +143,10 @@ class MainActivity : FlutterActivity() {
         val action = intent.action
         val uri = intent.data
         if (Intent.ACTION_VIEW == action && uri != null) {
+            if (uri.scheme == "docview") {
+                // Do not intercept or clear widget / deep link URIs
+                return
+            }
             val copiedPath = copyUriToInternalStorage(uri)
             // Prevent Flutter's deep linking engine from attempting to parse file:// or content:// as an app route
             intent.data = null

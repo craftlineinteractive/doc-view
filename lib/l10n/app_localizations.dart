@@ -5412,6 +5412,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Set Product Seen: False'**
   String get galleryDebugIapProductSeenFalse;
+
+  /// Title of the add widget bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Add to home screen'**
+  String get addWidgetSheetTitle;
+
+  /// Subtitle of the add widget bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a widget to add to your home screen'**
+  String get addWidgetSheetSubtitle;
+
+  /// Title of recent files widget
+  ///
+  /// In en, this message translates to:
+  /// **'Recent files'**
+  String get widgetRecentFilesTitle;
+
+  /// Grid size badge for recent files widget
+  ///
+  /// In en, this message translates to:
+  /// **'4 × 2'**
+  String get widgetRecentFilesBadge;
+
+  /// Description of recent files widget
+  ///
+  /// In en, this message translates to:
+  /// **'View and open your recently used files directly from your home screen'**
+  String get widgetRecentFilesDesc;
+
+  /// Title of quick tools widget
+  ///
+  /// In en, this message translates to:
+  /// **'Quick tools'**
+  String get widgetQuickToolsTitle;
+
+  /// Grid size badge for quick tools widget
+  ///
+  /// In en, this message translates to:
+  /// **'4 × 1'**
+  String get widgetQuickToolsBadge;
+
+  /// Description of quick tools widget
+  ///
+  /// In en, this message translates to:
+  /// **'Jump directly to Scan, Image to PDF, Search, or Import'**
+  String get widgetQuickToolsDesc;
+
+  /// Button to pin selected widget to home screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add widget'**
+  String get addWidgetButton;
+
+  /// Title of manual widget addition guide dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Add widget manually'**
+  String get addWidgetManualTitle;
+
+  /// Instructions for adding a widget manually
+  ///
+  /// In en, this message translates to:
+  /// **'Touch and hold an empty space on your home screen, tap Widgets, find Doc View, and drag it to your screen.'**
+  String get addWidgetManualMessage;
+
+  /// Title of quick access notification setting row
+  ///
+  /// In en, this message translates to:
+  /// **'Quick access notification'**
+  String get settingsQuickAccessNotificationTitle;
+
+  /// Subtitle of quick access notification setting row
+  ///
+  /// In en, this message translates to:
+  /// **'Show quick tools in notification bar'**
+  String get settingsQuickAccessNotificationSubtitle;
+
+  /// Title of notification permission pre-prompt dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Allow notifications'**
+  String get notificationPermissionDialogTitle;
+
+  /// Description of notification permission pre-prompt dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View needs notification permission to show the quick access bar in your notification tray.'**
+  String get notificationPermissionDialogDesc;
+
+  /// Title of quick access notification
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View Quick Tools'**
+  String get notificationTitle;
+
+  /// Body of quick access notification
+  ///
+  /// In en, this message translates to:
+  /// **'Scan, convert, or search documents'**
+  String get notificationBody;
+
+  /// Action label for scan in quick access notification
+  ///
+  /// In en, this message translates to:
+  /// **'Scan'**
+  String get notificationActionScan;
+
+  /// Action label for image to PDF in quick access notification
+  ///
+  /// In en, this message translates to:
+  /// **'Image to PDF'**
+  String get notificationActionImageToPdf;
+
+  /// Action label for search in quick access notification
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get notificationActionSearch;
 }
 
 class _AppLocalizationsDelegate
