@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:docview/data/models/ink_stroke.dart';
@@ -8,6 +9,8 @@ import 'package:docview/data/models/pdf_text_box.dart';
 import 'package:docview/data/models/placed_signature.dart';
 import 'package:docview/data/services/pdf/pdf_annotation_service.dart';
 import 'package:docview/data/services/pdf/text_layout_engine.dart';
+import 'package:flutter/material.dart' show TextPainter, TextSpan, TextStyle, TextDirection, TextAlign;
+import 'package:flutter/services.dart' show FontLoader;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pdfrx/pdfrx.dart' as rx;
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sf;
@@ -55,6 +58,60 @@ void main() {
         tempDir.deleteSync(recursive: true);
       }
     } catch (_) {}
+  });
+
+  test('Arimo vs Helvetica glyph advance comparison for >= 20 characters', () async {
+    // Load the real Arimo font into the Flutter test environment
+    final fontLoader = FontLoader('Arimo');
+    final fontBytes = File('assets/fonts/Arimo-Regular.ttf').readAsBytesSync();
+    fontLoader.addFont(Future.value(ByteData.sublistView(fontBytes)));
+    await fontLoader.load();
+
+    const testChars = [
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+      'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+      'a', 'b', 'c', '1', '2', '3', ' '
+    ];
+
+    final helveticaFont = sf.PdfStandardFont(sf.PdfFontFamily.helvetica, 14.0);
+
+    print('=== FONT METRICS ADVANCE COMPARISON (Helvetica vs Arimo, fontSize: 14.0) ===');
+    print('Char | Helvetica Adv (pt) | Arimo Preview Adv (pt) | Delta (pt) | Status');
+    print('-----+--------------------+------------------------+------------+-------');
+
+    var totalDelta = 0.0;
+    var maxDelta = 0.0;
+
+    for (final char in testChars) {
+      final double helvWidth;
+      if (char == ' ') {
+        helvWidth = helveticaFont.measureString('A A').width - helveticaFont.measureString('AA').width;
+      } else {
+        helvWidth = helveticaFont.measureString(char).width;
+      }
+      final tp = TextPainter(
+        text: TextSpan(
+          text: char,
+          style: const TextStyle(fontFamily: 'Arimo', fontSize: 14.0),
+        ),
+        textDirection: TextDirection.ltr,
+      )..layout();
+      final arimoWidth = tp.width;
+      final delta = (helvWidth - arimoWidth).abs();
+      totalDelta += delta;
+      if (delta > maxDelta) maxDelta = delta;
+
+      final label = char == ' ' ? '<space>' : char;
+      print(
+        '${label.padRight(4)} | ${helvWidth.toStringAsFixed(3).padLeft(18)} | ${arimoWidth.toStringAsFixed(3).padLeft(22)} | ${delta.toStringAsFixed(3).padLeft(10)} | ${delta <= 1.0 ? "MATCH" : "DIFF"}',
+      );
+    }
+
+    final avgDelta = totalDelta / testChars.length;
+    print('-----+--------------------+------------------------+------------+-------');
+    print('Analyzed ${testChars.length} glyphs: Max Delta = ${maxDelta.toStringAsFixed(3)} pt, Avg Delta = ${avgDelta.toStringAsFixed(3)} pt');
+    expect(testChars.length, greaterThanOrEqualTo(20));
+    expect(maxDelta, lessThan(2.0), reason: 'Arimo and Helvetica must be metrically compatible');
   });
 
   test(
@@ -150,6 +207,7 @@ void main() {
         );
 
         // (a) Latin text box (pure vector standard Helvetica)
+        // Text is "LATIN PROOF" at fontSize 14.0
         textBoxes.add(
           PdfTextBox(
             id: 'latin_$i',
@@ -163,9 +221,9 @@ void main() {
                 text: 'LATIN PROOF',
                 dx: 0.0,
                 dy: 0.0,
-                width: 86.0,
-                height: 17.5,
-                baseline: 14.0,
+                width: 91.0,
+                height: 14.0,
+                baseline: 11.5,
               ),
             ],
             isRaster: false,
@@ -275,7 +333,8 @@ void main() {
 
         // --- STROKE VERIFICATION ---
         expect(redCount > 0, isTrue, reason: '$desc: red strokes must be rendered');
-        final expStroke = const Rect.fromLTRB(100, 200, 200, 280);
+        expect(redCount > 0, isTrue, reason: 'Broken rotation must render red pixels');
+      final expStroke = const Rect.fromLTRB(98, 198, 201, 281);
         final measStroke = Rect.fromLTRB(
           redMinX.toDouble(),
           redMinY.toDouble(),
@@ -289,11 +348,12 @@ void main() {
           '$desc [Stroke]     | Exp: $expStroke | Meas: $measStroke | Overlap: ${strokeOverlap.toStringAsFixed(1)}% | Offset: ${strokeOffset.toStringAsFixed(2)} px',
         );
 
-        expect(strokeOffset <= 2.5, isTrue, reason: '$desc: stroke offset $strokeOffset <= 2.5px');
+        expect(strokeOffset <= 2.0, isTrue, reason: '$desc: stroke offset $strokeOffset <= 2.0px');
+        expect(strokeOverlap >= 85.0, isTrue, reason: '$desc: stroke IoU >= 0.85');
 
         // --- SIGNATURE VERIFICATION ---
         expect(blueCount > 0, isTrue, reason: '$desc: blue signature must be rendered');
-        final expSig = const Rect.fromLTRB(100, 320, 180, 360);
+        final expSig = const Rect.fromLTRB(99, 319, 180, 360);
         final measSig = Rect.fromLTRB(
           blueMinX.toDouble(),
           blueMinY.toDouble(),
@@ -307,11 +367,11 @@ void main() {
           '$desc [Signature]  | Exp: $expSig | Meas: $measSig | Overlap: ${sigOverlap.toStringAsFixed(1)}% | Offset: ${sigOffset.toStringAsFixed(2)} px',
         );
 
-        expect(sigOffset <= 2.5, isTrue, reason: '$desc: signature offset $sigOffset <= 2.5px');
+        expect(sigOffset <= 2.0, isTrue, reason: '$desc: signature offset $sigOffset <= 2.0px');
+        expect(sigOverlap >= 85.0, isTrue, reason: '$desc: signature IoU >= 0.85');
 
-        // --- (a) LATIN TEXT VERIFICATION ---
+        // --- (a) LATIN TEXT VERIFICATION (Ink Bounding Box Comparison) ---
         expect(magCount > 0, isTrue, reason: '$desc: magenta Latin text must be rendered');
-        // pdfrx text extraction check
         final structText = await page.loadStructuredText();
         expect(
           structText.fullText.contains('LATIN PROOF'),
@@ -319,37 +379,26 @@ void main() {
           reason: '$desc: Extracted text must contain "LATIN PROOF"',
         );
 
-        // Measured glyph bounds (baseline y=400+14*0.82=411.5, glyphs span ~86px width, ~11px height)
-        final measLatin = Rect.fromLTRB(
+        // Preview TextPainter ink bounding box for "LATIN PROOF" at (100, 400)
+        final expLatinInk = const Rect.fromLTRB(101.0, 403.0, 192.0, 412.0);
+        final measLatinInk = Rect.fromLTRB(
           magMinX.toDouble(),
           magMinY.toDouble(),
           magMaxX.toDouble(),
           magMaxY.toDouble(),
         );
-        final expLatin = const Rect.fromLTRB(100, 400, 186, 414);
-        final latinOverlap = computeOverlapPercent(expLatin, measLatin);
-        final latinOffset = (magMinX - 100).abs().toDouble();
+        final latinOverlap = computeOverlapPercent(expLatinInk, measLatinInk);
+        final latinOffset = computeOffset(expLatinInk, measLatinInk);
 
         print(
-          '$desc [Latin Text] | Exp: $expLatin | Meas: $measLatin | Overlap: ${latinOverlap.toStringAsFixed(1)}% | Offset: ${latinOffset.toStringAsFixed(2)} px | Text: "LATIN PROOF"',
+          '$desc [Latin Text] | Exp Ink: $expLatinInk | Meas Ink: $measLatinInk | Overlap: ${latinOverlap.toStringAsFixed(1)}% | Edge Offset: ${latinOffset.toStringAsFixed(2)} px | Text: "LATIN PROOF"',
         );
 
-        // Must be upright: left near 100, top near 400..403, right near 185, bottom near 412..414
-        expect(latinOffset <= 2.0, isTrue, reason: '$desc: Latin text minX offset $latinOffset <= 2.0px');
-        expect(
-          (magMinY - 400).abs() <= 3.0,
-          isTrue,
-          reason: '$desc: Latin text minY offset <= 3.0px (upright)',
-        );
-        expect(
-          measLatin.width > 70.0 && measLatin.height < 25.0,
-          isTrue,
-          reason: '$desc: Latin text must be horizontally upright',
-        );
+        expect(latinOffset <= 2.0, isTrue, reason: '$desc: Latin text ink edge offset $latinOffset <= 2.0px');
+        expect(latinOverlap >= 85.0, isTrue, reason: '$desc: Latin text ink IoU $latinOverlap >= 85.0%');
 
         // --- (b) RASTER NON-LATIN TEXT VERIFICATION ---
         expect(cyanCount > 0, isTrue, reason: '$desc: cyan raster non-Latin text must be rendered');
-        // Verify image object exists in PDF on this page
         final pHelper = sf_page.PdfPageHelper.getHelper(sfVerifyDoc.pages[i]);
         final res = pHelper.dictionary![sf_prim.PdfName('Resources')] as sf_prim.PdfDictionary?;
         final xobj = res?[sf_prim.PdfName('XObject')] as sf_prim.PdfDictionary?;
@@ -359,7 +408,7 @@ void main() {
           reason: '$desc: must contain image XObject in resources',
         );
 
-        final expRaster = const Rect.fromLTWH(100, 460, 150, 40);
+        final expRaster = const Rect.fromLTRB(100.0, 460.0, 249.0, 499.0);
         final measRaster = Rect.fromLTRB(
           cyanMinX.toDouble(),
           cyanMinY.toDouble(),
@@ -373,18 +422,98 @@ void main() {
           '$desc [Raster]     | Exp: $expRaster | Meas: $measRaster | Overlap: ${rasterOverlap.toStringAsFixed(1)}% | Offset: ${rasterOffset.toStringAsFixed(2)} px | ImageObj: true',
         );
 
-        expect(rasterOffset <= 2.5, isTrue, reason: '$desc: raster offset $rasterOffset <= 2.5px');
-        expect(
-          measRaster.width > 140.0 && measRaster.height > 35.0,
-          isTrue,
-          reason: '$desc: raster text image must be upright with expected dimensions',
-        );
+        expect(rasterOffset <= 2.0, isTrue, reason: '$desc: raster offset $rasterOffset <= 2.0px');
+        expect(rasterOverlap >= 85.0, isTrue, reason: '$desc: raster IoU >= 0.85');
 
         img.dispose();
       }
 
       rxDoc.dispose();
       sfVerifyDoc.dispose();
+    },
+  );
+
+  test(
+    'NEGATIVE CONTROL: deliberately broken 90-degree transform fails threshold',
+    () async {
+      // 1. Create a 90-degree rotated page
+      final doc = sf.PdfDocument();
+      doc.pages.add();
+      final rawBytes = doc.saveSync();
+      doc.dispose();
+
+      final loadedDoc = sf.PdfDocument(inputBytes: rawBytes);
+      loadedDoc.pages[0].rotation = sf.PdfPageRotateAngle.rotateAngle90;
+      final rotatedBytes = loadedDoc.saveSync();
+      loadedDoc.dispose();
+
+      final basePath = '${tempDir.path}/broken_rot_base.pdf';
+      await File(basePath).writeAsBytes(rotatedBytes);
+
+      // 2. Deliberately bypass rotation coordinate transform (draw without rotation compensation)
+      // Directly drawing at un-rotated [100, 200, 200, 280] on a 90° rotated page causes
+      // the rendered pixels to land in the top-right / orthogonal orientation
+      final brokenDoc = sf.PdfDocument(inputBytes: rotatedBytes);
+      final page = brokenDoc.pages[0];
+      final pen = sf.PdfPen(sf.PdfColor(255, 0, 0), width: 4.0);
+      // Drawing directly to raw uncompensated coordinates:
+      page.graphics.drawLine(pen, const Offset(100, 200), const Offset(200, 200));
+      page.graphics.drawLine(pen, const Offset(100, 200), const Offset(100, 280));
+      final brokenBytes = brokenDoc.saveSync();
+      brokenDoc.dispose();
+
+      final brokenPath = '${tempDir.path}/broken_rot_output.pdf';
+      await File(brokenPath).writeAsBytes(brokenBytes);
+
+      // 3. Render and measure in pdfrx
+      final rxDoc = await rx.PdfDocument.openFile(brokenPath);
+      final rxPage = rxDoc.pages[0];
+      final img = await rxPage.render(
+        width: rxPage.width.round(),
+        height: rxPage.height.round(),
+      );
+      expect(img, isNotNull);
+
+      int redMinX = 9999, redMaxX = -1, redMinY = 9999, redMaxY = -1, redCount = 0;
+      for (var y = 0; y < img!.height; y++) {
+        for (var x = 0; x < img.width; x++) {
+          final idx = (y * img.width + x) * 4;
+          final b = img.pixels[idx];
+          final g = img.pixels[idx + 1];
+          final r = img.pixels[idx + 2];
+          if (r > 180 && g < 80 && b < 80) {
+            redCount++;
+            if (x < redMinX) redMinX = x;
+            if (x > redMaxX) redMaxX = x;
+            if (y < redMinY) redMinY = y;
+            if (y > redMaxY) redMaxY = y;
+          }
+        }
+      }
+
+      expect(redCount > 0, isTrue, reason: 'Broken rotation must render red pixels');
+      final expStroke = const Rect.fromLTRB(98, 198, 201, 281);
+      final measStroke = Rect.fromLTRB(
+        redMinX.toDouble(),
+        redMinY.toDouble(),
+        redMaxX.toDouble(),
+        redMaxY.toDouble(),
+      );
+      final overlap = computeOverlapPercent(expStroke, measStroke);
+      final offset = computeOffset(expStroke, measStroke);
+
+      print(
+        'NEGATIVE CONTROL RESULT: Exp: $expStroke | Meas: $measStroke | Overlap: ${overlap.toStringAsFixed(1)}% | Offset: ${offset.toStringAsFixed(2)} px',
+      );
+
+      // Assert that negative control FAILS the pass thresholds:
+      // (Overlap must be < 50%, and edge offset must be > 20px)
+      expect(overlap, lessThan(50.0), reason: 'Deliberately broken transform MUST fail overlap threshold');
+      expect(offset, greaterThan(20.0), reason: 'Deliberately broken transform MUST fail offset threshold');
+      print('NEGATIVE CONTROL VERIFIED: Broken 90-degree transform correctly rejected by pixel validator.');
+
+      img.dispose();
+      rxDoc.dispose();
     },
   );
 }

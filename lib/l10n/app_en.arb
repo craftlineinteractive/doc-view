@@ -1168,11 +1168,11 @@
   "@faqAnswer6": {
     "description": "FAQ answer 6 regarding privacy and data policy"
   },
-  "faqQuestion7": "How does PDF to Word conversion work?",
+  "faqQuestion7": "Why did PDF to Word change my layout?",
   "@faqQuestion7": {
     "description": "FAQ question 7 regarding client-side PDF to Word conversion"
   },
-  "faqAnswer7": "PDF to Word extracts text, headings, and paragraph structure directly on your device. Images, tables, and complex vector art are omitted to produce clean, editable Word (.docx) files without uploading your data to the cloud.",
+  "faqAnswer7": "Doc View converts the text only, on your device. Tables, images, colors and layout are not kept. Scanned PDFs can't be converted because there is no text to read.",
   "@faqAnswer7": {
     "description": "FAQ answer 7 regarding client-side PDF to Word conversion"
   },
@@ -1188,7 +1188,7 @@
   "@pdfToWordScreenTitle": {
     "description": "Header title of the PDF to Word screen"
   },
-  "pdfToWordBannerText": "Converts text and layout. Images and complex formatting will be omitted in this version.",
+  "pdfToWordBannerText": "Only text is converted. Tables, images, colors and layout are not kept.",
   "@pdfToWordBannerText": {
     "description": "Non-dismissible information banner in PDF to Word screen"
   },
@@ -1248,9 +1248,21 @@
   "@pdfToWordNoTextTitle": {
     "description": "Empty state title when PDF has no text layer"
   },
-  "pdfToWordNoTextMessage": "This PDF appears to be a scanned image or contains no extractable text. PDF to Word currently supports text-based PDFs only.",
+  "pdfToWordNoTextMessage": "No text found in this PDF. Scanned documents can't be converted.",
   "@pdfToWordNoTextMessage": {
     "description": "Empty state message explaining scanned PDF limitation"
+  },
+  "pdfToWordLargeFileWarning": "Large document: conversion may take several minutes.",
+  "@pdfToWordLargeFileWarning": {
+    "description": "Warning banner shown when document exceeds 100 MB or 500 pages"
+  },
+  "pdfToWordInvalidFileName": "Invalid file name",
+  "@pdfToWordInvalidFileName": {
+    "description": "Validation error when file name contains illegal characters"
+  },
+  "pdfToWordActionCancel": "Cancel",
+  "@pdfToWordActionCancel": {
+    "description": "Cancel button in conversion progress sheet"
   },
   "pdfToWordEncryptedError": "The selected PDF is password-protected. Please unlock it to convert.",
   "@pdfToWordEncryptedError": {

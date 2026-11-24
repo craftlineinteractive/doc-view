@@ -74,6 +74,8 @@ class _PdfToWordParams {
   final String? password;
   final bool insertPageBreaks;
   final SendPort? progressPort;
+  final SendPort? cancelPort;
+  final int slowConvertDelayMs;
 
   const _PdfToWordParams({
     required this.sourcePath,
@@ -81,7 +83,29 @@ class _PdfToWordParams {
     this.password,
     this.insertPageBreaks = true,
     this.progressPort,
+    this.cancelPort,
+    this.slowConvertDelayMs = 0,
   });
+}
+
+/// Token allowing cancellation of an in-flight PDF to Word conversion.
+class PdfToWordCancellationToken {
+  bool _isCancelled = false;
+  SendPort? _controlPort;
+
+  bool get isCancelled => _isCancelled;
+
+  void cancel() {
+    _isCancelled = true;
+    _controlPort?.send('cancel');
+  }
+
+  void _attach(SendPort port) {
+    _controlPort = port;
+    if (_isCancelled) {
+      port.send('cancel');
+    }
+  }
 }
 
 /// Result of quick preflight check for text content in a PDF.
@@ -106,6 +130,16 @@ class PdfToWordService {
   static const int maxPages = 1000;
   static const int maxTextChars = 20 * 1024 * 1024; // 20 MB text limit
 
+  /// Debug-only slow conversion switch for testing cancellation and kill tests.
+  /// Guarded by kDebugMode.
+  static bool slowConvertForTesting = false;
+  static int slowConvertDelayMs = 0;
+
+  /// Verification helper ensuring slowConvert cannot activate in release mode.
+  static bool isSlowConvertActive({required bool isDebug}) {
+    return isDebug && slowConvertForTesting && slowConvertDelayMs > 0;
+  }
+
   /// Fast pre-check to verify if a PDF contains extractable text without running full conversion.
   Future<PdfTextPreflightResult> checkTextLayer({
     required String sourcePath,
@@ -121,10 +155,18 @@ class PdfToWordService {
     String? password,
     bool insertPageBreaks = true,
     void Function(double progress)? onProgress,
+    PdfToWordCancellationToken? cancellationToken,
   }) async {
     final resolvedOutputPath = outputPath ?? _defaultOutputPath(sourcePath);
 
     final receivePort = ReceivePort();
+    final cancelReceivePort = ReceivePort();
+    cancelReceivePort.listen((msg) {
+      if (msg is SendPort) {
+        cancellationToken?._attach(msg);
+      }
+    });
+
     try {
       if (onProgress != null) {
         receivePort.listen((message) {
@@ -140,12 +182,24 @@ class PdfToWordService {
         password: password,
         insertPageBreaks: insertPageBreaks,
         progressPort: receivePort.sendPort,
+        cancelPort: cancelReceivePort.sendPort,
+        slowConvertDelayMs:
+            kDebugMode && slowConvertForTesting ? slowConvertDelayMs : 0,
       );
 
       final result = await Isolate.run(() => _runPdfToWordConversion(params));
       return result;
+    } catch (e) {
+      final tempFile = File('$resolvedOutputPath.tmp');
+      if (tempFile.existsSync()) {
+        try {
+          tempFile.deleteSync();
+        } catch (_) {}
+      }
+      rethrow;
     } finally {
       receivePort.close();
+      cancelReceivePort.close();
     }
   }
 
@@ -217,7 +271,7 @@ PdfTextPreflightResult _runPreflightCheck(String sourcePath, String? password) {
 }
 
 /// Top-level isolate worker function executing full conversion.
-String _runPdfToWordConversion(_PdfToWordParams params) {
+Future<String> _runPdfToWordConversion(_PdfToWordParams params) async {
   final file = File(params.sourcePath);
   if (!file.existsSync()) {
     throw const PdfToWordException(PdfToWordErrorReason.fileNotFound);
@@ -255,7 +309,34 @@ String _runPdfToWordConversion(_PdfToWordParams params) {
     final allPagesParagraphs = <List<WordParagraph>>[];
     int totalExtractedChars = 0;
 
+    final cancelWorkerPort = ReceivePort();
+    bool isCancelled = false;
+    cancelWorkerPort.listen((msg) {
+      if (msg == 'cancel') {
+        isCancelled = true;
+      }
+    });
+    params.cancelPort?.send(cancelWorkerPort.sendPort);
+
     for (int pageIdx = 0; pageIdx < pageCount; pageIdx++) {
+      if (isCancelled) {
+        cancelWorkerPort.close();
+        final tempFile = File('${params.outputPath}.tmp');
+        if (tempFile.existsSync()) {
+          try {
+            tempFile.deleteSync();
+          } catch (_) {}
+        }
+        throw const PdfToWordException(
+          PdfToWordErrorReason.cancelled,
+          'Conversion cancelled by user.',
+        );
+      }
+
+      if (kDebugMode && params.slowConvertDelayMs > 0) {
+        await Future<void>.delayed(Duration(milliseconds: params.slowConvertDelayMs));
+      }
+
       params.progressPort?.send(pageIdx / pageCount * 0.85);
 
       final lines = extractor.extractTextLines(
@@ -328,6 +409,37 @@ String _runPdfToWordConversion(_PdfToWordParams params) {
 
     // Atomic rename
     tempFile.renameSync(targetFile.path);
+    cancelWorkerPort.close();
+
+    // Output verification: re-read output zip, verify required parts
+    try {
+      final verifyBytes = targetFile.readAsBytesSync();
+      final verifyArchive = ZipDecoder().decodeBytes(verifyBytes);
+      final hasContentTypes = verifyArchive.files.any(
+        (f) => f.name == '[Content_Types].xml' && f.size > 0,
+      );
+      final hasDocumentXml = verifyArchive.files.any(
+        (f) => f.name == 'word/document.xml' && f.size > 0,
+      );
+      if (!hasContentTypes || !hasDocumentXml) {
+        if (targetFile.existsSync()) targetFile.deleteSync();
+        throw const PdfToWordException(
+          PdfToWordErrorReason.conversionFailed,
+          'Output document failed OOXML verification.',
+        );
+      }
+    } catch (e) {
+      if (targetFile.existsSync()) {
+        try {
+          targetFile.deleteSync();
+        } catch (_) {}
+      }
+      if (e is PdfToWordException) rethrow;
+      throw PdfToWordException(
+        PdfToWordErrorReason.conversionFailed,
+        'Output document verification failed: $e',
+      );
+    }
 
     params.progressPort?.send(1.0);
     return targetFile.path;
@@ -397,9 +509,9 @@ List<WordParagraph> _groupLinesIntoParagraphs(List<TextLine> rawLines) {
         line.fontName.toLowerCase().contains('italic') ||
         line.fontName.toLowerCase().contains('oblique');
 
-    if (line.fontSize >= medianFontSize * 1.8) {
+    if (line.fontSize > medianFontSize * 1.8) {
       heading = WordHeadingLevel.heading1;
-    } else if (line.fontSize >= medianFontSize * 1.3 || (isBold && line.fontSize >= medianFontSize * 1.15)) {
+    } else if (line.fontSize >= medianFontSize * 1.3) {
       heading = WordHeadingLevel.heading2;
     }
 
@@ -499,6 +611,7 @@ Uint8List _buildDocxArchive({
   <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
   <Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/>
   <Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/>
+  <Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
 </Types>''';
   addXmlFile('[Content_Types].xml', contentTypesXml);
 
@@ -506,6 +619,7 @@ Uint8List _buildDocxArchive({
   const rootRelsXml = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
 </Relationships>''';
   addXmlFile('_rels/.rels', rootRelsXml);
 
@@ -517,6 +631,15 @@ Uint8List _buildDocxArchive({
   <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/>
 </Relationships>''';
   addXmlFile('word/_rels/document.xml.rels', docRelsXml);
+
+  // 4. docProps/core.xml
+  const corePropertiesXml = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <dc:title>Doc View Document</dc:title>
+  <dc:creator>Doc View</dc:creator>
+  <cp:lastModifiedBy>Doc View</cp:lastModifiedBy>
+</cp:coreProperties>''';
+  addXmlFile('docProps/core.xml', corePropertiesXml);
 
   // 4. word/settings.xml
   const settingsXml = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>

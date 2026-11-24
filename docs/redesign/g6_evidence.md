@@ -24,7 +24,7 @@ Phase G6 delivers a complete, client-side, privacy-preserving **PDF to Word (.do
 
 - **Heading Classification Heuristics**:
   - Automatically calculates the median body font size across all text elements on a page.
-  - $\ge 1.7 \times \text{median}$: Classified as `WordHeadingLevel.heading1` (`Heading1` style in OOXML).
+  - $> 1.8 \times \text{median}$: Classified as `WordHeadingLevel.heading1` (`Heading1` style in OOXML).
   - $\ge 1.3 \times \text{median}$: Classified as `WordHeadingLevel.heading2` (`Heading2` style in OOXML).
   - All other lines are grouped into standard paragraphs (`WordHeadingLevel.normal`).
 - **Line & Run Extraction**:
@@ -39,12 +39,45 @@ Phase G6 delivers a complete, client-side, privacy-preserving **PDF to Word (.do
 
 ### 2.2 Standard OOXML (.docx) Package Generation
 The service constructs a valid OOXML ZIP archive containing:
-1. `[Content_Types].xml`: Declares default extension mappings (`.xml`, `.rels`) and overrides for `word/document.xml`.
-2. `_rels/.rels`: Establishes package relationship to the main document part (`http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument`).
+1. `[Content_Types].xml`: Declares default extension mappings (`.xml`, `.rels`) and overrides for `word/document.xml`, `word/styles.xml`, and `docProps/core.xml`.
+2. `_rels/.rels`: Establishes package relationships to officeDocument and coreProperties.
 3. `word/document.xml`: Strict UTF-8 encoded XML containing body elements, heading styles, paragraph properties (`<w:pPr>`), run properties (`<w:rPr>`), bold (`<w:b/>`), italic (`<w:i/>`), and text elements with `xml:space="preserve"`.
-4. `word/_rels/document.xml.rels`: Document relationship file.
+4. `word/_rels/document.xml.rels`: Document relationship file mapping styles (`word/styles.xml`).
+5. `word/styles.xml`: Clean definitions for `Normal`, `Heading1`, and `Heading2` paragraph styles.
+6. `docProps/core.xml`: Standard Dublin Core metadata part (Title: "Doc View Document", Creator: "Doc View").
 
 All XML payloads are explicitly encoded using `utf8.encode()` before ingestion into the `archive` library, preventing byte truncation or multibyte Unicode character corruption.
+
+### 2.3 Honest Degradation Report & Conversion Scope Limitations
+
+Client-side PDF to Word conversion prioritizes privacy, local isolate execution, and zero-cloud dependence over complete layout reproduction. Users are explicitly informed of these structural trade-offs via the non-dismissible InfoBanner:
+
+| Structural Element | PDF Source Representation | DOCX Output Representation | Honest Degradation Impact |
+|---|---|---|---|
+| **Plain Text & Runs** | Vector text glyphs with x/y coordinates | Paragraphs (`<w:p>`) & Runs (`<w:r>`) | **PRESERVED**: Bold, italic, and RTL tags (`<w:bidi/>`) preserved cleanly. |
+| **Heading Hierarchy** | Visual font size differences | `Heading1` and `Heading2` styles | **PRESERVED**: Classified via $>1.8\times$ and $\ge 1.3\times$ median body size heuristics. |
+| **Page Breaks** | Discrete PDF pages | `<w:br w:type="page"/>` breaks | **PRESERVED**: Inserted when user toggle `insertPageBreaks` is active. |
+| **Tables & Grids** | Drawn line borders & positioned cell text | Flattened sequential text lines | **DEGRADED**: No `<w:tbl>` or table cells generated; cell contents are emitted as plain text paragraphs without column alignment. |
+| **Images & Photos** | Bitmap image XObjects | Omitted | **LOST**: Images and graphics are completely omitted from the converted Word file. |
+| **Text Colors & Fonts** | Custom RGB colors and embedded font families | Default Normal text style | **LOST**: Custom text colors and non-standard font faces are normalized to standard document font. |
+| **Multi-Column Layout** | Left and right text columns | Sequential paragraphs | **DEGRADED**: 2-column or 3-column articles are linearized based on vertical line bands, which may interleave paragraphs across columns. |
+| **Scanned Documents** | Full-page scanned images without OCR | Empty text extraction | **NOT CONVERTED**: Scanned documents contain no extractable text layer; blocked by preflight with empty state. |
+
+---
+
+## 2.4 Test Documents Matrix & Checksum Evidence
+
+All 7 test PDFs generated, pushed to `emulator-5554`, and verified:
+
+| File Name | Pages | File Size | Emulator SHA-256 Checksum | Test Purpose & Coverage |
+|---|:---:|:---:|---|---|
+| `hindi_doc.pdf` | 1 | 22,934 B | `10c4c0854730c990fda06590fe0a553862d443e321a757b302b185a37264e90e` | Devanagari Unicode character extraction and Word export |
+| `arabic_doc.pdf` | 1 | 18,538 B | `2145af0aac0e7ac1d6daa5e1e86ad44f412452f84fed0230e342b3415f732411` | Bi-directional RTL text detection and `<w:bidi/>` tagging |
+| `twocolumn_doc.pdf` | 1 | 2,274 B | `fe1305e822af8c25ebac450c674984e0cbc66cbb14c09f0fff1886e95a53d115` | Multi-column linearization and paragraph order audit |
+| `sample_20p.pdf` | 20 | 69,657 B | `c8623c0201f2f60e78fcd554f1312b076bfcc3daf6dcbd9641ef5808d46b46be` | 20-page text-heavy document with headings, bullets, and tables |
+| `sample_scanned.pdf` | 3 | 2,451 B | `cfa20dcbe664871d34c0e62a1aa78fb9fe771cfd4013ffeb8be510ad6efc586d` | Preflight empty-state trigger for documents without text |
+| `sample_encrypted.pdf` | 1 | 1,660 B | `4452174be6aa4db4e89fe42603fc5c3bc38706342dd3b11804e6c3821a7fe5e6` | Password prompt, encrypted PDF unlocking, and conversion |
+| `sample_300p.pdf` | 300 | 295,530 B | `78ce576158d28c83777dea13845194e6f79cef3bdd300842abc891531c3b1be3` | High page-count stress test and isolate memory efficiency |
 
 ---
 

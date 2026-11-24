@@ -41,15 +41,25 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
   bool _insertPageBreaks = true;
   bool _isCheckingText = false;
   PdfTextPreflightResult? _preflight;
+  late final TextEditingController _fileNameController;
 
   @override
   void initState() {
     super.initState();
+    _fileNameController = TextEditingController();
     if (widget.initialFile != null) {
       _selectedFile = widget.initialFile;
       _password = widget.initialPassword;
+      _fileNameController.text =
+          p.basenameWithoutExtension(widget.initialFile!.name);
       _runPreflight();
     }
+  }
+
+  @override
+  void dispose() {
+    _fileNameController.dispose();
+    super.dispose();
   }
 
   Future<void> _runPreflight() async {
@@ -67,12 +77,26 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
         sourcePath: file.path,
         password: _password,
       );
-      if (mounted) {
-        setState(() {
-          _preflight = result;
-          _isCheckingText = false;
-        });
+      if (!mounted) return;
+
+      if (result.isEncrypted && _password == null) {
+        final enteredPassword = await _showPasswordDialog();
+        if (enteredPassword != null && enteredPassword.isNotEmpty) {
+          _password = enteredPassword;
+          return _runPreflight();
+        } else {
+          setState(() {
+            _preflight = result;
+            _isCheckingText = false;
+          });
+          return;
+        }
       }
+
+      setState(() {
+        _preflight = result;
+        _isCheckingText = false;
+      });
     } catch (e) {
       if (mounted) {
         setState(() {
@@ -80,6 +104,34 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
         });
       }
     }
+  }
+
+  Future<String?> _showPasswordDialog() async {
+    final controller = TextEditingController();
+    return showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        title: Text(context.l10n.pdfPasswordTitle),
+        content: TextField(
+          controller: controller,
+          obscureText: true,
+          decoration: InputDecoration(
+            hintText: context.l10n.pdfPasswordHint,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(null),
+            child: Text(context.l10n.actionCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(ctx).pop(controller.text),
+            child: Text(context.l10n.pdfPasswordActionUnlock),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> _pickFile() async {
@@ -94,6 +146,8 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
     if (result != null && mounted) {
       setState(() {
         _selectedFile = result;
+        _password = null;
+        _fileNameController.text = p.basenameWithoutExtension(result.name);
       });
       await _runPreflight();
     }
@@ -106,10 +160,23 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
     final l10n = context.l10n;
     final totalPages = _preflight?.pageCount ?? 1;
 
+    final rawName = _fileNameController.text.trim();
+    if (rawName.isEmpty || RegExp(r'[/\\:*?"<>|]').hasMatch(rawName)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.pdfToWordInvalidFileName),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
+      return;
+    }
+
     double currentProgress = 0.0;
     StateSetter? progressSetter;
+    final cancelToken = PdfToWordCancellationToken();
+    bool userCancelled = false;
 
-    // Show determinate progress modal
+    // Show determinate progress modal with working cancel action
     showModalBottomSheet<void>(
       context: context,
       isDismissible: false,
@@ -119,17 +186,22 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
         return StatefulBuilder(
           builder: (ctx, setSheetState) {
             progressSetter = setSheetState;
-            final currentPage = (currentProgress * totalPages).ceil().clamp(1, totalPages);
+            final currentPage =
+                (currentProgress * totalPages).ceil().clamp(1, totalPages);
             return Container(
               decoration: BoxDecoration(
                 color: ctx.tokens.surface,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(24)),
               ),
               child: ProgressSheet(
                 title: l10n.pdfToWordConverting,
-                statusText: l10n.pdfToWordConvertingProgress(currentPage, totalPages),
+                statusText:
+                    l10n.pdfToWordConvertingProgress(currentPage, totalPages),
                 progress: currentProgress,
                 onCancel: () {
+                  userCancelled = true;
+                  cancelToken.cancel();
                   Navigator.of(ctx).pop();
                 },
               ),
@@ -142,11 +214,10 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
     try {
       final service = ref.read(pdfToWordServiceProvider);
       final outputDir = await ref.read(pdfOutputServiceProvider).getOutputDir();
-      final baseName = p.basenameWithoutExtension(file.path);
-      var target = File(p.join(outputDir.path, '$baseName.docx'));
+      var target = File(p.join(outputDir.path, '$rawName.docx'));
       var counter = 1;
       while (target.existsSync()) {
-        target = File(p.join(outputDir.path, '$baseName ($counter).docx'));
+        target = File(p.join(outputDir.path, '$rawName ($counter).docx'));
         counter++;
       }
 
@@ -162,6 +233,7 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
             });
           }
         },
+        cancellationToken: cancelToken,
       );
 
       // Close progress sheet
@@ -198,7 +270,8 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
           return Container(
             decoration: BoxDecoration(
               color: ctx.tokens.surface,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(24)),
             ),
             child: SafeArea(
               child: Column(
@@ -213,14 +286,17 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
                       context.push('/viewer', extra: convertedDoc);
                     },
                     onShare: () {
-                      ref.read(fileOperationsServiceProvider).share([convertedDoc]);
+                      ref
+                          .read(fileOperationsServiceProvider)
+                          .share([convertedDoc]);
                     },
                     onClose: () {
                       Navigator.of(ctx).pop();
                     },
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0, vertical: 8.0),
                     child: SizedBox(
                       width: double.infinity,
                       child: OutlinedButton.icon(
@@ -250,6 +326,12 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
       // Close progress sheet if still open
       if (mounted && Navigator.of(context, rootNavigator: true).canPop()) {
         Navigator.of(context, rootNavigator: true).pop();
+      }
+
+      if (userCancelled ||
+          (e is PdfToWordException &&
+              e.reason == PdfToWordErrorReason.cancelled)) {
+        return;
       }
 
       if (!mounted) return;
@@ -289,6 +371,35 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
     final l10n = context.l10n;
     final file = _selectedFile;
 
+    // Full-screen empty state when no extractable text layer is found in the PDF
+    final hasNoText =
+        _preflight != null && !_preflight!.hasText && !_preflight!.isEncrypted;
+
+    if (file != null && hasNoText) {
+      return Scaffold(
+        backgroundColor: tokens.surfaceAlt,
+        appBar: AppBar(
+          title: Text(l10n.pdfToWordScreenTitle),
+          elevation: 0,
+          backgroundColor: tokens.surface,
+          foregroundColor: tokens.textPrimary,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        body: Center(
+          child: DocEmptyState(
+            icon: Icons.document_scanner_outlined,
+            title: l10n.pdfToWordNoTextTitle,
+            message: l10n.pdfToWordNoTextMessage,
+            actionLabel: l10n.actionBack,
+            onAction: () => Navigator.of(context).pop(),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: tokens.surfaceAlt,
       appBar: AppBar(
@@ -298,7 +409,9 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
         foregroundColor: tokens.textPrimary,
         centerTitle: false,
       ),
-      body: file == null ? _buildEmptyPicker(tokens, l10n) : _buildMainContent(tokens, l10n, file),
+      body: file == null
+          ? _buildEmptyPicker(tokens, l10n)
+          : _buildMainContent(tokens, l10n, file),
     );
   }
 
@@ -350,7 +463,8 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
   }
 
   Widget _buildMainContent(DocViewTokens tokens, dynamic l10n, DocFile file) {
-    final hasNoText = _preflight != null && !_preflight!.hasText && !_preflight!.isEncrypted;
+    final isLargeFile = (file.sizeBytes > 100 * 1024 * 1024) ||
+        (_preflight != null && _preflight!.pageCount > 500);
 
     return Column(
       children: [
@@ -422,55 +536,65 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
               ),
               const SizedBox(height: 16),
 
-              // 3. Scanned PDF Warning / Empty State
+              // 3. Large File Warning Banner (>100MB or >500 pages)
+              if (isLargeFile) ...[
+                InfoBanner(
+                  message: l10n.pdfToWordLargeFileWarning,
+                  icon: Icons.warning_amber_rounded,
+                  color: DocViewColors.warning,
+                ),
+                const SizedBox(height: 16),
+              ],
+
+              // 4. Loading indicator while checking text layer
               if (_isCheckingText) ...[
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 24.0),
                   child: Center(
                     child: CircularProgressIndicator.adaptive(
-                      valueColor: AlwaysStoppedAnimation<Color>(tokens.primaryBlue),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(tokens.primaryBlue),
                     ),
                   ),
                 ),
-              ] else if (hasNoText) ...[
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    color: DocViewColors.warning.withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: DocViewColors.warning.withValues(alpha: 0.3)),
-                  ),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.warning_amber_rounded,
-                        size: 40,
-                        color: DocViewColors.warning,
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        l10n.pdfToWordNoTextTitle,
-                        style: DocViewTypography.titleMd.copyWith(
-                          color: tokens.textPrimary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        l10n.pdfToWordNoTextMessage,
-                        textAlign: TextAlign.center,
-                        style: DocViewTypography.bodySm.copyWith(
-                          color: tokens.textSecondary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
               ],
 
-              // 4. Page Break Option Switch
+              // 5. Editable File Name Field with Locked .docx Suffix
+              Container(
+                decoration: BoxDecoration(
+                  color: tokens.surface,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: tokens.hairline),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Row(
+                  children: [
+                    const Icon(Icons.edit_note_rounded, size: 22),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: TextField(
+                        key: const Key('input_docx_file_name'),
+                        controller: _fileNameController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          labelText: l10n.toolsLabelFileName,
+                          labelStyle: DocViewTypography.bodySm
+                              .copyWith(color: tokens.textSecondary),
+                          suffixText: '.docx',
+                          suffixStyle: DocViewTypography.bodyMd.copyWith(
+                            color: tokens.textPrimary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // 6. Page Break Option Switch
               Material(
                 color: tokens.surface,
                 shape: RoundedRectangleBorder(
@@ -504,7 +628,7 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
           ),
         ),
 
-        // 5. Fixed Bottom Conversion Action Button
+        // 7. Fixed Bottom Conversion Action Button
         Container(
           padding: EdgeInsets.fromLTRB(
             16,
@@ -520,7 +644,7 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
             key: const Key('btn_convert_to_word'),
             label: l10n.pdfToWordConvertAction,
             icon: const Icon(Icons.transform_rounded, color: Colors.white),
-            onPressed: (hasNoText || _isCheckingText) ? null : _executeConversion,
+            onPressed: _isCheckingText ? null : _executeConversion,
           ),
         ),
       ],

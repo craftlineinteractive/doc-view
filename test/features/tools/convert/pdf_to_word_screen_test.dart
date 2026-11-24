@@ -78,7 +78,7 @@ void main() {
     expect(find.text('PDF to Word'), findsWidgets);
   });
 
-  testWidgets('Renders main screen with PDF card, info banner, page switch and convert button', (tester) async {
+  testWidgets('Renders main screen with PDF card, info banner, filename field, page switch and convert button', (tester) async {
     final docFile = DocFile(
       path: samplePdf.path,
       name: 'sample_doc.pdf',
@@ -95,6 +95,8 @@ void main() {
     await tester.pump();
 
     expect(find.text('sample_doc.pdf'), findsOneWidget);
+    expect(find.byKey(const Key('input_docx_file_name')), findsOneWidget);
+    expect(find.text('.docx'), findsOneWidget);
     expect(find.byKey(const Key('switch_page_breaks')), findsOneWidget);
     expect(find.byKey(const Key('btn_convert_to_word')), findsOneWidget);
     expect(find.byKey(const Key('btn_change_file')), findsOneWidget);
@@ -104,7 +106,7 @@ void main() {
     await tester.pump();
   });
 
-  testWidgets('Displays warning banner for scanned/empty text PDF', (tester) async {
+  testWidgets('Displays full-screen EmptyState with only Back button for scanned/empty text PDF', (tester) async {
     final docFile = DocFile(
       path: emptyPdf.path,
       name: 'empty_doc.pdf',
@@ -120,7 +122,14 @@ void main() {
     });
     await tester.pump();
 
-    // Verify warning for scanned / empty text is shown
-    expect(find.byIcon(Icons.warning_amber_rounded), findsOneWidget);
+    // Verify full-screen empty state for scanned / empty text is shown
+    expect(find.text('No text found'), findsOneWidget);
+    expect(find.text("No text found in this PDF. Scanned documents can't be converted."), findsOneWidget);
+    expect(find.text('Back'), findsWidgets);
+
+    // Convert button, options, and settings must NOT be shown
+    expect(find.byKey(const Key('btn_convert_to_word')), findsNothing);
+    expect(find.byKey(const Key('switch_page_breaks')), findsNothing);
+    expect(find.byKey(const Key('input_docx_file_name')), findsNothing);
   });
 }

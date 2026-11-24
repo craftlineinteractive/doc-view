@@ -1624,13 +1624,13 @@ abstract class AppLocalizations {
   /// FAQ question 7 regarding client-side PDF to Word conversion
   ///
   /// In en, this message translates to:
-  /// **'How does PDF to Word conversion work?'**
+  /// **'Why did PDF to Word change my layout?'**
   String get faqQuestion7;
 
   /// FAQ answer 7 regarding client-side PDF to Word conversion
   ///
   /// In en, this message translates to:
-  /// **'PDF to Word extracts text, headings, and paragraph structure directly on your device. Images, tables, and complex vector art are omitted to produce clean, editable Word (.docx) files without uploading your data to the cloud.'**
+  /// **'Doc View converts the text only, on your device. Tables, images, colors and layout are not kept. Scanned PDFs can\'t be converted because there is no text to read.'**
   String get faqAnswer7;
 
   /// Title of the PDF to Word tool in Tools tab
@@ -1654,7 +1654,7 @@ abstract class AppLocalizations {
   /// Non-dismissible information banner in PDF to Word screen
   ///
   /// In en, this message translates to:
-  /// **'Converts text and layout. Images and complex formatting will be omitted in this version.'**
+  /// **'Only text is converted. Tables, images, colors and layout are not kept.'**
   String get pdfToWordBannerText;
 
   /// Switch tile title in PDF to Word screen
@@ -1732,8 +1732,26 @@ abstract class AppLocalizations {
   /// Empty state message explaining scanned PDF limitation
   ///
   /// In en, this message translates to:
-  /// **'This PDF appears to be a scanned image or contains no extractable text. PDF to Word currently supports text-based PDFs only.'**
+  /// **'No text found in this PDF. Scanned documents can\'t be converted.'**
   String get pdfToWordNoTextMessage;
+
+  /// Warning banner shown when document exceeds 100 MB or 500 pages
+  ///
+  /// In en, this message translates to:
+  /// **'Large document: conversion may take several minutes.'**
+  String get pdfToWordLargeFileWarning;
+
+  /// Validation error when file name contains illegal characters
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid file name'**
+  String get pdfToWordInvalidFileName;
+
+  /// Cancel button in conversion progress sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get pdfToWordActionCancel;
 
   /// Error message when PDF is encrypted
   ///

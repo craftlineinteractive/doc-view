@@ -1164,11 +1164,11 @@
   "@faqAnswer6": {
     "description": "FAQ answer 6 regarding privacy and data policy"
   },
-  "faqQuestion7": "[Ĥôŵ đôéš ÞÐƑ ţô Ŵôřđ çôñṽéřšîôñ ŵôřķ? ẋẋẋẋẋẋẋẋ]",
+  "faqQuestion7": "[Ŵĥý đîđ ÞÐƑ ţô Ŵôřđ çĥàñĝé ɱý łàýôûţ? ẋẋẋẋẋẋ]",
   "@faqQuestion7": {
     "description": "FAQ question 7 regarding client-side PDF to Word conversion"
   },
-  "faqAnswer7": "[ÞÐƑ ţô Ŵôřđ éẋţřàçţš ţéẋţ, ĥéàđîñĝš, àñđ þàřàĝřàþĥ šţřûçţûřé đîřéçţłý ôñ ýôûř đéṽîçé. Îɱàĝéš, ţàƀłéš, àñđ çôɱþłéẋ ṽéçţôř àřţ àřé ôɱîţţéđ ţô þřôđûçé çłéàñ, éđîţàƀłé Ŵôřđ (.đôçẋ) ƒîłéš ŵîţĥôûţ ûþłôàđîñĝ ýôûř đàţà ţô ţĥé çłôûđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "faqAnswer7": "[Ðôç Ṽîéŵ çôñṽéřţš ţĥé ţéẋţ ôñłý, ôñ ýôûř đéṽîçé. Ťàƀłéš, îɱàĝéš, çôłôřš àñđ łàýôûţ àřé ñôţ ƙéþţ. Šçàññéđ ÞÐƑš çàñ'ţ ƀé çôñṽéřţéđ ƀéçàûšé ţĥéřé îš ñô ţéẋţ ţô řéàđ. ẋẋẋẋẋẋẋẋẋẋ]",
   "@faqAnswer7": {
     "description": "FAQ answer 7 regarding client-side PDF to Word conversion"
   },
@@ -1184,7 +1184,7 @@
   "@pdfToWordScreenTitle": {
     "description": "Header title of the PDF to Word screen"
   },
-  "pdfToWordBannerText": "[Çôñṽéřţš ţéẋţ àñđ łàýôûţ. Îɱàĝéš àñđ çôɱþłéẋ ƒôřɱàţţîñĝ ŵîłł ƀé ôɱîţţéđ îñ ţĥîš ṽéřšîôñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "pdfToWordBannerText": "[Ôñłý ţéẋţ îš çôñṽéřţéđ. Ťàƀłéš, îɱàĝéš, çôłôřš àñđ łàýôûţ àřé ñôţ ƙéþţ. ẋẋẋẋẋẋ]",
   "@pdfToWordBannerText": {
     "description": "Non-dismissible information banner in PDF to Word screen"
   },
@@ -1244,9 +1244,21 @@
   "@pdfToWordNoTextTitle": {
     "description": "Empty state title when PDF has no text layer"
   },
-  "pdfToWordNoTextMessage": "[Ťĥîš ÞÐƑ àþþéàřš ţô ƀé à šçàññéđ îɱàĝé ôř çôñţàîñš ñô éẋţřàçţàƀłé ţéẋţ. ÞÐƑ ţô Ŵôřđ çûřřéñţłý šûþþôřţš ţéẋţ-ƀàšéđ ÞÐƑš ôñłý. ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "pdfToWordNoTextMessage": "[Ñô ţéẋţ ƒôûñđ îñ ţĥîš ÞÐƑ. Šçàññéđ đôçûɱéñţš çàñ'ţ ƀé çôñṽéřţéđ. ẋẋẋẋẋẋ]",
   "@pdfToWordNoTextMessage": {
     "description": "Empty state message explaining scanned PDF limitation"
+  },
+  "pdfToWordLargeFileWarning": "[Łàřĝé đôçûɱéñţ: çôñṽéřšîôñ ɱàý ţàķé šéṽéřàł ɱîñûţéš. ẋẋẋẋẋẋ]",
+  "@pdfToWordLargeFileWarning": {
+    "description": "Warning banner shown when document exceeds 100 MB or 500 pages"
+  },
+  "pdfToWordInvalidFileName": "[Îñṽàłîđ ƒîłé ñàɱé ẋẋẋ]",
+  "@pdfToWordInvalidFileName": {
+    "description": "Validation error when file name contains illegal characters"
+  },
+  "pdfToWordActionCancel": "[Çàñçéł ẋẋ]",
+  "@pdfToWordActionCancel": {
+    "description": "Cancel button in conversion progress sheet"
   },
   "pdfToWordEncryptedError": "[Ťĥé šéłéçţéđ ÞÐƑ îš þàššŵôřđ-þřôţéçţéđ. Þłéàšé ûñłôçķ îţ ţô çôñṽéřţ. ẋẋẋẋẋẋẋẋẋẋ]",
   "@pdfToWordEncryptedError": {

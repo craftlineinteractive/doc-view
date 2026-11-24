@@ -429,7 +429,7 @@ void main() {
         expect(find.textContaining('iOS uses strict app sandboxing'), findsOneWidget);
 
         // Verify 7th question exists
-        expect(find.text('How does PDF to Word conversion work?'), findsOneWidget);
+        expect(find.text('Why did PDF to Word change my layout?'), findsOneWidget);
 
         // Tap 6th question to verify exact privacy text
         await tester.tap(find.text('Is my data uploaded anywhere?'));

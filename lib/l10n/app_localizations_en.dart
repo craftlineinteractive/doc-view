@@ -920,11 +920,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your documents never leave your device. Doc View opens, converts and stores files locally. The app shows ads served by Google AdMob, which can use limited device data as described in our Privacy Policy.';
 
   @override
-  String get faqQuestion7 => 'How does PDF to Word conversion work?';
+  String get faqQuestion7 => 'Why did PDF to Word change my layout?';
 
   @override
   String get faqAnswer7 =>
-      'PDF to Word extracts text, headings, and paragraph structure directly on your device. Images, tables, and complex vector art are omitted to produce clean, editable Word (.docx) files without uploading your data to the cloud.';
+      'Doc View converts the text only, on your device. Tables, images, colors and layout are not kept. Scanned PDFs can\'t be converted because there is no text to read.';
 
   @override
   String get toolPdfToWord => 'PDF to Word';
@@ -937,7 +937,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pdfToWordBannerText =>
-      'Converts text and layout. Images and complex formatting will be omitted in this version.';
+      'Only text is converted. Tables, images, colors and layout are not kept.';
 
   @override
   String get pdfToWordPageBreaks => 'Insert page breaks between PDF pages';
@@ -980,7 +980,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pdfToWordNoTextMessage =>
-      'This PDF appears to be a scanned image or contains no extractable text. PDF to Word currently supports text-based PDFs only.';
+      'No text found in this PDF. Scanned documents can\'t be converted.';
+
+  @override
+  String get pdfToWordLargeFileWarning =>
+      'Large document: conversion may take several minutes.';
+
+  @override
+  String get pdfToWordInvalidFileName => 'Invalid file name';
+
+  @override
+  String get pdfToWordActionCancel => 'Cancel';
 
   @override
   String get pdfToWordEncryptedError =>
@@ -4004,11 +4014,11 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
       '[Ýôûř đôçûɱéñţš ñéṽéř łéàṽé ýôûř đéṽîçé. Ðôç Ṽîéŵ ôþéñš, çôñṽéřţš àñđ šţôřéš ƒîłéš łôçàłłý. Ťĥé àþþ šĥôŵš àđš šéřṽéđ ƀý Ĝôôĝłé ÅđṀôƀ, ŵĥîçĥ çàñ ûšé łîɱîţéđ đéṽîçé đàţà àš đéšçřîƀéđ îñ ôûř Þřîṽàçý Þôłîçý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get faqQuestion7 => '[Ĥôŵ đôéš ÞÐƑ ţô Ŵôřđ çôñṽéřšîôñ ŵôřķ? ẋẋẋẋẋẋẋẋ]';
+  String get faqQuestion7 => '[Ŵĥý đîđ ÞÐƑ ţô Ŵôřđ çĥàñĝé ɱý łàýôûţ? ẋẋẋẋẋẋ]';
 
   @override
   String get faqAnswer7 =>
-      '[ÞÐƑ ţô Ŵôřđ éẋţřàçţš ţéẋţ, ĥéàđîñĝš, àñđ þàřàĝřàþĥ šţřûçţûřé đîřéçţłý ôñ ýôûř đéṽîçé. Îɱàĝéš, ţàƀłéš, àñđ çôɱþłéẋ ṽéçţôř àřţ àřé ôɱîţţéđ ţô þřôđûçé çłéàñ, éđîţàƀłé Ŵôřđ (.đôçẋ) ƒîłéš ŵîţĥôûţ ûþłôàđîñĝ ýôûř đàţà ţô ţĥé çłôûđ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+      '[Ðôç Ṽîéŵ çôñṽéřţš ţĥé ţéẋţ ôñłý, ôñ ýôûř đéṽîçé. Ťàƀłéš, îɱàĝéš, çôłôřš àñđ łàýôûţ àřé ñôţ ƙéþţ. Šçàññéđ ÞÐƑš çàñ\'ţ ƀé çôñṽéřţéđ ƀéçàûšé ţĥéřé îš ñô ţéẋţ ţô řéàđ. ẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
   String get toolPdfToWord => '[ÞÐƑ ţô Ŵôřđ ẋẋẋẋ]';
@@ -4022,7 +4032,7 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get pdfToWordBannerText =>
-      '[Çôñṽéřţš ţéẋţ àñđ łàýôûţ. Îɱàĝéš àñđ çôɱþłéẋ ƒôřɱàţţîñĝ ŵîłł ƀé ôɱîţţéđ îñ ţĥîš ṽéřšîôñ. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+      '[Ôñłý ţéẋţ îš çôñṽéřţéđ. Ťàƀłéš, îɱàĝéš, çôłôřš àñđ łàýôûţ àřé ñôţ ƙéþţ. ẋẋẋẋẋẋ]';
 
   @override
   String get pdfToWordPageBreaks =>
@@ -4066,7 +4076,17 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get pdfToWordNoTextMessage =>
-      '[Ťĥîš ÞÐƑ àþþéàřš ţô ƀé à šçàññéđ îɱàĝé ôř çôñţàîñš ñô éẋţřàçţàƀłé ţéẋţ. ÞÐƑ ţô Ŵôřđ çûřřéñţłý šûþþôřţš ţéẋţ-ƀàšéđ ÞÐƑš ôñłý. ẋẋẋẋẋẋẋẋẋẋẋẋ]';
+      '[Ñô ţéẋţ ƒôûñđ îñ ţĥîš ÞÐƑ. Šçàññéđ đôçûɱéñţš çàñ\'ţ ƀé çôñṽéřţéđ. ẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordLargeFileWarning =>
+      '[Łàřĝé đôçûɱéñţ: çôñṽéřšîôñ ɱàý ţàķé šéṽéřàł ɱîñûţéš. ẋẋẋẋẋẋ]';
+
+  @override
+  String get pdfToWordInvalidFileName => '[Îñṽàłîđ ƒîłé ñàɱé ẋẋẋ]';
+
+  @override
+  String get pdfToWordActionCancel => '[Çàñçéł ẋẋ]';
 
   @override
   String get pdfToWordEncryptedError =>
