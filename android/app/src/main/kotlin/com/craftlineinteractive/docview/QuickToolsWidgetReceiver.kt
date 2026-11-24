@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.widget.RemoteViews
-import es.antonborras.home_widget.HomeWidgetLaunchIntent
-import es.antonborras.home_widget.HomeWidgetProvider
+import es.antonborri.home_widget.HomeWidgetLaunchIntent
+import es.antonborri.home_widget.HomeWidgetProvider
 
 class QuickToolsWidgetReceiver : HomeWidgetProvider() {
     override fun onUpdate(

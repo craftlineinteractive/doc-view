@@ -61,6 +61,16 @@ class DeepLinkService {
       return;
     }
 
+    if (host == 'gallery' || path == '/gallery') {
+      router.push('/debug/gallery');
+      return;
+    }
+
+    if (host == 'settings-widgets' || path == '/settings-widgets') {
+      router.push('/settings-widgets');
+      return;
+    }
+
     if (host == 'search' || (host.isEmpty && path == '/search')) {
       router.push('/search');
       return;

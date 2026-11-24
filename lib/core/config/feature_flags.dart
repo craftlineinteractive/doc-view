@@ -5,7 +5,7 @@ const bool premiumEnabled = true;
 
 /// When enabled, tools check premium subscription before allowing edits (Phase G7).
 const bool premiumGatingRequiresProduct = true;
-const bool widgetsEnabled = false;
+const bool widgetsEnabled = true;
 
 /// Enables Convert-to-Word action in PDF reader (Phase G6).
 const bool conversionsEnabled = true;

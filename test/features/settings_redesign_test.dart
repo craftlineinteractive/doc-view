@@ -57,6 +57,7 @@ void main() {
           const SettingsScreen(
             isReleaseOverride: true,
             premiumEnabledOverride: false,
+            widgetsEnabledOverride: false,
           ),
         );
         await tester.pumpAndSettle();
@@ -109,7 +110,7 @@ void main() {
 
         // Rows hidden when constants are empty, flags are off, or release has 1 language
         expect(premiumEnabled, isTrue);
-        expect(widgetsEnabled, isFalse);
+        expect(widgetsEnabled, isTrue);
         expect(AppConstants.termsOfUseUrl, isEmpty);
         expect(AppConstants.privacyPolicyUrl, isEmpty);
         expect(AppConstants.storeShareUrl, isEmpty);

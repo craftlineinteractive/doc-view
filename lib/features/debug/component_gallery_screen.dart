@@ -47,6 +47,8 @@ import '../../data/services/trash_service.dart';
 import '../tools/annotate/annotate_session_notifier.dart';
 import '../tools/annotate/widgets/annotate_toolbar.dart';
 import '../tools/annotate/widgets/selection_menu.dart';
+import '../../data/services/notifications/quick_access_notification_service.dart';
+import '../settings/widgets/add_widget_bottom_sheet.dart';
 
 /// Debug-only Component Gallery showcasing the entire Doc View component library.
 /// Only available in [kDebugMode], accessible via long-press on Settings version row.
@@ -1500,6 +1502,40 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                           ],
                         );
                       },
+                    ),
+                  ),
+
+                  // --- Section 16: Native App Widgets & Notification (G8) ---
+                  const SectionHeader(title: '16. Native App Widgets & Notification (G8)'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        FilledButton.icon(
+                          key: const Key('gallery_open_add_widget_sheet'),
+                          onPressed: () => AddWidgetBottomSheet.show(themedContext),
+                          icon: const Icon(Icons.widgets_outlined),
+                          label: const Text('Open Add Widget Sheet'),
+                        ),
+                        const SizedBox(height: 8),
+                        FilledButton.tonal(
+                          key: const Key('gallery_open_settings_widgets'),
+                          onPressed: () => context.push('/settings-widgets'),
+                          child: const Text('Open Settings (Widgets Enabled)'),
+                        ),
+                        const SizedBox(height: 8),
+                        FilledButton.tonal(
+                          key: const Key('gallery_toggle_quick_access_notif'),
+                          onPressed: () async {
+                            final service = ref.read(quickAccessNotificationServiceProvider);
+                            final enabled = await service.isEnabled();
+                            await service.setEnabled(!enabled);
+                          },
+                          child: const Text('Toggle Quick Access Notification'),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
                     ),
                   ),
                 ],

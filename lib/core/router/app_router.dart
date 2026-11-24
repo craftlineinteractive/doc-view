@@ -302,6 +302,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const LanguageScreen(),
       ),
       GoRoute(
+        path: '/settings-widgets',
+        name: 'settings-widgets',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const SettingsScreen(widgetsEnabledOverride: true),
+      ),
+      GoRoute(
         path: '/viewer',
         name: 'viewer',
         parentNavigatorKey: rootNavigatorKey,

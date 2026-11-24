@@ -180,6 +180,7 @@ void main() {
           home: SettingsScreen(
             isReleaseOverride: true,
             premiumEnabledOverride: false,
+            widgetsEnabledOverride: false,
           ),
         ),
       ),

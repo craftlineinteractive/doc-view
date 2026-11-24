@@ -6,8 +6,8 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.view.View
 import android.widget.RemoteViews
-import es.antonborras.home_widget.HomeWidgetLaunchIntent
-import es.antonborras.home_widget.HomeWidgetProvider
+import es.antonborri.home_widget.HomeWidgetLaunchIntent
+import es.antonborri.home_widget.HomeWidgetProvider
 import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.util.Date
