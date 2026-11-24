@@ -21,5 +21,12 @@ All user-facing legal, support, and store constants live in `lib/core/constants/
 
 | Flag | Default | Target Phase | Effect When `true` |
 | --- | --- | --- | --- |
-| `premiumEnabled` | `false` | Phase G7 | Shows `"Manage subscriptions"` row under Settings → Others (and future premium flows). |
+| `premiumEnabled` | `true` | Phase G7 | Shows `"Manage subscriptions"` row under Settings → Others and enables `/premium` paywall and billing flows. |
 | `widgetsEnabled` | `false` | Phase G8 | Shows `"Add Widget"` row under Settings → Others. |
+
+## In-App Purchase Subscriptions (Google Play Console)
+
+Subscription identifiers and base plans must be configured in Google Play Console (Monetize → Subscriptions) as specified in `docs/release/iap_products.txt`:
+- **Annual Subscription**: Product ID `docview_premium_yearly`, Base Plan ID `docview-premium-yearly-base`, 7-day free trial.
+- **Monthly Subscription**: Product ID `docview_premium_monthly`, Base Plan ID `docview-premium-monthly-base`.
+- Dynamic localized pricing and currency are managed entirely within Google Play Console and retrieved at runtime via Google Play Billing v5+ (Zero price literals in application code).

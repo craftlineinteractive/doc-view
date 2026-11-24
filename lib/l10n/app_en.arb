@@ -4012,5 +4012,187 @@
         "type": "int"
       }
     }
+  },
+  "premiumTitle": "Doc View Premium",
+  "@premiumTitle": {
+    "description": "Title of the premium subscription screen"
+  },
+  "premiumSubtitle": "Unlock all editing tools and enjoy a completely ad-free experience.",
+  "@premiumSubtitle": {
+    "description": "Subtitle of the premium subscription screen"
+  },
+  "premiumFeatureAllTools": "All 5 editing & conversion tools",
+  "@premiumFeatureAllTools": {
+    "description": "Benefit title: all editing tools unlocked"
+  },
+  "premiumFeatureAllToolsSub": "Annotate, Add Text, Sign, Manage Pages, and PDF to Word",
+  "@premiumFeatureAllToolsSub": {
+    "description": "Benefit description for all editing tools"
+  },
+  "premiumFeatureAdFree": "100% Ad-Free Experience",
+  "@premiumFeatureAdFree": {
+    "description": "Benefit title: ad-free"
+  },
+  "premiumFeatureAdFreeSub": "No banners, interruptions, or distractions anywhere",
+  "@premiumFeatureAdFreeSub": {
+    "description": "Benefit description for ad-free experience"
+  },
+  "premiumFeatureUnlimitedConversions": "Unlimited local conversions",
+  "@premiumFeatureUnlimitedConversions": {
+    "description": "Benefit title: unlimited conversions"
+  },
+  "premiumFeatureUnlimitedConversionsSub": "Convert documents on-device with zero file limits",
+  "@premiumFeatureUnlimitedConversionsSub": {
+    "description": "Benefit description for unlimited conversions"
+  },
+  "premiumFeaturePrivacyFirst": "100% Private & On-Device",
+  "@premiumFeaturePrivacyFirst": {
+    "description": "Benefit title: privacy first"
+  },
+  "premiumFeaturePrivacyFirstSub": "Files are processed locally and never uploaded to any server",
+  "@premiumFeaturePrivacyFirstSub": {
+    "description": "Benefit description for on-device privacy"
+  },
+  "premiumPlanYearly": "Annual Subscription",
+  "@premiumPlanYearly": {
+    "description": "Label for annual subscription plan"
+  },
+  "premiumPlanYearlyBadge": "BEST VALUE",
+  "@premiumPlanYearlyBadge": {
+    "description": "Badge for annual plan"
+  },
+  "premiumPlanYearlyTrial": "7 days free, then {price}/year",
+  "@premiumPlanYearlyTrial": {
+    "description": "Trial subtitle with dynamic store price",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumPlanMonthly": "Monthly Subscription",
+  "@premiumPlanMonthly": {
+    "description": "Label for monthly subscription plan"
+  },
+  "premiumPlanMonthlySub": "{price}/month",
+  "@premiumPlanMonthlySub": {
+    "description": "Monthly subtitle with dynamic store price",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumActionStartTrial": "Start 7-Day Free Trial",
+  "@premiumActionStartTrial": {
+    "description": "Primary button for yearly trial"
+  },
+  "premiumActionSubscribe": "Subscribe",
+  "@premiumActionSubscribe": {
+    "description": "Primary button for monthly subscription"
+  },
+  "premiumActionRestore": "Restore Purchases",
+  "@premiumActionRestore": {
+    "description": "Button to restore past purchases"
+  },
+  "premiumBillingDisclaimer": "Renews automatically. Cancel anytime in Google Play Subscriptions.",
+  "@premiumBillingDisclaimer": {
+    "description": "Google Play billing disclosure notice"
+  },
+  "premiumTerms": "Terms of Service",
+  "@premiumTerms": {
+    "description": "Link label for terms of service"
+  },
+  "premiumPrivacy": "Privacy Policy",
+  "@premiumPrivacy": {
+    "description": "Link label for privacy policy"
+  },
+  "premiumActiveStatus": "You are a Premium subscriber",
+  "@premiumActiveStatus": {
+    "description": "Status badge when subscription is active"
+  },
+  "premiumGraceStatus": "Offline grace period active",
+  "@premiumGraceStatus": {
+    "description": "Status badge when offline grace period is active"
+  },
+  "premiumExpiredStatus": "Subscription expired",
+  "@premiumExpiredStatus": {
+    "description": "Status badge when subscription expired"
+  },
+  "premiumRestoreSuccess": "Purchases restored successfully.",
+  "@premiumRestoreSuccess": {
+    "description": "Snackbar message when purchases are restored"
+  },
+  "premiumRestoreNone": "No active subscriptions found.",
+  "@premiumRestoreNone": {
+    "description": "Snackbar message when no subscription is found to restore"
+  },
+  "premiumErrorGeneral": "Unable to complete purchase. Please try again.",
+  "@premiumErrorGeneral": {
+    "description": "General purchase error message"
+  },
+  "premiumPagesGateTitle": "Doc View Premium",
+  "@premiumPagesGateTitle": {
+    "description": "Dialog title gating pages screen modifications"
+  },
+  "premiumPagesGateBody": "Reordering, rotating, and deleting pages requires a Premium subscription.",
+  "@premiumPagesGateBody": {
+    "description": "Dialog body gating pages screen modifications"
+  },
+  "premiumPagesGateUpgrade": "Upgrade to Premium",
+  "@premiumPagesGateUpgrade": {
+    "description": "Action button in pages screen gating dialog"
+  },
+  "premiumTooltip": "Doc View Premium",
+  "@premiumTooltip": {
+    "description": "Tooltip for crown button in app bar"
+  },
+  "premiumManageInPlay": "Manage",
+  "@premiumManageInPlay": {
+    "description": "Button to open Play Store subscriptions page"
+  },
+  "faqQuestion8": "What is included with Doc View Premium?",
+  "@faqQuestion8": {
+    "description": "FAQ question 8 about Doc View Premium features"
+  },
+  "faqAnswer8": "Doc View Premium unlocks all advanced document editing tools, including PDF page reordering, rotation, deletion, PDF-to-Word conversion, annotations, signatures, and custom text insertion, while completely eliminating all advertisements throughout the app. All document processing remains 100% on-device.",
+  "@faqAnswer8": {
+    "description": "FAQ answer 8 about Doc View Premium"
+  },
+  "faqQuestion9": "Can I use Doc View Premium without an internet connection?",
+  "@faqQuestion9": {
+    "description": "FAQ question 9 about offline grace period"
+  },
+  "faqAnswer9": "Yes. Once activated, Doc View securely caches your subscription state on your device with an offline grace period of up to 7 consecutive days. You can continue using all editing tools offline during this period.",
+  "@faqAnswer9": {
+    "description": "FAQ answer 9 about offline grace period"
+  },
+  "galleryDebugIapSectionTitle": "15. IAP & Premium Simulator (G7)",
+  "@galleryDebugIapSectionTitle": {
+    "description": "Section header for IAP simulator in component gallery"
+  },
+  "galleryDebugIapStateFree": "Set Free",
+  "@galleryDebugIapStateFree": {
+    "description": "Button to set Free state"
+  },
+  "galleryDebugIapStateYearly": "Set Yearly Premium",
+  "@galleryDebugIapStateYearly": {
+    "description": "Button to set Yearly state"
+  },
+  "galleryDebugIapStateMonthly": "Set Monthly Premium",
+  "@galleryDebugIapStateMonthly": {
+    "description": "Button to set Monthly state"
+  },
+  "galleryDebugIapStateGrace": "Set Offline Grace (Active)",
+  "@galleryDebugIapStateGrace": {
+    "description": "Button to set active grace state"
+  },
+  "galleryDebugIapStateGraceExpired": "Set Offline Grace (Expired)",
+  "@galleryDebugIapStateGraceExpired": {
+    "description": "Button to set expired grace state"
+  },
+  "galleryDebugOpenPremium": "Open /premium Screen",
+  "@galleryDebugOpenPremium": {
+    "description": "Button to navigate to premium screen"
   }
 }

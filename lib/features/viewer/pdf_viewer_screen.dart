@@ -15,6 +15,7 @@ import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../core/utils/format_utils.dart';
 import '../../data/models/doc_file.dart';
+import '../../data/services/billing/billing_providers.dart';
 import '../../shared/widgets/reader/reader_bottom_row.dart';
 import '../../shared/widgets/reader/reader_orientation.dart';
 import '../../shared/widgets/reader/reader_search_bar.dart';
@@ -616,6 +617,20 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
             tooltip: l10n.readerActionPages,
             constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
             onPressed: () => _openPagesScreen(liveFile),
+          ),
+
+          // Crown button (Doc View Premium)
+          IconButton(
+            key: const Key('reader_top_premium_button'),
+            icon: Icon(
+              Icons.workspace_premium_rounded,
+              color: ref.watch(isPremiumProvider)
+                  ? tokens.primaryBlue
+                  : tokens.premiumGold,
+            ),
+            tooltip: l10n.premiumTooltip,
+            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+            onPressed: () => context.push('/premium'),
           ),
 
           // 3-dot context menu

@@ -77,4 +77,5 @@ abstract final class AppIcons {
   static const IconData security = Icons.verified_user_outlined;
   static const IconData storage = Icons.storage_outlined;
   static const IconData adBadge = Icons.ad_units_outlined;
+  static const IconData crown = Icons.workspace_premium_rounded;
 }

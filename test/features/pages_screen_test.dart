@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:docview/core/constants/file_types.dart';
 import 'package:docview/core/theme/doc_view_tokens.dart';
 import 'package:docview/data/models/doc_file.dart';
+import 'package:docview/data/services/billing/billing_providers.dart';
 import 'package:docview/data/services/pdf/pdf_page_edit_service.dart';
 import 'package:docview/features/viewer/pages_screen.dart';
 import 'package:docview/l10n/app_localizations.dart';
@@ -27,8 +28,11 @@ Future<File> _createMinimalPdf(String path, int count) async {
   return file;
 }
 
-Widget _wrap(Widget child) {
+Widget _wrap(Widget child, {bool isPremium = true}) {
   return ProviderScope(
+    overrides: [
+      isPremiumProvider.overrideWithValue(isPremium),
+    ],
     child: MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -169,6 +173,42 @@ void main() {
       final undoButton = tester.widget<IconButton>(undoFinder);
       expect(undoButton.onPressed, isNull);
 
+      await tester.pumpWidget(const SizedBox.shrink());
+    });
+
+    testWidgets('free user attempting to rotate page prompts upgrade dialog', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          PagesScreen(file: docFile, initialPages: initialPages),
+          isPremium: false,
+        ),
+      );
+      await tester.pump();
+
+      // Tap tile 1 to select
+      await tester.tap(find.text('1'));
+      await tester.pump();
+
+      expect(find.text('Rotate'), findsOneWidget);
+
+      // Tap Rotate
+      await tester.tap(find.text('Rotate'));
+      await tester.pumpAndSettle();
+
+      // Verify upgrade dialog appears
+      expect(find.text('Doc View Premium'), findsOneWidget);
+      expect(
+        find.text('Reordering, rotating, and deleting pages requires a Premium subscription.'),
+        findsOneWidget,
+      );
+      expect(find.text('Upgrade to Premium'), findsOneWidget);
+      expect(find.text('Cancel'), findsOneWidget);
+
+      // Dismiss dialog
+      await tester.tap(find.text('Cancel'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Doc View Premium Feature'), findsNothing);
       await tester.pumpWidget(const SizedBox.shrink());
     });
   });

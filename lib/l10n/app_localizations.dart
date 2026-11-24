@@ -5094,6 +5094,264 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{size} pt'**
   String addTextFontSizePt(int size);
+
+  /// Title of the premium subscription screen
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View Premium'**
+  String get premiumTitle;
+
+  /// Subtitle of the premium subscription screen
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock all editing tools and enjoy a completely ad-free experience.'**
+  String get premiumSubtitle;
+
+  /// Benefit title: all editing tools unlocked
+  ///
+  /// In en, this message translates to:
+  /// **'All 5 editing & conversion tools'**
+  String get premiumFeatureAllTools;
+
+  /// Benefit description for all editing tools
+  ///
+  /// In en, this message translates to:
+  /// **'Annotate, Add Text, Sign, Manage Pages, and PDF to Word'**
+  String get premiumFeatureAllToolsSub;
+
+  /// Benefit title: ad-free
+  ///
+  /// In en, this message translates to:
+  /// **'100% Ad-Free Experience'**
+  String get premiumFeatureAdFree;
+
+  /// Benefit description for ad-free experience
+  ///
+  /// In en, this message translates to:
+  /// **'No banners, interruptions, or distractions anywhere'**
+  String get premiumFeatureAdFreeSub;
+
+  /// Benefit title: unlimited conversions
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited local conversions'**
+  String get premiumFeatureUnlimitedConversions;
+
+  /// Benefit description for unlimited conversions
+  ///
+  /// In en, this message translates to:
+  /// **'Convert documents on-device with zero file limits'**
+  String get premiumFeatureUnlimitedConversionsSub;
+
+  /// Benefit title: privacy first
+  ///
+  /// In en, this message translates to:
+  /// **'100% Private & On-Device'**
+  String get premiumFeaturePrivacyFirst;
+
+  /// Benefit description for on-device privacy
+  ///
+  /// In en, this message translates to:
+  /// **'Files are processed locally and never uploaded to any server'**
+  String get premiumFeaturePrivacyFirstSub;
+
+  /// Label for annual subscription plan
+  ///
+  /// In en, this message translates to:
+  /// **'Annual Subscription'**
+  String get premiumPlanYearly;
+
+  /// Badge for annual plan
+  ///
+  /// In en, this message translates to:
+  /// **'BEST VALUE'**
+  String get premiumPlanYearlyBadge;
+
+  /// Trial subtitle with dynamic store price
+  ///
+  /// In en, this message translates to:
+  /// **'7 days free, then {price}/year'**
+  String premiumPlanYearlyTrial(String price);
+
+  /// Label for monthly subscription plan
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Subscription'**
+  String get premiumPlanMonthly;
+
+  /// Monthly subtitle with dynamic store price
+  ///
+  /// In en, this message translates to:
+  /// **'{price}/month'**
+  String premiumPlanMonthlySub(String price);
+
+  /// Primary button for yearly trial
+  ///
+  /// In en, this message translates to:
+  /// **'Start 7-Day Free Trial'**
+  String get premiumActionStartTrial;
+
+  /// Primary button for monthly subscription
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe'**
+  String get premiumActionSubscribe;
+
+  /// Button to restore past purchases
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Purchases'**
+  String get premiumActionRestore;
+
+  /// Google Play billing disclosure notice
+  ///
+  /// In en, this message translates to:
+  /// **'Renews automatically. Cancel anytime in Google Play Subscriptions.'**
+  String get premiumBillingDisclaimer;
+
+  /// Link label for terms of service
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get premiumTerms;
+
+  /// Link label for privacy policy
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get premiumPrivacy;
+
+  /// Status badge when subscription is active
+  ///
+  /// In en, this message translates to:
+  /// **'You are a Premium subscriber'**
+  String get premiumActiveStatus;
+
+  /// Status badge when offline grace period is active
+  ///
+  /// In en, this message translates to:
+  /// **'Offline grace period active'**
+  String get premiumGraceStatus;
+
+  /// Status badge when subscription expired
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription expired'**
+  String get premiumExpiredStatus;
+
+  /// Snackbar message when purchases are restored
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases restored successfully.'**
+  String get premiumRestoreSuccess;
+
+  /// Snackbar message when no subscription is found to restore
+  ///
+  /// In en, this message translates to:
+  /// **'No active subscriptions found.'**
+  String get premiumRestoreNone;
+
+  /// General purchase error message
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to complete purchase. Please try again.'**
+  String get premiumErrorGeneral;
+
+  /// Dialog title gating pages screen modifications
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View Premium'**
+  String get premiumPagesGateTitle;
+
+  /// Dialog body gating pages screen modifications
+  ///
+  /// In en, this message translates to:
+  /// **'Reordering, rotating, and deleting pages requires a Premium subscription.'**
+  String get premiumPagesGateBody;
+
+  /// Action button in pages screen gating dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to Premium'**
+  String get premiumPagesGateUpgrade;
+
+  /// Tooltip for crown button in app bar
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View Premium'**
+  String get premiumTooltip;
+
+  /// Button to open Play Store subscriptions page
+  ///
+  /// In en, this message translates to:
+  /// **'Manage'**
+  String get premiumManageInPlay;
+
+  /// FAQ question 8 about Doc View Premium features
+  ///
+  /// In en, this message translates to:
+  /// **'What is included with Doc View Premium?'**
+  String get faqQuestion8;
+
+  /// FAQ answer 8 about Doc View Premium
+  ///
+  /// In en, this message translates to:
+  /// **'Doc View Premium unlocks all advanced document editing tools, including PDF page reordering, rotation, deletion, PDF-to-Word conversion, annotations, signatures, and custom text insertion, while completely eliminating all advertisements throughout the app. All document processing remains 100% on-device.'**
+  String get faqAnswer8;
+
+  /// FAQ question 9 about offline grace period
+  ///
+  /// In en, this message translates to:
+  /// **'Can I use Doc View Premium without an internet connection?'**
+  String get faqQuestion9;
+
+  /// FAQ answer 9 about offline grace period
+  ///
+  /// In en, this message translates to:
+  /// **'Yes. Once activated, Doc View securely caches your subscription state on your device with an offline grace period of up to 7 consecutive days. You can continue using all editing tools offline during this period.'**
+  String get faqAnswer9;
+
+  /// Section header for IAP simulator in component gallery
+  ///
+  /// In en, this message translates to:
+  /// **'15. IAP & Premium Simulator (G7)'**
+  String get galleryDebugIapSectionTitle;
+
+  /// Button to set Free state
+  ///
+  /// In en, this message translates to:
+  /// **'Set Free'**
+  String get galleryDebugIapStateFree;
+
+  /// Button to set Yearly state
+  ///
+  /// In en, this message translates to:
+  /// **'Set Yearly Premium'**
+  String get galleryDebugIapStateYearly;
+
+  /// Button to set Monthly state
+  ///
+  /// In en, this message translates to:
+  /// **'Set Monthly Premium'**
+  String get galleryDebugIapStateMonthly;
+
+  /// Button to set active grace state
+  ///
+  /// In en, this message translates to:
+  /// **'Set Offline Grace (Active)'**
+  String get galleryDebugIapStateGrace;
+
+  /// Button to set expired grace state
+  ///
+  /// In en, this message translates to:
+  /// **'Set Offline Grace (Expired)'**
+  String get galleryDebugIapStateGraceExpired;
+
+  /// Button to navigate to premium screen
+  ///
+  /// In en, this message translates to:
+  /// **'Open /premium Screen'**
+  String get galleryDebugOpenPremium;
 }
 
 class _AppLocalizationsDelegate

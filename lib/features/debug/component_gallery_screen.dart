@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/config/iap_config.dart';
 import '../../core/extensions/l10n_extension.dart';
 import '../../core/constants/file_types.dart';
 import '../../data/models/doc_file.dart';
 import '../../data/models/spreadsheet_data.dart';
+import '../../data/services/billing/billing_providers.dart';
+import '../premium/premium_screen.dart';
 import '../providers/providers.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/app_theme.dart';
@@ -56,10 +59,22 @@ class ComponentGalleryScreen extends ConsumerStatefulWidget {
 }
 
 class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen> {
+  final ScrollController _scrollController = ScrollController();
+  bool _showOnlyIapSection = false;
+
   @override
   void initState() {
     super.initState();
     if (kDebugMode) {
+      try {
+        final actionFile = File('/data/user/0/com.craftlineinteractive.docview/files/debug_action.txt');
+        if (actionFile.existsSync()) {
+          final content = actionFile.readAsStringSync().trim();
+          if (content == 'show_iap_simulator') {
+            _showOnlyIapSection = true;
+          }
+        }
+      } catch (_) {}
       WidgetsBinding.instance.addPostFrameCallback((_) => _checkAutoAction());
     }
   }
@@ -207,6 +222,21 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
               ),
             ),
           );
+        } else if (action == 'show_iap_simulator') {
+          setState(() => _showOnlyIapSection = true);
+        } else if (action == 'show_premium_subscribed' || action == 'set_premium_yearly_and_open') {
+          ref.read(premiumControllerProvider).setSimulatedState(
+            isPremium: true,
+            isGracePeriod: false,
+            activeProductId: IapConfig.yearlySubscriptionId,
+            verifiedAt: DateTime.now(),
+          );
+          await Future.delayed(const Duration(milliseconds: 600));
+          if (mounted) {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const PremiumScreen()),
+            );
+          }
         }
         }
       }
@@ -411,6 +441,7 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _searchCtrl.dispose();
     _textCtrl.dispose();
     _pwdCtrl.dispose();
@@ -474,9 +505,11 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                     ],
                   ),
                   body: ListView(
+                    controller: _scrollController,
                     padding: const EdgeInsets.only(bottom: 40),
                     children: [
-                      // --- Section 0: Environment Controls ---
+                      if (!_showOnlyIapSection) ...[
+                        // --- Section 0: Environment Controls ---
                       const SectionHeader(title: '0. Environment Controls'),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -1306,6 +1339,136 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                         ),
                         const SizedBox(height: 16),
                       ],
+                    ),
+                  ),
+                  ],
+
+                  // --- Section 15: IAP & Premium Simulator (G7) ---
+                  SectionHeader(title: themedContext.l10n.galleryDebugIapSectionTitle),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        final controller = ref.watch(premiumControllerProvider);
+                        final asyncState = ref.watch(premiumStateStreamProvider);
+                        final pState = asyncState.asData?.value ?? controller.state;
+                        final statusLabel = pState.isPremium
+                            ? (pState.isGracePeriod ? 'Grace Active' : 'Premium Active')
+                            : 'Free (Unsubscribed)';
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: tokens.surfaceAlt,
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: tokens.hairline),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    AppIcons.crown,
+                                    color: pState.isPremium
+                                        ? tokens.premiumGold
+                                        : tokens.textSecondary,
+                                    size: 24,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(
+                                      '$statusLabel (${pState.activeProductId ?? "none"})',
+                                      style: DocViewTypography.bodyMd.copyWith(
+                                        fontWeight: FontWeight.w700,
+                                        color: tokens.textPrimary,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: [
+                                FilledButton.tonal(
+                                  key: const Key('gallery_set_free'),
+                                  onPressed: () {
+                                    controller.setSimulatedState(
+                                      isPremium: false,
+                                      isGracePeriod: false,
+                                      activeProductId: null,
+                                    );
+                                  },
+                                  child: Text(themedContext.l10n.galleryDebugIapStateFree),
+                                ),
+                                FilledButton.tonal(
+                                  key: const Key('gallery_set_yearly'),
+                                  onPressed: () {
+                                    controller.setSimulatedState(
+                                      isPremium: true,
+                                      isGracePeriod: false,
+                                      activeProductId: IapConfig.yearlySubscriptionId,
+                                      verifiedAt: DateTime.now(),
+                                    );
+                                  },
+                                  child: Text(themedContext.l10n.galleryDebugIapStateYearly),
+                                ),
+                                FilledButton.tonal(
+                                  key: const Key('gallery_set_monthly'),
+                                  onPressed: () {
+                                    controller.setSimulatedState(
+                                      isPremium: true,
+                                      isGracePeriod: false,
+                                      activeProductId: IapConfig.monthlySubscriptionId,
+                                      verifiedAt: DateTime.now(),
+                                    );
+                                  },
+                                  child: Text(themedContext.l10n.galleryDebugIapStateMonthly),
+                                ),
+                                FilledButton.tonal(
+                                  key: const Key('gallery_set_grace'),
+                                  onPressed: () {
+                                    controller.setSimulatedState(
+                                      isPremium: true,
+                                      isGracePeriod: true,
+                                      activeProductId: IapConfig.yearlySubscriptionId,
+                                      verifiedAt: DateTime.now().subtract(const Duration(days: 3)),
+                                    );
+                                  },
+                                  child: Text(themedContext.l10n.galleryDebugIapStateGrace),
+                                ),
+                                FilledButton.tonal(
+                                  key: const Key('gallery_set_expired'),
+                                  onPressed: () {
+                                    controller.setSimulatedState(
+                                      isPremium: false,
+                                      isGracePeriod: false,
+                                      activeProductId: IapConfig.yearlySubscriptionId,
+                                      verifiedAt: DateTime.now().subtract(const Duration(days: 8)),
+                                    );
+                                  },
+                                  child: Text(themedContext.l10n.galleryDebugIapStateGraceExpired),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            FilledButton.icon(
+                              key: const Key('gallery_open_premium_screen'),
+                              onPressed: () => context.push('/premium'),
+                              icon: const Icon(AppIcons.crown),
+                              label: Text(themedContext.l10n.galleryDebugOpenPremium),
+                              style: FilledButton.styleFrom(
+                                backgroundColor: tokens.premiumGold,
+                                foregroundColor: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ],

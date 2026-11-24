@@ -4042,5 +4042,187 @@
         "type": "int"
       }
     }
+  },
+  "premiumTitle": "[Đôç Ṽîéŵ Þřéɱîûɱ ẋẋẋ]",
+  "@premiumTitle": {
+    "description": "Title of the premium subscription screen"
+  },
+  "premiumSubtitle": "[Ûñłôçķ àłł éđîţîñĝ ţôôłš àñđ éñĵôý à çôɱþłéţéłý àđ-ƒřéé éxþéřîéñçé. ẋẋẋẋẋẋ]",
+  "@premiumSubtitle": {
+    "description": "Subtitle of the premium subscription screen"
+  },
+  "premiumFeatureAllTools": "[Âłł 5 éđîţîñĝ & çôñṽéřšîôñ ţôôłš ẋẋẋẋ]",
+  "@premiumFeatureAllTools": {
+    "description": "Benefit title: all editing tools unlocked"
+  },
+  "premiumFeatureAllToolsSub": "[Âññôţàţé, Âđđ Ţéxţ, Şîĝñ, Màñàĝé Þàĝéš, àñđ ÞĐƑ ţô Ŵôřđ ẋẋẋẋẋẋ]",
+  "@premiumFeatureAllToolsSub": {
+    "description": "Benefit description for all editing tools"
+  },
+  "premiumFeatureAdFree": "[100% Âđ-Ƒřéé Éxþéřîéñçé ẋẋẋẋ]",
+  "@premiumFeatureAdFree": {
+    "description": "Benefit title: ad-free"
+  },
+  "premiumFeatureAdFreeSub": "[Ñô ƀàññéřš, îñţéřřûþţîôñš, ôř đîšţřàçţîôñš àñýŵĥéřé ẋẋẋẋẋ]",
+  "@premiumFeatureAdFreeSub": {
+    "description": "Benefit description for ad-free experience"
+  },
+  "premiumFeatureUnlimitedConversions": "[Ûñłîɱîţéđ łôçàł çôñṽéřšîôñš ẋẋẋẋ]",
+  "@premiumFeatureUnlimitedConversions": {
+    "description": "Benefit title: unlimited conversions"
+  },
+  "premiumFeatureUnlimitedConversionsSub": "[Çôñṽéřţ đôçûɱéñţš ôñ-đéṽîçé ŵîţĥ žéřô ƒîłé łîɱîţš ẋẋẋẋẋ]",
+  "@premiumFeatureUnlimitedConversionsSub": {
+    "description": "Benefit description for unlimited conversions"
+  },
+  "premiumFeaturePrivacyFirst": "[100% Þřîṽàţé & Ôñ-Đéṽîçé ẋẋẋẋ]",
+  "@premiumFeaturePrivacyFirst": {
+    "description": "Benefit title: privacy first"
+  },
+  "premiumFeaturePrivacyFirstSub": "[Ƒîłéš àřé þřôçéššéđ łôçàłłý àñđ ñéṽéř ûþłôàđéđ ţô àñý šéřṽéř ẋẋẋẋẋ]",
+  "@premiumFeaturePrivacyFirstSub": {
+    "description": "Benefit description for on-device privacy"
+  },
+  "premiumPlanYearly": "[Âññûàł Şûƀšçřîþţîôñ ẋẋẋ]",
+  "@premiumPlanYearly": {
+    "description": "Label for annual subscription plan"
+  },
+  "premiumPlanYearlyBadge": "[ƁÉŞŢ ṼÂŁÛÉ ẋ]",
+  "@premiumPlanYearlyBadge": {
+    "description": "Badge for annual plan"
+  },
+  "premiumPlanYearlyTrial": "[7 đàýš ƒřéé, ţĥéñ {price}/ýéàř ẋẋẋẋ]",
+  "@premiumPlanYearlyTrial": {
+    "description": "Trial subtitle with dynamic store price",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumPlanMonthly": "[Môñţĥłý Şûƀšçřîþţîôñ ẋẋẋ]",
+  "@premiumPlanMonthly": {
+    "description": "Label for monthly subscription plan"
+  },
+  "premiumPlanMonthlySub": "[{price}/ɱôñţĥ ẋẋ]",
+  "@premiumPlanMonthlySub": {
+    "description": "Monthly subtitle with dynamic store price",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumActionStartTrial": "[Şţàřţ 7-Đàý Ƒřéé Ţřîàł ẋẋẋ]",
+  "@premiumActionStartTrial": {
+    "description": "Primary button for yearly trial"
+  },
+  "premiumActionSubscribe": "[Şûƀšçřîƀé ẋ]",
+  "@premiumActionSubscribe": {
+    "description": "Primary button for monthly subscription"
+  },
+  "premiumActionRestore": "[Řéšţôřé Þûřçĥàšéš ẋẋẋ]",
+  "@premiumActionRestore": {
+    "description": "Button to restore past purchases"
+  },
+  "premiumBillingDisclaimer": "[Řéñéŵš àûţôɱàţîçàłłý. Çàñçéł àñýţîɱé îñ Ĝôôĝłé Þłàý Şûƀšçřîþţîôñš. ẋẋẋẋẋẋ]",
+  "@premiumBillingDisclaimer": {
+    "description": "Google Play billing disclosure notice"
+  },
+  "premiumTerms": "[Ţéřɱš ôƒ Şéřṽîçé ẋẋ]",
+  "@premiumTerms": {
+    "description": "Link label for terms of service"
+  },
+  "premiumPrivacy": "[Þřîṽàçý Þôłîçý ẋẋ]",
+  "@premiumPrivacy": {
+    "description": "Link label for privacy policy"
+  },
+  "premiumActiveStatus": "[Ýôû àřé à Þřéɱîûɱ šûƀšçřîƀéř ẋẋẋẋ]",
+  "@premiumActiveStatus": {
+    "description": "Status badge when subscription is active"
+  },
+  "premiumGraceStatus": "[Ôƒƒłîñé ĝřàçé þéřîôđ àçţîṽé ẋẋẋẋ]",
+  "@premiumGraceStatus": {
+    "description": "Status badge when offline grace period is active"
+  },
+  "premiumExpiredStatus": "[Şûƀšçřîþţîôñ éxþîřéđ ẋẋẋ]",
+  "@premiumExpiredStatus": {
+    "description": "Status badge when subscription expired"
+  },
+  "premiumRestoreSuccess": "[Þûřçĥàšéš řéšţôřéđ šûççéššƒûłłý. ẋẋẋẋ]",
+  "@premiumRestoreSuccess": {
+    "description": "Snackbar message when purchases are restored"
+  },
+  "premiumRestoreNone": "[Ñô àçţîṽé šûƀšçřîþţîôñš ƒôûñđ. ẋẋẋẋ]",
+  "@premiumRestoreNone": {
+    "description": "Snackbar message when no subscription is found to restore"
+  },
+  "premiumErrorGeneral": "[Ûñàƀłé ţô çôɱþłéţé þûřçĥàšé. Þłéàšé ţřý àĝàîñ. ẋẋẋẋẋ]",
+  "@premiumErrorGeneral": {
+    "description": "General purchase error message"
+  },
+  "premiumPagesGateTitle": "[Đôç Ṽîéŵ Þřéɱîûɱ ẋẋẋ]",
+  "@premiumPagesGateTitle": {
+    "description": "Dialog title gating pages screen modifications"
+  },
+  "premiumPagesGateBody": "[Řéôřđéřîñĝ, řôţàţîñĝ, àñđ đéłéţîñĝ þàĝéš řéâûîřéš à Þřéɱîûɱ šûƀšçřîþţîôñ. ẋẋẋẋẋẋ]",
+  "@premiumPagesGateBody": {
+    "description": "Dialog body gating pages screen modifications"
+  },
+  "premiumPagesGateUpgrade": "[Ûþĝřàđé ţô Þřéɱîûɱ ẋẋẋ]",
+  "@premiumPagesGateUpgrade": {
+    "description": "Action button in pages screen gating dialog"
+  },
+  "premiumTooltip": "[Đôç Ṽîéŵ Þřéɱîûɱ ẋẋẋ]",
+  "@premiumTooltip": {
+    "description": "Tooltip for crown button in app bar"
+  },
+  "premiumManageInPlay": "[Màñàĝé ẋ]",
+  "@premiumManageInPlay": {
+    "description": "Button to open Play Store subscriptions page"
+  },
+  "faqQuestion8": "[Ŵĥàţ îš îñçłûđéđ ŵîţĥ Đôç Ṽîéŵ Þřéɱîûɱ? ẋẋẋẋẋ]",
+  "@faqQuestion8": {
+    "description": "FAQ question 8 about Doc View Premium features"
+  },
+  "faqAnswer8": "[Đôç Ṽîéŵ Þřéɱîûɱ ûñłôçķš àłł àđṽàñçéđ đôçûɱéñţ éđîţîñĝ ţôôłš, îñçłûđîñĝ ÞĐƑ þàĝé řéôřđéřîñĝ, řôţàţîñĝ, đéłéţîôñ, ÞĐƑ-ţô-Ŵôřđ çôñṽéřšîôñ, àññôţàţîôñš, šîĝñàţûřéš, àñđ çûšţôɱ ţéxţ îñšéřţîôñ, ŵĥîłé çôɱþłéţéłý éłîɱîñàţîñĝ àłł àđṽéřţîšéɱéñţš ţĥřôûĝĥôûţ ţĥé àþþ. Âłł đôçûɱéñţ þřôçéššîñĝ řéɱàîñš 100% ôñ-đéṽîçé. ẋẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer8": {
+    "description": "FAQ answer 8 about Doc View Premium"
+  },
+  "faqQuestion9": "[Çàñ Î ûšé Đôç Ṽîéŵ Þřéɱîûɱ ŵîţĥôûţ àñ îñţéřñéţ çôññéçţîôñ? ẋẋẋẋẋẋ]",
+  "@faqQuestion9": {
+    "description": "FAQ question 9 about offline grace period"
+  },
+  "faqAnswer9": "[Ýéš. Ôñçé àçţîṽàţéđ, Đôç Ṽîéŵ šéçûřéłý çàçĥéš ýôûř šûƀšçřîþţîôñ šţàţé ôñ ýôûř đéṽîçé ŵîţĥ àñ ôƒƒłîñé ĝřàçé þéřîôđ ôƒ ûþ ţô 7 çôñšéçûţîṽé đàýš. Ýôû çàñ çôñţîñûé ûšîñĝ àłł éđîţîñĝ ţôôłš ôƒƒłîñé đûřîñĝ ţĥîš þéřîôđ. ẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer9": {
+    "description": "FAQ answer 9 about offline grace period"
+  },
+  "galleryDebugIapSectionTitle": "[15. ÎÂÞ & Þřéɱîûɱ Şîɱûłàţôř (Ĝ7) ẋẋẋẋ]",
+  "@galleryDebugIapSectionTitle": {
+    "description": "Section header for IAP simulator in component gallery"
+  },
+  "galleryDebugIapStateFree": "[Şéţ Ƒřéé ẋ]",
+  "@galleryDebugIapStateFree": {
+    "description": "Button to set Free state"
+  },
+  "galleryDebugIapStateYearly": "[Şéţ Ýéàřłý Þřéɱîûɱ ẋẋẋ]",
+  "@galleryDebugIapStateYearly": {
+    "description": "Button to set Yearly state"
+  },
+  "galleryDebugIapStateMonthly": "[Şéţ Môñţĥłý Þřéɱîûɱ ẋẋẋ]",
+  "@galleryDebugIapStateMonthly": {
+    "description": "Button to set Monthly state"
+  },
+  "galleryDebugIapStateGrace": "[Şéţ Ôƒƒłîñé Ĝřàçé (Âçţîṽé) ẋẋẋẋ]",
+  "@galleryDebugIapStateGrace": {
+    "description": "Button to set active grace state"
+  },
+  "galleryDebugIapStateGraceExpired": "[Şéţ Ôƒƒłîñé Ĝřàçé (Éxþîřéđ) ẋẋẋẋ]",
+  "@galleryDebugIapStateGraceExpired": {
+    "description": "Button to set expired grace state"
+  },
+  "galleryDebugOpenPremium": "[Ôþéñ /þřéɱîûɱ Şçřééñ ẋẋẋ]",
+  "@galleryDebugOpenPremium": {
+    "description": "Button to navigate to premium screen"
   }
 }

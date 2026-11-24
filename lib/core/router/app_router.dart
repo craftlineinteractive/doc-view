@@ -12,6 +12,7 @@ import '../../features/files/files_screen.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/permissions/permissions_screen.dart';
+import '../../features/premium/premium_screen.dart';
 import '../../features/search/search_screen.dart';
 import '../../features/settings/faq_screen.dart';
 import '../../features/settings/language_screen.dart';
@@ -233,6 +234,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'directories',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const DirectoriesScreen(),
+      ),
+      GoRoute(
+        path: '/premium',
+        name: 'premium',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const PremiumScreen(),
       ),
       GoRoute(
         path: '/faq',

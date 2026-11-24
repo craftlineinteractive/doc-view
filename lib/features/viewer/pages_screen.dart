@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pdfrx/pdfrx.dart';
 
 import '../../core/extensions/l10n_extension.dart';
+import '../../core/router/premium_gate.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
@@ -126,7 +127,7 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
     });
   }
 
-  void _handleReorder(int oldIndex, int newIndex) {
+  Future<void> _handleReorder(int oldIndex, int newIndex) async {
     if (oldIndex == newIndex ||
         oldIndex < 0 ||
         oldIndex >= _pages.length ||
@@ -134,6 +135,7 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
         newIndex >= _pages.length) {
       return;
     }
+    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
     setState(() {
       _saveUndoSnapshot();
       final item = _pages.removeAt(oldIndex);
@@ -143,8 +145,10 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
     });
   }
 
-  void _handleRotate() {
+  Future<void> _handleRotate() async {
     if (_selectedIndices.isEmpty) return;
+    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
+    if (!mounted) return;
     setState(() {
       _saveUndoSnapshot();
       for (final idx in _selectedIndices) {
@@ -156,8 +160,10 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
     });
   }
 
-  void _handleDelete() {
+  Future<void> _handleDelete() async {
     if (_selectedIndices.isEmpty) return;
+    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
+    if (!mounted) return;
     if (_selectedIndices.length >= _pages.length) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -180,6 +186,8 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
   }
 
   Future<void> _handleInsert() async {
+    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
+    if (!mounted) return;
     final result = await showModalBottomSheet<String>(
       context: context,
       backgroundColor: Colors.transparent,
@@ -282,6 +290,8 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
 
   Future<void> _handleExtract() async {
     if (_selectedIndices.isEmpty) return;
+    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
+    if (!mounted) return;
     final selectedSpecs = _selectedIndices.map((i) => _pages[i]).toList();
     final defaultName = '${_baseFileName()}_extracted';
 

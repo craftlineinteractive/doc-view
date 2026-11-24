@@ -83,5 +83,11 @@ abstract final class DocViewColors {
   static const Color error = Color(0xFFE5484D);
   static const Color errorTintLight = Color(0xFFFDE8E9);
   static const Color errorTintDark = Color(0xFF3E1C1E);
+
+  // --- Premium & Subscriptions ---
+  static const Color premiumGold = Color(0xFFFFB800);
+  static const Color premiumGoldDark = Color(0xFFE5A500);
+  static const Color premiumGoldSurface = Color(0xFFFFF8E7);
+  static const Color premiumGoldSurfaceDark = Color(0xFF332600);
 }
 

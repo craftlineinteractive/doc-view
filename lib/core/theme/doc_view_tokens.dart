@@ -57,6 +57,10 @@ class DocViewTokens extends ThemeExtension<DocViewTokens> {
   final FileTypeColors other;
 
   Color get error => DocViewColors.error;
+  Color get premiumGold => DocViewColors.premiumGold;
+  Color get premiumGoldDark => DocViewColors.premiumGoldDark;
+  Color get premiumGoldSurface => DocViewColors.premiumGoldSurface;
+  Color get premiumGoldSurfaceDark => DocViewColors.premiumGoldSurfaceDark;
 
   const DocViewTokens({
     required this.surface,

@@ -2,6 +2,7 @@ import 'package:docview/app.dart';
 import 'package:docview/core/constants/app_constants.dart';
 import 'package:docview/core/constants/file_types.dart';
 import 'package:docview/core/theme/app_theme.dart';
+import 'package:docview/data/services/billing/billing_providers.dart';
 import 'package:docview/data/services/permission_service.dart';
 import 'package:docview/features/directories/directories_screen.dart';
 import 'package:docview/features/providers/providers.dart';
@@ -91,11 +92,16 @@ void main() {
       'ToolsScreen shows exactly 9 G4c tool tiles with stable keys and accessibility',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        theme: AppTheme.lightTheme,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: const ToolsScreen(),
+      ProviderScope(
+        overrides: [
+          isPremiumProvider.overrideWithValue(true),
+        ],
+        child: MaterialApp(
+          theme: AppTheme.lightTheme,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const ToolsScreen(),
+        ),
       ),
     );
     await tester.pumpAndSettle();
@@ -171,7 +177,10 @@ void main() {
     await tester.pumpWidget(
       const ProviderScope(
         child: MaterialApp(
-          home: SettingsScreen(isReleaseOverride: true),
+          home: SettingsScreen(
+            isReleaseOverride: true,
+            premiumEnabledOverride: false,
+          ),
         ),
       ),
     );

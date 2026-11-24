@@ -524,3 +524,37 @@ This document catalogs every screen and bottom sheet added or restructured in **
 | **Placed Text Box with Side Handles ("Project Approved")** | ![Placed Text Box Handles](img/g5c/04_add_text_placed_box_handles.png) | 1080 × 2400 | 95 KB |
 | **Save Confirmation & Real Edited PDF Created** | ![Add Text Saved Result](img/g5c/05_add_text_saved_result.png) | 1080 × 2400 | 102 KB |
 
+---
+
+### 29. Premium Screen & Paywall (Phase G7)
+
+- **File**: `lib/features/premium/premium_screen.dart` (route `/premium`)
+- **Visual Design & Token Compliance**:
+  - Animated glowing Gold Crown badge (`DocViewColors.premiumGold` `#FFB800` / `AppIcons.crown`).
+  - Title: Space Grotesk Bold (`premiumTitle`), subtitle (`premiumSubtitle`).
+  - Active subscription card with verified shield icon (`Icons.verified_rounded`) and external link to Google Play Subscriptions management (`AppConstants.androidSubscriptionsUrl`).
+  - 4 Premium Benefits rows:
+    - All 5 editing & conversion tools (`Icons.auto_awesome_rounded`, primary blue)
+    - 100% Ad-Free Experience (`Icons.block_rounded`, emerald green `#1FA971`)
+    - Unlimited local conversions (`Icons.transform_rounded`, amber `#F5A524`)
+    - 100% Private & On-Device (`Icons.shield_outlined`, purple `#8B5CF6`)
+  - Subscription Plan Selector:
+    - **Annual Subscription Card**: "BEST VALUE" badge, dynamic `"{price}/year"`, 7-day free trial CTA (`"Start 7-Day Free Trial"`).
+    - **Monthly Subscription Card**: Dynamic `"{price}/month"`, direct subscribe CTA (`"Subscribe"`).
+  - Legal footer with links to Terms of Service and Privacy Policy (`canLaunchUrl` external browser).
+- **Zero Price Literals**:
+  - Contains zero hardcoded currency symbols or numeric prices. All dynamic strings are formatted via ARB placeholders with `ProductDetails.price` supplied at runtime by Google Play Billing.
+
+#### QA Screenshots & Visual Evidence (Phase G7)
+
+| View Description | Screenshot Artifact | Dimensions | File Size |
+|---|---|---|---|
+| **Premium Paywall: Yearly Plan Selected** | ![Premium Yearly](img/g7/01_premium_screen_yearly.png) | 1080 × 2400 | 256 KB |
+| **Premium Paywall: Monthly Plan Selected** | ![Premium Monthly](img/g7/02_premium_screen_monthly.png) | 1080 × 2400 | 252 KB |
+| **Tools Screen with Gold Crown Badges** | ![Tools Crown Badges](img/g7/03_tools_screen_crown_badges.png) | 1080 × 2400 | 234 KB |
+| **PDF Viewer Top Bar with Crown Icon** | ![Reader Crown Icon](img/g7/04_reader_crown_icon.png) | 1080 × 2400 | 165 KB |
+| **Pages Screen Upgrade Gate Dialog** | ![Pages Gate Dialog](img/g7/05_pages_screen_readonly_dialog.png) | 1080 × 2400 | 160 KB |
+| **Subscribed State with Google Play Manage Link** | ![Subscribed Banner](img/g7/06_purchase_success_sheet.png) | 1080 × 2400 | 267 KB |
+| **FAQ Screen with Premium Topics 8 & 9** | ![FAQ Premium Topics](img/g7/07_faq_premium_topics.png) | 1080 × 2400 | 261 KB |
+| **Component Gallery IAP Simulator** | ![IAP Simulator](img/g7/08_component_gallery_iap_simulator.png) | 1080 × 2400 | 126 KB |
+

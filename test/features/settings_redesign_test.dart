@@ -54,7 +54,10 @@ void main() {
         addTearDown(tester.view.resetDevicePixelRatio);
 
         await tester.pumpApp(
-          const SettingsScreen(isReleaseOverride: true),
+          const SettingsScreen(
+            isReleaseOverride: true,
+            premiumEnabledOverride: false,
+          ),
         );
         await tester.pumpAndSettle();
 
@@ -105,7 +108,7 @@ void main() {
         expect(find.byKey(const Key('settings_send_feedback')), findsNothing);
 
         // Rows hidden when constants are empty, flags are off, or release has 1 language
-        expect(premiumEnabled, isFalse);
+        expect(premiumEnabled, isTrue);
         expect(widgetsEnabled, isFalse);
         expect(AppConstants.termsOfUseUrl, isEmpty);
         expect(AppConstants.privacyPolicyUrl, isEmpty);
@@ -418,9 +421,9 @@ void main() {
         // Highlight banner MUST NOT appear on normal FAQ
         expect(find.byKey(const Key('faq_rating_highlight_banner')), findsNothing);
 
-        // 7 Topics header count & accordion cards
-        expect(find.text('7 Topics'), findsOneWidget);
-        for (var i = 0; i < 7; i++) {
+        // 9 Topics header count & accordion cards
+        expect(find.text('9 Topics'), findsOneWidget);
+        for (var i = 0; i < 9; i++) {
           expect(find.byKey(Key('faq_card_$i')), findsOneWidget);
         }
 
@@ -430,6 +433,9 @@ void main() {
 
         // Verify 7th question exists
         expect(find.text('Why did PDF to Word change my layout?'), findsOneWidget);
+
+        // Verify 8th question exists
+        expect(find.text('What is included with Doc View Premium?'), findsOneWidget);
 
         // Tap 6th question to verify exact privacy text
         await tester.tap(find.text('Is my data uploaded anywhere?'));

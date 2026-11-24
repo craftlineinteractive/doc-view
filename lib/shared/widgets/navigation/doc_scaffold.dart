@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../data/services/billing/billing_providers.dart';
 import '../ads/ad_placeholders.dart';
 
 /// App scaffold enforcing edge-to-edge layout, header background gradients,
@@ -31,16 +33,22 @@ class DocScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget content = body;
 
-    // Build bottom area combining docked ad banner (if enabled) + bottomNavigationBar
+    // Build bottom area combining docked ad banner (if enabled and ads allowed) + bottomNavigationBar
     Widget? combinedBottomArea;
     if (showDockedBanner || bottomNavigationBar != null) {
       combinedBottomArea = Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (showDockedBanner)
-            AdBannerSlot(
-              isLoaded: isAdLoaded,
-              onTap: onAdTap,
+            Consumer(
+              builder: (context, ref, child) {
+                final adsAllowed = ref.watch(adsAllowedProvider);
+                if (!adsAllowed) return const SizedBox.shrink();
+                return AdBannerSlot(
+                  isLoaded: isAdLoaded,
+                  onTap: onAdTap,
+                );
+              },
             ),
           ?bottomNavigationBar,
         ],

@@ -9,6 +9,7 @@ import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../data/services/billing/billing_providers.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
 import '../../shared/widgets/navigation/doc_scaffold.dart';
 import '../providers/providers.dart';
@@ -204,6 +205,11 @@ class ToolsScreen extends ConsumerWidget {
   }
 
   void _handleToolTap(BuildContext context, WidgetRef ref, ToolDef tool) {
+    if (tool.id != 'manage_pages' && tool.isPremium() && !ref.read(isPremiumProvider)) {
+      context.push('/premium');
+      return;
+    }
+
     switch (tool.id) {
       case 'image_to_pdf':
         _onImageToPdf(context);
@@ -279,6 +285,7 @@ class ToolsScreen extends ConsumerWidget {
     final convertTools = getToolsForSection(ToolSection.convertAndCreate);
     final editTools = getToolsForSection(ToolSection.editAndManage);
     final otherTools = getToolsForSection(ToolSection.others);
+    final isPremium = ref.watch(isPremiumProvider);
 
     return DocScaffold(
       applyHeaderGradient: true,
@@ -316,6 +323,13 @@ class ToolsScreen extends ConsumerWidget {
           ],
         ),
         actions: [
+          DocIconButton(
+            key: const Key('tools_crown_button'),
+            icon: AppIcons.crown,
+            color: isPremium ? tokens.primaryBlue : tokens.premiumGold,
+            tooltip: context.l10n.premiumTooltip,
+            onPressed: () => context.push('/premium'),
+          ),
           DocIconButton(
             icon: AppIcons.search,
             tooltip: context.l10n.tooltipSearch,

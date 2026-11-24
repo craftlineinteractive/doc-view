@@ -3067,6 +3067,151 @@ class AppLocalizationsEn extends AppLocalizations {
   String addTextFontSizePt(int size) {
     return '$size pt';
   }
+
+  @override
+  String get premiumTitle => 'Doc View Premium';
+
+  @override
+  String get premiumSubtitle =>
+      'Unlock all editing tools and enjoy a completely ad-free experience.';
+
+  @override
+  String get premiumFeatureAllTools => 'All 5 editing & conversion tools';
+
+  @override
+  String get premiumFeatureAllToolsSub =>
+      'Annotate, Add Text, Sign, Manage Pages, and PDF to Word';
+
+  @override
+  String get premiumFeatureAdFree => '100% Ad-Free Experience';
+
+  @override
+  String get premiumFeatureAdFreeSub =>
+      'No banners, interruptions, or distractions anywhere';
+
+  @override
+  String get premiumFeatureUnlimitedConversions =>
+      'Unlimited local conversions';
+
+  @override
+  String get premiumFeatureUnlimitedConversionsSub =>
+      'Convert documents on-device with zero file limits';
+
+  @override
+  String get premiumFeaturePrivacyFirst => '100% Private & On-Device';
+
+  @override
+  String get premiumFeaturePrivacyFirstSub =>
+      'Files are processed locally and never uploaded to any server';
+
+  @override
+  String get premiumPlanYearly => 'Annual Subscription';
+
+  @override
+  String get premiumPlanYearlyBadge => 'BEST VALUE';
+
+  @override
+  String premiumPlanYearlyTrial(String price) {
+    return '7 days free, then $price/year';
+  }
+
+  @override
+  String get premiumPlanMonthly => 'Monthly Subscription';
+
+  @override
+  String premiumPlanMonthlySub(String price) {
+    return '$price/month';
+  }
+
+  @override
+  String get premiumActionStartTrial => 'Start 7-Day Free Trial';
+
+  @override
+  String get premiumActionSubscribe => 'Subscribe';
+
+  @override
+  String get premiumActionRestore => 'Restore Purchases';
+
+  @override
+  String get premiumBillingDisclaimer =>
+      'Renews automatically. Cancel anytime in Google Play Subscriptions.';
+
+  @override
+  String get premiumTerms => 'Terms of Service';
+
+  @override
+  String get premiumPrivacy => 'Privacy Policy';
+
+  @override
+  String get premiumActiveStatus => 'You are a Premium subscriber';
+
+  @override
+  String get premiumGraceStatus => 'Offline grace period active';
+
+  @override
+  String get premiumExpiredStatus => 'Subscription expired';
+
+  @override
+  String get premiumRestoreSuccess => 'Purchases restored successfully.';
+
+  @override
+  String get premiumRestoreNone => 'No active subscriptions found.';
+
+  @override
+  String get premiumErrorGeneral =>
+      'Unable to complete purchase. Please try again.';
+
+  @override
+  String get premiumPagesGateTitle => 'Doc View Premium';
+
+  @override
+  String get premiumPagesGateBody =>
+      'Reordering, rotating, and deleting pages requires a Premium subscription.';
+
+  @override
+  String get premiumPagesGateUpgrade => 'Upgrade to Premium';
+
+  @override
+  String get premiumTooltip => 'Doc View Premium';
+
+  @override
+  String get premiumManageInPlay => 'Manage';
+
+  @override
+  String get faqQuestion8 => 'What is included with Doc View Premium?';
+
+  @override
+  String get faqAnswer8 =>
+      'Doc View Premium unlocks all advanced document editing tools, including PDF page reordering, rotation, deletion, PDF-to-Word conversion, annotations, signatures, and custom text insertion, while completely eliminating all advertisements throughout the app. All document processing remains 100% on-device.';
+
+  @override
+  String get faqQuestion9 =>
+      'Can I use Doc View Premium without an internet connection?';
+
+  @override
+  String get faqAnswer9 =>
+      'Yes. Once activated, Doc View securely caches your subscription state on your device with an offline grace period of up to 7 consecutive days. You can continue using all editing tools offline during this period.';
+
+  @override
+  String get galleryDebugIapSectionTitle => '15. IAP & Premium Simulator (G7)';
+
+  @override
+  String get galleryDebugIapStateFree => 'Set Free';
+
+  @override
+  String get galleryDebugIapStateYearly => 'Set Yearly Premium';
+
+  @override
+  String get galleryDebugIapStateMonthly => 'Set Monthly Premium';
+
+  @override
+  String get galleryDebugIapStateGrace => 'Set Offline Grace (Active)';
+
+  @override
+  String get galleryDebugIapStateGraceExpired => 'Set Offline Grace (Expired)';
+
+  @override
+  String get galleryDebugOpenPremium => 'Open /premium Screen';
 }
 
 /// The translations for English (`en_XA`).
@@ -6227,4 +6372,152 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   String addTextFontSizePt(int size) {
     return '[$size þţ ẋ]';
   }
+
+  @override
+  String get premiumTitle => '[Đôç Ṽîéŵ Þřéɱîûɱ ẋẋẋ]';
+
+  @override
+  String get premiumSubtitle =>
+      '[Ûñłôçķ àłł éđîţîñĝ ţôôłš àñđ éñĵôý à çôɱþłéţéłý àđ-ƒřéé éxþéřîéñçé. ẋẋẋẋẋẋ]';
+
+  @override
+  String get premiumFeatureAllTools =>
+      '[Âłł 5 éđîţîñĝ & çôñṽéřšîôñ ţôôłš ẋẋẋẋ]';
+
+  @override
+  String get premiumFeatureAllToolsSub =>
+      '[Âññôţàţé, Âđđ Ţéxţ, Şîĝñ, Màñàĝé Þàĝéš, àñđ ÞĐƑ ţô Ŵôřđ ẋẋẋẋẋẋ]';
+
+  @override
+  String get premiumFeatureAdFree => '[100% Âđ-Ƒřéé Éxþéřîéñçé ẋẋẋẋ]';
+
+  @override
+  String get premiumFeatureAdFreeSub =>
+      '[Ñô ƀàññéřš, îñţéřřûþţîôñš, ôř đîšţřàçţîôñš àñýŵĥéřé ẋẋẋẋẋ]';
+
+  @override
+  String get premiumFeatureUnlimitedConversions =>
+      '[Ûñłîɱîţéđ łôçàł çôñṽéřšîôñš ẋẋẋẋ]';
+
+  @override
+  String get premiumFeatureUnlimitedConversionsSub =>
+      '[Çôñṽéřţ đôçûɱéñţš ôñ-đéṽîçé ŵîţĥ žéřô ƒîłé łîɱîţš ẋẋẋẋẋ]';
+
+  @override
+  String get premiumFeaturePrivacyFirst => '[100% Þřîṽàţé & Ôñ-Đéṽîçé ẋẋẋẋ]';
+
+  @override
+  String get premiumFeaturePrivacyFirstSub =>
+      '[Ƒîłéš àřé þřôçéššéđ łôçàłłý àñđ ñéṽéř ûþłôàđéđ ţô àñý šéřṽéř ẋẋẋẋẋ]';
+
+  @override
+  String get premiumPlanYearly => '[Âññûàł Şûƀšçřîþţîôñ ẋẋẋ]';
+
+  @override
+  String get premiumPlanYearlyBadge => '[ƁÉŞŢ ṼÂŁÛÉ ẋ]';
+
+  @override
+  String premiumPlanYearlyTrial(String price) {
+    return '[7 đàýš ƒřéé, ţĥéñ $price/ýéàř ẋẋẋẋ]';
+  }
+
+  @override
+  String get premiumPlanMonthly => '[Môñţĥłý Şûƀšçřîþţîôñ ẋẋẋ]';
+
+  @override
+  String premiumPlanMonthlySub(String price) {
+    return '[$price/ɱôñţĥ ẋẋ]';
+  }
+
+  @override
+  String get premiumActionStartTrial => '[Şţàřţ 7-Đàý Ƒřéé Ţřîàł ẋẋẋ]';
+
+  @override
+  String get premiumActionSubscribe => '[Şûƀšçřîƀé ẋ]';
+
+  @override
+  String get premiumActionRestore => '[Řéšţôřé Þûřçĥàšéš ẋẋẋ]';
+
+  @override
+  String get premiumBillingDisclaimer =>
+      '[Řéñéŵš àûţôɱàţîçàłłý. Çàñçéł àñýţîɱé îñ Ĝôôĝłé Þłàý Şûƀšçřîþţîôñš. ẋẋẋẋẋẋ]';
+
+  @override
+  String get premiumTerms => '[Ţéřɱš ôƒ Şéřṽîçé ẋẋ]';
+
+  @override
+  String get premiumPrivacy => '[Þřîṽàçý Þôłîçý ẋẋ]';
+
+  @override
+  String get premiumActiveStatus => '[Ýôû àřé à Þřéɱîûɱ šûƀšçřîƀéř ẋẋẋẋ]';
+
+  @override
+  String get premiumGraceStatus => '[Ôƒƒłîñé ĝřàçé þéřîôđ àçţîṽé ẋẋẋẋ]';
+
+  @override
+  String get premiumExpiredStatus => '[Şûƀšçřîþţîôñ éxþîřéđ ẋẋẋ]';
+
+  @override
+  String get premiumRestoreSuccess => '[Þûřçĥàšéš řéšţôřéđ šûççéššƒûłłý. ẋẋẋẋ]';
+
+  @override
+  String get premiumRestoreNone => '[Ñô àçţîṽé šûƀšçřîþţîôñš ƒôûñđ. ẋẋẋẋ]';
+
+  @override
+  String get premiumErrorGeneral =>
+      '[Ûñàƀłé ţô çôɱþłéţé þûřçĥàšé. Þłéàšé ţřý àĝàîñ. ẋẋẋẋẋ]';
+
+  @override
+  String get premiumPagesGateTitle => '[Đôç Ṽîéŵ Þřéɱîûɱ ẋẋẋ]';
+
+  @override
+  String get premiumPagesGateBody =>
+      '[Řéôřđéřîñĝ, řôţàţîñĝ, àñđ đéłéţîñĝ þàĝéš řéâûîřéš à Þřéɱîûɱ šûƀšçřîþţîôñ. ẋẋẋẋẋẋ]';
+
+  @override
+  String get premiumPagesGateUpgrade => '[Ûþĝřàđé ţô Þřéɱîûɱ ẋẋẋ]';
+
+  @override
+  String get premiumTooltip => '[Đôç Ṽîéŵ Þřéɱîûɱ ẋẋẋ]';
+
+  @override
+  String get premiumManageInPlay => '[Màñàĝé ẋ]';
+
+  @override
+  String get faqQuestion8 => '[Ŵĥàţ îš îñçłûđéđ ŵîţĥ Đôç Ṽîéŵ Þřéɱîûɱ? ẋẋẋẋẋ]';
+
+  @override
+  String get faqAnswer8 =>
+      '[Đôç Ṽîéŵ Þřéɱîûɱ ûñłôçķš àłł àđṽàñçéđ đôçûɱéñţ éđîţîñĝ ţôôłš, îñçłûđîñĝ ÞĐƑ þàĝé řéôřđéřîñĝ, řôţàţîñĝ, đéłéţîôñ, ÞĐƑ-ţô-Ŵôřđ çôñṽéřšîôñ, àññôţàţîôñš, šîĝñàţûřéš, àñđ çûšţôɱ ţéxţ îñšéřţîôñ, ŵĥîłé çôɱþłéţéłý éłîɱîñàţîñĝ àłł àđṽéřţîšéɱéñţš ţĥřôûĝĥôûţ ţĥé àþþ. Âłł đôçûɱéñţ þřôçéššîñĝ řéɱàîñš 100% ôñ-đéṽîçé. ẋẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get faqQuestion9 =>
+      '[Çàñ Î ûšé Đôç Ṽîéŵ Þřéɱîûɱ ŵîţĥôûţ àñ îñţéřñéţ çôññéçţîôñ? ẋẋẋẋẋẋ]';
+
+  @override
+  String get faqAnswer9 =>
+      '[Ýéš. Ôñçé àçţîṽàţéđ, Đôç Ṽîéŵ šéçûřéłý çàçĥéš ýôûř šûƀšçřîþţîôñ šţàţé ôñ ýôûř đéṽîçé ŵîţĥ àñ ôƒƒłîñé ĝřàçé þéřîôđ ôƒ ûþ ţô 7 çôñšéçûţîṽé đàýš. Ýôû çàñ çôñţîñûé ûšîñĝ àłł éđîţîñĝ ţôôłš ôƒƒłîñé đûřîñĝ ţĥîš þéřîôđ. ẋẋẋẋẋẋẋẋ]';
+
+  @override
+  String get galleryDebugIapSectionTitle =>
+      '[15. ÎÂÞ & Þřéɱîûɱ Şîɱûłàţôř (Ĝ7) ẋẋẋẋ]';
+
+  @override
+  String get galleryDebugIapStateFree => '[Şéţ Ƒřéé ẋ]';
+
+  @override
+  String get galleryDebugIapStateYearly => '[Şéţ Ýéàřłý Þřéɱîûɱ ẋẋẋ]';
+
+  @override
+  String get galleryDebugIapStateMonthly => '[Şéţ Môñţĥłý Þřéɱîûɱ ẋẋẋ]';
+
+  @override
+  String get galleryDebugIapStateGrace => '[Şéţ Ôƒƒłîñé Ĝřàçé (Âçţîṽé) ẋẋẋẋ]';
+
+  @override
+  String get galleryDebugIapStateGraceExpired =>
+      '[Şéţ Ôƒƒłîñé Ĝřàçé (Éxþîřéđ) ẋẋẋẋ]';
+
+  @override
+  String get galleryDebugOpenPremium => '[Ôþéñ /þřéɱîûɱ Şçřééñ ẋẋẋ]';
 }
