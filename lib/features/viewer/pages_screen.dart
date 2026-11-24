@@ -9,6 +9,7 @@ import 'package:pdfrx/pdfrx.dart';
 
 import '../../core/extensions/l10n_extension.dart';
 import '../../core/router/premium_gate.dart';
+import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
@@ -127,7 +128,10 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
     });
   }
 
+  bool get _isReadOnly => PremiumGate.isLocked(ref, PremiumFeature.managePages);
+
   Future<void> _handleReorder(int oldIndex, int newIndex) async {
+    if (_isReadOnly) return;
     if (oldIndex == newIndex ||
         oldIndex < 0 ||
         oldIndex >= _pages.length ||
@@ -135,7 +139,6 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
         newIndex >= _pages.length) {
       return;
     }
-    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
     setState(() {
       _saveUndoSnapshot();
       final item = _pages.removeAt(oldIndex);
@@ -146,8 +149,8 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
   }
 
   Future<void> _handleRotate() async {
+    if (_isReadOnly) return;
     if (_selectedIndices.isEmpty) return;
-    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
     if (!mounted) return;
     setState(() {
       _saveUndoSnapshot();
@@ -161,8 +164,8 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
   }
 
   Future<void> _handleDelete() async {
+    if (_isReadOnly) return;
     if (_selectedIndices.isEmpty) return;
-    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
     if (!mounted) return;
     if (_selectedIndices.length >= _pages.length) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -186,7 +189,7 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
   }
 
   Future<void> _handleInsert() async {
-    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
+    if (_isReadOnly) return;
     if (!mounted) return;
     final result = await showModalBottomSheet<String>(
       context: context,
@@ -290,7 +293,7 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
 
   Future<void> _handleExtract() async {
     if (_selectedIndices.isEmpty) return;
-    if (!await PremiumGate.checkPagesEdit(context, ref)) return;
+    if (_isReadOnly) return;
     if (!mounted) return;
     final selectedSpecs = _selectedIndices.map((i) => _pages[i]).toList();
     final defaultName = '${_baseFileName()}_extracted';
@@ -557,31 +560,33 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
                 ),
               ),
               actions: [
-                // Undo button
-                IconButton(
-                  icon: const Icon(Icons.undo_rounded),
-                  tooltip: context.l10n.pagesActionUndo,
-                  onPressed: _undoSnapshot != null ? _handleUndo : null,
-                ),
-
-                // Save button
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: FilledButton.tonal(
-                    onPressed: _hasUnsavedChanges && !_isSaving ? _showSaveDialog : null,
-                    style: FilledButton.styleFrom(
-                      visualDensity: VisualDensity.compact,
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
-                    ),
-                    child: _isSaving
-                        ? const SizedBox(
-                            width: 14,
-                            height: 14,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        : Text(context.l10n.pagesActionSave),
+                if (!_isReadOnly) ...[
+                  // Undo button
+                  IconButton(
+                    icon: const Icon(Icons.undo_rounded),
+                    tooltip: context.l10n.pagesActionUndo,
+                    onPressed: _undoSnapshot != null ? _handleUndo : null,
                   ),
-                ),
+
+                  // Save button
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: FilledButton.tonal(
+                      onPressed: _hasUnsavedChanges && !_isSaving ? _showSaveDialog : null,
+                      style: FilledButton.styleFrom(
+                        visualDensity: VisualDensity.compact,
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                      ),
+                      child: _isSaving
+                          ? const SizedBox(
+                              width: 14,
+                              height: 14,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : Text(context.l10n.pagesActionSave),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -701,6 +706,22 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
                 itemBuilder: (context, index) {
                   final spec = _pages[index];
                   final isSelected = _selectedIndices.contains(index);
+
+                  if (_isReadOnly) {
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () {
+                        setState(() {
+                          if (isSelected) {
+                            _selectedIndices.remove(index);
+                          } else {
+                            _selectedIndices.add(index);
+                          }
+                        });
+                      },
+                      child: _buildTileContent(index, spec, isSelected),
+                    );
+                  }
 
                   return LongPressDraggable<int>(
                     data: index,
@@ -846,6 +867,46 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
 
     final tokens = context.tokens;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    if (_isReadOnly) {
+      return Container(
+        decoration: BoxDecoration(
+          color: isDark ? DocViewColors.surfaceDark : Colors.white,
+          border: Border(
+            top: BorderSide(
+              color: tokens.hairline,
+              width: 1,
+            ),
+          ),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: SafeArea(
+          top: false,
+          child: MediaQuery.withClampedTextScaling(
+            maxScaleFactor: 1.3,
+            child: SizedBox(
+              height: 56,
+              child: Center(
+                child: FilledButton.icon(
+                  key: const Key('pages_edit_pages_button'),
+                  onPressed: () => context.push('/premium'),
+                  icon: const Icon(AppIcons.crown, color: Colors.white, size: 20),
+                  label: Text(context.l10n.pagesEditPagesAction),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: tokens.premiumGoldDark,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(200, 48),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Container(
       decoration: BoxDecoration(

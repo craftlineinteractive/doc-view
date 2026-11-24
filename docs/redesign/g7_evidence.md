@@ -15,12 +15,21 @@ Phase G7 implements end-to-end subscription entitlement and in-app billing for D
 
 ## 2. Product Catalog & Subscription Identifiers
 
-All subscription product IDs are centralized in `lib/core/config/iap_config.dart` and mirrored in `docs/release/iap_products.txt`:
+All subscription product and base plan IDs are centralized in `lib/core/config/iap_config.dart` and mirrored in `docs/release/iap_products.txt` using the modern Google Play Billing Library v5+ / v6 single-product model:
 
-| Plan | Product ID | Base Plan ID (Play Billing v5+) | Billing Period | Free Trial |
-|---|---|---|---|---|
-| **Annual Subscription** | `docview_premium_yearly` | `docview-premium-yearly-base` | 1 Year (auto-renewing) | 7 Days Free Trial |
-| **Monthly Subscription** | `docview_premium_monthly` | `docview-premium-monthly-base` | 1 Month (auto-renewing) | None |
+| Plan | Product ID | Base Plan ID (Play Billing v5+) | Offer ID | Billing Period | Free Trial |
+|---|---|---|---|---|---|
+| **Annual Subscription** | `docview_premium` | `yearly` | `freetrial-7d` | `P1Y` (auto-renewing) | Dynamic duration (`P7D` -> 7 days) |
+| **Monthly Subscription** | `docview_premium` | `monthly` | *(none)* | `P1M` (auto-renewing) | None |
+
+### Dynamic Trial Duration
+Trial periods are extracted dynamically from introductory pricing phases using `SubscriptionPlan.parseBillingPeriodDays(period)`. ARB templates use `{days}` parameterization (e.g. `Start {days}-Day Free Trial`). Zero hard-coded trial days exist in `lib/` or ARB files.
+
+### Pre-Launch Lock Safeguard
+To prevent user lock-out before IAP products are active in the Google Play Console:
+- `locksActive = FeatureFlags.premiumEnabled && (prefs.getBool(IapConfig.prefKeyIapProductSeen) ?? false)`.
+- When `locksActive == false`: all 5 editing tools remain free, zero crown badges are rendered anywhere, `PagesScreen` is fully editable, and `/premium` displays a disabled state: "Subscriptions will be available soon."
+- When `locksActive == true`: free users are gated on the 5 premium tools with gold crown badges, and `PagesScreen` renders in read-only mode with a single centered "Edit pages" crown button (`key: const Key('pages_edit_pages_button')`).
 
 ---
 
@@ -104,4 +113,18 @@ The following tests require physical Android hardware and live Google Play Servi
 |---|---|---|---|
 | **G7: In-App Billing** | Live In-App Purchase Flow | Google Play Merchant Account | `PENDING (Play)` |
 | **G7: In-App Billing** | Subscription Auto-Renewal & Server Receipts | Google Play Developer API | `PENDING (Play)` |
+
+---
+
+## 9. Part 1 Verification Summary
+
+| item | DONE or NOT TESTED or PENDING | evidence path |
+|---|---|---|
+| 1. Modern single subscription product (`docview_premium`) & base plans | DONE | `lib/core/config/iap_config.dart`, `docs/release/iap_products.txt`, `test/premium/premium_controller_test.dart` |
+| 2. Zero hard-coded price literals & dynamic trial days | DONE | `test/premium/no_price_literals_test.dart`, `lib/l10n/app_en.arb`, `lib/data/services/billing/subscription_plan.dart` |
+| 3. Pre-launch lock safeguard (`locksActive`) | DONE | `lib/data/services/billing/billing_providers.dart`, `lib/features/premium/premium_screen.dart`, `test/features/premium/premium_screen_test.dart` |
+| 4. PagesScreen read-only UX & centered Edit pages CTA | DONE | `lib/features/viewer/pages_screen.dart`, `test/features/pages_screen_test.dart` |
+| 5. ComponentGalleryScreen Section 15 IAP simulator & toggles | DONE | `lib/features/debug/component_gallery_screen.dart`, `lib/l10n/app_en.arb` |
+| 6. Technical questions 4(a), 4(b), 4(c) verified | DONE | `docs/redesign/04_gaps_and_conflicts.md`, `docs/redesign/g7_evidence.md` |
+
 | **G7: In-App Billing** | Payment Decline & Account Hold | Google Play Billing Engine | `PENDING (Play)` |

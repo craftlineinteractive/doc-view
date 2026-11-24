@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:in_app_purchase/in_app_purchase.dart';
+
+import '../../../core/config/iap_config.dart';
 import 'purchase_gateway.dart';
+import 'subscription_plan.dart';
 
 /// Test and debug simulation implementation of [PurchaseGateway].
 ///
@@ -10,10 +13,13 @@ class FakePurchaseGateway implements PurchaseGateway {
   FakePurchaseGateway({
     this.isAvailableMock = true,
     List<ProductDetails>? mockProducts,
-  })  : _products = mockProducts ?? _defaultMockProducts();
+    List<SubscriptionPlan>? mockPlans,
+  })  : _products = mockProducts ?? _defaultMockProducts(),
+        _plans = mockPlans ?? _defaultMockPlans();
 
   bool isAvailableMock;
   List<ProductDetails> _products;
+  List<SubscriptionPlan> _plans;
   final StreamController<List<PurchaseDetails>> _purchaseController =
       StreamController<List<PurchaseDetails>>.broadcast();
 
@@ -30,6 +36,10 @@ class FakePurchaseGateway implements PurchaseGateway {
     _products = products;
   }
 
+  void setMockPlans(List<SubscriptionPlan> plans) {
+    _plans = plans;
+  }
+
   @override
   Stream<List<PurchaseDetails>> get purchaseStream => _purchaseController.stream;
 
@@ -44,6 +54,18 @@ class FakePurchaseGateway implements PurchaseGateway {
     if (delay > Duration.zero) await Future.delayed(delay);
     if (!isAvailableMock) return const [];
     return _products.where((p) => productIds.contains(p.id)).toList();
+  }
+
+  @override
+  Future<List<SubscriptionPlan>> querySubscriptionPlans() async {
+    if (delay > Duration.zero) await Future.delayed(delay);
+    if (!isAvailableMock) return const [];
+    return List<SubscriptionPlan>.from(_plans);
+  }
+
+  @override
+  Future<bool> buyPlan({required SubscriptionPlan plan}) async {
+    return buySubscription(productDetails: plan.productDetails);
   }
 
   @override
@@ -147,22 +169,43 @@ class FakePurchaseGateway implements PurchaseGateway {
   static List<ProductDetails> _defaultMockProducts() {
     return [
       _FakeProductDetails(
-        id: 'docview_premium_yearly',
-        title: 'Doc View Premium Yearly',
-        description: 'Unlimited access with 7-day free trial',
-        price: 'Dynamic Store Price / Year',
+        id: IapConfig.subscriptionProductId,
+        title: 'Doc View Premium',
+        description: 'Unlimited access with introductory trial',
+        price: 'Dynamic Store Price',
         rawPrice: 0.0,
         currencyCode: '',
         currencySymbol: '',
       ),
-      _FakeProductDetails(
-        id: 'docview_premium_monthly',
-        title: 'Doc View Premium Monthly',
-        description: 'Flexible monthly subscription',
-        price: 'Dynamic Store Price / Month',
+    ];
+  }
+
+  static List<SubscriptionPlan> _defaultMockPlans() {
+    final defaultProduct = _defaultMockProducts().first;
+    return [
+      SubscriptionPlan(
+        productId: IapConfig.subscriptionProductId,
+        basePlanId: IapConfig.yearlyBasePlanId,
+        billingPeriod: IapConfig.periodYearly,
+        formattedPrice: 'Dynamic Store Price / Year',
         rawPrice: 0.0,
         currencyCode: '',
         currencySymbol: '',
+        hasFreeTrial: true,
+        trialDays: 7,
+        productDetails: defaultProduct,
+      ),
+      SubscriptionPlan(
+        productId: IapConfig.subscriptionProductId,
+        basePlanId: IapConfig.monthlyBasePlanId,
+        billingPeriod: IapConfig.periodMonthly,
+        formattedPrice: 'Dynamic Store Price / Month',
+        rawPrice: 0.0,
+        currencyCode: '',
+        currencySymbol: '',
+        hasFreeTrial: false,
+        trialDays: null,
+        productDetails: defaultProduct,
       ),
     ];
   }

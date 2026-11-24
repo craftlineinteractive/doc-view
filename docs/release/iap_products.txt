@@ -5,37 +5,35 @@
 # in Google Play Console. This file contains ZERO price literals or currency amounts.
 
 # ---------------------------------------------------------------------------
-# Subscription 1: Doc View Premium (Yearly)
+# Subscription Product: Doc View Premium
 # ---------------------------------------------------------------------------
-Product ID: docview_premium_yearly
+Product ID: docview_premium
 Type: Auto-renewing subscription
 Status: Active
-Base Plan ID: docview-premium-yearly-base
-Billing Period: 1 Year
-Renewal Type: Automatic
-Free Trial Duration: 7 Days
-Grace Period: 16 Days
-Account Hold: 30 Days
-Benefits:
-- Complete PDF editor tools (Annotate, Sign, Add Text, Organize Pages)
-- Client-side PDF to Word conversion
-- 100% Ad-Free experience across all screens
-- Unlimited offline access and document operations
-- Zero cloud uploads / privacy first
 
-# ---------------------------------------------------------------------------
-# Subscription 2: Doc View Premium (Monthly)
-# ---------------------------------------------------------------------------
-Product ID: docview_premium_monthly
-Type: Auto-renewing subscription
-Status: Active
-Base Plan ID: docview-premium-monthly-base
-Billing Period: 1 Month
+# Base Plan 1: Yearly
+Base Plan ID: yearly
+Billing Period: P1Y (1 Year)
 Renewal Type: Automatic
-Free Trial Duration: None
+Offer ID: freetrial-7d
+Offer Type: Free trial
+Offer Eligibility: New customers only
+Trial Duration: P7D (7 Days)
 Grace Period: 16 Days
 Account Hold: 30 Days
-Benefits:
+
+# Base Plan 2: Monthly
+Base Plan ID: monthly
+Billing Period: P1M (1 Month)
+Renewal Type: Automatic
+Offer ID: freetrial-7d
+Offer Type: Free trial
+Offer Eligibility: New customers only
+Trial Duration: P7D (7 Days)
+Grace Period: 16 Days
+Account Hold: 30 Days
+
+Benefits (Both Plans):
 - Complete PDF editor tools (Annotate, Sign, Add Text, Organize Pages)
 - Client-side PDF to Word conversion
 - 100% Ad-Free experience across all screens

@@ -4057,14 +4057,13 @@
   "@premiumPlanYearly": {
     "description": "Label for annual subscription plan"
   },
-  "premiumPlanYearlyBadge": "BEST VALUE",
-  "@premiumPlanYearlyBadge": {
-    "description": "Badge for annual plan"
-  },
-  "premiumPlanYearlyTrial": "7 days free, then {price}/year",
+  "premiumPlanYearlyTrial": "{days} days free, then {price}/year",
   "@premiumPlanYearlyTrial": {
-    "description": "Trial subtitle with dynamic store price",
+    "description": "Trial subtitle with dynamic store price and days",
     "placeholders": {
+      "days": {
+        "type": "int"
+      },
       "price": {
         "type": "String"
       }
@@ -4083,9 +4082,68 @@
       }
     }
   },
-  "premiumActionStartTrial": "Start 7-Day Free Trial",
+  "premiumPlanYearlySub": "{price}/year",
+  "@premiumPlanYearlySub": {
+    "description": "Annual subtitle with dynamic store price when trial is absent",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumPlanMonthlyTrial": "{days} days free, then {price}/month",
+  "@premiumPlanMonthlyTrial": {
+    "description": "Monthly trial subtitle with dynamic store price and days",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumSavePercent": "Save {percent}%",
+  "@premiumSavePercent": {
+    "description": "Savings badge on annual plan when percentage is calculated",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "premiumSaveUnknown": "Save -%",
+  "@premiumSaveUnknown": {
+    "description": "Savings badge on annual plan when savings percentage is calculating"
+  },
+  "premiumActionStartTrial": "Start {days}-Day Free Trial",
   "@premiumActionStartTrial": {
-    "description": "Primary button for yearly trial"
+    "description": "Primary button for plan trial",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "premiumSubscriptionsAvailableSoon": "Subscriptions will be available soon.",
+  "@premiumSubscriptionsAvailableSoon": {
+    "description": "Message displayed when subscription products have not been returned from store"
+  },
+  "pagesEditPagesAction": "Edit pages",
+  "@pagesEditPagesAction": {
+    "description": "Button in read-only PagesScreen navigating to paywall"
+  },
+  "premiumCancelAnytime": "Cancel anytime",
+  "@premiumCancelAnytime": {
+    "description": "Reassurance notice that subscription can be cancelled anytime"
+  },
+  "premiumPendingStatus": "Your purchase is being processed by Google Play. Entitlements will activate once confirmed.",
+  "@premiumPendingStatus": {
+    "description": "Notice shown while purchase is pending in store"
+  },
+  "premiumRenewalDisclosurePricingUnavailable": "Renews automatically. Pricing will be confirmed by Google Play at checkout. Cancel anytime in Google Play Subscriptions.",
+  "@premiumRenewalDisclosurePricingUnavailable": {
+    "description": "Renewal disclosure when pricing details could not be loaded from store"
   },
   "premiumActionSubscribe": "Subscribe",
   "@premiumActionSubscribe": {
@@ -4194,5 +4252,13 @@
   "galleryDebugOpenPremium": "Open /premium Screen",
   "@galleryDebugOpenPremium": {
     "description": "Button to navigate to premium screen"
+  },
+  "galleryDebugIapProductSeenTrue": "Set Product Seen: True",
+  "@galleryDebugIapProductSeenTrue": {
+    "description": "Button to simulate IAP product seen"
+  },
+  "galleryDebugIapProductSeenFalse": "Set Product Seen: False",
+  "@galleryDebugIapProductSeenFalse": {
+    "description": "Button to simulate IAP product not seen"
   }
 }

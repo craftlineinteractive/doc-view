@@ -28,10 +28,11 @@ Future<File> _createMinimalPdf(String path, int count) async {
   return file;
 }
 
-Widget _wrap(Widget child, {bool isPremium = true}) {
+Widget _wrap(Widget child, {bool isPremium = true, bool locksActive = true}) {
   return ProviderScope(
     overrides: [
       isPremiumProvider.overrideWithValue(isPremium),
+      locksActiveProvider.overrideWithValue(locksActive),
     ],
     child: MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -176,39 +177,45 @@ void main() {
       await tester.pumpWidget(const SizedBox.shrink());
     });
 
-    testWidgets('free user attempting to rotate page prompts upgrade dialog', (tester) async {
+    testWidgets('free user enters read-only mode with Edit pages CTA when locks are active', (tester) async {
       await tester.pumpWidget(
         _wrap(
           PagesScreen(file: docFile, initialPages: initialPages),
           isPremium: false,
+          locksActive: true,
         ),
       );
       await tester.pump();
 
-      // Tap tile 1 to select
-      await tester.tap(find.text('1'));
+      // Read-only mode: Save and Undo buttons are hidden
+      expect(find.byKey(const Key('pages_save_button')), findsNothing);
+      expect(find.byKey(const Key('pages_undo_button')), findsNothing);
+
+      // Bottom bar shows single Edit pages button
+      expect(find.byKey(const Key('pages_edit_pages_button')), findsOneWidget);
+      expect(find.text('Edit pages'), findsOneWidget);
+
+      await tester.pumpWidget(const SizedBox.shrink());
+    });
+
+    testWidgets('free user has full access when locks are NOT active (locksActive=false)', (tester) async {
+      await tester.pumpWidget(
+        _wrap(
+          PagesScreen(file: docFile, initialPages: initialPages),
+          isPremium: false,
+          locksActive: false,
+        ),
+      );
       await tester.pump();
 
+      // In unlocked mode, read-only "Edit pages" CTA is NOT shown
+      expect(find.byKey(const Key('pages_edit_pages_button')), findsNothing);
+
+      // Select page 1 and verify editing actions are available
+      await tester.tap(find.text('1'));
+      await tester.pump();
       expect(find.text('Rotate'), findsOneWidget);
 
-      // Tap Rotate
-      await tester.tap(find.text('Rotate'));
-      await tester.pumpAndSettle();
-
-      // Verify upgrade dialog appears
-      expect(find.text('Doc View Premium'), findsOneWidget);
-      expect(
-        find.text('Reordering, rotating, and deleting pages requires a Premium subscription.'),
-        findsOneWidget,
-      );
-      expect(find.text('Upgrade to Premium'), findsOneWidget);
-      expect(find.text('Cancel'), findsOneWidget);
-
-      // Dismiss dialog
-      await tester.tap(find.text('Cancel'));
-      await tester.pumpAndSettle();
-
-      expect(find.text('Doc View Premium Feature'), findsNothing);
       await tester.pumpWidget(const SizedBox.shrink());
     });
   });

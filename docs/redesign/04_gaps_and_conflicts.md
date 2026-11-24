@@ -126,7 +126,17 @@ Each entry is explicitly tagged with a proposed resolution:
 
 ---
 
-## 4. Summary of Actions
+## 11. Phase G7 In-App Purchases, Billing Integration & Safeguard Entitlement Corrections
+
+| # | Feature / Area | Specification & Technical Finding | Resolution & UI Behavior | Status |
+| :- | :--- | :--- | :--- | :--- |
+| 11.1 | **Single Subscription Product Model** | Modern Google Play Billing v5+ / v6 replaces separate product IDs with a single subscription product containing multiple base plans and offers. | Standardized on single product `docview_premium` with base plans `yearly` (period `P1Y`) and `monthly` (period `P1M`), and free trial offer `freetrial-7d`. Mirrored in `lib/core/config/iap_config.dart` and `docs/release/iap_products.txt`. | `[implemented & verified]` |
+| 11.2 | **Dynamic Trial Duration vs Static Strings** | Trial duration must not be hardcoded to 7 days, as promotional offers may configure different trial lengths (e.g. 14 or 30 days). | Created ISO 8601 duration parser `SubscriptionPlan.parseBillingPeriodDays(period)` extracting trial days dynamically from the introductory phase. Parameterized ARB templates with `{days}` placeholder; zero hard-coded trial days in `lib/` or ARB. | `[implemented & verified]` |
+| 11.3 | **Pre-Launch Lock Safeguard (`locksActive`)** | Before the app's IAP product is live in the Google Play Console, gating tools would permanently lock users out. | Gating is active ONLY when `FeatureFlags.premiumEnabled && (prefs.getBool(IapConfig.prefKeyIapProductSeen) ?? false)`. When false, all 5 tools remain 100% free, zero crown badges appear anywhere, PagesScreen is fully editable, and `/premium` displays a disabled state: "Subscriptions will be available soon." | `[implemented & verified]` |
+| 11.4 | **PagesScreen Free Tier UX** | Showing a modal dialog upon every touch interaction is disruptive and bad UX. | When locks are active for free users, `PagesScreen` enters read-only mode: drag-and-drop reordering is disabled, app bar Undo and Save are hidden, and the bottom toolbar is replaced with a single centered "Edit pages" crown button (`key: const Key('pages_edit_pages_button')`) that routes to `/premium`. | `[implemented & verified]` |
+| 11.5 | **Diamond Dependency Resolution (`xml: ^7.0.1`)** | Removing `dependency_overrides: xml: ^7.0.1` causes `flutter pub get` failure: `syncfusion_flutter_pdf 28.2.12` depends on `xml ^6.5.0` while `pdf 3.13.1` requires `xml ^7.0.1`. | `dependency_overrides: xml: ^7.0.1` is strictly required to resolve the diamond dependency conflict cleanly without modifying third-party packages. | `[verified]` |
+| 11.6 | **External Storage Permissions & Hash Differences** | External public storage (`/sdcard`) uses GID 1023 (`media_rw`) due to Android's FUSE emulation daemon, unlike internal sandbox (`u0_a219`). | Fully documented: Android kernel maps `/sdcard` through FUSE with `media_rw` ownership. Verified that early test hash `0f984aba` was from an early offline fixture generator, while live emulator renders produce `95bc3e28...`. | `[verified]` |
+
 
 - **Total Items Categorized**: 29
 - **Implement**: 16 items (Synthesized screens, persisted history, macros, size estimates, defect corrections)

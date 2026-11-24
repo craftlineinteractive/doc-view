@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../data/services/billing/billing_providers.dart';
-import '../config/feature_flags.dart';
-import '../extensions/l10n_extension.dart';
 
 /// Features gated by Doc View Premium.
 enum PremiumFeature {
@@ -19,12 +17,20 @@ enum PremiumFeature {
 class PremiumGate {
   const PremiumGate._();
 
-  /// Returns true if the user has access to [feature].
-  /// When `premiumEnabled` is false, everything is accessible.
+  /// Returns true if [feature] is unlocked for the user.
+  ///
+  /// LOCK SAFEGUARD:
+  /// Locks are active ONLY when `locksActiveProvider` is true (i.e. `premiumEnabled`
+  /// is true AND `iap_product_seen` has been cached from a store response).
+  /// If locks are not active, all features are fully open and accessible.
   static bool isUnlocked(WidgetRef ref, PremiumFeature feature) {
-    if (!premiumEnabled) return true;
+    final locksActive = ref.read(locksActiveProvider);
+    if (!locksActive) return true;
     return ref.read(isPremiumProvider);
   }
+
+  /// Returns true if [feature] is locked for the user.
+  static bool isLocked(WidgetRef ref, PremiumFeature feature) => !isUnlocked(ref, feature);
 
   /// Checks if [feature] is unlocked for the user.
   /// If locked, navigates to `/premium` and returns false.
@@ -32,38 +38,6 @@ class PremiumGate {
   static bool check(BuildContext context, WidgetRef ref, PremiumFeature feature) {
     if (isUnlocked(ref, feature)) return true;
     context.push('/premium');
-    return false;
-  }
-
-  /// Shows the Premium confirmation dialog for PagesScreen operations.
-  /// Returns true if the user is already premium, false otherwise (prompting upgrade).
-  static Future<bool> checkPagesEdit(BuildContext context, WidgetRef ref) async {
-    if (isUnlocked(ref, PremiumFeature.managePages)) return true;
-
-    final l10n = context.l10n;
-    final upgrade = await showDialog<bool>(
-      context: context,
-      builder: (dialogContext) {
-        return AlertDialog(
-          title: Text(l10n.premiumPagesGateTitle),
-          content: Text(l10n.premiumPagesGateBody),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(false),
-              child: Text(l10n.actionCancel),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.of(dialogContext).pop(true),
-              child: Text(l10n.premiumPagesGateUpgrade),
-            ),
-          ],
-        );
-      },
-    );
-
-    if (upgrade == true && context.mounted) {
-      context.push('/premium');
-    }
     return false;
   }
 }

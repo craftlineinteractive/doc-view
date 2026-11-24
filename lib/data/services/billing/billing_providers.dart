@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/config/feature_flags.dart';
 import 'play_purchase_gateway.dart';
 import 'premium_controller.dart';
 import 'purchase_gateway.dart';
@@ -32,6 +34,23 @@ final isPremiumProvider = Provider<bool>((ref) {
   final controller = ref.watch(premiumControllerProvider);
   final asyncState = ref.watch(premiumStateStreamProvider);
   return asyncState.asData?.value.isPremium ?? controller.state.isPremium;
+});
+
+/// Reactive boolean provider indicating whether premium locks and safeguards are active.
+///
+/// LOCK SAFEGUARD:
+/// Locks are active ONLY when:
+/// 1. `FeatureFlags.premiumEnabled` is true, AND
+/// 2. The store has returned the subscription product at least once (cached `iap_product_seen` is true).
+///
+/// If `iap_product_seen` has NOT been seen from the store, all features are completely FREE
+/// and open (no crown badges, PagesScreen fully editable, paywall shows "Subscriptions will be available soon.").
+final locksActiveProvider = Provider<bool>((ref) {
+  if (!premiumEnabled) return false;
+  final controller = ref.watch(premiumControllerProvider);
+  final asyncState = ref.watch(premiumStateStreamProvider);
+  final state = asyncState.asData?.value ?? controller.state;
+  return state.iapProductSeen;
 });
 
 /// Reactive boolean provider determining whether advertisements should be displayed.

@@ -5161,17 +5161,11 @@ abstract class AppLocalizations {
   /// **'Annual Subscription'**
   String get premiumPlanYearly;
 
-  /// Badge for annual plan
+  /// Trial subtitle with dynamic store price and days
   ///
   /// In en, this message translates to:
-  /// **'BEST VALUE'**
-  String get premiumPlanYearlyBadge;
-
-  /// Trial subtitle with dynamic store price
-  ///
-  /// In en, this message translates to:
-  /// **'7 days free, then {price}/year'**
-  String premiumPlanYearlyTrial(String price);
+  /// **'{days} days free, then {price}/year'**
+  String premiumPlanYearlyTrial(int days, String price);
 
   /// Label for monthly subscription plan
   ///
@@ -5185,11 +5179,65 @@ abstract class AppLocalizations {
   /// **'{price}/month'**
   String premiumPlanMonthlySub(String price);
 
-  /// Primary button for yearly trial
+  /// Annual subtitle with dynamic store price when trial is absent
   ///
   /// In en, this message translates to:
-  /// **'Start 7-Day Free Trial'**
-  String get premiumActionStartTrial;
+  /// **'{price}/year'**
+  String premiumPlanYearlySub(String price);
+
+  /// Monthly trial subtitle with dynamic store price and days
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days free, then {price}/month'**
+  String premiumPlanMonthlyTrial(int days, String price);
+
+  /// Savings badge on annual plan when percentage is calculated
+  ///
+  /// In en, this message translates to:
+  /// **'Save {percent}%'**
+  String premiumSavePercent(int percent);
+
+  /// Savings badge on annual plan when savings percentage is calculating
+  ///
+  /// In en, this message translates to:
+  /// **'Save -%'**
+  String get premiumSaveUnknown;
+
+  /// Primary button for plan trial
+  ///
+  /// In en, this message translates to:
+  /// **'Start {days}-Day Free Trial'**
+  String premiumActionStartTrial(int days);
+
+  /// Message displayed when subscription products have not been returned from store
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions will be available soon.'**
+  String get premiumSubscriptionsAvailableSoon;
+
+  /// Button in read-only PagesScreen navigating to paywall
+  ///
+  /// In en, this message translates to:
+  /// **'Edit pages'**
+  String get pagesEditPagesAction;
+
+  /// Reassurance notice that subscription can be cancelled anytime
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel anytime'**
+  String get premiumCancelAnytime;
+
+  /// Notice shown while purchase is pending in store
+  ///
+  /// In en, this message translates to:
+  /// **'Your purchase is being processed by Google Play. Entitlements will activate once confirmed.'**
+  String get premiumPendingStatus;
+
+  /// Renewal disclosure when pricing details could not be loaded from store
+  ///
+  /// In en, this message translates to:
+  /// **'Renews automatically. Pricing will be confirmed by Google Play at checkout. Cancel anytime in Google Play Subscriptions.'**
+  String get premiumRenewalDisclosurePricingUnavailable;
 
   /// Primary button for monthly subscription
   ///
@@ -5352,6 +5400,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open /premium Screen'**
   String get galleryDebugOpenPremium;
+
+  /// Button to simulate IAP product seen
+  ///
+  /// In en, this message translates to:
+  /// **'Set Product Seen: True'**
+  String get galleryDebugIapProductSeenTrue;
+
+  /// Button to simulate IAP product not seen
+  ///
+  /// In en, this message translates to:
+  /// **'Set Product Seen: False'**
+  String get galleryDebugIapProductSeenFalse;
 }
 
 class _AppLocalizationsDelegate

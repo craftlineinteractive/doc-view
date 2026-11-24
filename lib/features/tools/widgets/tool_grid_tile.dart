@@ -31,8 +31,9 @@ class ToolGridTile extends ConsumerWidget {
     final tokens = context.tokens;
     final title = tool.title(context.l10n);
     final subtitle = tool.subtitle(context.l10n);
+    final locksActive = ref.watch(locksActiveProvider);
     final isPremium = ref.watch(isPremiumProvider);
-    final showCrownBadge = tool.isPremium() && !isPremium;
+    final showCrownBadge = locksActive && !isPremium && tool.isPremium();
 
     return Semantics(
       button: true,

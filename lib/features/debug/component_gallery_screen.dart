@@ -228,7 +228,8 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
           ref.read(premiumControllerProvider).setSimulatedState(
             isPremium: true,
             isGracePeriod: false,
-            activeProductId: IapConfig.yearlySubscriptionId,
+            activeProductId: IapConfig.subscriptionProductId,
+            activeBasePlanId: IapConfig.yearlyBasePlanId,
             verifiedAt: DateTime.now(),
           );
           await Future.delayed(const Duration(milliseconds: 600));
@@ -1410,7 +1411,8 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                                     controller.setSimulatedState(
                                       isPremium: true,
                                       isGracePeriod: false,
-                                      activeProductId: IapConfig.yearlySubscriptionId,
+                                      activeProductId: IapConfig.subscriptionProductId,
+                                      activeBasePlanId: IapConfig.yearlyBasePlanId,
                                       verifiedAt: DateTime.now(),
                                     );
                                   },
@@ -1422,7 +1424,8 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                                     controller.setSimulatedState(
                                       isPremium: true,
                                       isGracePeriod: false,
-                                      activeProductId: IapConfig.monthlySubscriptionId,
+                                      activeProductId: IapConfig.subscriptionProductId,
+                                      activeBasePlanId: IapConfig.monthlyBasePlanId,
                                       verifiedAt: DateTime.now(),
                                     );
                                   },
@@ -1434,7 +1437,8 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                                     controller.setSimulatedState(
                                       isPremium: true,
                                       isGracePeriod: true,
-                                      activeProductId: IapConfig.yearlySubscriptionId,
+                                      activeProductId: IapConfig.subscriptionProductId,
+                                      activeBasePlanId: IapConfig.yearlyBasePlanId,
                                       verifiedAt: DateTime.now().subtract(const Duration(days: 3)),
                                     );
                                   },
@@ -1446,11 +1450,38 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                                     controller.setSimulatedState(
                                       isPremium: false,
                                       isGracePeriod: false,
-                                      activeProductId: IapConfig.yearlySubscriptionId,
+                                      activeProductId: IapConfig.subscriptionProductId,
+                                      activeBasePlanId: IapConfig.yearlyBasePlanId,
                                       verifiedAt: DateTime.now().subtract(const Duration(days: 8)),
                                     );
                                   },
                                   child: Text(themedContext.l10n.galleryDebugIapStateGraceExpired),
+                                ),
+                                FilledButton.tonal(
+                                  key: const Key('gallery_set_product_seen_true'),
+                                  onPressed: () {
+                                    controller.setSimulatedState(
+                                      isPremium: pState.isPremium,
+                                      isGracePeriod: pState.isGracePeriod,
+                                      activeProductId: pState.activeProductId,
+                                      activeBasePlanId: pState.activeBasePlanId,
+                                      iapProductSeen: true,
+                                    );
+                                  },
+                                  child: Text(themedContext.l10n.galleryDebugIapProductSeenTrue),
+                                ),
+                                FilledButton.tonal(
+                                  key: const Key('gallery_set_product_seen_false'),
+                                  onPressed: () {
+                                    controller.setSimulatedState(
+                                      isPremium: pState.isPremium,
+                                      isGracePeriod: pState.isGracePeriod,
+                                      activeProductId: pState.activeProductId,
+                                      activeBasePlanId: pState.activeBasePlanId,
+                                      iapProductSeen: false,
+                                    );
+                                  },
+                                  child: Text(themedContext.l10n.galleryDebugIapProductSeenFalse),
                                 ),
                               ],
                             ),

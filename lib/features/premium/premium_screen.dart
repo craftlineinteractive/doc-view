@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/config/iap_config.dart';
@@ -16,6 +15,7 @@ import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../data/services/billing/billing_providers.dart';
 import '../../data/services/billing/premium_controller.dart';
+import '../../data/services/billing/subscription_plan.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
 
 /// Screen presenting Doc View Premium subscription plans, benefits, and purchase flows.
@@ -28,6 +28,8 @@ class PremiumScreen extends ConsumerStatefulWidget {
 
 class _PremiumScreenState extends ConsumerState<PremiumScreen>
     with SingleTickerProviderStateMixin {
+  static bool _introPlayedThisSession = false;
+
   late final AnimationController _animController;
   late final Animation<double> _crownScale;
   late final Animation<double> _crownGlow;
@@ -37,7 +39,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
   late final Animation<Offset> _plansSlide;
   late final Animation<double> _plansFade;
 
-  String _selectedProductId = IapConfig.yearlySubscriptionId;
+  String _selectedPeriod = IapConfig.periodYearly;
 
   @override
   void initState() {
@@ -113,8 +115,10 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
               ref.read(premiumControllerProvider).setSimulatedState(
                 isPremium: true,
                 isGracePeriod: false,
-                activeProductId: IapConfig.yearlySubscriptionId,
+                activeProductId: IapConfig.subscriptionProductId,
+                activeBasePlanId: IapConfig.yearlyBasePlanId,
                 verifiedAt: DateTime.now(),
+                iapProductSeen: true,
               );
             });
           }
@@ -124,9 +128,10 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      if (MediaQuery.maybeDisableAnimationsOf(context) ?? false) {
+      if (_introPlayedThisSession || (MediaQuery.maybeDisableAnimationsOf(context) ?? false)) {
         _animController.value = 1.0;
       } else {
+        _introPlayedThisSession = true;
         _animController.forward();
       }
     });
@@ -140,11 +145,11 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
 
   Future<void> _handleSubscribe(
     PremiumController controller,
-    ProductDetails? selectedProduct,
+    SubscriptionPlan? selectedPlan,
   ) async {
-    if (selectedProduct == null) return;
+    if (selectedPlan == null) return;
     try {
-      final success = await controller.buySubscription(selectedProduct);
+      final success = await controller.buyPlan(selectedPlan);
       if (!mounted) return;
 
       if (success) {
@@ -215,64 +220,104 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
     final premiumState = asyncState.asData?.value ?? controller.state;
     final isAlreadyPremium = premiumState.isPremium && !premiumState.isGracePeriod;
     final isGracePeriod = premiumState.isGracePeriod;
+    final isProductSeen = premiumState.iapProductSeen;
 
-    ProductDetails? yearlyProduct;
-    ProductDetails? monthlyProduct;
-    for (final p in premiumState.products) {
-      if (p.id == IapConfig.yearlySubscriptionId) {
-        yearlyProduct = p;
-      } else if (p.id == IapConfig.monthlySubscriptionId) {
-        monthlyProduct = p;
+    SubscriptionPlan? yearlyPlan;
+    SubscriptionPlan? monthlyPlan;
+
+    for (final plan in premiumState.plans) {
+      if (plan.isYearly && yearlyPlan == null) {
+        yearlyPlan = plan;
+      } else if (plan.isMonthly && monthlyPlan == null) {
+        monthlyPlan = plan;
       }
     }
 
-    final selectedProduct = _selectedProductId == IapConfig.yearlySubscriptionId
-        ? yearlyProduct
-        : monthlyProduct;
+    final selectedPlan = _selectedPeriod == IapConfig.periodYearly ? yearlyPlan : monthlyPlan;
+    final yearlyPrice = yearlyPlan?.formattedPrice ?? '...';
+    final monthlyPrice = monthlyPlan?.formattedPrice ?? '...';
 
-    final yearlyPrice = yearlyProduct?.price ?? '...';
-    final monthlyPrice = monthlyProduct?.price ?? '...';
+    // Calculate dynamic savings percentage: ((12 * monthly - yearly) / (12 * monthly) * 100)
+    int? savingsPercent;
+    if (yearlyPlan != null && monthlyPlan != null) {
+      if (yearlyPlan.rawPrice > 0 && monthlyPlan.rawPrice > 0) {
+        final annualMonthlyCost = 12 * monthlyPlan.rawPrice;
+        final diff = annualMonthlyCost - yearlyPlan.rawPrice;
+        final pct = ((diff / annualMonthlyCost) * 100).round();
+        if (pct >= 1) {
+          savingsPercent = pct;
+        }
+      }
+    }
 
-    return Scaffold(
-      backgroundColor: isDark ? DocViewColors.backgroundDark : Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        leading: DocIconButton(
-          icon: AppIcons.close,
-          tooltip: l10n.actionClose,
-          onPressed: () => context.pop(),
-        ),
-        actions: [
-          TextButton(
-            onPressed: premiumState.isLoading || premiumState.isRestoring
-                ? null
-                : () => _handleRestore(controller),
-            style: TextButton.styleFrom(
-              foregroundColor: tokens.textSecondary,
-              minimumSize: const Size(48, 48),
-            ),
-            child: Text(
-              l10n.premiumActionRestore,
-              style: DocViewTypography.labelMd.copyWith(
-                color: tokens.textSecondary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+    final String? savingsBadgeText = (yearlyPlan != null && monthlyPlan != null)
+        ? (savingsPercent != null ? l10n.premiumSavePercent(savingsPercent) : l10n.premiumSaveUnknown)
+        : null;
+
+    final String yearlySubtitle = (yearlyPlan?.hasFreeTrial ?? false) && (yearlyPlan?.trialDays != null && yearlyPlan!.trialDays! > 0)
+        ? l10n.premiumPlanYearlyTrial(yearlyPlan.trialDays!, yearlyPrice)
+        : l10n.premiumPlanYearlySub(yearlyPrice);
+
+    final String monthlySubtitle = (monthlyPlan?.hasFreeTrial ?? false) && (monthlyPlan?.trialDays != null && monthlyPlan!.trialDays! > 0)
+        ? l10n.premiumPlanMonthlyTrial(monthlyPlan.trialDays!, monthlyPrice)
+        : l10n.premiumPlanMonthlySub(monthlyPrice);
+
+    final bool hasTrial = selectedPlan != null && selectedPlan.hasFreeTrial && (selectedPlan.trialDays ?? 0) > 0;
+    final String ctaLabel = hasTrial
+        ? l10n.premiumActionStartTrial(selectedPlan.trialDays!)
+        : l10n.premiumActionSubscribe;
+
+    final showTerms = AppConstants.termsOfUseUrl.isNotEmpty;
+    final showPrivacy = AppConstants.privacyPolicyUrl.isNotEmpty;
+
+    return GestureDetector(
+      onTap: () {
+        if (_animController.isAnimating) {
+          _animController.forward(from: 1.0);
+        }
+      },
+      behavior: HitTestBehavior.translucent,
+      child: Scaffold(
+        backgroundColor: isDark ? DocViewColors.backgroundDark : Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          leading: DocIconButton(
+            icon: AppIcons.close,
+            tooltip: l10n.actionClose,
+            onPressed: () => context.pop(),
           ),
-          const SizedBox(width: 8),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
+          actions: [
+            TextButton(
+              onPressed: premiumState.isLoading || premiumState.isRestoring
+                  ? null
+                  : () => _handleRestore(controller),
+              child: premiumState.isRestoring
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : Text(
+                      l10n.premiumActionRestore,
+                      style: DocViewTypography.bodySm.copyWith(
+                        color: tokens.primaryBlue,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+            ),
+          ],
+        ),
+        body: Column(
           children: [
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // 1. Crown Badge & Glow animation
+                    // 1. Animated Gold Crown with Radial Glow
                     AnimatedBuilder(
                       animation: _animController,
                       builder: (context, child) {
@@ -282,14 +327,14 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
                             alignment: Alignment.center,
                             children: [
                               Container(
-                                width: 84,
-                                height: 84,
+                                width: 100,
+                                height: 100,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   gradient: RadialGradient(
                                     colors: [
                                       tokens.premiumGold.withValues(
-                                        alpha: 0.35 * _crownGlow.value,
+                                        alpha: 0.28 * _crownGlow.value,
                                       ),
                                       Colors.transparent,
                                     ],
@@ -390,7 +435,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    premiumState.activeProductId == IapConfig.yearlySubscriptionId
+                                    premiumState.activeBasePlanId == IapConfig.yearlyBasePlanId
                                         ? l10n.premiumPlanYearly
                                         : l10n.premiumPlanMonthly,
                                     style: DocViewTypography.bodySm.copyWith(
@@ -450,40 +495,76 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
                     ),
                     const SizedBox(height: 28),
 
-                    // 4. Plan Selection Cards
-                    SlideTransition(
-                      position: _plansSlide,
-                      child: FadeTransition(
-                        opacity: _plansFade,
+                    // 4. Plan Selection Cards OR Disabled State
+                    if (!isProductSeen)
+                      Container(
+                        key: const Key('premium_disabled_state'),
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                        decoration: BoxDecoration(
+                          color: isDark ? DocViewColors.surfaceDark : tokens.surfaceAlt,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: tokens.hairline),
+                        ),
                         child: Column(
                           children: [
-                            // Yearly Card (Recommended)
-                            _PlanCard(
-                              key: const Key('plan_card_yearly'),
-                              title: l10n.premiumPlanYearly,
-                              badgeText: l10n.premiumPlanYearlyBadge,
-                              subtitle: l10n.premiumPlanYearlyTrial(yearlyPrice),
-                              isSelected: _selectedProductId == IapConfig.yearlySubscriptionId,
-                              onTap: () => setState(() {
-                                _selectedProductId = IapConfig.yearlySubscriptionId;
-                              }),
+                            Icon(
+                              Icons.schedule_rounded,
+                              color: tokens.textSecondary,
+                              size: 32,
                             ),
                             const SizedBox(height: 12),
-
-                            // Monthly Card
-                            _PlanCard(
-                              key: const Key('plan_card_monthly'),
-                              title: l10n.premiumPlanMonthly,
-                              subtitle: l10n.premiumPlanMonthlySub(monthlyPrice),
-                              isSelected: _selectedProductId == IapConfig.monthlySubscriptionId,
-                              onTap: () => setState(() {
-                                _selectedProductId = IapConfig.monthlySubscriptionId;
-                              }),
+                            Text(
+                              l10n.premiumSubscriptionsAvailableSoon,
+                              textAlign: TextAlign.center,
+                              style: DocViewTypography.bodyMd.copyWith(
+                                color: tokens.textSecondary,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ],
                         ),
+                      )
+                    else
+                      SlideTransition(
+                        position: _plansSlide,
+                        child: FadeTransition(
+                          opacity: _plansFade,
+                          child: Column(
+                            children: [
+                              // Exactly Yearly first (preselected)
+                              _PlanCard(
+                                key: const Key('plan_card_yearly'),
+                                title: l10n.premiumPlanYearly,
+                                badgeText: savingsBadgeText,
+                                subtitle: yearlySubtitle,
+                                isSelected: _selectedPeriod == IapConfig.periodYearly,
+                                onTap: () => setState(() {
+                                  _selectedPeriod = IapConfig.periodYearly;
+                                  if (yearlyPlan != null) {
+                                    controller.selectPlan(yearlyPlan);
+                                  }
+                                }),
+                              ),
+                              const SizedBox(height: 12),
+
+                              // Exactly Monthly second
+                              _PlanCard(
+                                key: const Key('plan_card_monthly'),
+                                title: l10n.premiumPlanMonthly,
+                                subtitle: monthlySubtitle,
+                                isSelected: _selectedPeriod == IapConfig.periodMonthly,
+                                onTap: () => setState(() {
+                                  _selectedPeriod = IapConfig.periodMonthly;
+                                  if (monthlyPlan != null) {
+                                    controller.selectPlan(monthlyPlan);
+                                  }
+                                }),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
                     const SizedBox(height: 20),
                   ],
                 ),
@@ -518,9 +599,9 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
                     height: 52,
                     child: FilledButton(
                       key: const Key('premium_cta_button'),
-                      onPressed: premiumState.isLoading || premiumState.isRestoring
+                      onPressed: (!isProductSeen || premiumState.isLoading || premiumState.isRestoring)
                           ? null
-                          : () => _handleSubscribe(controller, selectedProduct),
+                          : () => _handleSubscribe(controller, selectedPlan),
                       style: FilledButton.styleFrom(
                         backgroundColor: tokens.primaryBlue,
                         shape: RoundedRectangleBorder(
@@ -537,9 +618,9 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
                               ),
                             )
                           : Text(
-                              _selectedProductId == IapConfig.yearlySubscriptionId
-                                  ? l10n.premiumActionStartTrial
-                                  : l10n.premiumActionSubscribe,
+                              !isProductSeen
+                                  ? l10n.premiumSubscriptionsAvailableSoon
+                                  : ctaLabel,
                               style: DocViewTypography.headlineSm.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
@@ -550,9 +631,11 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
                   ),
                   const SizedBox(height: 10),
 
-                  // Billing disclaimer
+                  // Renewal disclaimer with pricing-unavailable fallback
                   Text(
-                    l10n.premiumBillingDisclaimer,
+                    (yearlyPlan == null && monthlyPlan == null)
+                        ? l10n.premiumRenewalDisclosurePricingUnavailable
+                        : l10n.premiumBillingDisclaimer,
                     textAlign: TextAlign.center,
                     style: DocViewTypography.captionXs.copyWith(
                       color: tokens.textSecondary,
@@ -562,40 +645,45 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
                   ),
                   const SizedBox(height: 6),
 
-                  // Legal Links: Terms & Privacy
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () => _openUrl(AppConstants.termsOfUseUrl),
-                        child: Text(
-                          l10n.premiumTerms,
-                          style: DocViewTypography.captionXs.copyWith(
-                            color: tokens.primaryBlue,
-                            decoration: TextDecoration.underline,
-                            fontSize: 11,
+                  // Legal Links: Terms & Privacy (HIDDEN when constants are empty)
+                  if (showTerms || showPrivacy) ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (showTerms)
+                          GestureDetector(
+                            onTap: () => _openUrl(AppConstants.termsOfUseUrl),
+                            child: Text(
+                              l10n.premiumTerms,
+                              style: DocViewTypography.captionXs.copyWith(
+                                color: tokens.primaryBlue,
+                                decoration: TextDecoration.underline,
+                                fontSize: 11,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Text(
-                        ' • ',
-                        style: DocViewTypography.captionXs.copyWith(
-                          color: tokens.textSecondary,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () => _openUrl(AppConstants.privacyPolicyUrl),
-                        child: Text(
-                          l10n.premiumPrivacy,
-                          style: DocViewTypography.captionXs.copyWith(
-                            color: tokens.primaryBlue,
-                            decoration: TextDecoration.underline,
-                            fontSize: 11,
+                        if (showTerms && showPrivacy)
+                          Text(
+                            ' • ',
+                            style: DocViewTypography.captionXs.copyWith(
+                              color: tokens.textSecondary,
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
+                        if (showPrivacy)
+                          GestureDetector(
+                            onTap: () => _openUrl(AppConstants.privacyPolicyUrl),
+                            child: Text(
+                              l10n.premiumPrivacy,
+                              style: DocViewTypography.captionXs.copyWith(
+                                color: tokens.primaryBlue,
+                                decoration: TextDecoration.underline,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
                 ],
               ),
             ),

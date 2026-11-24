@@ -205,7 +205,9 @@ class ToolsScreen extends ConsumerWidget {
   }
 
   void _handleToolTap(BuildContext context, WidgetRef ref, ToolDef tool) {
-    if (tool.id != 'manage_pages' && tool.isPremium() && !ref.read(isPremiumProvider)) {
+    final locksActive = ref.read(locksActiveProvider);
+    final isPremium = ref.read(isPremiumProvider);
+    if (tool.id != 'manage_pages' && tool.isPremium() && (locksActive && !isPremium)) {
       context.push('/premium');
       return;
     }
@@ -286,6 +288,7 @@ class ToolsScreen extends ConsumerWidget {
     final editTools = getToolsForSection(ToolSection.editAndManage);
     final otherTools = getToolsForSection(ToolSection.others);
     final isPremium = ref.watch(isPremiumProvider);
+    final locksActive = ref.watch(locksActiveProvider);
 
     return DocScaffold(
       applyHeaderGradient: true,
@@ -323,13 +326,14 @@ class ToolsScreen extends ConsumerWidget {
           ],
         ),
         actions: [
-          DocIconButton(
-            key: const Key('tools_crown_button'),
-            icon: AppIcons.crown,
-            color: isPremium ? tokens.primaryBlue : tokens.premiumGold,
-            tooltip: context.l10n.premiumTooltip,
-            onPressed: () => context.push('/premium'),
-          ),
+          if (locksActive && !isPremium)
+            DocIconButton(
+              key: const Key('tools_crown_button'),
+              icon: AppIcons.crown,
+              color: tokens.premiumGold,
+              tooltip: context.l10n.premiumTooltip,
+              onPressed: () => context.push('/premium'),
+            ),
           DocIconButton(
             icon: AppIcons.search,
             tooltip: context.l10n.tooltipSearch,

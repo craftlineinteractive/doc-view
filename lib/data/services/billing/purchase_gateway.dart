@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
+import 'subscription_plan.dart';
+
 /// Abstract contract for In-App Billing store operations.
 ///
 /// Decouples UI and state management from the concrete platform billing engine
@@ -15,6 +17,12 @@ abstract class PurchaseGateway {
 
   /// Queries the store for localized product details (title, description, price).
   Future<List<ProductDetails>> queryProductDetails(Set<String> productIds);
+
+  /// Queries the store for subscription base plans and introductory offers.
+  Future<List<SubscriptionPlan>> querySubscriptionPlans();
+
+  /// Initiates a purchase flow for a specific subscription plan.
+  Future<bool> buyPlan({required SubscriptionPlan plan});
 
   /// Initiates a purchase flow for an auto-renewing subscription or non-consumable item.
   Future<bool> buySubscription({required ProductDetails productDetails});

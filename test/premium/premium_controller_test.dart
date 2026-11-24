@@ -19,7 +19,7 @@ void main() {
       fakeGateway.dispose();
     });
 
-    test('Fresh free user initializes with isPremium = false and loads products', () async {
+    test('Fresh free user initializes with isPremium = false and loads products/plans', () async {
       final prefs = await SharedPreferences.getInstance();
       final controller = PremiumController(gateway: fakeGateway, prefs: prefs);
 
@@ -28,11 +28,14 @@ void main() {
 
       expect(controller.state.isPremium, isFalse);
       expect(controller.state.isGracePeriod, isFalse);
-      expect(controller.state.products.length, 2);
-      // Yearly should be sorted first
-      expect(controller.state.products[0].id, IapConfig.yearlySubscriptionId);
-      expect(controller.state.products[1].id, IapConfig.monthlySubscriptionId);
-      expect(controller.state.selectedProduct?.id, IapConfig.yearlySubscriptionId);
+      expect(controller.state.iapProductSeen, isTrue);
+      expect(controller.state.plans.length, 2);
+      // Yearly should be sorted first, monthly second
+      expect(controller.state.plans[0].billingPeriod, IapConfig.periodYearly);
+      expect(controller.state.plans[0].basePlanId, IapConfig.yearlyBasePlanId);
+      expect(controller.state.plans[1].billingPeriod, IapConfig.periodMonthly);
+      expect(controller.state.plans[1].basePlanId, IapConfig.monthlyBasePlanId);
+      expect(controller.state.selectedPlan?.basePlanId, IapConfig.yearlyBasePlanId);
     });
 
     test('Offline grace period: active within 7 days is sustained with isPremium = true', () async {
@@ -42,7 +45,8 @@ void main() {
       SharedPreferences.setMockInitialValues({
         IapConfig.prefKeyPremiumActive: true,
         IapConfig.prefKeyPremiumVerifiedAtMs: verifiedAt.millisecondsSinceEpoch,
-        IapConfig.prefKeyIapProductSeen: IapConfig.yearlySubscriptionId,
+        IapConfig.prefKeyPurchaseToken: IapConfig.subscriptionProductId,
+        IapConfig.prefKeyActiveBasePlan: IapConfig.yearlyBasePlanId,
       });
 
       final prefs = await SharedPreferences.getInstance();
@@ -56,7 +60,7 @@ void main() {
 
       expect(controller.state.isPremium, isTrue);
       expect(controller.state.isGracePeriod, isTrue);
-      expect(controller.state.activeProductId, IapConfig.yearlySubscriptionId);
+      expect(controller.state.activeProductId, IapConfig.subscriptionProductId);
       expect(controller.state.verifiedAt, verifiedAt);
     });
 
@@ -67,7 +71,8 @@ void main() {
       SharedPreferences.setMockInitialValues({
         IapConfig.prefKeyPremiumActive: true,
         IapConfig.prefKeyPremiumVerifiedAtMs: verifiedAt.millisecondsSinceEpoch,
-        IapConfig.prefKeyIapProductSeen: IapConfig.yearlySubscriptionId,
+        IapConfig.prefKeyPurchaseToken: IapConfig.subscriptionProductId,
+        IapConfig.prefKeyActiveBasePlan: IapConfig.yearlyBasePlanId,
       });
 
       final prefs = await SharedPreferences.getInstance();
@@ -98,21 +103,22 @@ void main() {
       await Future<void>.delayed(const Duration(milliseconds: 50));
       expect(controller.state.isPremium, isFalse);
 
-      final success = await controller.buySubscription(controller.state.products[0]);
+      final success = await controller.buyPlan(controller.state.plans[0]);
       expect(success, isTrue);
 
       await Future<void>.delayed(const Duration(milliseconds: 50));
 
       expect(controller.state.isPremium, isTrue);
       expect(controller.state.isGracePeriod, isFalse);
-      expect(controller.state.activeProductId, IapConfig.yearlySubscriptionId);
+      expect(controller.state.activeProductId, IapConfig.subscriptionProductId);
       expect(controller.state.isLoading, isFalse);
       expect(controller.state.errorMessage, isNull);
 
       // Verify persisted cache in SharedPreferences
       expect(prefs.getBool(IapConfig.prefKeyPremiumActive), isTrue);
       expect(prefs.getInt(IapConfig.prefKeyPremiumVerifiedAtMs), fixedNow.millisecondsSinceEpoch);
-      expect(prefs.getString(IapConfig.prefKeyIapProductSeen), IapConfig.yearlySubscriptionId);
+      expect(prefs.getString(IapConfig.prefKeyPurchaseToken), contains(IapConfig.subscriptionProductId));
+      expect(prefs.getBool(IapConfig.prefKeyIapProductSeen), isTrue);
     });
 
     test('Purchase failure updates state with error message and keeps isPremium = false', () async {
@@ -121,7 +127,7 @@ void main() {
       final controller = PremiumController(gateway: fakeGateway, prefs: prefs);
 
       await Future<void>.delayed(const Duration(milliseconds: 50));
-      await controller.buySubscription(controller.state.products[0]);
+      await controller.buyPlan(controller.state.plans[0]);
       await Future<void>.delayed(const Duration(milliseconds: 50));
 
       expect(controller.state.isPremium, isFalse);
@@ -140,7 +146,7 @@ void main() {
       await Future<void>.delayed(const Duration(milliseconds: 50));
 
       expect(controller.state.isPremium, isTrue);
-      expect(controller.state.activeProductId, IapConfig.yearlySubscriptionId);
+      expect(controller.state.activeProductId, IapConfig.subscriptionProductId);
     });
   });
 }

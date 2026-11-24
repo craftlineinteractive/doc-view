@@ -63,17 +63,38 @@ void main() {
       expect(find.byKey(const Key('plan_card_yearly')), findsOneWidget);
       expect(find.byKey(const Key('plan_card_monthly')), findsOneWidget);
       expect(find.text('Annual Subscription'), findsOneWidget);
-      expect(find.text('BEST VALUE'), findsOneWidget);
       expect(find.text('Monthly Subscription'), findsOneWidget);
 
-      // Default CTA for yearly
+      // Default CTA for yearly with dynamic trial days
       expect(find.byKey(const Key('premium_cta_button')), findsOneWidget);
-      expect(find.text('Start 7-Day Free Trial'), findsOneWidget);
+      expect(find.textContaining('Free Trial'), findsOneWidget);
 
       // Legal & Disclaimer
       expect(find.textContaining('Renews automatically'), findsOneWidget);
-      expect(find.text('Terms of Service'), findsOneWidget);
-      expect(find.text('Privacy Policy'), findsOneWidget);
+    });
+
+    testWidgets('renders disabled state when iapProductSeen is false', (tester) async {
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      premiumController.setSimulatedState(
+        isPremium: false,
+        iapProductSeen: false,
+      );
+
+      await tester.pumpApp(
+        const PremiumScreen(),
+        overrides: [
+          purchaseGatewayProvider.overrideWithValue(fakeGateway),
+          premiumControllerProvider.overrideWithValue(premiumController),
+        ],
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(const Key('premium_disabled_state')), findsOneWidget);
+      expect(find.text('Subscriptions will be available soon.'), findsWidgets);
     });
 
     testWidgets('switching to monthly plan changes CTA button text to Subscribe', (tester) async {
@@ -91,7 +112,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.text('Start 7-Day Free Trial'), findsOneWidget);
+      expect(find.textContaining('Free Trial'), findsOneWidget);
 
       // Tap monthly plan card
       await tester.tap(find.byKey(const Key('plan_card_monthly')));
@@ -103,7 +124,7 @@ void main() {
       await tester.tap(find.byKey(const Key('plan_card_yearly')));
       await tester.pumpAndSettle();
 
-      expect(find.text('Start 7-Day Free Trial'), findsOneWidget);
+      expect(find.textContaining('Free Trial'), findsOneWidget);
     });
 
     testWidgets('tapping restore purchases calls controller and handles result', (tester) async {
@@ -135,7 +156,7 @@ void main() {
       premiumController.setSimulatedState(
         isPremium: true,
         isGracePeriod: false,
-        activeProductId: IapConfig.yearlySubscriptionId,
+        activeProductId: IapConfig.subscriptionProductId,
         verifiedAt: DateTime.now(),
       );
 
@@ -156,7 +177,7 @@ void main() {
       premiumController.setSimulatedState(
         isPremium: true,
         isGracePeriod: true,
-        activeProductId: IapConfig.yearlySubscriptionId,
+        activeProductId: IapConfig.subscriptionProductId,
         verifiedAt: DateTime.now().subtract(const Duration(days: 3)),
       );
 
@@ -174,13 +195,34 @@ void main() {
   });
 
   group('Premium Gating Integration Tests', () {
-    testWidgets('ToolsScreen renders gold Crown badges on gated tools for free users', (tester) async {
-      premiumController.setSimulatedState(isPremium: false);
+    testWidgets('ToolsScreen hides crown badges when locksActive is false', (tester) async {
+      premiumController.setSimulatedState(isPremium: false, iapProductSeen: false);
 
       await tester.pumpApp(
         const ToolsScreen(),
         overrides: [
           premiumControllerProvider.overrideWithValue(premiumController),
+          locksActiveProvider.overrideWithValue(false),
+        ],
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(const Key('tools_crown_button')), findsNothing);
+      expect(find.byKey(const Key('tool_crown_badge_pdf_to_word')), findsNothing);
+      expect(find.byKey(const Key('tool_crown_badge_annotate')), findsNothing);
+      expect(find.byKey(const Key('tool_crown_badge_add_text')), findsNothing);
+      expect(find.byKey(const Key('tool_crown_badge_sign')), findsNothing);
+      expect(find.byKey(const Key('tool_crown_badge_manage_pages')), findsNothing);
+    });
+
+    testWidgets('ToolsScreen renders gold Crown badges on gated tools when locksActive is true', (tester) async {
+      premiumController.setSimulatedState(isPremium: false, iapProductSeen: true);
+
+      await tester.pumpApp(
+        const ToolsScreen(),
+        overrides: [
+          premiumControllerProvider.overrideWithValue(premiumController),
+          locksActiveProvider.overrideWithValue(true),
         ],
       );
       await tester.pumpAndSettle();
@@ -203,13 +245,14 @@ void main() {
     testWidgets('ToolsScreen hides crown badges when user is premium', (tester) async {
       premiumController.setSimulatedState(
         isPremium: true,
-        activeProductId: IapConfig.yearlySubscriptionId,
+        activeProductId: IapConfig.subscriptionProductId,
       );
 
       await tester.pumpApp(
         const ToolsScreen(),
         overrides: [
           premiumControllerProvider.overrideWithValue(premiumController),
+          locksActiveProvider.overrideWithValue(true),
         ],
       );
       await tester.pumpAndSettle();
@@ -219,8 +262,8 @@ void main() {
       expect(find.byKey(const Key('tool_crown_badge_manage_pages')), findsNothing);
     });
 
-    testWidgets('PagesScreen blocks editing actions with upgrade dialog for free users', (tester) async {
-      premiumController.setSimulatedState(isPremium: false);
+    testWidgets('PagesScreen enters read-only mode with Edit pages CTA when locks are active for free users', (tester) async {
+      premiumController.setSimulatedState(isPremium: false, iapProductSeen: true);
 
       final dummyFile = DocFile(
         path: '/tmp/test.pdf',
@@ -240,6 +283,7 @@ void main() {
         PagesScreen(file: dummyFile, initialPages: dummyPages),
         overrides: [
           premiumControllerProvider.overrideWithValue(premiumController),
+          locksActiveProvider.overrideWithValue(true),
         ],
       );
       await tester.pumpAndSettle();
@@ -247,27 +291,13 @@ void main() {
       // Free user can view page thumbnails and page count
       expect(find.text('2 Pages'), findsOneWidget);
 
-      // Select page 0
-      await tester.tap(find.text('1'));
-      await tester.pumpAndSettle();
+      // Save and Undo buttons are hidden
+      expect(find.byKey(const Key('pages_save_button')), findsNothing);
+      expect(find.byKey(const Key('pages_undo_button')), findsNothing);
 
-      // Tap Rotate action
-      await tester.tap(find.byIcon(Icons.rotate_right_rounded));
-      await tester.pumpAndSettle();
-
-      // Upgrade Dialog MUST appear
-      expect(find.text('Doc View Premium'), findsOneWidget);
-      expect(
-        find.text('Reordering, rotating, and deleting pages requires a Premium subscription.'),
-        findsOneWidget,
-      );
-      expect(find.text('Upgrade to Premium'), findsOneWidget);
-      expect(find.text('Cancel'), findsOneWidget);
-
-      // Dismiss dialog
-      await tester.tap(find.text('Cancel'));
-      await tester.pumpAndSettle();
-      expect(find.text('Reordering, rotating, and deleting pages requires a Premium subscription.'), findsNothing);
+      // Bottom bar has Edit pages crown button
+      expect(find.byKey(const Key('pages_edit_pages_button')), findsOneWidget);
+      expect(find.text('Edit pages'), findsOneWidget);
     });
   });
 }

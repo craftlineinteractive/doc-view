@@ -4087,13 +4087,21 @@
   "@premiumPlanYearly": {
     "description": "Label for annual subscription plan"
   },
-  "premiumPlanYearlyBadge": "[ƁÉŞŢ ṼÂŁÛÉ ẋ]",
-  "@premiumPlanYearlyBadge": {
-    "description": "Badge for annual plan"
-  },
-  "premiumPlanYearlyTrial": "[7 đàýš ƒřéé, ţĥéñ {price}/ýéàř ẋẋẋẋ]",
+  "premiumPlanYearlyTrial": "[{days} đàýš ƒřéé, ţĥéñ {price}/ýéàř ẋẋẋẋ]",
   "@premiumPlanYearlyTrial": {
-    "description": "Trial subtitle with dynamic store price",
+    "description": "Trial subtitle with dynamic store price and days",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumPlanYearlySub": "[{price}/ýéàř ẋẋ]",
+  "@premiumPlanYearlySub": {
+    "description": "Annual subtitle with dynamic store price when trial is absent",
     "placeholders": {
       "price": {
         "type": "String"
@@ -4113,9 +4121,59 @@
       }
     }
   },
-  "premiumActionStartTrial": "[Şţàřţ 7-Đàý Ƒřéé Ţřîàł ẋẋẋ]",
+  "premiumPlanMonthlyTrial": "[{days} đàýš ƒřéé, ţĥéñ {price}/ɱôñţĥ ẋẋẋẋ]",
+  "@premiumPlanMonthlyTrial": {
+    "description": "Monthly trial subtitle with dynamic store price and days",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumSavePercent": "[Şàṽé {percent}% ẋ]",
+  "@premiumSavePercent": {
+    "description": "Savings badge on annual plan when percentage is calculated",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "premiumSaveUnknown": "[Şàṽé -% ẋ]",
+  "@premiumSaveUnknown": {
+    "description": "Savings badge on annual plan when savings percentage is calculating"
+  },
+  "premiumActionStartTrial": "[Şţàřţ {days}-Đàý Ƒřéé Ţřîàł ẋẋẋ]",
   "@premiumActionStartTrial": {
-    "description": "Primary button for yearly trial"
+    "description": "Primary button for plan trial",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "premiumSubscriptionsAvailableSoon": "[Şûƀšçřîþţîôñš ŵîłł ƀé àṽàîłàƀłé šôôñ. ẋẋẋẋẋ]",
+  "@premiumSubscriptionsAvailableSoon": {
+    "description": "Message displayed when subscription products have not been returned from store"
+  },
+  "pagesEditPagesAction": "[Éđîţ þàĝéš ẋẋ]",
+  "@pagesEditPagesAction": {
+    "description": "Button in read-only PagesScreen navigating to paywall"
+  },
+  "premiumCancelAnytime": "[Çàñçéł àñýţîɱé ẋẋ]",
+  "@premiumCancelAnytime": {
+    "description": "Reassurance notice that subscription can be cancelled anytime"
+  },
+  "premiumPendingStatus": "[Ýôûř þûřçĥàšé îš ƀéîñĝ þřôçéššéđ ƀý Ĝôôĝłé Þłàý. Éñţîţłéɱéñţš ŵîłł àçţîṽàţé ôñçé çôñƒîřɱéđ. ẋẋẋẋẋẋẋ]",
+  "@premiumPendingStatus": {
+    "description": "Notice shown while purchase is pending in store"
+  },
+  "premiumRenewalDisclosurePricingUnavailable": "[Řéñéŵš àûţôɱàţîçàłłý. Þřîçîñĝ ŵîłł ƀé çôñƒîřɱéđ ƀý Ĝôôĝłé Þłàý àţ çĥéçkôûţ. Çàñçéł àñýţîɱé îñ Ĝôôĝłé Þłàý Şûƀšçřîþţîôñš. ẋẋẋẋẋẋẋẋ]",
+  "@premiumRenewalDisclosurePricingUnavailable": {
+    "description": "Renewal disclosure when pricing details could not be loaded from store"
   },
   "premiumActionSubscribe": "[Şûƀšçřîƀé ẋ]",
   "@premiumActionSubscribe": {
@@ -4224,5 +4282,13 @@
   "galleryDebugOpenPremium": "[Ôþéñ /þřéɱîûɱ Şçřééñ ẋẋẋ]",
   "@galleryDebugOpenPremium": {
     "description": "Button to navigate to premium screen"
+  },
+  "galleryDebugIapProductSeenTrue": "[Şéţ Ƥřôđûçţ Şééñ: Ţřûé ẋẋẋ]",
+  "@galleryDebugIapProductSeenTrue": {
+    "description": "Button to simulate IAP product seen"
+  },
+  "galleryDebugIapProductSeenFalse": "[Şéţ Ƥřôđûçţ Şééñ: Ƒàłšé ẋẋẋ]",
+  "@galleryDebugIapProductSeenFalse": {
+    "description": "Button to simulate IAP product not seen"
   }
 }

@@ -3108,11 +3108,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumPlanYearly => 'Annual Subscription';
 
   @override
-  String get premiumPlanYearlyBadge => 'BEST VALUE';
-
-  @override
-  String premiumPlanYearlyTrial(String price) {
-    return '7 days free, then $price/year';
+  String premiumPlanYearlyTrial(int days, String price) {
+    return '$days days free, then $price/year';
   }
 
   @override
@@ -3124,7 +3121,45 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get premiumActionStartTrial => 'Start 7-Day Free Trial';
+  String premiumPlanYearlySub(String price) {
+    return '$price/year';
+  }
+
+  @override
+  String premiumPlanMonthlyTrial(int days, String price) {
+    return '$days days free, then $price/month';
+  }
+
+  @override
+  String premiumSavePercent(int percent) {
+    return 'Save $percent%';
+  }
+
+  @override
+  String get premiumSaveUnknown => 'Save -%';
+
+  @override
+  String premiumActionStartTrial(int days) {
+    return 'Start $days-Day Free Trial';
+  }
+
+  @override
+  String get premiumSubscriptionsAvailableSoon =>
+      'Subscriptions will be available soon.';
+
+  @override
+  String get pagesEditPagesAction => 'Edit pages';
+
+  @override
+  String get premiumCancelAnytime => 'Cancel anytime';
+
+  @override
+  String get premiumPendingStatus =>
+      'Your purchase is being processed by Google Play. Entitlements will activate once confirmed.';
+
+  @override
+  String get premiumRenewalDisclosurePricingUnavailable =>
+      'Renews automatically. Pricing will be confirmed by Google Play at checkout. Cancel anytime in Google Play Subscriptions.';
 
   @override
   String get premiumActionSubscribe => 'Subscribe';
@@ -3212,6 +3247,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get galleryDebugOpenPremium => 'Open /premium Screen';
+
+  @override
+  String get galleryDebugIapProductSeenTrue => 'Set Product Seen: True';
+
+  @override
+  String get galleryDebugIapProductSeenFalse => 'Set Product Seen: False';
 }
 
 /// The translations for English (`en_XA`).
@@ -6414,11 +6455,8 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   String get premiumPlanYearly => '[Âññûàł Şûƀšçřîþţîôñ ẋẋẋ]';
 
   @override
-  String get premiumPlanYearlyBadge => '[ƁÉŞŢ ṼÂŁÛÉ ẋ]';
-
-  @override
-  String premiumPlanYearlyTrial(String price) {
-    return '[7 đàýš ƒřéé, ţĥéñ $price/ýéàř ẋẋẋẋ]';
+  String premiumPlanYearlyTrial(int days, String price) {
+    return '[$days đàýš ƒřéé, ţĥéñ $price/ýéàř ẋẋẋẋ]';
   }
 
   @override
@@ -6430,7 +6468,45 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   }
 
   @override
-  String get premiumActionStartTrial => '[Şţàřţ 7-Đàý Ƒřéé Ţřîàł ẋẋẋ]';
+  String premiumPlanYearlySub(String price) {
+    return '[$price/ýéàř ẋẋ]';
+  }
+
+  @override
+  String premiumPlanMonthlyTrial(int days, String price) {
+    return '[$days đàýš ƒřéé, ţĥéñ $price/ɱôñţĥ ẋẋẋẋ]';
+  }
+
+  @override
+  String premiumSavePercent(int percent) {
+    return '[Şàṽé $percent% ẋ]';
+  }
+
+  @override
+  String get premiumSaveUnknown => '[Şàṽé -% ẋ]';
+
+  @override
+  String premiumActionStartTrial(int days) {
+    return '[Şţàřţ $days-Đàý Ƒřéé Ţřîàł ẋẋẋ]';
+  }
+
+  @override
+  String get premiumSubscriptionsAvailableSoon =>
+      '[Şûƀšçřîþţîôñš ŵîłł ƀé àṽàîłàƀłé šôôñ. ẋẋẋẋẋ]';
+
+  @override
+  String get pagesEditPagesAction => '[Éđîţ þàĝéš ẋẋ]';
+
+  @override
+  String get premiumCancelAnytime => '[Çàñçéł àñýţîɱé ẋẋ]';
+
+  @override
+  String get premiumPendingStatus =>
+      '[Ýôûř þûřçĥàšé îš ƀéîñĝ þřôçéššéđ ƀý Ĝôôĝłé Þłàý. Éñţîţłéɱéñţš ŵîłł àçţîṽàţé ôñçé çôñƒîřɱéđ. ẋẋẋẋẋẋẋ]';
+
+  @override
+  String get premiumRenewalDisclosurePricingUnavailable =>
+      '[Řéñéŵš àûţôɱàţîçàłłý. Þřîçîñĝ ŵîłł ƀé çôñƒîřɱéđ ƀý Ĝôôĝłé Þłàý àţ çĥéçkôûţ. Çàñçéł àñýţîɱé îñ Ĝôôĝłé Þłàý Şûƀšçřîþţîôñš. ẋẋẋẋẋẋẋẋ]';
 
   @override
   String get premiumActionSubscribe => '[Şûƀšçřîƀé ẋ]';
@@ -6520,4 +6596,10 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get galleryDebugOpenPremium => '[Ôþéñ /þřéɱîûɱ Şçřééñ ẋẋẋ]';
+
+  @override
+  String get galleryDebugIapProductSeenTrue => '[Şéţ Ƥřôđûçţ Şééñ: Ţřûé ẋẋẋ]';
+
+  @override
+  String get galleryDebugIapProductSeenFalse => '[Şéţ Ƥřôđûçţ Şééñ: Ƒàłšé ẋẋẋ]';
 }
