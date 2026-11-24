@@ -1,9 +1,10 @@
 // Compile-time feature flags gating upcoming roadmap phases.
 
 /// Enables subscription management and premium surfaces (Phase G7).
-const bool premiumEnabled = false;
+const bool premiumEnabled = true;
 
-/// Enables home screen widget configuration surfaces (Phase G8).
+/// When enabled, tools check premium subscription before allowing edits (Phase G7).
+const bool premiumGatingRequiresProduct = true;
 const bool widgetsEnabled = false;
 
 /// Enables Convert-to-Word action in PDF reader (Phase G6).

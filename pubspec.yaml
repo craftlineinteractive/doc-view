@@ -63,6 +63,7 @@ dependencies:
   printing: ^5.15.1
   syncfusion_flutter_pdf: 28.2.12
   archive: ^3.6.1
+  in_app_purchase: ^3.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
