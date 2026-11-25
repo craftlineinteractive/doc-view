@@ -209,5 +209,36 @@ void main() {
       final invertItem = find.widgetWithText(ReaderBottomRow, 'Invert');
       expect(invertItem, findsOneWidget);
     });
+
+    testWidgets('tapping reading surface toggles top and bottom bars', (tester) async {
+      await tester.pumpWidget(
+        _buildTestApp(
+          child: TxtViewerScreen(file: docFile),
+        ),
+      );
+      await tester.runAsync(() async {
+        await Future.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+
+      final initialTitleTop = tester.getTopLeft(find.text('readme.txt')).dy;
+      final initialBottomTop = tester.getTopLeft(find.byType(ReaderBottomRow)).dy;
+      expect(initialTitleTop, greaterThanOrEqualTo(0));
+      expect(initialBottomTop, lessThan(600));
+
+      // Tap text content to hide chrome
+      await tester.tap(find.text('Doc View Reader'));
+      await tester.pumpAndSettle();
+
+      expect(tester.getTopLeft(find.text('readme.txt')).dy, lessThan(0));
+      expect(tester.getTopLeft(find.byType(ReaderBottomRow)).dy, greaterThan(580));
+
+      // Tap text content again to restore chrome
+      await tester.tap(find.text('Doc View Reader'));
+      await tester.pumpAndSettle();
+
+      expect(tester.getTopLeft(find.text('readme.txt')).dy, greaterThanOrEqualTo(0));
+      expect(tester.getTopLeft(find.byType(ReaderBottomRow)).dy, lessThan(600));
+    });
   });
 }

@@ -165,8 +165,12 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Spacer matching top chrome height when visible
-                  SizedBox(height: topInset + 56),
+                  // Animated spacer matching top chrome height when visible
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeOut,
+                    height: (_showChrome || _isSearching) ? (topInset + 60) : 0,
+                  ),
 
                   // 1. Legacy format banner (doc, ppt, xls, rtf)
                   if (isLegacyFormat && !_dismissedLegacyBanner)
@@ -261,6 +265,7 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
                     child: DocumentView(
                       source: _source,
                       controller: _controller,
+                      onTap: _toggleChrome,
                       placeholderBuilder: (context) {
                         return _buildOpeningSkeleton(tokens, l10n);
                       },

@@ -38,6 +38,7 @@ class DocumentView extends StatefulWidget {
     this.renderTimeout = const Duration(seconds: 20),
     this.onReady,
     this.onFailure,
+    this.onTap,
     super.key,
   });
 
@@ -79,6 +80,9 @@ class DocumentView extends StatefulWidget {
 
   /// Called when the document cannot be shown.
   final void Function(DocumentFailure failure)? onFailure;
+
+  /// Called when the user taps the document surface without selecting text.
+  final VoidCallback? onTap;
 
   @override
   State<DocumentView> createState() => _DocumentViewState();
@@ -247,6 +251,9 @@ class _DocumentViewState extends State<DocumentView> {
 
       case 'located':
         _controller.reportPosition((message.payload['index'] as int?) ?? 0);
+
+      case 'toggleChrome':
+        widget.onTap?.call();
 
       case 'searchResult':
         _controller.reportSearchHits((message.payload['hits'] as int?) ?? 0);

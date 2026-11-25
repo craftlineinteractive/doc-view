@@ -52,6 +52,8 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
   bool _showChrome = true;
   bool _showPagePill = true;
   Timer? _pagePillIdleTimer;
+  EdgeInsets _docBoundaryMargin = const EdgeInsets.only(top: 130, bottom: 160);
+  bool _appliedExactBoundaryMargin = false;
 
   bool _isHorizontal = false;
   bool _isInverted = false;
@@ -101,8 +103,23 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
       if (_showChrome) {
         _showPagePill = true;
         _resetPagePillTimer();
+      } else {
+        _pagePillIdleTimer?.cancel();
+        _showPagePill = false;
       }
     });
+  }
+
+  EdgeInsets _computeBoundaryMarginForZoom(double zoom) {
+    final safeZoom = zoom > 0 ? zoom : 1.0;
+    final topInset = MediaQuery.paddingOf(context).top;
+    final bottomInset = MediaQuery.paddingOf(context).bottom;
+    final topChromeHeight = topInset + 64.0;
+    final bottomChromeHeight = bottomInset + 96.0;
+    return EdgeInsets.only(
+      top: topChromeHeight / safeZoom,
+      bottom: bottomChromeHeight / safeZoom,
+    );
   }
 
   void _onInteractionOrScroll() {
@@ -328,7 +345,15 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
                   passwordProvider: _handlePasswordRequest,
                   params: PdfViewerParams(
                     backgroundColor: canvasBg,
+                    boundaryMargin: _docBoundaryMargin,
                     layoutPages: _isHorizontal ? _horizontalPageLayout : null,
+                    onGeneralTap: (context, controller, details) {
+                      if (details.type == PdfViewerGeneralTapType.tap) {
+                        _toggleChrome();
+                        return true;
+                      }
+                      return false;
+                    },
                     pagePaintCallbacks: [
                       (canvas, rect, page) {
                         _textSearcher?.pageTextMatchPaintCallback(canvas, rect, page);
@@ -355,7 +380,50 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
                           _isLoading = false;
                         });
                         _checkScannedPdf(document);
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          if (!mounted || !_controller.isReady) return;
+                          final nextMargin = _computeBoundaryMarginForZoom(
+                            _controller.currentZoom,
+                          );
+                          final shouldSnap =
+                              !_appliedExactBoundaryMargin && _currentPage == 1;
+                          if (!_appliedExactBoundaryMargin ||
+                              (nextMargin.top - _docBoundaryMargin.top).abs() > 2.0 ||
+                              (nextMargin.bottom - _docBoundaryMargin.bottom).abs() > 2.0) {
+                            _appliedExactBoundaryMargin = true;
+                            setState(() {
+                              _docBoundaryMargin = nextMargin;
+                            });
+                            if (shouldSnap) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                if (mounted &&
+                                    _controller.isReady &&
+                                    _currentPage == 1) {
+                                  _controller.goToPage(
+                                    pageNumber: 1,
+                                    duration: Duration.zero,
+                                  );
+                                }
+                              });
+                            }
+                          }
+                        });
                       }
+                    },
+                    onViewSizeChanged: (viewSize, oldViewSize, controller) {
+                      if (oldViewSize == null || !mounted) return;
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        if (!mounted || !_controller.isReady) return;
+                        final nextMargin = _computeBoundaryMarginForZoom(
+                          _controller.currentZoom,
+                        );
+                        if ((nextMargin.top - _docBoundaryMargin.top).abs() > 2.0 ||
+                            (nextMargin.bottom - _docBoundaryMargin.bottom).abs() > 2.0) {
+                          setState(() {
+                            _docBoundaryMargin = nextMargin;
+                          });
+                        }
+                      });
                     },
                     onPageChanged: (pageNumber) {
                       if (mounted && pageNumber != null) {
@@ -426,23 +494,26 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
           AnimatedPositioned(
             duration: const Duration(milliseconds: 220),
             curve: Curves.easeOut,
-            top: _showChrome ? 0 : -(kToolbarHeight + topInset + 20),
+            top: (_showChrome || _isSearchActive) ? 0 : -(kToolbarHeight + topInset + 24),
             left: 0,
             right: 0,
-            child: _isSearchActive
-                ? ReaderSearchBar(
-                    controller: _searchController,
-                    onQueryChanged: _handleSearchQuery,
-                    onPrevMatch: () => _textSearcher?.goToPrevMatch(),
-                    onNextMatch: () => _textSearcher?.goToNextMatch(),
-                    onClose: _closeSearch,
-                    onClear: () => _textSearcher?.resetTextSearch(),
-                    currentMatchIndex: _textSearcher?.currentIndex,
-                    totalMatches: _textSearcher?.matches.length ?? 0,
-                    isSearching: _textSearcher?.isSearching ?? false,
-                    hasNoTextLayer: _hasNoTextLayer,
-                  )
-                : _buildTopBar(tokens, l10n, isDark, topInset, liveFile),
+            child: IgnorePointer(
+              ignoring: !(_showChrome || _isSearchActive),
+              child: _isSearchActive
+                  ? ReaderSearchBar(
+                      controller: _searchController,
+                      onQueryChanged: _handleSearchQuery,
+                      onPrevMatch: () => _textSearcher?.goToPrevMatch(),
+                      onNextMatch: () => _textSearcher?.goToNextMatch(),
+                      onClose: _closeSearch,
+                      onClear: () => _textSearcher?.resetTextSearch(),
+                      currentMatchIndex: _textSearcher?.currentIndex,
+                      totalMatches: _textSearcher?.matches.length ?? 0,
+                      isSearching: _textSearcher?.isSearching ?? false,
+                      hasNoTextLayer: _hasNoTextLayer,
+                    )
+                  : _buildTopBar(tokens, l10n, isDark, topInset, liveFile),
+            ),
           ),
 
           // 5. Floating Bottom Toolbar ([ReaderBottomRow])
@@ -452,7 +523,9 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
             bottom: _showChrome ? (16 + bottomInset) : -(100 + bottomInset),
             left: 20,
             right: 20,
-            child: ReaderBottomRow(
+            child: IgnorePointer(
+              ignoring: !_showChrome,
+              child: ReaderBottomRow(
               items: [
                 // 1. Scroll direction
                 ReaderBottomRowItem(
@@ -505,6 +578,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
                   },
                 ),
               ],
+            ),
             ),
           ),
         ],

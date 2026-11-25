@@ -141,6 +141,10 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
   bool _isInverted = false;
   bool _isSearching = false;
   bool _isSearchRunning = false;
+  Offset? _pointerDownPosition;
+  DateTime? _pointerDownTime;
+  bool _hasSelection = false;
+  bool _hadSelectionOnDown = false;
 
   List<String> _cachedLines = const [];
   List<TxtMatch> _matches = const [];
@@ -517,9 +521,27 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
         children: [
           // 1. Text reading canvas
           Positioned.fill(
-            child: GestureDetector(
+            child: Listener(
               behavior: HitTestBehavior.translucent,
-              onTap: _toggleChrome,
+              onPointerDown: (event) {
+                _pointerDownPosition = event.position;
+                _pointerDownTime = DateTime.now();
+                _hadSelectionOnDown = _hasSelection;
+              },
+              onPointerUp: (event) {
+                final downPos = _pointerDownPosition;
+                final downTime = _pointerDownTime;
+                _pointerDownPosition = null;
+                _pointerDownTime = null;
+                if (downPos == null || downTime == null || _hadSelectionOnDown) {
+                  return;
+                }
+                final moved = (event.position - downPos).distance;
+                final elapsed = DateTime.now().difference(downTime);
+                if (moved < 12.0 && elapsed.inMilliseconds < 350) {
+                  _toggleChrome();
+                }
+              },
               child: FutureBuilder<TxtContent>(
                 future: _contentFuture,
                 builder: (context, snapshot) {
@@ -536,10 +558,16 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
 
                   return Container(
                     color: surfaceBg,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        SizedBox(height: topInset + 56),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeOut,
+                            height: (_showChrome || _isSearching)
+                                ? (topInset + 60)
+                                : 0,
+                          ),
 
                         // Truncation notice banner
                         if (data.isTruncated && !_dismissedTruncationBanner)
@@ -588,6 +616,10 @@ class _TxtViewerScreenState extends ConsumerState<TxtViewerScreen> {
                         // Virtualized Line List with Match Highlighting & SelectionArea
                         Expanded(
                           child: SelectionArea(
+                            onSelectionChanged: (content) {
+                              _hasSelection = content != null &&
+                                  content.plainText.isNotEmpty;
+                            },
                             child: ListView.builder(
                               controller: _scrollController,
                               padding: EdgeInsets.fromLTRB(20, 16, 20, 80 + bottomInset),
