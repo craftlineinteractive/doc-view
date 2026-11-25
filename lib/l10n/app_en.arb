@@ -4017,17 +4017,17 @@
   "@premiumTitle": {
     "description": "Title of the premium subscription screen"
   },
-  "premiumSubtitle": "Unlock all editing tools and enjoy a completely ad-free experience.",
+  "premiumSubtitle": "Unlock Annotate & Sign tools and enjoy a completely ad-free experience.",
   "@premiumSubtitle": {
     "description": "Subtitle of the premium subscription screen"
   },
-  "premiumFeatureAllTools": "All 5 editing & conversion tools",
+  "premiumFeatureAllTools": "Annotate & Sign PDF tools",
   "@premiumFeatureAllTools": {
-    "description": "Benefit title: all editing tools unlocked"
+    "description": "Benefit title: premium editing tools unlocked"
   },
-  "premiumFeatureAllToolsSub": "Annotate, Add Text, Sign, Manage Pages, and PDF to Word",
+  "premiumFeatureAllToolsSub": "Draw markups, highlight documents, and sign PDFs effortlessly",
   "@premiumFeatureAllToolsSub": {
-    "description": "Benefit description for all editing tools"
+    "description": "Benefit description for premium editing tools"
   },
   "premiumFeatureAdFree": "100% Ad-Free Experience",
   "@premiumFeatureAdFree": {

@@ -207,7 +207,7 @@ class ToolsScreen extends ConsumerWidget {
   void _handleToolTap(BuildContext context, WidgetRef ref, ToolDef tool) {
     final locksActive = ref.read(locksActiveProvider);
     final isPremium = ref.read(isPremiumProvider);
-    if (tool.id != 'manage_pages' && tool.isPremium() && (locksActive && !isPremium)) {
+    if (tool.isPremium() && (locksActive && !isPremium)) {
       context.push('/premium');
       return;
     }

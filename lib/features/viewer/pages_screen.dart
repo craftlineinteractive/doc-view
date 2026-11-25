@@ -563,6 +563,7 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
                 if (!_isReadOnly) ...[
                   // Undo button
                   IconButton(
+                    key: const Key('pages_undo_button'),
                     icon: const Icon(Icons.undo_rounded),
                     tooltip: context.l10n.pagesActionUndo,
                     onPressed: _undoSnapshot != null ? _handleUndo : null,
@@ -572,6 +573,7 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: FilledButton.tonal(
+                      key: const Key('pages_save_button'),
                       onPressed: _hasUnsavedChanges && !_isSaving ? _showSaveDialog : null,
                       style: FilledButton.styleFrom(
                         visualDensity: VisualDensity.compact,

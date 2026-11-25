@@ -24,6 +24,9 @@ class PremiumGate {
   /// is true AND `iap_product_seen` has been cached from a store response).
   /// If locks are not active, all features are fully open and accessible.
   static bool isUnlocked(WidgetRef ref, PremiumFeature feature) {
+    if (feature != PremiumFeature.annotate && feature != PremiumFeature.sign) {
+      return true;
+    }
     final locksActive = ref.read(locksActiveProvider);
     if (!locksActive) return true;
     return ref.read(isPremiumProvider);

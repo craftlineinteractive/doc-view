@@ -5104,19 +5104,19 @@ abstract class AppLocalizations {
   /// Subtitle of the premium subscription screen
   ///
   /// In en, this message translates to:
-  /// **'Unlock all editing tools and enjoy a completely ad-free experience.'**
+  /// **'Unlock Annotate & Sign tools and enjoy a completely ad-free experience.'**
   String get premiumSubtitle;
 
-  /// Benefit title: all editing tools unlocked
+  /// Benefit title: premium editing tools unlocked
   ///
   /// In en, this message translates to:
-  /// **'All 5 editing & conversion tools'**
+  /// **'Annotate & Sign PDF tools'**
   String get premiumFeatureAllTools;
 
-  /// Benefit description for all editing tools
+  /// Benefit description for premium editing tools
   ///
   /// In en, this message translates to:
-  /// **'Annotate, Add Text, Sign, Manage Pages, and PDF to Word'**
+  /// **'Draw markups, highlight documents, and sign PDFs effortlessly'**
   String get premiumFeatureAllToolsSub;
 
   /// Benefit title: ad-free

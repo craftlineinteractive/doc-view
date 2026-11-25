@@ -4047,17 +4047,17 @@
   "@premiumTitle": {
     "description": "Title of the premium subscription screen"
   },
-  "premiumSubtitle": "[Ûñłôçķ àłł éđîţîñĝ ţôôłš àñđ éñĵôý à çôɱþłéţéłý àđ-ƒřéé éxþéřîéñçé. ẋẋẋẋẋẋ]",
+  "premiumSubtitle": "[Ûñłôçķ Âññôţàţé & Şîĝñ ţôôłš àñđ éñĵôý à çôɱþłéţéłý àđ-ƒřéé éxþéřîéñçé. ẋẋẋẋẋẋ]",
   "@premiumSubtitle": {
     "description": "Subtitle of the premium subscription screen"
   },
-  "premiumFeatureAllTools": "[Âłł 5 éđîţîñĝ & çôñṽéřšîôñ ţôôłš ẋẋẋẋ]",
+  "premiumFeatureAllTools": "[Âññôţàţé & Şîĝñ ÞÐƑ ţôôłš ẋẋẋẋ]",
   "@premiumFeatureAllTools": {
-    "description": "Benefit title: all editing tools unlocked"
+    "description": "Benefit title: premium editing tools unlocked"
   },
-  "premiumFeatureAllToolsSub": "[Âññôţàţé, Âđđ Ţéxţ, Şîĝñ, Màñàĝé Þàĝéš, àñđ ÞĐƑ ţô Ŵôřđ ẋẋẋẋẋẋ]",
+  "premiumFeatureAllToolsSub": "[Ðřàŵ ɱàřķûþš, ĥîĝĥłîĝĥţ đôçûɱéñţš, àñđ šîĝñ ÞÐƑš éƒƒôřţłéššłý ẋẋẋẋẋẋ]",
   "@premiumFeatureAllToolsSub": {
-    "description": "Benefit description for all editing tools"
+    "description": "Benefit description for premium editing tools"
   },
   "premiumFeatureAdFree": "[100% Âđ-Ƒřéé Éxþéřîéñçé ẋẋẋẋ]",
   "@premiumFeatureAdFree": {

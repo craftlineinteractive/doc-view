@@ -177,7 +177,7 @@ void main() {
       await tester.pumpWidget(const SizedBox.shrink());
     });
 
-    testWidgets('free user enters read-only mode with Edit pages CTA when locks are active', (tester) async {
+    testWidgets('free user has full edit access in PagesScreen even when locks are active', (tester) async {
       await tester.pumpWidget(
         _wrap(
           PagesScreen(file: docFile, initialPages: initialPages),
@@ -187,13 +187,14 @@ void main() {
       );
       await tester.pump();
 
-      // Read-only mode: Save and Undo buttons are hidden
-      expect(find.byKey(const Key('pages_save_button')), findsNothing);
-      expect(find.byKey(const Key('pages_undo_button')), findsNothing);
+      // Manage Pages is free: Save and Undo buttons are visible, Edit pages CTA is hidden
+      expect(find.byKey(const Key('pages_save_button')), findsOneWidget);
+      expect(find.byKey(const Key('pages_undo_button')), findsOneWidget);
+      expect(find.byKey(const Key('pages_edit_pages_button')), findsNothing);
 
-      // Bottom bar shows single Edit pages button
-      expect(find.byKey(const Key('pages_edit_pages_button')), findsOneWidget);
-      expect(find.text('Edit pages'), findsOneWidget);
+      await tester.tap(find.text('1'));
+      await tester.pump();
+      expect(find.text('Rotate'), findsOneWidget);
 
       await tester.pumpWidget(const SizedBox.shrink());
     });

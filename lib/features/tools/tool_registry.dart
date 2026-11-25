@@ -102,7 +102,6 @@ final List<ToolDef> toolRegistry = <ToolDef>[
     gradient: ToolGradients.wordToPdf,
     route: '/tools/pdf-to-word',
     isEnabled: () => conversionsEnabled,
-    isPremium: () => premiumEnabled,
   ),
 
   // --- Section 2: Edit & Manage ---
@@ -126,7 +125,6 @@ final List<ToolDef> toolRegistry = <ToolDef>[
     gradient: ToolGradients.addText,
     route: '/tools/add-text',
     isEnabled: () => addTextEnabled,
-    isPremium: () => premiumEnabled,
   ),
   ToolDef(
     id: 'sign',
@@ -148,7 +146,6 @@ final List<ToolDef> toolRegistry = <ToolDef>[
     gradient: ToolGradients.managePages,
     route: null, // Handled via picker in screen
     isEnabled: () => true,
-    isPremium: () => premiumEnabled,
   ),
   ToolDef(
     id: 'merge_pdf',

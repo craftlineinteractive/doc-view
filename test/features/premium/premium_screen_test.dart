@@ -1,5 +1,6 @@
 import 'package:docview/core/config/iap_config.dart';
 import 'package:docview/core/constants/file_types.dart';
+import 'package:docview/core/router/premium_gate.dart';
 import 'package:docview/data/models/doc_file.dart';
 import 'package:docview/data/services/billing/billing_providers.dart';
 import 'package:docview/data/services/billing/fake_purchase_gateway.dart';
@@ -9,6 +10,7 @@ import 'package:docview/features/premium/premium_screen.dart';
 import 'package:docview/features/tools/tools_screen.dart';
 import 'package:docview/features/viewer/pages_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,10 +53,10 @@ void main() {
       // Crown icon and titles
       expect(find.byType(PremiumScreen), findsOneWidget);
       expect(find.text('Doc View Premium'), findsWidgets);
-      expect(find.textContaining('Unlock all editing tools'), findsOneWidget);
+      expect(find.textContaining('Unlock Annotate & Sign tools'), findsOneWidget);
 
       // Benefits list
-      expect(find.text('All 5 editing & conversion tools'), findsOneWidget);
+      expect(find.text('Annotate & Sign PDF tools'), findsOneWidget);
       expect(find.text('100% Ad-Free Experience'), findsOneWidget);
       expect(find.text('Unlimited local conversions'), findsOneWidget);
       expect(find.text('100% Private & On-Device'), findsOneWidget);
@@ -215,7 +217,7 @@ void main() {
       expect(find.byKey(const Key('tool_crown_badge_manage_pages')), findsNothing);
     });
 
-    testWidgets('ToolsScreen renders gold Crown badges on gated tools when locksActive is true', (tester) async {
+    testWidgets('ToolsScreen renders gold Crown badges ONLY on Annotate and Sign when locksActive is true', (tester) async {
       premiumController.setSimulatedState(isPremium: false, iapProductSeen: true);
 
       await tester.pumpApp(
@@ -230,14 +232,14 @@ void main() {
       // Top app bar crown button
       expect(find.byKey(const Key('tools_crown_button')), findsOneWidget);
 
-      // Verify badges exist on gated tools
-      expect(find.byKey(const Key('tool_crown_badge_pdf_to_word')), findsOneWidget);
+      // Verify badges exist ONLY on Annotate and Sign
       expect(find.byKey(const Key('tool_crown_badge_annotate')), findsOneWidget);
-      expect(find.byKey(const Key('tool_crown_badge_add_text')), findsOneWidget);
       expect(find.byKey(const Key('tool_crown_badge_sign')), findsOneWidget);
-      expect(find.byKey(const Key('tool_crown_badge_manage_pages')), findsOneWidget);
 
-      // Non-gated tools do NOT have crown badge
+      // All other tools are free (no crown badge)
+      expect(find.byKey(const Key('tool_crown_badge_pdf_to_word')), findsNothing);
+      expect(find.byKey(const Key('tool_crown_badge_add_text')), findsNothing);
+      expect(find.byKey(const Key('tool_crown_badge_manage_pages')), findsNothing);
       expect(find.byKey(const Key('tool_crown_badge_image_to_pdf')), findsNothing);
       expect(find.byKey(const Key('tool_crown_badge_scan_to_pdf')), findsNothing);
     });
@@ -259,10 +261,11 @@ void main() {
 
       expect(find.byKey(const Key('tool_crown_badge_pdf_to_word')), findsNothing);
       expect(find.byKey(const Key('tool_crown_badge_annotate')), findsNothing);
+      expect(find.byKey(const Key('tool_crown_badge_sign')), findsNothing);
       expect(find.byKey(const Key('tool_crown_badge_manage_pages')), findsNothing);
     });
 
-    testWidgets('PagesScreen enters read-only mode with Edit pages CTA when locks are active for free users', (tester) async {
+    testWidgets('PagesScreen stays editable for free users even when locks are active', (tester) async {
       premiumController.setSimulatedState(isPremium: false, iapProductSeen: true);
 
       final dummyFile = DocFile(
@@ -291,13 +294,66 @@ void main() {
       // Free user can view page thumbnails and page count
       expect(find.text('2 Pages'), findsOneWidget);
 
-      // Save and Undo buttons are hidden
-      expect(find.byKey(const Key('pages_save_button')), findsNothing);
-      expect(find.byKey(const Key('pages_undo_button')), findsNothing);
+      // Save and Undo buttons are available (not read-only)
+      expect(find.byKey(const Key('pages_save_button')), findsOneWidget);
+      expect(find.byKey(const Key('pages_undo_button')), findsOneWidget);
 
-      // Bottom bar has Edit pages crown button
-      expect(find.byKey(const Key('pages_edit_pages_button')), findsOneWidget);
-      expect(find.text('Edit pages'), findsOneWidget);
+      // Bottom bar does NOT show read-only Edit pages crown CTA
+      expect(find.byKey(const Key('pages_edit_pages_button')), findsNothing);
+    });
+
+    testWidgets('PremiumGate locks ONLY annotate and sign for free users when locksActive is true', (tester) async {
+      premiumController.setSimulatedState(isPremium: false, iapProductSeen: true);
+
+      late bool annotateLocked;
+      late bool signLocked;
+      late bool addTextLocked;
+      late bool managePagesLocked;
+      late bool pdfToWordLocked;
+
+      await tester.pumpApp(
+        Builder(
+          builder: (context) => const SizedBox.shrink(),
+        ),
+        overrides: [
+          premiumControllerProvider.overrideWithValue(premiumController),
+          locksActiveProvider.overrideWithValue(true),
+        ],
+      );
+      // Use Consumer to read WidgetRef
+      await tester.pumpApp(
+        _GateProbe(
+          onBuilt: (ref) {
+            annotateLocked = PremiumGate.isLocked(ref, PremiumFeature.annotate);
+            signLocked = PremiumGate.isLocked(ref, PremiumFeature.sign);
+            addTextLocked = PremiumGate.isLocked(ref, PremiumFeature.addText);
+            managePagesLocked = PremiumGate.isLocked(ref, PremiumFeature.managePages);
+            pdfToWordLocked = PremiumGate.isLocked(ref, PremiumFeature.pdfToWord);
+          },
+        ),
+        overrides: [
+          premiumControllerProvider.overrideWithValue(premiumController),
+          locksActiveProvider.overrideWithValue(true),
+        ],
+      );
+      await tester.pumpAndSettle();
+
+      expect(annotateLocked, isTrue);
+      expect(signLocked, isTrue);
+      expect(addTextLocked, isFalse);
+      expect(managePagesLocked, isFalse);
+      expect(pdfToWordLocked, isFalse);
     });
   });
+}
+
+class _GateProbe extends ConsumerWidget {
+  const _GateProbe({required this.onBuilt});
+  final void Function(WidgetRef ref) onBuilt;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    onBuilt(ref);
+    return const SizedBox.shrink();
+  }
 }

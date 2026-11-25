@@ -3073,14 +3073,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get premiumSubtitle =>
-      'Unlock all editing tools and enjoy a completely ad-free experience.';
+      'Unlock Annotate & Sign tools and enjoy a completely ad-free experience.';
 
   @override
-  String get premiumFeatureAllTools => 'All 5 editing & conversion tools';
+  String get premiumFeatureAllTools => 'Annotate & Sign PDF tools';
 
   @override
   String get premiumFeatureAllToolsSub =>
-      'Annotate, Add Text, Sign, Manage Pages, and PDF to Word';
+      'Draw markups, highlight documents, and sign PDFs effortlessly';
 
   @override
   String get premiumFeatureAdFree => '100% Ad-Free Experience';
@@ -6501,15 +6501,14 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get premiumSubtitle =>
-      '[Ûñłôçķ àłł éđîţîñĝ ţôôłš àñđ éñĵôý à çôɱþłéţéłý àđ-ƒřéé éxþéřîéñçé. ẋẋẋẋẋẋ]';
+      '[Ûñłôçķ Âññôţàţé & Şîĝñ ţôôłš àñđ éñĵôý à çôɱþłéţéłý àđ-ƒřéé éxþéřîéñçé. ẋẋẋẋẋẋ]';
 
   @override
-  String get premiumFeatureAllTools =>
-      '[Âłł 5 éđîţîñĝ & çôñṽéřšîôñ ţôôłš ẋẋẋẋ]';
+  String get premiumFeatureAllTools => '[Âññôţàţé & Şîĝñ ÞÐƑ ţôôłš ẋẋẋẋ]';
 
   @override
   String get premiumFeatureAllToolsSub =>
-      '[Âññôţàţé, Âđđ Ţéxţ, Şîĝñ, Màñàĝé Þàĝéš, àñđ ÞĐƑ ţô Ŵôřđ ẋẋẋẋẋẋ]';
+      '[Ðřàŵ ɱàřķûþš, ĥîĝĥłîĝĥţ đôçûɱéñţš, àñđ šîĝñ ÞÐƑš éƒƒôřţłéššłý ẋẋẋẋẋẋ]';
 
   @override
   String get premiumFeatureAdFree => '[100% Âđ-Ƒřéé Éxþéřîéñçé ẋẋẋẋ]';
