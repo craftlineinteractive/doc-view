@@ -66,10 +66,10 @@ class AdService {
       await MobileAds.instance.initialize();
       _isSdkInitialized = true;
 
-      // Content-rating-safe configuration
+      // Content-rating-safe configuration: maxAdContentRating is set to G.
+      // tagForChildDirectedTreatment and age-restricted settings are intentionally NOT set.
       await MobileAds.instance.updateRequestConfiguration(
         RequestConfiguration(
-          ageRestrictedTreatment: AgeRestrictedTreatment.unspecified,
           maxAdContentRating: MaxAdContentRating.g,
         ),
       );

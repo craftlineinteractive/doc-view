@@ -141,8 +141,9 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
     // If real banner ad has loaded successfully
     if (_realAdLoaded && _bannerAd != null) {
       final tokens = context.tokens;
+      final bannerHeight = _bannerAd!.size.height.toDouble().clamp(50.0, 64.0);
       return Container(
-        height: 60,
+        height: bannerHeight,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: tokens.surfaceAlt,

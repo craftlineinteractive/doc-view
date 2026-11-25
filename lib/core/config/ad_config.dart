@@ -22,11 +22,14 @@ class AdConfig {
     AdType.interstitial: 'ca-app-pub-3940256099942544/1033173712',
   };
 
-  /// Production ad unit IDs per type. Empty strings by default until configured.
-  /// When empty in release builds, ad placement is disabled and collapses to zero height.
-  static const String releaseBannerAdUnitId = '';
-  static const String releaseNativeAdUnitId = '';
-  static const String releaseInterstitialAdUnitId = '';
+  /// Production ad unit IDs supplied via `--dart-define` flags at release build time.
+  /// If omitted, defaults to empty strings (which disables that placement and collapses to zero height).
+  static const String releaseBannerAdUnitId =
+      String.fromEnvironment('ADMOB_BANNER_ID', defaultValue: '');
+  static const String releaseNativeAdUnitId =
+      String.fromEnvironment('ADMOB_NATIVE_ID', defaultValue: '');
+  static const String releaseInterstitialAdUnitId =
+      String.fromEnvironment('ADMOB_INTERSTITIAL_ID', defaultValue: '');
 
   /// Optional test flag to simulate release mode behavior in widget/unit tests.
   static bool? forceReleaseModeForTesting;

@@ -179,5 +179,46 @@ void main() {
       final paddingWidget = tester.widget<Padding>(paddingAncestor.first);
       expect((paddingWidget.padding as EdgeInsets).bottom, equals(16.0));
     });
+
+    testWidgets('AdBannerSlot height is strictly <= 64 dp at 360 dp and 393 dp viewport widths', (tester) async {
+      for (final width in [360.0, 393.0]) {
+        tester.view.physicalSize = Size(width * 2.0, 800 * 2.0);
+        tester.view.devicePixelRatio = 2.0;
+
+        await tester.pumpWidget(
+          const MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Scaffold(
+              body: AdBannerSlot(isLoaded: true),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        final bannerBox = tester.renderObject(find.byType(AdBannerSlot)) as RenderBox;
+        expect(bannerBox.size.height, lessThanOrEqualTo(64.0));
+        expect(bannerBox.size.height, equals(60.0));
+      }
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+    });
+
+    test('PREMIUM USERS NEVER INITIALIZE THE ADS SDK: AdService aborts early without calling MobileAds initialize', () async {
+      final container = ProviderContainer(
+        overrides: [
+          isPremiumProvider.overrideWith((ref) => true),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      final adService = AdService(container.read(Provider((ref) => ref)));
+      expect(adService.isSdkInitialized, isFalse);
+
+      await adService.initializeSdkIfAllowed();
+
+      // Invariant: Must remain uninitialized for premium users
+      expect(adService.isSdkInitialized, isFalse);
+    });
   });
 }
