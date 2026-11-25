@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <full-backup-content>
-    <!-- Exclude user signature files from cloud backup to protect biometric/signature privacy -->
+    <!-- Exclude user signature files from cloud backup to protect signature privacy -->
+    <exclude domain="file" path="signatures.json" />
     <exclude domain="file" path="signatures" />
+    <!-- Exclude Recycle Bin folder: deleted files should not consume cloud backup quota -->
+    <exclude domain="file" path="recycle_bin" />
+    <!-- Exclude local document index database to prevent stale inode paths on restore -->
+    <exclude domain="database" path="docview.db" />
 </full-backup-content>
