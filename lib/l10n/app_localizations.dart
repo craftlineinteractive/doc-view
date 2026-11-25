@@ -418,7 +418,7 @@ abstract class AppLocalizations {
   /// Offline and privacy badge text on onboarding page 3
   ///
   /// In en, this message translates to:
-  /// **'100% Offline • Private & Secure'**
+  /// **'Your files stay on your device'**
   String get onboardingOfflineGuarantee;
 
   /// Tool title for converting images to PDF
@@ -490,13 +490,13 @@ abstract class AppLocalizations {
   /// Title for offline reassurance point
   ///
   /// In en, this message translates to:
-  /// **'Works offline'**
+  /// **'Files are never uploaded'**
   String get permissionReassuranceOfflineTitle;
 
   /// Description for offline reassurance point
   ///
   /// In en, this message translates to:
-  /// **'No internet connection required. Operates 100% locally.'**
+  /// **'Your documents are processed locally on your device.'**
   String get permissionReassuranceOfflineDesc;
 
   /// Title for no-uploads privacy reassurance point
@@ -5532,6 +5532,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search'**
   String get notificationActionSearch;
+
+  /// Settings row title to open UMP privacy options
+  ///
+  /// In en, this message translates to:
+  /// **'Ad choices'**
+  String get settingsAdChoicesTitle;
+
+  /// Settings row subtitle for Ad choices
+  ///
+  /// In en, this message translates to:
+  /// **'Manage privacy and advertising choices'**
+  String get settingsAdChoicesSubtitle;
+
+  /// FAQ question 10 about ads policy
+  ///
+  /// In en, this message translates to:
+  /// **'Why does Doc View show ads?'**
+  String get faqQuestion10;
+
+  /// FAQ answer 10 about ads policy
+  ///
+  /// In en, this message translates to:
+  /// **'Ads keep Doc View free. Premium removes them. Ads are served by Google AdMob and never see your documents.'**
+  String get faqAnswer10;
 }
 
 class _AppLocalizationsDelegate

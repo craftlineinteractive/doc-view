@@ -77,6 +77,10 @@ class FaqScreen extends StatefulWidget {
           question: context.l10n.faqQuestion9,
           answer: context.l10n.faqAnswer9,
         ),
+        FaqItem(
+          question: context.l10n.faqQuestion10,
+          answer: context.l10n.faqAnswer10,
+        ),
       ];
 
   @override

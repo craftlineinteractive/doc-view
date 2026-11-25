@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
@@ -11,6 +12,7 @@ import '../../core/theme/doc_view_typography.dart';
 import '../../core/utils/format_utils.dart';
 import '../../core/utils/page_range_parser.dart';
 import '../../data/models/doc_file.dart';
+import '../../data/services/ads/ad_service.dart';
 import '../../data/services/pdf/pdf_split_service.dart';
 import '../../shared/widgets/ads/ad_placeholders.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
@@ -252,12 +254,15 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isSplitting = false);
 
+        // Preload interstitial after successful tool operation result is produced
+        unawaited(ref.read(adServiceProvider).preloadInterstitialAfterSuccess());
+
         await ToolResultSheet.show(
           context,
           files: createdFiles,
           onDone: () async {
             if (mounted) {
-              await InterstitialPlaceholder.show(context);
+              await InterstitialPlaceholder.show(context, ref: ref);
               if (mounted) {
                 Navigator.of(context).pop();
               }

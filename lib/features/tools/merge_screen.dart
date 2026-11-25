@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -11,6 +12,7 @@ import '../../core/theme/doc_view_typography.dart';
 import '../../core/utils/file_name_utils.dart';
 import '../../core/utils/format_utils.dart';
 import '../../data/models/doc_file.dart';
+import '../../data/services/ads/ad_service.dart';
 import '../../data/services/pdf/pdf_merge_service.dart';
 import '../../shared/widgets/ads/ad_placeholders.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
@@ -193,12 +195,15 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isMerging = false);
 
+        // Preload interstitial after successful tool operation result is produced
+        unawaited(ref.read(adServiceProvider).preloadInterstitialAfterSuccess());
+
         await ToolResultSheet.show(
           context,
           files: [mergedDoc],
           onDone: () async {
             if (mounted) {
-              await InterstitialPlaceholder.show(context);
+              await InterstitialPlaceholder.show(context, ref: ref);
               if (mounted) {
                 Navigator.of(context).pop();
               }

@@ -8,6 +8,8 @@ import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../data/services/ads/ad_service.dart';
+import '../../data/services/ads/consent_gateway.dart';
 import '../providers/providers.dart';
 
 /// Splash screen displaying brand mark with floating document sheets,
@@ -95,7 +97,17 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
     final isOnboardingDone = results[3] as bool? ?? false;
     if (isOnboardingDone) {
-      context.go('/home');
+      // Run UMP consent update and initialize ads if permitted
+      try {
+        final consent = ref.read(consentGatewayProvider);
+        await consent.requestConsentInfoUpdate();
+        await consent.showConsentFormIfRequired();
+        await ref.read(adServiceProvider).initializeSdkIfAllowed();
+      } catch (_) {}
+
+      if (mounted) {
+        context.go('/home');
+      }
     } else {
       context.go('/onboarding');
     }

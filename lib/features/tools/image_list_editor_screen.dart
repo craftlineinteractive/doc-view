@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cunning_document_scanner/cunning_document_scanner.dart';
@@ -12,6 +13,7 @@ import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../core/utils/format_utils.dart';
+import '../../data/services/ads/ad_service.dart';
 import '../../data/services/pdf/image_to_pdf_service.dart';
 import '../../shared/widgets/ads/ad_placeholders.dart';
 import '../../shared/widgets/buttons/doc_buttons.dart';
@@ -219,13 +221,16 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isCreating = false);
 
+        // Preload interstitial after successful tool operation result is produced
+        unawaited(ref.read(adServiceProvider).preloadInterstitialAfterSuccess());
+
         // Show result sheet
         await ToolResultSheet.show(
           context,
           files: [docFile],
           onDone: () async {
             if (mounted) {
-              await InterstitialPlaceholder.show(context);
+              await InterstitialPlaceholder.show(context, ref: ref);
               if (mounted) {
                 Navigator.of(context).pop();
               }

@@ -260,7 +260,7 @@
   "@onboardingPage3Desc": {
     "description": "Body description for onboarding page 3"
   },
-  "onboardingOfflineGuarantee": "[100% Öƒƒłîñé • Þřîṽàţé & Šéçûřé ẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "onboardingOfflineGuarantee": "[Ŷôûř ƒîłéš šţàý ôñ ýôûř đéṽîçé ẋẋẋẋẋẋẋẋ]",
   "@onboardingOfflineGuarantee": {
     "description": "Offline and privacy badge text on onboarding page 3"
   },
@@ -308,11 +308,11 @@
   "@permissionStorageBody": {
     "description": "Explanation text on Android storage permission screen"
   },
-  "permissionReassuranceOfflineTitle": "[Ŵôřƙš ôƒƒłîñé ẋẋẋẋẋẋ]",
+  "permissionReassuranceOfflineTitle": "[Ƒîłéš àřé ñéṽéř ûþłôàđéđ ẋẋẋẋẋẋ]",
   "@permissionReassuranceOfflineTitle": {
     "description": "Title for offline reassurance point"
   },
-  "permissionReassuranceOfflineDesc": "[Ñô îñţéřñéţ çôññéçţîôñ řéʠûîřéđ. Öþéřàţéš 100% łôçàłłý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "permissionReassuranceOfflineDesc": "[Ŷôûř đôçûɱéñţš àřé þřôçéššéđ łôçàłłý ôñ ýôûř đéṽîçé. ẋẋẋẋẋẋẋẋ]",
   "@permissionReassuranceOfflineDesc": {
     "description": "Description for offline reassurance point"
   },
@@ -4370,5 +4370,21 @@
   "notificationActionSearch": "[Şéàřçĥ ẋ]",
   "@notificationActionSearch": {
     "description": "Action label for search in quick access notification"
+  },
+  "settingsAdChoicesTitle": "[Âđ çĥôîçéš ẋẋ]",
+  "@settingsAdChoicesTitle": {
+    "description": "Settings row title to open UMP privacy options"
+  },
+  "settingsAdChoicesSubtitle": "[Màñàĝé þřîṽàçý àñđ àđṽéřţîšîñĝ çĥôîçéš ẋẋẋẋẋẋ]",
+  "@settingsAdChoicesSubtitle": {
+    "description": "Settings row subtitle for Ad choices"
+  },
+  "faqQuestion10": "[Ŵĥý đôéš Đôç Ṽîéŵ šĥôŵ àđš? ẋẋẋẋẋẋ]",
+  "@faqQuestion10": {
+    "description": "FAQ question 10 about ads policy"
+  },
+  "faqAnswer10": "[Âđš ƙééþ Đôç Ṽîéŵ ƒřéé. Þřéɱîûɱ řéɱôṽéš ţĥéɱ. Âđš àřé šéřṽéđ ƀý Ĝôôĝłé ÂđMôƀ àñđ ñéṽéř šéé ýôûř đôçûɱéñţš. ẋẋẋẋẋẋẋẋẋẋẋẋ]",
+  "@faqAnswer10": {
+    "description": "FAQ answer 10 about ads policy"
   }
 }

@@ -9,6 +9,8 @@ import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../data/services/ads/ad_service.dart';
+import '../../data/services/ads/consent_gateway.dart';
 import '../../shared/widgets/buttons/doc_buttons.dart';
 import '../providers/providers.dart';
 
@@ -32,8 +34,18 @@ class _PermissionsScreenState extends ConsumerState<PermissionsScreen> {
     setState(() => _showingFrameC = true);
   }
 
-  void _enterMainApp() {
-    context.go('/home');
+  Future<void> _enterMainApp() async {
+    // Run Google UMP consent flow (Frame C stays BEFORE the UMP form as designed)
+    try {
+      final consent = ref.read(consentGatewayProvider);
+      await consent.requestConsentInfoUpdate();
+      await consent.showConsentFormIfRequired();
+      await ref.read(adServiceProvider).initializeSdkIfAllowed();
+    } catch (_) {}
+
+    if (mounted) {
+      context.go('/home');
+    }
   }
 
   Future<void> _handleAndroidGrantAccess() async {

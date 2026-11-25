@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
+import '../../../data/services/ads/ad_service.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import '../../../shared/widgets/ads/ad_placeholders.dart';
 import '../../../shared/widgets/buttons/doc_buttons.dart';
@@ -158,13 +160,16 @@ class _CreatePdfScreenState extends ConsumerState<CreatePdfScreen> {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isGenerating = false);
 
+        // Preload interstitial after successful tool operation result is produced
+        unawaited(ref.read(adServiceProvider).preloadInterstitialAfterSuccess());
+
         // Show result sheet with created document
         await ToolResultSheet.show(
           context,
           files: [docFile],
           onDone: () async {
             if (mounted) {
-              await InterstitialPlaceholder.show(context);
+              await InterstitialPlaceholder.show(context, ref: ref);
               if (mounted) {
                 Navigator.of(context).pop();
               }

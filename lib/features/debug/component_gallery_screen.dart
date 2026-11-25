@@ -49,6 +49,8 @@ import '../tools/annotate/widgets/annotate_toolbar.dart';
 import '../tools/annotate/widgets/selection_menu.dart';
 import '../../data/services/notifications/quick_access_notification_service.dart';
 import '../settings/widgets/add_widget_bottom_sheet.dart';
+import '../../data/services/ads/consent_gateway.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Debug-only Component Gallery showcasing the entire Doc View component library.
 /// Only available in [kDebugMode], accessible via long-press on Settings version row.
@@ -63,6 +65,8 @@ class ComponentGalleryScreen extends ConsumerStatefulWidget {
 class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _showOnlyIapSection = false;
+  bool _showOnlyAdsSection = false;
+  DebugGeography? _debugGeography;
 
   @override
   void initState() {
@@ -74,6 +78,8 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
           final content = actionFile.readAsStringSync().trim();
           if (content == 'show_iap_simulator') {
             _showOnlyIapSection = true;
+          } else if (content == 'show_ads_section') {
+            _showOnlyAdsSection = true;
           }
         }
       } catch (_) {}
@@ -511,7 +517,136 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                     controller: _scrollController,
                     padding: const EdgeInsets.only(bottom: 40),
                     children: [
-                      if (!_showOnlyIapSection) ...[
+                      if (_showOnlyAdsSection) ...[
+                        const SectionHeader(title: '17. Google Mobile Ads & UMP Consent (G9)'),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                'Simulate consent states, UMP dialogs, and AdMob integration.',
+                                style: DocViewTypography.bodyMd,
+                              ),
+                              const SizedBox(height: 12),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: [
+                                  FilledButton.tonal(
+                                    key: const Key('gallery_geo_eea'),
+                                    onPressed: () {
+                                      setState(() => _debugGeography = DebugGeography.debugGeographyEea);
+                                      ref.read(consentGatewayProvider).requestConsentInfoUpdate(debugGeography: _debugGeography);
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(content: Text('Debug Geography set to EEA & update requested')),
+                                      );
+                                    },
+                                    child: const Text('Set EEA Geography'),
+                                  ),
+                                  FilledButton.tonal(
+                                    key: const Key('gallery_geo_other'),
+                                    onPressed: () {
+                                      setState(() => _debugGeography = DebugGeography.debugGeographyOther);
+                                      ref.read(consentGatewayProvider).requestConsentInfoUpdate(debugGeography: _debugGeography);
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(content: Text('Debug Geography set to Other & update requested')),
+                                      );
+                                    },
+                                    child: const Text('Set Non-EEA Geography'),
+                                  ),
+                                  FilledButton.tonal(
+                                    key: const Key('gallery_geo_disabled'),
+                                    onPressed: () {
+                                      setState(() => _debugGeography = DebugGeography.debugGeographyDisabled);
+                                      ref.read(consentGatewayProvider).requestConsentInfoUpdate(debugGeography: _debugGeography);
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(content: Text('Debug Geography disabled & update requested')),
+                                      );
+                                    },
+                                    child: const Text('Disable Debug Geography'),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: [
+                                  FilledButton(
+                                    key: const Key('gallery_request_consent_update'),
+                                    onPressed: () async {
+                                      final gateway = ref.read(consentGatewayProvider);
+                                      await gateway.requestConsentInfoUpdate(debugGeography: _debugGeography);
+                                      final canRequest = await gateway.canRequestAds();
+                                      final privacyReq = await gateway.isPrivacyOptionsRequired();
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('canRequestAds: $canRequest, privacyOptionsRequired: $privacyReq')),
+                                        );
+                                      }
+                                    },
+                                    child: const Text('Request Consent Info'),
+                                  ),
+                                  FilledButton(
+                                    key: const Key('gallery_show_consent_form'),
+                                    onPressed: () async {
+                                      final gateway = ref.read(consentGatewayProvider);
+                                      final shown = await gateway.showConsentFormIfRequired();
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('Consent form shown / completed: $shown')),
+                                        );
+                                      }
+                                    },
+                                    child: const Text('Show Consent Form'),
+                                  ),
+                                  FilledButton(
+                                    key: const Key('gallery_show_privacy_options'),
+                                    onPressed: () async {
+                                      final gateway = ref.read(consentGatewayProvider);
+                                      await gateway.showPrivacyOptionsForm();
+                                    },
+                                    child: const Text('Show Privacy Options Form'),
+                                  ),
+                                  FilledButton.tonal(
+                                    key: const Key('gallery_reset_consent'),
+                                    onPressed: () async {
+                                      final gateway = ref.read(consentGatewayProvider);
+                                      await gateway.reset();
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(content: Text('Consent state reset')),
+                                        );
+                                      }
+                                    },
+                                    child: const Text('Reset Consent'),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              FilledButton.icon(
+                                key: const Key('gallery_simulate_interstitial'),
+                                onPressed: () async {
+                                  await InterstitialPlaceholder.show(context, ref: ref);
+                                },
+                                icon: const Icon(Icons.fullscreen),
+                                label: const Text('Simulate Interstitial Ad'),
+                              ),
+                              const SizedBox(height: 16),
+                              const Text('Native Ad Preview:', style: TextStyle(fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 8),
+                              const NativeAdRow(),
+                              const SizedBox(height: 16),
+                              const Text('Adaptive Banner Preview:', style: TextStyle(fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 8),
+                              const AdBannerSlot(),
+                              const SizedBox(height: 24),
+                            ],
+                          ),
+                        ),
+                      ] else ...[
+                        if (!_showOnlyIapSection) ...[
                         // --- Section 0: Environment Controls ---
                       const SectionHeader(title: '0. Environment Controls'),
                       Padding(
@@ -1534,12 +1669,137 @@ class _ComponentGalleryScreenState extends ConsumerState<ComponentGalleryScreen>
                           },
                           child: const Text('Toggle Quick Access Notification'),
                         ),
+                        const SizedBox(height: 24),
+                        Text(
+                          '17. Google Mobile Ads & UMP Consent (G9)',
+                          style: DocViewTypography.headlineSm,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Simulate consent states, UMP dialogs, and AdMob integration.',
+                          style: DocViewTypography.bodyMd,
+                        ),
+                        const SizedBox(height: 12),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            FilledButton.tonal(
+                              key: const Key('gallery_geo_eea'),
+                              onPressed: () {
+                                setState(() => _debugGeography = DebugGeography.debugGeographyEea);
+                                ref.read(consentGatewayProvider).requestConsentInfoUpdate(debugGeography: _debugGeography);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Debug Geography set to EEA & update requested')),
+                                );
+                              },
+                              child: const Text('Set EEA Geography'),
+                            ),
+                            FilledButton.tonal(
+                              key: const Key('gallery_geo_other'),
+                              onPressed: () {
+                                setState(() => _debugGeography = DebugGeography.debugGeographyOther);
+                                ref.read(consentGatewayProvider).requestConsentInfoUpdate(debugGeography: _debugGeography);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Debug Geography set to Other & update requested')),
+                                );
+                              },
+                              child: const Text('Set Non-EEA Geography'),
+                            ),
+                            FilledButton.tonal(
+                              key: const Key('gallery_geo_disabled'),
+                              onPressed: () {
+                                setState(() => _debugGeography = DebugGeography.debugGeographyDisabled);
+                                ref.read(consentGatewayProvider).requestConsentInfoUpdate(debugGeography: _debugGeography);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Debug Geography disabled & update requested')),
+                                );
+                              },
+                              child: const Text('Disable Debug Geography'),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            FilledButton(
+                              key: const Key('gallery_request_consent_update'),
+                              onPressed: () async {
+                                final gateway = ref.read(consentGatewayProvider);
+                                await gateway.requestConsentInfoUpdate(debugGeography: _debugGeography);
+                                final canRequest = await gateway.canRequestAds();
+                                final privacyReq = await gateway.isPrivacyOptionsRequired();
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('canRequestAds: $canRequest, privacyOptionsRequired: $privacyReq')),
+                                  );
+                                }
+                              },
+                              child: const Text('Request Consent Info'),
+                            ),
+                            FilledButton(
+                              key: const Key('gallery_show_consent_form'),
+                              onPressed: () async {
+                                final gateway = ref.read(consentGatewayProvider);
+                                final shown = await gateway.showConsentFormIfRequired();
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Consent form shown / completed: $shown')),
+                                  );
+                                }
+                              },
+                              child: const Text('Show Consent Form'),
+                            ),
+                            FilledButton(
+                              key: const Key('gallery_show_privacy_options'),
+                              onPressed: () async {
+                                final gateway = ref.read(consentGatewayProvider);
+                                await gateway.showPrivacyOptionsForm();
+                              },
+                              child: const Text('Show Privacy Options Form'),
+                            ),
+                            FilledButton.tonal(
+                              key: const Key('gallery_reset_consent'),
+                              onPressed: () async {
+                                final gateway = ref.read(consentGatewayProvider);
+                                await gateway.reset();
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Consent state reset')),
+                                  );
+                                }
+                              },
+                              child: const Text('Reset Consent'),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        FilledButton.icon(
+                          key: const Key('gallery_simulate_interstitial'),
+                          onPressed: () async {
+                            await InterstitialPlaceholder.show(context, ref: ref);
+                          },
+                          icon: const Icon(Icons.fullscreen),
+                          label: const Text('Simulate Interstitial Ad'),
+                        ),
+                        const SizedBox(height: 16),
+                        const Text('Native Ad Preview:', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 8),
+                        const NativeAdRow(),
+                        const SizedBox(height: 16),
+                        const Text('Adaptive Banner Preview:', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 8),
+                        const AdBannerSlot(),
+                        const SizedBox(height: 24),
                         const SizedBox(height: 16),
                       ],
                     ),
                   ),
                 ],
-              ),
+              ],
+            ),
               bottomNavigationBar: DocBottomNavBar(
                 currentIndex: _selectedNavTab,
                 onTap: (i) => setState(() => _selectedNavTab = i),

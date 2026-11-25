@@ -411,7 +411,7 @@ void main() {
     testWidgets(
       'FaqScreen without fromRating hides highlight banner and renders 7 Topics with exact privacy text',
       (tester) async {
-        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.physicalSize = const Size(1080, 4800);
         tester.view.devicePixelRatio = 2.0;
         addTearDown(tester.view.resetPhysicalSize);
         addTearDown(tester.view.resetDevicePixelRatio);
@@ -422,9 +422,9 @@ void main() {
         // Highlight banner MUST NOT appear on normal FAQ
         expect(find.byKey(const Key('faq_rating_highlight_banner')), findsNothing);
 
-        // 9 Topics header count & accordion cards
-        expect(find.text('9 Topics'), findsOneWidget);
-        for (var i = 0; i < 9; i++) {
+        // 10 Topics header count & accordion cards
+        expect(find.text('10 Topics'), findsOneWidget);
+        for (var i = 0; i < 10; i++) {
           expect(find.byKey(Key('faq_card_$i')), findsOneWidget);
         }
 
@@ -625,7 +625,7 @@ void main() {
     testWidgets(
       'Clear recent history dialog in ScanSettingsScreen prompts user and executes clear logic with snackbar',
       (tester) async {
-        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.physicalSize = const Size(1080, 4800);
         tester.view.devicePixelRatio = 2.0;
         addTearDown(tester.view.resetPhysicalSize);
         addTearDown(tester.view.resetDevicePixelRatio);

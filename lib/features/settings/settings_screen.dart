@@ -15,6 +15,7 @@ import '../../core/l10n/language_catalog.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../data/models/app_settings.dart';
+import '../../data/services/ads/consent_gateway.dart';
 import '../../data/services/notifications/quick_access_notification_service.dart';
 import '../../shared/widgets/dialogs/doc_dialog.dart';
 import '../../shared/widgets/navigation/doc_scaffold.dart';
@@ -45,6 +46,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
     this.termsOfUseUrlOverride,
     this.privacyPolicyUrlOverride,
     this.storeRateUrlOverride,
+    this.showAdChoicesOverride,
     this.onExternalUrlLaunch,
   });
 
@@ -60,6 +62,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
   final String? termsOfUseUrlOverride;
   final String? privacyPolicyUrlOverride;
   final String? storeRateUrlOverride;
+  final bool? showAdChoicesOverride;
   final Future<void> Function(Uri uri)? onExternalUrlLaunch;
 
   @override
@@ -298,6 +301,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           title: context.l10n.settingsManageSubscriptionsTitle,
           subtitle: context.l10n.settingsManageSubscriptionsSubtitle,
           onTap: _openManageSubscriptions,
+        ),
+      if (widget.showAdChoicesOverride ??
+          (ref.watch(isPrivacyOptionsRequiredProvider).asData?.value ?? false))
+        SettingsRow(
+          key: const Key('settings_ad_choices'),
+          icon: Icons.ads_click_outlined,
+          title: context.l10n.settingsAdChoicesTitle,
+          subtitle: context.l10n.settingsAdChoicesSubtitle,
+          onTap: () async {
+            await ref.read(consentGatewayProvider).showPrivacyOptionsForm();
+            ref.invalidate(isPrivacyOptionsRequiredProvider);
+          },
         ),
     ];
 

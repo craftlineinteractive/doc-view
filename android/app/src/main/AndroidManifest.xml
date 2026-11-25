@@ -67,6 +67,11 @@
             </intent-filter>
         </activity>
 
+        <!-- Google Mobile Ads App ID -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
+
         <!-- Recent Files Widget Receiver -->
         <receiver
             android:name=".RecentFilesWidgetReceiver"

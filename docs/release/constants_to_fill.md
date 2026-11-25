@@ -22,7 +22,7 @@ All user-facing legal, support, and store constants live in `lib/core/constants/
 | Flag | Default | Target Phase | Effect When `true` |
 | --- | --- | --- | --- |
 | `premiumEnabled` | `true` | Phase G7 | Shows `"Manage subscriptions"` row under Settings → Others and enables `/premium` paywall and billing flows. |
-| `widgetsEnabled` | `false` | Phase G8 | Shows `"Add Widget"` row under Settings → Others. |
+| `widgetsEnabled` | `true` | Phase G8 | Shows `"Add Widget"` row under Settings → Others. |
 
 ## In-App Purchase Subscriptions (Google Play Console)
 
@@ -30,3 +30,29 @@ Subscription identifiers and base plans must be configured in Google Play Consol
 - **Annual Subscription**: Product ID `docview_premium_yearly`, Base Plan ID `docview-premium-yearly-base`, 7-day free trial.
 - **Monthly Subscription**: Product ID `docview_premium_monthly`, Base Plan ID `docview-premium-monthly-base`.
 - Dynamic localized pricing and currency are managed entirely within Google Play Console and retrieved at runtime via Google Play Billing v5+ (Zero price literals in application code).
+
+## Google Mobile Ads & AdMob Configuration (REQUIRED Before Production Release)
+
+The repository ships with Google's public test AdMob App ID and test ad unit IDs. Before producing a production release, follow these exact steps:
+
+1. **Create AdMob Application**:
+   - Navigate to Google AdMob console (`https://admob.google.com/`).
+   - Create a new Android app (e.g., "Doc View").
+   - Note the assigned App ID: `ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX`.
+2. **Create Ad Units**:
+   - **Adaptive Banner**: Format Banner, name "DocView_AdaptiveBanner".
+   - **Native Advanced**: Format Native Advanced, name "DocView_NativeInFeed".
+   - **Interstitial**: Format Interstitial, name "DocView_PostExportInterstitial".
+3. **Configure Android App ID**:
+   - In `android/app/src/main/res/values/ads.xml`: replace the test App ID with the production App ID:
+     ```xml
+     <string name="admob_app_id">ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX</string>
+     ```
+4. **Configure Ad Unit IDs in Dart**:
+   - In `lib/core/config/ad_config.dart`: populate `releaseBannerAdUnitId`, `releaseNativeAdUnitId`, and `releaseInterstitialAdUnitId` with production IDs.
+   - If any ID remains an empty string (`''`), that placement automatically disables itself and collapses to 0 height with no layout gaps or requests.
+5. **GDPR / UMP User Messaging Platform**:
+   - In AdMob console → Privacy & messaging, publish a GDPR consent message.
+   - The UMP SDK will automatically present this form to EEA/UK users upon launch.
+6. **Data Safety & Privacy Policy**:
+   - Update Google Play Data Safety form with advertising identifiers and ad diagnostics as detailed in `docs/release/privacy_policy_changes.md`.

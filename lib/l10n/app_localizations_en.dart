@@ -190,7 +190,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Turn photos into PDFs, scan documents, merge and split files. Everything stays on your device.';
 
   @override
-  String get onboardingOfflineGuarantee => '100% Offline • Private & Secure';
+  String get onboardingOfflineGuarantee => 'Your files stay on your device';
 
   @override
   String get toolImageToPdf => 'Image to PDF';
@@ -227,11 +227,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'To list PDFs, Word, Excel and other files saved by any app, Android needs your permission to access all files. Your files never leave your phone.';
 
   @override
-  String get permissionReassuranceOfflineTitle => 'Works offline';
+  String get permissionReassuranceOfflineTitle => 'Files are never uploaded';
 
   @override
   String get permissionReassuranceOfflineDesc =>
-      'No internet connection required. Operates 100% locally.';
+      'Your documents are processed locally on your device.';
 
   @override
   String get permissionReassuranceNoUploadsTitle => 'No uploads';
@@ -3320,6 +3320,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationActionSearch => 'Search';
+
+  @override
+  String get settingsAdChoicesTitle => 'Ad choices';
+
+  @override
+  String get settingsAdChoicesSubtitle =>
+      'Manage privacy and advertising choices';
+
+  @override
+  String get faqQuestion10 => 'Why does Doc View show ads?';
+
+  @override
+  String get faqAnswer10 =>
+      'Ads keep Doc View free. Premium removes them. Ads are served by Google AdMob and never see your documents.';
 }
 
 /// The translations for English (`en_XA`).
@@ -3513,7 +3527,7 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get onboardingOfflineGuarantee =>
-      '[100% Öƒƒłîñé • Þřîṽàţé & Šéçûřé ẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+      '[Ŷôûř ƒîłéš šţàý ôñ ýôûř đéṽîçé ẋẋẋẋẋẋẋẋ]';
 
   @override
   String get toolImageToPdf => '[Îɱàĝé ţô ÞÐƑ ẋẋẋẋẋ]';
@@ -3551,11 +3565,12 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
       '[Ťô łîšţ ÞÐƑš, Ŵôřđ, Éẋçéł àñđ ôţĥéř ƒîłéš šàṽéđ ƀý àñý àþþ, Åñđřôîđ ñééđš ýôûř þéřɱîššîôñ ţô àççéšš àłł ƒîłéš. Ýôûř ƒîłéš ñéṽéř łéàṽé ýôûř þĥôñé. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
 
   @override
-  String get permissionReassuranceOfflineTitle => '[Ŵôřƙš ôƒƒłîñé ẋẋẋẋẋẋ]';
+  String get permissionReassuranceOfflineTitle =>
+      '[Ƒîłéš àřé ñéṽéř ûþłôàđéđ ẋẋẋẋẋẋ]';
 
   @override
   String get permissionReassuranceOfflineDesc =>
-      '[Ñô îñţéřñéţ çôññéçţîôñ řéʠûîřéđ. Öþéřàţéš 100% łôçàłłý. ẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋẋ]';
+      '[Ŷôûř đôçûɱéñţš àřé þřôçéššéđ łôçàłłý ôñ ýôûř đéṽîçé. ẋẋẋẋẋẋẋẋ]';
 
   @override
   String get permissionReassuranceNoUploadsTitle => '[Ñô ûþłôàđš ẋẋẋẋ]';
@@ -6736,4 +6751,18 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
 
   @override
   String get notificationActionSearch => '[Şéàřçĥ ẋ]';
+
+  @override
+  String get settingsAdChoicesTitle => '[Âđ çĥôîçéš ẋẋ]';
+
+  @override
+  String get settingsAdChoicesSubtitle =>
+      '[Màñàĝé þřîṽàçý àñđ àđṽéřţîšîñĝ çĥôîçéš ẋẋẋẋẋẋ]';
+
+  @override
+  String get faqQuestion10 => '[Ŵĥý đôéš Đôç Ṽîéŵ šĥôŵ àđš? ẋẋẋẋẋẋ]';
+
+  @override
+  String get faqAnswer10 =>
+      '[Âđš ƙééþ Đôç Ṽîéŵ ƒřéé. Þřéɱîûɱ řéɱôṽéš ţĥéɱ. Âđš àřé šéřṽéđ ƀý Ĝôôĝłé ÂđMôƀ àñđ ñéṽéř šéé ýôûř đôçûɱéñţš. ẋẋẋẋẋẋẋẋẋẋẋẋ]';
 }

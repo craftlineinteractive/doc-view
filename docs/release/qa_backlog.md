@@ -53,3 +53,24 @@ The following tests require physical Android hardware and must NOT be marked com
 - [ ] **20 MB Extracted Text Stress Test**: Verify typed exception thrown when extracted plain text size exceeds 20 MB (`PdfToWordErrorReason.textTooLarge`).
 - [ ] **Damaged Stream Recovery**: Test conversion on PDFs with missing xref tables or damaged EOF markers; verify graceful error handling.
 - [ ] **Low-RAM Android Go Devices**: Run 100-page conversion on a 1 GB / 2 GB RAM Android Go profile to verify background isolate does not trigger OS LMK (Low Memory Killer).
+
+---
+
+## 7. Google Mobile Ads (AdMob) & UMP Live Dependencies (Phase G9)
+
+| Area | Scenario | External Dependency | Status | Notes / Plan |
+|---|---|---|---|---|
+| **G9: AdMob** | Production Ad Units & App ID | Google AdMob Console | `PENDING (AdMob)` | Create production app and ad unit IDs in AdMob console; replace test IDs in `android/app/src/main/res/values/ads.xml` and `lib/core/config/ad_config.dart`. |
+| **G9: AdMob** | Real Device Ad Delivery & Fill Rate | Physical Android device & live Google Ad network | `NOT TESTED (physical)` | Test ad rendering, fill rates, adaptive banner resizing, and click-through on physical hardware with live Google Play Services. |
+| **G9: AdMob** | AdMob Policy Review & Compliance | Google AdMob Policy Team | `PENDING (AdMob)` | Complete AdMob account verification, app-ads.txt hosting, and publisher policy compliance review. |
+| **G9: UMP** | Live GDPR / UMP Consent Message | AdMob Privacy & Messaging | `PENDING (AdMob)` | Publish live GDPR consent message in AdMob console for EEA/UK targeting with custom branding and options. |
+
+---
+
+## 8. iOS Pending Advertising & Privacy Configuration (Phase G9)
+
+The following iOS advertising configurations are recorded as pending for future iOS release milestones:
+- [ ] **App Tracking Transparency (ATT)**: Request tracking authorization dialog via `AppTrackingTransparency` framework when targeting iOS 14.5+.
+- [ ] **GADApplicationIdentifier**: Configure production iOS AdMob App ID in `ios/Runner/Info.plist`.
+- [ ] **SKAdNetwork IDs**: Include Google and third-party advertising partner `SKAdNetworkItems` in `ios/Runner/Info.plist`.
+- [ ] **NSUserTrackingUsageDescription**: Provide localized user tracking disclosure copy explaining how advertising identifiers support free app access.
