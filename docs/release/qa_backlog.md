@@ -18,6 +18,9 @@ The following tests require physical Android hardware and must NOT be marked com
 | **G4c: Recycle Bin** | Flash storage write speed & wear | Real UFS/eMMC flash storage | Measure raw IO throughput of 190 MB copy/rename on physical flash storage compared to emulator host SSD. |
 | **G4c: File Management** | Android Files app interop | Native OEM file managers | Test file discovery and SAF (Storage Access Framework) pickers across Samsung My Files, Xiaomi File Manager, and Google Files. |
 | **G4b: Document Scanner** | Physical camera capture & autofocus | Physical camera sensor & lighting | Verify document edge detection, skew correction, and auto-shutter under variable real-world ambient lighting. |
+| **G8: App Widgets** | Third-party launcher pin compatibility | Physical OEM launchers | Verify `requestPinAppWidget` behavior on Samsung One UI, Xiaomi HyperOS, Nova, and Niagara launchers. |
+| **G8: Notifications** | OEM notification tray rendering | Physical OEM skins | Verify low-importance ongoing tray display and action buttons on MIUI/HyperOS, One UI, and ColorOS. |
+| **G8: Persistence** | Quick access notification re-post on reboot | Physical device power cycle | Verify sticky ongoing notification restoration after OS restart on devices with aggressive battery managers. |
 
 ---
 
