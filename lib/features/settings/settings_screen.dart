@@ -33,7 +33,7 @@ import 'widgets/theme_selection_sheet.dart';
 /// - General: Scan settings, App theme, Language (conditional), Rate us
 /// - Others (when non-empty): Add Widget (flag), Terms of use, Privacy policy,
 ///   Manage subscriptions (flag)
-/// - Centered footer: Version X.Y.Z (N) + Open-source licenses link.
+/// - Centered footer: Version X.Y.Z (N).
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({
     super.key,
@@ -456,17 +456,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           SettingsGroupCard(children: othersRows),
                         ],
 
-                        // 4. CENTERED FOOTER: Version + Open-source licenses
+                        // 4. CENTERED FOOTER: Version
                         SettingsFooter(
                           version: version,
                           buildNumber: buildNumber,
-                          onOpenLicenses: () {
-                            showLicensePage(
-                              context: context,
-                              applicationName: AppConstants.appName,
-                              applicationVersion: '$version ($buildNumber)',
-                            );
-                          },
                           onVersionLongPress: kDebugMode
                               ? () {
                                   Navigator.of(context).push(

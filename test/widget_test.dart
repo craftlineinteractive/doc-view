@@ -193,7 +193,7 @@ void main() {
     expect(find.byKey(const Key('settings_scan_settings')), findsOneWidget);
     expect(find.byKey(const Key('settings_app_theme')), findsOneWidget);
     expect(find.byKey(const Key('settings_rate_us')), findsOneWidget);
-    expect(find.byKey(const Key('settings_licenses')), findsOneWidget);
+    expect(find.byKey(const Key('settings_licenses')), findsNothing);
     expect(find.byKey(const Key('settings_version')), findsOneWidget);
 
     // Conditional rows whose constants are empty ('') or flags are off MUST NOT appear

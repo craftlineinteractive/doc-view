@@ -84,7 +84,7 @@ void main() {
         expect(appTheme, findsOneWidget);
         expect(rateUs, findsOneWidget);
         expect(version, findsOneWidget);
-        expect(licenses, findsOneWidget);
+        expect(licenses, findsNothing);
 
         // Verify strict top-to-bottom ordering
         expect(tester.getTopLeft(fileManager).dy, lessThan(tester.getTopLeft(faq).dy));
@@ -92,11 +92,10 @@ void main() {
         expect(tester.getTopLeft(scanSettings).dy, lessThan(tester.getTopLeft(appTheme).dy));
         expect(tester.getTopLeft(appTheme).dy, lessThan(tester.getTopLeft(rateUs).dy));
         expect(tester.getTopLeft(rateUs).dy, lessThan(tester.getTopLeft(version).dy));
-        expect(tester.getTopLeft(version).dy, lessThan(tester.getTopLeft(licenses).dy));
 
         // Version footer text & semantics
         expect(find.text('Version 1.0.0 (1)'), findsOneWidget);
-        expect(find.text('Open-source licenses'), findsOneWidget);
+        expect(find.text('Open-source licenses'), findsNothing);
         expect(
           find.bySemanticsLabel('Version 1.0.0 build 1'),
           findsOneWidget,
