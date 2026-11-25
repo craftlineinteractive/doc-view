@@ -1,0 +1,11 @@
+# Android Release Signing Configuration Example
+# Copy this file to android/key.properties and replace the placeholder values.
+# NEVER commit key.properties or keystore files (*.jks, *.keystore) to version control.
+#
+# Generate keystore with keytool:
+# keytool -genkey -v -keystore release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+#
+storePassword=YOUR_KEYSTORE_PASSWORD
+keyPassword=YOUR_KEY_PASSWORD
+keyAlias=upload
+storeFile=../release.jks

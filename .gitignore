@@ -45,3 +45,13 @@ task_plan.md
 progress.md
 findings.md
 
+# Android Keystores & Properties
+key.properties
+*.jks
+*.keystore
+local.properties
+symbols/
+build/symbols/
+.kotlin/
+**/android/.kotlin/
+
