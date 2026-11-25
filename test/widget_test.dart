@@ -179,6 +179,7 @@ void main() {
         child: MaterialApp(
           home: SettingsScreen(
             isReleaseOverride: true,
+            shippedLanguageCountOverride: 1,
             premiumEnabledOverride: false,
             widgetsEnabledOverride: false,
           ),

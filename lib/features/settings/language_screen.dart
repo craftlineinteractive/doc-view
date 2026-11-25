@@ -84,7 +84,7 @@ class _LanguageScreenState extends ConsumerState<LanguageScreen> {
           trailingBadge: (!lang.isShipped && !lang.isPseudo)
               ? context.l10n.languageNotTranslatedBadge
               : null,
-          isSelected: selectedCode == lang.code,
+          isSelected: LanguageCatalog.codesMatch(selectedCode, lang.code),
           isEnabled: lang.isShipped || (!isRelease && lang.isPseudo),
           onTap: () {
             if (lang.isShipped || (!isRelease && lang.isPseudo)) {

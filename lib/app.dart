@@ -42,6 +42,12 @@ class DocReaderApp extends ConsumerStatefulWidget {
           return supported;
         }
       }
+      for (final supported in supportedLocales) {
+        if (supported.languageCode == deviceLocale.languageCode &&
+            supported.countryCode != 'XA') {
+          return supported;
+        }
+      }
     }
     return const Locale('en');
   }
@@ -270,7 +276,11 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
       locale: locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: kReleaseMode
-          ? const [Locale('en')]
+          ? AppLocalizations.supportedLocales
+              .where(
+                (l) => !(l.languageCode == 'en' && l.countryCode == 'XA'),
+              )
+              .toList(growable: false)
           : AppLocalizations.supportedLocales,
       localeResolutionCallback: DocReaderApp.resolveAppLocale,
       routerConfig: router,

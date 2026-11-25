@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/l10n/language_catalog.dart';
 import '../models/app_settings.dart';
 
 /// Repository responsible for persisting and loading application preferences.
@@ -19,11 +20,16 @@ class SettingsRepository {
 
   /// Validates whether a [localeCode] is currently supported.
   ///
-  /// In release builds, only 'en' is allowed; debug builds allow 'en_XA'.
+  /// Accepts any shipped localization in [LanguageCatalog.shippedCodes]
+  /// (regardless of `-` or `_` separator), and allows `en_XA` in non-release
+  /// builds.
   static bool isValidLocaleCode(String? code) {
-    if (code == null) return false;
-    if (code == 'en') return true;
-    if (!kReleaseMode && code == 'en_XA') return true;
+    if (code == null || code.isEmpty) return false;
+    final normalized = LanguageCatalog.normalizeCode(code);
+    if (LanguageCatalog.shippedCodes.contains(normalized)) return true;
+    if (!kReleaseMode && normalized == LanguageCatalog.pseudoLocaleCode) {
+      return true;
+    }
     return false;
   }
 

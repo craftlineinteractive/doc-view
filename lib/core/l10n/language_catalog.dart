@@ -47,8 +47,18 @@ class LanguageCatalog {
     return codes;
   }
 
+  /// Normalizes hyphenated and underscored locale codes (e.g. `pt-BR` -> `pt_BR`).
+  static String normalizeCode(String code) => code.replaceAll('-', '_');
+
+  /// Returns true when two locale codes refer to the same locale regardless of
+  /// `-` vs `_` separators.
+  static bool codesMatch(String? a, String? b) {
+    if (a == null || b == null) return false;
+    return normalizeCode(a) == normalizeCode(b);
+  }
+
   static bool _isCodeShipped(String code) {
-    final normalized = code.replaceAll('-', '_');
+    final normalized = normalizeCode(code);
     return shippedCodes.contains(normalized);
   }
 

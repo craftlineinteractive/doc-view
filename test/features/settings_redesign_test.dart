@@ -56,6 +56,7 @@ void main() {
         await tester.pumpApp(
           const SettingsScreen(
             isReleaseOverride: true,
+            shippedLanguageCountOverride: 1,
             premiumEnabledOverride: false,
             widgetsEnabledOverride: false,
           ),
@@ -491,14 +492,16 @@ void main() {
 
         expect(find.byKey(const Key('lang_system_default')), findsOneWidget);
         expect(find.byKey(const Key('lang_en')), findsOneWidget);
+        expect(find.byKey(const Key('lang_hi')), findsOneWidget);
+        expect(find.byKey(const Key('lang_pt-BR')), findsOneWidget);
+        expect(find.byKey(const Key('lang_ar')), findsOneWidget);
         expect(find.byKey(const Key('lang_en_XA')), findsNothing);
-        expect(find.byKey(const Key('lang_hi')), findsNothing);
         expect(find.text('(not translated)'), findsNothing);
       },
     );
 
     testWidgets(
-      'Debug config lists pseudo-locale and unshipped planned languages; selecting persists and System default resets to null',
+      'Debug config lists pseudo-locale and all shipped languages; selecting persists and System default resets to null',
       (tester) async {
         final container = ProviderContainer();
         addTearDown(container.dispose);
@@ -516,7 +519,8 @@ void main() {
         expect(find.byKey(const Key('lang_system_default')), findsOneWidget);
         expect(find.byKey(const Key('lang_en')), findsOneWidget);
         expect(find.byKey(const Key('lang_en_XA')), findsOneWidget);
-        expect(find.text('(not translated)'), findsWidgets);
+        expect(find.byKey(const Key('lang_hi')), findsOneWidget);
+        expect(find.text('(not translated)'), findsNothing);
 
         // Select English -> applies live and persists
         await tester.tap(find.byKey(const Key('lang_en')));
@@ -524,13 +528,32 @@ void main() {
         expect(container.read(localeProvider), equals(const Locale('en')));
         expect(await SettingsRepository().getLocaleCode(), equals('en'));
 
-        // Select en_XA -> applies live and persists
+        // Select Hindi -> applies live and persists
+        await tester.tap(find.byKey(const Key('lang_hi')));
+        await tester.pumpAndSettle();
+        expect(container.read(localeProvider), equals(const Locale('hi')));
+        expect(await SettingsRepository().getLocaleCode(), equals('hi'));
+
+        // Select Portuguese (Brazil) -> applies live and persists
+        await tester.tap(find.byKey(const Key('lang_pt-BR')));
+        await tester.pumpAndSettle();
+        expect(
+          container.read(localeProvider),
+          equals(const Locale('pt', 'BR')),
+        );
+        expect(await SettingsRepository().getLocaleCode(), equals('pt-BR'));
+
+        // Select en_XA (scroll into view below the 10 shipped languages) -> applies live and persists
+        await tester.ensureVisible(find.byKey(const Key('lang_en_XA')));
+        await tester.pumpAndSettle();
         await tester.tap(find.byKey(const Key('lang_en_XA')));
         await tester.pumpAndSettle();
         expect(container.read(localeProvider), equals(const Locale('en', 'XA')));
         expect(await SettingsRepository().getLocaleCode(), equals('en_XA'));
 
         // Select System default -> resets localeProvider to null and clears pref
+        await tester.ensureVisible(find.byKey(const Key('lang_system_default')));
+        await tester.pumpAndSettle();
         await tester.tap(find.byKey(const Key('lang_system_default')));
         await tester.pumpAndSettle();
         expect(container.read(localeProvider), isNull);
