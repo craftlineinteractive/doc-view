@@ -1,58 +1,29 @@
-# Release Constants To Fill Before Store Submission
+# Production Constants & Configuration Reference: Doc View
 
-All user-facing legal, support, and store constants live in `lib/core/constants/app_constants.dart` and ship as empty strings (`''`) during development so unconfigured rows stay cleanly hidden. Before building a production release (Android Play Store / iOS App Store), populate every constant below.
+This document is the authoritative single source of truth for every environment variable, build flag, and configuration constant required for production release.
 
-| Constant (`AppConstants.*`) | Current Default | Where Used in UI | Source Document / Store Listing |
-| --- | --- | --- | --- |
-| `supportEmail` | `''` | FAQ highlight banner `"Contact us"` button & FAQ bottom `"Still need help? Send feedback"` CTA (`mailto:` with app version/build in body). Hidden when empty. | Official support inbox for Craftline Interactive (e.g., `support@craftlineinteractive.com`). |
-| `termsOfUseUrl` | `''` | Settings → Others → `"Terms of use"` row (opens external browser). Hidden when empty. | Hosted Terms of Use / Terms of Service web page (HTTPS) published on the official app website and referenced in Play Console / App Store Connect. |
-| `privacyPolicyUrl` | `''` | Settings → Others → `"Privacy policy"` row (opens external browser). Hidden when empty. | Hosted Privacy Policy web page (HTTPS) matching the URL declared in Google Play Data Safety / App Store Privacy Details (must disclose Google AdMob data usage). |
-| `storeShareUrl` | `''` | Settings → Top group → `"Share"` row (opens system Share Sheet via `share_plus`). Hidden when empty. | Public store listing URL (e.g., `https://play.google.com/store/apps/details?id=com.craftlineinteractive.docview` on Android or universal landing URL redirecting to Play Store / App Store). |
-| `storeRateUrl` | `''` | Settings → General → `"Rate us"` drawer → `"Rate on Google Play"` button (opens external browser). Hidden inside drawer when empty. | Google Play listing URL (`https://play.google.com/store/apps/details?id=com.craftlineinteractive.docview`) / App Store review URL. |
+---
 
-## Pre-Configured Platform URLs (No Change Needed Unless Store Policy Changes)
+## 1. Constants Inventory & Deployment Matrix
 
-| Constant (`AppConstants.*`) | Value | Where Used |
-| --- | --- | --- |
-| `androidSubscriptionsUrl` | `https://play.google.com/store/account/subscriptions` | Settings → Others → `"Manage subscriptions"` on Android (gated behind `premiumEnabled` in `lib/core/config/feature_flags.dart`, Phase G7). |
-| `iosSubscriptionsUrl` | `https://apps.apple.com/account/subscriptions` | Settings → Others → `"Manage subscriptions"` on iOS (gated behind `premiumEnabled` in `lib/core/config/feature_flags.dart`, Phase G7). |
+| Constant Name | Location in Codebase | How to Supply / Inject | Required Before Production? | Default Value | Notes / Description |
+|---|---|---|---|---|---|
+| `supportEmail` | `lib/core/constants/app_constants.dart` | Direct constant or Dart define | **REQUIRED** | `""` (Empty string) | Customer support email displayed in Settings → Support and feedback dialogs. |
+| `termsOfUseUrl` | `lib/core/constants/app_constants.dart` | Direct constant or Dart define | **REQUIRED** | `""` (Empty string) | Public HTTPS URL where `docs/release/store/terms_of_use.md` is hosted. |
+| `privacyPolicyUrl` | `lib/core/constants/app_constants.dart` | Direct constant or Dart define | **REQUIRED** | `""` (Empty string) | Public HTTPS URL where `docs/release/store/privacy_policy.md` is hosted. Must match Google Play Console URL. |
+| `storeShareUrl` | `lib/core/constants/app_constants.dart` | Direct constant or Dart define | **REQUIRED** | `""` (Empty string) | Google Play Store listing URL (`https://play.google.com/store/apps/details?id=com.craftlineinteractive.docview`). |
+| `storeRateUrl` | `lib/core/constants/app_constants.dart` | Direct constant or Dart define | **REQUIRED** | `""` (Empty string) | Market direct rating URI (`market://details?id=com.craftlineinteractive.docview`). |
+| `admobAppId` | `android/app/build.gradle.kts` | `-PadmobAppId=...` or `~/.gradle/gradle.properties` | **REQUIRED** | `ca-app-pub-3940256099942544~3347511713` (Test App ID) | Production AdMob Application ID. Release builds are blocked by Gradle if left as test ID. |
+| `ADMOB_BANNER_ID` | `lib/core/config/ad_config.dart` | `--dart-define=ADMOB_BANNER_ID=...` | **REQUIRED** (for ads) | `""` (Empty string) | Production banner ad unit ID from AdMob. If empty, banner slot is disabled and collapses to 0 height. |
+| `ADMOB_NATIVE_ID` | `lib/core/config/ad_config.dart` | `--dart-define=ADMOB_NATIVE_ID=...` | **REQUIRED** (for ads) | `""` (Empty string) | Production native in-feed ad unit ID. If empty, native ad slots collapse to 0 height. |
+| `ADMOB_INTERSTITIAL_ID` | `lib/core/config/ad_config.dart` | `--dart-define=ADMOB_INTERSTITIAL_ID=...` | **REQUIRED** (for ads) | `""` (Empty string) | Production interstitial ad unit ID. If empty, interstitials are suppressed. |
+| `productId` (IAP) | `lib/data/services/billing/iap_config.dart` | Constant in `iap_config.dart` | **CONFIGURED** | `docview_premium` | Google Play subscription product ID. |
+| `androidSubscriptionsUrl` | `lib/core/constants/app_constants.dart` | Constant in `app_constants.dart` | **CONFIGURED** | `https://play.google.com/store/account/subscriptions` | Google Play subscription management page. |
 
-## Feature Flags (`lib/core/config/feature_flags.dart`)
+---
 
-| Flag | Default | Target Phase | Effect When `true` |
-| --- | --- | --- | --- |
-| `premiumEnabled` | `true` | Phase G7 | Shows `"Manage subscriptions"` row under Settings → Others and enables `/premium` paywall and billing flows. |
-| `widgetsEnabled` | `true` | Phase G8 | Shows `"Add Widget"` row under Settings → Others. |
-
-## In-App Purchase Subscriptions (Google Play Console)
-
-Subscription identifiers and base plans must be configured in Google Play Console (Monetize → Subscriptions) as specified in `docs/release/iap_products.txt`:
-- **Annual Subscription**: Product ID `docview_premium_yearly`, Base Plan ID `docview-premium-yearly-base`, 7-day free trial.
-- **Monthly Subscription**: Product ID `docview_premium_monthly`, Base Plan ID `docview-premium-monthly-base`.
-- Dynamic localized pricing and currency are managed entirely within Google Play Console and retrieved at runtime via Google Play Billing v5+ (Zero price literals in application code).
-
-## Google Mobile Ads & AdMob Configuration (REQUIRED Before Production Release)
-
-The repository ships with Google's public test AdMob App ID and test ad unit IDs. Before producing a production release, follow these exact steps:
-
-1. **Create AdMob Application**:
-   - Navigate to Google AdMob console (`https://admob.google.com/`).
-   - Create a new Android app (e.g., "Doc View").
-   - Note the assigned App ID: `ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX`.
-2. **Create Ad Units**:
-   - **Adaptive Banner**: Format Banner, name "DocView_AdaptiveBanner".
-   - **Native Advanced**: Format Native Advanced, name "DocView_NativeInFeed".
-   - **Interstitial**: Format Interstitial, name "DocView_PostExportInterstitial".
-3. **Configure Android App ID**:
-   - In `android/app/src/main/res/values/ads.xml`: replace the test App ID with the production App ID:
-     ```xml
-     <string name="admob_app_id">ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX</string>
-     ```
-4. **Configure Ad Unit IDs in Dart**:
-   - In `lib/core/config/ad_config.dart`: populate `releaseBannerAdUnitId`, `releaseNativeAdUnitId`, and `releaseInterstitialAdUnitId` with production IDs.
-   - If any ID remains an empty string (`''`), that placement automatically disables itself and collapses to 0 height with no layout gaps or requests.
-5. **GDPR / UMP User Messaging Platform**:
-   - In AdMob console → Privacy & messaging, publish a GDPR consent message.
-   - The UMP SDK will automatically present this form to EEA/UK users upon launch.
-6. **Data Safety & Privacy Policy**:
-   - Update Google Play Data Safety form with advertising identifiers and ad diagnostics as detailed in `docs/release/privacy_policy_changes.md`.
+## 2. Automated Pre-Production Verification Test
+The test located at `test/constants/constants_audit_test.dart` audits the state of all constants:
+- Enumerates which constants are populated and which remain empty.
+- Verifies that empty constants fail production verification unless populated or explicitly configured.
+- Guarantees the app gracefully hides empty rows in debug and testing modes without crashing.
