@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/config/feature_flags.dart';
 import '../../core/errors/app_errors.dart';
 import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
@@ -288,7 +289,6 @@ class ToolsScreen extends ConsumerWidget {
     final editTools = getToolsForSection(ToolSection.editAndManage);
     final otherTools = getToolsForSection(ToolSection.others);
     final isPremium = ref.watch(isPremiumProvider);
-    final locksActive = ref.watch(locksActiveProvider);
 
     return DocScaffold(
       applyHeaderGradient: true,
@@ -326,11 +326,11 @@ class ToolsScreen extends ConsumerWidget {
           ],
         ),
         actions: [
-          if (locksActive && !isPremium)
+          if (premiumEnabled)
             DocIconButton(
               key: const Key('tools_crown_button'),
               icon: AppIcons.crown,
-              color: tokens.premiumGold,
+              color: isPremium ? tokens.primaryBlue : tokens.premiumGold,
               tooltip: context.l10n.premiumTooltip,
               onPressed: () => context.push('/premium'),
             ),

@@ -209,7 +209,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byKey(const Key('tools_crown_button')), findsNothing);
+      expect(find.byKey(const Key('tools_crown_button')), findsOneWidget);
       expect(find.byKey(const Key('tool_crown_badge_pdf_to_word')), findsNothing);
       expect(find.byKey(const Key('tool_crown_badge_annotate')), findsNothing);
       expect(find.byKey(const Key('tool_crown_badge_add_text')), findsNothing);
