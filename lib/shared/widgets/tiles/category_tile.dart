@@ -73,13 +73,13 @@ class CategoryTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           hoverColor: tokens.surfaceHover,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 _buildIcon(),
-                const SizedBox(height: 6),
+                const SizedBox(height: 4),
                 // Category label
                 Flexible(
                   child: Text(

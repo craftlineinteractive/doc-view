@@ -71,22 +71,22 @@ class SkeletonTileGrid extends StatelessWidget {
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.fromLTRB(16, 4, 16, 6),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
           crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 0.72,
+          mainAxisSpacing: 4,
+          childAspectRatio: 0.84,
         ),
         itemCount: itemCount,
         itemBuilder: (context, index) => const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 2, vertical: 4),
+          padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               SkeletonBox(width: 36, height: 44, borderRadius: 5),
-              SizedBox(height: 6),
+              SizedBox(height: 4),
               SkeletonBox(width: 36, height: 12, borderRadius: 3),
               SizedBox(height: 4),
               SkeletonBox(width: 44, height: 10, borderRadius: 2),

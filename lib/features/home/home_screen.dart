@@ -153,7 +153,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             // 2. 4x2 Category Grid (or Skeleton during initial load)
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
+                padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 16, 6),
                 child: countsAsync.isLoading
                     ? const SkeletonTileGrid(itemCount: 8)
                     : Builder(
@@ -169,14 +169,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 ? 0.58
                                 : (textScale > 1.1
                                     ? 0.68
-                                    : (size.width <= 360 ? 0.72 : 0.80));
+                                    : (size.width <= 360 ? 0.78 : 0.88));
                           }
 
                           return GridView.count(
                             crossAxisCount: 4,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            mainAxisSpacing: 10,
+                            mainAxisSpacing: 4,
                             crossAxisSpacing: 10,
                             childAspectRatio: categoryAspectRatio,
                             children: [
