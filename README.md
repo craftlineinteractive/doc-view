@@ -3,10 +3,31 @@
 [![Flutter](https://img.shields.io/badge/Flutter-3.44.9-02569B?logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.12.2-0175C2?logo=dart)](https://dart.dev)
 [![Target SDK](https://img.shields.io/badge/Android%20Target%20SDK-36-3DDC84?logo=android)](https://developer.android.com)
-[![Tests](https://img.shields.io/badge/Tests-781%2B%20Passing-success)](#testing--verification)
+[![Tests](https://img.shields.io/badge/Tests-787%2B%20Passing-success)](#testing--verification)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-**Doc View** is an ultra-fast, privacy-first offline document reader, file manager, and comprehensive PDF productivity toolkit designed natively for Android.
+**Doc View** is an ultra-fast, privacy-first offline document reader, file manager, and comprehensive PDF productivity toolkit designed natively for Android. All document processing happens 100% on-device — no files ever leave your phone.
+
+| | |
+|---|---|
+| **Package** | `com.craftlineinteractive.docview` |
+| **Version** | 1.0.0 (Build 1) |
+| **Min SDK** | Android 7.0 (API 24) |
+| **Target SDK** | Android 15 (API 36) |
+| **Languages** | English, Hindi, Gujarati, Spanish, Portuguese (BR), French, German, Arabic, Indonesian, Russian |
+
+---
+
+## Supported File Formats
+
+| Format | Extensions | View | Convert to PDF |
+|--------|-----------|:----:|:--------------:|
+| PDF | `.pdf` | ✅ | — |
+| Word | `.doc`, `.docx` | ✅ | ✅ |
+| Excel | `.xls`, `.xlsx` | ✅ | ✅ |
+| PowerPoint | `.ppt`, `.pptx` | ✅ | ✅ |
+| Plain Text | `.txt` | ✅ | — |
+| Images | `.jpg`, `.png`, `.webp` | ✅ | ✅ |
 
 ---
 
@@ -40,6 +61,32 @@
 - **Recent Files Widget (4x2)**: Glance at your top 5 recently opened documents and launch them directly.
 - **Quick Tools Widget (4x1)**: One-tap shortcuts for Scan, Image to PDF, Search, and Import.
 - **Quick Access Notification**: Optional low-importance persistent notification drawer with tool shortcuts.
+
+### 5. Premium Features
+Doc View is **free** with ads. A one-time premium upgrade removes ads and unlocks:
+- **Annotate & Draw**: Smooth vector ink drawing, highlights, and underlines on PDFs.
+- **Digital Signatures**: Create, store, and place reusable vector signatures on contracts and forms.
+
+All other tools — merge, split, compress, convert, watermark, page numbers, password protect/unlock, extract text, rotate/reorder pages — are **free for everyone**.
+
+---
+
+## Supported Languages
+
+Doc View ships with 10 languages. Users can switch languages instantly from **Settings → Language**.
+
+| Language | Code | Direction |
+|----------|------|-----------|
+| English | `en` | LTR |
+| Hindi (हिन्दी) | `hi` | LTR |
+| Gujarati (ગુજરાતી) | `gu` | LTR |
+| Spanish (Español) | `es` | LTR |
+| Portuguese (Português – BR) | `pt_BR` | LTR |
+| French (Français) | `fr` | LTR |
+| German (Deutsch) | `de` | LTR |
+| Arabic (العربية) | `ar` | RTL |
+| Indonesian (Bahasa Indonesia) | `id` | LTR |
+| Russian (Русский) | `ru` | LTR |
 
 ---
 
@@ -84,7 +131,7 @@ Doc View maintains an extensive test suite covering unit logic, Riverpod provide
 # Run static analysis
 flutter analyze
 
-# Run full test suite (780+ tests)
+# Run full test suite (787+ tests)
 flutter test
 
 # Run security guardrail checks
@@ -113,6 +160,29 @@ Doc View includes automated fail-safe checks in `android/app/build.gradle.kts` t
 
 ---
 
+## Project Structure
+
+```
+doc-view/
+├── android/              # Android platform (Gradle, manifests, widgets)
+├── assets/               # Fonts, icons, and static resources
+├── docs/                 # Architecture, audit, and release documentation
+│   ├── redesign/         # UI/UX redesign specs and evidence
+│   └── release/          # Store listing, security review, size report
+├── lib/
+│   ├── app.dart          # Root MaterialApp with theme & locale setup
+│   ├── core/             # Theme, localization, routing, constants
+│   ├── data/             # Repositories, models, local data sources
+│   ├── features/         # Feature modules (home, viewer, tools, settings…)
+│   ├── l10n/             # ARB translation files (10 languages)
+│   └── widgets/          # Shared reusable widgets
+├── test/                 # 787+ unit, widget, and integration tests
+├── pubspec.yaml          # Dependencies and version (1.0.0+1)
+└── LICENSE               # Apache License 2.0
+```
+
+---
+
 ## Documentation
 
 Comprehensive project documentation is available in the `docs/` directory:
@@ -136,3 +206,10 @@ Third-party libraries and fonts used in this application:
 - **Inter Fonts**: Licensed under the SIL Open Font License, Version 1.1 ([assets/fonts/Inter-OFL.txt](assets/fonts/Inter-OFL.txt)).
 - **Space Grotesk Fonts**: Licensed under the SIL Open Font License, Version 1.1 ([assets/fonts/SpaceGrotesk-OFL.txt](assets/fonts/SpaceGrotesk-OFL.txt)).
 - **Syncfusion PDF**: Used under the [Syncfusion Community License](docs/release/syncfusion_license.md).
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/craftlineinteractive">Craftline Interactive</a><br>
+  © 2026 Craftline Interactive — All rights reserved.
+</p>
