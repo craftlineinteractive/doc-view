@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:printing/printing.dart';
 
+import '../../../core/utils/external_activity_guard.dart';
+
 import '../../../core/errors/app_errors.dart';
 import '../../../data/models/doc_file.dart';
 
@@ -33,10 +35,12 @@ class PrintPdfService {
 
     try {
       final bytes = await ioFile.readAsBytes();
-      return await Printing.layoutPdf(
-        onLayout: (format) async => bytes,
-        name: file.name,
-      );
+      return await ExternalActivityGuard.guard(() async {
+        return await Printing.layoutPdf(
+          onLayout: (format) async => bytes,
+          name: file.name,
+        );
+      });
     } on PrintPdfException {
       rethrow;
     } catch (e) {

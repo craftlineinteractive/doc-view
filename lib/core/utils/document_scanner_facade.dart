@@ -1,5 +1,6 @@
 import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:flutter/foundation.dart';
+import 'external_activity_guard.dart';
 
 /// Facade wrapping cunning_document_scanner with a test hook.
 class DocumentScannerFacade {
@@ -11,7 +12,9 @@ class DocumentScannerFacade {
     if (testScans != null) {
       return testScans;
     }
-    // ignore: deprecated_member_use
-    return await CunningDocumentScanner.getPictures();
+    return await ExternalActivityGuard.guard(() async {
+      // ignore: deprecated_member_use
+      return await CunningDocumentScanner.getPictures();
+    });
   }
 }

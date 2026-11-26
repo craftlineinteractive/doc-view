@@ -6,6 +6,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/config/ad_config.dart';
+import '../../../core/utils/external_activity_guard.dart';
 import '../billing/billing_providers.dart';
 import 'consent_gateway.dart';
 
@@ -18,6 +19,11 @@ class AdService {
   InterstitialAd? _preloadedInterstitial;
   bool _isPreloadingInterstitial = false;
   final List<NativeAd> _cachedNativeAds = [];
+
+  AppOpenAd? _appOpenAd;
+  bool _isLoadingAppOpenAd = false;
+  bool _isShowingAppOpenAd = false;
+  DateTime? _appOpenLoadTime;
 
   static const String _keyLastInterstitialTime = 'ad_interstitial_last_time_ms';
   static const String _keyDailyInterstitialDate = 'ad_interstitial_daily_date';
@@ -235,10 +241,98 @@ class AdService {
     _preloadedInterstitial = null;
     _isPreloadingInterstitial = false;
 
+    _appOpenAd?.dispose();
+    _appOpenAd = null;
+    _isLoadingAppOpenAd = false;
+    _isShowingAppOpenAd = false;
+
     for (final nativeAd in _cachedNativeAds) {
       nativeAd.dispose();
     }
     _cachedNativeAds.clear();
+  }
+
+  /// Whether a loaded App Open Ad is currently available and valid (less than 4 hours old).
+  bool get isAppOpenAdAvailable {
+    final ad = _appOpenAd;
+    final loadTime = _appOpenLoadTime;
+    if (ad == null || loadTime == null) return false;
+    return DateTime.now().difference(loadTime) < const Duration(hours: 4);
+  }
+
+  /// Loads an App Open Ad into memory if eligible and not already loaded/expired.
+  Future<void> loadAppOpenAd() async {
+    final adsAllowed = _ref.read(adsAllowedProvider);
+    if (!adsAllowed) return;
+    if (!AdConfig.isAdEnabled(AdType.appOpen)) return;
+    if (_isLoadingAppOpenAd || isAppOpenAdAvailable) return;
+
+    if (!_isSdkInitialized) {
+      await initializeSdkIfAllowed();
+      if (!_isSdkInitialized) return;
+    }
+    if (!AdConfig.enablePlatformChannelRequests) return;
+
+    _isLoadingAppOpenAd = true;
+    final adUnitId = AdConfig.getAdUnitId(AdType.appOpen);
+
+    try {
+      await AppOpenAd.load(
+        adUnitId: adUnitId,
+        request: const AdRequest(),
+        adLoadCallback: AppOpenAdLoadCallback(
+          onAdLoaded: (ad) {
+            _appOpenAd = ad;
+            _appOpenLoadTime = DateTime.now();
+            _isLoadingAppOpenAd = false;
+          },
+          onAdFailedToLoad: (error) {
+            _appOpenAd = null;
+            _isLoadingAppOpenAd = false;
+          },
+        ),
+      );
+    } catch (_) {
+      _isLoadingAppOpenAd = false;
+    }
+  }
+
+  /// Shows the App Open Ad on app foreground if eligible and not guarded by external activity.
+  Future<void> showAppOpenAdIfEligible() async {
+    final adsAllowed = _ref.read(adsAllowedProvider);
+    if (!adsAllowed) return;
+    if (ExternalActivityGuard.isInExternalActivity) return;
+    if (_isShowingAppOpenAd) return;
+    if (!isAppOpenAdAvailable) {
+      loadAppOpenAd();
+      return;
+    }
+
+    final ad = _appOpenAd;
+    if (ad == null) return;
+
+    _isShowingAppOpenAd = true;
+    _appOpenAd = null;
+
+    ad.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (ad) {
+        ad.dispose();
+        _isShowingAppOpenAd = false;
+        loadAppOpenAd();
+      },
+      onAdFailedToShowFullScreenContent: (ad, error) {
+        ad.dispose();
+        _isShowingAppOpenAd = false;
+        loadAppOpenAd();
+      },
+    );
+
+    try {
+      await ad.show();
+    } catch (_) {
+      ad.dispose();
+      _isShowingAppOpenAd = false;
+    }
   }
 }
 

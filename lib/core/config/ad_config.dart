@@ -6,6 +6,7 @@ enum AdType {
   banner,
   native,
   interstitial,
+  appOpen,
 }
 
 /// Central configuration for AdMob advertisement units, IDs, and safety checks.
@@ -20,6 +21,7 @@ class AdConfig {
     AdType.banner: 'ca-app-pub-3940256099942544/6300978111',
     AdType.native: 'ca-app-pub-3940256099942544/2247696110',
     AdType.interstitial: 'ca-app-pub-3940256099942544/1033173712',
+    AdType.appOpen: 'ca-app-pub-3940256099942544/9257395921',
   };
 
   /// Production ad unit IDs supplied via `--dart-define` flags at release build time.
@@ -30,6 +32,8 @@ class AdConfig {
       String.fromEnvironment('ADMOB_NATIVE_ID', defaultValue: '');
   static const String releaseInterstitialAdUnitId =
       String.fromEnvironment('ADMOB_INTERSTITIAL_ID', defaultValue: '');
+  static const String releaseAppOpenAdUnitId =
+      String.fromEnvironment('ADMOB_APP_OPEN_ID', defaultValue: '');
 
   /// Optional test flag to simulate release mode behavior in widget/unit tests.
   static bool? forceReleaseModeForTesting;
@@ -55,6 +59,8 @@ class AdConfig {
           return releaseNativeAdUnitId;
         case AdType.interstitial:
           return releaseInterstitialAdUnitId;
+        case AdType.appOpen:
+          return releaseAppOpenAdUnitId;
       }
     }
     return testAdUnitIds[type] ?? '';
