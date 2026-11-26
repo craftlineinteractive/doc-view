@@ -16,25 +16,22 @@ body {
 }
 
 .stage {
-  padding: 16px 0 48px;
+  padding: 16px 0 32px;
+  overflow-x: hidden;
 }
 
-/* Slaytları ekrana sığdır: PPTXjs sabit piksel genişlik veriyor, telefonda
-   taşıyor. Ölçek dönüşümü düzeni bozmadan küçültüyor. */
-.stage .slide {
-  /* !important YOK: fitToWidth ölçek sonrası kenar boşluğunu inline
-     düzeltiyor ve !important onu eziyordu. */
+.slide-wrapper {
   margin: 0 auto 16px;
-  background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 8px 24px rgba(0, 0, 0, .06);
   border-radius: 2px;
-  /* max-width YOK: ölçekleme JS tarafında yapılıyor ve slaytın DOĞAL
-     genişliğini ölçmesi gerekiyor. CSS ile kırpmak ölçümü bozuyor, içerik
-     de mutlak konumlu olduğu için yine taşıyordu. */
+  background: #fff;
 }
 
-/* Ölçeklenen slaytlar yatay taşma yaratmasın. */
-.stage { overflow-x: hidden; }
+.stage .slide {
+  margin: 0;
+  background: #fff;
+  border-radius: 2px;
+}
 
 .stage .slide.hit {
   outline: 3px solid #e0910f;

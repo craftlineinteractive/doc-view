@@ -51,26 +51,61 @@
     observer.observe(stage, { childList: true, subtree: true });
   }
 
-  /* PPTXjs slaytlara sabit piksel genişlik veriyor (ör. 960 px); telefonda
-     taşıyor. Her slaytı ölçekleyip kapsayıcı yüksekliğini düzeltiyoruz. */
+  /* Slaytları ekrana sığdır ve CSS ölçeklemeden kaynaklanan hayali
+     kaydırma boşluklarını/beyaz boşlukları yok et.
+     Her slaytı tam ölçeklenmiş yükseklikte taşma-kırpılmış bir sarmalayıcıya
+     alıyoruz, böylece tarayıcı layout kutusu görsel kutuyla birebir örtüşür. */
   function fitToWidth(slides) {
     const available = document.documentElement.clientWidth;
+    let totalHeight = 0;
     slides.forEach(function (slide) {
-      const width = slide.offsetWidth;
-      const height = slide.offsetHeight;
-      if (!width || width <= available) {
-        return;
+      const naturalWidth = slide.dataset.naturalWidth ? parseFloat(slide.dataset.naturalWidth) : slide.offsetWidth;
+      const naturalHeight = slide.dataset.naturalHeight ? parseFloat(slide.dataset.naturalHeight) : slide.offsetHeight;
+      if (!slide.dataset.naturalWidth && naturalWidth) {
+        slide.dataset.naturalWidth = naturalWidth;
+        slide.dataset.naturalHeight = naturalHeight;
       }
-      const scale = available / width;
+
+      const width = naturalWidth || 960;
+      const height = naturalHeight || 720;
+      const scale = available < width ? available / width : 1;
+      const scaledWidth = Math.round(width * scale);
+      const scaledHeight = Math.round(height * scale);
+
+      let wrapper = slide.parentElement;
+      if (!wrapper || !wrapper.classList.contains('slide-wrapper')) {
+        wrapper = document.createElement('div');
+        wrapper.className = 'slide-wrapper';
+        slide.parentNode.insertBefore(wrapper, slide);
+        wrapper.appendChild(slide);
+      }
+
+      wrapper.style.width = scaledWidth + 'px';
+      wrapper.style.height = scaledHeight + 'px';
+      wrapper.style.margin = '0 auto 16px auto';
+      wrapper.style.overflow = 'hidden';
+      wrapper.style.position = 'relative';
+
+      slide.style.position = 'absolute';
+      slide.style.top = '0';
+      slide.style.left = '0';
       slide.style.transformOrigin = 'top left';
       slide.style.transform = 'scale(' + scale + ')';
-      // Ölçek düzen kutusunu küçültmüyor; kalan boşluğu negatif kenar
-      // boşluğuyla geri alıyoruz, yoksa slaytlar arası dev boşluk kalıyor.
-      slide.style.marginLeft = '0';
-      slide.style.marginRight = (available - width) + 'px';
-      slide.style.marginBottom = (16 - height * (1 - scale)) + 'px';
+      slide.style.margin = '0';
+
+      totalHeight += scaledHeight + 16;
     });
+
+    stage.style.minHeight = totalHeight + 'px';
+    stage.style.paddingBottom = '32px';
   }
+
+  window.addEventListener('resize', function () {
+    const slides = stage.querySelectorAll('.slide');
+    if (slides.length) {
+      fitToWidth(slides);
+    }
+  });
 
   function render(bytes) {
     startedAt = performance.now();

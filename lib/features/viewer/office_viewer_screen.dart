@@ -14,9 +14,9 @@ import '../../shared/widgets/reader/reader_bottom_row.dart';
 import '../../shared/widgets/reader/reader_orientation.dart';
 import '../../shared/widgets/reader/reader_search_bar.dart';
 import '../../shared/widgets/skeletons/shimmer.dart';
-import '../files/widgets/file_details_sheet.dart';
 import '../providers/providers.dart';
 import 'widgets/office_outline_sheet.dart';
+import 'widgets/viewer_more_sheet.dart';
 
 /// Full-featured, offline Office document viewer supporting Word, Excel, and PowerPoint files.
 ///
@@ -438,82 +438,21 @@ class _OfficeViewerScreenState extends ConsumerState<OfficeViewerScreen> {
             },
           ),
           // 3-dot popup menu
-          PopupMenuButton<String>(
+          IconButton(
+            key: const Key('office_top_menu_button'),
             icon: Icon(Icons.more_vert_rounded, color: tokens.textPrimary),
             tooltip: l10n.tooltipMoreActions,
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            onSelected: (action) {
-              if (action == 'outline') {
-                _showOutlineBottomSheet(context, outline);
-              } else if (action == 'details') {
-                FileDetailsSheet.show(context, currentFile);
-              } else if (action == 'open_external') {
-                OpenFilex.open(widget.file.path);
-              }
+            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+            onPressed: () {
+              ViewerMoreSheet.show(
+                context,
+                file: currentFile,
+                hasOutline: outline.isNotEmpty,
+                onOutline: outline.isNotEmpty
+                    ? () => _showOutlineBottomSheet(context, outline)
+                    : null,
+              );
             },
-            itemBuilder: (context) => [
-              if (outline.isNotEmpty)
-                PopupMenuItem(
-                  value: 'outline',
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.list_alt_rounded,
-                        size: 20,
-                        color: tokens.textPrimary,
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        l10n.viewerMenuOutline,
-                        style: DocViewTypography.bodyMd.copyWith(
-                          color: tokens.textPrimary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              PopupMenuItem(
-                value: 'details',
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.info_outline_rounded,
-                      size: 20,
-                      color: tokens.textPrimary,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      l10n.readerMenuDetails,
-                      style: DocViewTypography.bodyMd.copyWith(
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: 'open_external',
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.open_in_new_rounded,
-                      size: 20,
-                      color: tokens.textPrimary,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      l10n.readerMenuOpenExternal,
-                      style: DocViewTypography.bodyMd.copyWith(
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
           ),
         ],
       ),

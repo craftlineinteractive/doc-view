@@ -14,8 +14,8 @@ import '../../core/utils/spreadsheet_helpers.dart';
 import '../../data/models/doc_file.dart';
 import '../../data/models/spreadsheet_data.dart';
 import '../../data/services/spreadsheet_parser_service.dart';
-import '../files/widgets/file_details_sheet.dart';
 import '../providers/providers.dart';
+import 'widgets/viewer_more_sheet.dart';
 import '../../shared/widgets/reader/reader_bottom_row.dart';
 import '../../shared/widgets/reader/reader_orientation.dart';
 import '../../shared/widgets/reader/reader_search_bar.dart';
@@ -563,60 +563,17 @@ class _SpreadsheetViewerScreenState
             },
           ),
           // 3-dot popup menu
-          PopupMenuButton<String>(
+          IconButton(
+            key: const Key('spreadsheet_top_menu_button'),
             icon: Icon(Icons.more_vert_rounded, color: tokens.textPrimary),
             tooltip: l10n.tooltipMoreActions,
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            onSelected: (action) {
-              if (action == 'details') {
-                FileDetailsSheet.show(context, currentFile);
-              } else if (action == 'open_external') {
-                OpenFilex.open(widget.file.path);
-              }
+            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+            onPressed: () {
+              ViewerMoreSheet.show(
+                context,
+                file: currentFile,
+              );
             },
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 'details',
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.info_outline_rounded,
-                      size: 20,
-                      color: tokens.textPrimary,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      l10n.readerMenuDetails,
-                      style: DocViewTypography.bodyMd.copyWith(
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: 'open_external',
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.open_in_new_rounded,
-                      size: 20,
-                      color: tokens.textPrimary,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      l10n.readerMenuOpenInAnotherApp,
-                      style: DocViewTypography.bodyMd.copyWith(
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
           ),
         ],
       ),

@@ -20,10 +20,10 @@ import '../../shared/widgets/reader/reader_bottom_row.dart';
 import '../../shared/widgets/reader/reader_orientation.dart';
 import '../../shared/widgets/reader/reader_search_bar.dart';
 import '../../shared/widgets/skeletons/shimmer.dart';
-import '../files/widgets/file_details_sheet.dart';
 import '../providers/providers.dart';
 import 'widgets/pdf_goto_page_dialog.dart';
 import 'widgets/pdf_password_dialog.dart';
+import 'widgets/viewer_more_sheet.dart';
 
 class PdfViewerScreen extends ConsumerStatefulWidget {
   final DocFile file;
@@ -708,135 +708,22 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
           ),
 
           // 3-dot context menu
-          PopupMenuButton<String>(
+          IconButton(
             key: const Key('reader_top_menu_button'),
             icon: Icon(
               Icons.more_vert_rounded,
               color: tokens.textPrimary,
             ),
             tooltip: l10n.tooltipMoreActions,
-            color: isDark ? const Color(0xFF232838) : Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-              side: BorderSide(
-                color: tokens.hairline.withValues(alpha: 0.6),
-                width: 0.5,
-              ),
-            ),
-            onSelected: (value) async {
-              switch (value) {
-                case 'goto':
-                  _openGoToDialog();
-                  break;
-                case 'bookmark':
-                  ref
-                      .read(fileActionsControllerProvider)
-                      .toggleBookmark(liveFile);
-                  break;
-                case 'details':
-                  FileDetailsSheet.show(
-                    context,
-                    liveFile,
-                    pageCount: _pageCount > 0 ? _pageCount : null,
-                    showOpenButton: false,
-                  );
-                  break;
-                case 'open_external':
-                  final result = await OpenFilex.open(liveFile.path);
-                  if (result.type != ResultType.done && mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(l10n.viewerErrorNoAppFound),
-                      ),
-                    );
-                  }
-                  break;
-              }
+            constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+            onPressed: () {
+              ViewerMoreSheet.show(
+                context,
+                file: liveFile,
+                pageCount: _pageCount > 0 ? _pageCount : null,
+                onGoToPage: _openGoToDialog,
+              );
             },
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 'goto',
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.format_list_numbered_rounded,
-                      size: 20,
-                      color: tokens.textPrimary,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      l10n.readerMenuGoToPage,
-                      style: DocViewTypography.bodyMd.copyWith(
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: 'bookmark',
-                child: Row(
-                  children: [
-                    Icon(
-                      liveFile.isBookmarked
-                          ? Icons.bookmark_rounded
-                          : Icons.bookmark_border_rounded,
-                      size: 20,
-                      color: liveFile.isBookmarked
-                          ? tokens.primaryBlue
-                          : tokens.textPrimary,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      liveFile.isBookmarked
-                          ? l10n.readerMenuRemoveBookmark
-                          : l10n.readerMenuAddBookmark,
-                      style: DocViewTypography.bodyMd.copyWith(
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: 'details',
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.info_outline_rounded,
-                      size: 20,
-                      color: tokens.textPrimary,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      l10n.readerMenuDetails,
-                      style: DocViewTypography.bodyMd.copyWith(
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: 'open_external',
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.launch_outlined,
-                      size: 20,
-                      color: tokens.textPrimary,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      l10n.readerMenuOpenInAnotherApp,
-                      style: DocViewTypography.bodyMd.copyWith(
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
           ),
         ],
       ),
