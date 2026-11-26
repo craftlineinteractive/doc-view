@@ -54,4 +54,6 @@ symbols/
 build/symbols/
 .kotlin/
 **/android/.kotlin/
+desktop.ini
+config/release_ads.json
 

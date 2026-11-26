@@ -16,9 +16,11 @@ import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
 import '../../../data/services/convert/pdf_to_word_service.dart';
 import '../../../shared/widgets/buttons/doc_buttons.dart';
+import '../../../shared/widgets/buttons/doc_icon_button.dart';
 import '../../../shared/widgets/modals/doc_modals.dart';
 import '../../../shared/widgets/status/doc_status_widgets.dart';
 import '../../providers/providers.dart';
+import '../widgets/tool_file_picker_screen.dart';
 
 /// Screen managing client-side PDF to Word (.docx) document conversion.
 class PdfToWordScreen extends ConsumerStatefulWidget {
@@ -60,6 +62,11 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
   void dispose() {
     _fileNameController.dispose();
     super.dispose();
+  }
+
+  @visibleForTesting
+  set selectedFileForTesting(DocFile? file) {
+    _selectedFile = file;
   }
 
   Future<void> _runPreflight() async {
@@ -135,12 +142,9 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
   }
 
   Future<void> _pickFile() async {
-    final result = await context.push<DocFile?>(
-      '/tools/pick',
-      extra: {
-        'title': context.l10n.toolPdfToWord,
-        'category': FileCategory.pdf,
-      },
+    final result = await ToolFilePickerScreen.pickSingle(
+      context,
+      title: context.l10n.toolPdfToWord,
     );
 
     if (result != null && mounted) {
@@ -375,43 +379,79 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
     final hasNoText =
         _preflight != null && !_preflight!.hasText && !_preflight!.isEncrypted;
 
+    void handleBack() {
+      if (widget.initialFile == null && _selectedFile != null) {
+        setState(() {
+          _selectedFile = null;
+          _password = null;
+          _preflight = null;
+        });
+      } else {
+        Navigator.of(context).pop();
+      }
+    }
+
     if (file != null && hasNoText) {
-      return Scaffold(
+      return PopScope(
+        canPop: widget.initialFile != null,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!didPop) {
+            handleBack();
+          }
+        },
+        child: Scaffold(
+          backgroundColor: tokens.surfaceAlt,
+          appBar: AppBar(
+            title: Text(l10n.pdfToWordScreenTitle),
+            elevation: 0,
+            backgroundColor: tokens.surface,
+            foregroundColor: tokens.textPrimary,
+            leading: DocIconButton(
+              icon: AppIcons.back,
+              tooltip: l10n.actionBack,
+              onPressed: handleBack,
+            ),
+          ),
+          body: Center(
+            child: DocEmptyState(
+              icon: Icons.document_scanner_outlined,
+              title: l10n.pdfToWordNoTextTitle,
+              message: l10n.pdfToWordNoTextMessage,
+              actionLabel: l10n.actionBack,
+              onAction: handleBack,
+            ),
+          ),
+        ),
+      );
+    }
+
+    final canPopImmediately = widget.initialFile != null || _selectedFile == null;
+
+    return PopScope(
+      canPop: canPopImmediately,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          handleBack();
+        }
+      },
+      child: Scaffold(
         backgroundColor: tokens.surfaceAlt,
         appBar: AppBar(
           title: Text(l10n.pdfToWordScreenTitle),
           elevation: 0,
           backgroundColor: tokens.surface,
           foregroundColor: tokens.textPrimary,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
+          centerTitle: false,
+          leading: DocIconButton(
+            icon: AppIcons.back,
+            tooltip: l10n.actionBack,
+            onPressed: handleBack,
           ),
         ),
-        body: Center(
-          child: DocEmptyState(
-            icon: Icons.document_scanner_outlined,
-            title: l10n.pdfToWordNoTextTitle,
-            message: l10n.pdfToWordNoTextMessage,
-            actionLabel: l10n.actionBack,
-            onAction: () => Navigator.of(context).pop(),
-          ),
-        ),
-      );
-    }
-
-    return Scaffold(
-      backgroundColor: tokens.surfaceAlt,
-      appBar: AppBar(
-        title: Text(l10n.pdfToWordScreenTitle),
-        elevation: 0,
-        backgroundColor: tokens.surface,
-        foregroundColor: tokens.textPrimary,
-        centerTitle: false,
+        body: file == null
+            ? _buildEmptyPicker(tokens, l10n)
+            : _buildMainContent(tokens, l10n, file),
       ),
-      body: file == null
-          ? _buildEmptyPicker(tokens, l10n)
-          : _buildMainContent(tokens, l10n, file),
     );
   }
 

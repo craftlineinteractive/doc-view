@@ -270,24 +270,39 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
     final showTerms = AppConstants.termsOfUseUrl.isNotEmpty;
     final showPrivacy = AppConstants.privacyPolicyUrl.isNotEmpty;
 
-    return GestureDetector(
-      onTap: () {
-        if (_animController.isAnimating) {
-          _animController.forward(from: 1.0);
+    final canPop = Navigator.of(context).canPop();
+
+    return PopScope(
+      canPop: canPop,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          context.go('/home');
         }
       },
-      behavior: HitTestBehavior.translucent,
-      child: Scaffold(
-        backgroundColor: isDark ? DocViewColors.backgroundDark : Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          scrolledUnderElevation: 0,
-          leading: DocIconButton(
-            icon: AppIcons.close,
-            tooltip: l10n.actionClose,
-            onPressed: () => context.pop(),
-          ),
+      child: GestureDetector(
+        onTap: () {
+          if (_animController.isAnimating) {
+            _animController.forward(from: 1.0);
+          }
+        },
+        behavior: HitTestBehavior.translucent,
+        child: Scaffold(
+          backgroundColor: isDark ? DocViewColors.backgroundDark : Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            scrolledUnderElevation: 0,
+            leading: DocIconButton(
+              icon: AppIcons.close,
+              tooltip: l10n.actionClose,
+              onPressed: () {
+                if (Navigator.of(context).canPop()) {
+                  context.pop();
+                } else {
+                  context.go('/home');
+                }
+              },
+            ),
           actions: [
             TextButton(
               onPressed: premiumState.isLoading || premiumState.isRestoring
@@ -690,6 +705,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
           ],
         ),
       ),
+    ),
     );
   }
 }

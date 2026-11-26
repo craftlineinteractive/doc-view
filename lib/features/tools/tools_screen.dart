@@ -92,28 +92,73 @@ class ToolsScreen extends ConsumerWidget {
   }
 
   Future<void> _onAnnotate(BuildContext context) async {
-    final picked = await ToolFilePickerScreen.pickSingle(
-      context,
-      title: context.l10n.toolAnnotate,
-    );
+    final title = context.l10n.toolAnnotate;
+    while (context.mounted) {
+      if (!context.mounted) break;
+      final picked = await ToolFilePickerScreen.pickSingle(
+        context,
+        title: title,
+      );
 
-    if (picked != null && context.mounted) {
-      context.push(
+      if (picked == null || !context.mounted) break;
+
+      await context.push(
         '/tools/annotate',
         extra: {'filePath': picked.path},
       );
     }
   }
 
-  Future<void> _onManagePages(BuildContext context) async {
-    final picked = await ToolFilePickerScreen.pickSingle(
-      context,
-      title: context.l10n.toolPickerTitleSelectPdf,
-      actionLabel: context.l10n.toolPickerActionManage,
-    );
+  Future<void> _onAddText(BuildContext context) async {
+    final title = context.l10n.toolAddText;
+    while (context.mounted) {
+      if (!context.mounted) break;
+      final picked = await ToolFilePickerScreen.pickSingle(
+        context,
+        title: title,
+      );
 
-    if (picked != null && context.mounted) {
-      context.push(
+      if (picked == null || !context.mounted) break;
+
+      await context.push(
+        '/tools/add-text',
+        extra: {'filePath': picked.path},
+      );
+    }
+  }
+
+  Future<void> _onSign(BuildContext context) async {
+    final title = context.l10n.toolSign;
+    while (context.mounted) {
+      if (!context.mounted) break;
+      final picked = await ToolFilePickerScreen.pickSingle(
+        context,
+        title: title,
+      );
+
+      if (picked == null || !context.mounted) break;
+
+      await context.push(
+        '/tools/sign',
+        extra: {'filePath': picked.path},
+      );
+    }
+  }
+
+  Future<void> _onManagePages(BuildContext context) async {
+    final title = context.l10n.toolPickerTitleSelectPdf;
+    final actionLabel = context.l10n.toolPickerActionManage;
+    while (context.mounted) {
+      if (!context.mounted) break;
+      final picked = await ToolFilePickerScreen.pickSingle(
+        context,
+        title: title,
+        actionLabel: actionLabel,
+      );
+
+      if (picked == null || !context.mounted) break;
+
+      await context.push(
         '/pdf-pages',
         extra: picked,
       );
@@ -121,14 +166,18 @@ class ToolsScreen extends ConsumerWidget {
   }
 
   Future<void> _onMergePdf(BuildContext context) async {
-    final picked = await MergePdfPickerScreen.pick(
-      context,
-      title: context.l10n.toolPickerTitleSelectPdfs,
-      minSelection: 2,
-    );
+    final title = context.l10n.toolPickerTitleSelectPdfs;
+    while (context.mounted) {
+      if (!context.mounted) break;
+      final picked = await MergePdfPickerScreen.pick(
+        context,
+        title: title,
+        minSelection: 2,
+      );
 
-    if (picked != null && picked.length >= 2 && context.mounted) {
-      Navigator.of(context).push(
+      if (picked == null || picked.length < 2 || !context.mounted) break;
+
+      await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => MergeScreen(initialFiles: picked),
         ),
@@ -137,10 +186,13 @@ class ToolsScreen extends ConsumerWidget {
   }
 
   Future<void> _onSplitPdf(BuildContext context) async {
-    final picked = await SplitPickerScreen.pick(context);
+    while (context.mounted) {
+      if (!context.mounted) break;
+      final picked = await SplitPickerScreen.pick(context);
 
-    if (picked != null && context.mounted) {
-      Navigator.of(context).push(
+      if (picked == null || !context.mounted) break;
+
+      await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => SplitScreen(file: picked),
         ),
@@ -222,6 +274,12 @@ class ToolsScreen extends ConsumerWidget {
         break;
       case 'annotate':
         _onAnnotate(context);
+        break;
+      case 'add_text':
+        _onAddText(context);
+        break;
+      case 'sign':
+        _onSign(context);
         break;
       case 'manage_pages':
         _onManagePages(context);
