@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
+import '../../../core/utils/app_log.dart';
 import '../../../data/services/ads/ad_service.dart';
 import '../../../core/theme/doc_view_typography.dart';
 import '../../../shared/widgets/ads/ad_placeholders.dart';
@@ -177,14 +178,17 @@ class _CreatePdfScreenState extends ConsumerState<CreatePdfScreen> {
           },
         );
       }
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('Tools', 'create_pdf_failed', e, st);
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isGenerating = false);
 
         final l10n = context.l10n;
         final String errorMessage;
+        final String errorCode;
         if (e is CreatePdfException) {
+          errorCode = e.reason.name.toUpperCase();
           switch (e.reason) {
             case CreatePdfErrorReason.pageCountOutOfRange:
               errorMessage = l10n.createPdfErrorPageCount;
@@ -198,6 +202,7 @@ class _CreatePdfScreenState extends ConsumerState<CreatePdfScreen> {
               break;
           }
         } else {
+          errorCode = 'CREATE_FAILED';
           errorMessage = e.toString();
         }
 
@@ -205,6 +210,7 @@ class _CreatePdfScreenState extends ConsumerState<CreatePdfScreen> {
           context,
           title: l10n.createPdfErrorTitle,
           errorMessage: errorMessage,
+          errorCode: errorCode,
           onRetry: _createPdf,
         );
       }

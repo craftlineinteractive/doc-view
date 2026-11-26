@@ -9,6 +9,7 @@ import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../core/utils/app_log.dart';
 import '../../core/utils/file_name_utils.dart';
 import '../../core/utils/format_utils.dart';
 import '../../data/models/doc_file.dart';
@@ -211,10 +212,14 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
           },
         );
       }
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('Tools', 'merge_failed', e, st);
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isMerging = false);
+        final errorCode = e is PdfMergeException
+            ? e.reason.name.toUpperCase()
+            : 'MERGE_FAILED';
         final errorMessage = e is PdfMergeException
             ? e.localizedMessage(context)
             : e.toString();
@@ -222,6 +227,7 @@ class _MergeScreenState extends ConsumerState<MergeScreen> {
           context,
           title: context.l10n.mergeErrorTitle,
           errorMessage: errorMessage,
+          errorCode: errorCode,
           onRetry: _mergePdfs,
         );
       }

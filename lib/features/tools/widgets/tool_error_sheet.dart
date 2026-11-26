@@ -11,6 +11,7 @@ import '../../../shared/widgets/buttons/doc_buttons.dart';
 class ToolErrorSheet extends StatelessWidget {
   final String? title;
   final String errorMessage;
+  final String? errorCode;
   final VoidCallback? onRetry;
   final VoidCallback? onClose;
 
@@ -18,6 +19,7 @@ class ToolErrorSheet extends StatelessWidget {
     super.key,
     this.title,
     required this.errorMessage,
+    this.errorCode,
     this.onRetry,
     this.onClose,
   });
@@ -27,6 +29,7 @@ class ToolErrorSheet extends StatelessWidget {
     BuildContext context, {
     String? title,
     required String errorMessage,
+    String? errorCode,
     VoidCallback? onRetry,
     VoidCallback? onClose,
   }) {
@@ -37,6 +40,7 @@ class ToolErrorSheet extends StatelessWidget {
       builder: (sheetContext) => ToolErrorSheet(
         title: title,
         errorMessage: errorMessage,
+        errorCode: errorCode,
         onRetry: onRetry,
         onClose: onClose,
       ),
@@ -129,13 +133,30 @@ class ToolErrorSheet extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: tokens.hairline, width: 1),
             ),
-            child: Text(
-              errorMessage,
-              style: DocViewTypography.bodySm.copyWith(
-                color: tokens.textPrimary,
-                fontFamily: 'monospace',
-                fontSize: 12,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  errorMessage,
+                  style: DocViewTypography.bodySm.copyWith(
+                    color: tokens.textPrimary,
+                    fontFamily: 'monospace',
+                    fontSize: 12,
+                  ),
+                ),
+                if (errorCode != null && errorCode!.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    'Error code: $errorCode',
+                    style: DocViewTypography.captionXs.copyWith(
+                      color: tokens.textSecondary,
+                      fontFamily: 'monospace',
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ],
             ),
           ),
           const SizedBox(height: 24),

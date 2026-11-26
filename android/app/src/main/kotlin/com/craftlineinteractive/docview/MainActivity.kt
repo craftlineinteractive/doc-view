@@ -46,6 +46,16 @@ class MainActivity : FlutterActivity() {
                         initialFilePath = null
                         result.success(path)
                     }
+                    "copyUri" -> {
+                        val uriStr = call.argument<String>("uri")
+                        if (uriStr != null) {
+                            val uri = Uri.parse(uriStr)
+                            val path = copyUriToInternalStorage(uri)
+                            result.success(path)
+                        } else {
+                            result.error("INVALID_URI", "URI cannot be null", null)
+                        }
+                    }
                     else -> result.notImplemented()
                 }
             }
@@ -162,7 +172,26 @@ class MainActivity : FlutterActivity() {
 
     private fun copyUriToInternalStorage(uri: Uri): String? {
         return try {
-            val fileName = queryFileName(uri) ?: "opened_file"
+            var fileName = queryFileName(uri) ?: "opened_file"
+            if (!fileName.contains(".")) {
+                val mimeType = contentResolver.getType(uri)
+                val ext = when (mimeType) {
+                    "application/pdf" -> "pdf"
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document" -> "docx"
+                    "application/msword" -> "doc"
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" -> "xlsx"
+                    "application/vnd.ms-excel" -> "xls"
+                    "application/vnd.openxmlformats-officedocument.presentationml.presentation" -> "pptx"
+                    "application/vnd.ms-powerpoint" -> "ppt"
+                    "text/plain" -> "txt"
+                    "image/jpeg" -> "jpg"
+                    "image/png" -> "png"
+                    else -> null
+                }
+                if (ext != null) {
+                    fileName = "$fileName.$ext"
+                }
+            }
             val tempDir = File(cacheDir, "opened_with")
             if (!tempDir.exists()) tempDir.mkdirs()
             val targetFile = File(tempDir, fileName)

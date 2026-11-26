@@ -13,6 +13,8 @@ import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../core/utils/app_log.dart';
+import '../../core/utils/file_ingest_helper.dart';
 import '../../data/models/doc_file.dart';
 import '../../data/services/pdf/pdf_page_edit_service.dart';
 import '../providers/providers.dart';
@@ -71,20 +73,22 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
 
   Future<void> _loadDocument() async {
     try {
-      final doc = await PdfDocument.openFile(widget.file.path);
-      _sourceDocs[widget.file.path] = doc;
+      final safeFile = await FileIngestHelper.ingestToCache(widget.file.path, subDir: 'pages_inputs');
+      final doc = await PdfDocument.openFile(safeFile.path);
+      _sourceDocs[safeFile.path] = doc;
       if (!mounted) return;
       setState(() {
         _pages = List.generate(
           doc.pages.length,
           (i) => PdfPageEditSpec(
-            sourcePath: widget.file.path,
+            sourcePath: safeFile.path,
             sourcePageIndex: i,
           ),
         );
         _isLoading = false;
       });
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('Pages', 'load_document_failed', e, st);
       if (!mounted) return;
       setState(() {
         _errorMessage = e.toString();
@@ -96,7 +100,8 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
   Future<PdfDocument> _getSourceDocument(String path) async {
     final existing = _sourceDocs[path];
     if (existing != null) return existing;
-    final doc = await PdfDocument.openFile(path);
+    final safeFile = await FileIngestHelper.ingestToCache(path, subDir: 'pages_inputs');
+    final doc = await PdfDocument.openFile(safeFile.path);
     _sourceDocs[path] = doc;
     return doc;
   }
@@ -337,7 +342,7 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
           outputPath: outputFile.path,
         );
 
-        outputService.actionsController.invalidateAll();
+        await outputService.registerOutput(outputFile);
 
         if (mounted) {
           setState(() {
@@ -351,12 +356,13 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
             ),
           );
         }
-      } catch (e) {
+      } catch (e, st) {
+        AppLog.e('Pages', 'extract_pages_failed', e, st);
         if (mounted) {
           setState(() => _isSaving = false);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(e.toString()),
+              content: Text('${context.l10n.pagesErrorUnreadable}\nError code: PAGES_EXTRACT_FAILED'),
               backgroundColor: DocViewColors.error,
             ),
           );
@@ -453,6 +459,7 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
             outputPath: outFile.path,
             replaceOriginal: false,
           );
+          await outputService.registerOutput(outFile);
           finalSavedPath = outFile.path;
         } else {
           for (final doc in _sourceDocs.values) {
@@ -466,10 +473,9 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
             replaceOriginal: true,
             originalPath: widget.file.path,
           );
+          outputService.actionsController.invalidateAll();
           finalSavedPath = widget.file.path;
         }
-
-        outputService.actionsController.invalidateAll();
 
         if (mounted) {
           setState(() {
@@ -478,12 +484,13 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
           });
           context.pop({'saved': true, 'path': finalSavedPath});
         }
-      } catch (e) {
+      } catch (e, st) {
+        AppLog.e('Pages', 'save_document_failed', e, st);
         if (mounted) {
           setState(() => _isSaving = false);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(e.toString()),
+              content: Text('${context.l10n.pagesErrorUnreadable}\nError code: PAGES_SAVE_FAILED'),
               backgroundColor: DocViewColors.error,
             ),
           );

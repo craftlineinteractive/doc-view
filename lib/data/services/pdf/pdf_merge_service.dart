@@ -3,6 +3,7 @@ import 'package:path/path.dart' as p;
 import 'package:pdfrx/pdfrx.dart' as pdfrx;
 
 import '../../../core/errors/app_errors.dart';
+import '../../../core/utils/file_ingest_helper.dart';
 import '../../models/doc_file.dart';
 import 'pdf_output_service.dart';
 
@@ -52,10 +53,11 @@ class PdfMergeService {
     final allPages = <pdfrx.PdfPage>[];
 
     try {
-      final total = pdfPaths.length;
+      final safePaths = await FileIngestHelper.ingestAll(pdfPaths, subDir: 'merge_inputs');
+      final total = safePaths.length;
       for (var i = 0; i < total; i++) {
-        final path = pdfPaths[i];
-        final fileName = p.basename(path);
+        final path = safePaths[i];
+        final fileName = p.basename(pdfPaths[i]);
         final pdfrx.PdfDocument doc;
 
         try {

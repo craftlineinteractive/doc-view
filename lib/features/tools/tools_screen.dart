@@ -1,4 +1,3 @@
-import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +9,10 @@ import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../core/utils/app_log.dart';
+import '../../core/utils/document_scanner_facade.dart';
+import '../../core/utils/file_ingest_helper.dart';
+import '../../data/models/doc_file.dart';
 import '../../data/services/billing/billing_providers.dart';
 import '../../shared/widgets/buttons/doc_icon_button.dart';
 import '../../shared/widgets/navigation/doc_scaffold.dart';
@@ -54,38 +57,46 @@ class ToolsScreen extends ConsumerWidget {
           .where((p) => p.isNotEmpty)
           .toList();
       if (paths.isNotEmpty) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => ImageListEditorScreen(
-              initialImagePaths: paths,
-              defaultNamePrefix: 'Images',
-              isScannerSource: false,
+        final ingested = await FileIngestHelper.ingestAll(paths, subDir: 'images');
+        if (ingested.isNotEmpty && context.mounted) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ImageListEditorScreen(
+                initialImagePaths: ingested,
+                defaultNamePrefix: 'Images',
+                isScannerSource: false,
+              ),
             ),
-          ),
-        );
+          );
+        }
       }
     }
   }
 
   Future<void> _onScanToPdf(BuildContext context) async {
     try {
-      // ignore: deprecated_member_use
-      final scans = await CunningDocumentScanner.getPictures();
+      final scans = await DocumentScannerFacade.getPictures();
       if (scans != null && scans.isNotEmpty && context.mounted) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => ImageListEditorScreen(
-              initialImagePaths: scans,
-              defaultNamePrefix: 'Scan',
-              isScannerSource: true,
+        final ingested = await FileIngestHelper.ingestAll(scans, subDir: 'scans');
+        if (ingested.isNotEmpty && context.mounted) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ImageListEditorScreen(
+                initialImagePaths: ingested,
+                defaultNamePrefix: 'Scan',
+                isScannerSource: true,
+              ),
             ),
-          ),
-        );
+          );
+        }
       }
-    } catch (_) {
+    } catch (e, st) {
+      AppLog.e('Tools', 'scan_to_pdf_failed', e, st);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.importFailedError)),
+          SnackBar(
+            content: Text('${context.l10n.importFailedError}\nError code: SCAN_FAILED'),
+          ),
         );
       }
     }
@@ -221,10 +232,13 @@ class ToolsScreen extends ConsumerWidget {
           ),
         );
       }
-    } catch (_) {
+    } catch (e, st) {
+      AppLog.e('Tools', 'import_files_failed', e, st);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.importFailedError)),
+          SnackBar(
+            content: Text('${context.l10n.importFailedError}\nError code: IMPORT_FAILED'),
+          ),
         );
       }
     }
@@ -239,18 +253,33 @@ class ToolsScreen extends ConsumerWidget {
 
     if (picked != null && context.mounted) {
       try {
+        final cached = await FileIngestHelper.ingestToCache(picked.path, subDir: 'print_inputs');
+        final targetDoc = DocFile(
+          path: cached.path,
+          name: picked.name,
+          extension: picked.extension,
+          sizeBytes: picked.sizeBytes,
+          modified: picked.modified,
+          category: picked.category,
+        );
         const printService = PrintPdfService();
-        await printService.printDocument(picked);
-      } on PrintPdfException catch (e) {
+        await printService.printDocument(targetDoc);
+      } on PrintPdfException catch (e, st) {
+        AppLog.e('Tools', 'print_pdf_failed', e, st);
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(e.reason.localizedMessage(context))),
+            SnackBar(
+              content: Text('${e.reason.localizedMessage(context)}\nError code: ${e.reason.name.toUpperCase()}'),
+            ),
           );
         }
-      } catch (_) {
+      } catch (e, st) {
+        AppLog.e('Tools', 'print_pdf_failed', e, st);
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.l10n.printPdfErrorFailed)),
+            SnackBar(
+              content: Text('${context.l10n.printPdfErrorFailed}\nError code: PRINT_FAILED'),
+            ),
           );
         }
       }

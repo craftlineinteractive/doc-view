@@ -4,8 +4,10 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/constants/file_types.dart';
+import '../../../core/utils/app_log.dart';
 import '../../models/doc_file.dart';
 import '../../repositories/file_repository.dart';
+import '../permission_service.dart';
 import '../../../features/providers/providers.dart';
 
 /// Service managing the creation directory, sanitized naming, and indexing of generated PDFs.
@@ -13,10 +15,12 @@ class PdfOutputService {
   PdfOutputService({
     required this.repository,
     required this.actionsController,
+    this.permissionService,
   });
 
   final FileRepository repository;
   final FileActionsController actionsController;
+  final PermissionService? permissionService;
 
   /// Returns the `created/` output directory in application documents, creating it if missing.
   Future<Directory> getOutputDir() async {
@@ -64,6 +68,23 @@ class PdfOutputService {
   Future<DocFile> registerOutput(File file) async {
     final stat = await file.stat();
     final fileName = p.basename(file.path);
+
+    // Best-effort copy to public Documents directory when All files permission is granted
+    if (permissionService != null && Platform.isAndroid) {
+      try {
+        final hasAccess = await permissionService!.hasAllFilesAccess();
+        if (hasAccess) {
+          final publicDir = Directory('/storage/emulated/0/Documents/DocView');
+          if (!await publicDir.exists()) {
+            await publicDir.create(recursive: true);
+          }
+          final publicFile = File(p.join(publicDir.path, fileName));
+          await file.copy(publicFile.path);
+        }
+      } catch (e, st) {
+        AppLog.e('PdfOutput', 'public_copy_failed', e, st);
+      }
+    }
 
     final doc = DocFile(
       path: file.path,

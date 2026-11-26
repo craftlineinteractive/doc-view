@@ -11,6 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
+import '../../../core/utils/app_log.dart';
+import '../../../core/utils/file_ingest_helper.dart';
 import '../../../data/models/pdf_markup.dart';
 import '../../../data/services/pdf/pdf_annotation_service.dart';
 import '../../providers/providers.dart';
@@ -92,15 +94,18 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
     });
 
     try {
+      final safeFile = await FileIngestHelper.ingestToCache(path, subDir: 'annotate_inputs');
+      _filePath = safeFile.path;
       final service = ref.read(pdfAnnotationServiceProvider);
-      final info = await service.getDocumentInfo(path);
+      final info = await service.getDocumentInfo(safeFile.path);
       if (!mounted) return;
 
       ref.read(annotateSessionProvider.notifier).setDocumentInfo(info);
       setState(() {
         _isLoadingInfo = false;
       });
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('Annotate', 'load_document_failed', e, st);
       if (!mounted) return;
       setState(() {
         _isLoadingInfo = false;
@@ -275,12 +280,13 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
           ),
         );
       }
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('Annotate', 'save_annotations_failed', e, st);
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop(); // dismiss progress
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(context.l10n.annotateErrorSaveFailed(e.toString())),
+            content: Text('${context.l10n.annotateErrorSaveFailed(e.toString())}\nError code: ANNOTATION_SAVE_FAILED'),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

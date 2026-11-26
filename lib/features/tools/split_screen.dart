@@ -9,6 +9,7 @@ import '../../core/extensions/l10n_extension.dart';
 import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../core/utils/app_log.dart';
 import '../../core/utils/format_utils.dart';
 import '../../core/utils/page_range_parser.dart';
 import '../../data/models/doc_file.dart';
@@ -270,10 +271,14 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
           },
         );
       }
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('Tools', 'split_failed', e, st);
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isSplitting = false);
+        final errorCode = e is PdfSplitException
+            ? e.reason.name.toUpperCase()
+            : 'SPLIT_FAILED';
         final errorMessage = e is PdfSplitException
             ? e.localizedMessage(context)
             : e.toString();
@@ -281,6 +286,7 @@ class _SplitScreenState extends ConsumerState<SplitScreen> {
           context,
           title: context.l10n.splitErrorTitle,
           errorMessage: errorMessage,
+          errorCode: errorCode,
           onRetry: _splitPdf,
         );
       }

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +11,9 @@ import '../../core/theme/app_icons.dart';
 import '../../core/theme/doc_view_colors.dart';
 import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
+import '../../core/utils/app_log.dart';
+import '../../core/utils/document_scanner_facade.dart';
+import '../../core/utils/file_ingest_helper.dart';
 import '../../core/utils/format_utils.dart';
 import '../../data/services/ads/ad_service.dart';
 import '../../data/services/pdf/image_to_pdf_service.dart';
@@ -135,20 +137,23 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
     if (widget.isScannerSource) {
       final messenger = ScaffoldMessenger.of(context);
       try {
-        // ignore: deprecated_member_use
-        final scans = await CunningDocumentScanner.getPictures();
+        final scans = await DocumentScannerFacade.getPictures();
         if (!mounted) return;
         if (scans != null && scans.isNotEmpty) {
+          final ingested = await FileIngestHelper.ingestAll(scans, subDir: 'scans');
           final remaining = maxImageCount - _imagePaths.length;
           setState(() {
-            _imagePaths.addAll(scans.take(remaining));
+            _imagePaths.addAll(ingested.take(remaining));
             _updateSizes();
           });
         }
-      } catch (e) {
+      } catch (e, st) {
+        AppLog.e('Tools', 'add_scans_failed', e, st);
         if (!mounted) return;
         messenger.showSnackBar(
-          SnackBar(content: Text(context.l10n.imageListEditorScanFailed(e.toString()))),
+          SnackBar(
+            content: Text('${context.l10n.imageListEditorScanFailed(context.l10n.importFailedError)}\nError code: SCAN_FAILED'),
+          ),
         );
       }
     } else {
@@ -161,9 +166,10 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
             .whereType<String>()
             .where((p) => p.isNotEmpty)
             .toList();
+        final ingested = await FileIngestHelper.ingestAll(newPaths, subDir: 'images');
         final remaining = maxImageCount - _imagePaths.length;
         setState(() {
-          _imagePaths.addAll(newPaths.take(remaining));
+          _imagePaths.addAll(ingested.take(remaining));
           _updateSizes();
         });
       }
@@ -238,19 +244,28 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
           },
         );
       }
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('Tools', 'image_to_pdf_failed', e, st);
       if (mounted) {
         // Dismiss progress dialog
         Navigator.of(context, rootNavigator: true).pop();
         setState(() => _isCreating = false);
 
-        final errorMessage = e is ImageToPdfException
-            ? e.localizedMessage(context)
-            : e.toString();
+        final String errorCode;
+        final String errorMessage;
+        if (e is ImageToPdfException) {
+          errorCode = e.reason.name.toUpperCase();
+          errorMessage = e.localizedMessage(context);
+        } else {
+          errorCode = 'CREATE_FAILED';
+          errorMessage = context.l10n.toolErrorSubtitle;
+        }
+
         await ToolErrorSheet.show(
           context,
           title: context.l10n.toolsErrorCreatePdfTitle,
           errorMessage: errorMessage,
+          errorCode: errorCode,
           onRetry: _createPdf,
         );
       }
@@ -434,19 +449,20 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                                     final messenger = ScaffoldMessenger.of(context);
                                     final l10n = context.l10n;
                                     try {
-                                      // ignore: deprecated_member_use
-                                      final scans = await CunningDocumentScanner.getPictures();
+                                      final scans = await DocumentScannerFacade.getPictures();
                                       if (!mounted) return;
                                       if (scans != null && scans.isNotEmpty) {
+                                        final ingested = await FileIngestHelper.ingestAll(scans, subDir: 'scans');
                                         setState(() {
-                                          _imagePaths.addAll(scans.take(maxImageCount));
+                                          _imagePaths.addAll(ingested.take(maxImageCount));
                                           _updateSizes();
                                         });
                                       }
-                                    } catch (e) {
+                                    } catch (e, st) {
+                                      AppLog.e('Tools', 'scan_paper_failed', e, st);
                                       if (!mounted) return;
                                       messenger.showSnackBar(
-                                        SnackBar(content: Text(l10n.imageListEditorScanFailed(e.toString()))),
+                                        SnackBar(content: Text('${l10n.imageListEditorScanFailed(l10n.importFailedError)}\nError code: SCAN_FAILED')),
                                       );
                                     }
                                   },

@@ -5,6 +5,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../../core/constants/file_types.dart';
+import '../../core/utils/file_ingest_helper.dart';
 import '../models/doc_file.dart';
 import '../repositories/file_repository.dart';
 
@@ -44,8 +45,8 @@ class ImportService {
           _generateUniqueFilePath(importedDir.path, originalName);
 
       try {
-        final source = File(sourcePath);
-        final destination = await source.copy(uniquePath);
+        final safeSource = await FileIngestHelper.ingestToCache(sourcePath, subDir: 'import_inputs');
+        final destination = await safeSource.copy(uniquePath);
         final stat = await destination.stat();
 
         final fileName = p.basename(uniquePath);
@@ -78,8 +79,8 @@ class ImportService {
   /// Copies a file at [sourcePath] into the app's `imported/` directory,
   /// extracts its metadata, upserts it into the database, and returns the [DocFile].
   Future<DocFile> importFromPath(String sourcePath) async {
-    final source = File(sourcePath);
-    if (!source.existsSync()) {
+    final safeSource = await FileIngestHelper.ingestToCache(sourcePath, subDir: 'import_inputs');
+    if (!await safeSource.exists()) {
       throw FileSystemException('Source file does not exist', sourcePath);
     }
 
@@ -91,7 +92,7 @@ class ImportService {
 
     final originalName = p.basename(sourcePath);
     final uniquePath = _generateUniqueFilePath(importedDir.path, originalName);
-    final destination = await source.copy(uniquePath);
+    final destination = await safeSource.copy(uniquePath);
     final stat = await destination.stat();
 
     final fileName = p.basename(uniquePath);

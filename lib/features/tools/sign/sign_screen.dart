@@ -6,6 +6,8 @@ import 'package:pdfrx/pdfrx.dart';
 
 import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
+import '../../../core/utils/app_log.dart';
+import '../../../core/utils/file_ingest_helper.dart';
 import '../../../data/models/placed_signature.dart';
 import '../../../data/repositories/signature_repository.dart';
 import '../../../data/services/pdf/pdf_annotation_service.dart';
@@ -85,15 +87,18 @@ class _SignScreenState extends ConsumerState<SignScreen> {
     });
 
     try {
+      final safeFile = await FileIngestHelper.ingestToCache(path, subDir: 'sign_inputs');
+      _filePath = safeFile.path;
       final service = ref.read(pdfAnnotationServiceProvider);
-      final info = await service.getDocumentInfo(path);
+      final info = await service.getDocumentInfo(safeFile.path);
       if (!mounted) return;
 
       setState(() {
         _documentInfo = info;
         _isLoadingInfo = false;
       });
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('Sign', 'load_document_failed', e, st);
       if (!mounted) return;
       setState(() {
         _isLoadingInfo = false;
@@ -277,12 +282,13 @@ class _SignScreenState extends ConsumerState<SignScreen> {
           ),
         );
       }
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('Sign', 'save_signature_failed', e, st);
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop(); // dismiss progress dialog
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(context.l10n.annotateErrorSaveFailed(e.toString())),
+            content: Text('${context.l10n.annotateErrorSaveFailed(e.toString())}\nError code: SIGN_SAVE_FAILED'),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

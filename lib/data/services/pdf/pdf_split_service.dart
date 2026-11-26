@@ -3,6 +3,7 @@ import 'package:path/path.dart' as p;
 import 'package:pdfrx/pdfrx.dart' as pdfrx;
 
 import '../../../core/errors/app_errors.dart';
+import '../../../core/utils/file_ingest_helper.dart';
 import '../../../core/utils/page_range_parser.dart';
 import '../../models/doc_file.dart';
 import 'pdf_output_service.dart';
@@ -65,7 +66,8 @@ class PdfSplitService {
     final pdfrx.PdfDocument sourceDoc;
 
     try {
-      sourceDoc = await pdfrx.PdfDocument.openFile(pdfPath);
+      final safeFile = await FileIngestHelper.ingestToCache(pdfPath, subDir: 'split_inputs');
+      sourceDoc = await pdfrx.PdfDocument.openFile(safeFile.path);
     } catch (_) {
       throw PdfSplitException(
         PdfSplitErrorReason.passwordProtectedOrDamaged,

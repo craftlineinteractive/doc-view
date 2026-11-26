@@ -12,6 +12,8 @@ import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
+import '../../../core/utils/app_log.dart';
+import '../../../core/utils/file_ingest_helper.dart';
 import '../../../core/utils/format_utils.dart';
 import '../../../data/models/doc_file.dart';
 import '../../../data/services/convert/pdf_to_word_service.dart';
@@ -216,6 +218,7 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
     );
 
     try {
+      final safeFile = await FileIngestHelper.ingestToCache(file.path, subDir: 'pdf_to_word_inputs');
       final service = ref.read(pdfToWordServiceProvider);
       final outputDir = await ref.read(pdfOutputServiceProvider).getOutputDir();
       var target = File(p.join(outputDir.path, '$rawName.docx'));
@@ -226,7 +229,7 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
       }
 
       final outputPath = await service.convertPdfToWord(
-        sourcePath: file.path,
+        sourcePath: safeFile.path,
         outputPath: target.path,
         password: _password,
         insertPageBreaks: _insertPageBreaks,
@@ -326,7 +329,8 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
           );
         },
       );
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('PdfToWord', 'convert_failed', e, st);
       // Close progress sheet if still open
       if (mounted && Navigator.of(context, rootNavigator: true).canPop()) {
         Navigator.of(context, rootNavigator: true).pop();
@@ -339,6 +343,10 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
       }
 
       if (!mounted) return;
+
+      final errorCode = e is PdfToWordException
+          ? e.reason.name.toUpperCase()
+          : 'CONVERSION_FAILED';
 
       String errorText = l10n.pdfToWordGeneralError;
       if (e is PdfToWordException) {
@@ -362,7 +370,7 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(errorText),
+          content: Text('$errorText\nError code: $errorCode'),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );

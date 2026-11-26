@@ -111,9 +111,11 @@ final openWithServiceProvider = Provider<OpenWithService>((ref) {
 final pdfOutputServiceProvider = Provider<PdfOutputService>((ref) {
   final repository = ref.watch(fileRepositoryProvider);
   final actionsController = ref.watch(fileActionsControllerProvider);
+  final permissionService = ref.watch(permissionServiceProvider);
   return PdfOutputService(
     repository: repository,
     actionsController: actionsController,
+    permissionService: permissionService,
   );
 });
 

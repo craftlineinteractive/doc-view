@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/extensions/l10n_extension.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
+import '../../../core/utils/app_log.dart';
+import '../../../core/utils/file_ingest_helper.dart';
 import '../../../data/models/pdf_text_box.dart';
 import '../../../data/services/pdf/pdf_annotation_service.dart';
 import '../../../data/services/pdf/text_layout_engine.dart';
@@ -117,16 +119,19 @@ class _AddTextScreenState extends ConsumerState<AddTextScreen> {
     });
 
     try {
+      final safeFile = await FileIngestHelper.ingestToCache(path, subDir: 'add_text_inputs');
+      _filePath = safeFile.path;
       final info = await ref
           .read(pdfAnnotationServiceProvider)
-          .getDocumentInfo(path, password: password);
+          .getDocumentInfo(safeFile.path, password: password);
       if (mounted) {
         setState(() {
           _documentInfo = info;
           _isLoadingInfo = false;
         });
       }
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('AddText', 'load_document_failed', e, st);
       if (!mounted) return;
       final errStr = e.toString().toLowerCase();
       if (errStr.contains('password') || errStr.contains('encrypt')) {
@@ -470,12 +475,13 @@ class _AddTextScreenState extends ConsumerState<AddTextScreen> {
           ),
         );
       }
-    } catch (e) {
+    } catch (e, st) {
+      AppLog.e('AddText', 'save_text_failed', e, st);
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop(); // dismiss progress dialog
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(context.l10n.annotateErrorSaveFailed(e.toString())),
+            content: Text('${context.l10n.annotateErrorSaveFailed(e.toString())}\nError code: ADD_TEXT_SAVE_FAILED'),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
