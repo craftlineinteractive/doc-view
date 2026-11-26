@@ -151,8 +151,30 @@ class MainActivity : FlutterActivity() {
 
     private fun handleIntent(intent: Intent, isInitial: Boolean) {
         val action = intent.action
-        val uri = intent.data
-        if (Intent.ACTION_VIEW == action && uri != null) {
+        val uri: Uri? = when (action) {
+            Intent.ACTION_VIEW -> intent.data
+            Intent.ACTION_SEND -> {
+                val streamUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
+                } else {
+                    @Suppress("DEPRECATION")
+                    intent.getParcelableExtra<Uri>(Intent.EXTRA_STREAM)
+                }
+                streamUri ?: intent.clipData?.let { if (it.itemCount > 0) it.getItemAt(0).uri else null }
+            }
+            Intent.ACTION_SEND_MULTIPLE -> {
+                val list = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM, Uri::class.java)
+                } else {
+                    @Suppress("DEPRECATION")
+                    intent.getParcelableArrayListExtra<Uri>(Intent.EXTRA_STREAM)
+                }
+                list?.firstOrNull() ?: intent.clipData?.let { if (it.itemCount > 0) it.getItemAt(0).uri else null }
+            }
+            else -> null
+        }
+
+        if (uri != null) {
             if (uri.scheme == "docview") {
                 // Do not intercept or clear widget / deep link URIs
                 return
@@ -173,8 +195,9 @@ class MainActivity : FlutterActivity() {
     private fun copyUriToInternalStorage(uri: Uri): String? {
         return try {
             var fileName = queryFileName(uri) ?: "opened_file"
+            fileName = fileName.replace("[/\\\\:*?\"<>|]".toRegex(), "_")
             if (!fileName.contains(".")) {
-                val mimeType = contentResolver.getType(uri)
+                val mimeType = try { contentResolver.getType(uri) } catch (_: Exception) { null }
                 val ext = when (mimeType) {
                     "application/pdf" -> "pdf"
                     "application/vnd.openxmlformats-officedocument.wordprocessingml.document" -> "docx"
@@ -184,6 +207,8 @@ class MainActivity : FlutterActivity() {
                     "application/vnd.openxmlformats-officedocument.presentationml.presentation" -> "pptx"
                     "application/vnd.ms-powerpoint" -> "ppt"
                     "text/plain" -> "txt"
+                    "text/csv", "text/comma-separated-values" -> "csv"
+                    "application/rtf", "text/rtf", "application/x-rtf" -> "rtf"
                     "image/jpeg" -> "jpg"
                     "image/png" -> "png"
                     else -> null
@@ -194,9 +219,16 @@ class MainActivity : FlutterActivity() {
             }
             val tempDir = File(cacheDir, "opened_with")
             if (!tempDir.exists()) tempDir.mkdirs()
-            val targetFile = File(tempDir, fileName)
+            val targetFile = File(tempDir, "${System.currentTimeMillis()}_$fileName")
 
-            contentResolver.openInputStream(uri)?.use { inputStream ->
+            val stream = if (uri.scheme == "file") {
+                val f = File(uri.path ?: "")
+                if (f.exists()) f.inputStream() else contentResolver.openInputStream(uri)
+            } else {
+                contentResolver.openInputStream(uri)
+            }
+
+            stream?.use { inputStream ->
                 FileOutputStream(targetFile).use { outputStream ->
                     inputStream.copyTo(outputStream)
                 }
@@ -210,14 +242,20 @@ class MainActivity : FlutterActivity() {
 
     private fun queryFileName(uri: Uri): String? {
         if (uri.scheme == "content") {
-            contentResolver.query(uri, null, null, null, null)?.use { cursor ->
-                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                if (nameIndex != -1 && cursor.moveToFirst()) {
-                    return cursor.getString(nameIndex)
+            try {
+                contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+                    val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    if (nameIndex != -1 && cursor.moveToFirst()) {
+                        val name = cursor.getString(nameIndex)
+                        if (!name.isNullOrBlank()) return name
+                    }
                 }
+            } catch (_: Exception) {
+                // Ignore SecurityException or unsupported operation
             }
         }
-        return uri.lastPathSegment
+        val lastSegment = uri.lastPathSegment
+        return if (!lastSegment.isNullOrBlank()) lastSegment else null
     }
 }
 

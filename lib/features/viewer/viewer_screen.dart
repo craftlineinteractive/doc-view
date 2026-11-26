@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:open_filex/open_filex.dart';
 
 import '../../core/constants/file_types.dart';
@@ -88,8 +89,9 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Widget content;
     if (_isChecking) {
-      return Scaffold(
+      content = Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Center(
           child: ClipRRect(
@@ -106,13 +108,27 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           ),
         ),
       );
+    } else {
+      final lastDot = widget.file.path.lastIndexOf('.');
+      final ext = (lastDot != -1 && lastDot < widget.file.path.length - 1)
+          ? widget.file.path.substring(lastDot + 1).toLowerCase()
+          : '';
+      content = _buildContent(context, ext);
     }
 
-    final lastDot = widget.file.path.lastIndexOf('.');
-    final ext = (lastDot != -1 && lastDot < widget.file.path.length - 1)
-        ? widget.file.path.substring(lastDot + 1).toLowerCase()
-        : '';
+    return PopScope(
+      canPop: Navigator.of(context).canPop(),
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (context.mounted) {
+          context.go('/home');
+        }
+      },
+      child: content,
+    );
+  }
 
+  Widget _buildContent(BuildContext context, String ext) {
     // Route native spreadsheet grid viewer for modern XLSX, XLSM, CSV, and TSV
     if (ext == 'xlsx' || ext == 'xlsm' || ext == 'csv' || ext == 'tsv') {
       return SpreadsheetViewerScreen(file: widget.file);

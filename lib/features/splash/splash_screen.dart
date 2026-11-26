@@ -10,6 +10,7 @@ import '../../core/theme/doc_view_tokens.dart';
 import '../../core/theme/doc_view_typography.dart';
 import '../../data/services/ads/ad_service.dart';
 import '../../data/services/ads/consent_gateway.dart';
+import '../files/open_document.dart';
 import '../providers/providers.dart';
 
 /// Splash screen displaying brand mark with floating document sheets,
@@ -96,6 +97,33 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     if (!mounted) return;
 
     final isOnboardingDone = results[3] as bool? ?? false;
+    final openWithService = ref.read(openWithServiceProvider);
+    final initialFilePath = await openWithService.getInitialFile();
+
+    if (initialFilePath != null) {
+      openWithService.consumeInitialFile();
+      if (!mounted) return;
+      context.go('/home');
+      try {
+        final docFile = await ref
+            .read(importServiceProvider)
+            .importFromPath(initialFilePath);
+        ref.invalidate(categoryCountsProvider);
+        ref.invalidate(filesProvider);
+        if (mounted) {
+          openDocument(context, ref, docFile);
+        }
+      } catch (e) {
+        if (mounted) {
+          final err = context.l10n.errorCouldNotOpenDocument(e.toString());
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(err)),
+          );
+        }
+      }
+      return;
+    }
+
     if (isOnboardingDone) {
       // Run UMP consent update and initialize ads if permitted
       try {
@@ -109,7 +137,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
         context.go('/home');
       }
     } else {
-      context.go('/onboarding');
+      if (mounted) {
+        context.go('/onboarding');
+      }
     }
   }
 
