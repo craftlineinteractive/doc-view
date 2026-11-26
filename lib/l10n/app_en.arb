@@ -4129,6 +4129,19 @@
   "@premiumSubscriptionsAvailableSoon": {
     "description": "Message displayed when subscription products have not been returned from store"
   },
+  "premiumLoadPlansFailed": "Could not load plans. Tap to retry",
+  "@premiumLoadPlansFailed": {
+    "description": "Error message when subscription plans fail to load or timeout after 8 seconds"
+  },
+  "errorCodeLabel": "Error code: {code}",
+  "@errorCodeLabel": {
+    "description": "Label for machine-readable error codes",
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
   "pagesEditPagesAction": "Edit pages",
   "@pagesEditPagesAction": {
     "description": "Button in read-only PagesScreen navigating to paywall"

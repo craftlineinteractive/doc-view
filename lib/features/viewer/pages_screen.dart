@@ -360,9 +360,10 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
         AppLog.e('Pages', 'extract_pages_failed', e, st);
         if (mounted) {
           setState(() => _isSaving = false);
+          final err = '${context.l10n.pagesErrorUnreadable}\n${context.l10n.errorCodeLabel('PAGES_EXTRACT_FAILED')}';
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('${context.l10n.pagesErrorUnreadable}\nError code: PAGES_EXTRACT_FAILED'),
+              content: Text(err),
               backgroundColor: DocViewColors.error,
             ),
           );
@@ -488,9 +489,10 @@ class _PagesScreenState extends ConsumerState<PagesScreen> {
         AppLog.e('Pages', 'save_document_failed', e, st);
         if (mounted) {
           setState(() => _isSaving = false);
+          final err = '${context.l10n.pagesErrorUnreadable}\n${context.l10n.errorCodeLabel('PAGES_SAVE_FAILED')}';
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('${context.l10n.pagesErrorUnreadable}\nError code: PAGES_SAVE_FAILED'),
+              content: Text(err),
               backgroundColor: DocViewColors.error,
             ),
           );

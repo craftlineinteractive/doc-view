@@ -150,9 +150,10 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
       } catch (e, st) {
         AppLog.e('Tools', 'add_scans_failed', e, st);
         if (!mounted) return;
+        final err = '${context.l10n.imageListEditorScanFailed(context.l10n.importFailedError)}\n${context.l10n.errorCodeLabel('SCAN_FAILED')}';
         messenger.showSnackBar(
           SnackBar(
-            content: Text('${context.l10n.imageListEditorScanFailed(context.l10n.importFailedError)}\nError code: SCAN_FAILED'),
+            content: Text(err),
           ),
         );
       }
@@ -461,8 +462,9 @@ class _ImageListEditorScreenState extends ConsumerState<ImageListEditorScreen> {
                                     } catch (e, st) {
                                       AppLog.e('Tools', 'scan_paper_failed', e, st);
                                       if (!mounted) return;
+                                      final err = '${l10n.imageListEditorScanFailed(l10n.importFailedError)}\n${l10n.errorCodeLabel('SCAN_FAILED')}';
                                       messenger.showSnackBar(
-                                        SnackBar(content: Text('${l10n.imageListEditorScanFailed(l10n.importFailedError)}\nError code: SCAN_FAILED')),
+                                        SnackBar(content: Text(err)),
                                       );
                                     }
                                   },

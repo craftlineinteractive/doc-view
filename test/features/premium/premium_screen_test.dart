@@ -99,6 +99,64 @@ void main() {
       expect(find.text('Subscriptions will be available soon.'), findsWidgets);
     });
 
+    testWidgets('renders clean shimmer skeleton when plans are loading without cache', (tester) async {
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      premiumController.state = premiumController.state.copyWith(
+        plans: [],
+        isLoading: true,
+        iapProductSeen: true,
+      );
+
+      await tester.pumpApp(
+        const PremiumScreen(),
+        overrides: [
+          purchaseGatewayProvider.overrideWithValue(fakeGateway),
+          premiumControllerProvider.overrideWithValue(premiumController),
+        ],
+      );
+      await tester.pump();
+
+      expect(find.byKey(const Key('premium_plans_skeleton')), findsOneWidget);
+      expect(find.text('Subscriptions will be available soon.'), findsNothing);
+      expect(find.text('-'), findsNothing);
+    });
+
+    testWidgets('renders retry CTA when plans query fails, and tapping retry triggers reload', (tester) async {
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      premiumController.state = premiumController.state.copyWith(
+        plans: [],
+        isLoading: false,
+        errorMessage: 'Billing query timed out',
+        iapProductSeen: true,
+      );
+
+      await tester.pumpApp(
+        const PremiumScreen(),
+        overrides: [
+          purchaseGatewayProvider.overrideWithValue(fakeGateway),
+          premiumControllerProvider.overrideWithValue(premiumController),
+        ],
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(const Key('premium_retry_state')), findsOneWidget);
+      expect(find.text('Could not load plans. Tap to retry'), findsOneWidget);
+
+      final retryBtn = find.byKey(const Key('premium_retry_button'));
+      expect(retryBtn, findsOneWidget);
+
+      await tester.tap(retryBtn);
+      await tester.pump();
+    });
+
     testWidgets('switching to monthly plan changes CTA button text to Subscribe', (tester) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 2.0;

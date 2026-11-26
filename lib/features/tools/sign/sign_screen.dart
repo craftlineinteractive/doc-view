@@ -286,9 +286,10 @@ class _SignScreenState extends ConsumerState<SignScreen> {
       AppLog.e('Sign', 'save_signature_failed', e, st);
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop(); // dismiss progress dialog
+        final err = '${context.l10n.annotateErrorSaveFailed(e.toString())}\n${context.l10n.errorCodeLabel('SIGN_SAVE_FAILED')}';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${context.l10n.annotateErrorSaveFailed(e.toString())}\nError code: SIGN_SAVE_FAILED'),
+            content: Text(err),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

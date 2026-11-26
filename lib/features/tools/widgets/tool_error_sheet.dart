@@ -147,7 +147,7 @@ class ToolErrorSheet extends StatelessWidget {
                 if (errorCode != null && errorCode!.isNotEmpty) ...[
                   const SizedBox(height: 8),
                   Text(
-                    'Error code: $errorCode',
+                    context.l10n.errorCodeLabel(errorCode!),
                     style: DocViewTypography.captionXs.copyWith(
                       color: tokens.textSecondary,
                       fontFamily: 'monospace',

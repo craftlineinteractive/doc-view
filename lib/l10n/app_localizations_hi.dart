@@ -3173,6 +3173,14 @@ class AppLocalizationsHi extends AppLocalizations {
       'सदस्यताएं जल्द ही उपलब्ध होंगी।';
 
   @override
+  String get premiumLoadPlansFailed => 'Could not load plans. Tap to retry';
+
+  @override
+  String errorCodeLabel(String code) {
+    return 'Error code: $code';
+  }
+
+  @override
   String get pagesEditPagesAction => 'पेज संपादित करें';
 
   @override

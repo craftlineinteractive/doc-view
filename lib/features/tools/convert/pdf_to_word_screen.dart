@@ -368,9 +368,10 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
         }
       }
 
+      final err = '$errorText\n${context.l10n.errorCodeLabel(errorCode)}';
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('$errorText\nError code: $errorCode'),
+          content: Text(err),
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );

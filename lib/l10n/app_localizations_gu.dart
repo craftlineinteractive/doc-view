@@ -3160,6 +3160,14 @@ class AppLocalizationsGu extends AppLocalizations {
       'સબ્સ્ક્રિપ્શન્સ ટૂંક સમયમાં ઉપલબ્ધ થશે.';
 
   @override
+  String get premiumLoadPlansFailed => 'Could not load plans. Tap to retry';
+
+  @override
+  String errorCodeLabel(String code) {
+    return 'Error code: $code';
+  }
+
+  @override
   String get pagesEditPagesAction => 'પેજ એડિટ કરો';
 
   @override

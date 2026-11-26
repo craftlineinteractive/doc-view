@@ -5234,6 +5234,18 @@ abstract class AppLocalizations {
   /// **'Subscriptions will be available soon.'**
   String get premiumSubscriptionsAvailableSoon;
 
+  /// Error message when subscription plans fail to load or timeout after 8 seconds
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load plans. Tap to retry'**
+  String get premiumLoadPlansFailed;
+
+  /// Label for machine-readable error codes
+  ///
+  /// In en, this message translates to:
+  /// **'Error code: {code}'**
+  String errorCodeLabel(String code);
+
   /// Button in read-only PagesScreen navigating to paywall
   ///
   /// In en, this message translates to:

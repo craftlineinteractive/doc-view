@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -40,10 +41,27 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
   late final Animation<double> _plansFade;
 
   String _selectedPeriod = IapConfig.periodYearly;
+  Timer? _retryTimer;
+  bool _timedOut = false;
+
+  void _startRetryTimer() {
+    _retryTimer?.cancel();
+    _retryTimer = Timer(const Duration(seconds: 8), () {
+      if (mounted) {
+        final ctrl = ref.read(premiumControllerProvider);
+        if (ctrl.state.plans.isEmpty) {
+          setState(() {
+            _timedOut = true;
+          });
+        }
+      }
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    _startRetryTimer();
     _animController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 2200),
@@ -139,6 +157,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
 
   @override
   void dispose() {
+    _retryTimer?.cancel();
     _animController.dispose();
     super.dispose();
   }
@@ -510,76 +529,137 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
                     ),
                     const SizedBox(height: 28),
 
-                    // 4. Plan Selection Cards OR Disabled State
-                    if (!isProductSeen)
-                      Container(
-                        key: const Key('premium_disabled_state'),
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-                        decoration: BoxDecoration(
-                          color: isDark ? DocViewColors.surfaceDark : tokens.surfaceAlt,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: tokens.hairline),
-                        ),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.schedule_rounded,
-                              color: tokens.textSecondary,
-                              size: 32,
+                    // 4. Plan Selection Cards, Shimmer Skeleton, or Retry CTA
+                    Builder(
+                      builder: (context) {
+                        if (!isProductSeen) {
+                          if (premiumState.isLoading) {
+                            return const _PlanCardsSkeleton();
+                          }
+                          return Container(
+                            key: const Key('premium_disabled_state'),
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 24),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? DocViewColors.surfaceDark
+                                  : tokens.surfaceAlt,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: tokens.hairline),
                             ),
-                            const SizedBox(height: 12),
-                            Text(
-                              l10n.premiumSubscriptionsAvailableSoon,
-                              textAlign: TextAlign.center,
-                              style: DocViewTypography.bodyMd.copyWith(
-                                color: tokens.textSecondary,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.schedule_rounded,
+                                  color: tokens.textSecondary,
+                                  size: 32,
+                                ),
+                                const SizedBox(height: 12),
+                                Text(
+                                  l10n.premiumSubscriptionsAvailableSoon,
+                                  textAlign: TextAlign.center,
+                                  style: DocViewTypography.bodyMd.copyWith(
+                                    color: tokens.textSecondary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      )
-                    else
-                      SlideTransition(
-                        position: _plansSlide,
-                        child: FadeTransition(
-                          opacity: _plansFade,
-                          child: Column(
-                            children: [
-                              // Exactly Yearly first (preselected)
-                              _PlanCard(
-                                key: const Key('plan_card_yearly'),
-                                title: l10n.premiumPlanYearly,
-                                badgeText: savingsBadgeText,
-                                subtitle: yearlySubtitle,
-                                isSelected: _selectedPeriod == IapConfig.periodYearly,
-                                onTap: () => setState(() {
-                                  _selectedPeriod = IapConfig.periodYearly;
-                                  if (yearlyPlan != null) {
-                                    controller.selectPlan(yearlyPlan);
-                                  }
-                                }),
-                              ),
-                              const SizedBox(height: 12),
+                          );
+                        } else if (premiumState.plans.isNotEmpty) {
+                          return SlideTransition(
+                            position: _plansSlide,
+                            child: FadeTransition(
+                              opacity: _plansFade,
+                              child: Column(
+                                children: [
+                                  // Exactly Yearly first (preselected)
+                                  _PlanCard(
+                                    key: const Key('plan_card_yearly'),
+                                    title: l10n.premiumPlanYearly,
+                                    badgeText: savingsBadgeText,
+                                    subtitle: yearlySubtitle,
+                                    isSelected: _selectedPeriod == IapConfig.periodYearly,
+                                    onTap: () => setState(() {
+                                      _selectedPeriod = IapConfig.periodYearly;
+                                      if (yearlyPlan != null) {
+                                        controller.selectPlan(yearlyPlan);
+                                      }
+                                    }),
+                                  ),
+                                  const SizedBox(height: 12),
 
-                              // Exactly Monthly second
-                              _PlanCard(
-                                key: const Key('plan_card_monthly'),
-                                title: l10n.premiumPlanMonthly,
-                                subtitle: monthlySubtitle,
-                                isSelected: _selectedPeriod == IapConfig.periodMonthly,
-                                onTap: () => setState(() {
-                                  _selectedPeriod = IapConfig.periodMonthly;
-                                  if (monthlyPlan != null) {
-                                    controller.selectPlan(monthlyPlan);
-                                  }
-                                }),
+                                  // Exactly Monthly second
+                                  _PlanCard(
+                                    key: const Key('plan_card_monthly'),
+                                    title: l10n.premiumPlanMonthly,
+                                    subtitle: monthlySubtitle,
+                                    isSelected: _selectedPeriod == IapConfig.periodMonthly,
+                                    onTap: () => setState(() {
+                                      _selectedPeriod = IapConfig.periodMonthly;
+                                      if (monthlyPlan != null) {
+                                        controller.selectPlan(monthlyPlan);
+                                      }
+                                    }),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
+                            ),
+                          );
+                        } else if (_timedOut ||
+                            (premiumState.errorMessage != null &&
+                                !premiumState.isLoading)) {
+                          return Container(
+                            key: const Key('premium_retry_state'),
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 24),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? DocViewColors.surfaceDark
+                                  : tokens.surfaceAlt,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: tokens.hairline),
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.cloud_off_rounded,
+                                  color: tokens.textSecondary,
+                                  size: 32,
+                                ),
+                                const SizedBox(height: 12),
+                                Text(
+                                  l10n.premiumLoadPlansFailed,
+                                  textAlign: TextAlign.center,
+                                  style: DocViewTypography.bodyMd.copyWith(
+                                    color: tokens.textSecondary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                FilledButton.tonalIcon(
+                                  key: const Key('premium_retry_button'),
+                                  onPressed: () {
+                                    setState(() {
+                                      _timedOut = false;
+                                    });
+                                    _startRetryTimer();
+                                    controller.loadProducts();
+                                  },
+                                  icon: const Icon(Icons.refresh_rounded,
+                                      size: 18),
+                                  label: Text(l10n.actionRetry),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return const _PlanCardsSkeleton();
+                        }
+                      },
+                    ),
                     const SizedBox(height: 20),
                   ],
                 ),
@@ -612,36 +692,130 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen>
                   SizedBox(
                     width: double.infinity,
                     height: 52,
-                    child: FilledButton(
-                      key: const Key('premium_cta_button'),
-                      onPressed: (!isProductSeen || premiumState.isLoading || premiumState.isRestoring)
-                          ? null
-                          : () => _handleSubscribe(controller, selectedPlan),
-                      style: FilledButton.styleFrom(
-                        backgroundColor: tokens.primaryBlue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      child: premiumState.isLoading
-                          ? const SizedBox(
-                              width: 22,
-                              height: 22,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2.5,
-                                color: Colors.white,
+                    child: Builder(
+                      builder: (context) {
+                        if (!isProductSeen) {
+                          if (premiumState.isLoading) {
+                            return FilledButton(
+                              key: const Key('premium_cta_button'),
+                              onPressed: null,
+                              style: FilledButton.styleFrom(
+                                backgroundColor:
+                                    tokens.primaryBlue.withValues(alpha: 0.6),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
                               ),
-                            )
-                          : Text(
-                              !isProductSeen
-                                  ? l10n.premiumSubscriptionsAvailableSoon
-                                  : ctaLabel,
+                              child: const SizedBox(
+                                width: 22,
+                                height: 22,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.5,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          }
+                          return FilledButton(
+                            key: const Key('premium_cta_button'),
+                            onPressed: null,
+                            style: FilledButton.styleFrom(
+                              backgroundColor: tokens.primaryBlue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ),
+                            child: Text(
+                              l10n.premiumSubscriptionsAvailableSoon,
                               style: DocViewTypography.headlineSm.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,
                               ),
                             ),
+                          );
+                        } else if (premiumState.plans.isNotEmpty) {
+                          return FilledButton(
+                            key: const Key('premium_cta_button'),
+                            onPressed: (premiumState.isLoading ||
+                                    premiumState.isRestoring)
+                                ? null
+                                : () => _handleSubscribe(
+                                    controller, selectedPlan),
+                            style: FilledButton.styleFrom(
+                              backgroundColor: tokens.primaryBlue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ),
+                            child: premiumState.isLoading
+                                ? const SizedBox(
+                                    width: 22,
+                                    height: 22,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.5,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : Text(
+                                    ctaLabel,
+                                    style: DocViewTypography.headlineSm.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                          );
+                        } else if (_timedOut ||
+                            (premiumState.errorMessage != null &&
+                                !premiumState.isLoading)) {
+                          return FilledButton(
+                            key: const Key('premium_cta_button'),
+                            onPressed: () {
+                              setState(() {
+                                _timedOut = false;
+                              });
+                              _startRetryTimer();
+                              controller.loadProducts();
+                            },
+                            style: FilledButton.styleFrom(
+                              backgroundColor: tokens.primaryBlue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ),
+                            child: Text(
+                              l10n.actionRetry,
+                              style: DocViewTypography.headlineSm.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                              ),
+                            ),
+                          );
+                        } else {
+                          // Clean skeleton/shimmer loading state (never "-" or disabled message)
+                          return FilledButton(
+                            key: const Key('premium_cta_button'),
+                            onPressed: null,
+                            style: FilledButton.styleFrom(
+                              backgroundColor:
+                                  tokens.primaryBlue.withValues(alpha: 0.6),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ),
+                            child: const SizedBox(
+                              width: 22,
+                              height: 22,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2.5,
+                                color: Colors.white,
+                              ),
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -878,6 +1052,103 @@ class _PlanCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _PlanCardsSkeleton extends StatelessWidget {
+  const _PlanCardsSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.tokens;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? DocViewColors.surfaceDark : tokens.surfaceAlt;
+    final barBg = isDark ? const Color(0xFF2E3545) : const Color(0xFFE2E6EE);
+
+    return Column(
+      key: const Key('premium_plans_skeleton'),
+      children: [
+        // Skeleton Card 1 (Yearly)
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          decoration: BoxDecoration(
+            color: cardBg,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: tokens.hairline),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 140,
+                    height: 18,
+                    decoration: BoxDecoration(
+                      color: barBg,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                  Container(
+                    width: 70,
+                    height: 22,
+                    decoration: BoxDecoration(
+                      color: barBg,
+                      borderRadius: BorderRadius.circular(11),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Container(
+                width: 200,
+                height: 14,
+                decoration: BoxDecoration(
+                  color: barBg.withValues(alpha: 0.6),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+
+        // Skeleton Card 2 (Monthly)
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          decoration: BoxDecoration(
+            color: cardBg,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: tokens.hairline),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 120,
+                height: 18,
+                decoration: BoxDecoration(
+                  color: barBg,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                width: 160,
+                height: 14,
+                decoration: BoxDecoration(
+                  color: barBg.withValues(alpha: 0.6),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

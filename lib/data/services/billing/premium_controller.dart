@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/config/iap_config.dart';
+import '../../../core/utils/app_log.dart';
 import 'purchase_gateway.dart';
 import 'subscription_plan.dart';
 
@@ -139,9 +141,12 @@ class PremiumController extends ValueNotifier<PremiumState> {
   Future<void> _init() async {
     prefs ??= await SharedPreferences.getInstance();
 
+    // 0. Restore cached plans for instantaneous display on cold load
+    _loadCachedPlans();
+
     // 1. Check cached entitlement, offline grace period, and iap_product_seen
     final cachedProductSeen = prefs?.getBool(IapConfig.prefKeyIapProductSeen) ?? false;
-    state = state.copyWith(iapProductSeen: cachedProductSeen);
+    state = state.copyWith(iapProductSeen: cachedProductSeen || state.plans.isNotEmpty);
     _checkOfflineGraceEntitlement();
 
     // 2. Listen to real-time purchase updates from store
@@ -155,8 +160,29 @@ class PremiumController extends ValueNotifier<PremiumState> {
       },
     );
 
-    // 3. Query product catalog from store
+    // 3. Query product catalog from store in background
     await loadProducts();
+  }
+
+  void _loadCachedPlans() {
+    final cachedPlansJson = prefs?.getString(IapConfig.prefKeyCachedPlansJson);
+    if (cachedPlansJson != null && cachedPlansJson.isNotEmpty) {
+      try {
+        final decoded = jsonDecode(cachedPlansJson) as List<dynamic>;
+        final cachedPlans = decoded
+            .map((item) => SubscriptionPlan.fromJson(item as Map<String, dynamic>))
+            .toList();
+        if (cachedPlans.isNotEmpty) {
+          state = state.copyWith(
+            plans: cachedPlans,
+            selectedPlan: state.selectedPlan ?? cachedPlans.first,
+            iapProductSeen: true,
+          );
+        }
+      } catch (e, st) {
+        AppLog.e('Billing', 'parse_cached_plans_failed', e, st);
+      }
+    }
   }
 
   void _checkOfflineGraceEntitlement() {
@@ -200,48 +226,66 @@ class PremiumController extends ValueNotifier<PremiumState> {
   /// Loads subscription products and plans from the store.
   /// Exactly two plans ever shown: Yearly first, Monthly second.
   Future<void> loadProducts() async {
-    final available = await gateway.isAvailable();
-    if (!available) {
-      return;
-    }
-
-    // 1. Query plans from gateway
-    final fetchedPlans = await gateway.querySubscriptionPlans();
-    final fetchedProducts = await gateway.queryProductDetails(IapConfig.subscriptionProductIds);
-
-    if (fetchedPlans.isNotEmpty || fetchedProducts.isNotEmpty) {
-      // Mark store product seen in cache and state
-      await prefs?.setBool(IapConfig.prefKeyIapProductSeen, true);
-      state = state.copyWith(iapProductSeen: true);
-    }
-
-    if (fetchedPlans.isEmpty) {
-      return;
-    }
-
-    // Identify plans strictly by billing period: P1Y (yearly) and P1M (monthly)
-    SubscriptionPlan? yearlyPlan;
-    SubscriptionPlan? monthlyPlan;
-
-    for (final plan in fetchedPlans) {
-      if (plan.billingPeriod == IapConfig.periodYearly && yearlyPlan == null) {
-        yearlyPlan = plan;
-      } else if (plan.billingPeriod == IapConfig.periodMonthly && monthlyPlan == null) {
-        monthlyPlan = plan;
+    state = state.copyWith(isLoading: true, clearError: true);
+    try {
+      final available = await gateway.isAvailable();
+      if (!available) {
+        state = state.copyWith(isLoading: false);
+        return;
       }
-      // Any extra plans (e.g. quarterly) are intentionally omitted
+
+      // 1. Query plans from gateway
+      final fetchedPlans = await gateway.querySubscriptionPlans();
+      final fetchedProducts =
+          await gateway.queryProductDetails(IapConfig.subscriptionProductIds);
+
+      if (fetchedPlans.isNotEmpty || fetchedProducts.isNotEmpty) {
+        // Mark store product seen in cache and state
+        await prefs?.setBool(IapConfig.prefKeyIapProductSeen, true);
+      }
+
+      if (fetchedPlans.isEmpty) {
+        state = state.copyWith(isLoading: false);
+        return;
+      }
+
+      // Identify plans strictly by billing period: P1Y (yearly) and P1M (monthly)
+      SubscriptionPlan? yearlyPlan;
+      SubscriptionPlan? monthlyPlan;
+
+      for (final plan in fetchedPlans) {
+        if (plan.billingPeriod == IapConfig.periodYearly && yearlyPlan == null) {
+          yearlyPlan = plan;
+        } else if (plan.billingPeriod == IapConfig.periodMonthly && monthlyPlan == null) {
+          monthlyPlan = plan;
+        }
+        // Any extra plans (e.g. quarterly) are intentionally omitted
+      }
+
+      final organizedPlans = <SubscriptionPlan>[];
+      if (yearlyPlan != null) organizedPlans.add(yearlyPlan);
+      if (monthlyPlan != null) organizedPlans.add(monthlyPlan);
+
+      if (organizedPlans.isNotEmpty) {
+        final plansJson = jsonEncode(organizedPlans.map((p) => p.toJson()).toList());
+        await prefs?.setString(IapConfig.prefKeyCachedPlansJson, plansJson);
+      }
+
+      state = state.copyWith(
+        isLoading: false,
+        plans: organizedPlans,
+        selectedPlan: state.selectedPlan ?? (organizedPlans.isNotEmpty ? organizedPlans.first : null),
+        products: fetchedProducts,
+        selectedProduct: state.selectedProduct ?? (fetchedProducts.isNotEmpty ? fetchedProducts.first : null),
+        iapProductSeen: organizedPlans.isNotEmpty || state.iapProductSeen,
+      );
+    } catch (e, st) {
+      AppLog.e('Billing', 'load_products_failed', e, st);
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
     }
-
-    final organizedPlans = <SubscriptionPlan>[];
-    if (yearlyPlan != null) organizedPlans.add(yearlyPlan);
-    if (monthlyPlan != null) organizedPlans.add(monthlyPlan);
-
-    state = state.copyWith(
-      plans: organizedPlans,
-      selectedPlan: state.selectedPlan ?? (organizedPlans.isNotEmpty ? organizedPlans.first : null),
-      products: fetchedProducts,
-      selectedProduct: state.selectedProduct ?? (fetchedProducts.isNotEmpty ? fetchedProducts.first : null),
-    );
   }
 
   /// Selects the chosen plan card.

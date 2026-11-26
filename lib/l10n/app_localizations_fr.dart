@@ -3215,6 +3215,14 @@ class AppLocalizationsFr extends AppLocalizations {
       'Les abonnements seront bientôt disponibles.';
 
   @override
+  String get premiumLoadPlansFailed => 'Could not load plans. Tap to retry';
+
+  @override
+  String errorCodeLabel(String code) {
+    return 'Error code: $code';
+  }
+
+  @override
   String get pagesEditPagesAction => 'Modifier les pages';
 
   @override

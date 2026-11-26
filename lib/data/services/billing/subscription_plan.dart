@@ -75,4 +75,49 @@ class SubscriptionPlan {
     final totalDays = (years * 365) + (months * 30) + (weeks * 7) + days;
     return totalDays > 0 ? totalDays : null;
   }
+
+  /// Serializes plan to a persistent JSON map for offline / cold-load caching.
+  Map<String, dynamic> toJson() => {
+        'productId': productId,
+        'basePlanId': basePlanId,
+        'billingPeriod': billingPeriod,
+        'formattedPrice': formattedPrice,
+        'rawPrice': rawPrice,
+        'currencyCode': currencyCode,
+        'currencySymbol': currencySymbol,
+        'hasFreeTrial': hasFreeTrial,
+        'trialDays': trialDays,
+        'offerToken': offerToken,
+      };
+
+  /// Restores plan from cached JSON with a reconstructed [ProductDetails].
+  static SubscriptionPlan fromJson(Map<String, dynamic> json) {
+    final prodId = json['productId'] as String? ?? IapConfig.subscriptionProductId;
+    final fmtPrice = json['formattedPrice'] as String? ?? '';
+    final rPrice = (json['rawPrice'] as num?)?.toDouble() ?? 0.0;
+    final currCode = json['currencyCode'] as String? ?? '';
+    final currSym = json['currencySymbol'] as String? ?? '';
+
+    return SubscriptionPlan(
+      productId: prodId,
+      basePlanId: json['basePlanId'] as String? ?? '',
+      billingPeriod: json['billingPeriod'] as String? ?? '',
+      formattedPrice: fmtPrice,
+      rawPrice: rPrice,
+      currencyCode: currCode,
+      currencySymbol: currSym,
+      hasFreeTrial: json['hasFreeTrial'] as bool? ?? false,
+      trialDays: json['trialDays'] as int?,
+      offerToken: json['offerToken'] as String?,
+      productDetails: ProductDetails(
+        id: prodId,
+        title: 'Doc View Premium',
+        description: '',
+        price: fmtPrice,
+        rawPrice: rPrice,
+        currencyCode: currCode,
+        currencySymbol: currSym,
+      ),
+    );
+  }
 }

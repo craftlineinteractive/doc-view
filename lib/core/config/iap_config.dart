@@ -50,4 +50,7 @@ class IapConfig {
 
   /// SharedPreferences key for caching the active base plan ID.
   static const String prefKeyActiveBasePlan = 'iap_active_base_plan';
+
+  /// SharedPreferences key for caching serialized subscription plans JSON for instant cold load.
+  static const String prefKeyCachedPlansJson = 'iap_cached_plans_json';
 }

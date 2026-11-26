@@ -3181,6 +3181,14 @@ class AppLocalizationsRu extends AppLocalizations {
       'Подписки скоро станут доступны.';
 
   @override
+  String get premiumLoadPlansFailed => 'Could not load plans. Tap to retry';
+
+  @override
+  String errorCodeLabel(String code) {
+    return 'Error code: $code';
+  }
+
+  @override
   String get pagesEditPagesAction => 'Изменить страницы';
 
   @override

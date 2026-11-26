@@ -479,9 +479,10 @@ class _AddTextScreenState extends ConsumerState<AddTextScreen> {
       AppLog.e('AddText', 'save_text_failed', e, st);
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop(); // dismiss progress dialog
+        final err = '${context.l10n.annotateErrorSaveFailed(e.toString())}\n${context.l10n.errorCodeLabel('ADD_TEXT_SAVE_FAILED')}';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${context.l10n.annotateErrorSaveFailed(e.toString())}\nError code: ADD_TEXT_SAVE_FAILED'),
+            content: Text(err),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

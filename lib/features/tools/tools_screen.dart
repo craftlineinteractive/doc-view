@@ -93,9 +93,10 @@ class ToolsScreen extends ConsumerWidget {
     } catch (e, st) {
       AppLog.e('Tools', 'scan_to_pdf_failed', e, st);
       if (context.mounted) {
+        final err = '${context.l10n.importFailedError}\n${context.l10n.errorCodeLabel('SCAN_FAILED')}';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${context.l10n.importFailedError}\nError code: SCAN_FAILED'),
+            content: Text(err),
           ),
         );
       }
@@ -235,9 +236,10 @@ class ToolsScreen extends ConsumerWidget {
     } catch (e, st) {
       AppLog.e('Tools', 'import_files_failed', e, st);
       if (context.mounted) {
+        final err = '${context.l10n.importFailedError}\n${context.l10n.errorCodeLabel('IMPORT_FAILED')}';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${context.l10n.importFailedError}\nError code: IMPORT_FAILED'),
+            content: Text(err),
           ),
         );
       }
@@ -267,18 +269,20 @@ class ToolsScreen extends ConsumerWidget {
       } on PrintPdfException catch (e, st) {
         AppLog.e('Tools', 'print_pdf_failed', e, st);
         if (context.mounted) {
+          final err = '${e.reason.localizedMessage(context)}\n${context.l10n.errorCodeLabel(e.reason.name.toUpperCase())}';
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('${e.reason.localizedMessage(context)}\nError code: ${e.reason.name.toUpperCase()}'),
+              content: Text(err),
             ),
           );
         }
       } catch (e, st) {
         AppLog.e('Tools', 'print_pdf_failed', e, st);
         if (context.mounted) {
+          final err = '${context.l10n.printPdfErrorFailed}\n${context.l10n.errorCodeLabel('PRINT_FAILED')}';
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('${context.l10n.printPdfErrorFailed}\nError code: PRINT_FAILED'),
+              content: Text(err),
             ),
           );
         }

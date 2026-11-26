@@ -3141,6 +3141,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get premiumSubscriptionsAvailableSoon => 'ستتوفر الاشتراكات قريبًا.';
 
   @override
+  String get premiumLoadPlansFailed => 'Could not load plans. Tap to retry';
+
+  @override
+  String errorCodeLabel(String code) {
+    return 'Error code: $code';
+  }
+
+  @override
   String get pagesEditPagesAction => 'تعديل الصفحات';
 
   @override

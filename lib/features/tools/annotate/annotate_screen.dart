@@ -284,9 +284,10 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
       AppLog.e('Annotate', 'save_annotations_failed', e, st);
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop(); // dismiss progress
+        final err = '${context.l10n.annotateErrorSaveFailed(e.toString())}\n${context.l10n.errorCodeLabel('ANNOTATION_SAVE_FAILED')}';
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${context.l10n.annotateErrorSaveFailed(e.toString())}\nError code: ANNOTATION_SAVE_FAILED'),
+            content: Text(err),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

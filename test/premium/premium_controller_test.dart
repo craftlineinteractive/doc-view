@@ -148,5 +148,29 @@ void main() {
       expect(controller.state.isPremium, isTrue);
       expect(controller.state.activeProductId, IapConfig.subscriptionProductId);
     });
+
+    test('Plans are cached in SharedPreferences and restored immediately on cold load', () async {
+      final prefs = await SharedPreferences.getInstance();
+      final controller = PremiumController(gateway: fakeGateway, prefs: prefs);
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+
+      final cachedJson = prefs.getString(IapConfig.prefKeyCachedPlansJson);
+      expect(cachedJson, isNotNull);
+      expect(cachedJson, contains(IapConfig.yearlyBasePlanId));
+      expect(cachedJson, contains(IapConfig.monthlyBasePlanId));
+
+      // Cold load simulation: gateway with delay
+      fakeGateway.delay = const Duration(seconds: 10);
+      final coldController = PremiumController(gateway: fakeGateway, prefs: prefs);
+
+      // Immediately upon initialization, plans should be populated from cache
+      expect(coldController.state.plans.length, 2);
+      expect(coldController.state.plans[0].basePlanId, IapConfig.yearlyBasePlanId);
+      expect(coldController.state.plans[1].basePlanId, IapConfig.monthlyBasePlanId);
+      expect(coldController.state.iapProductSeen, isTrue);
+
+      coldController.dispose();
+      controller.dispose();
+    });
   });
 }

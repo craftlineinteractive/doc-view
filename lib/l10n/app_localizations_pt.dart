@@ -3194,6 +3194,14 @@ class AppLocalizationsPt extends AppLocalizations {
       'As assinaturas estarão disponíveis em breve.';
 
   @override
+  String get premiumLoadPlansFailed => 'Could not load plans. Tap to retry';
+
+  @override
+  String errorCodeLabel(String code) {
+    return 'Error code: $code';
+  }
+
+  @override
   String get pagesEditPagesAction => 'Editar páginas';
 
   @override

@@ -13,6 +13,7 @@ import 'core/extensions/l10n_extension.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'data/models/app_settings.dart';
+import 'data/services/billing/billing_providers.dart';
 import 'data/services/notifications/quick_access_notification_service.dart';
 import 'data/services/widgets/deep_link_service.dart';
 import 'features/files/open_document.dart';
@@ -72,6 +73,8 @@ class _DocReaderAppState extends ConsumerState<DocReaderApp>
       unawaited(
         ref.read(trashPurgeServiceProvider).runAutoPurgeIfDue().catchError((_) => false),
       );
+      // Pre-warm billing controller on startup for instant plan and price availability
+      ref.read(premiumControllerProvider);
     });
   }
 

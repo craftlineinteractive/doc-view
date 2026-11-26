@@ -3148,6 +3148,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Subscriptions will be available soon.';
 
   @override
+  String get premiumLoadPlansFailed => 'Could not load plans. Tap to retry';
+
+  @override
+  String errorCodeLabel(String code) {
+    return 'Error code: $code';
+  }
+
+  @override
   String get pagesEditPagesAction => 'Edit pages';
 
   @override
@@ -6574,6 +6582,15 @@ class AppLocalizationsEnXa extends AppLocalizationsEn {
   @override
   String get premiumSubscriptionsAvailableSoon =>
       '[Şûƀšçřîþţîôñš ŵîłł ƀé àṽàîłàƀłé šôôñ. ẋẋẋẋẋ]';
+
+  @override
+  String get premiumLoadPlansFailed =>
+      '[Çôûłđ ñôţ łôàđ þłàñš. Ţàþ ţô řéţřý ẋẋẋẋ]';
+
+  @override
+  String errorCodeLabel(String code) {
+    return '[Éřřôř çôđé: $code ẋẋ]';
+  }
 
   @override
   String get pagesEditPagesAction => '[Éđîţ þàĝéš ẋẋ]';
