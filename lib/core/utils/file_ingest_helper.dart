@@ -12,6 +12,9 @@ class FileIngestHelper {
   static const MethodChannel _openWithChannel =
       MethodChannel('com.craftlineinteractive.docview/open_with');
 
+  /// Optional override for temporary cache directory in unit tests.
+  static Directory? tempDirOverride;
+
   /// Resolves an input path or URI (content://, file://, or plain filesystem path)
   /// and copies the file into the app-private cache directory.
   ///
@@ -58,22 +61,20 @@ class FileIngestHelper {
     // 3. Stage into app-private cache
     try {
       final Directory tempDir;
-      try {
-        tempDir = await getTemporaryDirectory().timeout(
-          const Duration(milliseconds: 100),
-          onTimeout: () => Directory.systemTemp,
-        );
-      } catch (_) {
-        return sourceFile;
+      if (tempDirOverride != null) {
+        tempDir = tempDirOverride!;
+      } else if (Platform.environment.containsKey('FLUTTER_TEST')) {
+        tempDir = Directory.systemTemp;
+      } else {
+        tempDir = await getTemporaryDirectory();
       }
       final targetDir = Directory(p.join(tempDir.path, subDir));
       if (!targetDir.existsSync()) {
         targetDir.createSync(recursive: true);
       }
 
-      // If the file is already inside targetDir or tempDir, return it directly
-      if ((p.isWithin(targetDir.path, cleanPath) || p.isWithin(tempDir.path, cleanPath)) &&
-          sourceFile.existsSync()) {
+      // If the file is already inside targetDir, return it directly
+      if (p.isWithin(targetDir.path, cleanPath) && sourceFile.existsSync()) {
         return sourceFile;
       }
 

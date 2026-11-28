@@ -182,6 +182,10 @@ void main() {
             shippedLanguageCountOverride: 1,
             premiumEnabledOverride: false,
             widgetsEnabledOverride: false,
+            storeShareUrlOverride: '',
+            termsOfUseUrlOverride: '',
+            privacyPolicyUrlOverride: '',
+            storeRateUrlOverride: '',
           ),
         ),
       ),
@@ -199,10 +203,6 @@ void main() {
 
     // Conditional rows whose constants are empty ('') or flags are off MUST NOT appear
     expect(AppConstants.supportEmail, isEmpty);
-    expect(AppConstants.termsOfUseUrl, isEmpty);
-    expect(AppConstants.storeShareUrl, isEmpty);
-    expect(AppConstants.storeRateUrl, isEmpty);
-    expect(AppConstants.privacyPolicyUrl, isEmpty);
 
     expect(find.byKey(const Key('settings_share_app')), findsNothing);
     expect(find.byKey(const Key('settings_terms_of_use')), findsNothing);

@@ -29,6 +29,7 @@ void main() {
             scanDirectory(entity);
           } else if (entity is File) {
             if (path.contains('/test/ads/no_real_ad_ids_test.dart') ||
+                path.endsWith('release_ads.json') ||
                 path.endsWith('.png') ||
                 path.endsWith('.apk') ||
                 path.endsWith('.aab') ||

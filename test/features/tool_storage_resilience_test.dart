@@ -123,6 +123,7 @@ void main() {
     tempCacheDir = Directory('${testRoot.path}/app_flutter/cache');
     await tempAppPrivateDir.create(recursive: true);
     await tempCacheDir.create(recursive: true);
+    FileIngestHelper.tempDirOverride = tempCacheDir;
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
@@ -157,6 +158,7 @@ void main() {
       null,
     );
     DocumentScannerFacade.testScans = null;
+    FileIngestHelper.tempDirOverride = null;
     if (await testRoot.exists()) {
       await testRoot.delete(recursive: true);
     }
