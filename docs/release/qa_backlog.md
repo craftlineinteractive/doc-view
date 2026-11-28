@@ -8,6 +8,8 @@ This document tracks all QA scenarios across phases G4c through G7 that cannot b
 
 ## 2. Physical Phone Hardware Re-Test List (Required Before Production Release)
 
+> **Status Note (Release 1.0.1+2 QA Pass):** Physical test device `KB2005` (OnePlus 8T, serial `ff6c260c`) was detached during this automated test cycle (`adb devices -l` listed only `emulator-5554`). All physical-only verification scenarios remain explicitly marked **`NOT TESTED (physical)`** below. Emulator `emulator-5554` (API 36) was used for all P0 live smoke tests, screen captures, and isolate/AOT verification.
+
 The following tests require physical Android hardware and must NOT be marked complete based on emulator runs alone:
 
 | Area | Test Scenario | Hardware Dependency | Rationale & Test Criteria |
