@@ -316,10 +316,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         ),
     ];
 
-    return DocScaffold(
-      applyHeaderGradient: true,
-      showDockedBanner: true,
-      isAdLoaded: true,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        context.go('/home');
+      },
+      child: DocScaffold(
+        applyHeaderGradient: true,
+        showDockedBanner: true,
+        isAdLoaded: true,
       body: SafeArea(
         bottom: false,
         child: Column(
@@ -477,6 +483,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

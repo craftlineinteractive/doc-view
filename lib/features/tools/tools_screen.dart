@@ -381,10 +381,16 @@ class ToolsScreen extends ConsumerWidget {
     final otherTools = getToolsForSection(ToolSection.others);
     final isPremium = ref.watch(isPremiumProvider);
 
-    return DocScaffold(
-      applyHeaderGradient: true,
-      showDockedBanner: true,
-      isAdLoaded: true,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        context.go('/home');
+      },
+      child: DocScaffold(
+        applyHeaderGradient: true,
+        showDockedBanner: true,
+        isAdLoaded: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -493,6 +499,7 @@ class ToolsScreen extends ConsumerWidget {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
