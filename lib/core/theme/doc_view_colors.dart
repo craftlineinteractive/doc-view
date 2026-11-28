@@ -30,10 +30,13 @@ abstract final class DocViewColors {
   static const Color surfaceHoverDark = Color(0xFF2B3144);
   static const Color surfaceAltDark = Color(0xFF1E2333);
   static const Color dividerBandDark = Color(0xFF141722);
-  static const Color hairlineDark = Color(0xFF2A3042);
+  /// Neutral hairline: 12 % white over dark background, no blue cast.
+  static const Color hairlineDark = Color(0x1FFFFFFF);
   static const Color textPrimaryDark = Color(0xFFFFFFFF);
-  static const Color textSecondaryDark = Color(0xFF9EA5B7);
-  static const Color sectionHeaderDark = Color(0xFFA2ACC7);
+  /// Neutral secondary text – slightly warmer than the old blue-tinted #9EA5B7.
+  static const Color textSecondaryDark = Color(0xFFA8ADB7);
+  /// Neutral section header – same hue as textSecondaryDark, slightly lighter.
+  static const Color sectionHeaderDark = Color(0xFFA8ADB7);
   static const Color primaryButtonDark = Color(0xFF1A66E8);
   static const Color activeBlueDark = Color(0xFF4D8FF7);
   static const Color blueTintDark = Color(0xFF1E2A45);

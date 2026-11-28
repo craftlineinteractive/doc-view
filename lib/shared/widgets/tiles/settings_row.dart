@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_icons.dart';
+import '../../../core/theme/doc_view_colors.dart';
 import '../../../core/theme/doc_view_tokens.dart';
 import '../../../core/theme/doc_view_typography.dart';
 
@@ -80,8 +81,10 @@ class SettingsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.tokens;
-    final resolvedIconColor = iconColor ?? tokens.primaryBlue;
-    final resolvedIconBg = iconBgColor ?? tokens.blueTint;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // In dark mode default to neutral surface-on-surface instead of saturated blueTint
+    final resolvedIconColor = iconColor ?? (isDark ? const Color(0xFFE6E8EE) : tokens.primaryBlue);
+    final resolvedIconBg = iconBgColor ?? (isDark ? DocViewColors.surfaceHoverDark : tokens.blueTint);
 
     final effectiveTrailing = trailing ??
         (onTap != null
