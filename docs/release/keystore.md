@@ -33,9 +33,9 @@ keytool -genkey -v \
 
 ## 3. Configuring `android/key.properties`
 
-1. Copy `android/key.properties.example` to `android/key.properties`:
+1. Copy `android/key_properties.example` to `android/key.properties`:
    ```bash
-   cp android/key.properties.example android/key.properties
+   cp android/key_properties.example android/key.properties
    ```
 2. Populate the four required properties:
    ```properties

@@ -146,7 +146,7 @@ flutter test test/l10n/no_hardcoded_strings_test.dart
 
 Doc View includes automated fail-safe checks in `android/app/build.gradle.kts` to prevent accidental releases with debug keystores or Google test ad IDs:
 
-1. Copy `android/key.properties.example` to `android/key.properties` and configure your release upload keystore credentials (see `docs/release/keystore.md`).
+1. Copy `android/key_properties.example` to `android/key.properties` and configure your release upload keystore credentials (see `docs/release/keystore.md`).
 2. Build the obfuscated Android App Bundle with R8 shrinking:
    ```bash
    flutter build appbundle --release \
