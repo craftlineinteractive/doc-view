@@ -7,6 +7,7 @@ import 'package:docview/features/tools/annotate/annotate_screen.dart';
 import 'package:docview/features/tools/annotate/annotate_session_notifier.dart';
 import 'package:docview/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,12 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     tempDir = Directory.systemTemp.createTempSync('annotate_screen_test_');
 
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+      const MethodChannel('plugins.flutter.io/path_provider'),
+      (call) async => tempDir.path,
+    );
+
     // Generate a simple test PDF
     final doc = sf.PdfDocument();
     final page = doc.pages.add();
@@ -36,6 +43,11 @@ void main() {
   });
 
   tearDown(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+      const MethodChannel('plugins.flutter.io/path_provider'),
+      null,
+    );
     try {
       if (tempDir.existsSync()) {
         tempDir.deleteSync(recursive: true);

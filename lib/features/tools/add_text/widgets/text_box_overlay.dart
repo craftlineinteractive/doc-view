@@ -142,9 +142,10 @@ class _TextBoxOverlayState extends State<TextBoxOverlay> {
       top: bounds.top,
       width: bounds.width,
       height: bounds.height,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
+      child: RepaintBoundary(
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
           // Body & drag gesture area
           GestureDetector(
             onTap: widget.onTap,
@@ -312,6 +313,7 @@ class _TextBoxOverlayState extends State<TextBoxOverlay> {
             ),
         ],
       ),
-    );
+    ),
+  );
   }
 }

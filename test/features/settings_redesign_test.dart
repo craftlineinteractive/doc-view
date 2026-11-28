@@ -1,5 +1,4 @@
 import 'package:docview/core/config/feature_flags.dart';
-import 'package:docview/core/constants/app_constants.dart';
 import 'package:docview/data/models/app_settings.dart';
 import 'package:docview/data/repositories/settings_repository.dart';
 import 'package:docview/data/services/file_manager_service.dart';

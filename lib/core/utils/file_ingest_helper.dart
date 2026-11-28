@@ -57,14 +57,23 @@ class FileIngestHelper {
 
     // 3. Stage into app-private cache
     try {
-      final tempDir = await getTemporaryDirectory();
+      final Directory tempDir;
+      try {
+        tempDir = await getTemporaryDirectory().timeout(
+          const Duration(milliseconds: 100),
+          onTimeout: () => Directory.systemTemp,
+        );
+      } catch (_) {
+        return sourceFile;
+      }
       final targetDir = Directory(p.join(tempDir.path, subDir));
-      if (!await targetDir.exists()) {
-        await targetDir.create(recursive: true);
+      if (!targetDir.existsSync()) {
+        targetDir.createSync(recursive: true);
       }
 
-      // If the file is already inside targetDir, return it directly
-      if (p.isWithin(targetDir.path, cleanPath) && await sourceFile.exists()) {
+      // If the file is already inside targetDir or tempDir, return it directly
+      if ((p.isWithin(targetDir.path, cleanPath) || p.isWithin(tempDir.path, cleanPath)) &&
+          sourceFile.existsSync()) {
         return sourceFile;
       }
 
@@ -72,8 +81,8 @@ class FileIngestHelper {
       final uniqueName = '${DateTime.now().microsecondsSinceEpoch}_$baseName';
       final targetPath = p.join(targetDir.path, uniqueName);
 
-      if (await sourceFile.exists()) {
-        return await sourceFile.copy(targetPath);
+      if (sourceFile.existsSync()) {
+        return sourceFile.copySync(targetPath);
       } else {
         // Source file might be virtual or inaccessible via File.exists; return sourceFile
         return sourceFile;

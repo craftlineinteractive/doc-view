@@ -8,6 +8,7 @@ import 'package:docview/features/tools/add_text/widgets/text_box_overlay.dart';
 import 'package:docview/features/tools/add_text/widgets/text_style_sheet.dart';
 import 'package:docview/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,12 @@ void main() {
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
     tempDir = Directory.systemTemp.createTempSync('add_text_screen_test_');
+
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+      const MethodChannel('plugins.flutter.io/path_provider'),
+      (call) async => tempDir.path,
+    );
 
     final doc = sf.PdfDocument();
     final page = doc.pages.add();
@@ -39,6 +46,11 @@ void main() {
   });
 
   tearDown(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+      const MethodChannel('plugins.flutter.io/path_provider'),
+      null,
+    );
     try {
       if (tempDir.existsSync()) {
         tempDir.deleteSync(recursive: true);
