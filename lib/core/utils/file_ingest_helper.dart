@@ -79,8 +79,7 @@ class FileIngestHelper {
       }
 
       final baseName = p.basename(cleanPath);
-      final uniqueName = '${DateTime.now().microsecondsSinceEpoch}_$baseName';
-      final targetPath = p.join(targetDir.path, uniqueName);
+      final targetPath = p.join(targetDir.path, baseName);
 
       if (sourceFile.existsSync()) {
         return sourceFile.copySync(targetPath);
