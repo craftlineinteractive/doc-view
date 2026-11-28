@@ -48,10 +48,14 @@ class FileIngestHelper {
     // 2. Normalize file:// URIs
     String cleanPath = rawPathOrUri;
     if (rawPathOrUri.startsWith('file://')) {
-      final uri = Uri.tryParse(rawPathOrUri);
-      if (uri != null) {
-        cleanPath = uri.toFilePath();
-      } else {
+      try {
+        final uri = Uri.tryParse(rawPathOrUri);
+        if (uri != null) {
+          cleanPath = uri.toFilePath();
+        } else {
+          cleanPath = rawPathOrUri.replaceFirst('file://', '');
+        }
+      } catch (_) {
         cleanPath = rawPathOrUri.replaceFirst('file://', '');
       }
     }

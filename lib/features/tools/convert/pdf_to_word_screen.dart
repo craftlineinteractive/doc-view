@@ -153,7 +153,7 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
       setState(() {
         _selectedFile = result;
         _password = null;
-        _fileNameController.text = p.basenameWithoutExtension(result.name);
+        _fileNameController.text = p.basenameWithoutExtension(result.name).trim();
       });
       await _runPreflight();
     }
@@ -192,8 +192,9 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
         return StatefulBuilder(
           builder: (ctx, setSheetState) {
             progressSetter = setSheetState;
+            final safeTotalPages = totalPages > 0 ? totalPages : 1;
             final currentPage =
-                (currentProgress * totalPages).ceil().clamp(1, totalPages);
+                (currentProgress * safeTotalPages).ceil().clamp(1, safeTotalPages);
             return Container(
               decoration: BoxDecoration(
                 color: ctx.tokens.surface,
@@ -346,7 +347,9 @@ class _PdfToWordScreenState extends ConsumerState<PdfToWordScreen> {
 
       final errorCode = e is PdfToWordException
           ? e.reason.name.toUpperCase()
-          : 'CONVERSION_FAILED';
+          : (e is ArgumentError
+              ? 'ARGUMENT_${e.message.toString().replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_').toUpperCase()}'
+              : 'CONVERSION_FAILED');
 
       String errorText = l10n.pdfToWordGeneralError;
       if (e is PdfToWordException) {

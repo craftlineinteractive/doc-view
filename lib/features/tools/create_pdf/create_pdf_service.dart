@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:pdf/pdf.dart' as pdflib;
 import 'package:pdf/widgets.dart' as pw;
 
+import '../../../core/utils/app_log.dart';
 import '../../../data/models/doc_file.dart';
 import '../../../data/services/pdf/pdf_output_service.dart';
 import 'paper_template.dart';
@@ -152,6 +153,11 @@ Future<Uint8List> compileTemplatePdfInWorker(CreatePdfParams params) async {
   return await doc.save();
 }
 
+/// Dispatches [compileTemplatePdfInWorker] in a dedicated background isolate via [Isolate.run].
+Future<Uint8List> dispatchCompileTemplatePdf(CreatePdfParams params) {
+  return Isolate.run(() => compileTemplatePdfInWorker(params));
+}
+
 /// Service that generates custom blank paper template PDFs off the main isolate.
 class CreatePdfService {
   CreatePdfService({required this.outputService});
@@ -162,7 +168,7 @@ class CreatePdfService {
   ///
   /// - Enforces page count in range 1..100.
   /// - Sanitizes file name and saves into `created/` directory.
-  /// - Offloads rendering and PDF compilation to a background isolate via [Isolate.run].
+  /// - Offloads rendering and PDF compilation to a background isolate via [dispatchCompileTemplatePdf].
   /// - Reports progress if [onProgress] is supplied.
   /// - Registers output file into the document database.
   Future<DocFile> generateTemplatePdf({
@@ -209,7 +215,7 @@ class CreatePdfService {
         compress: compress,
       );
 
-      final pdfBytes = await Isolate.run(() => compileTemplatePdfInWorker(params));
+      final pdfBytes = await dispatchCompileTemplatePdf(params);
 
       final outputFile = await outputService.uniqueFile(sanitizedName);
       await outputFile.writeAsBytes(pdfBytes);
@@ -217,6 +223,7 @@ class CreatePdfService {
       return await outputService.registerOutput(outputFile);
     } catch (e, st) {
       if (e is CreatePdfException) rethrow;
+      AppLog.e('Tools', 'create_pdf_service_error', e, st);
       throw CreatePdfException(
         CreatePdfErrorReason.generationFailed,
         details: '$e\n$st',

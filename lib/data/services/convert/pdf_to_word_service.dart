@@ -145,7 +145,7 @@ class PdfToWordService {
     required String sourcePath,
     String? password,
   }) async {
-    return Isolate.run(() => _runPreflightCheck(sourcePath, password));
+    return dispatchPdfTextPreflight(sourcePath, password);
   }
 
   /// Converts a PDF file into a standard Microsoft Word (.docx) document.
@@ -187,7 +187,7 @@ class PdfToWordService {
             kDebugMode && slowConvertForTesting ? slowConvertDelayMs : 0,
       );
 
-      final result = await Isolate.run(() => _runPdfToWordConversion(params));
+      final result = await _dispatchPdfToWordConversion(params);
       return result;
     } catch (e) {
       final tempFile = File('$resolvedOutputPath.tmp');
@@ -214,6 +214,19 @@ class PdfToWordService {
     }
     return target;
   }
+}
+
+/// Dispatches [_runPreflightCheck] in a dedicated background isolate via [Isolate.run].
+Future<PdfTextPreflightResult> dispatchPdfTextPreflight(
+  String sourcePath,
+  String? password,
+) {
+  return Isolate.run(() => _runPreflightCheck(sourcePath, password));
+}
+
+/// Dispatches [_runPdfToWordConversion] in a dedicated background isolate via [Isolate.run].
+Future<String> _dispatchPdfToWordConversion(_PdfToWordParams params) {
+  return Isolate.run(() => _runPdfToWordConversion(params));
 }
 
 /// Top-level isolate worker function for preflight text inspection.
@@ -318,98 +331,107 @@ Future<String> _runPdfToWordConversion(_PdfToWordParams params) async {
     });
     params.cancelPort?.send(cancelWorkerPort.sendPort);
 
-    for (int pageIdx = 0; pageIdx < pageCount; pageIdx++) {
-      if (isCancelled) {
-        cancelWorkerPort.close();
-        final tempFile = File('${params.outputPath}.tmp');
-        if (tempFile.existsSync()) {
-          try {
-            tempFile.deleteSync();
-          } catch (_) {}
+    final targetFile = File(params.outputPath);
+
+    try {
+      for (int pageIdx = 0; pageIdx < pageCount; pageIdx++) {
+        if (isCancelled) {
+          cancelWorkerPort.close();
+          final tempFile = File('${params.outputPath}.tmp');
+          if (tempFile.existsSync()) {
+            try {
+              tempFile.deleteSync();
+            } catch (_) {}
+          }
+          throw const PdfToWordException(
+            PdfToWordErrorReason.cancelled,
+            'Conversion cancelled by user.',
+          );
         }
+
+        if (kDebugMode && params.slowConvertDelayMs > 0) {
+          await Future<void>.delayed(Duration(milliseconds: params.slowConvertDelayMs));
+        }
+
+        params.progressPort?.send(pageIdx / pageCount * 0.85);
+
+        final lines = extractor.extractTextLines(
+          startPageIndex: pageIdx,
+          endPageIndex: pageIdx,
+        );
+
+        final pageParagraphs = _groupLinesIntoParagraphs(lines);
+        for (final p in pageParagraphs) {
+          totalExtractedChars += p.plainText.length;
+          if (totalExtractedChars > PdfToWordService.maxTextChars) {
+            throw const PdfToWordException(
+              PdfToWordErrorReason.textLimitExceeded,
+              'Document extracted text exceeds 20 MB limit.',
+            );
+          }
+        }
+
+        allPagesParagraphs.add(pageParagraphs);
+      }
+
+      // Verify document contains extractable text
+      bool hasAnyText = false;
+      for (final pagePars in allPagesParagraphs) {
+        for (final p in pagePars) {
+          if (p.plainText.trim().isNotEmpty) {
+            hasAnyText = true;
+            break;
+          }
+        }
+        if (hasAnyText) break;
+      }
+
+      if (!hasAnyText) {
         throw const PdfToWordException(
-          PdfToWordErrorReason.cancelled,
-          'Conversion cancelled by user.',
+          PdfToWordErrorReason.noTextFound,
+          'No extractable text found in document (scanned PDF or vector images).',
         );
       }
 
-      if (kDebugMode && params.slowConvertDelayMs > 0) {
-        await Future<void>.delayed(Duration(milliseconds: params.slowConvertDelayMs));
-      }
+      params.progressPort?.send(0.90);
 
-      params.progressPort?.send(pageIdx / pageCount * 0.85);
-
-      final lines = extractor.extractTextLines(
-        startPageIndex: pageIdx,
-        endPageIndex: pageIdx,
+      // Build Word OOXML ZIP Archive
+      final docxBytes = _buildDocxArchive(
+        allPagesParagraphs: allPagesParagraphs,
+        insertPageBreaks: params.insertPageBreaks,
       );
 
-      final pageParagraphs = _groupLinesIntoParagraphs(lines);
-      for (final p in pageParagraphs) {
-        totalExtractedChars += p.plainText.length;
-        if (totalExtractedChars > PdfToWordService.maxTextChars) {
-          throw const PdfToWordException(
-            PdfToWordErrorReason.textLimitExceeded,
-            'Document extracted text exceeds 20 MB limit.',
-          );
-        }
+      params.progressPort?.send(0.95);
+
+      // Atomic disk write via .tmp file
+      final tempPath = '${params.outputPath}.tmp';
+      final tempFile = File(tempPath);
+
+      if (tempFile.existsSync()) {
+        try {
+          tempFile.deleteSync();
+        } catch (_) {}
       }
 
-      allPagesParagraphs.add(pageParagraphs);
-    }
+      tempFile.writeAsBytesSync(docxBytes, flush: true);
 
-    // Verify document contains extractable text
-    bool hasAnyText = false;
-    for (final pagePars in allPagesParagraphs) {
-      for (final p in pagePars) {
-        if (p.plainText.trim().isNotEmpty) {
-          hasAnyText = true;
-          break;
-        }
+      if (!tempFile.existsSync() || tempFile.lengthSync() == 0) {
+        throw const PdfToWordException(
+          PdfToWordErrorReason.conversionFailed,
+          'Failed to write temporary conversion output file.',
+        );
       }
-      if (hasAnyText) break;
-    }
 
-    if (!hasAnyText) {
-      throw const PdfToWordException(
-        PdfToWordErrorReason.noTextFound,
-        'No extractable text found in document (scanned PDF or vector images).',
-      );
-    }
-
-    params.progressPort?.send(0.90);
-
-    // Build Word OOXML ZIP Archive
-    final docxBytes = _buildDocxArchive(
-      allPagesParagraphs: allPagesParagraphs,
-      insertPageBreaks: params.insertPageBreaks,
-    );
-
-    params.progressPort?.send(0.95);
-
-    // Atomic disk write via .tmp file
-    final targetFile = File(params.outputPath);
-    final tempPath = '${params.outputPath}.tmp';
-    final tempFile = File(tempPath);
-
-    if (tempFile.existsSync()) {
-      try {
-        tempFile.deleteSync();
-      } catch (_) {}
-    }
-
-    tempFile.writeAsBytesSync(docxBytes, flush: true);
-
-    if (!tempFile.existsSync() || tempFile.lengthSync() == 0) {
-      throw const PdfToWordException(
+      // Atomic rename
+      tempFile.renameSync(targetFile.path);
+      cancelWorkerPort.close();
+    } catch (e) {
+      if (e is PdfToWordException) rethrow;
+      throw PdfToWordException(
         PdfToWordErrorReason.conversionFailed,
-        'Failed to write temporary conversion output file.',
+        'Conversion process error: $e',
       );
     }
-
-    // Atomic rename
-    tempFile.renameSync(targetFile.path);
-    cancelWorkerPort.close();
 
     // Output verification: re-read output zip, verify required parts
     try {
@@ -452,12 +474,14 @@ Future<String> _runPdfToWordConversion(_PdfToWordParams params) async {
 List<WordParagraph> _groupLinesIntoParagraphs(List<TextLine> rawLines) {
   if (rawLines.isEmpty) return const [];
 
-  // Sort lines into reading order: primary top-to-bottom, secondary left-to-right
+  // Sort lines into reading order: quantize top coordinate into 4-point bands to eliminate
+  // vertical jitter without violating sort transitivity, then order left-to-right.
   final lines = List<TextLine>.from(rawLines);
   lines.sort((a, b) {
-    final topDiff = a.bounds.top - b.bounds.top;
-    if (topDiff.abs() > 3.0) {
-      return topDiff.compareTo(0);
+    final aBand = (a.bounds.top / 4.0).floor();
+    final bBand = (b.bounds.top / 4.0).floor();
+    if (aBand != bBand) {
+      return aBand.compareTo(bBand);
     }
     return a.bounds.left.compareTo(b.bounds.left);
   });
