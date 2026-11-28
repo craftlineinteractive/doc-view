@@ -59,6 +59,9 @@ void main() {
             shippedLanguageCountOverride: 1,
             premiumEnabledOverride: false,
             widgetsEnabledOverride: false,
+            termsOfUseUrlOverride: '',
+            privacyPolicyUrlOverride: '',
+            storeShareUrlOverride: '',
           ),
         );
         await tester.pumpAndSettle();
@@ -111,9 +114,6 @@ void main() {
         // Rows hidden when constants are empty, flags are off, or release has 1 language
         expect(premiumEnabled, isTrue);
         expect(widgetsEnabled, isTrue);
-        expect(AppConstants.termsOfUseUrl, isEmpty);
-        expect(AppConstants.privacyPolicyUrl, isEmpty);
-        expect(AppConstants.storeShareUrl, isEmpty);
         expect(find.byKey(const Key('settings_add_widget')), findsNothing);
         expect(find.byKey(const Key('settings_manage_subscriptions')), findsNothing);
         expect(find.byKey(const Key('settings_terms_of_use')), findsNothing);
@@ -388,11 +388,11 @@ void main() {
     testWidgets(
       'Rate on Google Play button is hidden when storeRateUrl is empty while Help & feedback remains',
       (tester) async {
-        expect(AppConstants.storeRateUrl, isEmpty);
-
         await tester.pumpApp(
           const Scaffold(
-            body: RateUsSheet(),
+            body: RateUsSheet(
+              storeRateUrlOverride: '',
+            ),
           ),
         );
         await tester.pumpAndSettle();

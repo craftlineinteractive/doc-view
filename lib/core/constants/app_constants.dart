@@ -8,16 +8,20 @@ class AppConstants {
   static const String supportEmail = '';
 
   /// URL pointing to the hosted Terms of Use document. Hidden in settings if empty.
-  static const String termsOfUseUrl = '';
+  static const String termsOfUseUrl =
+      'https://www.craftlineinteractive.in/app/doc-view/terms-of-use/';
 
   /// URL pointing to the hosted Privacy Policy document. Hidden in settings if empty.
-  static const String privacyPolicyUrl = '';
+  static const String privacyPolicyUrl =
+      'https://www.craftlineinteractive.in/app/doc-view/privacy-policy/';
 
   /// App Store or Google Play share URL. Hidden in settings if empty.
-  static const String storeShareUrl = '';
+  static const String storeShareUrl =
+      'https://play.google.com/store/apps/details?id=com.craftlineinteractive.docview';
 
   /// App Store or Google Play rating URL. Hidden in Rate drawer if empty.
-  static const String storeRateUrl = '';
+  static const String storeRateUrl =
+      'https://play.google.com/store/apps/details?id=com.craftlineinteractive.docview';
 
   /// Platform subscription management pages (used only when `premiumEnabled` is true).
   static const String androidSubscriptionsUrl =

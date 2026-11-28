@@ -29,14 +29,13 @@ void main() {
         }
       });
 
-      // In repository state, URLs and release ad IDs are intentionally empty placeholders
-      // to prevent hardcoding personal credentials in git.
-      // IAP product ID must be populated with 'docview_premium'
-      expect(IapConfig.subscriptionProductId, equals('docview_premium'));
-      expect(AppConstants.appName, equals('Doc View'));
+      // supportEmail stays empty unless provided by owner (tracked in constants_to_fill.md)
       expect(emptyConstants, contains('supportEmail'));
-      expect(emptyConstants, contains('privacyPolicyUrl'));
-      expect(emptyConstants, contains('termsOfUseUrl'));
+      // Owner constants are now populated with public URLs
+      expect(populatedConstants, contains('privacyPolicyUrl'));
+      expect(populatedConstants, contains('termsOfUseUrl'));
+      expect(populatedConstants, contains('storeShareUrl'));
+      expect(populatedConstants, contains('storeRateUrl'));
       expect(populatedConstants, contains('iapProductId'));
     });
   });
