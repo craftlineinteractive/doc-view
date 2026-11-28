@@ -1,5 +1,6 @@
 import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:flutter/foundation.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'external_activity_guard.dart';
 
 /// Facade wrapping cunning_document_scanner with a test hook.
@@ -11,6 +12,10 @@ class DocumentScannerFacade {
   static Future<List<String>?> getPictures() async {
     if (testScans != null) {
       return testScans;
+    }
+    final status = await Permission.camera.request();
+    if (!status.isGranted) {
+      return null;
     }
     return await ExternalActivityGuard.guard(() async {
       // ignore: deprecated_member_use

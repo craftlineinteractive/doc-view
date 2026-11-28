@@ -34,8 +34,9 @@ class AppLog {
     );
 
     // Ensure it appears in standard logcat output without PII
+    final argDetail = error is ArgumentError ? ': ${error.message}' : '';
     // ignore: avoid_print
-    print('[DocView.$area] $reasonName (error: $errorType)');
+    print('[DocView.$area] $reasonName (error: $errorType$argDetail)');
   }
 
   /// Logs an informational event in a release-safe manner.
